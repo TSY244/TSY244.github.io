@@ -27,8 +27,14 @@
 <meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.png">
 <meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E9%A1%BA%E5%BA%8F%E6%A0%88%E7%9A%84%E8%A1%A8%E7%A4%BA.png">
 <meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%87%BD%E6%95%B0%E7%9A%84%E5%B5%8C%E5%A5%97%E8%B0%83%E7%94%A8%E7%9A%84%E5%8E%9F%E7%90%86.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E9%98%9F%E5%88%97%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E9%98%9F%E5%88%97%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93.png">
+<meta property="og:image" content="c:\Users\12414\Desktop\hexo\source_posts\%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97.assets\image-20230402182219032.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%81%87%E6%BA%A2%E5%87%BA.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E7%9C%9F%E6%BA%A2%E5%87%BA.png">
+<meta property="og:image" content="c:\Users\12414\Desktop\hexo\source_posts\%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97.assets\image-20230402183904096.png">
 <meta property="article:published_time" content="2023-03-29T12:39:43.000Z">
-<meta property="article:modified_time" content="2023-03-31T16:31:09.324Z">
+<meta property="article:modified_time" content="2023-04-03T03:44:48.737Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%9A%84%E7%89%B9%E7%82%B9.png">
@@ -224,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.4k words
+          6.6k words
         
       </span>
     
@@ -235,7 +241,7 @@
         
         
         
-          37 mins
+          55 mins
         
       </span>
     
@@ -344,7 +350,50 @@
 <li>先进先出的线性表</li>
 <li>有顺序结构和链式结构（常用的是顺序结构）</li>
 </ol>
-<h4 id="队列的相关操作"><a href="#队列的相关操作" class="headerlink" title="队列的相关操作"></a>队列的相关操作</h4>
+<h3 id="队列的相关操作"><a href="#队列的相关操作" class="headerlink" title="队列的相关操作"></a>队列的相关操作</h3><p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E9%98%9F%E5%88%97%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="队列的顺序表示和实现"><a href="#队列的顺序表示和实现" class="headerlink" title="队列的顺序表示和实现"></a>队列的顺序表示和实现</h3><p> <img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E9%98%9F%E5%88%97%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>对空的表示</p>
+<p><code>front</code>&#x3D;<code>rear</code>&#x3D;<code>0</code></p>
+</li>
+<li><p>队列的特殊情况</p>
+<p><img src="C:\Users\12414\Desktop\hexo\source_posts\栈和队列.assets\image-20230402182219032.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>假溢出和真溢出</p>
+<ul>
+<li><p>假溢出</p>
+<p><code>rear</code>!&#x3D;<code>0</code></p>
+<p><code>rear</code>&#x3D;<code>MAXQSIZE</code> 但是队列中还有空余的存储空间</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%81%87%E6%BA%A2%E5%87%BA.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>真溢出</p>
+<p><code>rear</code>&#x3D;<code>0</code></p>
+<p><code>fear</code>&#x3D;<code>MAXQSIZE</code></p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E7%9C%9F%E6%BA%A2%E5%87%BA.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+</li>
+<li><p>循环队列的处理逻辑</p>
+<ul>
+<li><p>使用<code>%</code>运算，将数组变成循环 </p>
+</li>
+<li><p>但是用循环队列的是时候，我们面对的是对空和对满是一种判断条件，所以我们使用标志经行判断</p>
+<p>一下提出三种解决办法</p>
+<p><img src="C:\Users\12414\Desktop\hexo\source_posts\栈和队列.assets\image-20230402183904096.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+</li>
+<li><p>头文件</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> OVERFLOW (-1)</span><br><br><span class="hljs-keyword">using</span> ElemType=<span class="hljs-type">int</span>;<br><span class="hljs-keyword">using</span> status=<span class="hljs-type">int</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> ERROR=<span class="hljs-number">-1</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAXSIZE=<span class="hljs-number">10</span>;<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Que</span>&#123;<br><br><span class="hljs-keyword">private</span>:<br>    ElemType* base;<br>    <span class="hljs-type">int</span> front;<span class="hljs-comment">//地址更小的指针</span><br>    <span class="hljs-type">int</span> rear;<span class="hljs-comment">//地址更大的指针</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">Que</span>();<br>    ~<span class="hljs-built_in">Que</span>();<br>    <span class="hljs-function">status <span class="hljs-title">ClearQueue</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">QueueLength</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">GetHead</span><span class="hljs-params">(ElemType&amp; e)</span></span>;<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">EnQueue</span><span class="hljs-params">(ElemType e)</span></span>;<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">DeQueue</span><span class="hljs-params">(ElemType &amp;e)</span></span>;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>类的实现</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br>Que::<span class="hljs-built_in">Que</span>() &#123;<br>    base= <span class="hljs-literal">nullptr</span>;<br>    base=<span class="hljs-keyword">new</span> ElemType [MAXSIZE];<br>    <span class="hljs-keyword">if</span>(base== <span class="hljs-literal">nullptr</span>)&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;base new ERROR&quot;</span>&lt;&lt;std::endl;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    front=<span class="hljs-number">0</span>;<br>    rear=<span class="hljs-number">0</span>;<br>&#125;<br><br>Que::~<span class="hljs-built_in">Que</span>() &#123;<br>    <span class="hljs-keyword">delete</span>[] base;<br>    front=<span class="hljs-number">0</span>;<br>    rear=<span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">Que::status Que::ClearQueue() &#123;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">    return 0;</span><br><span class="hljs-comment">&#125;*/</span><br><br><span class="hljs-comment">//这个算法需要想清楚</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Que::QueueLength</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> (rear-front+MAXSIZE)%MAXSIZE;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Que::GetHead</span><span class="hljs-params">(ElemType &amp;e)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(rear==front)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    e=*(base+front);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Que::EnQueue</span><span class="hljs-params">(ElemType e)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>((rear+<span class="hljs-number">1</span>)%MAXSIZE==front)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    *(base+rear)=e;<br>    rear=(rear+<span class="hljs-number">1</span>)%MAXSIZE;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Que::DeQueue</span><span class="hljs-params">(ElemType &amp;e)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(rear==front)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    e=*(base+front);<br>    front=(front+<span class="hljs-number">1</span>)%MAXSIZE;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>main.cpp</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;myClass.hpp&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">creatQ</span><span class="hljs-params">(Que &amp;que)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; MAXSIZE; ++i) &#123;<br>        que.<span class="hljs-built_in">EnQueue</span>(i + <span class="hljs-number">10</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printQueue</span><span class="hljs-params">(Que &amp;que)</span> </span>&#123;<br>    <span class="hljs-type">int</span> e;<br>    <span class="hljs-keyword">while</span> (que.<span class="hljs-built_in">GetHead</span>(e)) &#123;<br>        std::cout &lt;&lt;<span class="hljs-string">&quot;Get: &quot;</span>&lt;&lt; e &lt;&lt; std::endl;<br>        que.<span class="hljs-built_in">DeQueue</span>(e);<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;delete: &quot;</span>&lt;&lt;e&lt;&lt;std::endl;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    Que queue;<br>    ElemType elemType = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> e;<br>    queue.<span class="hljs-built_in">EnQueue</span>(<span class="hljs-number">244</span>);<br>    std::cout &lt;&lt; queue.<span class="hljs-built_in">QueueLength</span>() &lt;&lt; std::endl;<br>    std::cout &lt;&lt; queue.<span class="hljs-built_in">GetHead</span>(e) &lt;&lt; std::endl;<br>    std::cout &lt;&lt; e &lt;&lt; std::endl;<br>    <span class="hljs-built_in">creatQ</span>(queue);<br>    std::cout &lt;&lt; queue.<span class="hljs-built_in">QueueLength</span>() &lt;&lt; std::endl;<br>    <span class="hljs-built_in">printQueue</span>(queue);<br>    std::cout &lt;&lt; queue.<span class="hljs-built_in">DeQueue</span>(elemType) &lt;&lt; std::endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="队列链式实现"><a href="#队列链式实现" class="headerlink" title="队列链式实现"></a>队列链式实现</h3><p>1. </p>
+
                 
               </div>
             
