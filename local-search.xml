@@ -8,7 +8,7 @@
     <link href="/2023/04/05/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     <url>/2023/04/05/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
     
-    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="树和二叉树"><a href="#树和二叉树" class="headerlink" title="树和二叉树"></a>树和二叉树</h1><h2 id="树的基本"><a href="#树的基本" class="headerlink" title="树的基本"></a>树的基本</h2><ol><li>一个根和若干的子树</li></ol>]]></content>
+    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="树和二叉树"><a href="#树和二叉树" class="headerlink" title="树和二叉树"></a>树和二叉树</h1><h2 id="树的基本"><a href="#树的基本" class="headerlink" title="树的基本"></a>树的基本</h2><p><img src="C:\Users\12414\Desktop\hexo\source_posts\树和二叉树.assets\image-20230406091713117.png"></p><ol><li><p>一个根和若干的子树</p></li><li><p>基本术语</p><p><img src="C:\Users\12414\Desktop\hexo\source_posts\树和二叉树.assets\image-20230406091726624.png"></p></li><li><p>树的类别</p><ul><li><p>有序树</p><p>子树有位置要求</p></li><li><p>无序树</p><p>子树无要求</p><p>意思是：1，2，3，这三颗子树，无论如何排列都是一个树</p></li></ul></li><li><p>森林</p><p><img src="C:\Users\12414\Desktop\hexo\source_posts\树和二叉树.assets\image-20230406092134123.png"></p></li><li><p>树和线性结构的比较</p><ul><li>树是一对多</li><li>线性结构是一对一</li></ul></li></ol><h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ol><li>每个节点最多有两个度</li><li>二叉树是个有序树</li><li>二叉树是一个空集</li></ol>]]></content>
     
     
     
