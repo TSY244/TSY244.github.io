@@ -30,8 +30,11 @@
 <meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A83.png">
 <meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8.png">
 <meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E7%AE%97%E6%B3%95.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%89%8D%EF%BC%8C%E4%B8%AD%EF%BC%8C%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F.png">
 <meta property="article:published_time" content="2023-04-05T13:02:12.000Z">
-<meta property="article:modified_time" content="2023-04-07T15:04:26.516Z">
+<meta property="article:modified_time" content="2023-04-09T10:31:41.751Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89.png">
@@ -227,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          902 words
+          1.7k words
         
       </span>
     
@@ -238,7 +241,7 @@
         
         
         
-          8 mins
+          14 mins
         
       </span>
     
@@ -395,12 +398,29 @@
 <ul>
 <li><p>先序遍历</p>
 <p>先访问根节点，再访问左子树，再访问右子树</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E7%AE%97%E6%B3%95.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">visit</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,T-&gt;data);<br>&#125;<br><br>status <span class="hljs-title function_">PreOrderTraverse</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-keyword">if</span>(T==<span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        visit(T);<br>        PreOrderTraverse(T-&gt;lChild);<br>        PreOrderTraverse(T-&gt;rChild);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
 </li>
 <li><p>中序遍历</p>
 <p>先访问左子树，再访问根节点，再访问右子树</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">visit</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,T-&gt;data);<br>&#125;<br><br>status <span class="hljs-title function_">PreOrderTraverse</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-keyword">if</span>(T==<span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        PreOrderTraverse(T-&gt;lChild);<br>        visit(T);<br>        PreOrderTraverse(T-&gt;rChild);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
 </li>
 <li><p>后续遍历</p>
-<p>先访问左子树，在访问右子树，最后访问根节点</p>
+<p>先访问左子树，在访问右子树，最后访问根节点   </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-type">void</span> <span class="hljs-title function_">visit</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,T-&gt;data);<br>&#125;<br><br>status <span class="hljs-title function_">PreOrderTraverse</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-keyword">if</span>(T==<span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        PreOrderTraverse(T-&gt;lChild);<br>        PreOrderTraverse(T-&gt;rChild);<br>        visit(T);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>例题：</p>
+<p>使用二叉树表达算术表达式</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%89%8D%EF%BC%8C%E4%B8%AD%EF%BC%8C%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>遍历的算法分析</p>
 </li>
 </ul>
 
