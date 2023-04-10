@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>反转整个链表</title>
+    <link href="/2023/04/10/%E5%8F%8D%E8%BD%AC%E6%95%B4%E4%B8%AA%E9%93%BE%E8%A1%A8/"/>
+    <url>/2023/04/10/%E5%8F%8D%E8%BD%AC%E6%95%B4%E4%B8%AA%E9%93%BE%E8%A1%A8/</url>
+    
+    <content type="html"><![CDATA[<p><a href="!%5Bimage-20230410224210507%5D(C:%5CUsers%5C12414%5CDesktop%5Chexo%5Csource_posts%5C%E5%8F%8D%E8%BD%AC%E6%95%B4%E4%B8%AA%E9%93%BE%E8%A1%A8.assets%5Cimage-20230410224210507.png)">题</a></p><p><img src="https://newcode-1317182407.cos.ap-nanjing.myqcloud.com/%E9%93%BE%E8%A1%A8/%E5%8F%8D%E8%BD%AC%E6%95%B4%E4%B8%AA%E9%93%BE%E8%A1%A8%E9%A2%98.png"></p><ol><li><p>代码</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">struct</span> ListNode* <span class="hljs-title function_">ReverseList</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> ListNode* pHead )</span> &#123;<br>    <span class="hljs-comment">// write code here</span><br>    <span class="hljs-keyword">if</span>(pHead==<span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ListNode</span>* <span class="hljs-title">pre</span>=</span><span class="hljs-literal">NULL</span>;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ListNode</span>* <span class="hljs-title">cur</span>=</span>pHead;<br>    <span class="hljs-keyword">while</span>(cur!=<span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ListNode</span>* <span class="hljs-title">temp</span>=</span>cur-&gt;next;<br>        cur-&gt;next=pre;<br>        pre=cur;<br>        cur=temp;<br>    &#125;<br>    <span class="hljs-keyword">return</span> pre;<br>&#125;<br></code></pre></td></tr></table></figure></li><li><p>理解</p><ul><li>让<code>temp</code>保存<code>cur-&gt;next</code>的地址</li><li><code>pre</code>第一次要为NULL</li></ul></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>newcode</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>链表内指定区域反转</title>
     <link href="/2023/04/10/%E9%93%BE%E8%A1%A8%E5%86%85%E6%8C%87%E5%AE%9A%E5%8C%BA%E5%9F%9F%E5%8F%8D%E8%BD%AC/"/>
     <url>/2023/04/10/%E9%93%BE%E8%A1%A8%E5%86%85%E6%8C%87%E5%AE%9A%E5%8C%BA%E5%9F%9F%E5%8F%8D%E8%BD%AC/</url>
