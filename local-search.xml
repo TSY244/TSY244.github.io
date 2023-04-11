@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Effective</title>
+    <link href="/2023/04/11/Effective/"/>
+    <url>/2023/04/11/Effective/</url>
+    
+    <content type="html"><![CDATA[<h1 id="改程序和设计程序的55个具体做法"><a href="#改程序和设计程序的55个具体做法" class="headerlink" title="改程序和设计程序的55个具体做法"></a>改程序和设计程序的55个具体做法</h1><h2 id="条款-04"><a href="#条款-04" class="headerlink" title="条款 04"></a>条款 04</h2><p><strong>确保对象在使用中之前被初始化</strong></p><ol><li>使用初始化列表<ul><li>最好初始化列表与变量声明一一对应，也就是说与变量的声明顺序一致</li></ul></li></ol><h2 id="条款-05"><a href="#条款-05" class="headerlink" title="条款 05"></a>条款 05</h2>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Effective</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>反转整个链表</title>
     <link href="/2023/04/10/%E5%8F%8D%E8%BD%AC%E6%95%B4%E4%B8%AA%E9%93%BE%E8%A1%A8/"/>
     <url>/2023/04/10/%E5%8F%8D%E8%BD%AC%E6%95%B4%E4%B8%AA%E9%93%BE%E8%A1%A8/</url>
