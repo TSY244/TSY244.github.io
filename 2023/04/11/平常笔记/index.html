@@ -27,7 +27,7 @@
 <meta property="og:image" content="c:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20221211212205234.png">
 <meta property="og:image" content="c:\Users\12414\Desktop\%E5%AD%A6\%E7%AC%94%E8%AE%B0\c++\%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0.assets\%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0.assets\image-20221227225137590.png">
 <meta property="article:published_time" content="2023-04-11T04:46:56.000Z">
-<meta property="article:modified_time" content="2023-04-11T16:05:29.713Z">
+<meta property="article:modified_time" content="2023-04-12T06:34:35.420Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="c++随记">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.9k words
+          4.4k words
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          33 mins
+          37 mins
         
       </span>
     
@@ -436,6 +436,20 @@
 <p>在C++中，当我们派生一个子类时，子类的构造函数会默认调用父类的构造函数以初始化父类的成员变量。而在某些情况下，我们希望能够在父类的构造函数中调用子类重写的虚函数，此时就需要在父类的构造函数声明为<code>virtual</code>。</p>
 <p>具体来说，当父类的构造函数声明为<code>virtual</code>时，如果我们通过子类的指针或引用调用这个构造函数，那么实际被调用的将是子类的构造函数，而不是父类的构造函数。这样可以保证在父类中调用子类的虚函数时，已经完成了子类对象的初始化，避免出现未定义行为的情况。</p>
 <p>需要注意的是，对于同一对象，构造函数的调用顺序是按照继承层次由上至下的，也就是从基类到派生类。因此，在子类的构造函数中，父类的构造函数已经执行完毕，可以调用虚函数，无需再将父类的构造函数声明为<code>virtual</code>。</p>
+</li>
+<li><p>c++父类里使用<code>vitual</code>的函数子类还会继承嘛？</p>
+<p>在 C++ 中，如果一个父类声明了一个虚函数，那么子类继承这个虚函数并且在子类中可以进行重写（override）。当然，如果子类不想重写这个虚函数，也可以直接继承父类中的实现。</p>
+<p>需要注意的是，在父类的构造函数中调用虚函数时，子类的版本不会被调用。这是因为在子类的构造函数执行之前，父类的构造函数已经执行完毕了，此时子类还没有初始化完成。如果在父类的构造函数中调用子类的函数，就有可能出现未定义行为的情况，因此编译器会强制执行父类版本的虚函数。</p>
+<p>总之，如果一个虚函数在父类中已经声明，子类无论是否重写它，在概念上都是继承了这个虚函数，即子类对象拥有这个虚函数的 vtable（虚函数表） 和 vptr（虚指针），可以通过指针或引用来使用这个虚函数。</p>
+</li>
+<li><p>在使用多态的时候应该将父类的析构函数声明<code>vitrual</code></p>
+</li>
+<li><p>在使用<code>virtual</code>的时候体积的增大，是因为携带了很多信息，如虚函数表，虚指针</p>
+</li>
+<li><p>纯虚函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">testFunc</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+<p>含有纯虚函数的class不能声明的对象，只能被派生</p>
 </li>
 </ol>
 
