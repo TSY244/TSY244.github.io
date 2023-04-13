@@ -27,7 +27,7 @@
 <meta property="og:image" content="c:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20221211212205234.png">
 <meta property="og:image" content="c:\Users\12414\Desktop\%E5%AD%A6\%E7%AC%94%E8%AE%B0\c++\%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0.assets\%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0.assets\image-20221227225137590.png">
 <meta property="article:published_time" content="2023-04-11T04:46:56.000Z">
-<meta property="article:modified_time" content="2023-04-12T06:34:35.420Z">
+<meta property="article:modified_time" content="2023-04-13T06:55:45.154Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="c++随记">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.4k words
+          5.6k words
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          37 mins
+          47 mins
         
       </span>
     
@@ -451,6 +451,52 @@
 
 <p>含有纯虚函数的class不能声明的对象，只能被派生</p>
 </li>
+<li><p>在初始化列表中调用父类的构造函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">son</span>:<span class="hljs-keyword">public</span> fat &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">son</span>();<br><br>    ~<span class="hljs-built_in">son</span>();<br>&#125;;<br><br><span class="hljs-comment">//构造</span><br>son::<span class="hljs-built_in">son</span>(): <span class="hljs-built_in">fat</span>(<span class="hljs-number">1</span>)<br>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;son::son()&quot;</span> &lt;&lt; endl;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>move()</code>的使用</p>
+<p>于在不进行复制或赋值操作的情况下将对象的所有权从一个对象转移到另一个对象。通过使用move，可以避免对资源进行复制和销毁的昂贵开销，从而提高代码效率。</p>
+<p>在构造函数中可以使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">fat::<span class="hljs-built_in">fat</span>(std::string str):<span class="hljs-built_in">str</span>(std::<span class="hljs-built_in">move</span>(str)) &#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;name::name()&quot;</span> &lt;&lt; endl;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>final</code>关键字的使用</p>
+<ul>
+<li>在类上面的使用</li>
+</ul>
+<p>  类的声明中使用final关键字，可以指示该类不能被继承</p>
+<ul>
+<li><p>在虚函数上面的使用</p>
+<p>在虚函数的声明中使用final关键字，可以阻止子类对该虚函数进行覆盖</p>
+</li>
+</ul>
+<p>需要注意的是，final关键字只能用于类或虚函数的声明中，而不能用于变量、函数或其它类型的声明中。</p>
+</li>
+<li><p><code>const</code>和<code>constexpr</code></p>
+<ul>
+<li><p><code>const</code> 只是将变量标记为“只读”，并非编译期常量，而 <code>constexpr</code> 则需要在编译时求值，生成编译期常量。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">const</span> <span class="hljs-type">int</span> constInt=<span class="hljs-number">10</span>;<span class="hljs-comment">//只读</span><br><span class="hljs-keyword">constexpr</span> <span class="hljs-type">int</span> constNum=<span class="hljs-number">10</span>;<span class="hljs-comment">//编译期常量</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>被声明为 <code>constexpr</code> 的变量或函数，必须要满足编译器的常量表达式要求，可以在编译时进行求值。</p>
+</li>
+<li><p><code>constexpr</code> 变量应该使用特定的类型，如整数类型、枚举类型以及一些简单的浮点类型。</p>
+</li>
+<li><p><code>constexpr</code> 函数具有与普通函数类似的语法，但是其参数和返回值类型也必须是可求值的。在调用 <code>constexpr</code> 函数时，所有参数必须是编译期常量。</p>
+</li>
+</ul>
+</li>
+<li><p><code>const</code>修饰函数</p>
+<p>在C++中，<code>const</code> 关键字可以作用于成员函数、非成员函数、指针和引用等对象上。如果将 <code>const</code> 应用于成员函数，则该函数被视为只读函数（read-only function），即在该函数内不能修改成员变量的值，也不能调用非<code> const</code> 成员函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">fat::test</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>&#123;<br>    <span class="hljs-comment">//</span><br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>constexpr</code>修饰函数</p>
+<ol>
+<li>函数必须是类的一部分；</li>
+<li>函数有返回类型，而且返回类型必须为字面值类型；</li>
+<li>函数体中只能包含诸如 <code>return</code>、<code>static_assert</code> 和 <code>typedef</code> 等语句，不能有分支语句（例如 <code>if</code>、<code>while</code>）和循环语句（例如 <code>for</code>、<code>do-while</code>）；</li>
+<li>函数的参数列表中只能有字面值类型、引用和指针，而且参数都必须是 <code>constexpr</code> 的；</li>
+<li>将函数声明为 <code>constexpr</code> 时，函数体内的所有函数调用都必须是 <code>constexpr</code> 的，这也意味着被调用的函数必须是 <code>constexpr</code> 的。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-type">void</span> <span class="hljs-title">fat::test</span><span class="hljs-params">()</span> </span>&#123;<br><br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ol>
 
                 
