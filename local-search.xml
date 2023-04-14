@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>cpp代码规范</title>
+    <link href="/2023/04/14/cpp%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/"/>
+    <url>/2023/04/14/cpp%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</url>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="c-代码规范"><a href="#c-代码规范" class="headerlink" title="c++代码规范"></a>c++代码规范</h1><h2 id="基本代码规范"><a href="#基本代码规范" class="headerlink" title="基本代码规范"></a>基本代码规范</h2><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p><strong>方法一</strong></p><ol><li>包括两个文件一个是<code>inc</code>这个目录放<code>.h</code>文件，还有一个<code>src</code>目录，放置<code>.cpp</code>文件。</li></ol><p><strong>方法二</strong></p><ol><li>按照功能分文件</li></ol><h3 id="头文件结构"><a href="#头文件结构" class="headerlink" title="头文件结构"></a>头文件结构</h3><p><strong>处理方式一</strong></p><ol><li>使用<code>ifndef</code>&#x2F;<code>define</code>&#x2F;<code>endif</code></li></ol><p><strong>处理方式二</strong></p><ol><li>使用<code>#pragma once</code></li></ol><h3 id="头文件的包含"><a href="#头文件的包含" class="headerlink" title="头文件的包含"></a>头文件的包含</h3><ol><li>使用路径包括</li></ol><h3 id="名字空间"><a href="#名字空间" class="headerlink" title="名字空间"></a>名字空间</h3><ol><li>建议使用二级命名空间，第一个命名空间是项目名称，第二个是模块名称</li></ol><h3 id="代码行的使用"><a href="#代码行的使用" class="headerlink" title="代码行的使用"></a>代码行的使用</h3><ol><li><p>一行代码只做一件事</p></li><li><p>在定义变量的时候初始化变量</p><img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/%E8%A7%84%E8%8C%83%E4%BB%A3%E7%A0%81.png?q-sign-algorithm=sha1&q-ak=AKID62gNbIugj-rlltKDtx9qQ0_NXvaVQ5eNhwwxGkulFmHBe0ryycrOgtLN1PJ48AwE&q-sign-time=1681488019;1681491619&q-key-time=1681488019;1681491619&q-header-list=host&q-url-param-list=&q-signature=e4a689d272023a355d0531e4c2a8e304b91e3f84&x-cos-security-token=0TXuI2oo8Sb5JGse9bsw7agND0rUgf7ab53099746c0362b69c92e54403bee6c1Ar87iX4JGt_CJ_4-yiOqn5qq0oYOzq5Mvx5tZYU4UMH4CzPOLXAXckkgflDKpLF8EFsMkPbIaiZBHDbuZKO7M7wuhqklRkTpvoysQC3p_jlBgtUCJW9hscAxiDk_3qQDgHzlDrdCKzHaDdduRuoDolrxPPI9XoPQLvaqMiBwujWJDhXsHm8ruOPtekvK2ev8" style="zoom:150%;" /></li></ol><h3 id="注释的使用"><a href="#注释的使用" class="headerlink" title="注释的使用"></a>注释的使用</h3><ol><li>版本，版权的说明</li><li>函数接口的说明</li><li>重要代码</li><li>代码即注释</li></ol><h3 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h3><ol><li><p><code>class</code></p><p>采取大驼峰命名法</p><p>例如<code>MyClass</code></p></li><li><p>函数</p><p>采取驼峰命名</p></li><li><p>也可以在中间添加<code>_</code></p><p><code>creat_func</code>前后都是小写</p></li><li><p>变量命名</p><p>变量的意思</p></li></ol><h3 id="表达式和语句"><a href="#表达式和语句" class="headerlink" title="表达式和语句"></a>表达式和语句</h3><ol><li>添加<code>()</code></li><li>不编写太复杂的表达式</li></ol><h2 id="概念抽象与命名"><a href="#概念抽象与命名" class="headerlink" title="概念抽象与命名"></a>概念抽象与命名</h2><ol><li>类的命名是名词</li><li>函数是动词</li></ol><h2 id="大道至简"><a href="#大道至简" class="headerlink" title="大道至简"></a>大道至简</h2><ol><li>模块复用</li><li>化繁为简</li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>c++基础</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>栈的压入和弹出序列</title>
     <link href="/2023/04/13/%E6%A0%88%E7%9A%84%E5%8E%8B%E5%85%A5%E5%92%8C%E5%BC%B9%E5%87%BA%E5%BA%8F%E5%88%97/"/>
     <url>/2023/04/13/%E6%A0%88%E7%9A%84%E5%8E%8B%E5%85%A5%E5%92%8C%E5%BC%B9%E5%87%BA%E5%BA%8F%E5%88%97/</url>
