@@ -24,7 +24,7 @@
 <meta property="og:description" content="java的初始化 Java的初始化是指在创建对象时为其成员变量设定初值的过程。Java中的所有对象在创建时，其成员变量都会被默认初始化为其对应类型的默认值（如int类型的默认值为0，引用类型的默认值为null）。如果需要对成员变量进行显式初始化，可以通过构造函数、代码块或直接赋值的方式实现。 构造函数是一种特殊的方法，用于在创建对象时执行一些初始化操作。在Java中，每个类都有一个与之同名的构造">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-04-12T08:52:08.000Z">
-<meta property="article:modified_time" content="2023-04-13T11:58:11.690Z">
+<meta property="article:modified_time" content="2023-04-15T13:04:54.290Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="java随记">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k words
+          2.4k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          11 mins
+          20 mins
         
       </span>
     
@@ -307,7 +307,58 @@
 <li><p>使用<code>javac</code>将<code>java</code>文件编译成<code>.class</code>文件</p>
 <p>使用<code>java</code> 运行文件</p>
 </li>
+<li><p><code>java</code>代码块</p>
+<ul>
+<li><p>静态代码块</p>
+<p>只在类的加载时执行一次</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span>&#123;<br>    <span class="hljs-comment">//初始化static 变量</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>构造代码块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">&#123;<br>    <span class="hljs-comment">//每次类的加载都会执行</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>局部代码块</p>
+<p>用于限定生命周期</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> func&#123;<br>    &#123;<br>        <span class="hljs-type">int</span> num;<br>        <span class="hljs-comment">//限制num的生命周期</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>同步代码块</p>
+<p>确保线程安全</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">    <span class="hljs-comment">// 同步方法</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">synchronizedMethod</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">// 同步代码块，保证线程安全</span><br>        <span class="hljs-keyword">synchronized</span> (<span class="hljs-built_in">this</span>) &#123;<br>            <span class="hljs-comment">// do something</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Math类</p>
+<ol>
+<li><code>abs()</code>：返回一个数的绝对值。[<a target="_blank" rel="noopener" href="https://www.w3schools.com/java/ref_math.asp">1</a>]</li>
+<li><code>ceil()</code>：返回大于或等于参数的最小整数，即向上取整。[<a target="_blank" rel="noopener" href="https://www.w3schools.com/java/ref_math.asp">1</a>]</li>
+<li><code>floor()</code>：返回小于或等于参数的最大整数，即向下取整。[<a target="_blank" rel="noopener" href="https://www.w3schools.com/java/ref_math.asp">1</a>]</li>
+<li><code>round()</code>：返回四舍五入后的最接近的整数。[<a target="_blank" rel="noopener" href="https://www.w3schools.com/java/ref_math.asp">1</a>]</li>
+<li><code>max()</code>：返回两个值中较大的那个。[<a target="_blank" rel="noopener" href="https://www.w3schools.com/java/ref_math.asp">1</a>]</li>
+<li><code>min()</code>：返回两个值中较小的那个。[<a target="_blank" rel="noopener" href="https://www.w3schools.com/java/ref_math.asp">1</a>]</li>
+<li><code>pow(double a, double b)</code>：返回a的b次幂。[<a target="_blank" rel="noopener" href="https://www.w3schools.com/java/ref_math.asp">1</a>]</li>
+<li><code>sqrt()</code>：返回一个数的平方根。[<a target="_blank" rel="noopener" href="https://www.w3schools.com/java/ref_math.asp">1</a>]</li>
+<li><code>sin()</code>：返回一个角度的正弦值。[<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/sin">2</a>]</li>
+<li><code>cos()</code>：返回一个角度的余弦值。[<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/cos">2</a>]</li>
+<li><code>tan()</code>：返回一个角度的正切值。[<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/tan">2</a>]</li>
+<li><code>asin()</code>：返回一个数值的反正弦值（单位为弧度）。[<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/asin">2</a>]</li>
+<li><code>acos()</code>：返回一个数值的反余弦值（单位为弧度）。[<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/acos">2</a>]</li>
+<li><code>atan()</code>：返回一个数值的反正切值（单位为弧度）。[<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/atan">2</a>]</li>
+<li><code>exp()</code>：返回 <code>Math.E</code>（自然对数的底数）的指数。[<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/exp">2</a>]</li>
+<li><code>log()</code>：返回一个数的自然对数（以e为底数）。[<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/log">2</a>]</li>
+<li><code>random()</code>：返回一个随机数，范围为0到1。[<a target="_blank" rel="noopener" href="https://www.w3schools.com/java/ref_math.asp">1</a>]</li>
 </ol>
+</li>
+<li><p><code>java</code>使用代码块对static变量进行赋值和直接赋值的区别？</p>
+</li>
+<li><p>执行时机</p>
+</li>
+</ol>
+<p>   直接给static变量赋值时，赋值操作会在类加载时执行，也就是说，当 JVM 加载该类时，就会把static变量的初始值存储到内存中。</p>
+<p>   而代码块则需要等到该类被实例化时才会执行。也就是说，当该类被使用时，代码块中的语句才会执行，从而给static变量赋值。</p>
+<ol start="2">
+<li>赋值方式</li>
+</ol>
+<p>   直接给static变量赋值是一种简单的方式，它可以直接在变量后跟一个等号，然后紧接着赋值的表达式。</p>
+<p>   而代码块提供了更多灵活的赋值方式，我们可以在代码块中编写任意复杂的逻辑来计算出static变量的值，更加符合面向对象的设计思想。</p>
+<p>   综合来看，我们可以根据具体的场景选择不同的方式对static变量进行赋值。如果我们需要简单地给变量赋一个常量值，那么可以直接使用赋值操作；如果我们需要进行一些特殊的计算，或者需要依赖其他变量的值来计算static变量的值，那么可以使用代码块来进行赋值。</p>
 
                 
               </div>

@@ -23,11 +23,13 @@
 <meta property="og:site_name" content="chg">
 <meta property="og:description" content="[TOC] 改程序和设计程序的55个具体做法条款 04确保对象在使用中之前被初始化  使用初始化列表 最好初始化列表与变量声明一一对应，也就是说与变量的声明顺序一致    构造&#x2F;析构&#x2F;赋值条款  05了解c++默默写了哪些函数  构造函数，拷贝构造函数，析构函数  条款  06若不想使用编译器自动生成的函数，就该明确拒绝  为驳回编译器自动提供的机能，可以将相对应的函数声明为p">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://effective-1317182407.cos.ap-nanjing.myqcloud.com/%E6%9E%84%E9%80%A0%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC/%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%3D.png?q-sign-algorithm=sha1&q-ak=AKID4tTVLwjnPRwSZMh53K3QqXil4f3S-KSpkOuqMTYap-KhEZyuFnynstLefVaNKJf5&q-sign-time=1681571736;1681575336&q-key-time=1681571736;1681575336&q-header-list=host&q-url-param-list=&q-signature=679f4555e556f916c45757882c819f3d0a28677a&x-cos-security-token=dZTo02ja3xphg9YsD6gHM4ZJgnHCOBxac21a73217d597685649594afe00417d87ueWmakFgpD3dkHoshLZ-8wy-DJwgXB9Lto6_loQ-0PC1Yr77Pmn2VKy2I_V7_hKnuZby94CHGylyzpelGMjNbfpf6sEs1lPube_tUKXrpxXefgqZ2LmH7vCLZ032t1DtMhnJj4039c-IQtsSbVxZz7L6BNYTTKWGw_lUS9t4zOj-bX8ki-kDmFYTTKOlTui">
 <meta property="article:published_time" content="2023-04-11T04:46:56.000Z">
-<meta property="article:modified_time" content="2023-04-14T16:19:39.238Z">
+<meta property="article:modified_time" content="2023-04-15T15:33:17.539Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="Effective">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://effective-1317182407.cos.ap-nanjing.myqcloud.com/%E6%9E%84%E9%80%A0%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC/%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%3D.png?q-sign-algorithm=sha1&q-ak=AKID4tTVLwjnPRwSZMh53K3QqXil4f3S-KSpkOuqMTYap-KhEZyuFnynstLefVaNKJf5&q-sign-time=1681571736;1681575336&q-key-time=1681571736;1681575336&q-header-list=host&q-url-param-list=&q-signature=679f4555e556f916c45757882c819f3d0a28677a&x-cos-security-token=dZTo02ja3xphg9YsD6gHM4ZJgnHCOBxac21a73217d597685649594afe00417d87ueWmakFgpD3dkHoshLZ-8wy-DJwgXB9Lto6_loQ-0PC1Yr77Pmn2VKy2I_V7_hKnuZby94CHGylyzpelGMjNbfpf6sEs1lPube_tUKXrpxXefgqZ2LmH7vCLZ032t1DtMhnJj4039c-IQtsSbVxZz7L6BNYTTKWGw_lUS9t4zOj-bX8ki-kDmFYTTKOlTui">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -227,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          461 words
+          657 words
         
       </span>
     
@@ -238,7 +240,7 @@
         
         
         
-          4 mins
+          6 mins
         
       </span>
     
@@ -316,7 +318,24 @@
 <li>因为父类的构造函数会比基类的更早运行，如果在构造函数里面调用，调用的是父类的函数</li>
 <li>使用静态函数得到信息返回给父类的构造函数</li>
 </ol>
-<h3 id="条款-10"><a href="#条款-10" class="headerlink" title="条款 10"></a>条款 10</h3><p><strong>operator返回自身引用</strong></p>
+<h3 id="条款-10"><a href="#条款-10" class="headerlink" title="条款 10"></a>条款 10</h3><p><strong>operator&#x3D;返回自身引用</strong></p>
+<ol>
+<li>令赋值操作返回的是引用的<code>* this</code></li>
+</ol>
+<h3 id="条款-11"><a href="#条款-11" class="headerlink" title="条款 11"></a>条款 11</h3><p><strong>operator&#x3D; 返回自身</strong></p>
+<p><img src="https://effective-1317182407.cos.ap-nanjing.myqcloud.com/%E6%9E%84%E9%80%A0%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC/%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%3D.png?q-sign-algorithm=sha1&q-ak=AKID4tTVLwjnPRwSZMh53K3QqXil4f3S-KSpkOuqMTYap-KhEZyuFnynstLefVaNKJf5&q-sign-time=1681571736;1681575336&q-key-time=1681571736;1681575336&q-header-list=host&q-url-param-list=&q-signature=679f4555e556f916c45757882c819f3d0a28677a&x-cos-security-token=dZTo02ja3xphg9YsD6gHM4ZJgnHCOBxac21a73217d597685649594afe00417d87ueWmakFgpD3dkHoshLZ-8wy-DJwgXB9Lto6_loQ-0PC1Yr77Pmn2VKy2I_V7_hKnuZby94CHGylyzpelGMjNbfpf6sEs1lPube_tUKXrpxXefgqZ2LmH7vCLZ032t1DtMhnJj4039c-IQtsSbVxZz7L6BNYTTKWGw_lUS9t4zOj-bX8ki-kDmFYTTKOlTui" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>解决对于自己赋值自己的情况</p>
+<p>在经行操作的时候判断，是否是自己，如果是的话就直接返回</p>
+</li>
+<li><p>如果不考虑自己赋值自己的情况</p>
+<p>应该使用临时变量保存原来的地址，如果<code>new</code>失败了，指向的地址也不会出错</p>
+</li>
+</ol>
+<h3 id="条款-12"><a href="#条款-12" class="headerlink" title="条款 12"></a>条款 12</h3><p><strong>operator&#x3D; 赋值对象时勿忘每一个成分</strong></p>
+<ol>
+<li>在使用复制构造函数或者移动构造函数时，我们需要调用父类的构造函数</li>
+</ol>
 
                 
               </div>
