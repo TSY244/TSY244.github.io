@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="chg">
 <meta property="og:description" content="[TOC] 改程序和设计程序的55个具体做法条款 04确保对象在使用中之前被初始化  使用初始化列表 最好初始化列表与变量声明一一对应，也就是说与变量的声明顺序一致    构造&#x2F;析构&#x2F;赋值条款  05了解c++默默写了哪些函数  构造函数，拷贝构造函数，析构函数  条款  06若不想使用编译器自动生成的函数，就该明确拒绝  为驳回编译器自动提供的机能，可以将相对应的函数声明为p">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://effective-1317182407.cos.ap-nanjing.myqcloud.com/%E6%9E%84%E9%80%A0%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC/%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%3D.png?q-sign-algorithm=sha1&q-ak=AKID4tTVLwjnPRwSZMh53K3QqXil4f3S-KSpkOuqMTYap-KhEZyuFnynstLefVaNKJf5&q-sign-time=1681571736;1681575336&q-key-time=1681571736;1681575336&q-header-list=host&q-url-param-list=&q-signature=679f4555e556f916c45757882c819f3d0a28677a&x-cos-security-token=dZTo02ja3xphg9YsD6gHM4ZJgnHCOBxac21a73217d597685649594afe00417d87ueWmakFgpD3dkHoshLZ-8wy-DJwgXB9Lto6_loQ-0PC1Yr77Pmn2VKy2I_V7_hKnuZby94CHGylyzpelGMjNbfpf6sEs1lPube_tUKXrpxXefgqZ2LmH7vCLZ032t1DtMhnJj4039c-IQtsSbVxZz7L6BNYTTKWGw_lUS9t4zOj-bX8ki-kDmFYTTKOlTui">
+<meta property="og:image" content="https://effective-1317182407.cos.ap-nanjing.myqcloud.com/%E6%9E%84%E9%80%A0%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC/%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%3D.png?q-sign-algorithm=sha1&q-ak=AKIDIJnjtxFUCUqaAowDd-ITYULKypVpUES8sWaey3CQp_ns0CHbvrJmWzFH7Ie0DF15&q-sign-time=1681708749;1681712349&q-key-time=1681708749;1681712349&q-header-list=host&q-url-param-list=&q-signature=850ff8e56d95557c23e52e7cd8e59cc8b3657fc5&x-cos-security-token=E3kqUWLeRKkjezyhiWfLZ7axiiwNH9Tad224e4c6048773c82221d35a9a1db952rpP9gCmN9161-sBNWtpK5XZaZHZdg15x_XM5S_2jOf5JUwjFrF8zV7IGduKcH7SUzz46nh7zI0md7utqtPCeO_iFzVKsamTI2c7d1GyRCqlY8et0n73-7XFsO6Mj_JAVn7E5fe4cCscuCmQ4210uDc_u41j5y1gdbBfahmBnZ39nZk8VgmVJolGYUSLx7JpD">
 <meta property="article:published_time" content="2023-04-11T04:46:56.000Z">
-<meta property="article:modified_time" content="2023-04-15T15:33:17.539Z">
+<meta property="article:modified_time" content="2023-04-17T05:37:58.084Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="Effective">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://effective-1317182407.cos.ap-nanjing.myqcloud.com/%E6%9E%84%E9%80%A0%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC/%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%3D.png?q-sign-algorithm=sha1&q-ak=AKID4tTVLwjnPRwSZMh53K3QqXil4f3S-KSpkOuqMTYap-KhEZyuFnynstLefVaNKJf5&q-sign-time=1681571736;1681575336&q-key-time=1681571736;1681575336&q-header-list=host&q-url-param-list=&q-signature=679f4555e556f916c45757882c819f3d0a28677a&x-cos-security-token=dZTo02ja3xphg9YsD6gHM4ZJgnHCOBxac21a73217d597685649594afe00417d87ueWmakFgpD3dkHoshLZ-8wy-DJwgXB9Lto6_loQ-0PC1Yr77Pmn2VKy2I_V7_hKnuZby94CHGylyzpelGMjNbfpf6sEs1lPube_tUKXrpxXefgqZ2LmH7vCLZ032t1DtMhnJj4039c-IQtsSbVxZz7L6BNYTTKWGw_lUS9t4zOj-bX8ki-kDmFYTTKOlTui">
+<meta name="twitter:image" content="https://effective-1317182407.cos.ap-nanjing.myqcloud.com/%E6%9E%84%E9%80%A0%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC/%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%3D.png?q-sign-algorithm=sha1&q-ak=AKIDIJnjtxFUCUqaAowDd-ITYULKypVpUES8sWaey3CQp_ns0CHbvrJmWzFH7Ie0DF15&q-sign-time=1681708749;1681712349&q-key-time=1681708749;1681712349&q-header-list=host&q-url-param-list=&q-signature=850ff8e56d95557c23e52e7cd8e59cc8b3657fc5&x-cos-security-token=E3kqUWLeRKkjezyhiWfLZ7axiiwNH9Tad224e4c6048773c82221d35a9a1db952rpP9gCmN9161-sBNWtpK5XZaZHZdg15x_XM5S_2jOf5JUwjFrF8zV7IGduKcH7SUzz46nh7zI0md7utqtPCeO_iFzVKsamTI2c7d1GyRCqlY8et0n73-7XFsO6Mj_JAVn7E5fe4cCscuCmQ4210uDc_u41j5y1gdbBfahmBnZ39nZk8VgmVJolGYUSLx7JpD">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          657 words
+          694 words
         
       </span>
     
@@ -323,7 +323,7 @@
 <li>令赋值操作返回的是引用的<code>* this</code></li>
 </ol>
 <h3 id="条款-11"><a href="#条款-11" class="headerlink" title="条款 11"></a>条款 11</h3><p><strong>operator&#x3D; 返回自身</strong></p>
-<p><img src="https://effective-1317182407.cos.ap-nanjing.myqcloud.com/%E6%9E%84%E9%80%A0%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC/%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%3D.png?q-sign-algorithm=sha1&q-ak=AKID4tTVLwjnPRwSZMh53K3QqXil4f3S-KSpkOuqMTYap-KhEZyuFnynstLefVaNKJf5&q-sign-time=1681571736;1681575336&q-key-time=1681571736;1681575336&q-header-list=host&q-url-param-list=&q-signature=679f4555e556f916c45757882c819f3d0a28677a&x-cos-security-token=dZTo02ja3xphg9YsD6gHM4ZJgnHCOBxac21a73217d597685649594afe00417d87ueWmakFgpD3dkHoshLZ-8wy-DJwgXB9Lto6_loQ-0PC1Yr77Pmn2VKy2I_V7_hKnuZby94CHGylyzpelGMjNbfpf6sEs1lPube_tUKXrpxXefgqZ2LmH7vCLZ032t1DtMhnJj4039c-IQtsSbVxZz7L6BNYTTKWGw_lUS9t4zOj-bX8ki-kDmFYTTKOlTui" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://effective-1317182407.cos.ap-nanjing.myqcloud.com/%E6%9E%84%E9%80%A0%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC/%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%3D.png?q-sign-algorithm=sha1&q-ak=AKIDIJnjtxFUCUqaAowDd-ITYULKypVpUES8sWaey3CQp_ns0CHbvrJmWzFH7Ie0DF15&q-sign-time=1681708749;1681712349&q-key-time=1681708749;1681712349&q-header-list=host&q-url-param-list=&q-signature=850ff8e56d95557c23e52e7cd8e59cc8b3657fc5&x-cos-security-token=E3kqUWLeRKkjezyhiWfLZ7axiiwNH9Tad224e4c6048773c82221d35a9a1db952rpP9gCmN9161-sBNWtpK5XZaZHZdg15x_XM5S_2jOf5JUwjFrF8zV7IGduKcH7SUzz46nh7zI0md7utqtPCeO_iFzVKsamTI2c7d1GyRCqlY8et0n73-7XFsO6Mj_JAVn7E5fe4cCscuCmQ4210uDc_u41j5y1gdbBfahmBnZ39nZk8VgmVJolGYUSLx7JpD" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li><p>解决对于自己赋值自己的情况</p>
 <p>在经行操作的时候判断，是否是自己，如果是的话就直接返回</p>
@@ -335,6 +335,10 @@
 <h3 id="条款-12"><a href="#条款-12" class="headerlink" title="条款 12"></a>条款 12</h3><p><strong>operator&#x3D; 赋值对象时勿忘每一个成分</strong></p>
 <ol>
 <li>在使用复制构造函数或者移动构造函数时，我们需要调用父类的构造函数</li>
+</ol>
+<h2 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a>资源管理</h2><h3 id="条款-13"><a href="#条款-13" class="headerlink" title="条款 13"></a>条款 13</h3><ol>
+<li><code>auto_ptr</code>使用有big,所以选择c++11的智能指针</li>
+<li></li>
 </ol>
 
                 
