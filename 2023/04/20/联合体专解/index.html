@@ -16,28 +16,24 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] 图图的定义和基本术语  完全图  有n个点每个点都与n-1个点有边，但是注意如果是无向的边则应该是n*(n-1)&#x2F;2。如果是有向的边，则应该是n*(n-1)  稀疏图(e&lt;nlogn) 带箭头的边称为狐 有很少的边或狐的图  稠密图 有较多的边或狐的图  网 边&#x2F;狐带权（有意义，如：20km等）的图  邻接 有边&#x2F;狐相连的两个顶点之间的关系 根据离散的知识(V">
+    <meta name="description" content="联合体专解共用体的定义1234union 名字&amp;#123;    &#x2F;&#x2F;数据&amp;#125;    理解 所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存  在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量 12345678910111213141516union Date&amp;#123;	int num;	char name[20];&amp;#125;;int main()">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图">
-<meta property="og:url" content="http://example.com/2023/04/20/%E5%9B%BE/index.html">
+<meta property="og:title" content="联合体专解">
+<meta property="og:url" content="http://example.com/2023/04/20/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="[TOC] 图图的定义和基本术语  完全图  有n个点每个点都与n-1个点有边，但是注意如果是无向的边则应该是n*(n-1)&#x2F;2。如果是有向的边，则应该是n*(n-1)  稀疏图(e&lt;nlogn) 带箭头的边称为狐 有很少的边或狐的图  稠密图 有较多的边或狐的图  网 边&#x2F;狐带权（有意义，如：20km等）的图  邻接 有边&#x2F;狐相连的两个顶点之间的关系 根据离散的知识(V">
+<meta property="og:description" content="联合体专解共用体的定义1234union 名字&amp;#123;    &#x2F;&#x2F;数据&amp;#125;    理解 所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存  在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量 12345678910111213141516union Date&amp;#123;	int num;	char name[20];&amp;#125;;int main()">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%9B%BE/%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD.png">
-<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%9B%BE/%E5%AE%8C%E5%85%A8%E5%9B%BE.png">
-<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%9B%BE/%E6%9C%89%E5%90%91%E6%A0%91.png">
 <meta property="article:published_time" content="2023-04-20T01:01:17.000Z">
-<meta property="article:modified_time" content="2023-04-20T01:49:23.909Z">
+<meta property="article:modified_time" content="2023-04-20T05:09:20.831Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="数据结构和算法">
+<meta property="article:tag" content="c基础">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%9B%BE/%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>图 - chg</title>
+  <title>联合体专解 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="图"></span>
+            <span id="subtitle" data-typed-text="联合体专解"></span>
           
         </div>
 
@@ -231,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          667 words
+          353 words
         
       </span>
     
@@ -242,7 +238,7 @@
         
         
         
-          6 mins
+          3 mins
         
       </span>
     
@@ -280,71 +276,20 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">图</h1>
+            <h1 style="display: none">联合体专解</h1>
             
             
               <div class="markdown-body">
                 
-                <p>[TOC]</p>
-<h1 id="图"><a href="#图" class="headerlink" title="图"></a>图</h1><h2 id="图的定义和基本术语"><a href="#图的定义和基本术语" class="headerlink" title="图的定义和基本术语"></a>图的定义和基本术语</h2><p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%9B%BE/%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD.png" srcset="/img/loading.gif" lazyload alt=" "></p>
-<ol>
-<li><p>完全图</p>
-<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%9B%BE/%E5%AE%8C%E5%85%A8%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></p>
-<p>有<code>n</code>个点每个点都与<code>n-1</code>个点有边，但是注意如果是无向的边则应该是<code>n*(n-1)/2</code>。如果是有向的边，则应该是<code>n*(n-1)</code></p>
+                <h1 id="联合体专解"><a href="#联合体专解" class="headerlink" title="联合体专解"></a>联合体专解</h1><h2 id="共用体的定义"><a href="#共用体的定义" class="headerlink" title="共用体的定义"></a>共用体的定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">union</span> 名字</span><br><span class="hljs-class">&#123;</span><br>    <span class="hljs-comment">//数据</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><ol>
+<li><p>所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存</p>
 </li>
-<li><p>稀疏图(e&lt;nlogn)</p>
-<p><strong>带箭头的边称为狐</strong></p>
-<p>有很少的边或狐的图</p>
-</li>
-<li><p>稠密图</p>
-<p>有较多的边或狐的图</p>
-</li>
-<li><p>网</p>
-<p>边&#x2F;狐带权（有意义，如：<code>20km</code>等）的图</p>
-</li>
-<li><p>邻接</p>
-<p>有边&#x2F;狐相连的两个顶点之间的关系</p>
-<p>根据离散的知识(V<del>i</del>,V<del>j</del>)这是不分先后的（小括号括起来），则说V<del>i</del>,V<del>j</del>互称为邻接点</p>
-<p>&lt;V<del>i</del>,V<del>j</del>&gt;则则是有序的，对应有向的图V<del>i</del>邻接到V<del>j</del>，V<del>j</del>邻接于V<del>i</del></p>
-</li>
-<li><p>关联（依附）</p>
-<p>边或者狐与顶点的关系</p>
-</li>
-<li><p>顶点的度</p>
-<p>该顶点相关联的边的条数</p>
-<p>在有向图当中，顶点的度等于该顶点的出度和入度之和</p>
-<ul>
-<li>入度：是以该顶点为终点的有向边</li>
-<li>出度：是以该顶点为起点的有向边</li>
-</ul>
-<p>有向树</p>
-<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%9B%BE/%E6%9C%89%E5%90%91%E6%A0%91.png" srcset="/img/loading.gif" lazyload></p>
-</li>
-<li><p>路径</p>
-<p>按续的边构成的点的顶点序列</p>
-</li>
-<li><p>路径长度</p>
-<p>路径上边或者狐的数目（权值）之和</p>
-</li>
-<li><p>环（回路）</p>
-<p>第一个顶点和最后一个顶点相同的路径</p>
-</li>
-<li><p>简单的路径</p>
-<p>除了路径的起点和终点可以相同，其他的都不同</p>
-</li>
-<li><p>简单的回路（简单的环）：除路径和终点相同，其他的顶点都不相同（注意区别简单路径和简单的回路）</p>
-</li>
-<li><p>图和树的不同</p>
-<ul>
-<li>树是一种特殊的图，但是没有环，也就是说树的两个结点只有唯一路径</li>
-<li>树的每一个节点有且仅有<code>1</code>或者<code>0</code>个前驱。但是树可以有多个前驱</li>
-<li>树的每一个结点只会存在一种关系，即父子关系。但是图可以有多种关系。比如：有向边和无向边</li>
-<li>树一般用于分层存储和处理数据，如文件系统等；而图则更加灵活，可以用于表示各种复杂关系和网络结构，如社交网络、电脑网络、交通网络等等。</li>
-</ul>
-</li>
-<li><p>相同点</p>
-<p>树和图是两种基本的非线性数据结构</p>
-</li>
+<li><p>在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">union</span> <span class="hljs-title">Date</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-type">int</span> num;<br>	<span class="hljs-type">char</span> name[<span class="hljs-number">20</span>];<br>&#125;;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">union</span> <span class="hljs-title">Date</span> <span class="hljs-title">date</span>;</span><br>	date.num=<span class="hljs-number">65</span>;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,date.num);<br>    <span class="hljs-comment">//结果为65</span><br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>,date.name);<br>    <span class="hljs-comment">//结果为A，虽然没有定义date.name,但是由于共用一个内存，是可以访问的，因为65是A的码值</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ol>
 
                 
@@ -358,7 +303,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">#数据结构和算法</a>
+        <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
       
     </div>
   
@@ -370,8 +315,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>图</div>
-      <div>http://example.com/2023/04/20/图/</div>
+      <div>联合体专解</div>
+      <div>http://example.com/2023/04/20/联合体专解/</div>
     </div>
     <div class="license-meta">
       
@@ -415,12 +360,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/04/20/%E6%9E%9A%E4%B8%BE/" title="枚举">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">枚举</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/20/main%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82/" title="main函数传参">
-                        <span class="hidden-mobile">main函数传参</span>
+                      <a href="/2023/04/19/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" title="逆波兰表达式求值">
+                        <span class="hidden-mobile">逆波兰表达式求值</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
