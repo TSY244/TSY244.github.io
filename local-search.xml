@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>图</title>
+    <link href="/2023/04/20/%E5%9B%BE/"/>
+    <url>/2023/04/20/%E5%9B%BE/</url>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="图"><a href="#图" class="headerlink" title="图"></a>图</h1><h2 id="图的定义和基本术语"><a href="#图的定义和基本术语" class="headerlink" title="图的定义和基本术语"></a>图的定义和基本术语</h2><p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%9B%BE/%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD.png" alt=" "></p><ol><li><p>完全图</p><p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%9B%BE/%E5%AE%8C%E5%85%A8%E5%9B%BE.png"></p><p>有<code>n</code>个点每个点都与<code>n-1</code>个点有边，但是注意如果是无向的边则应该是<code>n*(n-1)/2</code>。如果是有向的边，则应该是<code>n*(n-1)</code></p></li><li><p>稀疏图(e&lt;nlogn)</p><p><strong>带箭头的边称为狐</strong></p><p>有很少的边或狐的图</p></li><li><p>稠密图</p><p>有较多的边或狐的图</p></li><li><p>网</p><p>边&#x2F;狐带权（有意义，如：<code>20km</code>等）的图</p></li><li><p>邻接</p><p>有边&#x2F;狐相连的两个顶点之间的关系</p><p>根据离散的知识(V<del>i</del>,V<del>j</del>)这是不分先后的（小括号括起来），则说V<del>i</del>,V<del>j</del>互称为邻接点</p><p>&lt;V<del>i</del>,V<del>j</del>&gt;则则是有序的，对应有向的图V<del>i</del>邻接到V<del>j</del>，V<del>j</del>邻接于V<del>i</del></p></li><li><p>关联（依附）</p><p>边或者狐与顶点的关系</p></li><li><p>顶点的度</p><p>该顶点相关联的边的条数</p><p>在有向图当中，顶点的度等于该顶点的出度和入度之和</p><ul><li>入度：是以该顶点为终点的有向边</li><li>出度：是以该顶点为起点的有向边</li></ul><p>有向树</p><p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E5%9B%BE/%E6%9C%89%E5%90%91%E6%A0%91.png"></p></li><li><p>路径</p><p>按续的边构成的点的顶点序列</p></li><li><p>路径长度</p><p>路径上边或者狐的数目（权值）之和</p></li><li><p>环（回路）</p><p>第一个顶点和最后一个顶点相同的路径</p></li><li><p>简单的路径</p><p>除了路径的起点和终点可以相同，其他的都不同</p></li><li><p>简单的回路（简单的环）：除路径和终点相同，其他的顶点都不相同（注意区别简单路径和简单的回路）</p></li><li><p>图和树的不同</p><ul><li>树是一种特殊的图，但是没有环，也就是说树的两个结点只有唯一路径</li><li>树的每一个节点有且仅有<code>1</code>或者<code>0</code>个前驱。但是树可以有多个前驱</li><li>树的每一个结点只会存在一种关系，即父子关系。但是图可以有多种关系。比如：有向边和无向边</li><li>树一般用于分层存储和处理数据，如文件系统等；而图则更加灵活，可以用于表示各种复杂关系和网络结构，如社交网络、电脑网络、交通网络等等。</li></ul></li><li><p>相同点</p><p>树和图是两种基本的非线性数据结构</p></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>数据结构和算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>逆波兰表达式求值</title>
     <link href="/2023/04/19/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/"/>
     <url>/2023/04/19/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/</url>
