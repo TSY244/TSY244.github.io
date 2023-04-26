@@ -1,0 +1,1017 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[TOC] 树和二叉树树的基本  一个根和若干的子树  基本术语   树的类别  有序树 子树有位置要求  无序树 子树无要求 意思是：1，2，3，这三颗子树，无论如何排列都是一个树    森林   树和线性结构的比较  树是一对多 线性结构是一对一    二叉树 每个节点最多有两个度  二叉树是个有序树（但是不是树的特殊情况）  二叉树可以是一 个空集   二叉树必须要分左子树还是右子树，即使只">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树和二叉树">
+<meta property="og:url" content="http://example.com/2023/04/05/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
+<meta property="og:site_name" content="chg">
+<meta property="og:description" content="[TOC] 树和二叉树树的基本  一个根和若干的子树  基本术语   树的类别  有序树 子树有位置要求  无序树 子树无要求 意思是：1，2，3，这三颗子树，无论如何排列都是一个树    森林   树和线性结构的比较  树是一对多 线性结构是一对一    二叉树 每个节点最多有两个度  二叉树是个有序树（但是不是树的特殊情况）  二叉树可以是一 个空集   二叉树必须要分左子树还是右子树，即使只">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91%2F%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A3%AE%E6%9E%97.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BD%A2%E6%80%81.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A83.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E7%AE%97%E6%B3%95.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%89%8D%EF%BC%8C%E4%B8%AD%EF%BC%8C%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E9%81%8D%E5%8E%86%E7%9A%84%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E7%9A%84%E9%9D%9E%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E8%A7%84%E5%88%99.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%A2%9E%E5%8A%A0%E4%B8%80%E4%B8%AA%E5%A4%B4%E7%BB%93%E7%82%B9.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A0%91%E5%92%8C%E6%A3%AE%E6%9E%97.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91%2F%E5%8F%8C%E4%BA%B2%E8%A1%A8%E7%A4%BA%E6%B3%95.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%AD%A9%E5%AD%90%E9%93%BE%E8%A1%A8.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%B8%A6%E5%8F%8C%E4%BA%B2%E7%9A%84%E5%AD%A9%E5%AD%90%E9%93%BE%E8%A1%A8.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95%E5%AE%9E%E6%93%8D.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%B0%86%E6%A0%91%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%85%84%E5%BC%9F%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E5%85%84%E5%BC%9F%E5%AD%98%E5%82%A8%E6%B3%95%EF%BC%89.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%98%E6%A0%91.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A3%AE%E6%9E%97%E5%8F%98%E6%88%90%E4%BA%8C%E5%8F%89%E6%A0%91.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%98%E6%A3%AE%E6%9E%97.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A3%AE%E6%9E%97%E7%9A%84%E9%81%8D%E5%8E%86.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A3%AE%E6%9E%97%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%88%A4%E6%96%AD%E6%A0%91.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E8%B7%AF%E5%BE%84%E9%95%BF%E5%BA%A62.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E7%89%B9%E7%82%B9.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0%E5%AE%9E%E4%BE%8B.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0%E4%BE%8B%E9%A2%98.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%A6%82%E4%BD%95%E4%BD%BF%E5%BE%97%E7%94%B5%E6%96%87%E7%9A%84%E6%9C%80%E7%9F%AD.png">
+<meta property="og:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%A6%82%E4%BD%95%E4%BD%BF%E5%BE%97%E7%94%B5%E6%96%87%E7%9A%84%E6%9C%80%E7%9F%AD.png">
+<meta property="article:published_time" content="2023-04-05T13:02:12.000Z">
+<meta property="article:modified_time" content="2023-04-17T11:23:44.102Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="数据结构和算法">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>树和二叉树 - chg</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>chg&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="树和二叉树"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-05 21:02" pubdate>
+          April 5, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          63 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">树和二叉树</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>[TOC]</p>
+<h1 id="树和二叉树"><a href="#树和二叉树" class="headerlink" title="树和二叉树"></a>树和二叉树</h1><h2 id="树的基本"><a href="#树的基本" class="headerlink" title="树的基本"></a>树的基本</h2><p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>一个根和若干的子树</p>
+</li>
+<li><p>基本术语</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91%2F%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>树的类别</p>
+<ul>
+<li><p>有序树</p>
+<p>子树有位置要求</p>
+</li>
+<li><p>无序树</p>
+<p>子树无要求</p>
+<p>意思是：1，2，3，这三颗子树，无论如何排列都是一个树</p>
+</li>
+</ul>
+</li>
+<li><p>森林</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A3%AE%E6%9E%97.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>树和线性结构的比较</p>
+<ul>
+<li>树是一对多</li>
+<li>线性结构是一对一</li>
+</ul>
+</li>
+</ol>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ol>
+<li><p>每个节点最多有两个度</p>
+</li>
+<li><p>二叉树是个有序树（但是不是树的特殊情况）</p>
+</li>
+<li><p>二叉树可以是一 个空集 </p>
+</li>
+<li><p>二叉树必须要分左子树还是右子树，即使只有一颗子树也要分（但是树可以不分，所以这就是二叉树不是树的原因）</p>
+</li>
+<li><p>二叉树的基本形态</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BD%A2%E6%80%81.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>二叉树的抽象类型定义</p>
+</li>
+<li><p>二叉树的性质</p>
+<ul>
+<li><p>在二叉树的第<code>i</code>层最多有2^i-1^ 个节点，最少有一个</p>
+</li>
+<li><p>深度为<code>k</code>的二叉树最多有2^k^ -1个节点</p>
+</li>
+<li><p>对任何一颗二叉树T如果叶子树为n<del>0</del>&#x3D;n<del>2</del>+1</p>
+</li>
+</ul>
+<p>  <img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A83.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>B&#x3D;n-1</p>
+<p>从下网上看，因为除了根节点每个节点都会产生一条边，所以<code>n-1</code>（除了根节点）个节点会产生<code>n-1</code>个边</p>
+</li>
+<li><p>n<del>2</del> *2 +n<del>1</del>*1</p>
+<p>从上往下看，因为，每一个度为2的节点都会产生两条边，每一度为1的节点会产生一个边</p>
+</li>
+<li><p>满二叉树</p>
+<ul>
+<li>每一层都达到最大的节点数</li>
+<li>叶子节点出现在最后一层</li>
+</ul>
+</li>
+<li><p>完成二叉树</p>
+<ul>
+<li><p>二叉树中有编号的与满二叉树的标号对应</p>
+</li>
+<li><p>在满二叉树中去除立连续的节点，剩下的也是完全二叉树</p>
+</li>
+<li><p>满二叉树一定是完全二叉树</p>
+</li>
+<li><p>完全二叉树的性质</p>
+<p>性质三</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8.png" srcset="/img/loading.gif" lazyload></p>
+<p>性质四</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>二叉树的存储结构  </p>
+<ul>
+<li>顺序结构</li>
+<li>链式结构<ul>
+<li>二叉链表</li>
+<li>三叉链表</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>二叉树的链式存储的储存结构</p>
+<p>二叉链表</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">BiNode</span>&#123;</span><br>    TElemType data;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">BiNode</span> *<span class="hljs-title">lChild</span>,*<span class="hljs-title">rChild</span>;</span><br>&#125;BiNode,*BiTree;<br></code></pre></td></tr></table></figure>
+
+<p>三叉链表(多了一个指向双亲的指针)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">BiNode</span>&#123;</span><br>    TElemType data;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">BiNode</span> *<span class="hljs-title">lChild</span>,*<span class="hljs-title">parent</span>,*<span class="hljs-title">rChild</span>;</span><br>&#125;BiNode,*BiTree;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>在<code>n</code>个节点的二叉链表中，必有<code>2n</code>个链域，除了根节点没有双亲，所以一定会有<code>n-1</code>个节点的链域存放指针，指向非空的子女节点。</li>
+</ul>
+<p>  所以一共有<code>n+1</code>个空指针域</p>
+</li>
+<li><p>二叉树的遍历</p>
+</li>
+</ol>
+<ul>
+<li><p>先序遍历</p>
+<p>先访问根节点，再访问左子树，再访问右子树</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E7%AE%97%E6%B3%95.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">visit</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,T-&gt;data);<br>&#125;<br><br>status <span class="hljs-title function_">PreOrderTraverse</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-keyword">if</span>(T==<span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        visit(T);<br>        PreOrderTraverse(T-&gt;lChild);<br>        PreOrderTraverse(T-&gt;rChild);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>中序遍历</p>
+<p>先访问左子树，再访问根节点，再访问右子树</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">visit</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,T-&gt;data);<br>&#125;<br><br>status <span class="hljs-title function_">PreOrderTraverse</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-keyword">if</span>(T==<span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        PreOrderTraverse(T-&gt;lChild);<br>        visit(T);<br>        PreOrderTraverse(T-&gt;rChild);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>后续遍历</p>
+<p>先访问左子树，在访问右子树，最后访问根节点   </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-type">void</span> <span class="hljs-title function_">visit</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,T-&gt;data);<br>&#125;<br><br>status <span class="hljs-title function_">PreOrderTraverse</span><span class="hljs-params">(BiTree T)</span>&#123;<br>    <span class="hljs-keyword">if</span>(T==<span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        PreOrderTraverse(T-&gt;lChild);<br>        PreOrderTraverse(T-&gt;rChild);<br>        visit(T);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>例题：</p>
+<p>使用二叉树表达算术表达式</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%89%8D%EF%BC%8C%E4%B8%AD%EF%BC%8C%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>递归遍历的算法分析</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E9%81%8D%E5%8E%86%E7%9A%84%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>从虚线出发到每一个终点路径每个节点经历3次</p>
+</li>
+<li><p>非递归遍历</p>
+<p>中序遍历</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E7%9A%84%E9%9D%9E%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iostream&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stack&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> status int</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> OK 1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ERROR (-1)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> true 1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> false 0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> TElemType char</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> SIZE 100</span><br><span class="hljs-function">status <span class="hljs-title">InOrderTraverse</span><span class="hljs-params">(BiTree&amp; T)</span></span>&#123;<br>    std::stack&lt;BiTree&gt; stack;<span class="hljs-comment">//申请一个栈</span><br>    BiTree moveNode=T;<br>    <span class="hljs-keyword">while</span>(!stack.<span class="hljs-built_in">empty</span>()||moveNode!= <span class="hljs-literal">nullptr</span>)&#123;<br>        <span class="hljs-keyword">if</span>(moveNode!= <span class="hljs-literal">nullptr</span>)&#123;<br>            stack.<span class="hljs-built_in">push</span>(moveNode);<br>            moveNode=moveNode-&gt;lChild;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">auto</span> p=stack.<span class="hljs-built_in">top</span>();<span class="hljs-comment">//得到栈首的元素</span><br>            std::cout&lt;&lt;p-&gt;data&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>            stack.<span class="hljs-built_in">pop</span>();<br>            moveNode=p-&gt;rChild;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> OK;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>层次遍历</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">status <span class="hljs-title">LeveIOrder</span><span class="hljs-params">(BiTree&amp; biTree)</span></span>&#123;<br>    std::queue&lt;BiTree&gt; queue;<br>    BiNode* pMove=biTree;<br>    queue.<span class="hljs-built_in">push</span>(biTree);<br>    <span class="hljs-keyword">while</span>(!queue.<span class="hljs-built_in">empty</span>())&#123;<br>        <span class="hljs-keyword">if</span>(queue.<span class="hljs-built_in">front</span>()-&gt;lChild!= <span class="hljs-literal">nullptr</span>)&#123;<br>            queue.<span class="hljs-built_in">push</span>(queue.<span class="hljs-built_in">front</span>()-&gt;lChild);<br>        &#125;<br>        <span class="hljs-keyword">if</span>(queue.<span class="hljs-built_in">front</span>()-&gt;rChild!= <span class="hljs-literal">nullptr</span>)&#123;<br>            queue.<span class="hljs-built_in">push</span>(queue.<span class="hljs-built_in">front</span>()-&gt;rChild);<br>        &#125;<br>        std::cout&lt;&lt;queue.<span class="hljs-built_in">front</span>()-&gt;data&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>        queue.<span class="hljs-built_in">pop</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<ol start="11">
+<li><p>二叉树的创建</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c">status <span class="hljs-title function_">CreatBitree</span><span class="hljs-params">(BiTree* biTree)</span>&#123;<br>    TElemType ch;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%c&quot;</span>,&amp;ch);<br>    <span class="hljs-keyword">if</span>(ch==<span class="hljs-string">&#x27;#&#x27;</span>)&#123;<br>        <span class="hljs-keyword">return</span> OK;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        (*biTree)=(BiNode*) <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(BiNode));<br>        (*biTree)-&gt;lChild=<span class="hljs-literal">NULL</span>;<br>        (*biTree)-&gt;rChild=<span class="hljs-literal">NULL</span>;<br>        (*biTree)-&gt;data=ch;<br>        CreatBitree(&amp;(*biTree)-&gt;lChild);<br>        CreatBitree(&amp;(*biTree)-&gt;rChild);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>定义：</p>
+<p>‘#’代表没有节点</p>
+</li>
+</ul>
+<p>所以上面代码的实现是，根据符号来确定是否要创建一个二叉树</p>
+</li>
+<li><p>二叉树的复制</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c">status <span class="hljs-title function_">Copy</span><span class="hljs-params">(BiTree T, BiTree *newBitree)</span> &#123;<br>    <span class="hljs-keyword">if</span> (T != <span class="hljs-literal">NULL</span>) &#123;<br>        *newBitree = (BiTree) <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(BiNode));<br>        (*newBitree)-&gt;lChild=<span class="hljs-literal">NULL</span>;<br>        (*newBitree)-&gt;rChild=<span class="hljs-literal">NULL</span>;<br>        (*newBitree)-&gt;data=T-&gt;data;<br>        Copy(T-&gt;lChild,&amp;(*newBitree)-&gt;lChild);<br>        Copy(T-&gt;rChild,&amp;(*newBitree)-&gt;rChild);<br>    &#125;<br>    <span class="hljs-keyword">return</span> OK;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>计算二叉树的深度</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">Depen</span><span class="hljs-params">(BiTree biTree)</span>&#123;<br>    <span class="hljs-keyword">if</span>(biTree==<span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        m= Depen(biTree-&gt;lChild);<br>        n= Depen(biTree-&gt;rChild);<br>    &#125;<br>    <span class="hljs-keyword">if</span>(n&gt;m)&#123;<br>        <span class="hljs-keyword">return</span> (n+<span class="hljs-number">1</span>);<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">return</span> m+<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>计算二叉树的节点数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">NodeCount</span><span class="hljs-params">(BiTree biTree)</span> &#123;<br>    <span class="hljs-keyword">if</span> (biTree != <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-keyword">return</span> NodeCount(biTree-&gt;lChild)+ NodeCount(biTree-&gt;rChild)+<span class="hljs-number">1</span>;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>计算叶子节点的个数（叶子节点是左右孩子都为<code>NULL</code>的节点）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c">status <span class="hljs-title function_">DestroyBiTree</span><span class="hljs-params">(BiTree *biTree)</span> &#123;<br>    <span class="hljs-keyword">if</span> (*biTree == <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> ((*biTree)-&gt;lChild != <span class="hljs-literal">NULL</span>) &#123;<br>        DestroyBiTree(&amp;(*biTree)-&gt;lChild);<br>    &#125;<br>    <span class="hljs-keyword">if</span> ((*biTree)-&gt;rChild != <span class="hljs-literal">NULL</span>) &#123;<br>        DestroyBiTree(&amp;(*biTree)-&gt;rChild);<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  %c&quot;</span>, (*biTree)-&gt;data);<br>    <span class="hljs-built_in">free</span>((*biTree));<br>    (*biTree)==<span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>线索二叉树</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.png" srcset="/img/loading.gif" lazyload></p>
+<p> <img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E8%A7%84%E5%88%99.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%A2%9E%E5%8A%A0%E4%B8%80%E4%B8%AA%E5%A4%B4%E7%BB%93%E7%82%B9.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<h2 id="树和森林"><a href="#树和森林" class="headerlink" title="树和森林"></a>树和森林</h2><p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A0%91%E5%92%8C%E6%A3%AE%E6%9E%97.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="树的存储结构"><a href="#树的存储结构" class="headerlink" title="树的存储结构"></a>树的存储结构</h3><h4 id="双亲表示法"><a href="#双亲表示法" class="headerlink" title="双亲表示法"></a>双亲表示法</h4><p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91%2F%E5%8F%8C%E4%BA%B2%E8%A1%A8%E7%A4%BA%E6%B3%95.png" srcset="/img/loading.gif" lazyload></p>
+<p>其中A是虚拟的头节点</p>
+<p>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">PTNode</span>&#123;</span><br>    TElemType data;<br>    <span class="hljs-type">int</span> parent;<br>&#125;PTNode;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span>&#123;</span><br>    PTNode nodes[BUFSIZ];<br>    <span class="hljs-type">int</span> r,n;<span class="hljs-comment">//存放根节点和节点个数</span><br>&#125;PTree;<br></code></pre></td></tr></table></figure>
+
+<h4 id="孩子链表"><a href="#孩子链表" class="headerlink" title="孩子链表"></a>孩子链表</h4><p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%AD%A9%E5%AD%90%E9%93%BE%E8%A1%A8.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="带双亲的孩子链表"><a href="#带双亲的孩子链表" class="headerlink" title="带双亲的孩子链表"></a>带双亲的孩子链表</h4><p>只是在孩子链表的基础上多加了双亲的位置</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%B8%A6%E5%8F%8C%E4%BA%B2%E7%9A%84%E5%AD%A9%E5%AD%90%E9%93%BE%E8%A1%A8.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="孩子兄弟表示法（二叉树表示法，二叉链表表示法）"><a href="#孩子兄弟表示法（二叉树表示法，二叉链表表示法）" class="headerlink" title="孩子兄弟表示法（二叉树表示法，二叉链表表示法）"></a>孩子兄弟表示法（二叉树表示法，二叉链表表示法）</h4><p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95%E5%AE%9E%E6%93%8D.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>将树转换为二叉树</p>
+<p>兄弟相连留长子</p>
+<p>意思是：将兄弟的连起来，只保留双亲与长子的连线</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%B0%86%E6%A0%91%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%85%84%E5%BC%9F%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E5%85%84%E5%BC%9F%E5%AD%98%E5%82%A8%E6%B3%95%EF%BC%89.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>将兄弟二叉树，转变为普通的树</p>
+<p>左孩子右右连双亲，去掉原来的右孩子线</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%98%E6%A0%91.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<h3 id="森林和二叉树的转化"><a href="#森林和二叉树的转化" class="headerlink" title="森林和二叉树的转化"></a>森林和二叉树的转化</h3><ol>
+<li><p>树变二叉树根相连</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A3%AE%E6%9E%97%E5%8F%98%E6%88%90%E4%BA%8C%E5%8F%89%E6%A0%91.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>二叉树变森林</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%98%E6%A3%AE%E6%9E%97.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<h3 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h3><ol>
+<li><p>先根</p>
+<p>如树不为空，那么先遍历根然后在遍历各个子树</p>
+</li>
+<li><p>后根</p>
+<p>若树不为空，后根遍历各课子树，然后访问根节点</p>
+</li>
+</ol>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="森林的遍历"><a href="#森林的遍历" class="headerlink" title="森林的遍历"></a>森林的遍历</h3><p>和二叉树的遍历方式一致</p>
+<ol>
+<li><p>先序遍历</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A3%AE%E6%9E%97%E7%9A%84%E9%81%8D%E5%8E%86.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>中序遍历</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E6%A3%AE%E6%9E%97%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<h2 id="哈夫曼树（最优二叉树）"><a href="#哈夫曼树（最优二叉树）" class="headerlink" title="哈夫曼树（最优二叉树）"></a>哈夫曼树（最优二叉树）</h2><h3 id="判断树"><a href="#判断树" class="headerlink" title="判断树"></a>判断树</h3><p>左边是改进的选择判断语句</p>
+<p>右边是普通的选择判断语句</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%88%A4%E6%96%AD%E6%A0%91.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>基本概念</p>
+<ul>
+<li><p>路径</p>
+<p>从一个结点到另一个结点的分支构成了结点间的路径</p>
+</li>
+<li><p>结点的路径长度</p>
+<p>两结点间的路径上的分支数</p>
+<p>A-&gt;D 的路径长度是  2</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E8%B7%AF%E5%BE%84%E9%95%BF%E5%BA%A62.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>树的路径长度</p>
+<p>从根结点到每个结点的路径长度之和</p>
+</li>
+<li><p>权</p>
+<p>将树中的结点赋一个有某种含义的数值，称为<strong>结点的权</strong></p>
+</li>
+<li><p>结点的带权路径长度</p>
+<p>从根到该节点之间的路径长度×该节点权的结果</p>
+</li>
+<li><p>树的带权路径长度</p>
+<p>树中所有的叶子结点的带权路径长度之和</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h3><p>最优树，也就是带权路径长度最短的树</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>满二叉树不一定是最优二叉树</li>
+</ol>
+<p><strong>哈夫曼树的特点</strong></p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E7%89%B9%E7%82%B9.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>只有度（子树个数 ）0为0或2的结点</li>
+<li>一共有<code>2n-1</code>个结点，且新构成的结点都是度为二的结点，原来的结点都是度为一的结点</li>
+<li>一共有n个叶子结点（原来的结点，也就是度为0的结点）</li>
+</ul>
+<h4 id="哈夫曼树的构造"><a href="#哈夫曼树的构造" class="headerlink" title="哈夫曼树的构造"></a>哈夫曼树的构造</h4><ol>
+<li>权值越大的先构造（贪心算法）</li>
+</ol>
+<p>   步骤</p>
+<ul>
+<li>构造森林全是根</li>
+<li>选用两小造新树</li>
+<li>删除两小添新人</li>
+<li>重复2，3剩单根</li>
+</ul>
+<p>   <img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0.png" srcset="/img/loading.gif" lazyload></p>
+<p>   删除两小的意思是：删除原来队列里面的两个小的</p>
+<p>   <img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0%E5%AE%9E%E4%BE%8B.png" srcset="/img/loading.gif" lazyload></p>
+<p>   直到剩下一棵树，就是哈夫曼树</p>
+<p>   下面是一个例题</p>
+<p>   <img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0%E4%BE%8B%E9%A2%98.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="2">
+<li><p>代码实现</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0.png" srcset="/img/loading.gif" lazyload></p>
+<p>注意重置min的过程，可以改进算法，但是作者还没有学到遍历，所以并没有采取其他方式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stdio.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stdlib.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> status int</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> OK 1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ERROR (-1)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> true 1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> false 0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ElemType int</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAXSIZE 30</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> OVERFLOW (-1)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> CHUNKSIZE 80</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stdio.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stdlib.h&quot;</span></span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">HTNode</span> &#123;</span><br>    <span class="hljs-type">int</span> weight;<br>    <span class="hljs-type">int</span> parent, lch, rch;<br>&#125; HTNode, *HuffmanTree;<br><span class="hljs-comment">//采用双亲表示法，但是会记录左右孩子的位置</span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">Select</span><span class="hljs-params">(HTNode *htNodes, <span class="hljs-type">int</span> size, <span class="hljs-type">int</span> *min1, <span class="hljs-type">int</span> *min2)</span> &#123;<br>    <span class="hljs-comment">//以下算法用于去出较次和最次的元素</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; ++i) &#123;<br>        <span class="hljs-keyword">if</span> ((htNodes + i)-&gt;parent == <span class="hljs-number">0</span><br>            &amp;&amp; (htNodes + i)-&gt;weight &lt; (htNodes + *min1)-&gt;weight) &#123;<span class="hljs-comment">//确保每小权的结点已经被选用</span><br><br>            *min2 = *min1;<br>            *min1 = i;<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((htNodes + i)-&gt;parent == <span class="hljs-number">0</span><br>                   &amp;&amp; (htNodes + i)-&gt;weight &lt; (htNodes + *min2)-&gt;weight<br>                   &amp;&amp; i != *min1) &#123;<br><br>            *min2 = i;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">initMin</span><span class="hljs-params">(HTNode* htNodes,<span class="hljs-type">int</span> size,<span class="hljs-type">int</span> *min1,<span class="hljs-type">int</span> *min2)</span>&#123;<br>    <span class="hljs-comment">//重置最小值，防止取出来的最小值是已经被选过的</span><br>    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (; i &lt; size; ++i) &#123;<br>        <span class="hljs-keyword">if</span>((htNodes+i)-&gt;parent==<span class="hljs-number">0</span>)&#123;<br>            *min1=i++;<span class="hljs-comment">//break使得++i失效</span><br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(;i&lt;size;++i)&#123;<br>        <span class="hljs-keyword">if</span>((htNodes+i)-&gt;parent==<span class="hljs-number">0</span>)&#123;<br>            *min2=i;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>&#125;<br><br>status <span class="hljs-title function_">creatNode</span><span class="hljs-params">(HTNode *htNodes, <span class="hljs-type">int</span> *nums, <span class="hljs-type">int</span> size)</span> &#123;<br>    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> min1 = <span class="hljs-number">0</span>, min2 = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> size1;<br>    size1 = size * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>;<br>    <span class="hljs-comment">//</span><br>    <span class="hljs-keyword">for</span> (; i&lt;size; ++i) &#123;<br>        (htNodes + i)-&gt;weight = *(nums + i);<br>        (htNodes + i)-&gt;lch = <span class="hljs-number">0</span>;<br>        (htNodes + i)-&gt;rch = <span class="hljs-number">0</span>;<br>        (htNodes + i)-&gt;parent = <span class="hljs-number">0</span>;<span class="hljs-comment">//一定要将parent重置为0</span><br>    &#125;<br><br>    <span class="hljs-keyword">for</span> (; i &lt; size1 ; ++i) &#123;<br>        initMin(htNodes,i,&amp;min1,&amp;min2);<br>        Select(htNodes, i, &amp;min1, &amp;min2);<br>        (htNodes + i)-&gt;weight = (htNodes + min1)-&gt;weight + (htNodes + min2)-&gt;weight;<br>        (htNodes + i)-&gt;lch = min1;<br>        (htNodes + i)-&gt;rch = min2;<br>        (htNodes + i)-&gt;parent = <span class="hljs-number">0</span>;<br>        (htNodes + min1)-&gt;parent = i;<br>        (htNodes + min2)-&gt;parent = i;<br>    &#125;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">int</span> num;<br>    <span class="hljs-type">int</span> nums[<span class="hljs-number">100</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-type">int</span> tem;<br>    HTNode htNodes[<span class="hljs-number">100</span>] = &#123;<span class="hljs-number">0</span>&#125;;<span class="hljs-comment">//注意这里使用变量，不使用指针</span><br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;num);<span class="hljs-comment">//num最大是5，因为，2n-1留一个0不用</span><br><span class="hljs-comment">/*    if(num&gt;5)&#123;</span><br><span class="hljs-comment">        printf(&quot;num too large&quot;);</span><br><span class="hljs-comment">        exit(-1);</span><br><span class="hljs-comment">    &#125;*/</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; num; ++i) &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;tem);<br>        nums[i] = tem;<br>    &#125;<br>    creatNode(htNodes, nums, num);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">2</span>*num<span class="hljs-number">-1</span>; ++i) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,htNodes[i].weight);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="哈曼树的运用"><a href="#哈曼树的运用" class="headerlink" title="哈曼树的运用"></a>哈曼树的运用</h4><h5 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h5><ol>
+<li><p>设计一种任意的编码都不是另一个编码的前缀</p>
+<p>如A(0)是B(00)的前缀</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>通过哈夫曼编码使得电文最短</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%A6%82%E4%BD%95%E4%BD%BF%E5%BE%97%E7%94%B5%E6%96%87%E7%9A%84%E6%9C%80%E7%9F%AD.png" srcset="/img/loading.gif" lazyload></p>
+<p>将要传输的字符出现的频率当作权值</p>
+<p><img src="https://chg-1317182407.cos.ap-chengdu.myqcloud.com/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%A6%82%E4%BD%95%E4%BD%BF%E5%BE%97%E7%94%B5%E6%96%87%E7%9A%84%E6%9C%80%E7%9F%AD.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>问题</p>
+<ul>
+<li><p>为什么哈夫曼编码能确保不是前缀编码？</p>
+<blockquote>
+<p>因为每一个字符都是叶子结点，也就是说，没有哪个叶子是另个一个叶子的前缀，也就是没有相同的路径</p>
+</blockquote>
+</li>
+<li><p>为什么哈夫曼树能确保字符编码总长最短？</p>
+<blockquote>
+<p>才用权的方式，权重大的离根节点更近，所以形成的编码最短。换句话说哈夫曼树的加权路径最短</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>性质</p>
+<ul>
+<li>哈夫曼编码是前缀码</li>
+<li>而且是最有前缀码</li>
+</ul>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">#数据结构和算法</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>树和二叉树</div>
+      <div>http://example.com/2023/04/05/新建文件夹/树和二叉树/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 5, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/10/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/%E9%93%BE%E8%A1%A8%E5%86%85%E6%8C%87%E5%AE%9A%E5%8C%BA%E5%9F%9F%E5%8F%8D%E8%BD%AC/" title="链表内指定区域反转">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">链表内指定区域反转</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/04/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/" title="串、数组和广义表">
+                        <span class="hidden-mobile">串、数组和广义表</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
