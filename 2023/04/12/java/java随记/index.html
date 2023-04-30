@@ -24,7 +24,7 @@
 <meta property="og:description" content="java的初始化 Java的初始化是指在创建对象时为其成员变量设定初值的过程。Java中的所有对象在创建时，其成员变量都会被默认初始化为其对应类型的默认值（如int类型的默认值为0，引用类型的默认值为null）。如果需要对成员变量进行显式初始化，可以通过构造函数、代码块或直接赋值的方式实现。 构造函数是一种特殊的方法，用于在创建对象时执行一些初始化操作。在Java中，每个类都有一个与之同名的构造">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-04-12T08:52:08.000Z">
-<meta property="article:modified_time" content="2023-04-24T04:38:17.452Z">
+<meta property="article:modified_time" content="2023-04-30T07:02:41.341Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="java随记">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k words
+          5.3k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          29 mins
+          45 mins
         
       </span>
     
@@ -387,7 +387,79 @@
 </li>
 <li><p><code>java</code>枚举<code>enum</code></p>
 <p>用于常量的定义</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">    <br></code></pre></td></tr></table></figure></li>
+</li>
+<li><p><code>substring</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">substring(<span class="hljs-number">3</span>,<span class="hljs-number">4</span>);<br></code></pre></td></tr></table></figure>
+
+<p>左闭右开</p>
+<p>从第三个开始，包含第三个，第四个结束不包含第四个</p>
+</li>
+<li><p><code>StringBuffer</code>不能直接给<code>String</code>赋值，必须使用<code>toString()</code></p>
+</li>
+<li><p>常用的Arrays类静态方法有：</p>
+<ul>
+<li>sort方法：对数组进行排序</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">int</span>[] nums = &#123;<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>&#125;;<br>Arrays.sort(nums); <span class="hljs-comment">// 对nums数组进行升序排序</span><br>System.out.println(Arrays.toString(nums)); <span class="hljs-comment">// [1, 3, 4]</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>binarySearch方法：在已排序的数组中查找指定元素并返回其下标</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">int</span>[] nums = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;;<br><span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> Arrays.binarySearch(nums, <span class="hljs-number">3</span>); <span class="hljs-comment">// 在nums数组中查找数字3</span><br>System.out.println(index); <span class="hljs-comment">// 2，即数字3在数组中的下标为2</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>equals方法：比较两个数组是否相等</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">int</span>[] a = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;;<br><span class="hljs-type">int</span>[] b = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;;<br><span class="hljs-type">boolean</span> <span class="hljs-variable">isEqual</span> <span class="hljs-operator">=</span> Arrays.equals(a, b); <span class="hljs-comment">// 判断a和b数组是否相等</span><br>System.out.println(isEqual); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>fill方法：将数组全部填充为指定值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">int</span>[] nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">5</span>];<br>Arrays.fill(nums, <span class="hljs-number">4</span>); <span class="hljs-comment">// 将nums数组全部填充为数字4</span><br>System.out.println(Arrays.toString(nums)); <span class="hljs-comment">// [4, 4, 4, 4, 4]</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>copyOf方法：复制一个数组的一部分或全部到一个新数组中</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">int</span>[] a = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;<br><span class="hljs-type">int</span>[] b = Arrays.copyOf(a, <span class="hljs-number">3</span>); <span class="hljs-comment">// 复制a数组的前3个元素到b数组中</span><br>System.out.println(Arrays.toString(b)); <span class="hljs-comment">// [1, 2, 3]</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>toString方法：将数组转换为字符串输出</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">int</span>[] nums = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;;<br>System.out.println(Arrays.toString(nums)); <span class="hljs-comment">// [1, 2, 3]</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>常用的Character类静态方法有：</p>
+<ul>
+<li>isLetter方法：判断字符是否为字母（大小写均可）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;A&#x27;</span>;<br><span class="hljs-type">boolean</span> <span class="hljs-variable">isLetter</span> <span class="hljs-operator">=</span> Character.isLetter(c); <span class="hljs-comment">// 判断c是否是字母</span><br>System.out.println(isLetter); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>isDigit方法：判断字符是否为数字</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;5&#x27;</span>;<br><span class="hljs-type">boolean</span> <span class="hljs-variable">isDigit</span> <span class="hljs-operator">=</span> Character.isDigit(c); <span class="hljs-comment">// 判断c是否是数字</span><br>System.out.println(isDigit); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>toUpperCase方法：将字符转换为大写字母</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;a&#x27;</span>;<br><span class="hljs-type">char</span> <span class="hljs-variable">upperCaseC</span> <span class="hljs-operator">=</span> Character.toUpperCase(c); <span class="hljs-comment">// 将小写字母c转换为大写字母</span><br>System.out.println(upperCaseC); <span class="hljs-comment">// A</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>toLowerCase方法：将字符转换为小写字母</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;B&#x27;</span>;<br><span class="hljs-type">char</span> <span class="hljs-variable">lowerCaseC</span> <span class="hljs-operator">=</span> Character.toLowerCase(c); <span class="hljs-comment">// 将大写字母B转换为小写字母</span><br>System.out.println(lowerCaseC); <span class="hljs-comment">// b</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>isWhitespace方法：判断字符是否为空格字符</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27; &#x27;</span>;<br><span class="hljs-type">boolean</span> <span class="hljs-variable">isWhitespace</span> <span class="hljs-operator">=</span> Character.isWhitespace(c); <span class="hljs-comment">// 判断c是否是空格字符</span><br>System.out.println(isWhitespace); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>isLetterOrDigit方法：判断字符是否为字母或数字</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;+&#x27;</span>;<br><span class="hljs-type">boolean</span> <span class="hljs-variable">isLetterOrDigit</span> <span class="hljs-operator">=</span> Character.isLetterOrDigit(c); <span class="hljs-comment">// 判断c是否是字母或数字</span><br>System.out.println(isLetterOrDigit); <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>ArrayList</code></p>
+</li>
 </ol>
 
                 
