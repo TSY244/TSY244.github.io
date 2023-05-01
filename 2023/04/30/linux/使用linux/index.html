@@ -16,23 +16,28 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SnakeForWinwin api 光标 光标是一个在控制台屏幕上移动的线条，用于显示当前工作的位置。你可以使用键盘或鼠标来移动光标，也可以使用控制台API函数来设置光标的位置、大小和可见性12。光标的形状可以是一个下划线、一个竖线或一个填充了字符单元格的方块1。  句柄 HANDLE是一个在Windows系统中表示系统资源的标识符，例如文件、线程或图形图像。你的应用程序不能直接访问对象数据，也">
+    <meta name="description" content="[TOC] 使用Linux各类小技巧 强制停止  Ctrl+c 退出程序  Ctrl+c 退出登出或退出     不能用于退出vi&#x2F;vim  历史命令查找  history  1history | grep ch  过滤使用的指令里带有ch的命令  Ctrl+r 输入内容匹配 如果搜索到的命令是可执行的，则直接回车 键盘的左右键，可以得到此命令  ! 匹配最近的 比如： 1!p  匹配最">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SnakeForWin">
-<meta property="og:url" content="http://example.com/2023/04/25/SnakeForWin/index.html">
+<meta property="og:title" content="使用linux">
+<meta property="og:url" content="http://example.com/2023/04/30/linux/%E4%BD%BF%E7%94%A8linux/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="SnakeForWinwin api 光标 光标是一个在控制台屏幕上移动的线条，用于显示当前工作的位置。你可以使用键盘或鼠标来移动光标，也可以使用控制台API函数来设置光标的位置、大小和可见性12。光标的形状可以是一个下划线、一个竖线或一个填充了字符单元格的方块1。  句柄 HANDLE是一个在Windows系统中表示系统资源的标识符，例如文件、线程或图形图像。你的应用程序不能直接访问对象数据，也">
+<meta property="og:description" content="[TOC] 使用Linux各类小技巧 强制停止  Ctrl+c 退出程序  Ctrl+c 退出登出或退出     不能用于退出vi&#x2F;vim  历史命令查找  history  1history | grep ch  过滤使用的指令里带有ch的命令  Ctrl+r 输入内容匹配 如果搜索到的命令是可执行的，则直接回车 键盘的左右键，可以得到此命令  ! 匹配最近的 比如： 1!p  匹配最">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-25T11:15:09.000Z">
-<meta property="article:modified_time" content="2023-04-25T15:38:43.305Z">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/yum.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/apt.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/systemctl.png">
+<meta property="article:published_time" content="2023-04-30T08:41:39.000Z">
+<meta property="article:modified_time" content="2023-04-30T15:12:12.283Z">
 <meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/yum.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>SnakeForWin - chg</title>
+  <title>使用linux - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SnakeForWin"></span>
+            <span id="subtitle" data-typed-text="使用linux"></span>
           
         </div>
 
@@ -214,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-25 19:15" pubdate>
-          April 25, 2023 pm
+        <time datetime="2023-04-30 16:41" pubdate>
+          April 30, 2023 pm
         </time>
       </span>
     
@@ -226,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          478 words
+          401 words
         
       </span>
     
@@ -275,26 +280,69 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SnakeForWin</h1>
+            <h1 style="display: none">使用linux</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SnakeForWin"><a href="#SnakeForWin" class="headerlink" title="SnakeForWin"></a>SnakeForWin</h1><h2 id="win-api"><a href="#win-api" class="headerlink" title="win api"></a>win api</h2><ol>
-<li><p>光标</p>
-<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/75389263/c-sharp-how-to-change-console-cursor-shape">光标是一个在控制台屏幕上移动的线条，用于显示当前工作的位置。你可以使用键盘或鼠标来移动光标，也可以使用控制台API函数来设置光标的位置、大小和可见性</a><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/75389263/c-sharp-how-to-change-console-cursor-shape">1</a><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/console/setconsolecursorposition">2</a><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/75389263/c-sharp-how-to-change-console-cursor-shape">。光标的形状可以是一个下划线、一个竖线或一个填充了字符单元格的方块</a><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/75389263/c-sharp-how-to-change-console-cursor-shape">1</a>。</p>
+                <p>[TOC]</p>
+<h1 id="使用Linux"><a href="#使用Linux" class="headerlink" title="使用Linux"></a>使用Linux</h1><h2 id="各类小技巧"><a href="#各类小技巧" class="headerlink" title="各类小技巧"></a>各类小技巧</h2><ol>
+<li><p>强制停止</p>
+<ul>
+<li><p><code>Ctrl+c</code> 退出程序</p>
 </li>
-<li><p>句柄</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/sysinternals/downloads/handle">HANDLE是一个在Windows系统中表示系统资源的标识符，例如文件、线程或图形图像。你的应用程序不能直接访问对象数据，也不能访问对象所代表的系统资源。相反，你的应用程序必须获取一个对象句柄，它可以用来检查或修改系统资源</a><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/sysinternals/downloads/handle">1</a><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/sysinternals/downloads/handle">2</a><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/sysinternals/downloads/handle">。你可以使用Sysinternals的Handle工具来查看任意进程的开放句柄信息</a><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/sysinternals/downloads/handle">1</a><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/win32/sysinfo/handles-and-objects">3</a>。</p>
+<li><p><code>Ctrl+c</code> 退出登出或退出</p>
+</li>
+</ul>
+<p>  不能用于退出vi&#x2F;vim</p>
+</li>
+<li><p>历史命令查找</p>
+<ul>
+<li><p><code>history</code> </p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">history</span> | <span class="hljs-keyword">grep</span> ch<br></code></pre></td></tr></table></figure>
+
+<p>过滤使用的指令里带有<code>ch</code>的命令</p>
+</li>
+<li><p><code>Ctrl+r</code> 输入内容匹配</p>
+<p>如果搜索到的命令是可执行的，则直接回车</p>
+<p>键盘的左右键，可以得到此命令</p>
+</li>
+<li><p><code>!</code> 匹配最近的</p>
+<p>比如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">!<span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure>
+
+<p>匹配最近的p开头的命令</p>
+</li>
+</ul>
+</li>
+<li><p>光标移动</p>
+<ul>
+<li><code>Ctrl + a</code> 跳到命令开头</li>
+<li><code>Ctrl + e</code> 跳到命令结尾</li>
+<li><code>Ctrl + 左键</code> 向左跳过一个单词</li>
+<li><code>Ctrl + 右键</code> 向右跳过一个单词</li>
+</ul>
+</li>
+<li><p>清屏</p>
+<ul>
+<li><code>Ctrl + r</code>&#x2F;<code>clean</code></li>
+</ul>
 </li>
 </ol>
-<h2 id="win-函数"><a href="#win-函数" class="headerlink" title="win 函数"></a>win 函数</h2><ol>
-<li><p>CursorJump（）</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/486361519">CursorJump()是一个自定义的函数，它的作用是让控制台的光标跳转到指定的位置，以便在那里输出字符。它的参数是两个整数，分别表示光标的横坐标和纵坐标。它的实现是利用Windows API中的COORD结构体和SetConsoleCursorPosition函数。你可以参考一些贪吃蛇的代码</a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/486361519">1</a>来看看这个函数是如何使用的。</p>
+<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><h3 id="CentOs"><a href="#CentOs" class="headerlink" title="CentOs"></a><code>CentOs</code></h3><p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/yum.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>yum</code>指令 </p>
+<h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a><code>Ubuntu</code></h3><p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/apt.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="控制软件的启动和关闭"><a href="#控制软件的启动和关闭" class="headerlink" title="控制软件的启动和关闭"></a>控制软件的启动和关闭</h2><h3 id="systemctl"><a href="#systemctl" class="headerlink" title="systemctl"></a>systemctl</h3><p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/systemctl.png" srcset="/img/loading.gif" lazyload></p>
+<p>控制系统的内置服务</p>
+<p>手动添加第三方软件到<code>systemctl</code></p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>在系统中创建软连接，可以直接将文件、文件夹放到其他位置，类似于win的快捷方式</p>
+<h3 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h3><ol>
+<li><p>语法：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ln</span> -s 参数<span class="hljs-number">1</span> 参数<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+
+<p>参数1：被链接的文件或者文件夹</p>
+<p>参数2：要链接的目的地</p>
 </li>
-</ol>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
-<li>为什么游戏区域会小</li>
 </ol>
 
                 
@@ -305,6 +353,13 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+    </div>
+  
 </div>
 
 
@@ -313,8 +368,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SnakeForWin</div>
-      <div>http://example.com/2023/04/25/SnakeForWin/</div>
+      <div>使用linux</div>
+      <div>http://example.com/2023/04/30/linux/使用linux/</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +381,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 25, 2023</div>
+          <div>April 30, 2023</div>
         </div>
       
       
@@ -358,18 +413,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/26/linux/%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90/" title="用户和权限">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">用户和权限</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/%E4%BB%8E%E4%B8%AD%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" title="从中序与后序遍历序列构造二叉树">
-                        <span class="hidden-mobile">从中序与后序遍历序列构造二叉树</span>
+                      <a href="/2023/04/26/newcoder/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%E6%AF%8Fk%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC/" title="链表中的节点每k个一组翻转">
+                        <span class="hidden-mobile">链表中的节点每k个一组翻转</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
