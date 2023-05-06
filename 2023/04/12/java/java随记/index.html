@@ -24,7 +24,7 @@
 <meta property="og:description" content="java的初始化 Java的初始化是指在创建对象时为其成员变量设定初值的过程。Java中的所有对象在创建时，其成员变量都会被默认初始化为其对应类型的默认值（如int类型的默认值为0，引用类型的默认值为null）。如果需要对成员变量进行显式初始化，可以通过构造函数、代码块或直接赋值的方式实现。 构造函数是一种特殊的方法，用于在创建对象时执行一些初始化操作。在Java中，每个类都有一个与之同名的构造">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-04-12T08:52:08.000Z">
-<meta property="article:modified_time" content="2023-05-01T06:53:43.130Z">
+<meta property="article:modified_time" content="2023-05-02T00:27:49.290Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="java随记">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.3k words
+          5.4k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          45 mins
+          46 mins
         
       </span>
     
@@ -459,6 +459,17 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java复制代码<span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;+&#x27;</span>;<br><span class="hljs-type">boolean</span> <span class="hljs-variable">isLetterOrDigit</span> <span class="hljs-operator">=</span> Character.isLetterOrDigit(c); <span class="hljs-comment">// 判断c是否是字母或数字</span><br>System.out.println(isLetterOrDigit); <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>如果父类的函数是<code>private</code>，则不会被覆盖。即使子类重写这个函数，但是调用的时候依然是父类的</p>
+</li>
+<li><p>文件的读写</p>
+<ul>
+<li><p>使用<code>scanner</code>和<code>PrintWrite</code></p>
+<ul>
+<li>在使用<code>scanner</code>时，使用<code>file</code>初始化对象</li>
+</ul>
+</li>
+<li><p>使<code>FileInputStream</code>和<code>FileOutputStream</code></p>
+</li>
+</ul>
 </li>
 </ol>
 
