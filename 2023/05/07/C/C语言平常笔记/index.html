@@ -1,0 +1,749 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="C语言平常笔记 在在自定义函数中使用sqrt函数，必须将开方数，重定义如（double） 123456789101112131415161718192021void n_prime(int a)&amp;#123;	int x&#x3D;0;	for(x&#x3D;2;x&lt;sqrt((double)x);x++)	&amp;#123;		if(0&#x3D;&#x3D;a%x)		&amp;#123;			printf(&quot;this is not">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言平常笔记">
+<meta property="og:url" content="http://example.com/2023/05/07/C/C%E8%AF%AD%E8%A8%80%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="chg">
+<meta property="og:description" content="C语言平常笔记 在在自定义函数中使用sqrt函数，必须将开方数，重定义如（double） 123456789101112131415161718192021void n_prime(int a)&amp;#123;	int x&#x3D;0;	for(x&#x3D;2;x&lt;sqrt((double)x);x++)	&amp;#123;		if(0&#x3D;&#x3D;a%x)		&amp;#123;			printf(&quot;this is not">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:\Users\12414\Desktop\%E7%AC%94%E8%AE%B0\c\%E5%B9%B3%E5%B8%B8\C%E8%AF%AD%E8%A8%80%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0.assets\image-20221209152359574.png">
+<meta property="og:image" content="c:\Users\12414\Desktop\%E7%AC%94%E8%AE%B0\c\%E5%B9%B3%E5%B8%B8\C%E8%AF%AD%E8%A8%80%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0.assets\image-20221209153159341.png">
+<meta property="article:published_time" content="2023-05-07T05:56:35.000Z">
+<meta property="article:modified_time" content="2023-05-08T05:50:42.725Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="c随记">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:\Users\12414\Desktop\%E7%AC%94%E8%AE%B0\c\%E5%B9%B3%E5%B8%B8\C%E8%AF%AD%E8%A8%80%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0.assets\image-20221209152359574.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>C语言平常笔记 - chg</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>chg&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="C语言平常笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-07 13:56" pubdate>
+          May 7, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">C语言平常笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="C语言平常笔记"><a href="#C语言平常笔记" class="headerlink" title="C语言平常笔记"></a>C语言平常笔记</h1><ol>
+<li><p>在在自定义函数中使用sqrt函数，必须将开方数，重定义如（double）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">n_prime</span><span class="hljs-params">(<span class="hljs-type">int</span> a)</span><br>&#123;<br>	<span class="hljs-type">int</span> x=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span>(x=<span class="hljs-number">2</span>;x&lt;<span class="hljs-built_in">sqrt</span>((<span class="hljs-type">double</span>)x);x++)<br>	&#123;<br>		<span class="hljs-keyword">if</span>(<span class="hljs-number">0</span>==a%x)<br>		&#123;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;this is not a prime&quot;</span>);<br>		&#125;<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;this is a prime&quot;</span>);<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">int</span> num=<span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;请输入判断的数：&quot;</span>);<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;num);<br>	n_prime(num);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>getchar的用法：如果单独只用gerchar(),则只取一个字符。把getcahr 放入循环中则可读取输入进去的所有值，包括（‘\n’,’ ‘）,但是scanf,只读取缓冲区中‘\n’之前的，\n是因为键盘使用了回车</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//这是一个计算输入数字中字母，数字，空格，和其他字符的代码</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">char</span> arr;<br>	<span class="hljs-type">int</span> letters=<span class="hljs-number">0</span>,numbers=<span class="hljs-number">0</span>,spaces=<span class="hljs-number">0</span>,others=<span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;请输入查找的字符串：&quot;</span>);<span class="hljs-comment">//存放得到的字符串</span><br>	<span class="hljs-keyword">while</span>((arr=getchar())!=<span class="hljs-string">&#x27;\n&#x27;</span>)<span class="hljs-comment">//必须放入循环</span><br>	&#123;<br>		<span class="hljs-keyword">if</span>(arr&gt;=<span class="hljs-string">&#x27;a&#x27;</span>&amp;&amp;arr&lt;=<span class="hljs-string">&#x27;z&#x27;</span>||arr&gt;<span class="hljs-string">&#x27;A&#x27;</span>&amp;&amp;arr&lt;<span class="hljs-string">&#x27;Z&#x27;</span>)<br>		&#123;<br>			letters++;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(arr&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;arr&lt;=<span class="hljs-string">&#x27;9&#x27;</span>)<br>		&#123;<br>			numbers++;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-string">&#x27; &#x27;</span>==arr)<br>		&#123;<br>			spaces++;<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			others++;<br>		&#125;<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;letters=%d\nnumber=%d\nspace=%d\nothers=%d\n&quot;</span>,letters,numbers,spaces,others);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>staticu作用：</p>
+<p>3.1 隐藏该语句</p>
+<p>3.2 被static修饰的变量存活时间更长</p>
+<p>3.3 初始化变量为0</p>
+</li>
+<li><p>typedef</p>
+<p>4.1 取别名： typedef 类型 别名</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//数组起别名</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-type">int</span> <span class="hljs-built_in">array</span>[<span class="hljs-number">3</span>];<br><span class="hljs-built_in">array</span> arr=&#123;<span class="hljs-number">0</span>，<span class="hljs-number">1</span>，<span class="hljs-number">2</span>&#125;；<span class="hljs-comment">//定义的一维数组</span><br><span class="hljs-built_in">array</span> arr2[<span class="hljs-number">3</span>]=&#123;<span class="hljs-number">0</span>，<span class="hljs-number">1</span>，<span class="hljs-number">2</span>，<span class="hljs-number">3</span>，<span class="hljs-number">4</span>，<span class="hljs-number">5</span>，<span class="hljs-number">6</span>，<span class="hljs-number">7</span>，<span class="hljs-number">8</span>&#125;;<span class="hljs-comment">//定义2维数组</span><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>指针大小在32位是4，在64位是8</p>
+</li>
+<li><p>输出中间取位</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> a=<span class="hljs-number">2</span>;<br><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.4d&quot;</span>,a);<br><span class="hljs-comment">//结果位0002</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%4d&quot;</span>,a);<br><span class="hljs-comment">//结果为   2</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%-4d&quot;</span>,a);<br><span class="hljs-comment">//结果为2    (有3个空格)</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>sqrt() 函数：括号里里面，放变量名</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c">A=b*b<span class="hljs-number">-4</span>*a*c;<br><span class="hljs-built_in">sqrt</span>(b*b<span class="hljs-number">-4</span>*a*c);<br><span class="hljs-comment">//不太行</span><br><span class="hljs-built_in">sqrt</span>(A);<br><span class="hljs-comment">//可以</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>double,可以用来表示整数</p>
+</li>
+<li><p>取一个高位数，从头开始取</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//例如</span><br><br>	a=x/<span class="hljs-number">10000</span>;<br>	b=x%<span class="hljs-number">1000</span>/<span class="hljs-number">100</span>;<br>	c=x%<span class="hljs-number">100</span>/<span class="hljs-number">10</span>;<br>	d=x%<span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>乘法符号不能省略</p>
+</li>
+<li><p>如果想使用除法输出小数，先转化再除法</p>
+</li>
+<li><p>define常量，不用加<code>‘;’</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> count 5</span><br><span class="hljs-comment">//就好了</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>局部变量是放在栈区上的，栈区内存的使用习惯是，先使用高地址，再使用低地址</p>
+</li>
+<li><p>size_t:它是为了方便系统之间的移植而定义的，不同的系统上，定义size_t 可能不一样。size_t在32位系统上定义为 unsigned int，也就是32位无符号<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B4%E5%9E%8B&spm=1001.2101.3001.7020">整型</a>。在64位系统上定义为 unsigned long ，也就是64位无符号整形</p>
+</li>
+<li><p>清空外部控制台：<code>system(&quot;cls&quot;);</code>,头文件是：<code>stdlib.h</code>。</p>
+</li>
+<li><p><code>void</code>函数<code>return ;</code></p>
+</li>
+<li><p>对于结构体的引用</p>
+<ul>
+<li>若使用地址使用结构体内的成员，使用<code>-&gt;</code></li>
+<li>若直接通过使用结构体的名字则使用：<code>.</code></li>
+</ul>
+</li>
+<li><p>对于链表的使用，应该将所有元素都初始化</p>
+</li>
+<li><p>使用<code>malloc</code>时，需要判断是否申请内存成功</p>
+</li>
+<li><p>判断存储方式</p>
+<ul>
+<li>大端存储：低位存在高地址</li>
+<li>小端存储：低位存放在低地址</li>
+<li>用共同体判断存储方式</li>
+</ul>
+</li>
+<li><p>枚举类型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">sex</span>&#123;</span>man, woman&#125;;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">int</span> a = <span class="hljs-number">0</span>;<br>	<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">sex</span> <span class="hljs-title">chg</span> =</span> <span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;a);<br>	chg = a == <span class="hljs-number">0</span> ? man : woman;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;chg=%d&quot;</span>, chg);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-comment">//如果chg=man,打印0</span><br><span class="hljs-comment">//如果chg=woman,打印1</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>3.14</code>是double 类型,<code>3.14f</code>是float类型</p>
+</li>
+<li><p>内存释放：只是将使用的部分的内存打上可回收的标记，还是可以修改内存所存的元素</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">int</span> n;<br>	<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Input n:&quot;</span>);<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);<br>	<span class="hljs-type">int</span>* p = (<span class="hljs-type">int</span>*)<span class="hljs-built_in">calloc</span>(n, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>));<br>	<span class="hljs-keyword">while</span> (i &lt; n)<br>	&#123;<br>		p[i++] = i;<br>	&#125;<br>	i = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (i &lt; n)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, p[i++]);<br>	&#125;<br>	<span class="hljs-built_in">free</span>(p);<br>	p = <span class="hljs-literal">NULL</span>;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\12414\Desktop\笔记\c\平常\C语言平常笔记.assets\image-20221209152359574.png" srcset="/img/loading.gif" lazyload alt="image-20221209152359574"></p>
+</li>
+<li><p><code>mollioc calloc realloc</code>函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span>* p=(<span class="hljs-type">int</span> *)<span class="hljs-built_in">calloc</span>(n,size);<span class="hljs-comment">//n:有多少个连续的int,size:只指针对应的类型的大小</span><br><span class="hljs-type">int</span>* p1=(<span class="hljs-type">int</span> *)<span class="hljs-built_in">malloc</span>(n*<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>));<br><span class="hljs-type">int</span>* p=(<span class="hljs-type">int</span> *)<span class="hljs-built_in">realloc</span>(p,n*<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>));<span class="hljs-comment">//n:可用于改变内存（重新申请）</span><br></code></pre></td></tr></table></figure>
+
+<p>使用<code>calloc</code>会自动初始化，<code>malloc</code>不会</p>
+<p> 使用<code>realloc</code>有两种情况，小扩容，大扩容，小扩容是在原有的内存基础上扩容，大扩容会改变位置</p>
+<p><img src="C:\Users\12414\Desktop\笔记\c\平常\C语言平常笔记.assets\image-20221209153159341.png" srcset="/img/loading.gif" lazyload alt="image-20221209153159341"></p>
+</li>
+<li><p>自己的交换函数，不能交换地址，交换地址对应的值</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">swap</span> <span class="hljs-params">( <span class="hljs-type">int</span> *a,  <span class="hljs-type">int</span> *b )</span><br>&#123;<br>	<span class="hljs-type">int</span> p;<br>	p=*a;<br>	*a=*b;<br>	*b=p;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>不能再自己的函数里面计算，数组的长度，因为，接受的是首地址</p>
+</li>
+<li><p>可以通过字写的程序计算，数组里面的字符（字符串特别适用，数字注意0）</p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/c%E9%9A%8F%E8%AE%B0/">#c随记</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>C语言平常笔记</div>
+      <div>http://example.com/2023/05/07/C/C语言平常笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 7, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/07/go/%E5%88%9D%E5%A7%8Bgo/" title="初始go">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">初始go</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/06/linux/shell/" title="shell">
+                        <span class="hidden-mobile">shell</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

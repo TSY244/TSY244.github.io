@@ -16,14 +16,17 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="[TOC] 初始GO基础语法hello world 一个项目只有一个包main 而且在main里面有一个func main   注释1234&#x2F;&#x2F;单行注释&#x2F;*多行注释 *&#x2F;  简单的程序 小程序 123456789101112	package mainimport &quot;fmt&quot;func main() &amp;#123;	var name string &#x3D; &quot;awd&quot;">
+<meta property="og:type" content="article">
 <meta property="og:title" content="初始go">
 <meta property="og:url" content="http://example.com/2023/05/07/go/%E5%88%9D%E5%A7%8Bgo/index.html">
 <meta property="og:site_name" content="chg">
+<meta property="og:description" content="[TOC] 初始GO基础语法hello world 一个项目只有一个包main 而且在main里面有一个func main   注释1234&#x2F;&#x2F;单行注释&#x2F;*多行注释 *&#x2F;  简单的程序 小程序 123456789101112	package mainimport &quot;fmt&quot;func main() &amp;#123;	var name string &#x3D; &quot;awd&quot;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-05-07T05:56:35.000Z">
-<meta property="article:modified_time" content="2023-05-07T05:56:35.088Z">
+<meta property="article:modified_time" content="2023-05-08T05:46:13.254Z">
 <meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="GO基础">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -224,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          768 words
         
       </span>
     
@@ -235,7 +238,7 @@
         
         
         
-          1 mins
+          7 mins
         
       </span>
     
@@ -278,7 +281,53 @@
             
               <div class="markdown-body">
                 
-                
+                <p>[TOC]</p>
+<h1 id="初始GO"><a href="#初始GO" class="headerlink" title="初始GO"></a>初始GO</h1><h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h3><ol>
+<li><p>一个项目只有一个包<code>main</code></p>
+<p>而且在<code>main</code>里面有一个<code>func main</code></p>
+</li>
+</ol>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//单行注释</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">多行注释</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="简单的程序"><a href="#简单的程序" class="headerlink" title="简单的程序"></a>简单的程序</h3><ol>
+<li><p>小程序</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go">	<span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> name <span class="hljs-type">string</span> = <span class="hljs-string">&quot;awd&quot;</span><br>	fmt.Println(name)<br>	name = <span class="hljs-string">&quot;Awdawd&quot;</span><br>	fmt.Println(name)<br>	<span class="hljs-keyword">var</span> Int <span class="hljs-type">int</span> = <span class="hljs-number">2</span><br>	fmt.Println(Int, name)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>注意<code>Println</code>的不一样的用法</li>
+</ul>
+</li>
+<li><p>声明变量</p>
+<ul>
+<li><p>定义单个变量</p>
+<p><code>var 变量名 变量的类型</code></p>
+</li>
+<li><p>定义多个变量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>	<span class="hljs-keyword">var</span> (<br>		name <span class="hljs-type">string</span> = <span class="hljs-string">&quot;ad&quot;</span><br>		Int  <span class="hljs-type">int</span>    = <span class="hljs-number">9</span><br>	)<br>	fmt.Println(name)<br>	fmt.Println(Int, name)<br><br>	<span class="hljs-built_in">print</span>(Int)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意var()用法</p>
+</li>
+<li><p>变量的初始值</p>
+<p><code>go</code>语言可以为变量默认值 </p>
+</li>
+<li><p>自动推导</p>
+<p>使用<code>变量名 :=</code>不用加<code>var</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go">	<span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	name := <span class="hljs-string">&quot;AWda&quot;</span><br>	fmt.Println(name)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>打印类型</p>
+<p><code>%T</code>大写</p>
+</li>
+<li><p>打印地址</p>
+<p><code>%p</code>小写  </p>
+</li>
+<li><p><code>_</code>给这个赋任何值都应该该被抛弃</p>
+</li>
+</ul>
+</li>
+<li><p>变量交换</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a <span class="hljs-type">int</span> = <span class="hljs-number">100</span><br>	<span class="hljs-keyword">var</span> b <span class="hljs-type">int</span> = <span class="hljs-number">200</span><br>	a, b = b, a<br>	fmt.Println(a, b)<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+
                 
               </div>
             
@@ -286,6 +335,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/GO%E5%9F%BA%E7%A1%80/">#GO基础</a>
+      
+    </div>
   
 </div>
 
@@ -340,12 +396,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/05/08/go/go%E9%9A%8F%E8%AE%B0/" title="go随记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">go随记</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/06/linux/shell/" title="shell">
-                        <span class="hidden-mobile">shell</span>
+                      <a href="/2023/05/07/C/C%E8%AF%AD%E8%A8%80%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0/" title="C语言平常笔记">
+                        <span class="hidden-mobile">C语言平常笔记</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
