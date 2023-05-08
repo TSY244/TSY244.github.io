@@ -23,11 +23,14 @@
 <meta property="og:site_name" content="chg">
 <meta property="og:description" content="[TOC] 初始GO基础语法hello world 一个项目只有一个包main 而且在main里面有一个func main   注释1234&#x2F;&#x2F;单行注释&#x2F;*多行注释 *&#x2F;  简单的程序 小程序 123456789101112	package mainimport &quot;fmt&quot;func main() &amp;#123;	var name string &#x3D; &quot;awd&quot;">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://go-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/iota.png">
+<meta property="og:image" content="https://go-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E9%83%A8%E5%88%86%E5%88%AB%E5%90%8D.png">
 <meta property="article:published_time" content="2023-05-07T05:56:35.000Z">
-<meta property="article:modified_time" content="2023-05-08T05:46:13.254Z">
+<meta property="article:modified_time" content="2023-05-08T16:01:20.966Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="GO基础">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://go-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/iota.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -227,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          768 words
+          3.4k words
         
       </span>
     
@@ -238,7 +241,7 @@
         
         
         
-          7 mins
+          29 mins
         
       </span>
     
@@ -297,6 +300,8 @@
 <li>注意<code>Println</code>的不一样的用法</li>
 </ul>
 </li>
+</ol>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ol>
 <li><p>声明变量</p>
 <ul>
 <li><p>定义单个变量</p>
@@ -325,7 +330,131 @@
 </ul>
 </li>
 <li><p>变量交换</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a <span class="hljs-type">int</span> = <span class="hljs-number">100</span><br>	<span class="hljs-keyword">var</span> b <span class="hljs-type">int</span> = <span class="hljs-number">200</span><br>	a, b = b, a<br>	fmt.Println(a, b)<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a <span class="hljs-type">int</span> = <span class="hljs-number">100</span><br>	<span class="hljs-keyword">var</span> b <span class="hljs-type">int</span> = <span class="hljs-number">200</span><br>	a, b = b, a<br>	fmt.Println(a, b)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>变量的作用域</p>
+<ul>
+<li>如果存在全局变量和局部变量，在函数里面优先使用局部变量</li>
+</ul>
+</li>
+</ol>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><ol>
+<li><p>使用关键字<code>const</code></p>
+</li>
+<li><p>也可以使用自动推导</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">const</span> d, e, c = <span class="hljs-string">&quot;string&quot;</span>, <span class="hljs-number">3.14</span>, <span class="hljs-number">520</span><br><span class="hljs-keyword">const</span> a <span class="hljs-type">int</span> =<span class="hljs-number">4</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>iota</code> 常计数器</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">const</span> (<br>		a = <span class="hljs-literal">iota</span><br>		b<br>		c<br>		d = <span class="hljs-string">&quot;haha&quot;</span><br>		e<br>		f = <span class="hljs-number">100</span><br>		g<br>		h = <span class="hljs-literal">iota</span><br>		i<br>	)<br>	fmt.Println(a, b, c, d, e, f, g, h, i)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>b&#x3D;1,c&#x3D;2</p>
+<p>e&#x3D;haha会与上面的变量保持相同</p>
+<p>g&#x3D;100同理</p>
+<p>h&#x3D;7恢复计数</p>
+<p>i&#x3D;8</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs go">	<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">const</span> (<br>		a = <span class="hljs-literal">iota</span><br>		b<br>		c<br>		d = <span class="hljs-string">&quot;haha&quot;</span><br>		e<br>		f = <span class="hljs-number">100</span><br>		g<br>		h = <span class="hljs-literal">iota</span><br>		i<br>	)<br>	<span class="hljs-keyword">const</span> (<br>		j = <span class="hljs-literal">iota</span><br>	)<br>	fmt.Println(a, b, c, d, e, f, g, h, i, j)<br><br>&#125;<br><br><span class="hljs-comment">//j=0;</span><br><span class="hljs-comment">//是一组新的const</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://go-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/iota.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ol>
+<li><p><code>bool</code></p>
+<p>默认值为<code>false</code></p>
+<p>打印格式是<code>%t</code></p>
+</li>
+<li><p>整形</p>
+<ul>
+<li><p>有符号整型：<code>int8</code>、<code>int16</code>、<code>int32</code>、<code>int64</code> 和 <code>int</code>。</p>
+</li>
+<li><p>无符号整型：<code>uint8</code>、<code>uint16</code>、<code>uint32</code>、<code>uint64</code> 和 <code>uint</code>。分别表示 8 位、16 位、32 位、64 位和字节长度的无符号整数。</p>
+</li>
+</ul>
+</li>
+<li><p>浮点型</p>
+<ul>
+<li><p>当规定输出的小数点时，go会四舍五入</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> float <span class="hljs-type">float32</span> = <span class="hljs-number">3.14</span><br>	<span class="hljs-keyword">var</span> float2 <span class="hljs-type">float32</span> = <span class="hljs-number">3.19</span><br>	fmt.Printf(<span class="hljs-string">&quot;%f\t%f\n&quot;</span>, float, float2)<br>	fmt.Printf(<span class="hljs-string">&quot;%.1f\t%.1f&quot;</span>, float, float2)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>运行结果</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">3</span>.<span class="hljs-number">140000</span>        <span class="hljs-number">3</span>.<span class="hljs-number">190000</span><br><span class="hljs-attribute">3</span>.<span class="hljs-number">1</span>     <span class="hljs-number">3</span>.<span class="hljs-number">2</span><br><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>部分类型的别名</p>
+<p><img src="https://go-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E9%83%A8%E5%88%86%E5%88%AB%E5%90%8D.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>string</p>
+<ul>
+<li><p>使用%s打印</p>
+</li>
+<li><p>字符串拼接</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> str <span class="hljs-type">string</span> = <span class="hljs-string">&quot;AWDawd&quot;</span><br>fmt.Println(str+<span class="hljs-string">&quot;awd&quot;</span>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>和C一样的转义字符</p>
+</li>
+<li><p>数据类型的转换</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go">		a := <span class="hljs-number">3</span><br>	b := <span class="hljs-number">3.14</span><br>	fmt.Println((<span class="hljs-type">float64</span>(a) + b))<br><span class="hljs-comment">//将a转换为float64</span><br><br><br><br>	c:=<span class="hljs-type">float64</span>(<span class="hljs-type">int</span>(<span class="hljs-type">float64</span>(a)))<br>	<span class="hljs-built_in">println</span>(c)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>整形，浮点型不能转成bool</li>
+</ul>
+</li>
+</ol>
+<h3 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h3><ol>
+<li>基本的都和C语言一样，下面是不一样的</li>
+<li>自增自减只有<code>i++</code>，<code>i--</code></li>
+</ol>
+<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><ol>
+<li>和C语言一样</li>
+</ol>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ol>
+<li>C语言一样</li>
+</ol>
+<h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><ol>
+<li><p><code>&amp;</code>两个二进制数对应都为1，才为1</p>
+<p>相当于和</p>
+</li>
+<li><p><code>|</code>只要有1，就为 1 </p>
+<p>相当于或</p>
+</li>
+<li><p>打印二进制（b是二进制的缩写）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">fmt.Printf(<span class="hljs-string">&quot;%b&quot;</span>, b)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>^</code>不同为<code>1</code>，相同为<code>0</code>  </p>
+</li>
+<li><p><code>&lt;&lt; n</code>左移n位</p>
+</li>
+<li><p><code>&gt;&gt; n</code>右移n位</p>
+</li>
+</ol>
+<h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><p>使用<code>fmt</code>里面的<code>scan</code>等</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go">fmt.Printf(<span class="hljs-string">&quot;input:&quot;</span>)<br><span class="hljs-keyword">var</span> a <span class="hljs-type">int</span><br><span class="hljs-keyword">var</span> b <span class="hljs-type">int</span><br><span class="hljs-keyword">var</span> str <span class="hljs-type">string</span><br>fmt.Scan(&amp;a, &amp;str, &amp;b)<br><br><span class="hljs-keyword">if</span> str == <span class="hljs-string">&quot;+&quot;</span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;a+b:&quot;</span>, a+b)<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> str == <span class="hljs-string">&quot;-&quot;</span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;a-b:&quot;</span>, a-b)<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> str == <span class="hljs-string">&quot;*&quot;</span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;a*b:&quot;</span>, a*b)<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> str == <span class="hljs-string">&quot;/&quot;</span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;a/b:&quot;</span>, <span class="hljs-type">float64</span>(a/b))<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;input error&quot;</span>)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="选择语句"><a href="#选择语句" class="headerlink" title="选择语句"></a>选择语句</h3><p><code>if-else</code></p>
+<p>注意不加小括号</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">	<span class="hljs-keyword">if</span> a == <span class="hljs-number">10</span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;a==10&quot;</span>)<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;a=&quot;</span>, a)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>switch</code></p>
+<p>默认op为<code>true</code></p>
+<p><code>go</code>的<code>op</code>可以是任何数据类型</p>
+<p><code>switch</code>没有穿透性</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go">	<span class="hljs-keyword">switch</span> a &#123;<br><span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>	fmt.Println(<span class="hljs-string">&quot;case 1&quot;</span>)<br><span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>	fmt.Println(<span class="hljs-string">&quot;case 2&quot;</span>)<br><span class="hljs-keyword">default</span>:<br>	fmt.Println(<span class="hljs-string">&quot;default&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>fallthrough</code>可以提供穿透性</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go">	<span class="hljs-keyword">switch</span> str &#123;<br><span class="hljs-keyword">case</span> <span class="hljs-string">&quot;1&quot;</span>:<br>	fmt.Println(<span class="hljs-string">&quot;case 1&quot;</span>)<br>	<span class="hljs-keyword">fallthrough</span><br><span class="hljs-keyword">case</span> <span class="hljs-string">&quot;2&quot;</span>:<br>	fmt.Println(<span class="hljs-string">&quot;case 2&quot;</span>)<br><span class="hljs-keyword">default</span>:<br>	fmt.Println(<span class="hljs-string">&quot;case else&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>配合使用<code>break</code>可以跳出穿透</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go">	str := <span class="hljs-string">&quot;1&quot;</span><br><span class="hljs-keyword">switch</span> str &#123;<br><span class="hljs-keyword">case</span> <span class="hljs-string">&quot;1&quot;</span>:<br>	fmt.Println(<span class="hljs-string">&quot;case 1&quot;</span>)<br>	<span class="hljs-keyword">fallthrough</span><br><span class="hljs-keyword">case</span> <span class="hljs-string">&quot;2&quot;</span>:<br>	<span class="hljs-keyword">if</span> str == <span class="hljs-string">&quot;1&quot;</span> &#123;<br>		<span class="hljs-keyword">break</span><br>	&#125;<br>	fmt.Println(<span class="hljs-string">&quot;case 2&quot;</span>)<br><span class="hljs-keyword">default</span>:<br>	fmt.Println(<span class="hljs-string">&quot;case else&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>死循环</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">for</span>&#123;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ol>
+<li><p>求长度<code>len</code></p>
+</li>
+<li><p>字符串其他操作</p>
+<p>遍历查询string</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go">	<span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	str := <span class="hljs-string">&quot;awd&quot;</span><br>	fmt.Println(<span class="hljs-built_in">len</span>(str))<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(str); i++ &#123;<br>		fmt.Printf(<span class="hljs-string">&quot;%c&quot;</span>, str[i])<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ol>
 
                 
