@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%97%A5%E6%9C%9F.png">
 <meta property="og:image" content="c:\Users\12414\Desktop\hexo\source_posts\linux\%E4%BD%BF%E7%94%A8linux.assets\image-20230501234712440.png">
 <meta property="article:published_time" content="2023-04-30T08:41:39.000Z">
-<meta property="article:modified_time" content="2023-05-13T00:57:28.221Z">
+<meta property="article:modified_time" content="2023-05-13T01:38:40.696Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          613 words
+          979 words
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          6 mins
+          9 mins
         
       </span>
     
@@ -382,6 +382,46 @@
 <p>下载网络文件</p>
 <p><code>wget [ -b ] url</code> </p>
 <p>b是后台下载</p>
+</li>
+<li><p><code>curl +IP/域名</code></p>
+<p>发起网络请求</p>
+<ul>
+<li><p>使用<code>curl cip.cc</code></p>
+<p>查看当前主机的ip</p>
+</li>
+<li><p>使用选项<code>-O</code>下载</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><ol>
+<li><p>IP只能代表某一个具体的电脑，不能锁定程序</p>
+</li>
+<li><p>总共有<code>65535</code>个端口</p>
+</li>
+<li><p>公认端口<code>1~1023</code></p>
+</li>
+<li><p>注册端口<code>1024~49151</code>，随意使用</p>
+</li>
+<li><p>动态端口<code>49152,65535</code>，不会绑定程序，而是当程序对外网连接时，用于临时用</p>
+</li>
+<li><p><code>nmap</code>查看端口的占用情况</p>
+<p><code>nmap + IP</code>查看哪些端口是对外链接的 </p>
+</li>
+<li><p><code>netstat</code>查看端口的占用情况</p>
+<p><code>netstat -anp | grep 端口号</code></p>
+<p>查看端口的占用情况</p>
+</li>
+<li><p><code>ss</code></p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo ss -tlnp</span><br></code></pre></td></tr></table></figure>
+
+<p>该命令与 netstat 的作用相同，也是显示当前正在监听的 TCP 端口和与之关联的进程信息，其中：</p>
+<ul>
+<li><code>-t</code> 参数表示只显示 TCP 协议相关的信息；</li>
+<li><code>-l</code> 参数表示只显示正在监听的端口；</li>
+<li><code>-n</code> 参数表示以数字形式显示端口号，而不是服务名称；</li>
+<li><code>-p</code> 参数表示同时显示进程 ID 和进程名。</li>
+</ul>
 </li>
 </ol>
 
