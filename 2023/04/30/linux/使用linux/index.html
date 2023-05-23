@@ -28,8 +28,14 @@
 <meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/systemctl.png">
 <meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%97%A5%E6%9C%9F.png">
 <meta property="og:image" content="c:\Users\12414\Desktop\hexo\source_posts\linux\%E4%BD%BF%E7%94%A8linux.assets\image-20230501234712440.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/tar.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/tar%E5%8E%8B%E7%BC%A9.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/tar%E8%A7%A3%E5%8E%8B.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/zip%E7%9A%84%E5%8E%8B%E7%BC%A9.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/unzip%E8%A7%A3%E5%8E%8B.png">
 <meta property="article:published_time" content="2023-04-30T08:41:39.000Z">
-<meta property="article:modified_time" content="2023-05-13T01:38:40.696Z">
+<meta property="article:modified_time" content="2023-05-17T15:30:21.953Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          979 words
+          1.3k words
         
       </span>
     
@@ -244,7 +250,7 @@
         
         
         
-          9 mins
+          12 mins
         
       </span>
     
@@ -424,6 +430,70 @@
 </ul>
 </li>
 </ol>
+<h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><ol>
+<li><p>查看进程</p>
+<p><code>ps [-e -f]</code></p>
+<p><code>-e</code>展现全部信息</p>
+<p><code>-f</code>以格式化的方式是展示</p>
+</li>
+<li><p>关闭进程</p>
+<p><code>kill [-9] 进程ID</code></p>
+<p><code>-9</code>表示强制关闭</p>
+</li>
+</ol>
+<h2 id="主机状态"><a href="#主机状态" class="headerlink" title="主机状态"></a>主机状态</h2><h3 id="查看系统资源"><a href="#查看系统资源" class="headerlink" title="查看系统资源"></a>查看系统资源</h3><ol>
+<li><p><code>top</code></p>
+<p>查看<code>cpu</code>的使用情况</p>
+</li>
+<li><p><code>df</code>查看磁盘使用情况</p>
+</li>
+<li><p><code>iostat</code></p>
+<p>查看cpu,磁盘信息  </p>
+<p>使用<code>-x</code>显示更多的信息</p>
+</li>
+<li><p><code>sar -n DEV num1 num2</code></p>
+<p><code>-n</code>查看网络</p>
+<p><code>DEV</code>查看网络接口</p>
+<p><code>num1</code> 刷新间隔</p>
+<p><code>num2</code>查看次数</p>
+</li>
+</ol>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><ol>
+<li><p>查看环境变量</p>
+<p><code>env</code></p>
+</li>
+<li><p>临时设置环境变量</p>
+<p><code>export 变量名=变量值</code></p>
+</li>
+<li><p>永久有效</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E9%85%8D%E7%BD%AE.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>针对用户</li>
+<li>全局有效</li>
+<li>使用<code>source </code>让其有效</li>
+</ul>
+</li>
+</ol>
+<h2 id="解压和压缩"><a href="#解压和压缩" class="headerlink" title="解压和压缩"></a>解压和压缩</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><p>针对<code>.tar</code>和<code>.gz</code>的压缩文件</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/tar.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>压缩</p>
+<p><code>tar -cvf test.tar 1.txt</code>将<code>1.txt</code>文件压缩到<code>test.tar</code>文件</p>
+<p><code>tar -zcvf test.tar.gz 1.txt</code>将<code>1.txt</code>压缩到<code>test.tar.gz</code>文件内，使用<code>gzip</code>的模式</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/tar%E5%8E%8B%E7%BC%A9.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>解压</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/tar%E8%A7%A3%E5%8E%8B.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<h3 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h3><ul>
+<li><p>压缩</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/zip%E7%9A%84%E5%8E%8B%E7%BC%A9.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>解压</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/Linux/unzip%E8%A7%A3%E5%8E%8B.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
 
                 
               </div>
