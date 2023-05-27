@@ -16,24 +16,35 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] Linux实战MySQL安装ubuntu 5.7 得到deb文件 1wget https:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mysql-apt-config_0.8.12-1_all.deb  配置源 1dpkg -i mysql-apt-config_0.8.12-1_all.deb  记得在server里面选择5.7  选择OK  更新apt 11 sudo apt-get">
+    <meta name="description" content="[TOC] git 的使用git的运行方式 三个区域   四种状态  未跟踪 还没有被git管理的文件	  未修改 已经被git管理，但是还没有对文件进行修改  已修改 就是已经被修改的文件，但是还没又被提交到缓存区  已暂存 就是修改过后添加到暂存区的文件     .gitignore 防止某些重要的信息泄露，通常将本文件中不能上传的文件放入.gitignore文件，我们只需要将文件名放进.gi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux实战">
-<meta property="og:url" content="http://example.com/2023/05/22/linux/Linux%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:title" content="git的使用">
+<meta property="og:url" content="http://example.com/2023/05/23/git%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="[TOC] Linux实战MySQL安装ubuntu 5.7 得到deb文件 1wget https:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mysql-apt-config_0.8.12-1_all.deb  配置源 1dpkg -i mysql-apt-config_0.8.12-1_all.deb  记得在server里面选择5.7  选择OK  更新apt 11 sudo apt-get">
+<meta property="og:description" content="[TOC] git 的使用git的运行方式 三个区域   四种状态  未跟踪 还没有被git管理的文件	  未修改 已经被git管理，但是还没有对文件进行修改  已修改 就是已经被修改的文件，但是还没又被提交到缓存区  已暂存 就是修改过后添加到暂存区的文件     .gitignore 防止某些重要的信息泄露，通常将本文件中不能上传的文件放入.gitignore文件，我们只需要将文件名放进.gi">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-05-22T04:41:44.000Z">
-<meta property="article:modified_time" content="2023-05-23T04:47:40.545Z">
+<meta property="og:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/git%E4%B8%89%E5%A4%A7%E5%8C%BA%E5%9F%9F.png">
+<meta property="og:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/%E6%96%87%E4%BB%B6%E7%9A%84%E5%9B%9B%E7%A7%8D%E7%8A%B6%E6%80%81.png">
+<meta property="og:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/gitcommit%E7%9A%84%E4%BA%A4%E4%BA%92.png">
+<meta property="og:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/gitdiff.png">
+<meta property="og:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/gitrm.png">
+<meta property="og:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93.jpg">
+<meta property="og:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/PushAndPull.jpg">
+<meta property="og:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86.jpg?q-sign-algorithm=sha1&q-ak=AKIDnkmkccSuOesMTXznpxqL-bOZjBT8msSYEjI5g2LvzABaVzkr8sDAaaXyDHn433Q9&q-sign-time=1685173031;1685176631&q-key-time=1685173031;1685176631&q-header-list=host&q-url-param-list=&q-signature=23be432d6081ad24ccbdf8d82b4d1861cd16360c&x-cos-security-token=JhQBPr1rKEDYQurjupXWeDlAFQpekQTafe6baf377b5f7786ddd5678ffb3c71f8PbDhihStc5x_NFZmM_aZa1tyfQ3QCe2Lj7Bv2WPw7ypYeJCKoyA5-E0u-o0xO0M422Y5KoAFdNfMwoNAa_DTajtf2lZYIvjsxO9WSMKVhvp0C3DzPLjnwQjHKp4irOOf7RrLAQUuH17oz9QU6yRwtaCYjeWsTk7doaO0GU84-pMECe23Y11EayKggQ13dHrm">
+<meta property="og:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/%E5%88%86%E6%94%AF%E7%9A%84%E5%90%88%E5%B9%B6%E5%92%8C%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81.jpg">
+<meta property="og:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/rebase.png">
+<meta property="article:published_time" content="2023-05-23T14:54:15.000Z">
+<meta property="article:modified_time" content="2023-05-27T08:24:52.492Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/git%E4%B8%89%E5%A4%A7%E5%8C%BA%E5%9F%9F.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Linux实战 - chg</title>
+  <title>git的使用 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux实战"></span>
+            <span id="subtitle" data-typed-text="git的使用"></span>
           
         </div>
 
@@ -215,8 +226,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-22 12:41" pubdate>
-          May 22, 2023 pm
+        <time datetime="2023-05-23 22:54" pubdate>
+          May 23, 2023 pm
         </time>
       </span>
     
@@ -227,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          263 words
+          1.4k words
         
       </span>
     
@@ -238,7 +249,7 @@
         
         
         
-          3 mins
+          12 mins
         
       </span>
     
@@ -276,31 +287,167 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Linux实战</h1>
+            <h1 style="display: none">git的使用</h1>
             
             
               <div class="markdown-body">
                 
                 <p>[TOC]</p>
-<h1 id="Linux实战"><a href="#Linux实战" class="headerlink" title="Linux实战"></a>Linux实战</h1><h2 id="MySQL安装"><a href="#MySQL安装" class="headerlink" title="MySQL安装"></a>MySQL安装</h2><h3 id="ubuntu-5-7"><a href="#ubuntu-5-7" class="headerlink" title="ubuntu 5.7"></a>ubuntu 5.7</h3><ol>
-<li><p>得到deb文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://dev.mysql.com/get/mysql-apt-config_0.8.12-1_all.deb<br></code></pre></td></tr></table></figure>
+<h1 id="git-的使用"><a href="#git-的使用" class="headerlink" title="git 的使用"></a>git 的使用</h1><h2 id="git的运行方式"><a href="#git的运行方式" class="headerlink" title="git的运行方式"></a>git的运行方式</h2><ol>
+<li><p>三个区域</p>
+<p><img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/git%E4%B8%89%E5%A4%A7%E5%8C%BA%E5%9F%9F.png" srcset="/img/loading.gif" lazyload></p>
 </li>
-<li><p>配置源</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">dpkg -i mysql-apt-config_0.8.12-1_all.deb<br></code></pre></td></tr></table></figure>
+<li><p>四种状态</p>
+<ul>
+<li><p>未跟踪</p>
+<p>还没有被<code>git</code>管理的文件	</p>
 </li>
-<li><p>记得在<code>server</code>里面选择5.7</p>
+<li><p>未修改</p>
+<p>已经被<code>git</code>管理，但是还没有对文件进行修改</p>
 </li>
-<li><p>选择<code>OK</code></p>
+<li><p>已修改</p>
+<p>就是已经被修改的文件，但是还没又被提交到缓存区</p>
 </li>
-<li><p>更新apt</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">1 sudo apt-get update<br></code></pre></td></tr></table></figure>
+<li><p>已暂存</p>
+<p>就是修改过后添加到暂存区的文件</p>
 </li>
-<li><p>查看是否有5.7的版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">1 apt-cache policy mysql-server<br></code></pre></td></tr></table></figure>
+</ul>
+<p><img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/%E6%96%87%E4%BB%B6%E7%9A%84%E5%9B%9B%E7%A7%8D%E7%8A%B6%E6%80%81.png" srcset="/img/loading.gif" lazyload></p>
 </li>
-<li><p>安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt-get install -s mysql-client=5.7.*<br></code></pre></td></tr></table></figure></li>
+<li><p><code>.gitignore</code></p>
+<p>防止某些重要的信息泄露，通常将本文件中不能上传的文件放入<code>.gitignore</code>文件，我们只需要将文件名放进<code>.gitignore</code>文件就可以。</p>
+<p>但是需要忽视的文件如果已经添加进入了仓库，则<code>gitignore</code>就不在起作用了</p>
+<p>同时也可以存放文件夹名称，代表这个文件和里面的内容会被忽视</p>
+</li>
+</ol>
+<h2 id="常用的指令"><a href="#常用的指令" class="headerlink" title="常用的指令"></a>常用的指令</h2><ol>
+<li><p>创建</p>
+<ul>
+<li><p><code>git init （目标）</code></p>
+</li>
+<li><p><code>git clone </code> </p>
+<p>克隆一个远程的仓库</p>
+</li>
+</ul>
+</li>
+<li><p>查看仓库的状态</p>
+<p><code>git status</code></p>
+</li>
+<li><p>提交操作</p>
+<p>A. 先将工作区的文件提交到暂存区</p>
+<p>  <code>git add</code></p>
+<p>​	可以使用<code>git add .</code>表示添加当前的所有的文件</p>
+<p>B. 提交到仓库（只能提交到暂存区）</p>
+<p>​	<code>git commit</code> 这个会进入vim界面交互</p>
+<p>​	<img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/gitcommit%E7%9A%84%E4%BA%A4%E4%BA%92.png" srcset="/img/loading.gif" lazyload></p>
+<p>​	<code>git commit -m &quot;提交的信息&quot;</code> </p>
+</li>
+<li><p>查看提交的信息</p>
+<p><code>git log (--oneline)</code> </p>
+<p>​	得到提交的信息，使用–oneline获得简洁得提交记录</p>
+</li>
+<li><p>回到之前的版本</p>
+<ul>
+<li><code>git reset --sort</code>回到某个版本，并且保留工作区，缓存区得内容</li>
+<li><code>git reset --hard</code> 回到某个版本，丢弃工作区，缓存区的内容</li>
+<li><code>git reset --mixed</code> 回到某个版本，丢弃工作取的内容，丢弃缓存区的内容</li>
+<li><code>git reflog</code> 查看操作的历史记录</li>
+</ul>
+</li>
+<li><p>查看工作区，暂存区，本地仓库的差异</p>
+<ul>
+<li><p><code>git diff</code> 比较工作区，和暂存区的文件内容</p>
+<p><img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/gitdiff.png" srcset="/img/loading.gif" lazyload></p>
+<p>-红色部分代表在缓存区的数据</p>
+<p>-绿色代表在工作区的数据</p>
+</li>
+<li><p><code>git diff HEAD</code> 对比和版本库的差距</p>
+</li>
+<li><p><code>git diff cached</code> 对比暂存区和版本库的差异</p>
+</li>
+<li><p><code>git fiff 版本号1 版本号2</code> 比较两个版本之间的差异，可以将版本2换成<code>HEAD</code></p>
+</li>
+<li><p><code>git diff HEAD~2 HEAD</code>比较上2个版本的区别，省略数字代表和上一个版本比较</p>
+</li>
+<li><p><code>git diff HEAD~2 HEAD 文件名</code> 比较指定的文件的差异</p>
+</li>
+<li><p><code>git diff 分支名1 分支名2</code> 比较两个分支名的区别</p>
+</li>
+</ul>
+</li>
+<li><p>删除文件</p>
+<p><code>git ls-files</code> 缓存区的内容</p>
+<ul>
+<li><p>方法一</p>
+<p>使用<code>rm</code>删除本地文件</p>
+</li>
+<li><p>方法二</p>
+<p>使用<code>git rm</code> 将文件从工作区和缓存区都删除掉</p>
+</li>
+</ul>
+<p><img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/gitrm.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><ol>
+<li><p><code>git clone</code></p>
+<p>克隆仓库，如果没有配配置ssh将会报错</p>
+</li>
+<li><p>配置ssh</p>
+</li>
+<li><p>远程仓库的使用</p>
+<p><img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/PushAndPull.jpg" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>关联远程仓库</p>
+<ul>
+<li><code> git remote add origin 远程仓库的地址</code> 关联远程创库</li>
+<li><code>git branch -M main</code> 将分支的名字改为<code>main</code></li>
+<li><code>git push -u origin main</code> 将本地的分支与远程创库的分支关联起来</li>
+</ul>
+</li>
+<li><p>查看远程创库的</p>
+<p><code>git remote -v</code></p>
+</li>
+</ul>
+</li>
+<li><p>分支</p>
+<ul>
+<li><p>创建分支</p>
+<p><code>git branch +分支名</code> 创建一个新的分支</p>
+</li>
+<li><p>查看分支</p>
+<p><code>git branch</code> 查看当前的分支</p>
+</li>
+<li><p>去到分支</p>
+<p><code>git checkout dev1</code>去到第一个分支</p>
+<p><code>git switch dev1</code>去到第一个分支</p>
+</li>
+<li><p>合并分支</p>
+<p><code>git merge dev</code> 将分支dev合并到当前的分支</p>
+</li>
+<li><p>查看分支图</p>
+<p><code>git log --graph  --oneline --decorate --all</code>查看分支图</p>
+</li>
+<li><p>删除分支</p>
+<p><code>git branch -d dev1</code> 删除dev1分支</p>
+</li>
+</ul>
+<p><img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86.jpg?q-sign-algorithm=sha1&q-ak=AKIDnkmkccSuOesMTXznpxqL-bOZjBT8msSYEjI5g2LvzABaVzkr8sDAaaXyDHn433Q9&q-sign-time=1685173031;1685176631&q-key-time=1685173031;1685176631&q-header-list=host&q-url-param-list=&q-signature=23be432d6081ad24ccbdf8d82b4d1861cd16360c&x-cos-security-token=JhQBPr1rKEDYQurjupXWeDlAFQpekQTafe6baf377b5f7786ddd5678ffb3c71f8PbDhihStc5x_NFZmM_aZa1tyfQ3QCe2Lj7Bv2WPw7ypYeJCKoyA5-E0u-o0xO0M422Y5KoAFdNfMwoNAa_DTajtf2lZYIvjsxO9WSMKVhvp0C3DzPLjnwQjHKp4irOOf7RrLAQUuH17oz9QU6yRwtaCYjeWsTk7doaO0GU84-pMECe23Y11EayKggQ13dHrm" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>解决分支冲突问题 </p>
+<p><code>git commit -a -m</code>提交暂存和创库两个动作</p>
+<p>当文件发生冲突的时候，我们需要手动的修改文件，然后将文件</p>
+<p><img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/%E5%88%86%E6%94%AF%E7%9A%84%E5%90%88%E5%B9%B6%E5%92%8C%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81.jpg" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>使用变基</p>
+<p><img src="https://pictuures-1317182407.cos.ap-chengdu.myqcloud.com/rebase.png" srcset="/img/loading.gif" lazyload></p>
+<p>从共同点开始之后的分支将会直接接在当前的分支后面</p>
+</li>
+<li><p>git分支流模型</p>
+<ul>
+<li><code>main</code></li>
+</ul>
+</li>
 </ol>
 
                 
@@ -314,7 +461,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Linux/">#Linux</a>
+        <a href="/tags/git/">#git</a>
       
     </div>
   
@@ -326,8 +473,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux实战</div>
-      <div>http://example.com/2023/05/22/linux/Linux实战/</div>
+      <div>git的使用</div>
+      <div>http://example.com/2023/05/23/git的使用/</div>
     </div>
     <div class="license-meta">
       
@@ -339,7 +486,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 22, 2023</div>
+          <div>May 23, 2023</div>
         </div>
       
       
@@ -371,18 +518,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/23/git%E7%9A%84%E4%BD%BF%E7%94%A8/" title="git的使用">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">git的使用</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/11/%E7%AE%97%E6%B3%95/luogu/%E6%A0%A1%E9%97%A8%E5%A4%96%E7%9A%84%E6%A0%91/" title="校门外的树">
-                        <span class="hidden-mobile">校门外的树</span>
+                      <a href="/2023/05/22/linux/Linux%E5%AE%9E%E6%88%98/" title="Linux实战">
+                        <span class="hidden-mobile">Linux实战</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
