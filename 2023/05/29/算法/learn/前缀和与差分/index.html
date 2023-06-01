@@ -16,23 +16,34 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Archives">
-<meta property="og:url" content="http://example.com/archives/2023/page/3/index.html">
+    <meta name="description" content="[TOC] 前缀和与差分前缀和 前缀和可以理解为，数列的前n项的和 sum[i]代表了，0~i的区间和   差分差分标记 数组L-&gt;R的都加上+num。等于差分数组的第L个元素+num，第R+1个元素-num。然后对差分数组求前缀和就是原数组； [ L,R ] + v  &lt;-&gt; d[L]+num,d[R+1]-num 如果R+1越界，就不用管，则相当于没有  实际操作的时候我们不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前缀和与差分">
+<meta property="og:url" content="http://example.com/2023/05/29/%E7%AE%97%E6%B3%95/learn/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/index.html">
 <meta property="og:site_name" content="chg">
+<meta property="og:description" content="[TOC] 前缀和与差分前缀和 前缀和可以理解为，数列的前n项的和 sum[i]代表了，0~i的区间和   差分差分标记 数组L-&gt;R的都加上+num。等于差分数组的第L个元素+num，第R+1个元素-num。然后对差分数组求前缀和就是原数组； [ L,R ] + v  &lt;-&gt; d[L]+num,d[R+1]-num 如果R+1越界，就不用管，则相当于没有  实际操作的时候我们不">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-29T10:46:30.000Z">
+<meta property="article:modified_time" content="2023-05-29T11:49:24.711Z">
 <meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Archives - chg</title>
+  <title>前缀和与差分 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -82,7 +93,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -188,9 +199,54 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Archives"></span>
+            <span id="subtitle" data-typed-text="前缀和与差分"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-29 18:46" pubdate>
+          May 29, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          203 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          2 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -206,100 +262,178 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">47 posts in total</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2023</p>
-    
-    <a href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" class="list-group-item list-group-item-action">
-      <time>04-20</time>
-      <div class="list-group-item-title">枚举</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前缀和与差分</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>[TOC]</p>
+<h1 id="前缀和与差分"><a href="#前缀和与差分" class="headerlink" title="前缀和与差分"></a>前缀和与差分</h1><h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><ol>
+<li><p>前缀和可以理解为，数列的前n项的和</p>
+<p><code>sum[i]</code>代表了，0~i的区间和</p>
+</li>
+</ol>
+<h2 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h2><h3 id="差分标记"><a href="#差分标记" class="headerlink" title="差分标记"></a>差分标记</h3><ol>
+<li><p>数组<code>L-&gt;R</code>的都加上<code>+num</code>。等于差分数组的第<code>L</code>个元素<code>+num</code>，第<code>R+1</code>个元素<code>-num</code>。然后对差分数组求前缀和就是原数组；</p>
+<p><code>[ L,R ] + v  &lt;-&gt; d[L]+num,d[R+1]-num</code></p>
+<p>如果<code>R+1</code>越界，就不用管，则相当于没有</p>
+</li>
+<li><p>实际操作的时候我们不需要把差分数组做出来，我们只需要初始化为<code>0</code></p>
+</li>
+<li></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-    
-    <a href="/2023/04/20/C/%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%A6%E8%A7%A31/" class="list-group-item list-group-item-action">
-      <time>04-20</time>
-      <div class="list-group-item-title">操作符详解</div>
-    </a>
   
-    
-    <a href="/2023/04/20/C/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="list-group-item list-group-item-action">
-      <time>04-20</time>
-      <div class="list-group-item-title">文件操作</div>
-    </a>
-  
-    
-    <a href="/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/" class="list-group-item list-group-item-action">
-      <time>04-20</time>
-      <div class="list-group-item-title">联合体专解</div>
-    </a>
-  
-    
-    <a href="/2023/04/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/" class="list-group-item list-group-item-action">
-      <time>04-20</time>
-      <div class="list-group-item-title">图</div>
-    </a>
-  
-    
-    <a href="/2023/04/19/%E7%AE%97%E6%B3%95/newcoder/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" class="list-group-item list-group-item-action">
-      <time>04-19</time>
-      <div class="list-group-item-title">逆波兰表达式求值</div>
-    </a>
-  
-    
-    <a href="/2023/04/19/linux/linux%E9%9A%8F%E8%AE%B0/" class="list-group-item list-group-item-action">
-      <time>04-19</time>
-      <div class="list-group-item-title">linux随记</div>
-    </a>
-  
-    
-    <a href="/2023/04/17/linux/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" class="list-group-item list-group-item-action">
-      <time>04-17</time>
-      <div class="list-group-item-title">常用指令</div>
-    </a>
-  
-    
-    <a href="/2023/04/17/linux/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" class="list-group-item list-group-item-action">
-      <time>04-17</time>
-      <div class="list-group-item-title">操作系统概述</div>
-    </a>
-  
-    
-    <a href="/2023/04/17/%E7%AE%97%E6%B3%95/newcoder/%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7%E5%BA%8F%E5%88%97/" class="list-group-item list-group-item-action">
-      <time>04-17</time>
-      <div class="list-group-item-title">有效括号序列</div>
-    </a>
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+      
+    </div>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2023/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2023/">1</a><a class="page-number" href="/archives/2023/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/2023/page/4/#board">4</a><a class="page-number" href="/archives/2023/page/5/#board">5</a><a class="extend next" rel="next" href="/archives/2023/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
+              
+  
 
-
-
-
-              </div>
-            </div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>前缀和与差分</div>
+      <div>http://example.com/2023/05/29/算法/learn/前缀和与差分/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 29, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
           </div>
         </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/29/effective/effective/" title="改程序和设计程序的55个具体做法">
+                        <span class="hidden-mobile">改程序和设计程序的55个具体做法</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -417,6 +551,99 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
