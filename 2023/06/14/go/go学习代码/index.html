@@ -16,24 +16,24 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="联合体专解共用体的定义1234union 名字&amp;#123;    &#x2F;&#x2F;数据&amp;#125;    理解 所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存  在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量 12345678910111213141516union Date&amp;#123;	int num;	char name[20];&amp;#125;;int main()">
+    <meta name="description" content="[TOC] 声明变量1234567891011121314151617181920212223242526package mainimport &quot;fmt&quot;func main() &amp;#123;    &#x2F;&#x2F;1.    var a int &#x3D; 520    fmt.Println(a)    &#x2F;&#x2F;2.    b :&#x3D; 1314    fmt.Println(b)    &#x2F;&#x2F;3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="联合体专解">
-<meta property="og:url" content="http://example.com/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/index.html">
+<meta property="og:title" content="go学习代码">
+<meta property="og:url" content="http://example.com/2023/06/14/go/go%E5%AD%A6%E4%B9%A0%E4%BB%A3%E7%A0%81/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="联合体专解共用体的定义1234union 名字&amp;#123;    &#x2F;&#x2F;数据&amp;#125;    理解 所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存  在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量 12345678910111213141516union Date&amp;#123;	int num;	char name[20];&amp;#125;;int main()">
+<meta property="og:description" content="[TOC] 声明变量1234567891011121314151617181920212223242526package mainimport &quot;fmt&quot;func main() &amp;#123;    &#x2F;&#x2F;1.    var a int &#x3D; 520    fmt.Println(a)    &#x2F;&#x2F;2.    b :&#x3D; 1314    fmt.Println(b)    &#x2F;&#x2F;3">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-20T01:01:17.000Z">
-<meta property="article:modified_time" content="2023-04-20T05:09:20.831Z">
+<meta property="article:published_time" content="2023-06-14T13:53:12.000Z">
+<meta property="article:modified_time" content="2023-06-14T14:49:12.197Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c基础">
+<meta property="article:tag" content="go">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>联合体专解 - chg</title>
+  <title>go学习代码 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="联合体专解"></span>
+            <span id="subtitle" data-typed-text="go学习代码"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-20 09:01" pubdate>
-          April 20, 2023 am
+        <time datetime="2023-06-14 21:53" pubdate>
+          June 14, 2023 pm
         </time>
       </span>
     
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          353 words
+          861 words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          3 mins
+          8 mins
         
       </span>
     
@@ -276,21 +276,18 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">联合体专解</h1>
+            <h1 style="display: none">go学习代码</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="联合体专解"><a href="#联合体专解" class="headerlink" title="联合体专解"></a>联合体专解</h1><h2 id="共用体的定义"><a href="#共用体的定义" class="headerlink" title="共用体的定义"></a>共用体的定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">union</span> 名字</span><br><span class="hljs-class">&#123;</span><br>    <span class="hljs-comment">//数据</span><br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>[TOC]</p>
+<h1 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>    <span class="hljs-comment">//1.</span><br>    <span class="hljs-keyword">var</span> a <span class="hljs-type">int</span> = <span class="hljs-number">520</span><br>    fmt.Println(a)<br><br>    <span class="hljs-comment">//2.</span><br>    b := <span class="hljs-number">1314</span><br>    fmt.Println(b)<br><br>    <span class="hljs-comment">//3</span><br>    <span class="hljs-keyword">var</span> (<br>        c <span class="hljs-type">int</span> = <span class="hljs-number">959</span><br>        d <span class="hljs-type">int</span> = <span class="hljs-number">244</span><br>    )<br>    fmt.Println(c + d)<br><br>    <span class="hljs-comment">//4</span><br>    <span class="hljs-keyword">var</span> e = <span class="hljs-number">2023</span><br>    fmt.Println(e)<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
+<h1 id="常量-模拟枚举"><a href="#常量-模拟枚举" class="headerlink" title="常量(模拟枚举)"></a>常量(模拟枚举)</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-comment">//模拟枚举</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">iota,每行递增</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">const</span> (<br>    A = <span class="hljs-literal">iota</span><br>    B<br>    C<br>    D = <span class="hljs-number">20</span><br>    E<br>    F = <span class="hljs-literal">iota</span><br>    G = <span class="hljs-string">&quot;adh&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">//设置const常量</span><br>    <span class="hljs-comment">//不能使用自动类型推导</span><br>    <span class="hljs-keyword">const</span> a <span class="hljs-type">int</span> = <span class="hljs-number">10</span><br>    <span class="hljs-keyword">const</span> b = <span class="hljs-number">20</span><br>    fmt.Println(a)<br>    fmt.Println(b)<br>    fmt.Println(A)<br>    fmt.Println(F)<br>    fmt.Println(G)<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
+<h1 id="多返回值-三种"><a href="#多返回值-三种" class="headerlink" title="多返回值(三种)"></a>多返回值(三种)</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">add</span><span class="hljs-params">(a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>)</span></span> (<span class="hljs-type">int</span>, <span class="hljs-type">int</span>, <span class="hljs-type">int</span>) &#123;<br>    <span class="hljs-keyword">return</span> a, b, a + b<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">add1</span><span class="hljs-params">(a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>)</span></span> (c, d <span class="hljs-type">int</span>) &#123;<br>    <span class="hljs-keyword">return</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">add2</span><span class="hljs-params">(a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>)</span></span> (sum <span class="hljs-type">int</span>) &#123;<br>    sum = a + b<br>    <span class="hljs-keyword">return</span> sum<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    a, b, sum := add(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>)<br>    fmt.Printf(<span class="hljs-string">&quot;%v+%v=%v&quot;</span>, a, b, sum)<br><br>    c, d := add1(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>    fmt.Println(c, d)<br><br>    sum1 := add2(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>)<br>    fmt.Println(sum1)<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
 
-<h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><ol>
-<li><p>所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存</p>
-</li>
-<li><p>在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">union</span> <span class="hljs-title">Date</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-type">int</span> num;<br>	<span class="hljs-type">char</span> name[<span class="hljs-number">20</span>];<br>&#125;;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">union</span> <span class="hljs-title">Date</span> <span class="hljs-title">date</span>;</span><br>	date.num=<span class="hljs-number">65</span>;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,date.num);<br>    <span class="hljs-comment">//结果为65</span><br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>,date.name);<br>    <span class="hljs-comment">//结果为A，虽然没有定义date.name,但是由于共用一个内存，是可以访问的，因为65是A的码值</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
-</ol>
 
                 
               </div>
@@ -303,7 +300,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
+        <a href="/tags/go/">#go</a>
       
     </div>
   
@@ -315,8 +312,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>联合体专解</div>
-      <div>http://example.com/2023/04/20/C/联合体专解/</div>
+      <div>go学习代码</div>
+      <div>http://example.com/2023/06/14/go/go学习代码/</div>
     </div>
     <div class="license-meta">
       
@@ -328,7 +325,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 20, 2023</div>
+          <div>June 14, 2023</div>
         </div>
       
       
@@ -360,18 +357,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" title="枚举">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">枚举</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/" title="图">
-                        <span class="hidden-mobile">图</span>
+                      <a href="/2023/06/12/linux%E5%A4%8D%E4%B9%A0%E6%96%87%E6%A1%A3/" title="linux复习文档">
+                        <span class="hidden-mobile">linux复习文档</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
