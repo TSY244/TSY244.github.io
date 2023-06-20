@@ -16,17 +16,22 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] gcc的工作流程  预编译阶段会去除注释  编译会生成一个编译文件  汇编会得到一个二进制文件  部分命令   执行多文件时，一定要编译多个.c文件   制作动态库和静态库静态库的创建">
+    <meta name="description" content="[TOC] gcc的工作流程  预编译阶段会去除注释  编译会生成一个编译文件  汇编会得到一个二进制文件  部分命令   执行多文件时，一定要编译多个.c文件   制作动态库和静态库静态库的创建 静态库的命名格式(linux) 前缀是lib 后缀是.a 例如libxxx.a  静态库的命名格式(windows) 前缀是lib 后缀也是lib 例如libxxx.lib  静态库的链接   ar参数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gcc">
 <meta property="og:url" content="http://example.com/2023/06/15/linux/gcc/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="[TOC] gcc的工作流程  预编译阶段会去除注释  编译会生成一个编译文件  汇编会得到一个二进制文件  部分命令   执行多文件时，一定要编译多个.c文件   制作动态库和静态库静态库的创建">
+<meta property="og:description" content="[TOC] gcc的工作流程  预编译阶段会去除注释  编译会生成一个编译文件  汇编会得到一个二进制文件  部分命令   执行多文件时，一定要编译多个.c文件   制作动态库和静态库静态库的创建 静态库的命名格式(linux) 前缀是lib 后缀是.a 例如libxxx.a  静态库的命名格式(windows) 前缀是lib 后缀也是lib 例如libxxx.lib  静态库的链接   ar参数">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/gcc/gcc%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/gcc/gcc%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/image-20230619194413609.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/image-20230619194627222.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/image-20230619211403619.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/image-20230619213441041.png">
+<meta property="og:image" content="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/image-20230620111319001.png">
 <meta property="article:published_time" content="2023-06-15T03:55:18.000Z">
-<meta property="article:modified_time" content="2023-06-17T05:52:23.747Z">
+<meta property="article:modified_time" content="2023-06-20T06:04:58.980Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          83 words
+          318 words
         
       </span>
     
@@ -241,7 +246,7 @@
         
         
         
-          1 mins
+          3 mins
         
       </span>
     
@@ -299,7 +304,51 @@
 <li><p>执行多文件时，一定要编译多个.c文件</p>
 </li>
 </ol>
-<h1 id="制作动态库和静态库"><a href="#制作动态库和静态库" class="headerlink" title="制作动态库和静态库"></a>制作动态库和静态库</h1><h2 id="静态库的创建"><a href="#静态库的创建" class="headerlink" title="静态库的创建"></a>静态库的创建</h2>
+<h1 id="制作动态库和静态库"><a href="#制作动态库和静态库" class="headerlink" title="制作动态库和静态库"></a>制作动态库和静态库</h1><h2 id="静态库的创建"><a href="#静态库的创建" class="headerlink" title="静态库的创建"></a>静态库的创建</h2><ol>
+<li><p>静态库的命名格式(linux)</p>
+<p>前缀是<code>lib</code></p>
+<p>后缀是<code>.a</code></p>
+<p>例如<code>libxxx.a</code></p>
+</li>
+<li><p>静态库的命名格式(windows)</p>
+<p>前缀是<code>lib</code></p>
+<p>后缀也是<code>lib</code></p>
+<p>例如<code>libxxx.lib</code></p>
+</li>
+<li><p>静态库的链接</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/image-20230619194413609.png" srcset="/img/loading.gif" lazyload alt="image-20230619194413609"></p>
+<ul>
+<li><p><code>ar</code>参数的使用</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/image-20230619194627222.png" srcset="/img/loading.gif" lazyload alt="image-20230619194627222"></p>
+</li>
+<li><p>打包练习</p>
+<p><code>ar rcs libxxx.a *.o</code></p>
+<p>注意<code>.o</code>是已经编译的文件</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/image-20230619211403619.png" srcset="/img/loading.gif" lazyload alt="image-20230619211403619"></p>
+</li>
+<li><p>使用<code>nm -C .o</code>查看所有定义</p>
+<p><code>T</code>  是外部函数</p>
+<p><code>U</code>  是本文件的函数</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/image-20230619213441041.png" srcset="/img/loading.gif" lazyload alt="image-20230619213441041"></p>
+</li>
+</ul>
+</li>
+<li><p>静态库的使用</p>
+<p>编译<code>.a</code>文件</p>
+</li>
+</ol>
+<h2 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h2><ol>
+<li><p>动态库的创建</p>
+<p><img src="https://linux-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/image-20230620111319001.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>使用</p>
+</li>
+</ol>
+<h2 id="动态库和静态库的优缺点比较"><a href="#动态库和静态库的优缺点比较" class="headerlink" title="动态库和静态库的优缺点比较"></a>动态库和静态库的优缺点比较</h2><ol>
+<li>动态库运行效率低，但是占用的内存小，对于现代计算机而言，运行效率差别不大</li>
+<li>现在大多都是发布的动态库</li>
+</ol>
+
                 
               </div>
             
