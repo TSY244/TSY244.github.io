@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://go-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%25v%E7%9A%84%E5%90%84%E7%A7%8D%E5%BD%A2%E5%BC%8F.png">
 <meta property="article:published_time" content="2023-05-08T05:46:43.000Z">
-<meta property="article:modified_time" content="2023-06-19T02:22:04.864Z">
+<meta property="article:modified_time" content="2023-06-22T06:25:21.675Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="go">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          749 words
+          1.4k words
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          7 mins
+          12 mins
         
       </span>
     
@@ -323,6 +323,11 @@
 </li>
 <li><p>类的首字母大写，才能在其他包访问到类</p>
 </li>
+<li><p>go语言的匿名函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>            <span class="hljs-keyword">defer</span> fmt.Println(<span class="hljs-string">&quot;this is A.defer&quot;</span>)<br>            i := <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> i &lt; <span class="hljs-number">10</span> &#123;<br>                i++<br>                fmt.Println(<span class="hljs-string">&quot;this is goRoutine : &quot;</span>, i)<br>                time.Sleep(<span class="hljs-number">1</span> * time.Second)<br>            &#125;<br>            fmt.Println(<span class="hljs-string">&quot;A&quot;</span>)<br>    <br>            <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>                <span class="hljs-keyword">defer</span> fmt.Println(<span class="hljs-string">&quot;this is B.defer&quot;</span>)<br>                fmt.Println(<span class="hljs-string">&quot;this is B&quot;</span>)<br>            &#125;()<br>        &#125;() <span class="hljs-comment">//加小括号是为了调用</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>runtime.Goexit()</code>退出当前的<code>goroutine</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>            <span class="hljs-keyword">defer</span> fmt.Println(<span class="hljs-string">&quot;this is A.defer&quot;</span>)<br>            i := <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> i &lt; <span class="hljs-number">10</span> &#123;<br>                i++<br>                fmt.Println(<span class="hljs-string">&quot;this is goRoutine : &quot;</span>, i)<br>                time.Sleep(<span class="hljs-number">1</span> * time.Second)<br>            &#125;<br>            fmt.Println(<span class="hljs-string">&quot;A&quot;</span>)<br>    <br>            <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>                <span class="hljs-keyword">defer</span> fmt.Println(<span class="hljs-string">&quot;this is B.defer&quot;</span>)<br>                fmt.Println(<span class="hljs-string">&quot;this is B&quot;</span>)<br>            &#125;()<br>        &#125;() <span class="hljs-comment">//加小括号是为了调用</span><br></code></pre></td></tr></table></figure></li>
 </ol>
 
                 
