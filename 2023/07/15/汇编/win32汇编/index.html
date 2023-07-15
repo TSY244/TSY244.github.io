@@ -16,27 +16,45 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="game.exe的使用方法 使用win+r,调出cmd  点击确定  使用CHCP 65001设置UTF-8   直接拖进cmd，将game.exe运行  注意不要改变游戏区域的大小">
+    <meta name="description" content="[TOC] win32汇编模式定义 定义了程序使用的指令集、互作模式和格式  win32环境中.386是必不可少的    后面带p则是伪指令  内存模式  但是主要使用的是flat  因win32程序只有一种内存模式，flat模式，没有64kb的限制   语言模式 除了在.model语句中指定内存模式意以外，还应该指定语言模式   stdcall的参数压栈方式是：从右往左   option语句">
 <meta property="og:type" content="article">
-<meta property="og:title" content="chg">
-<meta property="og:url" content="http://example.com/2023/05/01/c++/game.exe%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:title" content="win32汇编">
+<meta property="og:url" content="http://example.com/2023/07/15/%E6%B1%87%E7%BC%96/win32%E6%B1%87%E7%BC%96/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="game.exe的使用方法 使用win+r,调出cmd  点击确定  使用CHCP 65001设置UTF-8   直接拖进cmd，将game.exe运行  注意不要改变游戏区域的大小">
+<meta property="og:description" content="[TOC] win32汇编模式定义 定义了程序使用的指令集、互作模式和格式  win32环境中.386是必不可少的    后面带p则是伪指令  内存模式  但是主要使用的是flat  因win32程序只有一种内存模式，flat模式，没有64kb的限制   语言模式 除了在.model语句中指定内存模式意以外，还应该指定语言模式   stdcall的参数压栈方式是：从右往左   option语句">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="c:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20230501125706379.png">
-<meta property="og:image" content="c:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20230501125822766.png">
-<meta property="og:image" content="c:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20230501130058613.png">
-<meta property="article:published_time" content="2023-05-01T05:01:06.542Z">
-<meta property="article:modified_time" content="2023-05-01T05:01:19.367Z">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173340028.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173449273.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173747893.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715174527757.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715175305850.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715180311206.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715194544213.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195000045.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195240031.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195356997.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201548889.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201811427.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201856489.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715202519213.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715203657995.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715203928273.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715204231533.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715204632946.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715215236758.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715215645107.png">
+<meta property="article:published_time" content="2023-07-15T01:29:24.000Z">
+<meta property="article:modified_time" content="2023-07-15T13:59:55.152Z">
 <meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="汇编">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="c:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20230501125706379.png">
+<meta name="twitter:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173340028.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>chg</title>
+  <title>win32汇编 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +220,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="win32汇编"></span>
           
         </div>
 
@@ -218,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-01 13:01" pubdate>
-          May 1, 2023 pm
+        <time datetime="2023-07-15 09:29" pubdate>
+          July 15, 2023 am
         </time>
       </span>
     
@@ -230,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          80 words
+          747 words
         
       </span>
     
@@ -241,7 +259,7 @@
         
         
         
-          1 mins
+          7 mins
         
       </span>
     
@@ -279,26 +297,110 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">win32汇编</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="game-exe的使用方法"><a href="#game-exe的使用方法" class="headerlink" title="game.exe的使用方法"></a>game.exe的使用方法</h1><ol>
-<li><p>使用<code>win+r</code>,调出<code>cmd</code></p>
-<p><img src="C:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20230501125706379.png" srcset="/img/loading.gif" lazyload alt="image-20230501125706379"></p>
-<p>点击确定</p>
+                <p>[TOC]</p>
+<h1 id="win32汇编"><a href="#win32汇编" class="headerlink" title="win32汇编"></a>win32汇编</h1><h2 id="模式定义"><a href="#模式定义" class="headerlink" title="模式定义"></a>模式定义</h2><ol>
+<li><p>定义了程序使用的指令集、互作模式和格式</p>
 </li>
-<li><p>使用<code>CHCP 65001</code>设置<code>UTF-8</code></p>
-<p><img src="C:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20230501125822766.png" srcset="/img/loading.gif" lazyload alt="image-20230501125822766"></p>
+<li><p>win32环境中<code>.386</code>是必不可少的</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173340028.png" srcset="/img/loading.gif" lazyload alt="image-20230715173340028"></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173449273.png" srcset="/img/loading.gif" lazyload alt="image-20230715173449273"></p>
 </li>
-<li><p>直接拖进cmd，将game.exe运行</p>
+<li><p>后面带<code>p</code>则是伪指令</p>
 </li>
-<li><p>注意不要改变游戏区域的大小</p>
-<p><img src="C:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20230501130058613.png" srcset="/img/loading.gif" lazyload alt="image-20230501130058613"></p>
+<li><p>内存模式</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173747893.png" srcset="/img/loading.gif" lazyload alt="image-20230715173747893"></p>
+<p>但是主要使用的是<code>flat</code></p>
+<blockquote>
+<p>因win32程序只有一种内存模式，flat模式，没有64kb的限制</p>
+</blockquote>
+</li>
+<li><p>语言模式</p>
+<p>除了在<code>.model</code>语句中指定内存模式意以外，还应该指定语言模式</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715174527757.png" srcset="/img/loading.gif" lazyload alt="image-20230715174527757"></p>
+<ul>
+<li>stdcall的参数压栈方式是：从右往左</li>
+</ul>
+</li>
+<li><p><code>option</code>语句</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715175305850.png" srcset="/img/loading.gif" lazyload alt="image-20230715175305850"></p>
 </li>
 </ol>
-
+<h2 id="短的定义"><a href="#短的定义" class="headerlink" title="短的定义"></a>短的定义</h2><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715180311206.png" srcset="/img/loading.gif" lazyload alt="image-20230715180311206"></p>
+<h3 id="数据段"><a href="#数据段" class="headerlink" title="数据段"></a>数据段</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715194544213.png" srcset="/img/loading.gif" lazyload alt="image-20230715194544213"></p>
+<ol>
+<li><p>可读可写的已定义的变量</p>
+<p>这些数据在<code>.data</code>的段中，是已初始化的数据段。<code>.data</code>的段存放在可执行文件的_DATA字节区内</p>
+</li>
+<li><p>可读可写的未定义的变量</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195000045.png" srcset="/img/loading.gif" lazyload alt="image-20230715195000045"></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195240031.png" srcset="/img/loading.gif" lazyload alt="image-20230715195240031"></p>
+</li>
+<li><p>常量</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195356997.png" srcset="/img/loading.gif" lazyload alt="image-20230715195356997"></p>
+</li>
+</ol>
+<h3 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a>代码段</h3><ol>
+<li>所有的指令都在代码段里面</li>
+<li>代码段是放在_TEXT的节区中的</li>
+</ol>
+<h2 id="简单语法和知识点"><a href="#简单语法和知识点" class="headerlink" title="简单语法和知识点"></a>简单语法和知识点</h2><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><ol>
+<li><p>在代码前面写”;”，代表注释处理 </p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201548889.png" srcset="/img/loading.gif" lazyload alt="image-20230715201548889"></p>
+</li>
+</ol>
+<h3 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h3><ol>
+<li>由于程序的某一行过长，不利于阅读时可以使用<code>\</code>做换行符</li>
+</ol>
+<h3 id="调用API函数"><a href="#调用API函数" class="headerlink" title="调用API函数"></a>调用API函数</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201811427.png" srcset="/img/loading.gif" lazyload alt="image-20230715201811427"></p>
+<p> <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201856489.png" srcset="/img/loading.gif" lazyload alt="image-20230715201856489"></p>
+<h3 id="动态链接库（dll）"><a href="#动态链接库（dll）" class="headerlink" title="动态链接库（dll）"></a>动态链接库（dll）</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715202519213.png" srcset="/img/loading.gif" lazyload alt="image-20230715202519213"></p>
+<h3 id="使用invoke语句"><a href="#使用invoke语句" class="headerlink" title="使用invoke语句"></a>使用invoke语句</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715203657995.png" srcset="/img/loading.gif" lazyload alt="image-20230715203657995"></p>
+<h3 id="API函数的返回值"><a href="#API函数的返回值" class="headerlink" title="API函数的返回值"></a>API函数的返回值</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715203928273.png" srcset="/img/loading.gif" lazyload alt="image-20230715203928273"></p>
+<ol>
+<li><p>返回值保存在<code>eax</code>寄存器当中‘</p>
+</li>
+<li><p>返回值都是4个字节。</p>
+<p>如果超出4个字节的字符串，这个时候返回的就是指针（32位下的指针是4个字节）</p>
+</li>
+</ol>
+<h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715204231533.png" srcset="/img/loading.gif" lazyload alt="image-20230715204231533"><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715204632946.png" srcset="/img/loading.gif" lazyload alt="image-20230715204632946"></p>
+<ol>
+<li><p>使用<code>proto</code></p>
+</li>
+<li><p>距离</p>
+<blockquote>
+<p>win32是4G 的平坦段，无所谓距离</p>
+<p>在Win32汇编中，函数定义时使用的距离（distance）是指函数内部的相对偏移量，用于表示函数内部的标签或指令之间的距离。</p>
+<p>在汇编语言中，函数通常由一系列的指令组成，每个指令都有一个相对于函数起始地址的偏移量。这个偏移量被称为距离。</p>
+</blockquote>
+</li>
+<li><p>对于win32汇编的参数值只有dword一种，也就是说只有4个字节</p>
+</li>
+</ol>
+<h3 id="include语句"><a href="#include语句" class="headerlink" title="include语句"></a>include语句</h3><ol>
+<li><p>包含头文件</p>
+</li>
+<li><p>包含的两个方式】</p>
+<p><code>include &lt;头文件的名字&gt;</code></p>
+<p><code>include 头文件的名字 </code></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715215236758.png" srcset="/img/loading.gif" lazyload alt="image-20230715215236758"></p>
+</li>
+</ol>
+<h3 id="includelib"><a href="#includelib" class="headerlink" title="includelib"></a>includelib</h3><ol>
+<li><p>导入库文件</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715215645107.png" srcset="/img/loading.gif" lazyload alt="image-20230715215645107"></p>
+</li>
+<li><p>一般库文件和动态链接库的名字相同，后缀不同</p>
+</li>
+<li><p>使用lib更像是一个借用，但是使用include是将文件拷贝到程序当中</p>
+</li>
+</ol>
+<h3 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h3>
                 
               </div>
             
@@ -306,6 +408,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B1%87%E7%BC%96/">#汇编</a>
+      
+    </div>
   
 </div>
 
@@ -315,8 +424,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://example.com/2023/05/01/c++/game.exe的使用方法/</div>
+      <div>win32汇编</div>
+      <div>http://example.com/2023/07/15/汇编/win32汇编/</div>
     </div>
     <div class="license-meta">
       
@@ -328,7 +437,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 1, 2023</div>
+          <div>July 15, 2023</div>
         </div>
       
       
@@ -360,9 +469,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/01/%E7%AE%97%E6%B3%95/newcoder/%E6%9F%A5%E7%9C%8B%E9%93%BE%E8%A1%A8%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF/" title="查看链表是否有环">
+                      <a href="/2023/07/15/%E6%B1%87%E7%BC%96/8086%E6%B1%87%E7%BC%96/" title="8086汇编">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">查看链表是否有环</span>
+                        <span class="hidden-mobile">8086汇编</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -370,8 +479,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/30/linux/%E4%BD%BF%E7%94%A8linux/" title="使用linux">
-                        <span class="hidden-mobile">使用linux</span>
+                      <a href="/2023/07/13/python/py%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" title="py速成学习">
+                        <span class="hidden-mobile">py速成学习</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
