@@ -29,8 +29,17 @@
 <meta property="og:image" content="https://qt-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/image-20230629175549828.png">
 <meta property="og:image" content="https://qt-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/image-20230629175753092.png">
 <meta property="og:image" content="https://qt-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/image-20230629214952983.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230723222647656.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230723224446185.png">
+<meta property="og:image" content="c:\Users\12414\Desktop\hexo\source_posts\QT\QT.assets\image-20230723224534289.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/qt1/image-20230723235424678.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/qt1/image-20230723235538742.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/qt1/image-20230723235707087.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/qt1/image-20230723235900989.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/image-20230724000157379.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/image-20230724000353154.png">
 <meta property="article:published_time" content="2023-06-26T15:57:01.000Z">
-<meta property="article:modified_time" content="2023-07-17T14:52:58.214Z">
+<meta property="article:modified_time" content="2023-07-23T16:03:56.087Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="QT">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.2k words
+          6k words
         
       </span>
     
@@ -245,7 +254,7 @@
         
         
         
-          44 mins
+          51 mins
         
       </span>
     
@@ -471,6 +480,53 @@
 <li>一个槽函数也可以是相关多个信号</li>
 <li>可以使用信号连接信号，就可以不用使用<code>emit</code></li>
 </ul>
+</li>
+<li><p>连接方式（对函数进行了重载）</p>
+<ul>
+<li><p>QT4</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">connect</span>(qtgirl, <span class="hljs-built_in">SIGNAL</span>(<span class="hljs-built_in">test_signal</span>()), qtslot,<span class="hljs-built_in">SLOT</span>(<span class="hljs-built_in">test_slot</span>()));<span class="hljs-comment">//注意函数参数的使用</span><br>   <br>   <span class="hljs-built_in">connect</span>(qtgirl, <span class="hljs-built_in">SIGNAL</span>(<span class="hljs-built_in">test_signal</span>(QString)), qtslot,<span class="hljs-built_in">SLOT</span>(<span class="hljs-built_in">test_slot</span>(QString)));<span class="hljs-comment">//注意函数参数的使用</span><br>     <br>        <br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>QT5</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">//QT5  重载过后</span><br>     <br><span class="hljs-built_in">void</span>(Qtgirl:: * girl1)() = &amp;Qtgirl::test_signal;<br><span class="hljs-built_in">void</span>(Qtgirl:: * girl2)(QString) = &amp;Qtgirl::test_signal;<br>     <br><span class="hljs-built_in">void</span>(Qtslot:: * solt1)() = &amp;Qtslot::test_slot;<br><span class="hljs-built_in">void</span>(Qtslot:: * solt2)(QString) = &amp;Qtslot::test_slot;<br><span class="hljs-built_in">connect</span>(qtgirl, girl1, qtslot, solt1);<span class="hljs-comment">//注意函数参数的使用</span><br><span class="hljs-built_in">connect</span>(qtgirl, girl2, qtslot, solt2);<span class="hljs-comment">//注意函数参数的使用</span><br></code></pre></td></tr></table></figure>
+
+<p>也就是需要我们将参数绑定在函数指针上面</p>
+<p>返回值是void的函数指针</p>
+</li>
+<li><p>此外还要注意信号的使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">QtWidgetsApplication1::launchSignal</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    emit qtgirl-&gt;<span class="hljs-built_in">test_signal</span>();<br>    emit qtgirl-&gt;<span class="hljs-built_in">test_signal</span>(<span class="hljs-string">&quot;Hamburger&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><code>lambda</code>表达式</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230723222647656.png" srcset="/img/loading.gif" lazyload alt="image-20230723222647656"></p>
+</li>
+</ol>
+<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><h3 id="QTimer"><a href="#QTimer" class="headerlink" title="QTimer"></a>QTimer</h3><ol>
+<li><p>构造函数</p>
+<p>我们需要指定一个参数，让它挂在对象树上，可以进行内存回收</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230723224446185.png" srcset="/img/loading.gif" lazyload alt="image-20230723224446185"></p>
+</li>
+<li><p>调用最好需要指定时间的间隔周期</p>
+<p><img src="C:\Users\12414\Desktop\hexo\source_posts\QT\QT.assets\image-20230723224534289.png" srcset="/img/loading.gif" lazyload alt="image-20230723224534289"></p>
+<p>如果没有指定间隔周期，需要调用如下的操作</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/qt1/image-20230723235424678.png" srcset="/img/loading.gif" lazyload alt="image-20230723235424678"></p>
+</li>
+<li><p>调用的开始函数</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/qt1/image-20230723235538742.png" srcset="/img/loading.gif" lazyload alt="image-20230723235538742"></p>
+</li>
+<li><p>发送信号</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/qt1/image-20230723235707087.png" srcset="/img/loading.gif" lazyload alt="image-20230723235707087"></p>
+<p>当timeout时就会发出信号，我们就需要槽函数接收信号</p>
+</li>
+<li><p>设置精度</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/qt1/image-20230723235900989.png" srcset="/img/loading.gif" lazyload alt="image-20230723235900989"></p>
+</li>
+<li><p>看定时器是否是存活的</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/image-20230724000157379.png" srcset="/img/loading.gif" lazyload alt="image-20230724000157379"></p>
+</li>
+<li><p>设置信号只发射一次</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/qt/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/image-20230724000353154.png" srcset="/img/loading.gif" lazyload alt="image-20230724000353154"></p>
 </li>
 </ol>
 

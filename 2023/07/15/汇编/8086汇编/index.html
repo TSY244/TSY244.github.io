@@ -16,20 +16,59 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="8086入门学习 8086汇编代码使用debug  在终端中输入debug进入到调式界面  查看寄存器输入R  r+寄存器变量名直接修改寄存器的值   查看内存输入D    也可以添加地址，从1000段地址偏移0开始输出      改变内存的内容E  第一种方法   第二种方法     使用A添加汇编代码  T执行插入的指令  U翻译机器码   指令的学习mov">
+    <meta name="description" content="8086入门学习 8086汇编代码使用debug  在终端中输入debug进入到调式界面  查看寄存器输入R  r+寄存器变量名直接修改寄存器的值   查看内存输入D    也可以添加地址，从1000段地址偏移0开始输出      改变内存的内容E  第一种方法   第二种方法     使用A添加汇编代码  T执行插入的指令  U翻译机器码   部分寄存器 指令的学习mov  注意逗号后面的控制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="8086汇编">
 <meta property="og:url" content="http://example.com/2023/07/15/%E6%B1%87%E7%BC%96/8086%E6%B1%87%E7%BC%96/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="8086入门学习 8086汇编代码使用debug  在终端中输入debug进入到调式界面  查看寄存器输入R  r+寄存器变量名直接修改寄存器的值   查看内存输入D    也可以添加地址，从1000段地址偏移0开始输出      改变内存的内容E  第一种方法   第二种方法     使用A添加汇编代码  T执行插入的指令  U翻译机器码   指令的学习mov">
+<meta property="og:description" content="8086入门学习 8086汇编代码使用debug  在终端中输入debug进入到调式界面  查看寄存器输入R  r+寄存器变量名直接修改寄存器的值   查看内存输入D    也可以添加地址，从1000段地址偏移0开始输出      改变内存的内容E  第一种方法   第二种方法     使用A添加汇编代码  T执行插入的指令  U翻译机器码   部分寄存器 指令的学习mov  注意逗号后面的控制">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230719181638022.png">
 <meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230719182834156.png">
 <meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230719182309364.png">
 <meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230719182659159.png">
 <meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230719183431008.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722085403982.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720151104219.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720151249768.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720152313629.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720152634451.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720153048935.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720153203861.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722083756095.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722085536634.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722085647601.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722090833052.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722091746751.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722092236392.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722092457283.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722093511339.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722170544073.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722171803628.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722172100724.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722172133543.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230723123016835.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722100913434.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722101449853.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722102553160.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722103018201.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722104944573.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722105649871.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722105723077.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722114949873.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722125003980.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722130358149.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722130541365.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722131010719.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722131701530.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722155845770.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722160118625.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722161253506.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722161405353.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722161635034.png">
+<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722172758881.png">
 <meta property="article:published_time" content="2023-07-15T06:39:56.000Z">
-<meta property="article:modified_time" content="2023-07-19T10:41:30.870Z">
+<meta property="article:modified_time" content="2023-07-23T04:58:36.515Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="汇编">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +272,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          145 words
+          1.8k words
         
       </span>
     
@@ -244,7 +283,7 @@
         
         
         
-          2 mins
+          16 mins
         
       </span>
     
@@ -322,7 +361,236 @@
 <li><p><code>U</code>翻译机器码</p>
 </li>
 </ol>
-<h2 id="指令的学习"><a href="#指令的学习" class="headerlink" title="指令的学习"></a>指令的学习</h2><h3 id="mov"><a href="#mov" class="headerlink" title="mov"></a><code>mov</code></h3>
+<h2 id="部分寄存器"><a href="#部分寄存器" class="headerlink" title="部分寄存器"></a>部分寄存器</h2><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722085403982.png" srcset="/img/loading.gif" lazyload alt="image-20230722085403982"></p>
+<h2 id="指令的学习"><a href="#指令的学习" class="headerlink" title="指令的学习"></a>指令的学习</h2><h3 id="mov"><a href="#mov" class="headerlink" title="mov"></a><code>mov</code></h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720151104219.png" srcset="/img/loading.gif" lazyload alt="image-20230720151104219"></p>
+<ol>
+<li><p>注意逗号后面的控制</p>
+</li>
+<li><p>下面操作寄存器的高位和低位</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720151249768.png" srcset="/img/loading.gif" lazyload alt="image-20230720151249768"></p>
+<p>注意第三条指令(不包括错误的指令)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov ch, 10<br></code></pre></td></tr></table></figure>
+
+<p>这段代码表示将10给c寄存器的高位（hight）</p>
+<p>由此可以知道直接使用<code>mov</code>直接赋值给低地址位</p>
+</li>
+</ol>
+<h3 id="add"><a href="#add" class="headerlink" title="add"></a><code>add</code></h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720152313629.png" srcset="/img/loading.gif" lazyload alt="image-20230720152313629"></p>
+<ol>
+<li><p>将两个数相加</p>
+</li>
+<li><p>同时也可以实现自己加自己</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720152634451.png" srcset="/img/loading.gif" lazyload alt="image-20230720152634451"></p>
+</li>
+<li><p>相加如果越位了就直接舍去</p>
+</li>
+<li><p>如使用地位相加过后溢位了</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720153048935.png" srcset="/img/loading.gif" lazyload alt="image-20230720153048935"></p>
+<p>同样的不会进位</p>
+<p>但是使用的是整个的寄存器那么就会进位</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230720153203861.png" srcset="/img/loading.gif" lazyload alt="image-20230720153203861"></p>
+</li>
+</ol>
+<h3 id="sub"><a href="#sub" class="headerlink" title="sub"></a><code>sub</code></h3><ol>
+<li><p>sub会向下越界</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722083756095.png" srcset="/img/loading.gif" lazyload alt="image-20230722083756095"></p>
+</li>
+<li><p>同样的如果是操作低位或高位，只会在低位或者高位进行sub计算</p>
+</li>
+</ol>
+<h3 id="mul"><a href="#mul" class="headerlink" title="mul"></a><code>mul</code></h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722085536634.png" srcset="/img/loading.gif" lazyload alt="image-20230722085536634"></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722085647601.png" srcset="/img/loading.gif" lazyload alt="image-20230722085647601"></p>
+<ol>
+<li><p>首先应该知道</p>
+<p>乘数一个是放<code>ax</code>或者<code>al</code>当中的，另一个是自己指定的</p>
+</li>
+<li><p>存放的时候默认放在<code>ax</code>，如果是16位的乘法，高位就放在<code>dx</code></p>
+</li>
+</ol>
+<p><code>div</code></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722090833052.png" srcset="/img/loading.gif" lazyload alt="image-20230722090833052"></p>
+<ol>
+<li><p>除数相当于是我们指定的</p>
+<p>被除数要分情况，被除数是16位放在<code>ax</code>当中；是<code>32</code>就放在<code>dx</code>和<code>ax</code>当中，高位放在<code>dx</code>地位放在<code>ax</code></p>
+</li>
+<li><p>结果的从存放。</p>
+<p>高位放余数，低位放置商</p>
+</li>
+</ol>
+<p><code>and</code></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722091746751.png" srcset="/img/loading.gif" lazyload alt="image-20230722091746751"></p>
+<ol>
+<li><p>有<code>0</code>就是<code>0</code></p>
+</li>
+<li><p>下面演示操作方法</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722092236392.png" srcset="/img/loading.gif" lazyload alt="image-20230722092236392"></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722092457283.png" srcset="/img/loading.gif" lazyload alt="image-20230722092457283"></p>
+</li>
+</ol>
+<p><code>or</code></p>
+<ol>
+<li>有<code>1</code>就是<code>1</code></li>
+<li>但是在<code>debug</code>界面我们不能使用二进制，所以先要转换成16进制才能计算二进制</li>
+</ol>
+<h3 id="左右移的指令"><a href="#左右移的指令" class="headerlink" title="左右移的指令"></a><code>左右移的指令</code></h3><ol>
+<li>移动都是移动的是二进制</li>
+</ol>
+<h4 id="shl左移"><a href="#shl左移" class="headerlink" title="shl左移"></a><code>shl</code>左移</h4><ol>
+<li><p>和C语言的一致，向左移动，然后右边补<code>0</code></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722093511339.png" srcset="/img/loading.gif" lazyload alt="image-20230722093511339"></p>
+</li>
+</ol>
+<h4 id="rol循环左移"><a href="#rol循环左移" class="headerlink" title="rol循环左移"></a><code>rol</code>循环左移</h4><ol>
+<li>将高位舍去的位数补充到低位</li>
+</ol>
+<h4 id="shr右移"><a href="#shr右移" class="headerlink" title="shr右移"></a><code>shr</code>右移</h4><h4 id="ror循环右移"><a href="#ror循环右移" class="headerlink" title="ror循环右移"></a><code>ror</code>循环右移</h4><h3 id="inc自增操作"><a href="#inc自增操作" class="headerlink" title="inc自增操作"></a><code>inc</code>自增操作</h3><h3 id="dec自减操作"><a href="#dec自减操作" class="headerlink" title="dec自减操作"></a><code>dec</code>自减操作</h3><h3 id="nop空的代码段"><a href="#nop空的代码段" class="headerlink" title="nop空的代码段"></a><code>nop</code>空的代码段</h3><ol>
+<li>大小为一个字节</li>
+<li>可以用存放代码段</li>
+</ol>
+<h3 id="xchg交换"><a href="#xchg交换" class="headerlink" title="xchg交换"></a><code>xchg</code>交换</h3><ol>
+<li>可以用于交换两个数，寄存器或者地址</li>
+</ol>
+<h3 id="neg取反"><a href="#neg取反" class="headerlink" title="neg取反"></a><code>neg</code>取反</h3><ol>
+<li>用于将二进制取反操作</li>
+</ol>
+<h3 id="abs带进位的加法"><a href="#abs带进位的加法" class="headerlink" title="abs带进位的加法"></a><code>abs</code>带进位的加法</h3><ol>
+<li>利用的是cf寄存器</li>
+</ol>
+<h3 id="abb带借位的一个减法"><a href="#abb带借位的一个减法" class="headerlink" title="abb带借位的一个减法"></a><code>abb</code>带借位的一个减法</h3><ol>
+<li>使用的也是cf寄存器</li>
+</ol>
+<h3 id="cmp是比较，也是减法"><a href="#cmp是比较，也是减法" class="headerlink" title="cmp是比较，也是减法"></a><code>cmp</code>是比较，也是减法</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722170544073.png" srcset="/img/loading.gif" lazyload alt="image-20230722170544073"></p>
+<p>通过相减看是否是相等的</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722171803628.png" srcset="/img/loading.gif" lazyload alt="image-20230722171803628"></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722172100724.png" srcset="/img/loading.gif" lazyload alt="image-20230722172100724"></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722172133543.png" srcset="/img/loading.gif" lazyload alt="image-20230722172133543"></p>
+<h3 id="call和ret"><a href="#call和ret" class="headerlink" title="call和ret"></a><code>call</code>和<code>ret</code></h3><ol>
+<li><p>通过修改cx的值进行跳转</p>
+</li>
+<li><p><code>call</code>相当于函数的调用</p>
+</li>
+<li><p><code>ret</code>用于函数的结束</p>
+</li>
+<li><p>但是整体的结束是INT 21H</p>
+</li>
+<li><p>CALL 和  RET的都是修改IP的值，也就是说是近转移</p>
+</li>
+<li><p>CALLF和RETF就是说是远转移，如果通过修改IP不能达到要求，则会修改 CX</p>
+</li>
+<li><p>本质都是压栈和弹栈的过程</p>
+<p>CALL是压栈，将代码的地址压栈</p>
+<p>RET是出栈，将代码的地址</p>
+</li>
+</ol>
+<h3 id="offset读取一个函数的地址，然后赋值"><a href="#offset读取一个函数的地址，然后赋值" class="headerlink" title="offset读取一个函数的地址，然后赋值"></a>offset读取一个函数的地址，然后赋值</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230723123016835.png" srcset="/img/loading.gif" lazyload alt="image-20230723123016835"></p>
+<ol>
+<li>获取一个函数的地址，然后进行操作</li>
+</ol>
+<h3 id="lea"><a href="#lea" class="headerlink" title="lea"></a><code>lea</code></h3><ol>
+<li>计算有效地址：<code>lea</code> 可以计算一个内存操作数的有效地址，并将结果（即内存地址）加载到目标寄存器中。例如，<code>lea eax, [ebx+ecx*4]</code> 将计算 <code>[ebx+ecx*4]</code> 的有效地址，并将结果存储到寄存器 <code>eax</code> 中。</li>
+<li>进行简单的加法运算：<code>lea</code> 可以执行简单的加法运算，并将结果加载到目标寄存器中。例如，<code>lea eax, [ebx+123]</code> 将 <code>ebx+123</code> 的结果计算出来，并将结果存储到寄存器 <code>eax</code> 中。</li>
+</ol>
+<h2 id="终断"><a href="#终断" class="headerlink" title="终断"></a>终断</h2><ol>
+<li>程序停止就是中断</li>
+</ol>
+<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><h3 id="段地址和偏移地址"><a href="#段地址和偏移地址" class="headerlink" title="段地址和偏移地址"></a>段地址和偏移地址</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722100913434.png" srcset="/img/loading.gif" lazyload alt="image-20230722100913434"></p>
+<ol>
+<li><p>一个物理地址可以有很多个段地址加偏移地址的组合 </p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722101449853.png" srcset="/img/loading.gif" lazyload alt="image-20230722101449853"></p>
+</li>
+<li><p>下面演示使用DS（数据段地址）+偏移地址给ax赋值</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722102553160.png" srcset="/img/loading.gif" lazyload alt="image-20230722102553160"></p>
+<p>注意标红的地方就是使用的偏移地址</p>
+</li>
+<li><p>不通过<code>r</code>修改DS寄存器</p>
+<p>由于DOS的限制，不能直接使用MOV修改DS寄存器</p>
+<p>但是可以使用下面的例子对DS赋值</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722103018201.png" srcset="/img/loading.gif" lazyload alt="image-20230722103018201"></p>
+<p>我们先将值赋给AX然后在对其赋值</p>
+</li>
+</ol>
+<h3 id="CS和IP-代码段寄存器"><a href="#CS和IP-代码段寄存器" class="headerlink" title="CS和IP   代码段寄存器"></a>CS和IP   代码段寄存器</h3><p>代码运行地址</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722104944573.png" srcset="/img/loading.gif" lazyload alt="image-20230722104944573"></p>
+<ol>
+<li><p>物理的内存等于</p>
+<p>​	CS*16+IP&#x3D;内存</p>
+</li>
+<li><p>下面使用实例</p>
+<ul>
+<li><p>先将规定地址，在添加汇编代码</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722105649871.png" srcset="/img/loading.gif" lazyload alt="image-20230722105649871"></p>
+</li>
+<li><p>使用U将机器码翻译成汇编代码</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722105723077.png" srcset="/img/loading.gif" lazyload alt="image-20230722105723077"></p>
+</li>
+</ul>
+</li>
+<li><p>注意</p>
+<p><strong>如果要指定一段地址运行，需要修改CS和IP的数值</strong></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722114949873.png" srcset="/img/loading.gif" lazyload alt="image-20230722114949873"></p>
+</li>
+</ol>
+<h3 id="jump指令"><a href="#jump指令" class="headerlink" title="jump指令"></a><code>jump</code>指令</h3><ol>
+<li><p>用于不同内存的跳转</p>
+<p>下面的实现在1E2B:0100运行mov ax,8989</p>
+<p>然后使用jump与运行jump1000:0000</p>
+<p>运行move bx,1212</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722125003980.png" srcset="/img/loading.gif" lazyload alt="image-20230722125003980"></p>
+<p>注意在编写的时候我们需要手动跳转内存进行写代码</p>
+</li>
+</ol>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><ol>
+<li><p>先进后出，后进先出</p>
+</li>
+<li><p>压栈</p>
+<blockquote>
+<p>将ax,bx,cx压入栈</p>
+</blockquote>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722130358149.png" srcset="/img/loading.gif" lazyload alt="image-20230722130358149"></p>
+</li>
+<li><p>出栈</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722130541365.png" srcset="/img/loading.gif" lazyload alt="image-20230722130541365"></p>
+</li>
+<li><p>寻址的实现</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722131010719.png" srcset="/img/loading.gif" lazyload alt="image-20230722131010719"></p>
+<p>我们通过记录段地址用SS，使用SP记录偏移的地址</p>
+</li>
+<li><p>栈的越界</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722131701530.png" srcset="/img/loading.gif" lazyload alt="image-20230722131701530"></p>
+<p>也就是说，计算机不会检测，需要人为的注意栈区的大小</p>
+</li>
+</ol>
+<h3 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h3><ol>
+<li>使用偏移地址的方式<ul>
+<li>首先使用CS进行段地址的赋值</li>
+<li>然后使用偏移地址的方式查找</li>
+<li>注意BX寄存器也是可以用来当作偏移地址</li>
+</ul>
+</li>
+</ol>
+<h3 id="SI和DI"><a href="#SI和DI" class="headerlink" title="SI和DI"></a><code>SI</code>和<code>DI</code></h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722155845770.png" srcset="/img/loading.gif" lazyload alt="image-20230722155845770"></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722160118625.png" srcset="/img/loading.gif" lazyload alt="image-20230722160118625"></p>
+<h3 id="BX-寄存器BX的替代品"><a href="#BX-寄存器BX的替代品" class="headerlink" title="BX 寄存器BX的替代品"></a>BX 寄存器BX的替代品</h3><ol>
+<li>代表了以SS:BP</li>
+<li>可以用于寻址</li>
+<li>同时还可以使用<code>.</code>表示偏移地址</li>
+</ol>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722161253506.png" srcset="/img/loading.gif" lazyload alt="image-20230722161253506"></p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722161405353.png" srcset="/img/loading.gif" lazyload alt="image-20230722161405353"></p>
+<h3 id="ES附加段寄存器"><a href="#ES附加段寄存器" class="headerlink" title="ES附加段寄存器"></a><code>ES</code>附加段寄存器</h3><p>相当于备胎，和其他的差不多</p>
+<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722161635034.png" srcset="/img/loading.gif" lazyload alt="image-20230722161635034"></p>
+<h3 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h3><h2 id="比较器，相当于c-的if"><a href="#比较器，相当于c-的if" class="headerlink" title="比较器，相当于c++的if"></a>比较器，相当于c++的if</h2><h2 id="段"><a href="#段" class="headerlink" title="段"></a>段</h2><h3 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a>代码段</h3><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230722172758881.png" srcset="/img/loading.gif" lazyload alt="image-20230722172758881" style="zoom:150%;" />
+
+<ol>
+<li><p>注意我们需要先将cs指定，也就是code segment</p>
+<p>还需要将codesg ends 结尾</p>
+</li>
+</ol>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><ol>
+<li>使用loop进行循环</li>
+<li>根据CX的值是否为0，进行判断是否是可行的</li>
+</ol>
+
                 
               </div>
             
