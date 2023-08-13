@@ -226,6 +226,286 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/07/19/%E6%B1%87%E7%BC%96/8086%E9%9A%8F%E8%AE%B0/" target="_self">
+          8086随记
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/19/%E6%B1%87%E7%BC%96/8086%E9%9A%8F%E8%AE%B0/" target="_self">
+        <div>
+          段地址和偏移地址  段地址是一个16位的值，用于表示内存中的段（Segment）。每个段都有一个唯一的段地址，用于标识该段在内存中的位置。段地址乘以16后，得到段在内存中的起始地址。 偏移地址是一个16位的值，用于表示相对于段起始地址的偏移量。偏移地址指定了从段起始地址开始的具体位置。   每个段地址都会相差16个字节  汇编代码里面是不区分大小写
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-19 18:30" pubdate>
+              2023-07-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B1%87%E7%BC%96/">#汇编</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/16/%E6%B1%87%E7%BC%96/%E6%B1%87%E7%BC%96%E6%89%AB%E7%9B%B2/" target="_self">
+          汇编扫盲
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/16/%E6%B1%87%E7%BC%96/%E6%B1%87%E7%BC%96%E6%89%AB%E7%9B%B2/" target="_self">
+        <div>
+          [TOC] 汇编扫盲lea 用于取指针的地址  invoke 用于调用函数，并且提供简单的方式传参数  offset 去变量的地址 1invoke MessageBox, 0, offset message, offset title, MB_OK  MASM-&gt;addr ASSUME ASSUME指令的作用是将一个段寄存器与一个段名进行关联。它告诉汇编器，当遇到使用该段寄存器的指令时，应该
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-16 10:28" pubdate>
+              2023-07-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B1%87%E7%BC%96/">#汇编</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/15/%E6%B1%87%E7%BC%96/8086%E6%B1%87%E7%BC%96/" target="_self">
+          8086汇编
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/15/%E6%B1%87%E7%BC%96/8086%E6%B1%87%E7%BC%96/" target="_self">
+        <div>
+          8086入门学习 8086汇编代码使用debug  在终端中输入debug进入到调式界面  查看寄存器输入R  r+寄存器变量名直接修改寄存器的值   查看内存输入D    也可以添加地址，从1000段地址偏移0开始输出      改变内存的内容E  第一种方法   第二种方法     使用A添加汇编代码  T执行插入的指令  U翻译机器码   部分寄存器 指令的学习mov  注意逗号后面的控制
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-15 14:39" pubdate>
+              2023-07-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B1%87%E7%BC%96/">#汇编</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/15/%E6%B1%87%E7%BC%96/win32%E6%B1%87%E7%BC%96/" target="_self">
+          win32汇编
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/15/%E6%B1%87%E7%BC%96/win32%E6%B1%87%E7%BC%96/" target="_self">
+        <div>
+          [TOC] win32汇编模式定义 定义了程序使用的指令集、互作模式和格式  win32环境中.386是必不可少的    后面带p则是伪指令  内存模式  但是主要使用的是flat  因win32程序只有一种内存模式，flat模式，没有64kb的限制   语言模式 除了在.model语句中指定内存模式意以外，还应该指定语言模式   stdcall的参数压栈方式是：从右往左   option语句
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-15 09:29" pubdate>
+              2023-07-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B1%87%E7%BC%96/">#汇编</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/13/python/py%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" target="_self">
+          py速成学习
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/13/python/py%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" target="_self">
+        <div>
+          [TOC] pythonprint 使用print  hello world 1print(&quot;hello world&quot;)  值得注意的是使用py的打印函数是printf并没有f py是一门脚本语言所以我们写一句话也是可以运行出结果的  字符串怕拼接 1print(&quot;hello&quot;+&quot; world&quot;)  换行和打印多行 1234print(&
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-13 21:48" pubdate>
+              2023-07-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python/">#python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/06/29/QT/qt%E9%9A%8F%E8%AE%B0/" target="_self">
+          qt随记
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/29/QT/qt%E9%9A%8F%E8%AE%B0/" target="_self">
+        <div>
+          QT的输出是 1qDebug()&lt;&lt;&quot;i&#x27;m august&quot;;
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-29 17:27" pubdate>
+              2023-06-29
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/QT/">#QT</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/06/26/QT/QT/" target="_self">
+          QT
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/26/QT/QT/" target="_self">
+        <div>
+          [TOC] QT认识QT  添加窗口  在项目名的位置添加新的文件  在mainwindow.cpp里面的构造函数在新建一个自己的窗口类名  通过new指定父对象经行选择是内嵌的窗口还是在外的  调用show方法才能显示窗口 12345678910111213141516171819MainWindow::MainWindow(QWidget *parent) :    QMainWindow(p
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-26 23:57" pubdate>
+              2023-06-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/QT/">#QT</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/06/26/c++/cpp%E6%96%B0%E7%89%B9%E6%80%A7/" target="_self">
           c++新特性
         </a>
@@ -340,291 +620,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/20/linux/makefile/" target="_self">
-          makefile
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/20/linux/makefile/" target="_self">
-        <div>
-          [TOC] makefilemake是什么 make 是一个命令工具，是一个解释 makefile 中指令的命令工具 创建12345678910111213141516171819202122232425# 举例: 有源文件 a.c b.c c.c head.h, 需要生成可执行程序 app################# 例1 #################app:a.c b.c c.c
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-20 14:06" pubdate>
-              2023-06-20
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">#Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/18/linux/vim/" target="_self">
-          vim
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/18/linux/vim/" target="_self">
-        <div>
-          [TOC] vim的使用光表移动 移动到行尾 $  移动到行首 0  移动到整个文件的最开始 gg  移动到真个文件的最后 G  跳转行 nG   删除 删除单词 dw  但是注意必须要将光标置于最前方  删除光标前的字符串 d0  删除行 D或者dd  删除多行 ddnd或者ndd   撤销与反撤销 撤销 u  反撤销 ctrl+r   复制与粘贴 粘贴到行的下边 p 小写的p  粘贴在行的上面
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-18 23:32" pubdate>
-              2023-06-18
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">#Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/16/Wireshark/" target="_self">
-          Wireshark
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/16/Wireshark/" target="_self">
-        <div>
-          初始wireshark
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-16 13:56" pubdate>
-              2023-06-16
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Wireshark/">#Wireshark</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/15/linux/gcc/" target="_self">
-          gcc
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/15/linux/gcc/" target="_self">
-        <div>
-          [TOC] gcc的工作流程  预编译阶段会去除注释  编译会生成一个编译文件  汇编会得到一个二进制文件  部分命令   执行多文件时，一定要编译多个.c文件   制作动态库和静态库静态库的创建 静态库的命名格式(linux) 前缀是lib 后缀是.a 例如libxxx.a  静态库的命名格式(windows) 前缀是lib 后缀也是lib 例如libxxx.lib  静态库的链接   ar参数
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-15 11:55" pubdate>
-              2023-06-15
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">#Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/14/go/go%E5%AD%A6%E4%B9%A0%E4%BB%A3%E7%A0%81/" target="_self">
-          go学习代码
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/14/go/go%E5%AD%A6%E4%B9%A0%E4%BB%A3%E7%A0%81/" target="_self">
-        <div>
-          [TOC] 声明变量1234567891011121314151617181920212223242526package mainimport &quot;fmt&quot;func main() &#123;    //1.    var a int = 520    fmt.Println(a)    //2.    b := 1314    fmt.Println(b)    //3
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-14 21:53" pubdate>
-              2023-06-14
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/go/">#go</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/12/linux/linux%E5%A4%8D%E4%B9%A0%E6%96%87%E6%A1%A3/" target="_self">
-          linux复习文档
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/12/linux/linux%E5%A4%8D%E4%B9%A0%E6%96%87%E6%A1%A3/" target="_self">
-        <div>
-          [TOC] 基本的知识 命令执行成功过后返回一个0  比较运算符 1234567-eq       //等于-ne       //不等于-gt        //大于 （greater）-lt         //小于 （less）-ge       //大于等于-le        //小于等于
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-12 08:49" pubdate>
-              2023-06-12
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">#Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" target="_self">
-          计算机系统简介
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" target="_self">
-        <div>
-          [TOC] 计算机系统简介
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-09 13:39" pubdate>
-              2023-06-09
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
