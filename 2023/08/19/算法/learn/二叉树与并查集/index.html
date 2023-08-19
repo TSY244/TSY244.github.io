@@ -16,24 +16,24 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="linux随记 sudo  在Linux系统中，sudo是一种特殊权限（superuser do）命令，允许普通用户以超级管理员的身份执行特定任务或命令。管理员可以使用sudo命令来授权其他用户执行某些特定操作，而无需共享root账户密码  Ctrl+l 清屏   -R 表示递归的参数，用于文件夹相关的参数  su - root 切换到root用户  exit 用于退出root  |管道符 把管道">
+    <meta name="description" content="二叉树与并查集树的基本概念可见于数据结构和算法的笔记，更加详细  空树 树的特性 任意一个树的两个节点，有且只有一条边 一个节点数为n的树，边的数量是n-1 任意一个数加一条边就会变成图，也就是有回路    二叉树 二叉树是有序树  斜树 全是右子树或者左子树  满二叉树 叶子全部出现最底层  完成二叉树 底层可以不完全存在，但是需要优先左子树  第i 层具有2^1-1^个节点  深度为k的树，最">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux随记">
-<meta property="og:url" content="http://example.com/2023/04/19/linux/linux%E9%9A%8F%E8%AE%B0/index.html">
+<meta property="og:title" content="二叉树与并查集">
+<meta property="og:url" content="http://example.com/2023/08/19/%E7%AE%97%E6%B3%95/learn/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%B9%B6%E6%9F%A5%E9%9B%86/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="linux随记 sudo  在Linux系统中，sudo是一种特殊权限（superuser do）命令，允许普通用户以超级管理员的身份执行特定任务或命令。管理员可以使用sudo命令来授权其他用户执行某些特定操作，而无需共享root账户密码  Ctrl+l 清屏   -R 表示递归的参数，用于文件夹相关的参数  su - root 切换到root用户  exit 用于退出root  |管道符 把管道">
+<meta property="og:description" content="二叉树与并查集树的基本概念可见于数据结构和算法的笔记，更加详细  空树 树的特性 任意一个树的两个节点，有且只有一条边 一个节点数为n的树，边的数量是n-1 任意一个数加一条边就会变成图，也就是有回路    二叉树 二叉树是有序树  斜树 全是右子树或者左子树  满二叉树 叶子全部出现最底层  完成二叉树 底层可以不完全存在，但是需要优先左子树  第i 层具有2^1-1^个节点  深度为k的树，最">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-19T07:18:34.000Z">
-<meta property="article:modified_time" content="2023-08-15T14:29:44.328Z">
+<meta property="article:published_time" content="2023-08-19T00:17:16.000Z">
+<meta property="article:modified_time" content="2023-08-19T00:59:10.367Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>linux随记 - chg</title>
+  <title>二叉树与并查集 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="linux随记"></span>
+            <span id="subtitle" data-typed-text="二叉树与并查集"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-19 15:18" pubdate>
-          April 19, 2023 pm
+        <time datetime="2023-08-19 08:17" pubdate>
+          August 19, 2023 am
         </time>
       </span>
     
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          321 words
+          286 words
         
       </span>
     
@@ -276,45 +276,50 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">linux随记</h1>
+            <h1 style="display: none">二叉树与并查集</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="linux随记"><a href="#linux随记" class="headerlink" title="linux随记"></a>linux随记</h1><ol>
-<li><p>sudo </p>
-<p>在Linux系统中，sudo是一种特殊权限（superuser do）命令，允许普通用户以超级管理员的身份执行特定任务或命令。管理员可以使用sudo命令来授权其他用户执行某些特定操作，而无需共享root账户密码</p>
+                <h1 id="二叉树与并查集"><a href="#二叉树与并查集" class="headerlink" title="二叉树与并查集"></a>二叉树与并查集</h1><h2 id="树的基本概念"><a href="#树的基本概念" class="headerlink" title="树的基本概念"></a>树的基本概念</h2><p>可见于数据结构和算法的笔记，更加详细</p>
+<ol>
+<li>空树</li>
+<li>树的特性<ul>
+<li>任意一个树的两个节点，有且只有一条边</li>
+<li>一个节点数为n的树，边的数量是n-1</li>
+<li>任意一个数加一条边就会变成图，也就是有回路</li>
+</ul>
 </li>
-<li><p><code>Ctrl+l</code></p>
-<p>清屏 </p>
-</li>
-<li><p><code>-R</code></p>
-<p>表示递归的参数，用于文件夹相关的参数</p>
-</li>
-<li><p><code>su - root</code></p>
-<p>切换到<code>root</code>用户</p>
-</li>
-<li><p><code>exit</code></p>
-<p>用于退出<code>root</code></p>
-</li>
-<li><p><code>|</code>管道符</p>
-<p>把管道符左边的结果，作为右边命令的输入</p>
-</li>
-<li><p><code>Ctrl+x</code></p>
-<p>也可以用于退出<code>root</code></p>
-</li>
-<li><p><code>shell</code>编程里面</p>
-<p><code>#</code>后面都是注释</p>
-</li>
-<li><p><code>./</code>执行文件</p>
-</li>
-<li><p>使用find查找最近几天有过改动的文件</p>
-<blockquote>
-<p>find &#x2F;home&#x2F;book -mtime -2 &#x2F;&#x2F;查找&#x2F;home目录下两天内有变动的文件。</p>
-</blockquote>
-</li>
-<li></li>
 </ol>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ol>
+<li><p>二叉树是有序树</p>
+</li>
+<li><p>斜树</p>
+<p>全是右子树或者左子树</p>
+</li>
+<li><p>满二叉树</p>
+<p>叶子全部出现最底层</p>
+</li>
+<li><p>完成二叉树</p>
+<p>底层可以不完全存在，但是需要优先左子树</p>
+</li>
+<li><p>第i 层具有2^1-1^个节点</p>
+</li>
+<li><p>深度为k的树，最多有2^k^-1个节点，</p>
+</li>
+<li><p>度为2的节点数为n，那么叶子节点而数量是2*n</p>
+</li>
+<li><p>在完全二叉树中，如果一共有n个节点，那么右[log2 n]+1的层，[log2 n]是向下取整</p>
+</li>
+<li><p>遍历</p>
+<ul>
+<li>前序：根，左，右</li>
+<li>中序：左，根，右</li>
+<li>后序：左，右，根</li>
+</ul>
+</li>
+</ol>
+<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h2><p>1. </p>
 
                 
               </div>
@@ -327,7 +332,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Linux/">#Linux</a>
+        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
       
     </div>
   
@@ -339,8 +344,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>linux随记</div>
-      <div>http://example.com/2023/04/19/linux/linux随记/</div>
+      <div>二叉树与并查集</div>
+      <div>http://example.com/2023/08/19/算法/learn/二叉树与并查集/</div>
     </div>
     <div class="license-meta">
       
@@ -352,7 +357,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 19, 2023</div>
+          <div>August 19, 2023</div>
         </div>
       
       
@@ -384,9 +389,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/19/%E7%AE%97%E6%B3%95/newcoder/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" title="逆波兰表达式求值">
+                      <a href="/2023/08/19/docker%E7%9A%84%E4%BD%BF%E7%94%A8/" title="docker的使用">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">逆波兰表达式求值</span>
+                        <span class="hidden-mobile">docker的使用</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -394,8 +399,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/17/linux/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" title="常用指令">
-                        <span class="hidden-mobile">常用指令</span>
+                      <a href="/2023/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F/51MCN/" title="51MCN">
+                        <span class="hidden-mobile">51MCN</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
