@@ -16,24 +16,33 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="docker的使用Docker镜像操作 列出镜像  docker image ls -a   拉取镜像  docker image pull  镜像名称&#x2F;仓库的位置  docker官方提供的image文件存在Library组里面，所以拉取u这个仓库的镜像的时候可以不用管仓库名称  删除镜像  docker image rm 镜像名称或者镜像的id docker rmi 镜像的名称或者id">
+    <meta name="description" content="IP信息收集实验目的通过实验学习域名查询IP和IP反查域名，了解什么是CDN，通过判断是否存在CDN来查找CDN背后的真实IP，学习旁注和C段嗅探。 实验环境无特殊要求，能访问互联网即可。 实验步骤一任务描述：域名查询IP和IP反查域名。  域名查询ip:   可见，同一个域名，访问出了两个IP地址  IP-&gt;域名     实验步骤二任务描述：探测IP真实性：判断是否存在CDN—&gt;查找">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker的使用">
-<meta property="og:url" content="http://example.com/2023/08/19/docker%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="实验">
+<meta property="og:url" content="http://example.com/2023/08/20/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="docker的使用Docker镜像操作 列出镜像  docker image ls -a   拉取镜像  docker image pull  镜像名称&#x2F;仓库的位置  docker官方提供的image文件存在Library组里面，所以拉取u这个仓库的镜像的时候可以不用管仓库名称  删除镜像  docker image rm 镜像名称或者镜像的id docker rmi 镜像的名称或者id">
+<meta property="og:description" content="IP信息收集实验目的通过实验学习域名查询IP和IP反查域名，了解什么是CDN，通过判断是否存在CDN来查找CDN背后的真实IP，学习旁注和C段嗅探。 实验环境无特殊要求，能访问互联网即可。 实验步骤一任务描述：域名查询IP和IP反查域名。  域名查询ip:   可见，同一个域名，访问出了两个IP地址  IP-&gt;域名     实验步骤二任务描述：探测IP真实性：判断是否存在CDN—&gt;查找">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-08-19T04:55:22.000Z">
-<meta property="article:modified_time" content="2023-08-19T05:27:24.388Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230820235747511.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230821000127195.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230821000342505.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230821000404898.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230821011319261.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action">
+<meta property="article:published_time" content="2023-08-20T15:52:07.000Z">
+<meta property="article:modified_time" content="2023-08-21T01:10:20.599Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="docker">
+<meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230820235747511.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>docker的使用 - chg</title>
+  <title>实验 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +208,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="docker的使用"></span>
+            <span id="subtitle" data-typed-text="实验"></span>
           
         </div>
 
@@ -215,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-19 12:55" pubdate>
-          August 19, 2023 pm
+        <time datetime="2023-08-20 23:52" pubdate>
+          August 20, 2023 pm
         </time>
       </span>
     
@@ -227,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          1.4k words
         
       </span>
     
@@ -238,7 +247,7 @@
         
         
         
-          9 mins
+          12 mins
         
       </span>
     
@@ -276,107 +285,97 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">docker的使用</h1>
+            <h1 style="display: none">实验</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="docker的使用"><a href="#docker的使用" class="headerlink" title="docker的使用"></a>docker的使用</h1><h2 id="Docker镜像操作"><a href="#Docker镜像操作" class="headerlink" title="Docker镜像操作"></a>Docker镜像操作</h2><ol>
-<li><p>列出镜像</p>
-<blockquote>
-<p>docker image ls -a</p>
-</blockquote>
+                <h1 id="IP信息收集"><a href="#IP信息收集" class="headerlink" title="IP信息收集"></a>IP信息收集</h1><h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><p>通过实验学习域名查询IP和IP反查域名，了解什么是CDN，通过判断是否存在CDN来查找CDN背后的真实IP，学习旁注和C段嗅探。</p>
+<h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><p>无特殊要求，能访问互联网即可。</p>
+<h2 id="实验步骤一"><a href="#实验步骤一" class="headerlink" title="实验步骤一"></a>实验步骤一</h2><p><strong>任务描述：域名查询IP和IP反查域名。</strong></p>
+<ol>
+<li><p>域名查询ip:</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230820235747511.png" srcset="/img/loading.gif" lazyload alt="image-20230820235747511"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230821000127195.png" srcset="/img/loading.gif" lazyload alt="image-20230821000127195"></p>
+<p>可见，同一个域名，访问出了两个IP地址</p>
 </li>
-<li><p>拉取镜像</p>
-<blockquote>
-<p>docker image pull  镜像名称&#x2F;仓库的位置</p>
-</blockquote>
-<p>docker官方提供的image文件存在Library组里面，所以拉取u这个仓库的镜像的时候可以不用管仓库名称</p>
-</li>
-<li><p>删除镜像</p>
-<blockquote>
-<p>docker image rm 镜像名称或者镜像的id</p>
-<p>docker rmi 镜像的名称或者id</p>
-</blockquote>
-<p>注意当有容器在使用镜像的时候应该先删除容器，使用包括，正在运行的容器或者stop的容器</p>
+<li><p>IP-&gt;域名</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230821000342505.png" srcset="/img/loading.gif" lazyload alt="image-20230821000342505"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230821000404898.png" srcset="/img/loading.gif" lazyload alt="image-20230821000404898"></p>
 </li>
 </ol>
-<h2 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h2><ol>
-<li><p>创建容器</p>
-<blockquote>
-<p>docker run [option]  镜像名   向容器传入的命令（一般出入&#x2F;bin&#x2F;bash）</p>
-</blockquote>
-<blockquote>
-<p>-i 表示以“交互模式”运行容器<br>-t 表示容器启动后会进入其命令行。加入这两个参数后，容器创建就能登录进去。即 分配一个伪终端。<br>–name 为创建的容器命名<br>-v 表示目录映射关系(前者是宿主机目录，后者是映射到宿主机上的目录，即 宿主机目录:容器中目录)，可<br>以使 用多个-v 做多个目录或文件映射。注意:最好做目录映射，在宿主机上做修改，然后 共享到容器上。<br>-d 在run后面加上-d参数,则会创建一个守护式容器在后台运行(这样创建容器后不 会自动登录容器，如果只加-i -t 两个参数，创建后就会自动进去容器)。<br>-p 表示端口映射，前者是宿主机端口，后者是容器内的映射端口。可以使用多个-p 做多个端口映射<br>-e 为容器设置环境变量<br>–network&#x3D;host 表示将主机的网络环境映射到容器中，容器的网络与主机相同</p>
-</blockquote>
+<h2 id="实验步骤二"><a href="#实验步骤二" class="headerlink" title="实验步骤二"></a>实验步骤二</h2><p><strong>任务描述：探测IP真实性：判断是否存在CDN—&gt;查找CDN背后的真实IP。</strong></p>
+<ol>
+<li><p>检测的方法</p>
 <ul>
-<li><p>创建一个交互式的容器</p>
-<p>我们需要在创建的时候附加上it</p>
-</li>
-<li><p>创建一个守护式容器</p>
-<p>守护式的容器，在容器内部exit但是容器不会stop，如果需要一个长时间运行的容器可以使用这个</p>
-<blockquote>
-<p>docker run -dit –name&#x3D;test centos</p>
-</blockquote>
-<p>创建一个名为test 的容器，使用的镜像是centos，这样运行可以帮助pull镜像，但是还是手动pull好一点</p>
+<li><p>多地ping</p>
+<p>判断是否存在CDN可以使用ping方法，在不同的地区ping同一个域名，查看对应IP地址是否唯一，如果不唯一多半是使用了CDN。</p>
+<p><a target="_blank" rel="noopener" href="https://ping.chinaz.com/">https://ping.chinaz.com/</a></p>
+<p>多地ping包括了外国ping</p>
 </li>
 </ul>
 </li>
-<li><p>进入运行的容器</p>
+<li><p>查询子域名的IP</p>
 </li>
-</ol>
-<blockquote>
-<p>docker exet -it 容器的名称 传入的命令</p>
-</blockquote>
-<ol start="3">
-<li><p>查看容器</p>
-<blockquote>
-<p>docker ps (-a)</p>
-</blockquote>
-</li>
-<li><p>停止与启动容器</p>
+<li><p>查询历史DNS记录中可能存在的使用CDN前的记录</p>
 <ul>
-<li><p>停止</p>
+<li><p>解析目标域名的AAAA记录</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/blechschmidt/massdns">https://github.com/blechschmidt/massdns</a></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>然后输出hetianlab.txt<img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>包括了解析器IP地址，以便在检测到某些解析器产生不良结果时便于过滤输出。</p>
+<p>dnsenum：查询网站的主机地址信息、域名服务器、mx record（函件交换记录），在域名服务器上执行axfr请求、通过谷歌脚本得到扩展域名信息、提取子域名并查询、计算C类地址并执行whois查询、把地址段写入文件。</p>
 <blockquote>
-<p>docker stop 容器名称或者id</p>
+<p>dnsenum hetianlab.com -v </p>
 </blockquote>
-</li>
-<li><p>关闭</p>
-<blockquote>
-<p>docker  kill 容器名称或者id</p>
-</blockquote>
-</li>
-<li><p>启动</p>
-<blockquote>
-<p>docker start 容器名称或者id</p>
-</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230821011319261.png" srcset="/img/loading.gif" lazyload alt="image-20230821011319261"></p>
 </li>
 </ul>
 </li>
-<li><p>删除容器</p>
-<blockquote>
-<p>docker rm 容器的名称和id</p>
-</blockquote>
+</ol>
+<h2 id="实验步骤三"><a href="#实验步骤三" class="headerlink" title="实验步骤三"></a>实验步骤三</h2><p><strong>任务描述：旁注和C段嗅探</strong></p>
+<ol>
+<li><p>使用bannerscan进行C段BANNER与路径的扫描</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/x0day/bannerscan">https://github.com/x0day/bannerscan</a></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/IP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action" srcset="/img/loading.gif" lazyload alt="img"></p>
 </li>
 </ol>
-<h2 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h2><ol>
-<li><p>保存容器为镜像</p>
-<blockquote>
-<p>docker commit mycentos3 mycentos3</p>
-</blockquote>
+<h1 id="端口信息收集"><a href="#端口信息收集" class="headerlink" title="端口信息收集"></a>端口信息收集</h1><h2 id="实验目的-1"><a href="#实验目的-1" class="headerlink" title="实验目的"></a>实验目的</h2><p>通过实验学习端口扫描的常用方法，利用相关工具检测服务器或指定IP段的端口开放情况。</p>
+<h2 id="实验环境-1"><a href="#实验环境-1" class="headerlink" title="实验环境"></a>实验环境</h2><p>无特殊要求，能访问互联网即可。</p>
+<h2 id="实验步骤一-1"><a href="#实验步骤一-1" class="headerlink" title="实验步骤一"></a>实验步骤一</h2><p><strong>任务描述：nmap工具简单介绍。</strong></p>
+<ol>
+<li><p>NetworkMapper（nmap），是一款开放源代码的网络探测和安全审核工具。手册地址：<a target="_blank" rel="noopener" href="https://nmap.org/man/zh/">https://nmap.org/man/zh/</a></p>
+<p>“所感兴趣的端口表格”是其中的关键。那张表列出端口号，协议，服务名称和状态。状态可能是 <code>open</code>(开放的)，<code>filtered</code>(被过滤的)， <code>closed</code>(关闭的)，或者<code>unfiltered</code>(未被过滤的)。 Open(开放的)意味着目标机器上的应用程序正在该端口监听连接&#x2F;报文。 <code>filtered</code>(被过滤的) 意味着防火墙，过滤器或者其它网络障碍阻止了该端口被访问，Nmap无法得知 它是 <code>open</code>(开放的) 还是 <code>closed</code>(关闭的)。 <code>closed</code>(关闭的) 端口没有应用程序在它上面监听，但是他们随时可能开放。</p>
 </li>
-</ol>
-<h2 id="容器备份和迁移"><a href="#容器备份和迁移" class="headerlink" title="容器备份和迁移"></a>容器备份和迁移</h2><blockquote>
-<p> # docker save -o 保存的文件名 镜像名</p>
-<p>docker save -o .&#x2F;mycentos3.tar mycentos3</p>
-</blockquote>
+<li><p>nmap的功能</p>
+<p>1）主机发现：检测网络存活主机</p>
+<p>2）端口发现：检测主机开放端口</p>
+<p>3）服务发现：检测相应端口软件及版本</p>
+<p>4）检测操作系统、硬件地址</p>
+<p>5）检测脆弱性漏洞</p>
+</li>
+<li><p>端口状态</p>
+<p>1）open：端口开启、数据到达主机、有程序在端口上监控</p>
+<p>2）closed：端口关闭、数据到达主机、没有程序在端口上监控</p>
+<p>3）filtered：数据没有到达主机，返回结果为空，数据被防火墙或IDS（intrusiondetection system，入侵检测系统）过滤；</p>
+<p>4）unfiltered：数据没有到达主机，且不能识别端口的当前状态</p>
+</li>
+<li><p>nmap的基础用法</p>
 <ul>
-<li><p>将镜像文件加载到本地</p>
+<li><p>单一主机的扫描</p>
 <blockquote>
-<p>docker load -i .&#x2F;centos.tar</p>
+<p>nmap 192.168.1.2</p>
 </blockquote>
+</li>
+<li><p>子网扫描</p>
+<blockquote>
+<p>nmap 192.168.1.1&#x2F;24</p>
+</blockquote>
+<p>&#x3D;&#x3D;&#x2F;24&#x3D;&#x3D;的意义是使用24位的子网掩码，就是所有的IP地址</p>
 </li>
 </ul>
+</li>
+</ol>
 
                 
               </div>
@@ -389,7 +388,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/docker/">#docker</a>
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
       
     </div>
   
@@ -401,8 +400,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>docker的使用</div>
-      <div>http://example.com/2023/08/19/docker的使用/</div>
+      <div>实验</div>
+      <div>http://example.com/2023/08/20/渗透/实验/</div>
     </div>
     <div class="license-meta">
       
@@ -414,7 +413,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 19, 2023</div>
+          <div>August 20, 2023</div>
         </div>
       
       
@@ -446,9 +445,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/19/%E6%B8%97%E9%80%8F/%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80/" title="渗透基础">
+                      <a href="/2023/08/21/text/" title="text">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">渗透基础</span>
+                        <span class="hidden-mobile">text</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -456,8 +455,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/19/%E7%AE%97%E6%B3%95/learn/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%B9%B6%E6%9F%A5%E9%9B%86/" title="二叉树与并查集">
-                        <span class="hidden-mobile">二叉树与并查集</span>
+                      <a href="/2023/08/20/%E6%B8%97%E9%80%8F/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="信息收集">
+                        <span class="hidden-mobile">信息收集</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
