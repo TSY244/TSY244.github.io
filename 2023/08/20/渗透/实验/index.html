@@ -43,8 +43,12 @@
 <meta property="og:image" content="d:\hexo\source_posts\%E6%B8%97%E9%80%8F\%E5%AE%9E%E9%AA%8C.assets\image-20230821134706590.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E5%9F%9F%E5%90%8D%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20230821134951298.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E5%9F%9F%E5%90%8D%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action">
 <meta property="article:published_time" content="2023-08-20T15:52:07.000Z">
-<meta property="article:modified_time" content="2023-08-21T06:38:29.498Z">
+<meta property="article:modified_time" content="2023-08-22T10:07:10.261Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -248,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5k words
+          6.1k words
         
       </span>
     
@@ -259,7 +263,7 @@
         
         
         
-          42 mins
+          51 mins
         
       </span>
     
@@ -569,7 +573,54 @@
 </ol>
 <p>   敏感文件扫描，地址：<a target="_blank" rel="noopener" href="https://github.com/Mosuan/FileScan">https://github.com/Mosuan/FileScan</a></p>
 <p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E5%9F%9F%E5%90%8D%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.png" srcset="/img/loading.gif" lazyload alt="headImg"></p>
-<h2 id="实验步骤三-2"><a href="#实验步骤三-2" class="headerlink" title="实验步骤三"></a>实验步骤三</h2><p>实验步骤四</p>
+<h2 id="实验步骤三-2"><a href="#实验步骤三-2" class="headerlink" title="实验步骤三"></a>实验步骤三</h2><p><strong>任务描述：指纹信息收集。</strong></p>
+<ol>
+<li><p>第三方网站</p>
+<p><a target="_blank" rel="noopener" href="https://www.yunsee.cn/">https://www.yunsee.cn/</a> （云悉指纹）</p>
+<p><a target="_blank" rel="noopener" href="http://finger.tidesec.net/">http://finger.tidesec.net/</a> （潮汐指纹）</p>
+<p>推荐使用：潮汐指纹</p>
+</li>
+<li><p>服务器ssh配置ssh_scan</p>
+<p>SSH配置和策略扫描程序，地址：<a target="_blank" rel="noopener" href="https://github.com/mozilla/ssh_scan">https://github.com/mozilla/ssh_scan</a></p>
+</li>
+<li><p>w12scan</p>
+<p>一款网络资产发现引擎，通过Web接口下发任务，会自动将相关的资产聚合在一起方便分析使用。地址：<a target="_blank" rel="noopener" href="https://github.com/w-digital-scanner/w12scan">https://github.com/w-digital-scanner/w12scan</a></p>
+<p>使用参考：<a target="_blank" rel="noopener" href="https://www.bugku.com/thread-3810-1-1.html">https://www.bugku.com/thread-3810-1-1.html</a></p>
+</li>
+</ol>
+<h2 id="实验步骤四"><a href="#实验步骤四" class="headerlink" title="实验步骤四"></a>实验步骤四</h2><p><strong>任务描述：CMS信息查询。</strong></p>
+<ol>
+<li><p>第三方网站</p>
+<p><a target="_blank" rel="noopener" href="http://whatweb.bugscaner.com/look/">http://whatweb.bugscaner.com/look/</a> （在线CMS指纹识别）</p>
+<p>但是报错502也就是说对方的服务器出现了问题</p>
+</li>
+<li><p>CMS-Exploit-Framework</p>
+<p>一款CMS漏洞利用框架，通过它可以很容易地获取、开发CMS漏洞利用插件，并对目标应用进行测试。地址：<a target="_blank" rel="noopener" href="https://github.com/Q2h1Cg/CMS-Exploit-Framework">https://github.com/Q2h1Cg/CMS-Exploit-Framework</a></p>
+<p>CMS识别：</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action" srcset="/img/loading.gif" lazyload alt="img"></p>
+</li>
+</ol>
+<h2 id="实验步骤五"><a href="#实验步骤五" class="headerlink" title="实验步骤五"></a>实验步骤五</h2><p><strong>任务描述：WAF识别。</strong></p>
+<ol>
+<li><p>wafw00f</p>
+<p>一个Web应用防火墙（WAF）指纹识别工具，地址：<a target="_blank" rel="noopener" href="https://github.com/EnableSecurity/wafw00f">https://github.com/EnableSecurity/wafw00f</a></p>
+<p>工作原理：首先发送正常的HTTP请求并分析响应，如果不成功，将发送多个HTTP请求（可能是恶意的），并使用简单的逻辑来推断出它是哪个WAF。如果还是不成功，将分析先前返回的响应，并使用另一种简单的算法来猜测WAF或安全解决方案是否正在积极响应我们的攻击。</p>
+</li>
+</ol>
+<h2 id="实验步骤六"><a href="#实验步骤六" class="headerlink" title="实验步骤六"></a>实验步骤六</h2><p><strong>任务描述：其他信息收集。</strong></p>
+<ol>
+<li><p>sslscan</p>
+<p>sslscan是kali自带的工具，能够基于服务器的安全通信来分析服务器的配置文件。</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>这一部分告诉了我们服务器的一些配置信息，包括常见的配置错误：不支持TLS Fallback SCSV（信令套件，可以用来阻止客户端和服务器之间的意外降级，预防中间人攻击）、支持安全会话重新协商、禁止压缩、没有心脏滴血漏洞</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>这一部分告诉我们服务器支持的加密算法，以及服务器首选的加密算法，红色代表不安全的算法，黄色代表中等强度的算法。</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%AE%9E%E9%AA%8C/%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/headImg.action" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>这一部分告诉我们证书签名的一些信息，这里用的是2048位的RSA进行签名。</p>
+</li>
+<li><p>Kali中还有另一个工具sslyze也可以从SSL&#x2F;TLS获取加密信息的攻击，并且有时会提供额外信息给攻击者；SSL&#x2F;TLS信息也可以通过openssl命令获得。</p>
+</li>
+</ol>
 
                 
               </div>

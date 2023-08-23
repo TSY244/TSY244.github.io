@@ -16,18 +16,27 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="渗透基础">
+    <meta name="description" content="渗透基础web安全-基础环境搭建web安全-sql注入sql简介 什么是sql   SQL是一种数据库查询和程序设计语言。用于存取数据以及查询、更新和管理关系数据库系统。     常见的SQL数据库有MySQL，SQL server，Oracle、Sybase、db2….不同的数据库所使用的SQL语句也   不一样。  mysql的数据结构   数据库中包含表，表是由列组成，表的数据存储方式是按行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="渗透基础">
 <meta property="og:url" content="http://example.com/2023/08/19/%E6%B8%97%E9%80%8F/%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="渗透基础">
+<meta property="og:description" content="渗透基础web安全-基础环境搭建web安全-sql注入sql简介 什么是sql   SQL是一种数据库查询和程序设计语言。用于存取数据以及查询、更新和管理关系数据库系统。     常见的SQL数据库有MySQL，SQL server，Oracle、Sybase、db2….不同的数据库所使用的SQL语句也   不一样。  mysql的数据结构   数据库中包含表，表是由列组成，表的数据存储方式是按行">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152001672.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152402216.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152421200.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152602583.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823153825533.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165930344.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165956400.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823170055778.png">
 <meta property="article:published_time" content="2023-08-19T06:01:59.000Z">
-<meta property="article:modified_time" content="2023-08-19T06:02:50.944Z">
+<meta property="article:modified_time" content="2023-08-23T09:02:06.592Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152001672.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -227,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4 words
+          2k words
         
       </span>
     
@@ -238,7 +247,7 @@
         
         
         
-          1 mins
+          17 mins
         
       </span>
     
@@ -281,7 +290,132 @@
             
               <div class="markdown-body">
                 
-                <h1 id="渗透基础"><a href="#渗透基础" class="headerlink" title="渗透基础"></a>渗透基础</h1>
+                <h1 id="渗透基础"><a href="#渗透基础" class="headerlink" title="渗透基础"></a>渗透基础</h1><h2 id="web安全-基础环境搭建"><a href="#web安全-基础环境搭建" class="headerlink" title="web安全-基础环境搭建"></a>web安全-基础环境搭建</h2><h2 id="web安全-sql注入"><a href="#web安全-sql注入" class="headerlink" title="web安全-sql注入"></a>web安全-sql注入</h2><h3 id="sql简介"><a href="#sql简介" class="headerlink" title="sql简介"></a>sql简介</h3><ol>
+<li><p>什么是sql</p>
+<p>  SQL是一种数据库查询和程序设计语言。用于存取数据以及查询、更新和管理关系数据库系统。  </p>
+<p>  常见的SQL数据库有MySQL，SQL server，Oracle、Sybase、db2….不同的数据库所使用的SQL语句也  </p>
+<p>不一样。</p>
+</li>
+<li><p>mysql的数据结构</p>
+<p>  数据库中包含表，表是由列组成，表的数据存储方式是按行存储。</p>
+</li>
+</ol>
+<h3 id="mysql语句"><a href="#mysql语句" class="headerlink" title="mysql语句"></a>mysql语句</h3><ol>
+<li><p>select</p>
+<p>  用于从表中选取数据。结果被存储在一个结果表中（称为结果集）。  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 语法：<br>SELECT 列名 FROM 表名<br>SELECT * FROM 表名<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>insert info</p>
+<p>用于向表中插入新的<strong>行</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 语法：<br>INSERT INTO 表名称 VALUES (值1, 值2,....)<br>INSERT INTO table_name (列1, 列2,...) VALUES (值1, 值2,....)<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>delete </p>
+<p>用于删除表中的行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 语法：<br>DELETE FROM 表名称 WHERE 列名称 = 值<br>DELETE * FROM 表名称<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>updatte</p>
+<p>用于修改表中的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 语法：<br>UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>oder by</p>
+<p>用于对结果集进行排序。  </p>
+<p>用于根据指定的列对结果集进行排序。  </p>
+<p>默认按照升序对记录进行排序；  </p>
+<p>按照降序对记录排序，使用DESC关键字；  </p>
+<p>order by 排序列数大于当前查询的列数时就会报错； </p>
+<p> sql注入利用这个特性来判断列数以及显示位。  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152001672.png" srcset="/img/loading.gif" lazyload alt="image-20230823152001672"></p>
+</li>
+<li><p>where</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 有条件地从表中选取数据<br># 语法：<br>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>AND 和 OR运算符</p>
+<p>AND 和 OR  可在 WHERE 子语句中把两个或多个条件结合起来。  </p>
+<p>如果第一个条件和第二个条件都成立，则 AND 运算符显示一条记录。  </p>
+<p>如果第一个条件和第二个条件中只要有一个成立，则 OR 运算符显示一条记录</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152402216.png" srcset="/img/loading.gif" lazyload alt="image-20230823152402216"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152421200.png" srcset="/img/loading.gif" lazyload alt="image-20230823152421200"></p>
+</li>
+<li><p>注释符</p>
+<ul>
+<li><p>注释符可以替代空格</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152602583.png" srcset="/img/loading.gif" lazyload alt="image-20230823152602583"></p>
+<p>有些时候可能对方不接受空格，所以使用注释符的形式</p>
+</li>
+<li><p>内联注入</p>
+<blockquote>
+<p>  &#x2F;<em>!&#x2F;</em>!*&#x2F;  </p>
+<p>&#x2F;* *&#x2F; 在mysql中是多行注释 但是如果里面加了! 那么后面的内容会被执行</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>连接</p>
+<ul>
+<li><p>数据库的连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 格式 mysql -u 用户名 -p 密码 -h 主机地址<br>mysql –uroot -proot -h 127.0.0.1<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>列出当前的mysql的相关状态信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">status;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>显示所有的数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">show databases;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>打开数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">use mysql<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>显示数据表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">show tables<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>显示表结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 格式：describe 数据表名;<br>describe user;<br># 格式：show columns from 数据表名;<br>show columns from user;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>清空数据表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 格式：delete from 数据表名;<br>delete from test01;<br># 格式：truncate table 数据表名;<br>truncate table test01;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>显示表的创建过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 格式：show create table 表名;<br>show create table user;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>删除表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 格式：drop table 数据表;<br>drop table test01;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>退出数据库连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">exit<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>mysql的系统表</p>
+<ul>
+<li>information_schema</li>
+</ul>
+<p>  在 MySQL中，把 information_schema 看作是一个数据库，确切说是信息数据库。其中保存着关于  MySQL 服务器所维护的所有其他数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权  限等。  </p>
+<ul>
+<li><p><strong>SCHEMATA</strong> 表：提供了当前mysql实例中所有数据库的信息。  <strong>show</strong> databases*;* 的结果取之此表。  </p>
+</li>
+<li><p>TABLES 表：提供了关于数据库中的表的信息。详细表述了某个表属于哪个<strong>schema</strong>，表类型，表引擎，创建  时间等信息。  </p>
+<p>  <strong>show</strong> tables from <strong>schemaname;</strong> (<strong>schemaname</strong>为指定数据库名**)**的结果取之此表。  </p>
+</li>
+<li><p>COLUMNS 表：提供了表中的列信息。详细表述了某张表的所有列以及每个列的信息。  <strong>show</strong> columns from <strong>schemaname.tablename;</strong> (<strong>schemaname</strong>为指定数据库名**,** tablename为指定数据 库下的数据表名)的结果取之此表。</p>
+</li>
+</ul>
+<p>  <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823153825533.png" srcset="/img/loading.gif" lazyload alt="image-20230823153825533"></p>
+</li>
+</ol>
+<h3 id="mysql注入的原理"><a href="#mysql注入的原理" class="headerlink" title="mysql注入的原理"></a>mysql注入的原理</h3><ol>
+<li><p>什么是sql注入</p>
+<p> 利用现有应用程序，将恶意的SQL命令注入到程序后台并在数据库引擎执行的能力。  SQL注入漏洞是由于WEB应用程序对用户输入的数据合法性判断不严格导致。  </p>
+<p>攻击者把SQL命令语句作为输入被服务器SQL解释器正确解析执行，数据库把查询到的结果返回给服  务器，然后呈现给攻击者，<strong>攻击者由此获得数据库内的数据信息</strong>。</p>
+</li>
+<li><p>一次正常的HTTP请求分析</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165930344.png" srcset="/img/loading.gif" lazyload alt="image-20230823165930344"></p>
+</li>
+<li><p>一次正常的sql注入分析</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165956400.png" srcset="/img/loading.gif" lazyload alt="image-20230823165956400"></p>
+</li>
+</ol>
+<h3 id="sql注入判断"><a href="#sql注入判断" class="headerlink" title="sql注入判断"></a>sql注入判断</h3><p>  根据客户端返回的结果来判断提交的测试语句是否成功被数据库引擎执行，如果测试语句被执行了，  说明存在注入漏洞。  </p>
+<p><strong>俗话就是说，只要我们可以进行sql语句那么就存在漏洞</strong></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823170055778.png" srcset="/img/loading.gif" lazyload alt="image-20230823170055778"></p>
+
                 
               </div>
             
