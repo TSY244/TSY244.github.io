@@ -26,8 +26,11 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%BC%B1%E5%AF%86%E7%A0%81/image-20230826174924165-16930433646201.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%BC%B1%E5%AF%86%E7%A0%81/image-20230826175012568.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%BC%B1%E5%AF%86%E7%A0%81/image-20230826175945632.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/image-20230827084813386.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/image-20230827090243781.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/%E6%88%AA%E5%9B%BE__2023-08-27-09-40-49.png">
 <meta property="article:published_time" content="2023-08-26T02:08:49.000Z">
-<meta property="article:modified_time" content="2023-08-26T13:32:09.820Z">
+<meta property="article:modified_time" content="2023-08-27T02:09:26.406Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          695 words
+          1.7k words
         
       </span>
     
@@ -242,7 +245,7 @@
         
         
         
-          6 mins
+          15 mins
         
       </span>
     
@@ -330,7 +333,99 @@
 </li>
 </ol>
 <h2 id="未授权访问漏洞"><a href="#未授权访问漏洞" class="headerlink" title="未授权访问漏洞"></a>未授权访问漏洞</h2><p>没有权限就饿可以访问	</p>
-
+<h3 id="常见的未授权的漏洞"><a href="#常见的未授权的漏洞" class="headerlink" title="常见的未授权的漏洞"></a>常见的未授权的漏洞</h3><blockquote>
+<p><strong>Redis</strong>  未授权访问漏洞  </p>
+<p>Docker 未授权访问漏洞  </p>
+<p>MongoDB 未授权访问漏洞  </p>
+<p>Jenkins未授权访问漏洞  </p>
+<p>Memcached 未授权访问漏洞  </p>
+<p>JBOSS 未授权访问漏洞  </p>
+<p>VNC 未授权访问漏洞  </p>
+<p>ZooKeeper 未授权访问漏洞  </p>
+<p>Rsync 未授权访问漏洞  </p>
+<p>Atlassian Crowd 未授权访问漏洞  </p>
+<p>CouchDB 未授权访问漏洞  </p>
+<p>Elasticsearch 未授权访问漏洞  </p>
+<p><strong>Hadoop</strong> 未授权访问漏洞  </p>
+<p>Jupyter Notebook 未授权访问漏洞</p>
+</blockquote>
+<h3 id="redis未授权访问"><a href="#redis未授权访问" class="headerlink" title="redis未授权访问"></a>redis未授权访问</h3><ol>
+<li><p>redis简介</p>
+<p>  Redis 是完全开源免费的，一个灵活的高性能 key-value 数据结构存储，可以用来作为数据库、缓存  和消息队列。</p>
+</li>
+<li><p>redisd的框架</p>
+<p>  Redis 主要由有两个程序组成：  </p>
+<p>  Redis 客户端 redis-cli  </p>
+<p>  Redis 服务器 redis-server  </p>
+</li>
+<li><p>应用场景</p>
+<ul>
+<li>存储 缓存数据</li>
+<li>需要高速读写的场合使用它高速读写</li>
+</ul>
+</li>
+<li><p>漏洞发现</p>
+<p>redis默认监听端口是6379</p>
+<blockquote>
+<p>MongoDB：27017 </p>
+<p>Memcached：11211  </p>
+<p>Jboss：8080  </p>
+<p>VNC：5900、5901  </p>
+<p>Docker：2375  </p>
+</blockquote>
+</li>
+<li><p>要确定对方是否开启redis服务，可以看是否开启了6379端口</p>
+<p>但是使用者而可能更改了端口服务</p>
+<ul>
+<li><p>端口探测</p>
+<blockquote>
+<p>nmap -v -Pn -p 6379 -sV IP</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/image-20230827084813386.png" srcset="/img/loading.gif" lazyload alt="image-20230827084813386"></p>
+</li>
+</ul>
+</li>
+<li><p>redis常用的指令</p>
+<blockquote>
+<p>redis连接远程服务器</p>
+<p>redis-cli -h host -p port -a password</p>
+<p>set testkey “testvalue” 设置testkey的值为testvalue</p>
+<p>get testkey 获取testkey</p>
+<p>set score 99 设置score的值为99</p>
+<p>incr score 将score的值增加一</p>
+<p>get score  获取score的值</p>
+<p>keys *</p>
+<p>列出所有的Key,注意没有values操作</p>
+<p>config set dir &#x2F;home&#x2F;test 设置工作的目录是&#x2F;home&#x2F;test</p>
+<p>config set dbfilename  redis.rdb 设置备份文件名</p>
+<p>config get dir 检查工作目录是否设置成功</p>
+<p>config get dbfilename 检查备份文件名是否设置成功</p>
+<p>save  进行一次备份操作</p>
+<p>flushall 删除所有的数据</p>
+<p>del key 删除 key的数据</p>
+</blockquote>
+</li>
+<li><p>redis的历史漏洞</p>
+<ul>
+<li><p>redis未授权漏洞</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/image-20230827090243781.png" srcset="/img/loading.gif" lazyload alt="image-20230827090243781"></p>
+</li>
+</ul>
+</li>
+<li><p>漏洞利用</p>
+<ul>
+<li><p>环境搭建</p>
+<blockquote>
+<p>dicker-compose.yml</p>
+</blockquote>
+</li>
+<li><p>也可以使用下面的环境</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/%E6%88%AA%E5%9B%BE__2023-08-27-09-40-49.png" srcset="/img/loading.gif" lazyload alt="截图__2023-08-27-09-40-49"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="常见中间件漏洞"><a href="#常见中间件漏洞" class="headerlink" title="常见中间件漏洞"></a>常见中间件漏洞</h2><h2 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h2>
                 
               </div>
             
