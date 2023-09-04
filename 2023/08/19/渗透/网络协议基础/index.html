@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/image-20230819180924981.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/image-20230820104232492.png">
 <meta property="article:published_time" content="2023-08-19T07:14:41.000Z">
-<meta property="article:modified_time" content="2023-08-20T02:58:01.803Z">
+<meta property="article:modified_time" content="2023-09-04T12:48:43.388Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k words
+          3k words
         
       </span>
     
@@ -245,7 +245,7 @@
         
         
         
-          22 mins
+          25 mins
         
       </span>
     
@@ -311,6 +311,7 @@
 <li><p><strong>UDP</strong>只是简单的发送不会保证对方是否接受到</p>
 </li>
 <li><p>当设备作为接收方时，传输层则要负责把数据包传给应用，但是一台设备上可能会有很多应用在接收或者传输数据，因此需要用一个编号将应用区分开来，这个编号就是<strong>端口</strong>。比如80端口通常是Web服务器用的，22端口通常是SSH远程登录服务器用的。而对于浏览器（客户端）中的每个标签栏都是一个独立的进程，操作系统会为这些进程分配临时的端口号。<br>由于传输层的报文中会携带端口号，因此接收方可以识别出该报文是发送给哪个应用。</p>
+<p>说白了就是用于区分不同的信息有不同的去处</p>
 </li>
 </ol>
 <h4 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h4><ol>
@@ -439,6 +440,27 @@
 <li>403 访问不允许</li>
 <li>405 请求方式不允许</li>
 <li>5XX 服务器错误</li>
+</ul>
+</li>
+</ol>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>HTTP 是超文本传输协议，也就是<strong>H</strong>yperText <strong>T</strong>ransfer <strong>P</strong>rotocol</p>
+<h3 id="http常见的字段"><a href="#http常见的字段" class="headerlink" title="http常见的字段"></a>http常见的字段</h3><h4 id="host"><a href="#host" class="headerlink" title="host"></a>host</h4><p>客户端发送请求的时候，用来指定服务器的域名</p>
+<blockquote>
+<p>host: <a target="_blank" rel="noopener" href="http://www.a.com/">www.a.com</a></p>
+</blockquote>
+<h4 id="Content-Length"><a href="#Content-Length" class="headerlink" title="Content-Length"></a><em>Content-Length</em></h4><p>表明本次回应的长度是多少</p>
+<h4 id="Connection"><a href="#Connection" class="headerlink" title="Connection"></a><em>Connection</em></h4><p>是否是TCP持久通信</p>
+<h4 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a><em>Content-Type</em></h4><p>高速客户端本次的数据是什么格式</p>
+<h4 id="Content-Encoding"><a href="#Content-Encoding" class="headerlink" title="Content-Encoding"></a><em>Content-Encoding</em></h4><p>说明数据的压缩方法</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ol>
+<li><p><em>Content-Encoding</em> </p>
+<p>通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态</p>
+</li>
+<li><p>post提交数据的几种Content-Type</p>
+<ul>
+<li>application&#x2F;x-www-form-urlencoded：最常见的POST提交数据方式，浏览器支持的原生form  表单</li>
+<li>multipart&#x2F;form-data：这种方式一般用来上传文件</li>
+<li>application&#x2F;json：在响应头中很常见，在请求头中用来告诉服务端消息主体是序列化后的json  字符串</li>
 </ul>
 </li>
 </ol>
