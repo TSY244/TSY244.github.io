@@ -16,18 +16,21 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="django">
+    <meta name="description" content="django基本认识数据迁移映射到数据库 12python manage.py makemigrationspython manage.py migrate  创建APP1python manage.py startapp app_name  基本视图返回响应的response12def test_func(request):    return HttpResponse(&amp;#x27;test&amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="django">
 <meta property="og:url" content="http://example.com/2023/09/22/python/django/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="django">
+<meta property="og:description" content="django基本认识数据迁移映射到数据库 12python manage.py makemigrationspython manage.py migrate  创建APP1python manage.py startapp app_name  基本视图返回响应的response12def test_func(request):    return HttpResponse(&amp;#x27;test&amp;#">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/django/image-20230923191111893.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/django/image-20230923213424682.png">
 <meta property="article:published_time" content="2023-09-22T13:50:04.000Z">
-<meta property="article:modified_time" content="2023-09-22T17:31:41.764Z">
+<meta property="article:modified_time" content="2023-09-23T14:34:17.501Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/django/image-20230923191111893.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -227,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6 words
+          1.5k words
         
       </span>
     
@@ -238,7 +241,7 @@
         
         
         
-          1 mins
+          13 mins
         
       </span>
     
@@ -281,7 +284,53 @@
             
               <div class="markdown-body">
                 
-                <h1 id="django"><a href="#django" class="headerlink" title="django"></a>django</h1>
+                <h1 id="django"><a href="#django" class="headerlink" title="django"></a>django</h1><h2 id="基本认识"><a href="#基本认识" class="headerlink" title="基本认识"></a>基本认识</h2><h3 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h3><p>映射到数据库</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">python manage.py makemigrations<br>python manage.py migrate<br></code></pre></td></tr></table></figure>
+
+<h3 id="创建APP"><a href="#创建APP" class="headerlink" title="创建APP"></a>创建APP</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> manage.<span class="hljs-keyword">py</span> startapp app_name<br></code></pre></td></tr></table></figure>
+
+<h3 id="基本视图"><a href="#基本视图" class="headerlink" title="基本视图"></a>基本视图</h3><h4 id="返回响应的response"><a href="#返回响应的response" class="headerlink" title="返回响应的response"></a>返回响应的response</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_func</span>(<span class="hljs-params">request</span>):<br>    <span class="hljs-keyword">return</span> HttpResponse(<span class="hljs-string">&#x27;test&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="渲染一个html"><a href="#渲染一个html" class="headerlink" title="渲染一个html"></a>渲染一个html</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">user_add</span>(<span class="hljs-params">request</span>):<br>    <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&quot;user_add.html&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="整体的框架"><a href="#整体的框架" class="headerlink" title="整体的框架"></a>整体的框架</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/django/image-20230923191111893.png" srcset="/img/loading.gif" lazyload alt="image-20230923191111893"></p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><h4 id="子路由的写法"><a href="#子路由的写法" class="headerlink" title="子路由的写法"></a>子路由的写法</h4><p>一般只需要一个子路由，这里我们使用app  ： user</p>
+<p>首先需要在app里面创建urls.py文件，然后像主文件里面的urls一样添加路径就很好了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path <br><br><span class="hljs-keyword">import</span> user.views<br><span class="hljs-comment"># from user import views</span><br><span class="hljs-keyword">from</span> user.views <span class="hljs-keyword">import</span> *<br><br><span class="hljs-comment"># 子路由</span><br><br>urlpatterns = [<br>    path(<span class="hljs-string">&#x27;user_test/&#x27;</span>, user_test),<br>]<br><br></code></pre></td></tr></table></figure>
+
+<p>然后主文件的urls.py如下图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin<br><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path,include<br><span class="hljs-keyword">from</span> user.views <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> app01 <span class="hljs-keyword">import</span> views<br><br>urlpatterns = [<br>    path(<span class="hljs-string">&#x27;user/&#x27;</span>, include(<span class="hljs-string">&#x27;user.urls&#x27;</span>)),<span class="hljs-comment"># 配置子路由的路径</span><br>    path(<span class="hljs-string">&#x27;user/index&#x27;</span>, views.index),<br>    path(<span class="hljs-string">&#x27;user/add&#x27;</span>, views.user_add),<br>    path(<span class="hljs-string">&#x27;user/list&#x27;</span>, views.user_list),<br>]<br></code></pre></td></tr></table></figure>
+
+<h3 id="创建模板"><a href="#创建模板" class="headerlink" title="创建模板"></a>创建模板</h3><p>在model.py里添加以下的数据 </p>
+<p>创建模板的时候记得一定要继承models.Model<br>创建一个类，相当于表的结构</p>
+<p>对象相当于一行数据</p>
+<p>类的属性就是对应的字段</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models<br><br><br><span class="hljs-comment"># Create your models here.</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserModel</span>(models.Model):<br>    name = models.CharField(<span class="hljs-number">10</span>,unique=<span class="hljs-literal">True</span>)<br>    sex = models.CharField(<span class="hljs-number">10</span>)<br>    age = models.IntegerField(default=<span class="hljs-number">18</span>)<br>    is_delete = models.BooleanField(default=<span class="hljs-literal">False</span>)<br><br><br><br><span class="hljs-comment"># 相当于创建了一个用户表</span><br><span class="hljs-comment"># 姓名  varchar</span><br><span class="hljs-comment"># 性别  varchar</span><br><span class="hljs-comment"># 年龄  age</span><br><span class="hljs-comment"># 是否删除 bool</span><br><br></code></pre></td></tr></table></figure>
+
+<p>模型改变就需要再次数据迁移</p>
+<p>上面执行完的结果就是<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/django/image-20230923213424682.png" srcset="/img/loading.gif" lazyload alt="image-20230923213424682"></p>
+<h3 id="后台的管理页面"><a href="#后台的管理页面" class="headerlink" title="后台的管理页面"></a>后台的管理页面</h3><ol>
+<li><p>注册需要管理的模型</p>
+<p>需要在admin.py里使用下面的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin<br><span class="hljs-keyword">from</span> user.models <span class="hljs-keyword">import</span> *<br><span class="hljs-comment"># Register your models here.</span><br><br>admin.register(UserModel)<br><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>创建超级管理员用户</p>
+<p>使用下面的指令就行了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">python manage.py createsuperuser<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>添加admin的访问路径</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">path(<span class="hljs-string">&#x27;admin/&#x27;</span>, admin.site.urls)	<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>访问 后台管理系统</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8000</span><span class="hljs-regexp">/admin/</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="路由-1"><a href="#路由-1" class="headerlink" title="路由"></a>路由</h2>
                 
               </div>
             
