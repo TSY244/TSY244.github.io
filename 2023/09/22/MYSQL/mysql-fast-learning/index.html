@@ -16,24 +16,26 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] main函数传参三个问题 参数个数 首个参数到底是谁 带空格的参数  基本形式 int main(int argc,char* argv[]) &amp;#123;     return 0; &amp;#125; 123456789101112131415162. 第一个参数的意思是：参数的个数3. 第二个参数的意思是：存放的参数，而且至少有一个，如果打印的话，结果是该项目的名称   实例：   &#96;">
+    <meta name="description" content="mysql 登录数据库  1mysql -u -p   查看当前数据库的字段 1SELECT * FROM chg_girlfriends  查看当前有哪些数据库 1show databases;  创建数据库 1creat database 数据库名字  选中数据库操作 1use 数据库的名称  查看数据库的表 1SHOW TABLES;  创建一个gril_friend的表 123456cre">
 <meta property="og:type" content="article">
-<meta property="og:title" content="main函数传参">
-<meta property="og:url" content="http://example.com/2023/04/20/C/main%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82/index.html">
+<meta property="og:title" content="mysql_fast_learning">
+<meta property="og:url" content="http://example.com/2023/09/22/MYSQL/mysql-fast-learning/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="[TOC] main函数传参三个问题 参数个数 首个参数到底是谁 带空格的参数  基本形式 int main(int argc,char* argv[]) &amp;#123;     return 0; &amp;#125; 123456789101112131415162. 第一个参数的意思是：参数的个数3. 第二个参数的意思是：存放的参数，而且至少有一个，如果打印的话，结果是该项目的名称   实例：   &#96;">
+<meta property="og:description" content="mysql 登录数据库  1mysql -u -p   查看当前数据库的字段 1SELECT * FROM chg_girlfriends  查看当前有哪些数据库 1show databases;  创建数据库 1creat database 数据库名字  选中数据库操作 1use 数据库的名称  查看数据库的表 1SHOW TABLES;  创建一个gril_friend的表 123456cre">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-20T01:01:17.000Z">
-<meta property="article:modified_time" content="2023-04-20T05:12:28.261Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png">
+<meta property="article:published_time" content="2023-09-22T00:26:25.000Z">
+<meta property="article:modified_time" content="2023-09-22T12:44:26.893Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c基础">
+<meta property="article:tag" content="MYSQL">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>main函数传参 - chg</title>
+  <title>mysql_fast_learning - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="main函数传参"></span>
+            <span id="subtitle" data-typed-text="mysql_fast_learning"></span>
           
         </div>
 
@@ -215,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-20 09:01" pubdate>
-          April 20, 2023 am
+        <time datetime="2023-09-22 08:26" pubdate>
+          September 22, 2023 am
         </time>
       </span>
     
@@ -227,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          412 words
+          1.3k words
         
       </span>
     
@@ -238,7 +240,7 @@
         
         
         
-          4 mins
+          11 mins
         
       </span>
     
@@ -276,30 +278,130 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">main函数传参</h1>
+            <h1 style="display: none">mysql_fast_learning</h1>
             
             
               <div class="markdown-body">
                 
-                <p>[TOC]</p>
-<h1 id="main函数传参"><a href="#main函数传参" class="headerlink" title="main函数传参"></a>main函数传参</h1><h2 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h2><ol>
-<li>参数个数</li>
-<li>首个参数到底是谁</li>
-<li>带空格的参数</li>
+                <h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1><ol>
+<li>登录数据库</li>
 </ol>
-<h2 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h2><ol>
-<li><pre><code class="c">int main(int argc,char* argv[])
-&#123;
-    return 0;
-&#125;
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-number">2.</span> 第一个参数的意思是：参数的个数<br><br><span class="hljs-number">3.</span> 第二个参数的意思是：存放的参数，而且至少有一个，如果打印的话，结果是该项目的名称<br><br>   实例：<br><br>   ```<span class="hljs-function">c</span><br><span class="hljs-function">   <span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span></span><br><span class="hljs-function">   </span>&#123;<br>   	<span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; argc; i++)<br>   	&#123;<br>   		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, argv[i]);<br>   	&#125;<br>   	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>   &#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql -u -p<br></code></pre></td></tr></table></figure>
 
-运行结果：
-
-![image-20221225201855246](C:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20221225201855246.png)
-</code></pre>
+<ol start="2">
+<li><p>查看当前数据库的字段</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> chg_girlfriends<br></code></pre></td></tr></table></figure>
 </li>
-<li></li>
+<li><p>查看当前有哪些数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">show</span> databases;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">creat database 数据库名字<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>选中数据库操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">use 数据库的名称<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看数据库的表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SHOW TABLES;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个gril_friend的表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs MYSQL">create table student(<br>    name  char(4) not null ,<br>    sex   enum(&#x27;男&#x27;,&#x27;女&#x27;),<br>    id    char(11) primary key,<br>    class tinyint not null<br>);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看某个数据表的结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs MYSQL">DESCRIBE STUDENT;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png" srcset="/img/loading.gif" lazyload alt="image-20230922091346627"></p>
+</li>
+<li><p>查看表中数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECt * FROM student;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>如何往数据表中添加数据记录</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> student<br><span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;CHG&#x27;</span>,<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-string">&#x27;2&#x27;</span>,<span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>数据类型的选择</p>
+</li>
+</ol>
+<ul>
+<li>时间类型看格式</li>
+<li>整型和字符串类型看长度</li>
+</ul>
+<ol start="12">
+<li><p>更新字段名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER TABLE student CHANGE COLUMN classNum cn TINYINT;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建约束</p>
+<ul>
+<li><p>主键约束</p>
+<p>不重复且不为空</p>
+<p>创建一个主键：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE test(<br>	test1 char PRIMARY KEY<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>创建联合主键（加起来不重复，任何一个都不能为空）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE test(<br>	test1 char,<br>	test2 char,<br>	PRIMARY KEY(test1,test2)<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>创建自增主键：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE test(<br>	test1 char,<br>	test2 char,<br>	test3 TINYINT AUTO_INCREMENT,<br>	PRIMARY KEY(test1,test2,test3)<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>给表添加主键：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter TABLE test DROP PRIMARY KEY;<br>ALTER TABLE test ADD PRIMARY KEY(test1,test2);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>删除主键：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter TABLE test DROP PRIMARY KEY;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>通过修改字段的方式增加主键(modify)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER TABLE test MODIFY test1 TINYINT PRIMARY KEY;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>唯一约束</p>
+<p>该字段的值不可以重复</p>
+<p>alter添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER TABLE test ADD UNIQUE(test1,test2);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>非空约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span><br><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>默认约束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">default 默认值<br></code></pre></td></tr></table></figure>
+
+<p>传了值就不会使用默认值</p>
+</li>
+<li><p>外键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE class (<br>	name char(10) PRIMARY KEY,<br>	class_id TINYINT DEFAULT 4,<br>	student_name char(4),<br>	FOREIGN KEY (student_name) REFERENCES student(name)<br>);<br></code></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+<p>	</p>
+</li>
+<li><p>范式</p>
+<ul>
+<li><p>第一范式（1NF）</p>
+<p>数据表中的所有的字段都是不可分割的原子值</p>
+<p>就是满足填入的数据不可以拆分</p>
+</li>
+<li><p>第二范式(2NF)</p>
+<p>必须是满足第一范式的前提下</p>
+<p>一个表的所有列最好都和主键相关，不想关的拆解成其他表</p>
+</li>
+<li><p>第三范式(3NF)</p>
+<p>满足第二范式</p>
+<p>非主键不存在相关性</p>
+</li>
+</ul>
+</li>
 </ol>
 
                 
@@ -313,7 +415,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
+        <a href="/tags/MYSQL/">#MYSQL</a>
       
     </div>
   
@@ -325,8 +427,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>main函数传参</div>
-      <div>http://example.com/2023/04/20/C/main函数传参/</div>
+      <div>mysql_fast_learning</div>
+      <div>http://example.com/2023/09/22/MYSQL/mysql-fast-learning/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +440,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 20, 2023</div>
+          <div>September 22, 2023</div>
         </div>
       
       
@@ -370,9 +472,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/21/%E7%AE%97%E6%B3%95/newcoder/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" title="表达式求值">
+                      <a href="/2023/09/22/python/django/" title="django">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">表达式求值</span>
+                        <span class="hidden-mobile">django</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -380,8 +482,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/20/C/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%90%88%E9%9B%86/" title="函数指针合集">
-                        <span class="hidden-mobile">函数指针合集</span>
+                      <a href="/2023/09/21/web/WEB%E5%AE%89%E5%85%A8/" title="WEB安全">
+                        <span class="hidden-mobile">WEB安全</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
