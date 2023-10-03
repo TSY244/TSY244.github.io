@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/django/image-20230923191111893.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/django/image-20230923213424682.png">
 <meta property="article:published_time" content="2023-09-22T13:50:04.000Z">
-<meta property="article:modified_time" content="2023-09-23T14:34:17.501Z">
+<meta property="article:modified_time" content="2023-09-24T14:02:31.436Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k words
+          2.5k words
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          13 mins
+          21 mins
         
       </span>
     
@@ -330,7 +330,42 @@
 <li><p>访问 后台管理系统</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8000</span><span class="hljs-regexp">/admin/</span><br></code></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="路由-1"><a href="#路由-1" class="headerlink" title="路由"></a>路由</h2>
+<h2 id="路由-1"><a href="#路由-1" class="headerlink" title="路由"></a>路由</h2><p>使用include使用子路由</p>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><ol>
+<li><p>使用超链接的方向是</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html">&#123;# url转发测试 #&#125;<br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/user/list&quot;</span>&gt;</span>路由转发测试，点击进入用户下·列表<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>主路由的urls随摆配置</p>
+</li>
+<li><p>使用反向解释的方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">&#123;<span class="hljs-comment"># 反向解析 #&#125;</span><br>&#123;<span class="hljs-comment"># list 是path name的值 #&#125;</span><br>&lt;a href=<span class="hljs-string">&quot;&#123;% url &#x27;list&#x27; %&#125;&quot;</span>&gt;反向解析测试，点击进入用户下列表&lt;/a&gt;<br></code></pre></td></tr></table></figure>
+
+<p>注意：这么写的话，主路由不能存在命名空间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">path(<span class="hljs-string">&#x27;user/&#x27;</span>, include(<span class="hljs-string">&#x27;user.urls&#x27;</span>))  <span class="hljs-comment"># 使用子路由</span><br>   <br></code></pre></td></tr></table></figure>
+
+<p>子路由指定路由的名称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">path(<span class="hljs-string">&#x27;list/&#x27;</span>, user_list, name=<span class="hljs-string">&#x27;list&#x27;</span>),<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>使用命令空间的方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">&#123;<span class="hljs-comment"># 命名空间反向解析 #&#125;</span><br>&lt;a href=<span class="hljs-string">&quot;&#123;% url &#x27;user:list&#x27; %&#125;&quot;</span>&gt;反向解析测试，点击进入用户下列表&lt;/a&gt;<br></code></pre></td></tr></table></figure>
+
+<p>主路由一定存在namespace</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">path(<span class="hljs-string">&#x27;user/&#x27;</span>, include((<span class="hljs-string">&#x27;user.urls&#x27;</span>, <span class="hljs-string">&#x27;user&#x27;</span>), namespace=<span class="hljs-string">&#x27;user&#x27;</span>))  <span class="hljs-comment"># 使用命名空间</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>使用重定向</p>
+<p>关键字传参</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_redirect</span>(<span class="hljs-params">request</span>):<br>    <span class="hljs-keyword">return</span> redirect(reverse(<span class="hljs-string">&#x27;user:details&#x27;</span>, kwargs=&#123;<span class="hljs-string">&#x27;uid&#x27;</span>: <span class="hljs-number">2</span>&#125;))<br></code></pre></td></tr></table></figure>
+
+<p>占位传参</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_redirect</span>(<span class="hljs-params">request</span>):<br>    <span class="hljs-keyword">return</span> redirect(reverse(<span class="hljs-string">&#x27;user:details&#x27;</span>, args=(<span class="hljs-number">2</span>,)))<br></code></pre></td></tr></table></figure>
+
+<p>直接解析网址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_redirect</span>(<span class="hljs-params">request</span>):<br>    <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">&quot;https://www.baidu.com&quot;</span>)<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="模型基础"><a href="#模型基础" class="headerlink" title="模型基础"></a>模型基础</h2><p> 这个可以理解是数据库的结构</p>
+
                 
               </div>
             
@@ -398,6 +433,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/10/01/redis/redis/" title="redis">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">redis</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
