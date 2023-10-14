@@ -16,16 +16,16 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="mysql 登录数据库  1mysql -u -p   查看当前数据库的字段 1SELECT * FROM chg_girlfriends  查看当前有哪些数据库 1show databases;  创建数据库 1creat database 数据库名字  选中数据库操作 1use 数据库的名称  查看数据库的表 1SHOW TABLES;  创建一个gril_friend的表 123456cre">
+    <meta name="description" content="初始mysql 登录数据库  1mysql -u -p   查看当前数据库的字段 1SELECT * FROM chg_girlfriends  查看当前有哪些数据库 1show databases;  创建数据库 1creat database 数据库名字  选中数据库操作 1use 数据库的名称  查看数据库的表 1SHOW TABLES;  创建一个gril_friend的表 123456c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql_fast_learning">
 <meta property="og:url" content="http://example.com/2023/09/22/MYSQL/mysql-fast-learning/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="mysql 登录数据库  1mysql -u -p   查看当前数据库的字段 1SELECT * FROM chg_girlfriends  查看当前有哪些数据库 1show databases;  创建数据库 1creat database 数据库名字  选中数据库操作 1use 数据库的名称  查看数据库的表 1SHOW TABLES;  创建一个gril_friend的表 123456cre">
+<meta property="og:description" content="初始mysql 登录数据库  1mysql -u -p   查看当前数据库的字段 1SELECT * FROM chg_girlfriends  查看当前有哪些数据库 1show databases;  创建数据库 1creat database 数据库名字  选中数据库操作 1use 数据库的名称  查看数据库的表 1SHOW TABLES;  创建一个gril_friend的表 123456c">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png">
 <meta property="article:published_time" content="2023-09-22T00:26:25.000Z">
-<meta property="article:modified_time" content="2023-09-22T12:44:26.893Z">
+<meta property="article:modified_time" content="2023-10-13T15:01:53.348Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="MYSQL">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          7k words
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          11 mins
+          59 mins
         
       </span>
     
@@ -283,7 +283,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1><ol>
+                <h1 id="初始mysql"><a href="#初始mysql" class="headerlink" title="初始mysql"></a>初始mysql</h1><ol>
 <li>登录数据库</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql -u -p<br></code></pre></td></tr></table></figure>
@@ -402,6 +402,51 @@
 </li>
 </ul>
 </li>
+</ol>
+<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><ol>
+<li><p>数据准备</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE DATABASE mysql_test;<br><br>USE mysql_test;<br><br>CREATE TABLE<br>    Student(<br>        sno VARCHAR(20) PRIMARY KEY,<br>        sname VARCHAR(20) NOT NULL,<br>        ssex VARCHAR(10) NOT NULL,<br>        sbirthday DATETIME NOT NULL,<br>        class VARCHAR(20) NOT NULL<br>    );<br><br>DROP TABLE student;<br><br>-- 提前准备<br><br>CREATE TABLE<br>    Teacher(<br>        tno VARCHAR(20) PRIMARY KEY,<br>        tname VARCHAR(20) NOT NULL,<br>        tsex VARCHAR(10) NOT NULL,<br>        tbirthday DATETIME,<br>        prof VARCHAR(20) NOT NULL,<br>        depart VARCHAR(20) NOT NULL<br>    );<br><br>CREATE TABLE<br>    Course(<br>        cno VARCHAR(20) PRIMARY KEY,<br>        cname VARCHAR(20) NOT NULL,<br>        tno VARCHAR(20) NOT NULL,<br>        FOREIGN KEY(tno) REFERENCES teacher(tno)<br>    )<br><br>DROP TABLE score;<br><br>CREATE TABLE<br>    score(<br>        sno VARCHAR(20) NOT NULL,<br>        cno VARCHAR(20) NOT NULL,<br>        degree DECIMAL NOT NULL,<br>        FOREIGN KEY(sno) REFERENCES Student(sno),<br>        FOREIGN KEY(cno) REFERENCES Course(con),<br>        PRIMARY KEY(sno, cno)<br>    );<br><br>-- 添加学生表的数据<br><br>INSERT INTO student VALUES(&#x27;101&#x27;, &#x27;曾华&#x27;, &#x27;男&#x27;, &#x27;1977-09-01&#x27;, &#x27;95033&#x27;);<br><br>INSERT INTO student VALUES(&#x27;102&#x27;, &#x27;匡明&#x27;, &#x27;男&#x27;, &#x27;1975-10-02&#x27;, &#x27;95031&#x27;);<br><br>INSERT INTO student VALUES(&#x27;103&#x27;, &#x27;王丽&#x27;, &#x27;女&#x27;, &#x27;1976-01-23&#x27;, &#x27;95033&#x27;);<br><br>INSERT INTO student VALUES(&#x27;104&#x27;, &#x27;李军&#x27;, &#x27;男&#x27;, &#x27;1976-02-20&#x27;, &#x27;95033&#x27;);<br><br>INSERT INTO student VALUES(&#x27;105&#x27;, &#x27;王芳&#x27;, &#x27;女&#x27;, &#x27;1975-02-10&#x27;, &#x27;95031&#x27;);<br><br>INSERT INTO student VALUES(&#x27;106&#x27;, &#x27;陆军&#x27;, &#x27;男&#x27;, &#x27;1974-06-03&#x27;, &#x27;95031&#x27;);<br><br>INSERT INTO student VALUES(&#x27;107&#x27;, &#x27;王尼玛&#x27;, &#x27;男&#x27;, &#x27;1976-02-20&#x27;, &#x27;95033&#x27;);<br><br>INSERT INTO student VALUES(&#x27;108&#x27;, &#x27;张全蛋&#x27;, &#x27;男&#x27;, &#x27;1975-02-10&#x27;, &#x27;95031&#x27;);<br><br>INSERT INTO student VALUES(&#x27;109&#x27;, &#x27;赵铁柱&#x27;, &#x27;男&#x27;, &#x27;1974-06-03&#x27;, &#x27;95031&#x27;);<br><br>INSERT INTO student VALUES(&#x27;101&#x27;, &#x27;曾华&#x27;, &#x27;男&#x27;, &#x27;1977-09-01&#x27;, &#x27;95033&#x27;);<br><br>INSERT INTO student VALUES(&#x27;102&#x27;, &#x27;匡明&#x27;, &#x27;男&#x27;, &#x27;1975-10-02&#x27;, &#x27;95031&#x27;);<br><br>INSERT INTO student VALUES(&#x27;103&#x27;, &#x27;王丽&#x27;, &#x27;女&#x27;, &#x27;1976-01-23&#x27;, &#x27;95033&#x27;);<br><br>INSERT INTO student VALUES(&#x27;104&#x27;, &#x27;李军&#x27;, &#x27;男&#x27;, &#x27;1976-02-20&#x27;, &#x27;95033&#x27;);<br><br>INSERT INTO student VALUES(&#x27;105&#x27;, &#x27;王芳&#x27;, &#x27;女&#x27;, &#x27;1975-02-10&#x27;, &#x27;95031&#x27;);<br><br>INSERT INTO student VALUES(&#x27;106&#x27;, &#x27;陆军&#x27;, &#x27;男&#x27;, &#x27;1974-06-03&#x27;, &#x27;95031&#x27;);<br><br>INSERT INTO student VALUES(&#x27;107&#x27;, &#x27;王尼玛&#x27;, &#x27;男&#x27;, &#x27;1976-02-20&#x27;, &#x27;95033&#x27;);<br><br>INSERT INTO student VALUES(&#x27;108&#x27;, &#x27;张全蛋&#x27;, &#x27;男&#x27;, &#x27;1975-02-10&#x27;, &#x27;95031&#x27;);<br><br>INSERT INTO student VALUES(&#x27;109&#x27;, &#x27;赵铁柱&#x27;, &#x27;男&#x27;, &#x27;1974-06-03&#x27;, &#x27;95031&#x27;);<br><br>INSERT INTO teacher<br>VALUES (<br>        &#x27;804&#x27;,<br>        &#x27;李诚&#x27;,<br>        &#x27;男&#x27;,<br>        &#x27;1958-12-02&#x27;,<br>        &#x27;副教授&#x27;,<br>        &#x27;计算机系&#x27;<br>    );<br><br>INSERT INTO teacher<br>VALUES (<br>        &#x27;856&#x27;,<br>        &#x27;张旭&#x27;,<br>        &#x27;男&#x27;,<br>        &#x27;1969-03-12&#x27;,<br>        &#x27;讲师&#x27;,<br>        &#x27;电子工程系&#x27;<br>    );<br><br>INSERT INTO teacher<br>VALUES (<br>        &#x27;825&#x27;,<br>        &#x27;王萍&#x27;,<br>        &#x27;女&#x27;,<br>        &#x27;1972-05-05&#x27;,<br>        &#x27;助教&#x27;,<br>        &#x27;计算机系&#x27;<br>    );<br><br>INSERT INTO teacher<br>VALUES (<br>        &#x27;831&#x27;,<br>        &#x27;刘冰&#x27;,<br>        &#x27;女&#x27;,<br>        &#x27;1977-08-14&#x27;,<br>        &#x27;助教&#x27;,<br>        &#x27;电子工程系&#x27;<br>    );<br><br>show tables;<br><br>select * from teacher;<br><br>INSERT INTO course VALUES(&#x27;3-105&#x27;, &#x27;计算机导论&#x27;, &#x27;825&#x27;);<br><br>INSERT INTO course VALUES(&#x27;3-245&#x27;, &#x27;操作系统&#x27;, &#x27;804&#x27;);<br><br>INSERT INTO course VALUES(&#x27;6-166&#x27;, &#x27;数字电路&#x27;, &#x27;856&#x27;);<br><br>INSERT INTO course VALUES(&#x27;9-888&#x27;, &#x27;高等数学&#x27;, &#x27;831&#x27;);<br><br>-- 存入数据<br><br>INSERT INTO score VALUES(&#x27;103&#x27;, &#x27;3-105&#x27;, &#x27;92&#x27;);<br><br>INSERT INTO score VALUES(&#x27;103&#x27;, &#x27;3-245&#x27;, &#x27;86&#x27;);<br><br>INSERT INTO score VALUES(&#x27;103&#x27;, &#x27;6-166&#x27;, &#x27;85&#x27;);<br><br>INSERT INTO score VALUES(&#x27;105&#x27;, &#x27;3-105&#x27;, &#x27;88&#x27;);<br><br>INSERT INTO score VALUES(&#x27;105&#x27;, &#x27;3-245&#x27;, &#x27;75&#x27;);<br><br>INSERT INTO score VALUES(&#x27;105&#x27;, &#x27;6-166&#x27;, &#x27;79&#x27;);<br><br>INSERT INTO score VALUES(&#x27;109&#x27;, &#x27;3-105&#x27;, &#x27;76&#x27;);<br><br>INSERT INTO score VALUES(&#x27;109&#x27;, &#x27;3-245&#x27;, &#x27;68&#x27;);<br><br>INSERT INTO score VALUES(&#x27;109&#x27;, &#x27;6-166&#x27;, &#x27;81&#x27;);<br><br>SELECT * FROM score;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询student 表的所有记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from student;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询指定的列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select sname,sno,ssex from student;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询某一列的所有的值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询教师所有的单位<br><br>-- 重复<br><br>SELECT depart from teacher;<br><br>-- 不重复<br><br>SELECT DISTINCT depart from teacher;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>使用where 作为条件查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"><br>SELECT * FROM score WHERE DEGREE BETWEEN 60 and 80;<br><br>SELECT * FROM score WHERE DEGREE &gt;60 and DEGREE &lt;80;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>关系查找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 表示或者关系的查询<br>SELECT * FROM score WHERE degree in(86,88);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>多条件查找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"><br>-- 使用两个条件查询<br><br>SELECT * FROM student WHERE class=95031 AND ssex=&#x27;女&#x27;;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>升序降序查找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 升序降序查表<br><br><br>-- 升序查表<br>SELECT * FROM student ORDER BY class ASC;<br><br>-- 降序查找<br>SELECT * FROM student ORDER BY class DESC;<br><br>-- 默认升序<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql"><br>SELECT * FROM score ORDER BY cno ASC,DEGREE DESC;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询’95031’班的人数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 统计人数<br><br>SELECT COUNT(*) FROM student WHERE class=&#x27;95031&#x27;;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>子查询</p>
+</li>
+</ol>
+   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"><br>-- 统计最高分<br><br>SELECT * FROM score WHERE degree=(SELECT MAX(degree) FROM score);<br></code></pre></td></tr></table></figure>
+
+<ol start="11">
+<li><p>计算不同组的平均数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 计算平均成绩<br>-- 计算某一个特定的值的平均数<br>SELECT AVG(DEGREE) FROM score where cno =&#x27;3-105&#x27;;<br><br><br>-- 计算组平均值<br>SELECT cno,AVG(DEGREE) FROM score GROUP BY cno;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>分组指定组内成员的数量，使用like匹配</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 计算score 表中至少有两名学生选修，并以3开头的平均数<br><br>SELECT<br>    cno,<br>    AVG(DEGREE),<br>    COUNT(*)<br>FROM score<br>GROUP BY cno<br>HAVING<br>    COUNT(cno) &gt;= 2<br>    AND cno LIKE &#x27;3%&#x27;; <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>带条件的查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询分数大于70，小于90的sno列<br><br>SELECT sno,DEGREE FROM score WHERE degree&gt;70 and degree&lt;90;<br><br>SELECT sno FROM score WHERE degree BETWEEN 70 AND 90;<br></code></pre></td></tr></table></figure></li>
 </ol>
 
                 
