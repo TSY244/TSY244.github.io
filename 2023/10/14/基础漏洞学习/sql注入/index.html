@@ -16,14 +16,17 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="注入原理sql基础了解sql 注释 1-- 一定要加一个空格  表示相等 1-- 使用&#96;&#x3D;&#96;  sql信息表 1infomation_schema  使用系统函数得到信息123456789101112131415SELECT version();  -- 返回数据库的版本select user();  select DATABASE();  SELECT CURRENT_USER(); -- 当前">
+<meta property="og:type" content="article">
 <meta property="og:title" content="sql注入">
-<meta property="og:url" content="http://example.com/2023/10/14/sql%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:url" content="http://example.com/2023/10/14/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="chg">
+<meta property="og:description" content="注入原理sql基础了解sql 注释 1-- 一定要加一个空格  表示相等 1-- 使用&#96;&#x3D;&#96;  sql信息表 1infomation_schema  使用系统函数得到信息123456789101112131415SELECT version();  -- 返回数据库的版本select user();  select DATABASE();  SELECT CURRENT_USER(); -- 当前">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-14T07:51:33.000Z">
-<meta property="article:modified_time" content="2023-10-14T07:51:33.924Z">
+<meta property="article:modified_time" content="2023-10-14T12:19:53.649Z">
 <meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="基础漏洞学习">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -224,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          1.2k words
         
       </span>
     
@@ -235,7 +238,7 @@
         
         
         
-          1 mins
+          11 mins
         
       </span>
     
@@ -278,7 +281,102 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="注入原理"><a href="#注入原理" class="headerlink" title="注入原理"></a>注入原理</h1><h1 id="sql基础"><a href="#sql基础" class="headerlink" title="sql基础"></a>sql基础</h1><h2 id="了解sql"><a href="#了解sql" class="headerlink" title="了解sql"></a>了解sql</h2><ol>
+<li><p>注释</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 一定要加一个空格</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>表示相等</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 使用`=`</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>sql信息表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">infomation_schema<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="使用系统函数得到信息"><a href="#使用系统函数得到信息" class="headerlink" title="使用系统函数得到信息"></a>使用系统函数得到信息</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> version();  <span class="hljs-comment">-- 返回数据库的版本</span><br><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>();  <br><br><span class="hljs-keyword">select</span> DATABASE();  <br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">CURRENT_USER</span>(); <span class="hljs-comment">-- 当前用户</span><br><br><span class="hljs-keyword">SELECT</span> @<span class="hljs-variable">@datadir</span>;  <span class="hljs-comment">-- 数据库的地址</span><br><br><span class="hljs-keyword">SELECT</span> @<span class="hljs-variable">@version</span>_compile_os; <span class="hljs-comment">-- 返沪当前系统的版本</span><br><br><br><span class="hljs-comment">-- 系统的用户</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">SYSTEM_USER</span>();<br></code></pre></td></tr></table></figure>
+
+<h2 id="使用infomation-schema查看信息"><a href="#使用infomation-schema查看信息" class="headerlink" title="使用infomation_schema查看信息"></a>使用infomation_schema查看信息</h2><ol>
+<li><p>查看所有的数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> information_schema.SCHEMATA;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> information_schema.TABLES;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>列名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> `COLUMN_NAME` <span class="hljs-keyword">FROM</span> information_schema.COLUMNS <span class="hljs-keyword">WHERE</span> TABLE_NAME <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;%h%&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>数据库表的名字</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT `TABLE_NAME` FROM information_schema.TABLES;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>查看该表属于什么数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * from information_schema.TABLES WHERE `TABLE_NAME` = &#x27;test_data&#x27;;<br><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>字段的名称</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> COLUMN_NAME<br><span class="hljs-keyword">FROM</span><br>    information_schema.COLUMNS<br><span class="hljs-keyword">where</span> `TABLE_NAME` <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;student&#x27;</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>infomation_schema常用的字段名称</p>
+<ul>
+<li><code>schema_name</code>所有的数据表</li>
+<li>table_schema 当前表的数据库</li>
+<li>table_name 表的名称</li>
+<li>column_name 字段的名称</li>
+</ul>
+</li>
+</ol>
+<h2 id="sql-注入常用的函数"><a href="#sql-注入常用的函数" class="headerlink" title="sql 注入常用的函数"></a>sql 注入常用的函数</h2><ol>
+<li><p>concat(str1,”分隔符” ,str2)</p>
+<p>concat(str1,str2,str3)</p>
+</li>
+<li><p>group_concat(field_username1,field_username2…)</p>
+<p>将多行查询的结果以逗号隔开全部输出 （将多行转换成一行输出）</p>
+</li>
+<li><p>substr(),substring(),mid()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT SUBSTR((DATABASE()),0,10);<br></code></pre></td></tr></table></figure>
+
+<p>从0，开始，采取10个字节</p>
+</li>
+<li><p>left(“string”,size)</p>
+<p>从左边开始size个字节</p>
+</li>
+<li><p>right(“string”,size)</p>
+<p>从右边开始size个字节</p>
+</li>
+<li><p>locate(substr,str)</p>
+<p>返回substr在str中第一次出现的位置</p>
+</li>
+<li><p><code>limit</code>和<code>offset</code> 限制查询显示的行数</p>
+</li>
+<li><p>rand()</p>
+<p>随机数</p>
+<p><code>select rand()</code></p>
+</li>
+<li><p>floor()</p>
+<p>向下取整数</p>
+</li>
+</ol>
+<h1 id="sql注入的分类"><a href="#sql注入的分类" class="headerlink" title="sql注入的分类"></a>sql注入的分类</h1><h2 id="根据变量分"><a href="#根据变量分" class="headerlink" title="根据变量分"></a>根据变量分</h2><ol>
+<li>字符型</li>
+<li>数字型</li>
+</ol>
+<h2 id="根据位置分"><a href="#根据位置分" class="headerlink" title="根据位置分"></a>根据位置分</h2><ol>
+<li>get</li>
+<li>post</li>
+<li>http</li>
+</ol>
+<h2 id="根据手法分"><a href="#根据手法分" class="headerlink" title="根据手法分"></a>根据手法分</h2><ol>
+<li>联合注入</li>
+<li>报错注入</li>
+<li>bool盲注</li>
+<li>时间盲注（延迟注入）</li>
+<li>堆叠注入</li>
+<li>二次注入</li>
+<li>宽字节注入</li>
+</ol>
+<h1 id="有可能存在的地方"><a href="#有可能存在的地方" class="headerlink" title="有可能存在的地方"></a>有可能存在的地方</h1>
                 
               </div>
             
@@ -286,6 +384,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/">#基础漏洞学习</a>
+      
+    </div>
   
 </div>
 
@@ -296,7 +401,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>sql注入</div>
-      <div>http://example.com/2023/10/14/sql注入/</div>
+      <div>http://example.com/2023/10/14/基础漏洞学习/sql注入/</div>
     </div>
     <div class="license-meta">
       
