@@ -24,7 +24,7 @@
 <meta property="og:description" content="注入原理sql基础了解sql 注释 1-- 一定要加一个空格  表示相等 1-- 使用&#96;&#x3D;&#96;  sql信息表 1infomation_schema  使用系统函数得到信息123456789101112131415SELECT version();  -- 返回数据库的版本select user();  select DATABASE();  SELECT CURRENT_USER(); -- 当前">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-14T07:51:33.000Z">
-<meta property="article:modified_time" content="2023-10-14T12:19:53.649Z">
+<meta property="article:modified_time" content="2023-10-15T12:28:06.551Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k words
+          1.7k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          11 mins
+          15 mins
         
       </span>
     
@@ -376,7 +376,17 @@
 <li>二次注入</li>
 <li>宽字节注入</li>
 </ol>
-<h1 id="有可能存在的地方"><a href="#有可能存在的地方" class="headerlink" title="有可能存在的地方"></a>有可能存在的地方</h1>
+<h1 id="有可能存在的地方"><a href="#有可能存在的地方" class="headerlink" title="有可能存在的地方"></a>有可能存在的地方</h1><h2 id="万能密码"><a href="#万能密码" class="headerlink" title="万能密码"></a>万能密码</h2><p>如果登录框存在万能密码登录的话，就可以判断存在sql注入的漏洞</p>
+<p>当我们输入用户名和密码的时候</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from admin where Username= &#x27;.$username.&#x27; and Password= &#x27;.md5($password).&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>但是当我们输入万能密码的时候</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from admin where Username=&#x27;1&#x27; or 1=1 or &#x27;1&#x27;=&#x27;1&#x27; and Password=&#x27;EDFKGMZDFSDFDSFRRQWERRFGGG&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>由于’or’&lt;’and’&lt;’not’的关系</p>
+<p>上面的情况就会变成 false or true or false</p>
+<p>最后一个false是<code>&#39;1&#39;=&#39;1&#39; and Password=&#39;EDFKGMZDFSDFDSFRRQWERRFGGG&#39;</code><br>因为密码是我们乱输入的，又会先计算and所以会变成false</p>
+<h1 id="sql注入做题的一般步骤"><a href="#sql注入做题的一般步骤" class="headerlink" title="sql注入做题的一般步骤"></a>sql注入做题的一般步骤</h1><h2 id="1-判断是字符型还是数字型"><a href="#1-判断是字符型还是数字型" class="headerlink" title="1  判断是字符型还是数字型"></a>1  判断是字符型还是数字型</h2>
                 
               </div>
             
@@ -444,6 +454,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/10/14/PHP/php%E9%9A%8F%E8%AE%B0/" title="php随记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">php随记</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
