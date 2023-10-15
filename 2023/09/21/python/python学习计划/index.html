@@ -1,0 +1,905 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="23_9_22python版本推荐3.8和2,7最好都安装用着挺方便的，反正不要太新了    搭建vscode环境 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;165379391 我的文件结构 假如我想使用python 单独打开code就可以了 我是则会么做的，防止了不同环境的混用，乱    安装ipython 相比于命令行还是好用很多，这个是睿那里偷的 不知道你有没有，反正我把我知">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python学习计划">
+<meta property="og:url" content="http://example.com/2023/09/21/python/python%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/index.html">
+<meta property="og:site_name" content="chg">
+<meta property="og:description" content="23_9_22python版本推荐3.8和2,7最好都安装用着挺方便的，反正不要太新了    搭建vscode环境 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;165379391 我的文件结构 假如我想使用python 单独打开code就可以了 我是则会么做的，防止了不同环境的混用，乱    安装ipython 相比于命令行还是好用很多，这个是睿那里偷的 不知道你有没有，反正我把我知">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921234737043.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921235028643.png">
+<meta property="article:published_time" content="2023-09-21T15:42:37.000Z">
+<meta property="article:modified_time" content="2023-10-15T16:01:36.615Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921234737043.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>python学习计划 - chg</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>chg&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="python学习计划"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-21 23:42" pubdate>
+          September 21, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">python学习计划</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="23-9-22"><a href="#23-9-22" class="headerlink" title="23_9_22"></a>23_9_22</h1><p>python版本推荐3.8和2,7最好都安装<br>用着挺方便的，反正不要太新了</p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+搭建vscode环境</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/165379391">https://zhuanlan.zhihu.com/p/165379391</a></p>
+<p>我的文件结构<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921234737043.png" srcset="/img/loading.gif" lazyload alt="image-20230921234737043"></p>
+<p>假如我想使用python<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921235028643.png" srcset="/img/loading.gif" lazyload alt="image-20230921235028643"></p>
+<p>单独打开code就可以了</p>
+<p>我是则会么做的，防止了不同环境的混用，乱</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+安装ipython</p>
+<p>相比于命令行还是好用很多，这个是睿那里偷的</p>
+<p>不知道你有没有，反正我把我知道推荐给你</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39526564/article/details/113627531">https://blog.csdn.net/weixin_39526564/article/details/113627531</a></p>
+</li>
+</ul>
+<hr>
+<h1 id="23-9-23"><a href="#23-9-23" class="headerlink" title="23_9_23"></a>23_9_23</h1><p>语言学习</p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+尝试以下代码</p>
+<p>ipython</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> this<br></code></pre></td></tr></table></figure>
+
+<p>我反正是看不懂英语</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> turtle<br><br>turtle.pensize(<span class="hljs-number">4</span>)<br>turtle.pencolor(<span class="hljs-string">&#x27;red&#x27;</span>)<br><br>turtle.forward(<span class="hljs-number">100</span>)<br>turtle.right(<span class="hljs-number">90</span>)<br>turtle.forward(<span class="hljs-number">100</span>)<br>turtle.right(<span class="hljs-number">90</span>)<br>turtle.forward(<span class="hljs-number">100</span>)<br>turtle.right(<span class="hljs-number">90</span>)<br>turtle.forward(<span class="hljs-number">100</span>)<br><br>turtle.mainloop()<br></code></pre></td></tr></table></figure>
+
+<p>挺有趣的，挺强大的</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+了解变量的命名</p>
+<blockquote>
+<p>回答问题</p>
+<ol>
+<li>__实例属性用单个下划线开头</li>
+<li>__实例属性用两个下划线开头</li>
+</ol>
+</blockquote>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+类型与检查</p>
+<p>Python中可以使用<code>type</code>函数对变量的类型进行检查</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python">a = <span class="hljs-number">100</span><br>b = <span class="hljs-number">12.345</span><br>c = <span class="hljs-number">1</span> + <span class="hljs-number">5j</span><br>d = <span class="hljs-string">&#x27;hello, world&#x27;</span><br>e = <span class="hljs-literal">True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))    <span class="hljs-comment"># &lt;class &#x27;int&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(b))    <span class="hljs-comment"># &lt;class &#x27;float&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(c))    <span class="hljs-comment"># &lt;class &#x27;complex&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(d))    <span class="hljs-comment"># &lt;class &#x27;str&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(e))    <span class="hljs-comment"># &lt;class &#x27;bool&#x27;&gt;</span><br><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+如何经行类型转换？</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+运算符</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 取下标：</li>
+<li><input checked="" disabled="" type="checkbox"> 切片：</li>
+<li><input checked="" disabled="" type="checkbox"> 按位取反, 正负号：</li>
+<li><input checked="" disabled="" type="checkbox"> 乘，除，模，整除：</li>
+<li><input checked="" disabled="" type="checkbox"> 加，减：</li>
+<li><input checked="" disabled="" type="checkbox"> 右移，左移：</li>
+<li><input checked="" disabled="" type="checkbox"> 按位与：</li>
+<li><input checked="" disabled="" type="checkbox"> 按位异或，按位或：</li>
+<li><input checked="" disabled="" type="checkbox"> 小于等于，小于，大于，大于等于：</li>
+<li><input checked="" disabled="" type="checkbox"> 等于，不等于：</li>
+<li><input checked="" disabled="" type="checkbox"> 身份运算符：</li>
+<li><input checked="" disabled="" type="checkbox"> 成员运算符：</li>
+<li><input checked="" disabled="" type="checkbox"> 逻辑运算符：</li>
+</ul>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+项目</p>
+<p>虽然看起来很简单，但是还是做一下</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 输入半径计算圆的面积</li>
+</ul>
+</li>
+</ul>
+<h1 id="23-9-24"><a href="#23-9-24" class="headerlink" title="23_9_24"></a>23_9_24</h1><ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+复习</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 找出一段(1000-…)时间的闰年</li>
+<li><input checked="" disabled="" type="checkbox"> 二分查找循序表</li>
+</ul>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+if-else</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+项目</p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+将成绩换成等级</p>
+<blockquote>
+<p>如果输入的成绩在90分以上（含90分）输出A；80分-90分（不含90分）输出B；70分-80分（不含80分）输出C；60分-70分（不含70分）输出D；60分以下输出E。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="23-9-27"><a href="#23-9-27" class="headerlink" title="23_9_27"></a>23_9_27</h1><ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+生成<strong>斐波那契数列</strong>的前20个数。</p>
+<p>尝试使用递归和循环分别构造</p>
+<p>尝试定义函数函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ ==<span class="hljs-string">&#x27;__mian__&#x27;</span> <span class="hljs-comment">#理解为主函数</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">function_name</span> <span class="hljs-comment">#注意命名规范</span><br></code></pre></td></tr></table></figure>
+
+<p>这个我还没写，可以等我写了，你在做</p>
+</li>
+</ul>
+<h1 id="23-9-28"><a href="#23-9-28" class="headerlink" title="23_9_28"></a>23_9_28</h1><ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+尝试使用可变参数函数写一个加法器</p>
+<p>关键词:<code>*args</code></p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+使用model</p>
+<p>可以理解为C语言的头文件</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+写一个两个model里面有两个func(*args)的程序</p>
+<p>第一个func为减法</p>
+<p>第二个func为加法</p>
+</li>
+</ul>
+<h1 id="23-10-5"><a href="#23-10-5" class="headerlink" title="23_10_5"></a>23_10_5</h1><p>抱歉，因为我的问题，把你的学习时间拉长了</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 原谅（哈哈哈哈）</li>
+<li><input checked="" disabled="" type="checkbox"> 判断是不是回文数</li>
+<li><input checked="" disabled="" type="checkbox"> 判断是不是素数</li>
+</ul>
+<h1 id="23-10-6"><a href="#23-10-6" class="headerlink" title="23_10_6"></a>23_10_6</h1><ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+使用这行的字符串打印静夜诗（意思一下就行，重点再折行也就是使用<code>&quot;&quot;&quot;</code>）</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+学习使用<code>\</code>表示8进制和16进制</p>
+<p><code>\u</code>八进制</p>
+<p><code>\x</code>十六进制</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+学习字符串的相关符号</p>
+<ul>
+<li></li>
+</ul>
+<ul>
+<li></li>
+</ul>
+<p>in</p>
+<p>not in</p>
+<p>[]</p>
+<p>[:]</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+学习字符串的操作</p>
+<ol>
+<li>计算长度</li>
+<li>获得&#x3D;&#x3D;全部大写&#x3D;&#x3D;的拷贝</li>
+<li>查找，返回下标</li>
+<li>是否是数字构成</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">len</span>()<br>upper()<br>find()<br>isdigit()<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+格式化字符串</p>
+</li>
+</ul>
+<h1 id="23-10-7"><a href="#23-10-7" class="headerlink" title="23_10_7"></a>23_10_7</h1><ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+使用列表</p>
+<blockquote>
+<p>定义列表可以将列表的元素放在<code>[]</code></p>
+<p>list1 &#x3D; [1, 3, 5, 7, 100]</p>
+<p>看一个比较东西：</p>
+<p>list1&#x3D;[‘hello’]</p>
+<p>list2&#x3D;list1*3</p>
+<p>print(list2) # [‘hello’, ‘hello’, ‘hello’]</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs python">下标(索引)运算<br><br><span class="hljs-built_in">print</span>(list1[<span class="hljs-number">0</span>]) <span class="hljs-comment"># 1</span><br><span class="hljs-built_in">print</span>(list1[<span class="hljs-number">4</span>]) <span class="hljs-comment"># 100</span><br><br><br><span class="hljs-comment"># range 循环</span><br><span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(list1)):<br>    <span class="hljs-built_in">print</span>(list1[index])<br>    <br>    <br><span class="hljs-comment"># 通过for循环遍历列表元素</span><br><span class="hljs-keyword">for</span> elem <span class="hljs-keyword">in</span> list1:<br>    <span class="hljs-built_in">print</span>(elem)<br>    <br>    <br><span class="hljs-comment"># 通过enumerate函数处理列表之后再遍历可以同时获得元素索引和值</span><br><span class="hljs-keyword">for</span> index, elem <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(list1):<br>    <span class="hljs-built_in">print</span>(index, elem)<br>    <br>    <br><span class="hljs-comment"># 添加元素</span><br>list1.append(<span class="hljs-number">200</span>)<br>list1.insert(<span class="hljs-number">1</span>, <span class="hljs-number">400</span>)<br><br><br><span class="hljs-comment"># 从指定的位置删除元素</span><br>list1.pop(<span class="hljs-number">0</span>)<br>list1.pop(<span class="hljs-built_in">len</span>(list1) - <span class="hljs-number">1</span>)<br><br><br><br><span class="hljs-comment"># 清空列表元素</span><br>list1.clear()<br><br><br><span class="hljs-comment"># 列表切片</span><br>fruits2 = fruits[<span class="hljs-number">1</span>:<span class="hljs-number">4</span>]<br></code></pre></td></tr></table></figure>
+
+<p>可以尝试其他的东西，我觉得用的多的就是这些</p>
+</li>
+</ul>
+<h1 id="23-10-8"><a href="#23-10-8" class="headerlink" title="23_10_8"></a>23_10_8</h1><p>今天学习一下生成器</p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+生成器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">f = [x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)]<br>f = [x + y <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;ABCDE&#x27;</span> <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;1234567&#x27;</span>]<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="23-10-12"><a href="#23-10-12" class="headerlink" title="23_10_12"></a>23_10_12</h1><p>一不小心都这么久没给你布置任务了….</p>
+<p>再次道歉</p>
+<p>今天学习元组+项目练手</p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+跑马灯</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> time<br><br>string = <span class="hljs-string">&quot;四川成都欢迎你!&quot;</span><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    os.system(<span class="hljs-string">&quot;cls&quot;</span>)<br>    <span class="hljs-built_in">print</span>(string)<br>    time.sleep(<span class="hljs-number">0.2</span>)<br>    string = string[<span class="hljs-number">1</span>:] + string[<span class="hljs-number">0</span>]<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+生成指定的长度的随机数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> random<br><br>passwd_len = <span class="hljs-number">10</span><br>all_chars = <span class="hljs-string">&quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span><br>passwd = <span class="hljs-string">&quot;&quot;</span><br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(passwd_len):<br>    index = random.randint(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(all_chars) - <span class="hljs-number">1</span>)  <span class="hljs-comment"># 想想为什么减一嘞</span><br>    passwd += <span class="hljs-built_in">str</span>(all_chars[index])<br><br><span class="hljs-built_in">print</span>(passwd)<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+元组</p>
+<blockquote>
+<p>元组与列表类似</p>
+<p>不同之处在于元组的元素不能修改</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 定义元组</span><br>t = (<span class="hljs-string">&#x27;wx&#x27;</span>,<span class="hljs-string">&#x27;四川成都&#x27;</span>,<span class="hljs-number">1</span>,<span class="hljs-literal">False</span>)<br><span class="hljs-comment"># 除了1，2有意思其他的没有哈哈哈</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>获取元组的值</p>
+</li>
+<li><p>便于元组</p>
+</li>
+<li><p>转换成列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">list</span>()<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h1 id="23-10-13"><a href="#23-10-13" class="headerlink" title="23_10_13"></a>23_10_13</h1><ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+完成下面这个</p>
+<blockquote>
+<p>这个是一道经典算法</p>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">《幸运的基督徒》</span><br><span class="hljs-string">有15个基督徒和15个非基督徒在海上遇险，为了能让一部分人活下来不得不将其中15个人扔到海里面去，有个人想了个办法就是大家围成一个圈，由某个人开始从1报数，报到9的人就扔到海里面，他后面的人接着从1开始报数，报到9的人继续扔到海里面，直到扔掉15个人。由于上帝的保佑，15个基督徒都幸免于难，问这些人最开始是怎么站的，哪些位置是基督徒哪些位置是非基督徒。</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="23-10-15"><a href="#23-10-15" class="headerlink" title="23_10_15"></a>23_10_15</h1><ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+开始学习面向对象</p>
+<blockquote>
+<p> 经过java的学习，你应该知道什么是面向对象，所以对思想我就不再细说了，开始尝试学习在python运用这种思想</p>
+</blockquote>
+<p>直接看这段代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 类名大写</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>:<br>    <span class="hljs-comment"># 构造函数，可以理解为构造器</span><br>    <span class="hljs-comment"># name,age作为成员变量</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age, sno</span>):<br>        self.name = name  <span class="hljs-comment"># 理解尾public</span><br>        self.__age = age  <span class="hljs-comment"># 理解为private</span><br>        self.__sno = sno  <span class="hljs-comment"># 理解为private</span><br><br>        <span class="hljs-comment"># 由于python没有私有这一说，添加_只是一种较为合理的代码风格,表面是私有，我们通过方法却能访问</span><br><br>    <span class="hljs-comment"># 我喜欢驼峰命名法</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">getName</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> self.name<br><br>    <span class="hljs-comment"># 貌似这种命名python更加喜欢</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">set_name</span>(<span class="hljs-params">self, name</span>):<br>        self.name = name<br><br><br><span class="hljs-comment"># 类的实例化</span><br>wx = Student(<span class="hljs-string">&quot;wx&quot;</span>, <span class="hljs-number">19</span>, <span class="hljs-string">&quot;2022125008&quot;</span>)<br><br><span class="hljs-built_in">print</span>(wx.getName())<br><span class="hljs-built_in">print</span>(wx.name)<br>wx.set_name(<span class="hljs-string">&quot;wen&quot;</span>)<br><span class="hljs-built_in">print</span>(wx.getName())<br><br><span class="hljs-built_in">print</span>(wx.getAge())<br><span class="hljs-comment"># 访问age私有变量</span><br><span class="hljs-built_in">print</span>(wx._Student__age)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+练习定义点(Point)类</p>
+<p>成员：x,y</p>
+<p>方法：set,get</p>
+</li>
+</ul>
+<h1 id="23-10-16"><a href="#23-10-16" class="headerlink" title="23_10_16"></a>23_10_16</h1><p>继承，作为脚本语言这个用的不是很多（至少是我）</p>
+<p>开发用的多</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 装饰器</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/python/">#python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>python学习计划</div>
+      <div>http://example.com/2023/09/21/python/python学习计划/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 21, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/22/MYSQL/mysql-fast-learning/" title="mysql_fast_learning">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">mysql_fast_learning</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/21/web/WEB%E5%AE%89%E5%85%A8/" title="WEB安全">
+                        <span class="hidden-mobile">WEB安全</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
