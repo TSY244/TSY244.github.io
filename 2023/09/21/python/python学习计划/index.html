@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921234737043.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921235028643.png">
 <meta property="article:published_time" content="2023-09-21T15:42:37.000Z">
-<meta property="article:modified_time" content="2023-10-15T16:18:00.248Z">
+<meta property="article:modified_time" content="2023-10-16T17:02:39.002Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.4k words
+          5.2k words
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          37 mins
+          44 mins
         
       </span>
     
@@ -537,6 +537,31 @@ if-else</p>
 <h1 id="23-10-17"><a href="#23-10-17" class="headerlink" title="23_10_17"></a>23_10_17</h1><p>学习继承</p>
 <p>继承，作为脚本语言这个用的不是很多（至少是我）</p>
 <p>开发用的多</p>
+<ul>
+<li><p><input disabled="" type="checkbox"> 
+静态方法</p>
+<p>这个java里面有默认你知道</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@staticmethod </span><span class="hljs-comment"># 静态方法</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_age</span>():<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>.__age<br></code></pre></td></tr></table></figure>
+
+<p>就是添加了一个修饰</p>
+</li>
+<li><p><input disabled="" type="checkbox"> 
+类方法</p>
+<p>类方法代表了与类本身信息相关的函数，第一个参数规定了是<code>cls</code></p>
+<p>下面是我理解的用法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@classmethod  </span><span class="hljs-comment"># 类方法</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">getClassName</span>(<span class="hljs-params">cls</span>):<br>        <span class="hljs-keyword">return</span> cls.__name__ <span class="hljs-comment"># 返回当前类的名称</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><input disabled="" type="checkbox"> 
+继承</p>
+<p>注意看Student的括号，需要包含父类，也就是需要继承的类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:<br>    <span class="hljs-comment"># 限定Person对象只能绑定_name, __age和__sex属性</span><br>    _slots_ = (<span class="hljs-string">&quot;__name&quot;</span>, <span class="hljs-string">&quot;__age&quot;</span>, <span class="hljs-string">&quot;__sex&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age, sex</span>) -&gt; <span class="hljs-literal">None</span>:  <span class="hljs-comment"># 后置返回值</span><br>        self.__name = name<br>        self.__age = age<br>        self.__sex = sex<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(<span class="hljs-title class_ inherited__">Person</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age, sex, school</span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-built_in">super</span>().__init__(name, age, sex)  <span class="hljs-comment"># 调用父类的构造函数</span><br>        self.__school = school<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_name</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>.__name<br><br><span class="hljs-meta">    @staticmethod  </span><span class="hljs-comment"># 静态方法</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_age</span>():<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>.__age<br><br><span class="hljs-meta">    @classmethod  </span><span class="hljs-comment"># 类方法</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">getClassName</span>(<span class="hljs-params">cls</span>):<br>        <span class="hljs-keyword">return</span> cls.__name__<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><input disabled="" type="checkbox"> 
+多态</p>
+<p>我们也可以对一个父类函数进行重写，当多个子类的调用同一个方法的结果不一样，这个就是多态（我的理解）</p>
+</li>
+</ul>
+<h1 id="23-10-18"><a href="#23-10-18" class="headerlink" title="23_10_18"></a>23_10_18</h1><p>学习抽象….</p>
 
                 
               </div>
