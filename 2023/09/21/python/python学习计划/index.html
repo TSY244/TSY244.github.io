@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921234737043.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921235028643.png">
 <meta property="article:published_time" content="2023-09-21T15:42:37.000Z">
-<meta property="article:modified_time" content="2023-10-16T17:02:39.002Z">
+<meta property="article:modified_time" content="2023-10-17T16:13:20.627Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.2k words
+          6.2k words
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          44 mins
+          52 mins
         
       </span>
     
@@ -561,7 +561,85 @@ if-else</p>
 <p>我们也可以对一个父类函数进行重写，当多个子类的调用同一个方法的结果不一样，这个就是多态（我的理解）</p>
 </li>
 </ul>
-<h1 id="23-10-18"><a href="#23-10-18" class="headerlink" title="23_10_18"></a>23_10_18</h1><p>学习抽象….</p>
+<h1 id="23-10-18"><a href="#23-10-18" class="headerlink" title="23_10_18"></a>23_10_18</h1><p>抽象就是虚函数之类的东西</p>
+<ul>
+<li><p><input disabled="" type="checkbox"> 
+给vscode安装以下</p>
+<blockquote>
+<p>Better Comments</p>
+<p>Error Lens</p>
+</blockquote>
+</li>
+<li><p><input disabled="" type="checkbox"> 
+研究代码 </p>
+<pre><code class="python">  import abc 
+# !这里的类一定要导入
+
+class Person(metaclass=abc.ABCMeta):
+
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+
+    @abc.abstractmethod
+    def behavior():
+        pass
+
+    @property
+    def name(self):
+        return self.__name
+    
+    @name.setter
+    def setName(self,name):
+        self.__name = name
+
+    @property
+    def age(self):
+        return self.__age
+    
+    @age.setter
+    def setAge(self,age):
+        self.__age = age
+
+class Student(Person):
+    
+    def __init__(self, name, age, school):
+        super().__init__(name, age)
+        self.__school = school
+    
+    def behavior(self):
+        print(&quot;I&#39;m studying&quot;)
+    
+    @property
+    def school(self):
+        return self.__school
+        
+    @school.setter
+    def setSchool(self,school):
+            self.__school = school
+
+    def behavior(self):
+        print(&quot;studying&quot;)
+
+class Teacher(Person):
+
+    def __init__(self, name, age):
+        super().__init__(name, age)
+        
+    def behavior(self):
+      print(&quot;teaching&quot;)
+        
+# !注意观察同样一个函数的输出结果
+      wx=Student(&quot;wx&quot;,18,&quot;CUIT&quot;)
+      wx.behavior()
+      chg=Teacher(&quot;chg&quot;,18)
+      chg.behavior()
+
+# ?一些原因我现在使用的是vscode写markdown,可能对python的格式会发生变化
+</code></pre>
+</li>
+</ul>
+<h1 id="23-10-18-1"><a href="#23-10-18-1" class="headerlink" title="23_10_18"></a>23_10_18</h1><p>文件和异常…</p>
 
                 
               </div>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="_slots_魔术由于python是一门动态语言[1]，所以我们可以使用_slots_魔术限定，就是只能邦定 12345678class Person:    # 限定Person对象只能绑定_name, __age和__sex属性    _slots_ &#x3D; (&quot;__name&quot;, &quot;__age&quot;, &quot;__sex&quot;)    def __in">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-16T16:34:32.000Z">
-<meta property="article:modified_time" content="2023-10-16T16:59:03.854Z">
+<meta property="article:modified_time" content="2023-10-17T15:43:58.207Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
@@ -308,7 +308,6 @@
 <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>我们也可以对一个父类函数进行重写，当多个子类的调用同一个方法的结果不一样，这个就是多态</p>
 <h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>一定要引入abc</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> abc<br><br><span class="hljs-comment"># 注意构建的时候 metaclass=abc.ABCMeta</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Pet</span>(<span class="hljs-built_in">object</span>, metaclass=abc.ABCMeta):<br>    <span class="hljs-string">&quot;&quot;&quot;宠物&quot;&quot;&quot;</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, nickname</span>):<br>        self._nickname = nickname<br><br><span class="hljs-meta">    @abc.abstractmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">make_voice</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;发出声音&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
-
 <section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>允许我们在运行的时候，绑定新的方法和属性
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
