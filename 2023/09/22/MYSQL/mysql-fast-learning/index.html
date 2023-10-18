@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png">
 <meta property="article:published_time" content="2023-09-22T00:26:25.000Z">
-<meta property="article:modified_time" content="2023-10-17T14:31:11.521Z">
+<meta property="article:modified_time" content="2023-10-18T02:33:09.376Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="MYSQL">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.2k words
+          8.8k words
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          61 mins
+          74 mins
         
       </span>
     
@@ -463,9 +463,29 @@ SELECT
     score.degree
 FROM score
     JOIN course ON course.cno = score.cno;
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><br><span class="hljs-number">2</span>. 隐式<span class="hljs-keyword">join和显示，建议使用显示的，隐式的不太清楚</span><br><span class="hljs-keyword"></span><br>   ```mysql<br>   <span class="hljs-comment"># 查询所有的学生的sname,cname,degree</span><br>   <br>   SELECT<br>       student.sname,<br>       course.cname,<br>       <span class="hljs-keyword">score.degree</span><br><span class="hljs-keyword"></span>   FROM student<br>       <span class="hljs-keyword">JOIN </span><span class="hljs-keyword">score </span>ON student.sno = <span class="hljs-keyword">score.sno </span><span class="hljs-comment"># 这两个不一样，也不能是student</span><br>       <span class="hljs-keyword">JOIN </span>course ON <span class="hljs-keyword">score.cno </span>= course.cno;<br>   <br>   <br>   SELECT sname, cname, degree<br>   FROM student, <span class="hljs-keyword">score, </span>course<br>   WHERE<br>       student.sno = <span class="hljs-keyword">score.sno</span><br><span class="hljs-keyword"></span>       <span class="hljs-keyword">and </span><span class="hljs-keyword">score.cno </span>= course.cno;<br></code></pre></td></tr></table></figure>
 </code></pre>
 </li>
+<li><p>as起别名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT<br>    student.sname as stu_name,<br>    course.cname,<br>    score.degree,<br>    score.cno as sco_con<br>FROM student<br>    JOIN score ON student.sno = score.sno<br>    JOIN course ON score.cno = course.cno;<br></code></pre></td></tr></table></figure></li>
 </ol>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><ol>
+<li><p>使用in计算一类</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"># 查询<span class="hljs-number">95031</span>班，每个班的平均分<br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(degree)<br><span class="hljs-keyword">from</span> score<br><span class="hljs-keyword">where</span> sno <span class="hljs-keyword">in</span> (<br>        <span class="hljs-keyword">SELECT</span> sno<br>        <span class="hljs-keyword">from</span> student<br>        <span class="hljs-keyword">WHERE</span> class <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;95031&#x27;</span><br>    ) <br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> cno; # 根据不同的学科分类<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>子查询做限定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT *<br>from score<br>WHERE degree &gt; (<br>        SELECT degree<br>        FROM score<br>        WHERE sno = 109 AND cno=&#x27;3-105&#x27;<br>    );<br>    <br># 查询3-105课程的成绩高于 109 同学 3-105 成绩的所有同学的记录<br>SELECT *<br>FROM score<br>WHERE cno = &#x27;3-105&#x27; and degree &gt; (<br>        SELECT degree<br>        FROM score<br>        WHERE<br>            sno = 109<br>            AND cno = &#x27;3-105&#x27;<br>    );<br>    <br><br># 查询成绩高于学号 109 课程号为 3-105 的成绩的所有记录<br><br>SELECT *<br>FROM score<br>WHERE cno = &#x27;3-105&#x27; and degree &gt; (<br>        SELECT degree<br>        FROM score<br>        WHERE<br>            sno = 109<br>            and cno = &#x27;3-105&#x27;<br>    );<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="year-函数和-in-做限制条件"><a href="#year-函数和-in-做限制条件" class="headerlink" title="year 函数和 in 做限制条件"></a>year 函数和 in 做限制条件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询和学号 108 101 的同学同年出生的所有学生的sno sname 和 sbirthday<br><br>SELECT *<br>FROM student<br>WHERE YEAR(sbirthday) in(<br>        SELECT<br>            YEAR(sbirthday)<br>        FROM student<br>        WHERE<br>            sno in(108, 101)<br>    );<br></code></pre></td></tr></table></figure>
+
+<h2 id="嵌套子查询"><a href="#嵌套子查询" class="headerlink" title="嵌套子查询"></a>嵌套子查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询 张旭 老师任课学生的成绩<br><br>SELECT *<br>FROM score<br>WHERE cno in (<br>        SELECT cno<br>        FROM course<br>        WHERE tno = (<br>                SELECT tno<br>                FROM teacher<br>                WHERE tname = &quot;张旭&quot;<br>            )<br>    );<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="多表查询plus"><a href="#多表查询plus" class="headerlink" title="多表查询plus"></a>多表查询plus</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询选修某课程的同学人数多于5人的教师名字<br><br>SELECT tname<br>FROM teacher<br>WHERE tno = (<br>        SELECT tno<br>        FROM course<br>        WHERE cno = (<br>                SELECT cno<br>                FROM score<br>                GROUP BY cno<br>                HAVING<br>                    COUNT(*) &gt; 5<br>            )<br>    );<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
