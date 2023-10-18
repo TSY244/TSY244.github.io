@@ -16,24 +16,28 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] lambda高级使用捕获列表lambda 表达式还可以通过捕获列表捕获一定范围内的变量：  [] 不捕获任何变量。 [&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。 [&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。 [&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。 [bar">
+    <meta name="description" content="因特网计算机网络在信息时代的作用 常见的三种网络  电信网络 计算机网络 有线电视网路  其中计算机网络是最重要的  互联网的两个基本特点 连通性和共享  互联网是由数量极大的各种计算机网络互相连接起来的   互联网概述网路的网络 网络是由若干结点和连接他们的链路组成的  计算机网络是由多个结点和链路组成 结点可以是计算机，集线器，或者路由去  互联网是网路的网路  Inter网基于isp[1]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lambda高级使用">
-<meta property="og:url" content="https://tsy244.github.io/2023/03/26/c++/lambda%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="计网基本概念">
+<meta property="og:url" content="https://tsy244.github.io/2023/10/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="[TOC] lambda高级使用捕获列表lambda 表达式还可以通过捕获列表捕获一定范围内的变量：  [] 不捕获任何变量。 [&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。 [&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。 [&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。 [bar">
+<meta property="og:description" content="因特网计算机网络在信息时代的作用 常见的三种网络  电信网络 计算机网络 有线电视网路  其中计算机网络是最重要的  互联网的两个基本特点 连通性和共享  互联网是由数量极大的各种计算机网络互相连接起来的   互联网概述网路的网络 网络是由若干结点和连接他们的链路组成的  计算机网络是由多个结点和链路组成 结点可以是计算机，集线器，或者路由去  互联网是网路的网路  Inter网基于isp[1]">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-26T12:39:43.000Z">
-<meta property="article:modified_time" content="2023-04-10T14:25:14.004Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231018105708360.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231018115013403.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231018114245320.png">
+<meta property="article:published_time" content="2023-10-18T02:38:53.000Z">
+<meta property="article:modified_time" content="2023-10-18T04:00:17.209Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c++基础">
+<meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231018105708360.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>lambda高级使用 - chg</title>
+  <title>计网基本概念 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="lambda高级使用"></span>
+            <span id="subtitle" data-typed-text="计网基本概念"></span>
           
         </div>
 
@@ -215,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-26 20:39" pubdate>
-          March 26, 2023 pm
+        <time datetime="2023-10-18 10:38" pubdate>
+          October 18, 2023 am
         </time>
       </span>
     
@@ -227,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          1k words
         
       </span>
     
@@ -238,7 +242,7 @@
         
         
         
-          11 mins
+          9 mins
         
       </span>
     
@@ -276,35 +280,93 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">lambda高级使用</h1>
+            <h1 style="display: none">计网基本概念</h1>
             
             
               <div class="markdown-body">
                 
-                <p>[TOC]</p>
-<h1 id="lambda高级使用"><a href="#lambda高级使用" class="headerlink" title="lambda高级使用"></a>lambda高级使用</h1><h2 id="捕获列表"><a href="#捕获列表" class="headerlink" title="捕获列表"></a>捕获列表</h2><p>lambda 表达式还可以通过捕获列表捕获一定范围内的变量：</p>
+                <h1 id="因特网"><a href="#因特网" class="headerlink" title="因特网"></a>因特网</h1><h2 id="计算机网络在信息时代的作用"><a href="#计算机网络在信息时代的作用" class="headerlink" title="计算机网络在信息时代的作用"></a>计算机网络在信息时代的作用</h2><ol>
+<li><p>常见的三种网络</p>
 <ul>
-<li>[] 不捕获任何变量。</li>
-<li>[&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。</li>
-<li>[&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。</li>
-<li>[&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。</li>
-<li>[bar] 按值捕获 bar 变量，同时不捕获其他变量。</li>
-<li>[this] 捕获当前类中的 this <a target="_blank" rel="noopener" href="http://c.biancheng.net/c/80/">指针</a>，让 lambda 表达式拥有和当前类成员函数同样的访问权限。如果已经使用了 &amp; 或者 &#x3D;，就默认添加此选项。捕获 this 的目的是可以在 lamda 中使用当前类的成员函数和成员变量。</li>
+<li>电信网络</li>
+<li>计算机网络</li>
+<li>有线电视网路</li>
 </ul>
-<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><ol>
-<li>没有捕获的时候，我们将该lambda变量可以看成函数指针</li>
-<li>有捕获的时候，我们将该lambda表达式堪称仿函数</li>
-</ol>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ol>
-<li><p>使用<code>function</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iostream&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functional&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;vector&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a&#123;<span class="hljs-number">9</span>&#125;;<br>    <span class="hljs-type">int</span> b&#123;<span class="hljs-number">10</span>&#125;;<br>    [a,b](<span class="hljs-type">int</span> x)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;a+b&lt;&lt;std::endl&lt;&lt;x&lt;&lt;std::endl;<br>    &#125;(<span class="hljs-number">88</span>);<br>    std::function&lt;<span class="hljs-type">void</span>(<span class="hljs-type">int</span>,std::string)&gt; func&#123;[](<span class="hljs-type">int</span> num,std::string S)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;num= &quot;</span>&lt;&lt;num&lt;&lt;<span class="hljs-string">&quot; name= &quot;</span>&lt;&lt;S&lt;&lt;std::endl;<br>    &#125;&#125;;<br>    <span class="hljs-built_in">func</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;chg&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-
+<p>其中计算机网络是最重要的</p>
 </li>
-<li><p>使用<code>bind</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a&#123;<span class="hljs-number">9</span>&#125;;	<br>    <span class="hljs-type">int</span> b&#123;<span class="hljs-number">10</span>&#125;;<br>    [a,b](<span class="hljs-type">int</span> x)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;a+b&lt;&lt;std::endl&lt;&lt;x&lt;&lt;std::endl;<br>    &#125;(<span class="hljs-number">88</span>);<br>    <span class="hljs-keyword">auto</span> f2= std::<span class="hljs-built_in">bind</span>([](<span class="hljs-type">int</span> num,std::string S)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;num= &quot;</span>&lt;&lt;num&lt;&lt;<span class="hljs-string">&quot; name= &quot;</span>&lt;&lt;S&lt;&lt;std::endl;<br>    &#125;,std::placeholders::_1,std::placeholders::_2);<br>    <span class="hljs-built_in">f2</span>(<span class="hljs-number">2</span>,<span class="hljs-string">&quot;zjy&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+<li><p>互联网的两个基本特点</p>
+<p><strong>连通性</strong>和<strong>共享</strong></p>
+</li>
+<li><p>互联网是由数量极大的各种计算机网络互相连接起来的</p>
+</li>
 </ol>
-
+<h2 id="互联网概述"><a href="#互联网概述" class="headerlink" title="互联网概述"></a>互联网概述</h2><h3 id="网路的网络"><a href="#网路的网络" class="headerlink" title="网路的网络"></a>网路的网络</h3><ol>
+<li><p>网络是由若干<strong>结点</strong>和连接他们的<strong>链路</strong>组成的</p>
+</li>
+<li><p>计算机网络是由多个<strong>结点</strong>和<strong>链路组成</strong></p>
+<p>结点可以是计算机，集线器，或者路由去</p>
+</li>
+<li><p>互联网是网路的网路</p>
+</li>
+<li><p>Inter网基于isp<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="网络运营商，在中国有，中国电信，移动，联通">[1]</span></a></sup></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231018105708360.png" srcset="/img/loading.gif" lazyload alt="image-20231018105708360"></p>
+<p>主机在边缘部分作用是<strong>信息处理</strong></p>
+<p>路由器在核心部分，作用是<strong>按存储转发的方式进行分组交换</strong></p>
+<p>一个用户只要买了路由器或者调节器之类的设备就可以成为ISP</p>
+</li>
+</ol>
+<h3 id="互联网基础发生的三个阶段"><a href="#互联网基础发生的三个阶段" class="headerlink" title="互联网基础发生的三个阶段"></a>互联网基础发生的三个阶段</h3><ol>
+<li><p>internet是互连网，通用名词，泛指的是网络。互连网之间的通信协议可以任意选择，不一定是TCP&#x2F;IP	</p>
+</li>
+<li><p>Internet是互联网，专用名词，特指全球最大的互连网。互联网采用的是tcp&#x2F;ip协议</p>
+</li>
+<li><p>现在的互联网是多层次的ISP<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="网络运营商，在中国有，中国电信，移动，联通">[1]</span></a></sup>结构</p>
+<p>分为，主干isp，地区isp，本地isp</p>
+</li>
+<li><p>上网就是接入互联网，主机必须要有ip才能上网</p>
+</li>
+<li><p>万维网：就是基于互联网的一种信息共享服务，浏览网页就是使用的是万维网。但是邮件系统不是使用这个系统</p>
+</li>
+</ol>
+<h3 id="互联网的标准化工作"><a href="#互联网的标准化工作" class="headerlink" title="互联网的标准化工作"></a>互联网的标准化工作</h3><p>存在于互联网的pfc文档</p>
+<h2 id="互联网的组成"><a href="#互联网的组成" class="headerlink" title="互联网的组成"></a>互联网的组成</h2><p>按工作方式分可以分为核心部分和边缘部分</p>
+<ol>
+<li>边缘部分：由连接到互联网的<strong>主机</strong>组成，作用是<strong>进行信息处理</strong></li>
+<li>核心部分：连接到网络的<strong>路由器</strong>组成，<strong>按存储转发的方式进行分组交换</strong></li>
+</ol>
+<h3 id="边缘部分"><a href="#边缘部分" class="headerlink" title="边缘部分"></a>边缘部分</h3><ol>
+<li>主机又称为端系统，个人电脑，摄像头，手机等</li>
+<li>边缘部分通过核心部分提供的服务进行通信，这一般就成为<strong>计算机之间的通信</strong></li>
+</ol>
+<h3 id="核心部分"><a href="#核心部分" class="headerlink" title="核心部分"></a>核心部分</h3><p>核心部分最重要的功能就是分组交换，主要是路由器</p>
+<p>路由器是实现分组交换的关键构建，用于转发分组</p>
+<h4 id="三种交换方式"><a href="#三种交换方式" class="headerlink" title="三种交换方式"></a>三种交换方式</h4><ol>
+<li><p>电路交换</p>
+<p>例子就是电话的之间的通信，使用一个电话交换机 </p>
+<p>如果暂时没有使用的话，他也是占用了物理资源，所以对于计算机这种突发的信息并不适用</p>
+</li>
+<li><p>分组交换</p>
+<p>最重要的交换机是路由器，依然采用了存储转发的方式</p>
+<p>分组交换就是将一个报文分成不同小的部分，在进行发送</p>
+<p>首部：里面包含了目的地址、源地址等控制信息</p>
+</li>
+<li><p>报文交换已经被分组交换替代</p>
+<p>整个报文先传送到相邻结点，全部存储下来后查找转发表，转发到下一个结点。</p>
+</li>
+<li><p>三种分组方式的比较</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231018115013403.png" srcset="/img/loading.gif" lazyload alt="image-20231018115013403"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231018114245320.png" srcset="/img/loading.gif" lazyload alt="image-20231018114245320"></p>
+</li>
+</ol>
+<h2 id="计算机网络的定义"><a href="#计算机网络的定义" class="headerlink" title="计算机网络的定义"></a>计算机网络的定义</h2><p>  络的定义</p>
+<p>计算机网络并非专门用来传递数据，还支持很多应用</p>
+<h3 id="几种不同类型的计算机网络"><a href="#几种不同类型的计算机网络" class="headerlink" title="几种不同类型的计算机网络"></a>几种不同类型的计算机网络</h3><ul>
+<li><strong>广域网WAN</strong>：互联网的核心部分，连接广域网各节点一般使用的是高速链路</li>
+<li>城域网MAN：城域网采用的是以太网技术，常作为局域网讨论</li>
+<li>局域网</li>
+</ul>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>网络运营商，在中国有，中国电信，移动，联通
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -316,7 +378,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c-%E5%9F%BA%E7%A1%80/">#c++基础</a>
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
       
     </div>
   
@@ -328,8 +390,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>lambda高级使用</div>
-      <div>https://tsy244.github.io/2023/03/26/c++/lambda高级使用/</div>
+      <div>计网基本概念</div>
+      <div>https://tsy244.github.io/2023/10/18/计算机网络/计网基本概念/</div>
     </div>
     <div class="license-meta">
       
@@ -341,7 +403,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 26, 2023</div>
+          <div>October 18, 2023</div>
         </div>
       
       
@@ -373,18 +435,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BA%BF%E6%80%A7%E8%A1%A8/" title="线性表">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">线性表</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/26/c++/%E5%87%BD%E6%95%B0/" title="函数">
-                        <span class="hidden-mobile">函数</span>
+                      <a href="/2023/10/17/python/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" title="面向对象进阶">
+                        <span class="hidden-mobile">面向对象进阶</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
