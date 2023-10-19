@@ -16,12 +16,12 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="注入原理sql基础了解sql 注释 1-- 一定要加一个空格  表示相等 1-- 使用&#96;&#x3D;&#96;  sql信息表 1infomation_schema  使用系统函数得到信息123456789101112131415SELECT version();  -- 返回数据库的版本select user();  select DATABASE();  SELECT CURRENT_USER(); -- 当前">
+    <meta name="description" content="注入原理sql基础了解sql 注释 1-- 一定要加一个空格  表示相等 1-- 使用&#96;&#x3D;&#96;  sql信息表 1infomation_schema  使用系统函数得到信息123456789101112131415SELECT version();  -- 返回数据库的版本select user();  select DATABASE();  -- 这个经常使用SELECT CURRENT_USER">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql注入">
 <meta property="og:url" content="https://tsy244.github.io/2023/10/14/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="注入原理sql基础了解sql 注释 1-- 一定要加一个空格  表示相等 1-- 使用&#96;&#x3D;&#96;  sql信息表 1infomation_schema  使用系统函数得到信息123456789101112131415SELECT version();  -- 返回数据库的版本select user();  select DATABASE();  SELECT CURRENT_USER(); -- 当前">
+<meta property="og:description" content="注入原理sql基础了解sql 注释 1-- 一定要加一个空格  表示相等 1-- 使用&#96;&#x3D;&#96;  sql信息表 1infomation_schema  使用系统函数得到信息123456789101112131415SELECT version();  -- 返回数据库的版本select user();  select DATABASE();  -- 这个经常使用SELECT CURRENT_USER">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231015223810801.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231015223845453.png">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231015225551176.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231015230510288.png">
 <meta property="article:published_time" content="2023-10-14T07:51:33.000Z">
-<meta property="article:modified_time" content="2023-10-18T16:24:43.221Z">
+<meta property="article:modified_time" content="2023-10-19T09:04:39.534Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k words
+          4.1k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          29 mins
+          34 mins
         
       </span>
     
@@ -299,7 +299,7 @@
 <li><p>sql信息表</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">infomation_schema<br></code></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="使用系统函数得到信息"><a href="#使用系统函数得到信息" class="headerlink" title="使用系统函数得到信息"></a>使用系统函数得到信息</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> version();  <span class="hljs-comment">-- 返回数据库的版本</span><br><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>();  <br><br><span class="hljs-keyword">select</span> DATABASE();  <br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">CURRENT_USER</span>(); <span class="hljs-comment">-- 当前用户</span><br><br><span class="hljs-keyword">SELECT</span> @<span class="hljs-variable">@datadir</span>;  <span class="hljs-comment">-- 数据库的地址</span><br><br><span class="hljs-keyword">SELECT</span> @<span class="hljs-variable">@version</span>_compile_os; <span class="hljs-comment">-- 返沪当前系统的版本</span><br><br><br><span class="hljs-comment">-- 系统的用户</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">SYSTEM_USER</span>();<br></code></pre></td></tr></table></figure>
+<h2 id="使用系统函数得到信息"><a href="#使用系统函数得到信息" class="headerlink" title="使用系统函数得到信息"></a>使用系统函数得到信息</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> version();  <span class="hljs-comment">-- 返回数据库的版本</span><br><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>();  <br><br><span class="hljs-keyword">select</span> DATABASE();  <span class="hljs-comment">-- 这个经常使用</span><br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">CURRENT_USER</span>(); <span class="hljs-comment">-- 当前用户</span><br><br><span class="hljs-keyword">SELECT</span> @<span class="hljs-variable">@datadir</span>;  <span class="hljs-comment">-- 数据库的地址  这个返回的是一个文件路径</span><br><br><span class="hljs-keyword">SELECT</span> @<span class="hljs-variable">@version</span>_compile_os; <span class="hljs-comment">-- 返回当前系统的版本</span><br><br><br><span class="hljs-comment">-- 系统的用户</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">SYSTEM_USER</span>();<br></code></pre></td></tr></table></figure>
 
 <h2 id="使用infomation-schema查看信息"><a href="#使用infomation-schema查看信息" class="headerlink" title="使用infomation_schema查看信息"></a>使用infomation_schema查看信息</h2><ol>
 <li><p>查看所有的数据库</p>
@@ -476,6 +476,40 @@
 <li>updatexml()</li>
 <li>floor()+rand()+group()</li>
 </ol>
+<h2 id="布尔注入"><a href="#布尔注入" class="headerlink" title="布尔注入"></a>布尔注入</h2><h2 id="时间注入"><a href="#时间注入" class="headerlink" title="时间注入"></a>时间注入</h2><h2 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h2><h1 id="sql绕过"><a href="#sql绕过" class="headerlink" title="sql绕过"></a>sql绕过</h1><p>由于部分程序会对sql的语法进行检测，所以我们的sql语句不能再后端执行，我们需要绕过才行</p>
+<h2 id="嵌套双写绕过"><a href="#嵌套双写绕过" class="headerlink" title="嵌套双写绕过"></a>嵌套双写绕过</h2><p>ununionion</p>
+<h2 id="大小写混淆"><a href="#大小写混淆" class="headerlink" title="大小写混淆"></a>大小写混淆</h2><p>union Union</p>
+<h2 id="通过内联注释"><a href="#通过内联注释" class="headerlink" title="通过内联注释"></a>通过内联注释</h2><h2 id="通过空格绕过"><a href="#通过空格绕过" class="headerlink" title="通过空格绕过"></a>通过空格绕过</h2><p>两个空格等于一个tab，所以我们使用  %a0&#x3D;空格的方式</p>
+<p>%20%09%0a %0b %0c %0d %a0&#x2F;**&#x2F;</p>
+<p>这个是最近的绕过方式，用注释代替空格</p>
+<p>&#x2F;*注释*&#x2F;</p>
+<h2 id="括号绕过空格"><a href="#括号绕过空格" class="headerlink" title="括号绕过空格"></a>括号绕过空格</h2><p>有些情况下空格会被过滤，但是括号不会</p>
+<p>这种过滤方法常常用于  time based的盲注</p>
+<h2 id="引号绕过"><a href="#引号绕过" class="headerlink" title="引号绕过"></a>引号绕过</h2><h2 id="逗号绕过"><a href="#逗号绕过" class="headerlink" title="逗号绕过"></a>逗号绕过</h2><h2 id="比较符号绕过"><a href="#比较符号绕过" class="headerlink" title="比较符号绕过"></a>比较符号绕过</h2><h1 id="sql注入漏洞的危害以及如何防范sql注入"><a href="#sql注入漏洞的危害以及如何防范sql注入" class="headerlink" title="sql注入漏洞的危害以及如何防范sql注入"></a>sql注入漏洞的危害以及如何防范sql注入</h1><h2 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h2><ol>
+<li><p>未授权访问  导致信息泄露</p>
+</li>
+<li><p>可以对数据库的数据进行删除，操作</p>
+<p>如果攻击者进行了增加和删除操作，添加了管理者用户，对公司的权益就很受损</p>
+</li>
+<li><p>可以控制后台，如果网站的目录存在可写的权限，可以写入木马，或者对页面进行篡改</p>
+</li>
+<li><p>攻击者提权获得远程服务器</p>
+</li>
+</ol>
+<h2 id="防范"><a href="#防范" class="headerlink" title="防范"></a>防范</h2><ol>
+<li>分级用户，严格控制权限</li>
+<li>在书写Sql语言的时候，禁止直接将变量写入，而是通过设置相应的参数来传递相关的变量</li>
+<li>具体检测变量的时候</li>
+<li>使用安全的参数</li>
+<li>通过专业的扫描工具</li>
+<li>多层验证</li>
+<li>数据库信息加密</li>
+</ol>
+<h2 id="防御手段"><a href="#防御手段" class="headerlink" title="防御手段"></a>防御手段</h2><h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h3>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">insert into users(username,id,password) values(?,?,?)<br></code></pre></td></tr></table></figure>
+
+<p>使用这种语句的话，用户不能直接传入sql语句，而是使用的是具体的变量，进行赋值</p>
+<h3 id="严格控制数据类型"><a href="#严格控制数据类型" class="headerlink" title="严格控制数据类型"></a>严格控制数据类型</h3><p>由于数据库部分是弱类型语言所以我们可以使用函数，进行判断用户的输入是字符还是数字</p>
+<h2 id="对特殊字符进行转移"><a href="#对特殊字符进行转移" class="headerlink" title="对特殊字符进行转移"></a>对特殊字符进行转移</h2><p>使用转义的话，可以防止攻击者进行代码的闭合</p>
 <section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>xml用于网络存储和数据交换的标签语言，类似于html但是没有预设的标签，都是用户自定义
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
