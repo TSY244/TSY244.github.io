@@ -226,6 +226,46 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/04/11/c++/c++%E9%9A%8F%E8%AE%B0/" target="_self">
+          c++随记
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/11/c++/c++%E9%9A%8F%E8%AE%B0/" target="_self">
+        <div>
+          平常笔记 初始化数组需要定义大小才能被cin  cin和scanf一样，都跳过空格  public和private:用于类的封装  new 和 malloc的主要区别:new调用构造函数，malloc不会  int *p1 &#x3D; new int[10]，int *p2 &#x3D; new int[10]()区别：p1申请的空间里的值是随机值，p2申请的空间里的值已经初始化  引用: 12
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-11 12:46" pubdate>
+              2023-04-11
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/c-%E5%9F%BA%E7%A1%80/">#c++基础</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/04/11/c++/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" target="_self">
           智能指针
         </a>
@@ -546,55 +586,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/03/26/c++/%E5%87%BD%E6%95%B0/" target="_self">
-          函数
+        <a href="/2023/03/26/c++/%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%8C%85%E8%A3%85%E5%99%A8/" target="_self">
+          可调用对象包装器
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/26/c++/%E5%87%BD%E6%95%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/26/c++/%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%8C%85%E8%A3%85%E5%99%A8/" target="_self">
         <div>
-          [TOC] 函数构造函数 通过类里函数可以给私有成员赋值，同时也可以通过函数return 出值  特殊的成员函数，主要用于创建对象时初始化对象-&gt;给对象成员赋予初值  构造函数的特点  构造函数的函数名与类名相同 构造函数没有返回值类型，也没有返回值 构造函数可以重载   没有写构造函数，自己会生成，由于内联函数，牺牲时间换效率  系统给的构造函数 1Myclass()&#123;&#125
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-03-26 20:39" pubdate>
-              2023-03-26
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/c-%E5%9F%BA%E7%A1%80/">#c++基础</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/03/26/c++/%E5%8F%B3%E5%80%BC%E5%92%8C%E5%B7%A6%E5%80%BC/" target="_self">
-          右值和左值
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/26/c++/%E5%8F%B3%E5%80%BC%E5%92%8C%E5%B7%A6%E5%80%BC/" target="_self">
-        <div>
-          [TOC] 右值和左值右值左值的区分 能取地址的是左值，不能取地址的是右值  实例 1234567891011int main()&#123;    //左值    int lvalue=244;    //左值引用    int &amp;lvalueCite=lvalue;    //右值    //右值引用    int &amp;&amp;rvalueCite=6;&#125;  使用右值
+          [TOC] 可调用对象包装器可调用对象可以按照函数的方法进行调用 分类 函数指针  使用using进行定义函数指针  1using callBack = void(*)(int, double);    仿函数  可以转换为函数的类对象  类成员的函数指针  实例 1234567891011121314151617181920212223242526272829303132333435363738
         </div>
       </a>
 
