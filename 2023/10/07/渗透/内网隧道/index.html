@@ -16,15 +16,15 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="文件传输windows下文件传输Bitsadmincertutil">
+    <meta name="description" content="文件传输windows下文件传输Bitsadmincertutillinux和win的文件互传scp当用户的主机存在scp的话我们就可以使用这个  安装scp 主要是可能不会在win安装这个程序，所以问哦们需要安装  使用 12scp user@ip:file_path&#x2F;file_name myfilenamescp -r user@ip:file_path&#x2F;file_name myfilenam">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内网隧道">
 <meta property="og:url" content="https://tsy244.github.io/2023/10/07/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="文件传输windows下文件传输Bitsadmincertutil">
+<meta property="og:description" content="文件传输windows下文件传输Bitsadmincertutillinux和win的文件互传scp当用户的主机存在scp的话我们就可以使用这个  安装scp 主要是可能不会在win安装这个程序，所以问哦们需要安装  使用 12scp user@ip:file_path&#x2F;file_name myfilenamescp -r user@ip:file_path&#x2F;file_name myfilenam">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-07T12:46:57.000Z">
-<meta property="article:modified_time" content="2023-10-08T14:16:43.528Z">
+<meta property="article:modified_time" content="2023-10-19T17:17:15.119Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          33 words
+          328 words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          1 mins
+          3 mins
         
       </span>
     
@@ -281,7 +281,20 @@
             
               <div class="markdown-body">
                 
-                <h1 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h1><h2 id="windows下文件传输"><a href="#windows下文件传输" class="headerlink" title="windows下文件传输"></a>windows下文件传输</h2><h3 id="Bitsadmin"><a href="#Bitsadmin" class="headerlink" title="Bitsadmin"></a>Bitsadmin</h3><h3 id="certutil"><a href="#certutil" class="headerlink" title="certutil"></a>certutil</h3>
+                <h1 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h1><h2 id="windows下文件传输"><a href="#windows下文件传输" class="headerlink" title="windows下文件传输"></a>windows下文件传输</h2><h3 id="Bitsadmin"><a href="#Bitsadmin" class="headerlink" title="Bitsadmin"></a>Bitsadmin</h3><h3 id="certutil"><a href="#certutil" class="headerlink" title="certutil"></a>certutil</h3><h3 id="linux和win的文件互传"><a href="#linux和win的文件互传" class="headerlink" title="linux和win的文件互传"></a>linux和win的文件互传</h3><h4 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h4><p>当用户的主机存在scp的话我们就可以使用这个</p>
+<ol>
+<li><p>安装scp</p>
+<p>主要是可能不会在win安装这个程序，所以问哦们需要安装</p>
+</li>
+<li><p>使用</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir">scp user<span class="hljs-variable">@ip</span><span class="hljs-symbol">:file_path/file_name</span> myfilename<br>scp -r user<span class="hljs-variable">@ip</span><span class="hljs-symbol">:file_path/file_name</span> myfilename<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="建立共享文件"><a href="#建立共享文件" class="headerlink" title="建立共享文件"></a>建立共享文件</h4><p>用于win之间传输文件</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">net</span> use k: \\<span class="hljs-number">10.10.10.1</span>\c&amp;  /user:administrator <span class="hljs-string">&#x27;root&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="vbs脚本"><a href="#vbs脚本" class="headerlink" title="vbs脚本"></a>vbs脚本</h4><p>编写一个脚本文件用于下载文件</p>
+<h2 id="linux下的文件传输"><a href="#linux下的文件传输" class="headerlink" title="linux下的文件传输"></a>linux下的文件传输</h2><h3 id="使用wget-下载"><a href="#使用wget-下载" class="headerlink" title="使用wget 下载"></a>使用wget 下载</h3><h3 id="curl下载"><a href="#curl下载" class="headerlink" title="curl下载"></a>curl下载</h3><p>就是一个服务工具</p>
+<h3 id="netcat"><a href="#netcat" class="headerlink" title="netcat"></a>netcat</h3>
                 
               </div>
             
