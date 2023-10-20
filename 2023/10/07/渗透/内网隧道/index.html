@@ -23,11 +23,15 @@
 <meta property="og:site_name" content="chg">
 <meta property="og:description" content="文件传输windows下文件传输Bitsadmin这个是用于win接受就可以不一定需要linux挂载  我们可以通过这个命令将我们托管的payload下载下来  下面是我们的具体步骤  攻击者使用linux的apache服务挂载我们的payload 然后使用下在win直接下载就行了   演示 我已经将payload挂载到网络上，现在准备从win上载 1bitsadmin &#x2F;transfer she">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E6%90%AD%E5%BB%BA/image-20231020215251402.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E6%90%AD%E5%BB%BA/image-20231020215341294.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E6%90%AD%E5%BB%BA/image-20231020222033527.png">
 <meta property="article:published_time" content="2023-10-07T12:46:57.000Z">
-<meta property="article:modified_time" content="2023-10-20T12:13:27.452Z">
+<meta property="article:modified_time" content="2023-10-20T14:23:21.698Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E6%90%AD%E5%BB%BA/image-20231020215251402.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -227,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          2.4k words
         
       </span>
     
@@ -238,7 +242,7 @@
         
         
         
-          12 mins
+          21 mins
         
       </span>
     
@@ -347,7 +351,41 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nc -lvvp port &gt; payload<br></code></pre></td></tr></table></figure></li>
 </ol>
 <h3 id="sftp"><a href="#sftp" class="headerlink" title="sftp"></a>sftp</h3><p>这个使用运用了ssh协议</p>
-<h3 id="dns传输数据"><a href="#dns传输数据" class="headerlink" title="dns传输数据"></a>dns传输数据</h3>
+<h3 id="dns传输数据"><a href="#dns传输数据" class="headerlink" title="dns传输数据"></a>dns传输数据</h3><h1 id="socks代理"><a href="#socks代理" class="headerlink" title="socks代理"></a>socks代理</h1><h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><p>代理服务器就相当于一个转发信息的中间人</p>
+<p>转发客户端和服务端的消息</p>
+<h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>当我们无法访问的的时候我们就需要使用正向代理，来跨过防火墙</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E6%90%AD%E5%BB%BA/image-20231020215251402.png" srcset="/img/loading.gif" lazyload alt="image-20231020215251402"></p>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E6%90%AD%E5%BB%BA/image-20231020215341294.png" srcset="/img/loading.gif" lazyload alt="image-20231020215341294"></p>
+<p>可以理解为我们需要访问内网，但是现在只有反向代理服务器出网，所以我们使用这种方法来访问反向代理服务器，然后由反向代理服务器作为转发来连接服务内网服务器</p>
+<p>这样来看我们可以可理解为反向代理服务器就是我们需要的资源服务器</p>
+<p>现在使用最多的反向代理服务器是	<a target="_blank" rel="noopener" href="https://blog.csdn.net/hyfsbxg/article/details/122322125">NGINX</a></p>
+<h3 id="透明代理"><a href="#透明代理" class="headerlink" title="透明代理"></a>透明代理</h3><p>而可以理解为，透明代理会帮助你筛选，如果你访问的是合理的就让你通过，如果不太合理，那么我们就不允许访问</p>
+<blockquote>
+<p>  客户端 A  和客户端 B  并不知道行为管理设备充当透明代理行为，当用户 A 或用户 B 向服务器 A  或服  务器 B  提交请求的时候，透明代理设备根据自身策略拦截并修改用户 A 或 B  的报文，并作为实际的请  求方，向服务器 A  或 B  发送请求，当接收信息回传，透明代理再根据自身的设置把允许的报文发回至  用户 A  或 B，如上图，如果透明代理设置不允许访问服务器 B，那么用户 A  或者用户 B  就不会得到服  务器 B 的数据。  </p>
+</blockquote>
+<h2 id="socks"><a href="#socks" class="headerlink" title="socks"></a>socks</h2><p>这个是一个协议，存在于应用层，可以理解为中间传递的方式。使用TCP&#x2F;IP协议，因而不提供如传递ICMP信息之类的网络层网关服务。</p>
+<p>如今大型的网络架构，利用网络防火墙搭建起内部网络与外部网络的屏障，这些防火墙通常以应用层网关的形式工作在网络之间。</p>
+<p><strong>而socks则通过框架来使这些协议安全透明地通过防火墙。</strong></p>
+<p>但是socks代理当中我们不能代理ping原因是ping 是使用的是ICMP协议，socks是使用的是TCP&#x2F;IP协议</p>
+<h2 id="socks代理-1"><a href="#socks代理-1" class="headerlink" title="socks代理"></a>socks代理</h2><ol>
+<li><p>被代理端与代理服务器通过 SOCKS4&#x2F;5 代理协议进行通讯；  </p>
+</li>
+<li><p>SOCKS4：是对HTTP代理协议的加强，它不仅代理HTTP协议，而是对所有向外的连接进行代理，没有  协议限制；  </p>
+</li>
+<li><p>SOCKS4a：SOCKS4协议的简单扩展，允许客户端对无法解析域名的目的主机进行访问  </p>
+</li>
+<li><p>SOCKS5：SOCKS5比SOCKS4a多了身份验证、IPv6、UDP支持。创建与SOCKS5服务器的TCP连接后  客户端需要先发送请求来确认协议版本及认证方式，相对前面的版本这个版本当中支持的协议更多，相对前面更加的安全</p>
+</li>
+</ol>
+<h3 id="socks代理和vpn的区别"><a href="#socks代理和vpn的区别" class="headerlink" title="socks代理和vpn的区别"></a>socks代理和vpn的区别</h3><h4 id="vpn"><a href="#vpn" class="headerlink" title="vpn"></a>vpn</h4><p>vpn（Virtual Private Network，虚拟专用网络），可以通过公共网络</p>
+<p>（互联网）建立起加密，私密的连接技术</p>
+<p>主要是用于当处于外网的时候使用vpn访问公司内部的资料</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E6%90%AD%E5%BB%BA/image-20231020222033527.png" srcset="/img/loading.gif" lazyload alt="image-20231020222033527"></p>
+<h3 id="socks5代理工具"><a href="#socks5代理工具" class="headerlink" title="socks5代理工具"></a>socks5代理工具</h3><ol>
+<li>frp</li>
+<li>ProxyChains</li>
+</ol>
+
                 
               </div>
             
