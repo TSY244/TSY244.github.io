@@ -16,24 +16,24 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] main函数传参三个问题 参数个数 首个参数到底是谁 带空格的参数  基本形式 int main(int argc,char* argv[]) &amp;#123;     return 0; &amp;#125; 123456789101112131415162. 第一个参数的意思是：参数的个数3. 第二个参数的意思是：存放的参数，而且至少有一个，如果打印的话，结果是该项目的名称   实例：   &#96;">
+    <meta name="description" content="python里面的多进程unix和linux 使用fork()  来调用系统创建一个进程 这样创建的进程是一个子进程，拷贝的父进程的 但是子进程都存在自己的PID fork的它可以做到返回两次 在父进程里fork返回的是子进程的PID，在子进程里返回的永远都是0   win multiprocessing 使用这个model里面的Process创建子进程 并且在这个里面还进行了更高级的封装 进程池">
 <meta property="og:type" content="article">
-<meta property="og:title" content="main函数传参">
-<meta property="og:url" content="https://tsy244.github.io/2023/04/20/C/main%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82/index.html">
+<meta property="og:title" content="进程和线程">
+<meta property="og:url" content="https://tsy244.github.io/2023/10/23/python/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="[TOC] main函数传参三个问题 参数个数 首个参数到底是谁 带空格的参数  基本形式 int main(int argc,char* argv[]) &amp;#123;     return 0; &amp;#125; 123456789101112131415162. 第一个参数的意思是：参数的个数3. 第二个参数的意思是：存放的参数，而且至少有一个，如果打印的话，结果是该项目的名称   实例：   &#96;">
+<meta property="og:description" content="python里面的多进程unix和linux 使用fork()  来调用系统创建一个进程 这样创建的进程是一个子进程，拷贝的父进程的 但是子进程都存在自己的PID fork的它可以做到返回两次 在父进程里fork返回的是子进程的PID，在子进程里返回的永远都是0   win multiprocessing 使用这个model里面的Process创建子进程 并且在这个里面还进行了更高级的封装 进程池">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-20T01:01:17.000Z">
-<meta property="article:modified_time" content="2023-04-20T05:12:28.261Z">
+<meta property="article:published_time" content="2023-10-23T15:33:22.000Z">
+<meta property="article:modified_time" content="2023-10-23T16:39:20.196Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c基础">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>main函数传参 - chg</title>
+  <title>进程和线程 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="main函数传参"></span>
+            <span id="subtitle" data-typed-text="进程和线程"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-20 09:01" pubdate>
-          April 20, 2023 am
+        <time datetime="2023-10-23 23:33" pubdate>
+          October 23, 2023 pm
         </time>
       </span>
     
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          412 words
+          1.8k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          4 mins
+          15 mins
         
       </span>
     
@@ -276,30 +276,65 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">main函数传参</h1>
+            <h1 style="display: none">进程和线程</h1>
             
             
               <div class="markdown-body">
                 
-                <p>[TOC]</p>
-<h1 id="main函数传参"><a href="#main函数传参" class="headerlink" title="main函数传参"></a>main函数传参</h1><h2 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h2><ol>
-<li>参数个数</li>
-<li>首个参数到底是谁</li>
-<li>带空格的参数</li>
-</ol>
-<h2 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h2><ol>
-<li><pre><code class="c">int main(int argc,char* argv[])
-&#123;
-    return 0;
-&#125;
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-number">2.</span> 第一个参数的意思是：参数的个数<br><br><span class="hljs-number">3.</span> 第二个参数的意思是：存放的参数，而且至少有一个，如果打印的话，结果是该项目的名称<br><br>   实例：<br><br>   ```<span class="hljs-function">c</span><br><span class="hljs-function">   <span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span></span><br><span class="hljs-function">   </span>&#123;<br>   	<span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; argc; i++)<br>   	&#123;<br>   		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, argv[i]);<br>   	&#125;<br>   	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>   &#125;<br></code></pre></td></tr></table></figure>
-
-运行结果：
-
-![image-20221225201855246](C:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20221225201855246.png)
-</code></pre>
+                <h1 id="python里面的多进程"><a href="#python里面的多进程" class="headerlink" title="python里面的多进程"></a>python里面的多进程</h1><h2 id="unix和linux"><a href="#unix和linux" class="headerlink" title="unix和linux"></a>unix和linux</h2><ol>
+<li><p>使用fork()  来调用系统创建一个进程</p>
+<p>这样创建的进程是一个子进程，拷贝的父进程的</p>
+<p>但是子进程都存在自己的PID</p>
+<p>fork的它可以做到返回两次</p>
+<p>在父进程里fork返回的是子进程的PID，在子进程里返回的永远都是0</p>
 </li>
-<li></li>
+</ol>
+<h2 id="win"><a href="#win" class="headerlink" title="win"></a>win</h2><ol>
+<li><p>multiprocessing</p>
+<p>使用这个model里面的Process创建子进程</p>
+<p>并且在这个里面还进行了更高级的封装</p>
+<p>进程池(pool)  消息队列(Queue)  管道(Pipe)</p>
+</li>
+<li><p>下面是一段对比</p>
+<p><strong>不适用多进程</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time, sleep<br><br><br><span class="hljs-comment"># 不使用多进程</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">work_out</span>():<br>    start = time()<br>    <span class="hljs-built_in">all</span> = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">100000</span>):<br>        <span class="hljs-built_in">all</span> = <span class="hljs-built_in">all</span> * i<br>        <span class="hljs-comment"># print(all)</span><br>    end = time()<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;消耗的时间为 ：<span class="hljs-subst">&#123;end-start&#125;</span>\n&quot;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    start = time()<br>    work_out()<br>    work_out()<br>    end = time()<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;消耗时间为:<span class="hljs-subst">&#123;end-start&#125;</span>&quot;</span>)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>消耗的时间为 ：2.4721951484680176</p>
+<p>消耗的时间为 ：2.4349334239959717</p>
+<p>消耗时间为:4.907128572463989</p>
+</blockquote>
+<p><strong>使用多进程</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time, sleep<br><span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Process<br><br><span class="hljs-comment"># 使用多进程</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">work_out</span>():<br>    start = time()<br>    <span class="hljs-built_in">all</span> = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">100000</span>):<br>        <span class="hljs-built_in">all</span> = <span class="hljs-built_in">all</span> * i<br>        <span class="hljs-comment"># print(all)</span><br>    end = time()<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;消耗的时间为 ：<span class="hljs-subst">&#123;end-start&#125;</span>\n&quot;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    start = time()<br>    p1 = Process(target=work_out)<br>    p1.start()<br>    p2 = Process(target=work_out)<br>    p2.start()<br>    p1.join()<br>    p2.join()<br>    end = time()<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;消耗时间为:<span class="hljs-subst">&#123;end-start&#125;</span>&quot;</span>)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>消耗的时间为 ：3.135038137435913</p>
+<p>消耗的时间为 ：3.1490530967712402</p>
+<p>消耗时间为:3.279216766357422</p>
+</blockquote>
+</li>
+<li><p>也可以使用subprocess模块中类</p>
+<p>创建子进程，然后子进程之间可以访问</p>
+</li>
+</ol>
+<h1 id="python里的多线程"><a href="#python里的多线程" class="headerlink" title="python里的多线程"></a>python里的多线程</h1><ol>
+<li><p>主要使用的是<code>threading</code>来实现多线程</p>
+</li>
+<li><p>多线程之间可以通信，因为共用，但是就会面临一个新的问题</p>
+<p>如果两个线程同时访问一个全局变量会发生什么结果？</p>
+<p>这个变量称为竞争变量</p>
+</li>
+<li><p>加锁解决</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, Lock<br><br>i = <span class="hljs-number">0</span><br>total = <span class="hljs-number">0</span><br>lock = Lock()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">work</span>():<br>    <span class="hljs-keyword">global</span> i, total<br><br>    <span class="hljs-keyword">while</span> i != <span class="hljs-number">101</span>:<br>        lock.acquire()<br>        total += i<br>        i += <span class="hljs-number">1</span><br>        lock.release()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    t1 = Thread(target=work)<br>    t1.start()<br>    t2 = Thread(target=work)<br>    t2.start()<br><br>    t1.join()<br>    t2.join()<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;结果是: <span class="hljs-subst">&#123;total&#125;</span>&quot;</span>)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="python里面的协程"><a href="#python里面的协程" class="headerlink" title="python里面的协程"></a>python里面的协程</h1><ol>
+<li>优势<ul>
+<li>运行效率极高</li>
+<li>可以在单核单线程里面处理异步操作</li>
+<li>不需要锁机制</li>
+</ul>
+</li>
+<li>如果想要充分利用CPU的多核特性，最简单的方法是多进程+协程，既充分利用多核，又充分发挥协程的高效率</li>
 </ol>
 
                 
@@ -313,7 +348,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
+        <a href="/tags/python/">#python</a>
       
     </div>
   
@@ -325,8 +360,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>main函数传参</div>
-      <div>https://tsy244.github.io/2023/04/20/C/main函数传参/</div>
+      <div>进程和线程</div>
+      <div>https://tsy244.github.io/2023/10/23/python/进程和线程/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +373,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 20, 2023</div>
+          <div>October 23, 2023</div>
         </div>
       
       
@@ -370,18 +405,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/20/C/%E5%88%9D%E5%A7%8B%E6%8C%87%E9%92%88/" title="初始指针">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">初始指针</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/20/C/%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%A6%E8%A7%A31/" title="操作符详解">
-                        <span class="hidden-mobile">操作符详解</span>
+                      <a href="/2023/10/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%89%A9%E7%90%86%E5%B1%82/" title="物理层">
+                        <span class="hidden-mobile">物理层</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

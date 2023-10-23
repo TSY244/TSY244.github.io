@@ -16,16 +16,27 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="物理层的基本概念 处理比特流  物理层的主要任务 机械特性 电气特性 功能特性 过程特性   物理层下面的传输媒体 导引型传输媒体 同轴电缆 双绞线   光纤 电力线   非导引型传输媒体 无线电波 微波 红外线 可见光    传输方式  串行传输 并行传输 同步传输 异步传输 单向通信（单工） 双向交替通信（半双工） 双向通信（全双工）  编码与解调  调制后采用的是模拟信号  码元 常用的编码">
+<meta property="og:type" content="article">
 <meta property="og:title" content="物理层">
 <meta property="og:url" content="https://tsy244.github.io/2023/10/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%89%A9%E7%90%86%E5%B1%82/index.html">
 <meta property="og:site_name" content="chg">
+<meta property="og:description" content="物理层的基本概念 处理比特流  物理层的主要任务 机械特性 电气特性 功能特性 过程特性   物理层下面的传输媒体 导引型传输媒体 同轴电缆 双绞线   光纤 电力线   非导引型传输媒体 无线电波 微波 红外线 可见光    传输方式  串行传输 并行传输 同步传输 异步传输 单向通信（单工） 双向交替通信（半双工） 双向通信（全双工）  编码与解调  调制后采用的是模拟信号  码元 常用的编码">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023142138991.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023143215057.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023143954827.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023150323318.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023150625986.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023150951418.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023151102672.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023151718565.png">
 <meta property="article:published_time" content="2023-10-23T06:16:24.000Z">
-<meta property="article:modified_time" content="2023-10-23T06:17:17.190Z">
+<meta property="article:modified_time" content="2023-10-23T07:17:41.784Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="计算机网路">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023142138991.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -225,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          323 words
         
       </span>
     
@@ -236,7 +247,7 @@
         
         
         
-          1 mins
+          3 mins
         
       </span>
     
@@ -279,7 +290,72 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="物理层的基本概念"><a href="#物理层的基本概念" class="headerlink" title="物理层的基本概念"></a>物理层的基本概念</h1><ol>
+<li>处理比特流</li>
+</ol>
+<h2 id="物理层的主要任务"><a href="#物理层的主要任务" class="headerlink" title="物理层的主要任务"></a>物理层的主要任务</h2><ol>
+<li>机械特性</li>
+<li>电气特性</li>
+<li>功能特性</li>
+<li>过程特性</li>
+</ol>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023142138991.png" srcset="/img/loading.gif" lazyload alt="image-20231023142138991"></p>
+<h2 id="物理层下面的传输媒体"><a href="#物理层下面的传输媒体" class="headerlink" title="物理层下面的传输媒体"></a>物理层下面的传输媒体</h2><ol>
+<li>导引型传输媒体<ul>
+<li>同轴电缆</li>
+<li>双绞线  </li>
+<li>光纤</li>
+<li>电力线</li>
+</ul>
+</li>
+<li>非导引型传输媒体<ul>
+<li>无线电波</li>
+<li>微波</li>
+<li>红外线</li>
+<li>可见光</li>
+</ul>
+</li>
+</ol>
+<h1 id="传输方式"><a href="#传输方式" class="headerlink" title="传输方式"></a>传输方式</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023143215057.png" srcset="/img/loading.gif" lazyload alt="image-20231023143215057"></p>
+<ul>
+<li>串行传输</li>
+<li>并行传输</li>
+<li>同步传输</li>
+<li>异步传输</li>
+<li>单向通信（单工）</li>
+<li>双向交替通信（半双工）</li>
+<li>双向通信（全双工）</li>
+</ul>
+<h1 id="编码与解调"><a href="#编码与解调" class="headerlink" title="编码与解调"></a>编码与解调</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023143954827.png" srcset="/img/loading.gif" lazyload alt="image-20231023143954827"></p>
+<ol>
+<li>调制后采用的是模拟信号</li>
+</ol>
+<h2 id="码元"><a href="#码元" class="headerlink" title="码元"></a>码元</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023150323318.png" srcset="/img/loading.gif" lazyload alt="image-20231023150323318"></p>
+<h2 id="常用的编码方法"><a href="#常用的编码方法" class="headerlink" title="常用的编码方法"></a>常用的编码方法</h2><ul>
+<li><p>不归零编码</p>
+<p>存在同步问题，所以计算机里面不使用这种编码</p>
+</li>
+<li><p>归零编码</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023150625986.png" srcset="/img/loading.gif" lazyload alt="image-20231023150625986"></p>
+<p>这样编码会造成数据带宽浪费的问题，因为大部分都用来存储“归零”而浪费</p>
+</li>
+<li><p>曼厠斯蒂编码</p>
+<p>码元中间的跳变即表示时钟又表示数据</p>
+<p>可以理解为同一个方向是一同一类信号</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023150951418.png" srcset="/img/loading.gif" lazyload alt="image-20231023150951418"></p>
+</li>
+<li><p>差分曼厠斯蒂编码</p>
+<p>根据码元开始处是否发生变化来表示数据</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023151102672.png" srcset="/img/loading.gif" lazyload alt="image-20231023151102672"></p>
+</li>
+</ul>
+<h2 id="常用的调制方法"><a href="#常用的调制方法" class="headerlink" title="常用的调制方法"></a>常用的调制方法</h2><p>将数字信号转变成电子信号</p>
+<h1 id="通道的极限通量"><a href="#通道的极限通量" class="headerlink" title="通道的极限通量"></a>通道的极限通量</h1><ul>
+<li>奈氏准则</li>
+<li>香农公式</li>
+</ul>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/image-20231023151718565.png" srcset="/img/loading.gif" lazyload alt="image-20231023151718565"></p>
+
                 
               </div>
             
@@ -347,6 +423,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/10/23/python/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" title="进程和线程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">进程和线程</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
