@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png">
 <meta property="article:published_time" content="2023-09-22T00:26:25.000Z">
-<meta property="article:modified_time" content="2023-10-26T07:03:33.830Z">
+<meta property="article:modified_time" content="2023-10-26T08:34:23.162Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="MYSQL">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10k words
+          11k words
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          87 mins
+          93 mins
         
       </span>
     
@@ -424,7 +424,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 使用两个条件查询<br><br>SELECT * FROM student WHERE class=95031 AND ssex=&#x27;女&#x27;;<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>升序降序查找</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 升序降序查表<br><br><br>-- 升序查表<br>SELECT * FROM student ORDER BY class ASC;<br><br>-- 降序查找<br>SELECT * FROM student ORDER BY class DESC;<br><br>-- 默认升序<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 升序降序查表<br><br><br>-- 升序查表<br>SELECT * FROM student ORDER BY class ASC;<br><br>-- 降序查找<br>SELECT * FROM student ORDER BY class DESC;<br><br>-- 默认升序<br><br><br># 以班级和年龄从大到小排序查询student 表中全部的记录<br><br>SELECT * FROM student ORDER BY class DESC,sbirthday;<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql"><br>SELECT * FROM score ORDER BY cno ASC,DEGREE DESC;<br></code></pre></td></tr></table></figure>
 </li>
@@ -443,7 +443,13 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 计算score 表中至少有两名学生选修，并以3开头的ban&#x27;j平均数<br><br>SELECT<br>    cno,<br>    AVG(DEGREE),<br>    COUNT(*)<br>FROM score<br>GROUP BY cno<br>HAVING<br>    COUNT(cno) &gt;= 2<br>    AND cno LIKE &#x27;3%&#x27;; <br></code></pre></td></tr></table></figure>
 </li>
 <li><p>带条件的查询</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询分数大于70，小于90的sno列<br><br>SELECT sno,DEGREE FROM score WHERE degree&gt;70 and degree&lt;90;<br><br>SELECT sno FROM score WHERE degree BETWEEN 70 AND 90;<br><br></code></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询分数大于70，小于90的sno列<br><br>SELECT sno,DEGREE FROM score WHERE degree&gt;70 and degree&lt;90;<br><br>SELECT sno FROM score WHERE degree BETWEEN 70 AND 90;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>分组后条件查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">    <br># 查询至少有两名男生的班号<br>    <br>SELECT class<br>FROM student<br>WHERE ssex=&#x27;男&#x27; GROUP BY class HAVING COUNT(*) &gt;1;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>日期求最大最小</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询student 中最大的sbirthday和最小<br><br>SELECT MAX(sbirthday)-MIN(sbirthday) FROM student;	<br></code></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><ol>
 <li><pre><code class="mysql">
@@ -471,7 +477,7 @@ FROM score
 </ol>
 <h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><ol>
 <li><p>使用in计算一类</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"># 查询<span class="hljs-number">95031</span>班，每个班的平均分<br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(degree)<br><span class="hljs-keyword">from</span> score<br><span class="hljs-keyword">where</span> sno <span class="hljs-keyword">in</span> (<br>        <span class="hljs-keyword">SELECT</span> sno<br>        <span class="hljs-keyword">from</span> student<br>        <span class="hljs-keyword">WHERE</span> class <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;95031&#x27;</span><br>    ) <br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> cno; # 根据不同的学科分类<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs sql"># 查询<span class="hljs-number">95031</span>班，每个班的平均分<br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(degree)<br><span class="hljs-keyword">from</span> score<br><span class="hljs-keyword">where</span> sno <span class="hljs-keyword">in</span> (<br>        <span class="hljs-keyword">SELECT</span> sno<br>        <span class="hljs-keyword">from</span> student<br>        <span class="hljs-keyword">WHERE</span> class <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;95031&#x27;</span><br>    ) <br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> cno; # 根据不同的学科分类<br><br><br><br># 查询所有教师的tname 和 depart<br><br><span class="hljs-keyword">SELECT</span> tname, depart<br><span class="hljs-keyword">FROM</span> teacher<br><span class="hljs-keyword">WHERE</span> tno <span class="hljs-keyword">IN</span> (<br>        <span class="hljs-keyword">SELECT</span> tno<br>        <span class="hljs-keyword">FROM</span> course<br>    );<br>    <br>    <br>    <br> # 查询男教师并且他们所上的课<br><br><span class="hljs-keyword">SELECT</span> cno, cname<br><span class="hljs-keyword">FROM</span> course<br><span class="hljs-keyword">WHERE</span> tno <span class="hljs-keyword">in</span> (<br>        <span class="hljs-keyword">SELECT</span> tno<br>        <span class="hljs-keyword">FROM</span> teacher<br>        <span class="hljs-keyword">WHERE</span> tsex <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;男&#x27;</span><br>    );<br></code></pre></td></tr></table></figure>
 
 
 </li>
@@ -508,6 +514,10 @@ FROM score
 <h3 id="查询多张表的类似元素"><a href="#查询多张表的类似元素" class="headerlink" title="查询多张表的类似元素"></a>查询多张表的类似元素</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询所有学生和老师的的name sex birthday<br>SELECT<br>    sname as name,<br>    ssex as sex,<br>    sbirthday as birthday<br>from student<br>UNION<br>SELECT<br>    tname,<br>    tsex,<br>    tbirthday # 后面可以不起别名<br>FROM teacher;<br><br><br># 查询所有女老师和女学生的name  asex  birthday<br><br>SELECT<br>    sname as name,<br>    ssex as sex,<br>    sbirthday as birthday<br>FROM student<br>WHERE student.ssex = &quot;女&quot;<br>UNION<br>SELECT tname, tsex, tbirthday<br>FROM teacher<br>WHERE tsex = &quot;女&quot;;<br></code></pre></td></tr></table></figure>
 
 
+
+<h2 id="复制表数据做查询语句"><a href="#复制表数据做查询语句" class="headerlink" title="复制表数据做查询语句"></a>复制表数据做查询语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs mysql">#查询成绩比平均成绩低的同学的学号、姓名、成绩<br><br>SELECT cno,AVG(degree) FROM score GROUP BY cno;<br><br># 可以求出平均数<br><br>SELECT * FROM score;<br><br># 可以找出所有的信息<br><br>SELECT *<br>FROM score a<br>WHERE degree &lt; (<br>        SELECT AVG(degree)<br>        FROM score b<br>        WHERE a.cno = b.cno<br>    );<br></code></pre></td></tr></table></figure>
+
+<h2 id="year"><a href="#year" class="headerlink" title="year()"></a>year()</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询student 的年龄 和姓名<br><br># 注意年龄需要  现在的日期-出生日期<br><br>select sname,YEAR(NOW())-YEAR(sbirthday) from student;<br><br></code></pre></td></tr></table></figure>
 
 
                 
