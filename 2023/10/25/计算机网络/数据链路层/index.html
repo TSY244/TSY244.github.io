@@ -16,24 +16,36 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] lambda高级使用捕获列表lambda 表达式还可以通过捕获列表捕获一定范围内的变量：  [] 不捕获任何变量。 [&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。 [&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。 [&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。 [bar">
+    <meta name="description" content="概述数据链路层的地位  链路 从一个结点到另一个相邻结点，中间没有其他的交换结点  数据链路 在链路上添加了协议和软件，就跟构成了数据链路  数据链路层通过帧来传递数据   数据链路层的三个重要问题封装成帧需要在来自网络层的数据添加，帧头和帧尾，这个过程就是封装成帧的过程  差错检测 每一个帧具有帧检验字段 通过算法查看是否有出错  可靠传输如果传输的过程中出现了错误，就会被丢弃 如果发送方提供的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lambda高级使用">
-<meta property="og:url" content="https://tsy244.github.io/2023/03/26/c++/lambda%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="数据链路层">
+<meta property="og:url" content="https://tsy244.github.io/2023/10/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="[TOC] lambda高级使用捕获列表lambda 表达式还可以通过捕获列表捕获一定范围内的变量：  [] 不捕获任何变量。 [&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。 [&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。 [&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。 [bar">
+<meta property="og:description" content="概述数据链路层的地位  链路 从一个结点到另一个相邻结点，中间没有其他的交换结点  数据链路 在链路上添加了协议和软件，就跟构成了数据链路  数据链路层通过帧来传递数据   数据链路层的三个重要问题封装成帧需要在来自网络层的数据添加，帧头和帧尾，这个过程就是封装成帧的过程  差错检测 每一个帧具有帧检验字段 通过算法查看是否有出错  可靠传输如果传输的过程中出现了错误，就会被丢弃 如果发送方提供的">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-26T12:39:43.000Z">
-<meta property="article:modified_time" content="2023-04-10T14:25:14.004Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103310175.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103913366.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104213045.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104521813.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105011257.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105610036.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110036815.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110406127.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110519536.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110611230.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025115733560.png">
+<meta property="article:published_time" content="2023-10-25T02:29:57.000Z">
+<meta property="article:modified_time" content="2023-10-25T03:57:48.297Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c++基础">
+<meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103310175.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>lambda高级使用 - chg</title>
+  <title>数据链路层 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +211,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="lambda高级使用"></span>
+            <span id="subtitle" data-typed-text="数据链路层"></span>
           
         </div>
 
@@ -215,8 +227,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-26 20:39" pubdate>
-          March 26, 2023 pm
+        <time datetime="2023-10-25 10:29" pubdate>
+          October 25, 2023 am
         </time>
       </span>
     
@@ -227,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          849 words
         
       </span>
     
@@ -238,7 +250,7 @@
         
         
         
-          11 mins
+          8 mins
         
       </span>
     
@@ -276,34 +288,85 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">lambda高级使用</h1>
+            <h1 style="display: none">数据链路层</h1>
             
             
               <div class="markdown-body">
                 
-                <p>[TOC]</p>
-<h1 id="lambda高级使用"><a href="#lambda高级使用" class="headerlink" title="lambda高级使用"></a>lambda高级使用</h1><h2 id="捕获列表"><a href="#捕获列表" class="headerlink" title="捕获列表"></a>捕获列表</h2><p>lambda 表达式还可以通过捕获列表捕获一定范围内的变量：</p>
-<ul>
-<li>[] 不捕获任何变量。</li>
-<li>[&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。</li>
-<li>[&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。</li>
-<li>[&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。</li>
-<li>[bar] 按值捕获 bar 变量，同时不捕获其他变量。</li>
-<li>[this] 捕获当前类中的 this <a target="_blank" rel="noopener" href="http://c.biancheng.net/c/80/">指针</a>，让 lambda 表达式拥有和当前类成员函数同样的访问权限。如果已经使用了 &amp; 或者 &#x3D;，就默认添加此选项。捕获 this 的目的是可以在 lamda 中使用当前类的成员函数和成员变量。</li>
-</ul>
-<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><ol>
-<li>没有捕获的时候，我们将该lambda变量可以看成函数指针</li>
-<li>有捕获的时候，我们将该lambda表达式堪称仿函数</li>
-</ol>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ol>
-<li><p>使用<code>function</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iostream&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functional&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;vector&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a&#123;<span class="hljs-number">9</span>&#125;;<br>    <span class="hljs-type">int</span> b&#123;<span class="hljs-number">10</span>&#125;;<br>    [a,b](<span class="hljs-type">int</span> x)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;a+b&lt;&lt;std::endl&lt;&lt;x&lt;&lt;std::endl;<br>    &#125;(<span class="hljs-number">88</span>);<br>    std::function&lt;<span class="hljs-type">void</span>(<span class="hljs-type">int</span>,std::string)&gt; func&#123;[](<span class="hljs-type">int</span> num,std::string S)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;num= &quot;</span>&lt;&lt;num&lt;&lt;<span class="hljs-string">&quot; name= &quot;</span>&lt;&lt;S&lt;&lt;std::endl;<br>    &#125;&#125;;<br>    <span class="hljs-built_in">func</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;chg&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-
+                <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="数据链路层的地位"><a href="#数据链路层的地位" class="headerlink" title="数据链路层的地位"></a>数据链路层的地位</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103310175.png" srcset="/img/loading.gif" lazyload alt="image-20231025103310175"></p>
+<ol>
+<li><p>链路</p>
+<p>从一个结点到另一个相邻结点，中间没有其他的交换结点</p>
 </li>
-<li><p>使用<code>bind</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a&#123;<span class="hljs-number">9</span>&#125;;	<br>    <span class="hljs-type">int</span> b&#123;<span class="hljs-number">10</span>&#125;;<br>    [a,b](<span class="hljs-type">int</span> x)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;a+b&lt;&lt;std::endl&lt;&lt;x&lt;&lt;std::endl;<br>    &#125;(<span class="hljs-number">88</span>);<br>    <span class="hljs-keyword">auto</span> f2= std::<span class="hljs-built_in">bind</span>([](<span class="hljs-type">int</span> num,std::string S)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;num= &quot;</span>&lt;&lt;num&lt;&lt;<span class="hljs-string">&quot; name= &quot;</span>&lt;&lt;S&lt;&lt;std::endl;<br>    &#125;,std::placeholders::_1,std::placeholders::_2);<br>    <span class="hljs-built_in">f2</span>(<span class="hljs-number">2</span>,<span class="hljs-string">&quot;zjy&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+<li><p>数据链路</p>
+<p>在链路上添加了协议和软件，就跟构成了数据链路</p>
+</li>
+<li><p>数据链路层通过<strong>帧</strong>来传递数据</p>
+</li>
 </ol>
+<h2 id="数据链路层的三个重要问题"><a href="#数据链路层的三个重要问题" class="headerlink" title="数据链路层的三个重要问题"></a>数据链路层的三个重要问题</h2><h3 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h3><p>需要在来自网络层的数据添加，帧头和帧尾，这个过程就是封装成帧的过程</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103913366.png" srcset="/img/loading.gif" lazyload alt="image-20231025103913366"></p>
+<h3 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h3><p> 每一个帧具有帧检验字段</p>
+<p>通过算法查看是否有出错</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104213045.png" srcset="/img/loading.gif" lazyload alt="image-20231025104213045"></p>
+<h3 id="可靠传输"><a href="#可靠传输" class="headerlink" title="可靠传输"></a>可靠传输</h3><p>如果传输的过程中出现了错误，就会被丢弃</p>
+<p>如果发送方提供的是不可靠服务，丢弃就丢弃了。如果是可靠服务，就需要保证上层能过接收到真正确的副本</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104521813.png" srcset="/img/loading.gif" lazyload alt="image-20231025104521813"></p>
+<h1 id="封装成帧-1"><a href="#封装成帧-1" class="headerlink" title="封装成帧"></a>封装成帧</h1><p>添加帧头和帧尾的过程</p>
+<p>帧头和帧尾的作用之一是帧定界</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105011257.png" srcset="/img/loading.gif" lazyload alt="image-20231025105011257"></p>
+<p>通过帧的标志位来划分</p>
+<p>但是不是所有的帧都包含标志位</p>
+<p>比如像mac帧，就存在标志位，那是怎么定位的呢？</p>
+<blockquote>
+<ol>
+<li><p>通过前导码</p>
+<p>前导码里面包含了8字节，前7个字节是前同步码，是接收方的时钟同步</p>
+<p>后一个字节是帧开始定界符</p>
+</li>
+<li><p>规定了96比特的发送时间，所有mac帧不需要帧结束定位符</p>
+</li>
+</ol>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105610036.png" srcset="/img/loading.gif" lazyload alt="image-20231025105610036"></p>
+<h2 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h2><ol>
+<li><p>数据链路层对上层传输的数据没有任何限制</p>
+<p>问题：如果上层传输的数据中存在flag的值，那就不能正常传输</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110036815.png" srcset="/img/loading.gif" lazyload alt="image-20231025110036815"></p>
+<blockquote>
+<p>因此存在各种数据链路层协议，为解决这个问题</p>
+<p>可以这样，当上层数据传入数据链路层的时候，数据链路层会扫描发送的数据，如果存在数据定位符，我们就对非flag转义</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110406127.png" srcset="/img/loading.gif" lazyload alt="image-20231025110406127"></p>
+<p>但是现在有一个新的问题：</p>
+<p>如果存在转移字符，怎么解决？</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110519536.png" srcset="/img/loading.gif" lazyload alt="image-20231025110519536"></p>
+<blockquote>
+<p>将改转义字符也转义变成普通的字符</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110611230.png" srcset="/img/loading.gif" lazyload alt="image-20231025110611230"></p>
+</li>
+<li><p>数据部分的长度</p>
+<p>考虑到差错控制等多种因素，每一种数据链路层的协议都规定了<strong>最大传送单元MTU</strong></p>
+</li>
+</ol>
+<h1 id="差错检验"><a href="#差错检验" class="headerlink" title="差错检验"></a>差错检验</h1><h2 id="奇偶校验"><a href="#奇偶校验" class="headerlink" title="奇偶校验"></a>奇偶校验</h2><p>在待发送的数据后面添加一位奇偶校验位，使得整个数据当中’1’的个数为奇数或者偶数</p>
+<blockquote>
+<p>采取这样的检测会出现问题，当发生一位误码的时候可以检测出。但是当产生两位误码的时候就可能会误认为没有发生改变</p>
+</blockquote>
+<h2 id="冗余码检验"><a href="#冗余码检验" class="headerlink" title="冗余码检验"></a>冗余码检验</h2><p>主要使用</p>
+<h1 id="可靠传输-1"><a href="#可靠传输-1" class="headerlink" title="可靠传输"></a>可靠传输</h1><h2 id="传输差错"><a href="#传输差错" class="headerlink" title="传输差错"></a>传输差错</h2><ol>
+<li>比特差错</li>
+<li>分组丢失</li>
+<li>分组失序</li>
+<li>分组重复</li>
+<li>分组丢失，分组失序，分组重复不会存在于数据链路层，只会出现在上层</li>
+</ol>
+<h1 id="可靠传输的协议"><a href="#可靠传输的协议" class="headerlink" title="可靠传输的协议"></a>可靠传输的协议</h1><h1 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h1><blockquote>
+<p>基本实现：</p>
+<p>发送方发发送数据然后接收方检测，如果没有误码就给发送方发送ACK，发送方就可以继续发送数据。如果存在误码就会发送NAK，然后发送方就会重新发送数据</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025115733560.png" srcset="/img/loading.gif" lazyload alt="image-20231025115733560"></p>
 
                 
               </div>
@@ -316,7 +379,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c-%E5%9F%BA%E7%A1%80/">#c++基础</a>
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
       
     </div>
   
@@ -328,8 +391,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>lambda高级使用</div>
-      <div>https://tsy244.github.io/2023/03/26/c++/lambda高级使用/</div>
+      <div>数据链路层</div>
+      <div>https://tsy244.github.io/2023/10/25/计算机网络/数据链路层/</div>
     </div>
     <div class="license-meta">
       
@@ -341,7 +404,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 26, 2023</div>
+          <div>October 25, 2023</div>
         </div>
       
       
@@ -373,18 +436,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BA%BF%E6%80%A7%E8%A1%A8/" title="线性表">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">线性表</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/26/c++/%E5%87%BD%E6%95%B0/" title="函数">
-                        <span class="hidden-mobile">函数</span>
+                      <a href="/2023/10/25/MYSQL/mysql%E9%9A%8F%E8%AE%B0/" title="mysql随记">
+                        <span class="hidden-mobile">mysql随记</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
