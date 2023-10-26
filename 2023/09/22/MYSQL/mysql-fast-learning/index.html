@@ -1,0 +1,886 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="初始mysql 登录数据库  1mysql -uroot  -proot  查看当前数据库的字段 1SELECT * FROM chg_girlfriends  查看当前有哪些数据库 1show databases;  创建数据库 1creat database 数据库名字  选中数据库操作 1use 数据库的名称  查看数据库的表 1SHOW TABLES;  创建一个gril_friend的表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql_fast_learning">
+<meta property="og:url" content="https://tsy244.github.io/2023/09/22/MYSQL/mysql-fast-learning/index.html">
+<meta property="og:site_name" content="chg">
+<meta property="og:description" content="初始mysql 登录数据库  1mysql -uroot  -proot  查看当前数据库的字段 1SELECT * FROM chg_girlfriends  查看当前有哪些数据库 1show databases;  创建数据库 1creat database 数据库名字  选中数据库操作 1use 数据库的名称  查看数据库的表 1SHOW TABLES;  创建一个gril_friend的表">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png">
+<meta property="article:published_time" content="2023-09-22T00:26:25.000Z">
+<meta property="article:modified_time" content="2023-10-26T07:03:33.830Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="MYSQL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>mysql_fast_learning - chg</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>chg&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="mysql_fast_learning"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-22 08:26" pubdate>
+          September 22, 2023 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          10k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          87 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">mysql_fast_learning</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="初始mysql"><a href="#初始mysql" class="headerlink" title="初始mysql"></a>初始mysql</h1><ol>
+<li><p>登录数据库</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql -uroot  -proot<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前数据库的字段</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> chg_girlfriends<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前有哪些数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">show</span> databases;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">creat database 数据库名字<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>选中数据库操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">use 数据库的名称<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看数据库的表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SHOW TABLES;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个gril_friend的表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs MYSQL">create table student(<br>    name  char(4) not null ,<br>    sex   enum(&#x27;男&#x27;,&#x27;女&#x27;),<br>    id    char(11) primary key,<br>    class tinyint not null<br>);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看某个数据表的结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs MYSQL">DESCRIBE STUDENT;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png" srcset="/img/loading.gif" lazyload alt="image-20230922091346627"></p>
+</li>
+<li><p>查看表中数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECt * FROM student;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>如何往数据表中添加数据记录</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> student<br><span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;CHG&#x27;</span>,<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-string">&#x27;2&#x27;</span>,<span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>数据类型的选择</p>
+</li>
+</ol>
+<ul>
+<li>时间类型看格式</li>
+<li>整型和字符串类型看长度</li>
+</ul>
+<ol start="12">
+<li><p>更新字段名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER TABLE student CHANGE COLUMN classNum cn TINYINT;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建约束</p>
+<ul>
+<li><p>主键约束</p>
+<p>不重复且不为空</p>
+<p>创建一个主键：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE test(<br>	test1 char PRIMARY KEY<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>创建联合主键（加起来不重复，任何一个都不能为空）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE test(<br>	test1 char,<br>	test2 char,<br>	PRIMARY KEY(test1,test2)<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>创建自增主键：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE test(<br>	test1 char,<br>	test2 char,<br>	test3 TINYINT AUTO_INCREMENT,<br>	PRIMARY KEY(test1,test2,test3)<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>给表添加主键：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter TABLE test DROP PRIMARY KEY;<br>ALTER TABLE test ADD PRIMARY KEY(test1,test2);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>删除主键：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter TABLE test DROP PRIMARY KEY;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>通过修改字段的方式增加主键(modify)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER TABLE test MODIFY test1 TINYINT PRIMARY KEY;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>唯一约束</p>
+<p>该字段的值不可以重复</p>
+<p>alter添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER TABLE test ADD UNIQUE(test1,test2);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>非空约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>默认约束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">default 默认值<br></code></pre></td></tr></table></figure>
+
+<p>传了值就不会使用默认值</p>
+</li>
+<li><p>外键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE class (<br>        name char(10) PRIMARY KEY,<br>        class_id TINYINT DEFAULT 4,<br>        student_name char(4),<br>        FOREIGN KEY (student_name) REFERENCES student(name)<br>    );<br></code></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+<p>	</p>
+</li>
+<li><p>范式</p>
+<ul>
+<li><p>第一范式（1NF）</p>
+<p>数据表中的所有的字段都是不可分割的原子值</p>
+<p>就是满足填入的数据不可以拆分</p>
+</li>
+<li><p>第二范式(2NF)</p>
+<p>必须是满足第一范式的前提下</p>
+<p>一个表的所有列最好都和主键相关，不想关的拆解成其他表</p>
+</li>
+<li><p>第三范式(3NF)</p>
+<p>满足第二范式</p>
+<p>非主键不存在相关性</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><h2 id="单表查询"><a href="#单表查询" class="headerlink" title="单表查询"></a>单表查询</h2><ol>
+<li><p>数据准备</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE DATABASE mysql_test;<br>   <br>USE mysql_test;<br>   <br>CREATE TABLE<br>    Student(<br>        sno VARCHAR(20) PRIMARY KEY,<br>        sname VARCHAR(20) NOT NULL,<br>        ssex VARCHAR(10) NOT NULL,<br>        sbirthday DATETIME NOT NULL,<br>        class VARCHAR(20) NOT NULL<br>    );<br>   <br>DROP TABLE student;<br>   <br>-- 提前准备<br>   <br>CREATE TABLE<br>    Teacher(<br>        tno VARCHAR(20) PRIMARY KEY,<br>        tname VARCHAR(20) NOT NULL,<br>        tsex VARCHAR(10) NOT NULL,<br>        tbirthday DATETIME,<br>        prof VARCHAR(20) NOT NULL,<br>        depart VARCHAR(20) NOT NULL<br>    );<br>   <br>CREATE TABLE<br>    Course(<br>        cno VARCHAR(20) PRIMARY KEY,<br>        cname VARCHAR(20) NOT NULL,<br>        tno VARCHAR(20) NOT NULL,<br>        FOREIGN KEY(tno) REFERENCES teacher(tno)<br>    )<br>   <br>DROP TABLE score;<br>   <br>CREATE TABLE<br>    score(<br>        sno VARCHAR(20) NOT NULL,<br>        cno VARCHAR(20) NOT NULL,<br>        degree DECIMAL NOT NULL,<br>        FOREIGN KEY(sno) REFERENCES Student(sno),<br>        FOREIGN KEY(cno) REFERENCES Course(con),<br>        PRIMARY KEY(sno, cno)<br>    );<br>   <br>-- 添加学生表的数据<br>   <br>INSERT INTO student VALUES(&#x27;101&#x27;, &#x27;曾华&#x27;, &#x27;男&#x27;, &#x27;1977-09-01&#x27;, &#x27;95033&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;102&#x27;, &#x27;匡明&#x27;, &#x27;男&#x27;, &#x27;1975-10-02&#x27;, &#x27;95031&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;103&#x27;, &#x27;王丽&#x27;, &#x27;女&#x27;, &#x27;1976-01-23&#x27;, &#x27;95033&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;104&#x27;, &#x27;李军&#x27;, &#x27;男&#x27;, &#x27;1976-02-20&#x27;, &#x27;95033&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;105&#x27;, &#x27;王芳&#x27;, &#x27;女&#x27;, &#x27;1975-02-10&#x27;, &#x27;95031&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;106&#x27;, &#x27;陆军&#x27;, &#x27;男&#x27;, &#x27;1974-06-03&#x27;, &#x27;95031&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;107&#x27;, &#x27;王尼玛&#x27;, &#x27;男&#x27;, &#x27;1976-02-20&#x27;, &#x27;95033&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;108&#x27;, &#x27;张全蛋&#x27;, &#x27;男&#x27;, &#x27;1975-02-10&#x27;, &#x27;95031&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;109&#x27;, &#x27;赵铁柱&#x27;, &#x27;男&#x27;, &#x27;1974-06-03&#x27;, &#x27;95031&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;101&#x27;, &#x27;曾华&#x27;, &#x27;男&#x27;, &#x27;1977-09-01&#x27;, &#x27;95033&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;102&#x27;, &#x27;匡明&#x27;, &#x27;男&#x27;, &#x27;1975-10-02&#x27;, &#x27;95031&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;103&#x27;, &#x27;王丽&#x27;, &#x27;女&#x27;, &#x27;1976-01-23&#x27;, &#x27;95033&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;104&#x27;, &#x27;李军&#x27;, &#x27;男&#x27;, &#x27;1976-02-20&#x27;, &#x27;95033&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;105&#x27;, &#x27;王芳&#x27;, &#x27;女&#x27;, &#x27;1975-02-10&#x27;, &#x27;95031&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;106&#x27;, &#x27;陆军&#x27;, &#x27;男&#x27;, &#x27;1974-06-03&#x27;, &#x27;95031&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;107&#x27;, &#x27;王尼玛&#x27;, &#x27;男&#x27;, &#x27;1976-02-20&#x27;, &#x27;95033&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;108&#x27;, &#x27;张全蛋&#x27;, &#x27;男&#x27;, &#x27;1975-02-10&#x27;, &#x27;95031&#x27;);<br>   <br>INSERT INTO student VALUES(&#x27;109&#x27;, &#x27;赵铁柱&#x27;, &#x27;男&#x27;, &#x27;1974-06-03&#x27;, &#x27;95031&#x27;);<br>   <br>INSERT INTO teacher<br>VALUES (<br>        &#x27;804&#x27;,<br>        &#x27;李诚&#x27;,<br>        &#x27;男&#x27;,<br>        &#x27;1958-12-02&#x27;,<br>        &#x27;副教授&#x27;,<br>        &#x27;计算机系&#x27;<br>    );<br>   <br>INSERT INTO teacher<br>VALUES (<br>        &#x27;856&#x27;,<br>        &#x27;张旭&#x27;,<br>        &#x27;男&#x27;,<br>        &#x27;1969-03-12&#x27;,<br>        &#x27;讲师&#x27;,<br>        &#x27;电子工程系&#x27;<br>    );<br>   <br>INSERT INTO teacher<br>VALUES (<br>        &#x27;825&#x27;,<br>        &#x27;王萍&#x27;,<br>        &#x27;女&#x27;,<br>        &#x27;1972-05-05&#x27;,<br>        &#x27;助教&#x27;,<br>        &#x27;计算机系&#x27;<br>    );<br>   <br>INSERT INTO teacher<br>VALUES (<br>        &#x27;831&#x27;,<br>        &#x27;刘冰&#x27;,<br>        &#x27;女&#x27;,<br>        &#x27;1977-08-14&#x27;,<br>        &#x27;助教&#x27;,<br>        &#x27;电子工程系&#x27;<br>    );<br>   <br>show tables;<br>   <br>select * from teacher;<br>   <br>INSERT INTO course VALUES(&#x27;3-105&#x27;, &#x27;计算机导论&#x27;, &#x27;825&#x27;);<br>   <br>INSERT INTO course VALUES(&#x27;3-245&#x27;, &#x27;操作系统&#x27;, &#x27;804&#x27;);<br>   <br>INSERT INTO course VALUES(&#x27;6-166&#x27;, &#x27;数字电路&#x27;, &#x27;856&#x27;);<br>   <br>INSERT INTO course VALUES(&#x27;9-888&#x27;, &#x27;高等数学&#x27;, &#x27;831&#x27;);<br>   <br>-- 存入数据<br>   <br>INSERT INTO score VALUES(&#x27;103&#x27;, &#x27;3-105&#x27;, &#x27;92&#x27;);<br>   <br>INSERT INTO score VALUES(&#x27;103&#x27;, &#x27;3-245&#x27;, &#x27;86&#x27;);<br>   <br>INSERT INTO score VALUES(&#x27;103&#x27;, &#x27;6-166&#x27;, &#x27;85&#x27;);<br>   <br>INSERT INTO score VALUES(&#x27;105&#x27;, &#x27;3-105&#x27;, &#x27;88&#x27;);<br>   <br>INSERT INTO score VALUES(&#x27;105&#x27;, &#x27;3-245&#x27;, &#x27;75&#x27;);<br>   <br>INSERT INTO score VALUES(&#x27;105&#x27;, &#x27;6-166&#x27;, &#x27;79&#x27;);<br>   <br>INSERT INTO score VALUES(&#x27;109&#x27;, &#x27;3-105&#x27;, &#x27;76&#x27;);<br>   <br>INSERT INTO score VALUES(&#x27;109&#x27;, &#x27;3-245&#x27;, &#x27;68&#x27;);<br>   <br>INSERT INTO score VALUES(&#x27;109&#x27;, &#x27;6-166&#x27;, &#x27;81&#x27;);<br>   <br>SELECT * FROM score;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询student 表的所有记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from student;		<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询指定的列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select sname,sno,ssex from student;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询某一列的所有的值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询教师所有的单位<br><br>-- 重复<br><br>SELECT depart from teacher;<br><br>-- 不重复<br><br>SELECT DISTINCT depart from teacher;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>使用where 作为条件查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"><br>SELECT * FROM score WHERE DEGREE BETWEEN 60 and 80;<br><br>SELECT * FROM score WHERE DEGREE &gt;60 and DEGREE &lt;80;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>关系查找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 表示或者关系的查询<br>SELECT * FROM score WHERE degree in(86,88);  -- 表示范围<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>多条件查找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 使用两个条件查询<br><br>SELECT * FROM student WHERE class=95031 AND ssex=&#x27;女&#x27;;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>升序降序查找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 升序降序查表<br><br><br>-- 升序查表<br>SELECT * FROM student ORDER BY class ASC;<br><br>-- 降序查找<br>SELECT * FROM student ORDER BY class DESC;<br><br>-- 默认升序<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql"><br>SELECT * FROM score ORDER BY cno ASC,DEGREE DESC;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询’95031’班的人数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 统计人数<br><br>SELECT COUNT(*) FROM student WHERE class=&#x27;95031&#x27;;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>子查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"><br>-- 统计最高分<br><br>SELECT * FROM score WHERE degree=(SELECT MAX(degree) FROM score);<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>计算不同组的平均数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 计算平均成绩<br>-- 计算某一个特定的值的平均数<br>SELECT AVG(DEGREE) FROM score where cno =&#x27;3-105&#x27;;<br><br><br>-- 计算组平均值<br>SELECT cno,AVG(DEGREE) FROM score GROUP BY cno;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>分组指定组内成员的数量，使用like匹配</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 计算score 表中至少有两名学生选修，并以3开头的ban&#x27;j平均数<br><br>SELECT<br>    cno,<br>    AVG(DEGREE),<br>    COUNT(*)<br>FROM score<br>GROUP BY cno<br>HAVING<br>    COUNT(cno) &gt;= 2<br>    AND cno LIKE &#x27;3%&#x27;; <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>带条件的查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询分数大于70，小于90的sno列<br><br>SELECT sno,DEGREE FROM score WHERE degree&gt;70 and degree&lt;90;<br><br>SELECT sno FROM score WHERE degree BETWEEN 70 AND 90;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><ol>
+<li><pre><code class="mysql">
+SELECT
+    student.sno,
+    student.sname,
+    score.cno,
+    score.degree
+from student
+    JOIN score ON student.sno = score.sno;
+
+# 查询所有学生的son,cname,degree
+
+SELECT
+    score.sno,
+    course.cname,
+    score.degree
+FROM score
+    JOIN course ON course.cno = score.cno;
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><br><span class="hljs-number">2</span>. 隐式<span class="hljs-keyword">join和显示，建议使用显示的，隐式的不太清楚</span><br><span class="hljs-keyword"></span><br>   ```mysql<br>   <span class="hljs-comment"># 查询所有的学生的sname,cname,degree</span><br>   <br>   SELECT<br>       student.sname,<br>       course.cname,<br>       <span class="hljs-keyword">score.degree</span><br><span class="hljs-keyword"></span>   FROM student<br>       <span class="hljs-keyword">JOIN </span><span class="hljs-keyword">score </span>ON student.sno = <span class="hljs-keyword">score.sno </span><span class="hljs-comment"># 这两个不一样，也不能是student</span><br>       <span class="hljs-keyword">JOIN </span>course ON <span class="hljs-keyword">score.cno </span>= course.cno;<br>   <br>   <br>   SELECT sname, cname, degree<br>   FROM student, <span class="hljs-keyword">score, </span>course<br>   WHERE<br>       student.sno = <span class="hljs-keyword">score.sno</span><br><span class="hljs-keyword"></span>       <span class="hljs-keyword">and </span><span class="hljs-keyword">score.cno </span>= course.cno;<br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>as起别名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT<br>    student.sname as stu_name,<br>    course.cname,<br>    score.degree,<br>    score.cno as sco_con<br>FROM student<br>    JOIN score ON student.sno = score.sno<br>    JOIN course ON score.cno = course.cno;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><ol>
+<li><p>使用in计算一类</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"># 查询<span class="hljs-number">95031</span>班，每个班的平均分<br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(degree)<br><span class="hljs-keyword">from</span> score<br><span class="hljs-keyword">where</span> sno <span class="hljs-keyword">in</span> (<br>        <span class="hljs-keyword">SELECT</span> sno<br>        <span class="hljs-keyword">from</span> student<br>        <span class="hljs-keyword">WHERE</span> class <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;95031&#x27;</span><br>    ) <br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> cno; # 根据不同的学科分类<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>子查询做限定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT *<br>from score<br>WHERE degree &gt; (<br>        SELECT degree<br>        FROM score<br>        WHERE sno = 109 AND cno=&#x27;3-105&#x27;<br>    );<br>    <br># 查询3-105课程的成绩高于 109 同学 3-105 成绩的所有同学的记录<br>SELECT *<br>FROM score<br>WHERE cno = &#x27;3-105&#x27; and degree &gt; (<br>        SELECT degree<br>        FROM score<br>        WHERE<br>            sno = 109<br>            AND cno = &#x27;3-105&#x27;<br>    );<br>    <br><br># 查询成绩高于学号 109 课程号为 3-105 的成绩的所有记录<br><br>SELECT *<br>FROM score<br>WHERE cno = &#x27;3-105&#x27; and degree &gt; (<br>        SELECT degree<br>        FROM score<br>        WHERE<br>            sno = 109<br>            and cno = &#x27;3-105&#x27;<br>    );<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="year-函数和-in-做限制条件"><a href="#year-函数和-in-做限制条件" class="headerlink" title="year 函数和 in 做限制条件"></a>year 函数和 in 做限制条件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询和学号 108 101 的同学同年出生的所有学生的sno sname 和 sbirthday<br><br>SELECT *<br>FROM student<br>WHERE YEAR(sbirthday) in(<br>        SELECT<br>            YEAR(sbirthday)<br>        FROM student<br>        WHERE<br>            sno in(108, 101)<br>    );<br></code></pre></td></tr></table></figure>
+
+<h2 id="嵌套子查询"><a href="#嵌套子查询" class="headerlink" title="嵌套子查询"></a>嵌套子查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询 张旭 老师任课学生的成绩<br><br>SELECT *<br>FROM score<br>WHERE cno in (<br>        SELECT cno<br>        FROM course<br>        WHERE tno = (<br>                SELECT tno<br>                FROM teacher<br>                WHERE tname = &quot;张旭&quot;<br>            )<br>    );<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="多表查询plus"><a href="#多表查询plus" class="headerlink" title="多表查询plus"></a>多表查询plus</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询选修某课程的同学人数多于5人的教师名字<br><br>SELECT tname<br>FROM teacher<br>WHERE tno = (<br>        SELECT tno<br>        FROM course<br>        WHERE cno = (<br>                SELECT cno<br>                FROM score<br>                GROUP BY cno<br>                HAVING<br>                    COUNT(*) &gt; 5<br>            )<br>    );<br></code></pre></td></tr></table></figure>
+
+<h2 id="any"><a href="#any" class="headerlink" title="any"></a>any</h2><p>任意一个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询选修编号为“3-105“课程且成绩至少高于选修编号为“3-245&quot;的同学的Cn0、Sno和Deg re并按Deg ree从高到低次序排序。<br><br>SELECT *<br>FROM score<br>WHERE<br>    cno = &quot;3-105&quot;<br>    and degree &gt; ANY(<br>        SELECT degree<br>        FROM score<br>        WHERE cno = &#x27;3-245&#x27;<br>    )<br>ORDER BY degree DESC; <br># ASC 是升序<br></code></pre></td></tr></table></figure>
+
+<h2 id="all"><a href="#all" class="headerlink" title="all"></a>all</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询选修编号为“3-105”且成绩高于选修编号为“3-245&quot;课程的同学的Cn0、Sno和Degree.<br><br>SELECT cno, sno, degree<br>FROM score<br>WHERE<br>    cno = &#x27;3-105&#x27;<br>    AND degree &gt; all(<br>        SELECT degree<br>        FROM score<br>        WHERE cno = &#x27;3-245&#x27;<br>    )<br>ORDER BY degree;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="查询练习"><a href="#查询练习" class="headerlink" title="查询练习"></a>查询练习</h2><h3 id="in"><a href="#in" class="headerlink" title="in"></a>in</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询95033 or  95031的学生<br><br>SELECT * from student WHERE class in(&quot;95033&quot;,&quot;95031&quot;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="where"><a href="#where" class="headerlink" title="where"></a>where</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询成绩在85以上的con<br><br>SELECT sno, cno,degree FROM score WHERE degree &gt; 85;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="多表查询-1"><a href="#多表查询-1" class="headerlink" title="多表查询"></a>多表查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询计算机系老师所教的课程表<br><br>SELECT *<br>FROM course<br>    JOIN teacher ON course.tno = teacher.tno<br>WHERE<br>    teacher.depart like &quot;计算机%&quot;;<br><br>select * FROM course WHERE tno in (SELECT tno FROM teacher WHERE depart LIKE &quot;计算机_&quot;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="union和nion"><a href="#union和nion" class="headerlink" title="union和nion"></a>union和nion</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询 计算机系  与  电子工程系  不同职称的教师的tname  prof<br># union求并集<br>SELECT tname, prof<br>FROM teacher<br>WHERE<br>    depart LIKE &quot;电子%&quot;<br>    AND prof NOT IN(<br>        SELECT DISTINCT prof<br>        FROM teacher<br>        WHERE<br>            depart like &quot;计算机%&quot;<br>    )<br>UNION<br>SELECT tname, prof<br>FROM teacher<br>WHERE<br>    depart LIKE &quot;计算%&quot;<br>    AND prof NOT IN(<br>        SELECT DISTINCT prof<br>        FROM teacher<br>        WHERE<br>            depart like &quot;电子%&quot;<br>    );<br></code></pre></td></tr></table></figure>
+
+<h3 id="查询多张表的类似元素"><a href="#查询多张表的类似元素" class="headerlink" title="查询多张表的类似元素"></a>查询多张表的类似元素</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询所有学生和老师的的name sex birthday<br>SELECT<br>    sname as name,<br>    ssex as sex,<br>    sbirthday as birthday<br>from student<br>UNION<br>SELECT<br>    tname,<br>    tsex,<br>    tbirthday # 后面可以不起别名<br>FROM teacher;<br><br><br># 查询所有女老师和女学生的name  asex  birthday<br><br>SELECT<br>    sname as name,<br>    ssex as sex,<br>    sbirthday as birthday<br>FROM student<br>WHERE student.ssex = &quot;女&quot;<br>UNION<br>SELECT tname, tsex, tbirthday<br>FROM teacher<br>WHERE tsex = &quot;女&quot;;<br></code></pre></td></tr></table></figure>
+
+
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MYSQL/">#MYSQL</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>mysql_fast_learning</div>
+      <div>https://tsy244.github.io/2023/09/22/MYSQL/mysql-fast-learning/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 22, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/22/python/django/" title="django">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">django</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/21/python/python%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/" title="python学习计划">
+                        <span class="hidden-mobile">python学习计划</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
