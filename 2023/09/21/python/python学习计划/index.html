@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921234737043.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230921235028643.png">
 <meta property="article:published_time" content="2023-09-21T15:42:37.000Z">
-<meta property="article:modified_time" content="2023-10-23T16:41:55.506Z">
+<meta property="article:modified_time" content="2023-10-30T16:02:46.761Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          11k words
+          12k words
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          93 mins
+          97 mins
         
       </span>
     
@@ -643,6 +643,13 @@ base64项目添加异常处理</p>
 </ol>
 <p>我不知道怎么解释，看着有问题问我就行</p>
 </li>
+</ul>
+<h1 id="23-10-30"><a href="#23-10-30" class="headerlink" title="23_10_30"></a>23_10_30</h1><p>赶着最后一天，给你分享点东西</p>
+<p>反正要上python课你可以结合起来看看，或者到最后一起看</p>
+<ul>
+<li><p><input disabled="" type="checkbox"> 
+python的网络编程</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread<br><span class="hljs-keyword">import</span> requests<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Download</span>(<span class="hljs-title class_ inherited__">Thread</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, url</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        self.__url = url<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">run</span>(<span class="hljs-params">self</span>):<br>        fileName = self.__url[self.__url.rfind(<span class="hljs-string">&#x27;/&#x27;</span>)+<span class="hljs-number">1</span>:] <span class="hljs-comment"># 获取文件名，从左一个/开始后面的</span><br>        resp = requests.get(self.__url)<br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(fileName, <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>            f.write(resp.content)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    Download(<span class="hljs-string">r&quot;自己的&quot;</span>).start() <span class="hljs-comment">#! 我本来放了我的图床的，但是你是学web的，我怕被你发现了什么神奇的东西哈哈哈</span><br><br><br>main()<br></code></pre></td></tr></table></figure></li>
 </ul>
 
                 
