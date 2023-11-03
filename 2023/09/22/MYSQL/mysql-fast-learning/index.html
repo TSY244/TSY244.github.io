@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231101093619444.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231101094236099.png">
 <meta property="article:published_time" content="2023-09-22T00:26:25.000Z">
-<meta property="article:modified_time" content="2023-11-01T02:24:21.335Z">
+<meta property="article:modified_time" content="2023-11-03T00:18:55.128Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="MYSQL">
 <meta name="twitter:card" content="summary_large_image">
@@ -575,10 +575,17 @@ FROM score
 <li><p>事务是否开启</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select @@autocommot;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231101094236099.png" srcset="/img/loading.gif" lazyload alt="image-20231101094236099"><br>1 则为开启（默认)</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231101094236099.png" srcset="/img/loading.gif" lazyload alt="image-20231101094236099"></p>
+<p>1 则为开启（默认)</p>
 </li>
 <li><p>事务开启的作用</p>
 <p>我们执行一条sql语句的时候会立马知道结果，而且不能回滚（不能撤销）</p>
+</li>
+<li><p>如何控制事务？</p>
+<ul>
+<li>默认开启事务</li>
+<li>rollback;语句是回滚</li>
+</ul>
 </li>
 </ol>
 
