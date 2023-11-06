@@ -59,8 +59,20 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113410095.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113837171.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113959921.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106141538494.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142039698.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142310810.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143323621.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143642085.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144543701.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144739764.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106145924298.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150151949.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150459459.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150955022.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106151426644.png">
 <meta property="article:published_time" content="2023-10-25T02:29:57.000Z">
-<meta property="article:modified_time" content="2023-11-01T03:46:32.380Z">
+<meta property="article:modified_time" content="2023-11-06T07:16:29.568Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k words
+          2.4k words
         
       </span>
     
@@ -275,7 +287,7 @@
         
         
         
-          16 mins
+          21 mins
         
       </span>
     
@@ -468,7 +480,63 @@
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113959921.png" srcset="/img/loading.gif" lazyload alt="image-20231101113959921"></p>
 <p>在网络层首部中右源IP地址和目标IP地址</p>
 <p>在数据链路层的首部中有源MAC地址和目标IP地址 </p>
-<h2 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h2>
+<h2 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h2><p>就是用于使用Ip地址发现mac地址</p>
+<p>用于使用IP发现mac地址</p>
+<p>通过广播查询，然后ip匹配的地址就会记录到arp高速缓存表</p>
+<p><strong>arp只能在一个链路和一个网络之间只用，不能跨网络使用</strong></p>
+<p>存在arp欺骗的问题</p>
+<h1 id="集线器和交换机"><a href="#集线器和交换机" class="headerlink" title="集线器和交换机"></a>集线器和交换机</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106141538494.png" srcset="/img/loading.gif" lazyload alt="image-20231106141538494"></p>
+<h2 id="交换机和集线器的区别"><a href="#交换机和集线器的区别" class="headerlink" title="交换机和集线器的区别"></a>交换机和集线器的区别</h2><p>交换机可以指定一个主机交流</p>
+<p>集线器会使用一种类似广播的形式也就是说每一个用户都会接受到信息</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142039698.png" srcset="/img/loading.gif" lazyload alt="image-20231106142039698"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142310810.png" srcset="/img/loading.gif" lazyload alt="image-20231106142310810"></p>
+<p>交换机会扩大广播域但是不会扩展碰撞域</p>
+<p>集线器会扩展广播域同时也会扩展碰撞域</p>
+<p><strong>交换机工作在主要数据链路层，集线器工作在物理层</strong></p>
+<h1 id="以太网交换机自学习和转发帧的流程"><a href="#以太网交换机自学习和转发帧的流程" class="headerlink" title="以太网交换机自学习和转发帧的流程"></a>以太网交换机自学习和转发帧的流程</h1><ol>
+<li><p>交换机插上网线就能使用，最开始的时候帧转发表是空的，但是要能连上网，就会自己存储转发表</p>
+</li>
+<li><p>帧交换表不会永久存放，到一定的时间之后就会消除</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143323621.png" srcset="/img/loading.gif" lazyload alt="image-20231106143323621"></p>
+<p>因为mac地址也交换机接口的对应关系不是永久性的</p>
+</li>
+<li><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143642085.png" srcset="/img/loading.gif" lazyload alt="image-20231106143642085"></p>
+<p>mac地址就是物理地址工作在数据链路层</p>
+</li>
+</ol>
+<h1 id="生成树协议"><a href="#生成树协议" class="headerlink" title="生成树协议"></a>生成树协议</h1><ol>
+<li>用于防止添加冗余，生成的网络环</li>
+</ol>
+<h1 id="虚拟局域网-VLAN"><a href="#虚拟局域网-VLAN" class="headerlink" title="虚拟局域网(VLAN)"></a>虚拟局域网(VLAN)</h1><ol>
+<li><p>随着交换机的增多，广播域也变大，就会造成很多问题</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144543701.png" srcset="/img/loading.gif" lazyload alt="image-20231106144543701"></p>
+<ul>
+<li>当某一个主机获取mac地址，使用arp协议的时候就会广播所有的域</li>
+</ul>
+</li>
+<li><p>网络上大量使用广播</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144739764.png" srcset="/img/loading.gif" lazyload alt="image-20231106144739764"></p>
+</li>
+<li><p>同一个VLAN可以广播通信，不同的VLAN不能广播通信</p>
+</li>
+</ol>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106145924298.png" srcset="/img/loading.gif" lazyload alt="image-20231106145924298"></p>
+<ol start="4">
+<li><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150151949.png" srcset="/img/loading.gif" lazyload alt="image-20231106150151949"></p>
+</li>
+<li><p>ACCESS端口<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150459459.png" srcset="/img/loading.gif" lazyload alt="image-20231106150459459"></p>
+<p>access端口将会对没打标签的打标签，打标签的去标签，如果与自己的PVID相等的话就转发该帧</p>
+<p>连接主机的端口应该设置为ACCESS</p>
+</li>
+<li><p>TRUNK端口</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150955022.png" srcset="/img/loading.gif" lazyload alt="image-20231106150955022"></p>
+<p>对于这个转发机制，适用于不同VLAN之间的转发</p>
+</li>
+<li><p>Hybrid端口</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106151426644.png" srcset="/img/loading.gif" lazyload alt="image-20231106151426644"></p>
+</li>
+</ol>
+
                 
               </div>
             
