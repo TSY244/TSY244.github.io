@@ -16,15 +16,15 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="什么是文件上传漏洞？由于程序员没有对文件上传后做审查导致用户可以按照自己的想法上传可执行文件，这个就是文件上传漏洞。 什么是Webshell 就是一种以asp[^asp]，php，jsp，cgi等网页文件形式存在的一种命令执行环境   什么是一句话木马可以理解为连接菜刀，蚁剑的钥匙 下面是常用的一句话木马 123&lt;?php    eval($_POST(cmd));?&gt;  这个cmd就">
+    <meta name="description" content="什么是文件上传漏洞？由于程序员没有对文件上传后做审查导致用户可以按照自己的想法上传可执行文件，这个就是文件上传漏洞。 什么是Webshell 就是一种以asp[^asp]，php，jsp，cgi等网页文件形式存在的一种命令执行环境 攻击者在入侵了一个网站后，通常会将这些asp或php后门文件与网站服务器web目录下正常的网页文件混在一起，然后使用浏览器来访问这些后门，得到一个命令执行环境，以达到控">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件上传">
 <meta property="og:url" content="https://tsy244.github.io/2023/11/19/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="什么是文件上传漏洞？由于程序员没有对文件上传后做审查导致用户可以按照自己的想法上传可执行文件，这个就是文件上传漏洞。 什么是Webshell 就是一种以asp[^asp]，php，jsp，cgi等网页文件形式存在的一种命令执行环境   什么是一句话木马可以理解为连接菜刀，蚁剑的钥匙 下面是常用的一句话木马 123&lt;?php    eval($_POST(cmd));?&gt;  这个cmd就">
+<meta property="og:description" content="什么是文件上传漏洞？由于程序员没有对文件上传后做审查导致用户可以按照自己的想法上传可执行文件，这个就是文件上传漏洞。 什么是Webshell 就是一种以asp[^asp]，php，jsp，cgi等网页文件形式存在的一种命令执行环境 攻击者在入侵了一个网站后，通常会将这些asp或php后门文件与网站服务器web目录下正常的网页文件混在一起，然后使用浏览器来访问这些后门，得到一个命令执行环境，以达到控">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-19T08:58:36.000Z">
-<meta property="article:modified_time" content="2023-11-19T13:07:24.156Z">
+<meta property="article:modified_time" content="2023-11-20T02:30:12.616Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.5k words
+          10k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          55 mins
+          84 mins
         
       </span>
     
@@ -284,7 +284,7 @@
                 <h1 id="什么是文件上传漏洞？"><a href="#什么是文件上传漏洞？" class="headerlink" title="什么是文件上传漏洞？"></a>什么是文件上传漏洞？</h1><p>由于程序员没有对文件上传后做审查导致用户可以按照自己的想法上传可执行文件，这个就是文件上传漏洞。</p>
 <h1 id="什么是Webshell"><a href="#什么是Webshell" class="headerlink" title="什么是Webshell"></a>什么是Webshell</h1><ol>
 <li>就是一种以asp[^asp]，php，jsp，cgi等网页文件形式存在的一种命令执行环境</li>
-<li></li>
+<li>攻击者在入侵了一个网站后，通常会将这些asp或php后门文件与网站服务器web目录下正常的网页文件混在一起，然后使用浏览器来访问这些后门，得到一个命令执行环境，以达到控制网站服务器的目的（可以上传下载或者修改文件，操作数据库，执行任意命令等）。 WebShell后门隐蔽较性高，可以轻松穿越防火墙，访问WebShell时不会留下系统日志，只会在网站的web日志中留下一些数据提交记录</li>
 </ol>
 <h1 id="什么是一句话木马"><a href="#什么是一句话木马" class="headerlink" title="什么是一句话木马"></a>什么是一句话木马</h1><p>可以理解为连接菜刀，蚁剑的钥匙</p>
 <p>下面是常用的一句话木马</p>
@@ -335,16 +335,49 @@
 <p>注意这个先后关系，前端检测完了发现可以通过后会将数据发送到服务器，我们使用bs抓包，抓到的是前端检查过后的数据</p>
 <h2 id="检查扩展名"><a href="#检查扩展名" class="headerlink" title="检查扩展名"></a>检查扩展名</h2><h3 id="黑名单策略"><a href="#黑名单策略" class="headerlink" title="黑名单策略"></a>黑名单策略</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">//黑名单策略</span><br>&lt;li id=<span class="hljs-string">&quot;show_code&quot;</span>&gt;<br>    &lt;h3&gt;代码&lt;/h3&gt;<br>&lt;pre&gt;<br>&lt;code <span class="hljs-class"><span class="hljs-keyword">class</span>=&quot;<span class="hljs-title">line</span>-<span class="hljs-title">numbers</span> <span class="hljs-title">language</span>-<span class="hljs-title">php</span>&quot;&gt;$<span class="hljs-title">is_upload</span> = <span class="hljs-title">false</span>;</span><br><span class="hljs-class">$<span class="hljs-title">msg</span> = <span class="hljs-title">null</span>;</span><br><span class="hljs-class"><span class="hljs-title">if</span> (<span class="hljs-title">isset</span>($<span class="hljs-title">_POST</span>[&#x27;<span class="hljs-title">submit</span>&#x27;])) </span>&#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;<br>        <span class="hljs-variable">$deny_ext</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;.asp&#x27;</span>,<span class="hljs-string">&#x27;.aspx&#x27;</span>,<span class="hljs-string">&#x27;.php&#x27;</span>,<span class="hljs-string">&#x27;.jsp&#x27;</span>);<br>        <span class="hljs-variable">$file_name</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;upload_file&#x27;</span>][<span class="hljs-string">&#x27;name&#x27;</span>]);<br>        <span class="hljs-variable">$file_name</span> = <span class="hljs-title function_ invoke__">deldot</span>(<span class="hljs-variable">$file_name</span>);<span class="hljs-comment">//删除文件名末尾的点</span><br>        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">strrchr</span>(<span class="hljs-variable">$file_name</span>, <span class="hljs-string">&#x27;.&#x27;</span>);<br>        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">strtolower</span>(<span class="hljs-variable">$file_ext</span>); <span class="hljs-comment">//转换为小写</span><br>        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">str_ireplace</span>(<span class="hljs-string">&#x27;::$DATA&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-variable">$file_ext</span>);<span class="hljs-comment">//去除字符串::$DATA</span><br>        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$file_ext</span>); <span class="hljs-comment">//收尾去空</span><br><br>        <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">in_array</span>(<span class="hljs-variable">$file_ext</span>, <span class="hljs-variable">$deny_ext</span>)) &#123;<br>            <span class="hljs-variable">$temp_file</span> = <span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;upload_file&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>];<br>            <span class="hljs-variable">$img_path</span> = UPLOAD_PATH.<span class="hljs-string">&#x27;/&#x27;</span>.<span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&quot;YmdHis&quot;</span>).<span class="hljs-title function_ invoke__">rand</span>(<span class="hljs-number">1000</span>,<span class="hljs-number">9999</span>).<span class="hljs-variable">$file_ext</span>;            <br>            <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">move_uploaded_file</span>(<span class="hljs-variable">$temp_file</span>,<span class="hljs-variable">$img_path</span>)) &#123;<br>                 <span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">true</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-variable">$msg</span> = <span class="hljs-string">&#x27;上传出错！&#x27;</span>;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-variable">$msg</span> = <span class="hljs-string">&#x27;不允许上传.asp,.aspx,.php,.jsp后缀文件！&#x27;</span>;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-variable">$msg</span> = UPLOAD_PATH . <span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;<br>    &#125;<br>&#125;<br>&lt;/code&gt;<br>&lt;/pre&gt;<br>&lt;/li&gt;<br><br></code></pre></td></tr></table></figure>
 
+<h3 id="白名单策略"><a href="#白名单策略" class="headerlink" title="白名单策略"></a>白名单策略</h3><p>文件扩展名不在白名单中就是不合法的</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs php">&lt;li id=<span class="hljs-string">&quot;show_code&quot;</span>&gt;<br>    &lt;h3&gt;代码&lt;/h3&gt;<br>&lt;pre&gt;<br>&lt;code <span class="hljs-class"><span class="hljs-keyword">class</span>=&quot;<span class="hljs-title">line</span>-<span class="hljs-title">numbers</span> <span class="hljs-title">language</span>-<span class="hljs-title">php</span>&quot;&gt;$<span class="hljs-title">is_upload</span> = <span class="hljs-title">false</span>;</span><br><span class="hljs-class">$<span class="hljs-title">msg</span> = <span class="hljs-title">null</span>;</span><br><span class="hljs-class"><span class="hljs-title">if</span>(<span class="hljs-title">isset</span>($<span class="hljs-title">_POST</span>[&#x27;<span class="hljs-title">submit</span>&#x27;]))</span>&#123;<br>    <span class="hljs-variable">$ext_arr</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;jpg&#x27;</span>,<span class="hljs-string">&#x27;png&#x27;</span>,<span class="hljs-string">&#x27;gif&#x27;</span>);<br>    <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">substr</span>(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;upload_file&#x27;</span>][<span class="hljs-string">&#x27;name&#x27;</span>],<span class="hljs-title function_ invoke__">strrpos</span>(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;upload_file&#x27;</span>][<span class="hljs-string">&#x27;name&#x27;</span>],<span class="hljs-string">&quot;.&quot;</span>)+<span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">in_array</span>(<span class="hljs-variable">$file_ext</span>,<span class="hljs-variable">$ext_arr</span>))&#123;<br>        <span class="hljs-variable">$temp_file</span> = <span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;upload_file&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>];<br>        <span class="hljs-variable">$img_path</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;save_path&#x27;</span>].<span class="hljs-string">&quot;/&quot;</span>.<span class="hljs-title function_ invoke__">rand</span>(<span class="hljs-number">10</span>, <span class="hljs-number">99</span>).<span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&quot;YmdHis&quot;</span>).<span class="hljs-string">&quot;.&quot;</span>.<span class="hljs-variable">$file_ext</span>;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">move_uploaded_file</span>(<span class="hljs-variable">$temp_file</span>,<span class="hljs-variable">$img_path</span>))&#123;<br>            <span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">true</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-variable">$msg</span> = <span class="hljs-string">&#x27;上传出错！&#x27;</span>;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-variable">$msg</span> = <span class="hljs-string">&quot;只允许上传.jpg|.png|.gif类型文件！&quot;</span>;<br>    &#125;<br>&#125;<br>&lt;/code&gt;<br>&lt;/pre&gt;<br>&lt;/li&gt;<br><br></code></pre></td></tr></table></figure>
 
+<h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4><p>当浏览器将文件提交到服务器端的时候，服务器端会根据设定的黑白名单对浏览器提交上来的文件扩展名进行检测，如果上传的文件扩展名不符合黑白名单的限制，则不予上传，否则上传成功。</p>
+<h4 id="绕过方法-1"><a href="#绕过方法-1" class="headerlink" title="绕过方法"></a>绕过方法</h4><p>在一些Web server中，存在解析漏洞:</p>
+<ol>
+<li>老版本的IIS6中的目录解析漏洞，如果网站目录中有一个 &#x2F;.asp&#x2F;目录，那么此目录下面的一切内容都会被当作asp脚本来解析</li>
+<li>老版本的IIS6中的分号漏洞：IIS在解析文件名的时候可能将分号后面的内容丢弃，那么我们可以在上传的时候给后面加入分号内容来避免黑名单过滤，如 a.asp;jpg</li>
+<li>旧版Windows Server中存在空格和dot漏洞类似于 a.php. 和 a.php[空格] 这样的文件名存储后会被windows去掉点和空格，从而使得加上这两个东西可以突破过滤，成功上传，并且被当作php代码来执行</li>
+<li>nginx(0.5.x, 0.6.x, 0.7 &lt;&#x3D; 0.7.65, 0.8 &lt;&#x3D; 0.8.37)空字节漏洞 xxx.jpg%00.php 这样的文件名会被解析为php代码运行（fastcgi会把这个文件当php看，不受空字节影响，但是检查文件后缀的那个功能会把空字节后面的东西抛弃，所以识别为jpg）</li>
+<li>apache1.x,2.x的解析漏洞，上传如a.php.rar a.php.gif 类型的文件名，可以避免对于php文件的过滤机制，但是由于apache在解析文件名的时候是从右向左读，如果遇到不能识别的扩展名则跳过，<strong>rar</strong>等扩展名是apache不能识别的，因此就会直接将类型识别为php，从而达到了注入php代码的目的</li>
+</ol>
+<h3 id="检查Content-Type"><a href="#检查Content-Type" class="headerlink" title="检查Content-Type"></a>检查Content-Type</h3><h4 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h4><p>HTTP协议规定了上传资源的时候在Header中加上一项文件的MIMETYPE，来识别文件类型，这个动作是由浏览器完成的，服务端可以检查此类型，不过这仍然是不安全的,因为HTTP header可以被发出者或者中间人任意的修改。</p>
+<h4 id="绕过方法-2"><a href="#绕过方法-2" class="headerlink" title="绕过方法"></a>绕过方法</h4><p>可以使用bs抓包，然后更改文件格式，也就是header</p>
+<h3 id="文件头检查"><a href="#文件头检查" class="headerlink" title="文件头检查"></a>文件头检查</h3><p>给上传脚本加上相应的幻数头字节就可以，php引擎会将 &lt;?之前的内容当作html文本，不解释而跳过之，后面的代码仍然能够得到执行比如下面：<br>（一般不限制图片文件格式的时候使用GIF的头比较方便，因为全都是文本可打印字符。）</p>
+<h3 id="限制web-server"><a href="#限制web-server" class="headerlink" title="限制web server"></a>限制web server</h3><h4 id="原理-4"><a href="#原理-4" class="headerlink" title="原理"></a>原理</h4><p>导致文件上传漏洞的根本原因在于服务把用户上传的本应是数据的内容当作了代码，一般而言：用户上传的内容都会被存储到特定的一个文件夹下，比如我们很多人习惯于放在 .&#x2F;upload&#x2F; 下面要防止数据被当作代码执行，我们可以限制web server对于特定文件夹的行为。</p>
+<blockquote>
+<p>在默认情况下，对与 .php文件Apache会当作代码来执行，对于 html,css,js文件，则会直接由HTTP Response交给客户端程序对于一些资源文件，比如txt，doc，rar等等，则也会以文件下载的方式传送的客户端。我们希望用户上传的东西仅仅当作资源和数据而不能当作代码。因此Apache使用服务器程序的接口来进行限制利用 .htaccess 文件机制来对web server行为进行限制。</p>
+</blockquote>
+<h4 id="几种处理方式"><a href="#几种处理方式" class="headerlink" title="几种处理方式"></a>几种处理方式</h4><h5 id="指定特定扩展名的文件的处理方式"><a href="#指定特定扩展名的文件的处理方式" class="headerlink" title="指定特定扩展名的文件的处理方式"></a>指定特定扩展名的文件的处理方式</h5><p><strong>原理：</strong></p>
+<p>原理是指定Response的Content-Type可以加上如下几行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs htaccess">AddType text/plain .pl .py .php<br></code></pre></td></tr></table></figure>
 
+<p>这种情况下会将指定的文件转变为文本文件</p>
+<h5 id="完全禁止特定扩展名的文件被访问"><a href="#完全禁止特定扩展名的文件被访问" class="headerlink" title="完全禁止特定扩展名的文件被访问"></a>完全禁止特定扩展名的文件被访问</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs htaccess">Options -ExecCGI<br>AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi识别<br></code></pre></td></tr></table></figure>
 
+<p>注意上面的减号用于禁用cgi</p>
+<h5 id="强制web服务器对于特定文件类型的处理"><a href="#强制web服务器对于特定文件类型的处理" class="headerlink" title="强制web服务器对于特定文件类型的处理"></a>强制web服务器对于特定文件类型的处理</h5><p>这个方法是将特定文件按照我们指定的方式处理</p>
+<blockquote>
+<p><strong>与第一条不同的是， 下面的方法直接强行让apache将文件识别为你指定的类型，而第一种是让浏览器符合上面正则的全部被认为是纯文本，也可以继续往里面加入其他类型</strong></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs htaccess">&lt;FilesMatch &quot;\.(php|pl|py|jsp|asp|htm|shtml|sh|cgi)$&quot;&gt;<br>ForceType text/plain<br>&lt;/FilesMatch&gt;<br></code></pre></td></tr></table></figure>
 
+<h5 id="只允许访问特定的文件类型（白名单）"><a href="#只允许访问特定的文件类型（白名单）" class="headerlink" title="只允许访问特定的文件类型（白名单）"></a>只允许访问特定的文件类型（白名单）</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs htaccess">&lt;Files ^(*.jpeg|*.jpg|*.png|*.gif)&gt;<br>order deny,allow<br>deny from all<br>&lt;/Files&gt;<br><br></code></pre></td></tr></table></figure>
 
-
-
-
-
-
+<h4 id="绕过方法-3"><a href="#绕过方法-3" class="headerlink" title="绕过方法"></a>绕过方法</h4><p><strong>可以通过 move_uploaded_file 函数把自己写的.htaccess 文件上传，覆盖掉服务器上的文件，来定义文件类型和执行权限如果做到了这一点，将获得相当大的权限。</strong></p>
+<h4 id="什么是htaccess"><a href="#什么是htaccess" class="headerlink" title="什么是htaccess"></a>什么是htaccess</h4><ul>
+<li>.htaccess是一个纯文本文件，它里面存放着Apache服务器配置相关的指令。</li>
+<li>.htaccess主要的作用有：URL重写、自定义错误页面、MIME类型配置以及访问权限控制等。主要体现在伪静态的应用、图片防盗链、自定义404错误页面、阻止&#x2F;允许特定IP&#x2F;IP段、目录浏览与主页、禁止访问指定文件类型、文件密码保护等。 .htaccess的用途范围主要针对当前目录。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/engeng/articles/5948089.html">apache .htaccess文件详解和配置技巧总结 - 恩恩先生 - 博客园 (cnblogs.com)</a></p>
+<h3 id="文件系统00截断"><a href="#文件系统00截断" class="headerlink" title="文件系统00截断"></a>文件系统00截断</h3><h4 id="原理-5"><a href="#原理-5" class="headerlink" title="原理"></a>原理</h4><p>在上传的时候，当文件系统读到【0x00】时，会认为文件已经结束。**利用00截断就是利用程序员在写程序时对文件的上传路径过滤不严格，产生0x00、%00上传截断漏洞。</p>
+<h4 id="绕过方法-4"><a href="#绕过方法-4" class="headerlink" title="绕过方法"></a>绕过方法</h4><p>通过抓包截断将【evil.php.jpg】后面的一个【.】换成【0x00】。在上传的时候，当文件系统读到【0x00】时，会认为文件已经结束，从而将【evil.php.jpg】的内容写入到【evil.php】中，从而达到攻击的目的</p>
 <p>[^asp]:ASP 文件可包含文本、HTML 标签和脚本。ASP 文件中的脚本可在服务器上执行。总结来说就是一个动态页面</p>
 <section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>就是符号<code>#!</code>这个一般存在于shell脚本的第一行
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
