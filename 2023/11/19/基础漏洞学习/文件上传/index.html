@@ -24,7 +24,7 @@
 <meta property="og:description" content="什么是文件上传漏洞？由于程序员没有对文件上传后做审查导致用户可以按照自己的想法上传可执行文件，这个就是文件上传漏洞。 什么是Webshell 就是一种以asp[^asp]，php，jsp，cgi等网页文件形式存在的一种命令执行环境 攻击者在入侵了一个网站后，通常会将这些asp或php后门文件与网站服务器web目录下正常的网页文件混在一起，然后使用浏览器来访问这些后门，得到一个命令执行环境，以达到控">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-19T08:58:36.000Z">
-<meta property="article:modified_time" content="2023-11-20T02:30:12.616Z">
+<meta property="article:modified_time" content="2023-11-21T15:37:33.648Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -238,7 +238,7 @@
         
         
         
-          84 mins
+          87 mins
         
       </span>
     
@@ -304,7 +304,8 @@
 <h1 id="文件上传漏洞的原因"><a href="#文件上传漏洞的原因" class="headerlink" title="文件上传漏洞的原因"></a>文件上传漏洞的原因</h1><ol>
 <li>文件扩展名或者后缀名没有做好严格的限制</li>
 <li>文件上传的表述方法没有做好检查</li>
-<li>没有对文件设置不可执行权限（特别是shebang<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="就是符号`#!`这个一般存在于shell脚本的第一行">[1]</span></a></sup>）</li>
+<li>没有对文件设置不可执行权限（特别是shebang<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="就是符号`#!`这个一般存在于shell脚本的第一行
+[^NTFS ]: [FAT32、NTFS和exFAT的区别是什么？该如何选择？_exfat和ntfs的区别-CSDN博客](https://blog.csdn.net/qq_43003203/article/details/108463388#:~:text=1、FAT32格式： Windows平台的传统文件格式，Windows,95第二版首次引入，取代FAT16 (支持文件最大容量2GB)，兼容性很好，但缺点是对文件大小有限制，不支持超过4GB的文件。 所以，对于很多大型游戏、镜像文件、压缩包、视频，它是没有办法的。)">[1]</span></a></sup>）</li>
 <li>对于web server对于上传文件或者指定目录的行为没有做限制</li>
 </ol>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><ol>
@@ -378,8 +379,10 @@
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/engeng/articles/5948089.html">apache .htaccess文件详解和配置技巧总结 - 恩恩先生 - 博客园 (cnblogs.com)</a></p>
 <h3 id="文件系统00截断"><a href="#文件系统00截断" class="headerlink" title="文件系统00截断"></a>文件系统00截断</h3><h4 id="原理-5"><a href="#原理-5" class="headerlink" title="原理"></a>原理</h4><p>在上传的时候，当文件系统读到【0x00】时，会认为文件已经结束。**利用00截断就是利用程序员在写程序时对文件的上传路径过滤不严格，产生0x00、%00上传截断漏洞。</p>
 <h4 id="绕过方法-4"><a href="#绕过方法-4" class="headerlink" title="绕过方法"></a>绕过方法</h4><p>通过抓包截断将【evil.php.jpg】后面的一个【.】换成【0x00】。在上传的时候，当文件系统读到【0x00】时，会认为文件已经结束，从而将【evil.php.jpg】的内容写入到【evil.php】中，从而达到攻击的目的</p>
-<p>[^asp]:ASP 文件可包含文本、HTML 标签和脚本。ASP 文件中的脚本可在服务器上执行。总结来说就是一个动态页面</p>
-<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>就是符号<code>#!</code>这个一般存在于shell脚本的第一行
+<h3 id="windows-NTFS文件系统特性绕过"><a href="#windows-NTFS文件系统特性绕过" class="headerlink" title="windows NTFS文件系统特性绕过"></a>windows NTFS文件系统特性绕过</h3><p>NTFS交换数据流是NTFS[^NTFS ]磁盘格式的新特性</p>
+<p>遇到了添加</p>
+<h3 id="二次渲染绕过"><a href="#二次渲染绕过" class="headerlink" title="二次渲染绕过"></a>二次渲染绕过</h3><h1 id="靶场刷题记录"><a href="#靶场刷题记录" class="headerlink" title="靶场刷题记录"></a>靶场刷题记录</h1><p>[^asp]:ASP 文件可包含文本、HTML 标签和脚本。ASP 文件中的脚本可在服务器上执行。总结来说就是一个动态页面</p>
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>就是符号<code>#!</code>这个一般存在于shell脚本的第一行<br>[^NTFS ]: [FAT32、NTFS和exFAT的区别是什么？该如何选择？_exfat和ntfs的区别-CSDN博客](<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43003203/article/details/108463388#:~:text=1%E3%80%81FAT32%E6%A0%BC%E5%BC%8F%EF%BC%9A">https://blog.csdn.net/qq_43003203/article/details/108463388#:~:text=1、FAT32格式：</a> Windows平台的传统文件格式，Windows,95第二版首次引入，取代FAT16 (支持文件最大容量2GB)，兼容性很好，但缺点是对文件大小有限制，不支持超过4GB的文件。 所以，对于很多大型游戏、镜像文件、压缩包、视频，它是没有办法的。)
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
@@ -448,6 +451,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/11/20/MYSQL/er%E5%9B%BE/" title="er图">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">er图</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
