@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/python/%E9%9A%8F%E7%AC%94/image-20231123141022634.png">
 <meta property="article:published_time" content="2023-07-19T15:24:27.000Z">
-<meta property="article:modified_time" content="2023-11-23T17:01:14.931Z">
+<meta property="article:modified_time" content="2023-11-25T16:55:52.966Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          972 words
+          1.2k words
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          9 mins
+          10 mins
         
       </span>
     
@@ -338,6 +338,19 @@
 </ol>
 <h1 id="倒叙输出"><a href="#倒叙输出" class="headerlink" title="倒叙输出"></a>倒叙输出</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">s = <span class="hljs-string">&quot;Alice&quot;</span><br><span class="hljs-built_in">print</span>(s[::–<span class="hljs-number">1</span>])<br></code></pre></td></tr></table></figure>
 
+<h1 id="字节流和字符流"><a href="#字节流和字符流" class="headerlink" title="字节流和字符流"></a>字节流和字符流</h1><p>使用文本文件打开的时候，这个时候使用的字符流。使用二进制打开的时候是字节流</p>
+<h1 id="read读取方式"><a href="#read读取方式" class="headerlink" title="read读取方式"></a>read读取方式</h1><ol>
+<li><p>readlines</p>
+<p>返回一个元组，每一个元素都是一行</p>
+</li>
+<li><p>readline</p>
+<p>返回一行</p>
+</li>
+<li><p>read</p>
+<p>读取所有的内容返回一个字符串</p>
+</li>
+</ol>
+<h1 id="读取的大小问题"><a href="#读取的大小问题" class="headerlink" title="读取的大小问题"></a>读取的大小问题</h1><p>Python 虽然可以处理任意大小的文件，但是处理大文件时可能会遇到内存限制问题。如果文件过大，可能会导致内存溢出或者其他相关错误。</p>
 
                 
               </div>
