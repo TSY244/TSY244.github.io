@@ -16,24 +16,32 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] main函数传参三个问题 参数个数 首个参数到底是谁 带空格的参数  基本形式 int main(int argc,char* argv[]) &amp;#123;     return 0; &amp;#125; 123456789101112131415162. 第一个参数的意思是：参数的个数3. 第二个参数的意思是：存放的参数，而且至少有一个，如果打印的话，结果是该项目的名称   实例：   &#96;">
+    <meta name="description" content="SSRF[NISACTF 2022]easyssrf0x01 这道题的思路比较简单 就是使用ssrf访问文件  给了一个接口，那么就直接访问  跟着他走  file:&#x2F;&#x2F;&#x2F;&#x2F;fl4g		   访问它指定的路径 出现了  file_get_contents   0x02 通过这个函数，我们可以直接访问文件 他又说了文件在flag，所以就直接访问flag 建议直">
 <meta property="og:type" content="article">
-<meta property="og:title" content="main函数传参">
-<meta property="og:url" content="https://tsy244.github.io/2023/04/20/C/main%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82/index.html">
+<meta property="og:title" content="web刷题">
+<meta property="og:url" content="https://tsy244.github.io/2023/11/30/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web%E5%88%B7%E9%A2%98/index.html">
 <meta property="og:site_name" content="chg">
-<meta property="og:description" content="[TOC] main函数传参三个问题 参数个数 首个参数到底是谁 带空格的参数  基本形式 int main(int argc,char* argv[]) &amp;#123;     return 0; &amp;#125; 123456789101112131415162. 第一个参数的意思是：参数的个数3. 第二个参数的意思是：存放的参数，而且至少有一个，如果打印的话，结果是该项目的名称   实例：   &#96;">
+<meta property="og:description" content="SSRF[NISACTF 2022]easyssrf0x01 这道题的思路比较简单 就是使用ssrf访问文件  给了一个接口，那么就直接访问  跟着他走  file:&#x2F;&#x2F;&#x2F;&#x2F;fl4g		   访问它指定的路径 出现了  file_get_contents   0x02 通过这个函数，我们可以直接访问文件 他又说了文件在flag，所以就直接访问flag 建议直">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-20T01:01:17.000Z">
-<meta property="article:modified_time" content="2023-04-20T05:12:28.261Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093925060.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094012524.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094113614.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094245225.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095243554.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095633444.png">
+<meta property="article:published_time" content="2023-11-30T01:35:09.000Z">
+<meta property="article:modified_time" content="2023-11-30T01:56:39.006Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c基础">
+<meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>main函数传参 - chg</title>
+  <title>web刷题 - chg</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="main函数传参"></span>
+            <span id="subtitle" data-typed-text="web刷题"></span>
           
         </div>
 
@@ -215,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-20 09:01" pubdate>
-          April 20, 2023 am
+        <time datetime="2023-11-30 09:35" pubdate>
+          November 30, 2023 am
         </time>
       </span>
     
@@ -227,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          412 words
+          623 words
         
       </span>
     
@@ -238,7 +246,7 @@
         
         
         
-          4 mins
+          6 mins
         
       </span>
     
@@ -276,31 +284,56 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">main函数传参</h1>
+            <h1 style="display: none">web刷题</h1>
             
             
               <div class="markdown-body">
                 
-                <p>[TOC]</p>
-<h1 id="main函数传参"><a href="#main函数传参" class="headerlink" title="main函数传参"></a>main函数传参</h1><h2 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h2><ol>
-<li>参数个数</li>
-<li>首个参数到底是谁</li>
-<li>带空格的参数</li>
-</ol>
-<h2 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h2><ol>
-<li><pre><code class="c">int main(int argc,char* argv[])
-&#123;
-    return 0;
-&#125;
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-number">2.</span> 第一个参数的意思是：参数的个数<br><br><span class="hljs-number">3.</span> 第二个参数的意思是：存放的参数，而且至少有一个，如果打印的话，结果是该项目的名称<br><br>   实例：<br><br>   ```<span class="hljs-function">c</span><br><span class="hljs-function">   <span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span></span><br><span class="hljs-function">   </span>&#123;<br>   	<span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; argc; i++)<br>   	&#123;<br>   		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, argv[i]);<br>   	&#125;<br>   	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>   &#125;<br></code></pre></td></tr></table></figure>
-
-运行结果：
-
-![image-20221225201855246](C:\Users\12414\AppData\Roaming\Typora\typora-user-images\image-20221225201855246.png)
-</code></pre>
-</li>
-<li></li>
-</ol>
+                <h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h1><h2 id="NISACTF-2022-easyssrf"><a href="#NISACTF-2022-easyssrf" class="headerlink" title="[NISACTF 2022]easyssrf"></a>[NISACTF 2022]easyssrf</h2><p><strong>0x01</strong></p>
+<p>这道题的思路比较简单</p>
+<p>就是使用ssrf访问文件</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png" srcset="/img/loading.gif" lazyload alt="image-20231130093853864"></p>
+<p>给了一个接口，那么就直接访问</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093925060.png" srcset="/img/loading.gif" lazyload alt="image-20231130093925060"></p>
+<p>跟着他走</p>
+<blockquote>
+<p>file:&#x2F;&#x2F;&#x2F;&#x2F;fl4g		</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094012524.png" srcset="/img/loading.gif" lazyload alt="image-20231130094012524"></p>
+<p>访问它指定的路径</p>
+<p>出现了</p>
+<blockquote>
+<p>file_get_contents</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094113614.png" srcset="/img/loading.gif" lazyload alt="image-20231130094113614"></p>
+<p><strong>0x02</strong></p>
+<p>通过这个函数，我们可以直接访问文件</p>
+<p>他又说了文件在<code>flag</code>，所以就直接访问flag</p>
+<p>建议直接尝试比较长的路径</p>
+<blockquote>
+<p>?file&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;flag</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094245225.png" srcset="/img/loading.gif" lazyload alt="image-20231130094245225"></p>
+<h2 id="HNCTF-2022-WEEK2-ez-ssrf已解决"><a href="#HNCTF-2022-WEEK2-ez-ssrf已解决" class="headerlink" title="[HNCTF 2022 WEEK2]ez_ssrf已解决"></a>[HNCTF 2022 WEEK2]ez_ssrf已解决</h2><p>[<a target="_blank" rel="noopener" href="https://www.nssctf.cn/problem/2949">HNCTF 2022 WEEK2]ez_ssrf | NSSCTF</a></p>
+<p><strong>0x00</strong></p>
+<p>访问他给的地址，然后发现这个</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095243554.png" srcset="/img/loading.gif" lazyload alt="image-20231130095243554"></p>
+<p>出现了</p>
+<blockquote>
+<p> fsockopen()</p>
+</blockquote>
+<p>那就构造数据发送</p>
+<p><strong>0x01</strong></p>
+<blockquote>
+<p>&#x2F;index.php?host&#x3D;127.0.0.1&amp;port&#x3D;80&amp;data&#x3D;R0VUIC9mbGFnLnBocCBIVFRQLzEuMQ0KSG9zdDogMTI3LjAuMC4xDQpDb25uZWN0aW9uOiBDbG9zZQ0KDQo&#x3D;</p>
+</blockquote>
+<p>data</p>
+<blockquote>
+<p>GET &#x2F;flag.php HTTP&#x2F;1.1<br>Host: 127.0.0.1<br>Connection: Close</p>
+</blockquote>
+<p>得到flag</p>
+<p>这里就相当于是伪造了一个请求，请求了服务端，但是这个host和port不是很理解</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095633444.png" srcset="/img/loading.gif" lazyload alt="image-20231130095633444"></p>
 
                 
               </div>
@@ -313,7 +346,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
+        <a href="/tags/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">#CTF刷题记录</a>
       
     </div>
   
@@ -325,8 +358,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>main函数传参</div>
-      <div>https://tsy244.github.io/2023/04/20/C/main函数传参/</div>
+      <div>web刷题</div>
+      <div>https://tsy244.github.io/2023/11/30/CTF刷题记录/web刷题/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +371,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 20, 2023</div>
+          <div>November 30, 2023</div>
         </div>
       
       
@@ -370,18 +403,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/20/C/%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%A6%E8%A7%A31/" title="操作符详解">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">操作符详解</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/20/C/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" title="文件操作">
-                        <span class="hidden-mobile">文件操作</span>
+                      <a href="/2023/11/30/%E9%9D%B6%E5%9C%BA%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/pikachu/" title="pikachu">
+                        <span class="hidden-mobile">pikachu</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
