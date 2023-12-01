@@ -23,11 +23,14 @@
 <meta property="og:site_name" content="chg">
 <meta property="og:description" content="SSRF是什么SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。 SSRF漏洞原理可以理解为，服务器可以从其他的服务器获取信息。然而却没有对这个服务器的地址做限制 就比如说，我们可以指定一个有缺陷的url，或者自己的作为外部服务器。 SSRF漏洞挖掘分享通过URL分享网页的内容 转码通过URL地址把原地址的网">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130140802475.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130141033863.png">
 <meta property="article:published_time" content="2023-11-28T06:52:10.000Z">
-<meta property="article:modified_time" content="2023-11-29T15:19:26.596Z">
+<meta property="article:modified_time" content="2023-12-01T05:00:21.239Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞学习">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130140802475.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -227,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k words
+          4.7k words
         
       </span>
     
@@ -238,7 +241,7 @@
         
         
         
-          30 mins
+          39 mins
         
       </span>
     
@@ -323,7 +326,70 @@
 <p>4.攻击内外网的web应用，主要是使用get参数就可以实现的攻击（比如struts2，sqli等）;</p>
 <p>5.利用file协议读取本地文件等。.</p>
 <p>6.各个协议调用探针：http,file,dict,ftp,gopher等</p>
-<h1 id="SSRF绕过"><a href="#SSRF绕过" class="headerlink" title="SSRF绕过"></a>SSRF绕过</h1>
+<h1 id="SSRF中url解码编码"><a href="#SSRF中url解码编码" class="headerlink" title="SSRF中url解码编码"></a>SSRF中url解码编码</h1><h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>现在我们有一个url是:</p>
+<blockquote>
+<p><a href="http://ip:host/xxx">http://ip:host/xxx</a></p>
+</blockquote>
+<p>如果现在<code>xxx</code>里含有<code>%xx</code>格式，这个数据先是被接受之后才会被解码</p>
+<h2 id="gopher"><a href="#gopher" class="headerlink" title="gopher"></a>gopher</h2><p>还是这个url</p>
+<blockquote>
+<p><a href="http://ip:host/xxx">http://ip:host/xxx</a></p>
+</blockquote>
+<p>如果xxx里面含有%xx格式的数据，那么会在发送方就处理成接收方接受的数据</p>
+<h1 id="SSRF利用"><a href="#SSRF利用" class="headerlink" title="SSRF利用"></a>SSRF利用</h1><h2 id="内网访问"><a href="#内网访问" class="headerlink" title="内网访问"></a>内网访问</h2><p>ctfhub  技能树</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://127.0.0.1/flag.php</a></p>
+</blockquote>
+<h2 id="伪协议读取文件"><a href="#伪协议读取文件" class="headerlink" title="伪协议读取文件"></a>伪协议读取文件</h2><p><strong>伪协议:</strong></p>
+<blockquote>
+<p>类型<br>file:&#x2F;&#x2F;&#x2F;<br>dict:&#x2F;&#x2F;<br>sftp:&#x2F;&#x2F;<br>ldap:&#x2F;&#x2F;<br>tftp:&#x2F;&#x2F;<br>gopher:&#x2F;&#x2F;</p>
+</blockquote>
+<p>这里使用ctfhub技能树的题做演示</p>
+<blockquote>
+<p>file:&#x2F;&#x2F;&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php</p>
+</blockquote>
+<p>注意这个是web目录</p>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><p>端口扫描使用的是<code>dict://</code>协议</p>
+<p>但是请你注意，我们使用dict扫描出端口之后，需要使用url直接访问，而不是继续使用dict协议</p>
+<p>下面是做题逻辑，他说了端口在8000~9000，直接使用bp扫</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130140802475.png" srcset="/img/loading.gif" lazyload alt="image-20231130140802475"></p>
+<p>访问：</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130141033863.png" srcset="/img/loading.gif" lazyload alt="image-20231130141033863"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://challenge-a30959492eed8566.sandbox.ctfhub.com:10800/?url=127.0.0.1:8017">http://challenge-a30959492eed8566.sandbox.ctfhub.com:10800/?url=127.0.0.1:8017</a></p>
+</blockquote>
+<h2 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h2><p>这次还是使用ctfhub 的技能树作为例子</p>
+<p>题目是：</p>
+<blockquote>
+<p>这次是发一个HTTP POST请求.对了.ssrf是用php的curl实现的.并且会跟踪302跳转.加油吧骚年</p>
+</blockquote>
+<p>要求我们发一个POST请求包，但是这个发包需要利用gopher协议</p>
+<p>首先我们可以利用index.php的url访问flag.php和index.php</p>
+<h2 id="URL-Bypass"><a href="#URL-Bypass" class="headerlink" title="URL Bypass"></a>URL Bypass</h2><p>ctfhub技能树里面的一道题</p>
+<p>打开过后发现必须带有</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://notfound.ctfhub.com/">http://notfound.ctfhub.com</a></p>
+</blockquote>
+<p>这里我们需要知道一个东西</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.baidu.com@192.168.0.1/">http://www.baidu.com@192.168.0.1/</a></p>
+</blockquote>
+<p>请求的都是192.168.0.1里面的内容</p>
+<p>是所以我们直接构造</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://challenge-a1e077f43b569033.sandbox.ctfhub.com:10800/?url=http://notfound.ctfhub.com@127.0.0.1/flag.php">challenge-a1e077f43b569033.sandbox.ctfhub.com:10800&#x2F;?url&#x3D;http:&#x2F;&#x2F;notfound.ctfhub.com@127.0.0.1/flag.php</a></p>
+</blockquote>
+<h2 id="IP-Bypass"><a href="#IP-Bypass" class="headerlink" title="IP Bypass"></a>IP Bypass</h2><p>这道题我觉得比较鸡贼，因为他会有到你想ip，ban掉了127&#x2F;172</p>
+<p>但是我们有一个回环地址localhost</p>
+<p>所以直接构造poc</p>
+<blockquote>
+<p>?url&#x3D;localhost&#x2F;flag.php</p>
+</blockquote>
+<h2 id="302跳转"><a href="#302跳转" class="headerlink" title="302跳转"></a>302跳转</h2><p>不知道这个怎么回事，我尝试在http添加Localtion字段发现没有什么用，直接访问这个就没有问题</p>
+<blockquote>
+<p>?url&#x3D;localhost&#x2F;flag.php</p>
+</blockquote>
+
                 
               </div>
             
