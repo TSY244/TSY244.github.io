@@ -16,15 +16,15 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="漏洞危害 对企业有影响，虽然一条短信比较便宜但是，如果一次性，一直发很多条，那么也会造成很大的危害 对接收方有影响，造成了信息骚扰。或者利用这个钓鱼  漏洞出现的位置 注册验证码获取（邮件短信）、注册激活邮件获取（邮件）、密码找回验证（邮件短信）、支付类信息、验证码验证（短信）、站内信、私信发送处（私信，站内信）等任何需要发送给邮件的，短信的地方  案例qq邮件发送处，可以利用抓包，一直发送 绕过">
+    <meta name="description" content="作用RCE漏洞，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统。 原理根根原理就是利用了给用户提供了命令执行的方式，但是没有对内容做限制、 常用的代码执行函数12345678system()passthru()exec()shell_exec()popen()proc_open()pcntl_exec()  剩下的参考 渗透基础 - chg (tsy244.github">
 <meta property="og:type" content="article">
-<meta property="og:title" content="短信轰炸漏洞">
-<meta property="og:url" content="https://tsy244.github.io/2023/12/05/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%9F%AD%E4%BF%A1%E8%BD%B0%E7%82%B8%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:title" content="远程代码执行">
+<meta property="og:url" content="https://tsy244.github.io/2023/11/25/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="漏洞危害 对企业有影响，虽然一条短信比较便宜但是，如果一次性，一直发很多条，那么也会造成很大的危害 对接收方有影响，造成了信息骚扰。或者利用这个钓鱼  漏洞出现的位置 注册验证码获取（邮件短信）、注册激活邮件获取（邮件）、密码找回验证（邮件短信）、支付类信息、验证码验证（短信）、站内信、私信发送处（私信，站内信）等任何需要发送给邮件的，短信的地方  案例qq邮件发送处，可以利用抓包，一直发送 绕过">
+<meta property="og:description" content="作用RCE漏洞，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统。 原理根根原理就是利用了给用户提供了命令执行的方式，但是没有对内容做限制、 常用的代码执行函数12345678system()passthru()exec()shell_exec()popen()proc_open()pcntl_exec()  剩下的参考 渗透基础 - chg (tsy244.github">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-04T16:26:18.000Z">
-<meta property="article:modified_time" content="2023-12-05T02:18:54.755Z">
+<meta property="article:published_time" content="2023-11-25T11:37:31.000Z">
+<meta property="article:modified_time" content="2023-12-06T09:01:48.548Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>短信轰炸漏洞 - AU9U5T</title>
+  <title>远程代码执行 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="短信轰炸漏洞"></span>
+            <span id="subtitle" data-typed-text="远程代码执行"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-05 00:26" pubdate>
-          December 5, 2023 am
+        <time datetime="2023-11-25 19:37" pubdate>
+          November 25, 2023 pm
         </time>
       </span>
     
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          395 words
+          229 words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          4 mins
+          2 mins
         
       </span>
     
@@ -276,42 +276,18 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">短信轰炸漏洞</h1>
+            <h1 style="display: none">远程代码执行</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h1><ol>
-<li>对企业有影响，虽然一条短信比较便宜但是，如果一次性，一直发很多条，那么也会造成很大的危害</li>
-<li>对接收方有影响，造成了信息骚扰。或者利用这个钓鱼</li>
-</ol>
-<h1 id="漏洞出现的位置"><a href="#漏洞出现的位置" class="headerlink" title="漏洞出现的位置"></a>漏洞出现的位置</h1><blockquote>
-<p>注册验证码获取（邮件短信）、注册激活邮件获取（邮件）、密码找回验证（邮件短信）、支付类信息、验证码验证（短信）、站内信、私信发送处（私信，站内信）等任何需要发送给邮件的，短信的地方</p>
-</blockquote>
-<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>qq邮件发送处，可以利用抓包，一直发送</p>
-<h1 id="绕过方法"><a href="#绕过方法" class="headerlink" title="绕过方法"></a>绕过方法</h1><ol>
-<li><p>使用空格</p>
-<p>注意在邮箱的<strong>最后面</strong>或者<strong>最前面</strong>添加空格</p>
-<blockquote>
-<p>因为业务的逻辑是，使用手机号发送信息，如果一段时间之类发送了就不发送，没有发送就发送。对方的服务器对比的是两个我们使用的电话号码，当使用添加了空格的电话号码之后，这个两个字符串就不相等了</p>
-</blockquote>
-</li>
-<li><p>修改cookie值绕过</p>
-</li>
-<li><p>使用不同的ip绕过</p>
-</li>
-<li><p>利用大小写绕过</p>
-</li>
-<li><p>使用不同账户绕过</p>
-</li>
-</ol>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><ol>
-<li><p>合理配置后台短信服务器的功能</p>
-<p>发送次数不超过3~5次，并且可以对发送时间做限制</p>
-</li>
-<li><p>在页面中添加验证码</p>
-</li>
-</ol>
+                <h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>RCE漏洞，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统。</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>根根原理就是利用了给用户提供了命令执行的方式，但是没有对内容做限制、</p>
+<h1 id="常用的代码执行函数"><a href="#常用的代码执行函数" class="headerlink" title="常用的代码执行函数"></a>常用的代码执行函数</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-title function_ invoke__">system</span>()<br><span class="hljs-title function_ invoke__">passthru</span>()<br><span class="hljs-title function_ invoke__">exec</span>()<br><span class="hljs-title function_ invoke__">shell_exec</span>()<br><span class="hljs-title function_ invoke__">popen</span>()<br><span class="hljs-title function_ invoke__">proc_open</span>()<br><span class="hljs-title function_ invoke__">pcntl_exec</span>()<br><br></code></pre></td></tr></table></figure>
+
+<p>剩下的参考</p>
+<p><a href="https://tsy244.github.io/2023/08/19/%E6%B8%97%E9%80%8F/%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80/#web%E5%AE%89%E5%85%A8-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C">渗透基础 - chg (tsy244.github.io)</a></p>
+<p><a href="https://tsy244.github.io/tags/%E9%9D%B6%E5%9C%BA%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">Tags - 靶场刷题记录 - chg (tsy244.github.io)</a></p>
 
                 
               </div>
@@ -336,8 +312,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>短信轰炸漏洞</div>
-      <div>https://tsy244.github.io/2023/12/05/基础漏洞学习/短信轰炸漏洞/</div>
+      <div>远程代码执行</div>
+      <div>https://tsy244.github.io/2023/11/25/基础漏洞/远程代码执行/</div>
     </div>
     <div class="license-meta">
       
@@ -349,7 +325,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 5, 2023</div>
+          <div>November 25, 2023</div>
         </div>
       
       
@@ -381,12 +357,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/11/26/%E9%9D%B6%E5%9C%BA%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/dvwa/" title="dvwa">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">dvwa</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/12/01/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/XSS/" title="XSS">
-                        <span class="hidden-mobile">XSS</span>
+                      <a href="/2023/11/25/others/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/" title="制作图片马">
+                        <span class="hidden-mobile">制作图片马</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

