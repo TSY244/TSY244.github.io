@@ -16,16 +16,16 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] python的小数打印123# print(&quot;%.2f&quot;%intNum)# print(f&amp;#x27;&amp;#123;intNum:.2f&amp;#125;&amp;#x27;)print(&amp;#x27;&amp;#123;:.2f&amp;#125;&amp;#x27;.format(intNum))  控制进制123str16&#x3D;input()int16&#x3D;int(str16,16)print()  list">
+    <meta name="description" content="[TOC] 字符串类型 使用count()可以记录元素出现的次数  发现字串出现的位置 find()   python的小数打印123# print(&quot;%.2f&quot;%intNum)# print(f&amp;#x27;&amp;#123;intNum:.2f&amp;#125;&amp;#x27;)print(&amp;#x27;&amp;#123;:.2f&amp;#125;&amp;#x27;.format(intNum))  控制进制1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python随记">
 <meta property="og:url" content="https://tsy244.github.io/2023/07/19/python/python%E9%9A%8F%E8%AE%B0/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="[TOC] python的小数打印123# print(&quot;%.2f&quot;%intNum)# print(f&amp;#x27;&amp;#123;intNum:.2f&amp;#125;&amp;#x27;)print(&amp;#x27;&amp;#123;:.2f&amp;#125;&amp;#x27;.format(intNum))  控制进制123str16&#x3D;input()int16&#x3D;int(str16,16)print()  list">
+<meta property="og:description" content="[TOC] 字符串类型 使用count()可以记录元素出现的次数  发现字串出现的位置 find()   python的小数打印123# print(&quot;%.2f&quot;%intNum)# print(f&amp;#x27;&amp;#123;intNum:.2f&amp;#125;&amp;#x27;)print(&amp;#x27;&amp;#123;:.2f&amp;#125;&amp;#x27;.format(intNum))  控制进制1">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/python/%E9%9A%8F%E7%AC%94/image-20231123141022634.png">
 <meta property="article:published_time" content="2023-07-19T15:24:27.000Z">
-<meta property="article:modified_time" content="2023-12-05T16:14:40.352Z">
+<meta property="article:modified_time" content="2023-12-08T13:28:50.183Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          2.4k words
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          14 mins
+          21 mins
         
       </span>
     
@@ -284,6 +284,13 @@
               <div class="markdown-body">
                 
                 <p>[TOC]</p>
+<h1 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h1><ol>
+<li><p>使用count()可以记录元素出现的次数</p>
+</li>
+<li><p>发现字串出现的位置</p>
+<p><code>find()</code></p>
+</li>
+</ol>
 <h1 id="python的小数打印"><a href="#python的小数打印" class="headerlink" title="python的小数打印"></a>python的小数打印</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># print(&quot;%.2f&quot;%intNum)</span><br><span class="hljs-comment"># print(f&#x27;&#123;intNum:.2f&#125;&#x27;)</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#123;:.2f&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(intNum))<br></code></pre></td></tr></table></figure>
 
 <h1 id="控制进制"><a href="#控制进制" class="headerlink" title="控制进制"></a>控制进制</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">str16=<span class="hljs-built_in">input</span>()<br>int16=<span class="hljs-built_in">int</span>(str16,<span class="hljs-number">16</span>)<br><span class="hljs-built_in">print</span>()<br></code></pre></td></tr></table></figure>
@@ -333,6 +340,20 @@
 <p>创建一个进程</p>
 </li>
 </ol>
+<h2 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h2><ol>
+<li>删除文件<ul>
+<li>若文件夹之下没有文件或者文件夹，可以只用<code>rmdir</code>但是有文件的话只能只用<code>rmtree</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><p><code>remove()</code>删除文件</p>
+<h2 id="查看文件路径下的文件"><a href="#查看文件路径下的文件" class="headerlink" title="查看文件路径下的文件"></a>查看文件路径下的文件</h2><ol>
+<li><p>列出指定的文件夹当中的文件内容</p>
+<p>listfiles()</p>
+</li>
+</ol>
+<h2 id="查看是否是目录"><a href="#查看是否是目录" class="headerlink" title="查看是否是目录"></a>查看是否是目录</h2><p><code>isdir()</code>判断是否是系统已经存在的目录</p>
+<h2 id="判断是否是文件"><a href="#判断是否是文件" class="headerlink" title="判断是否是文件"></a>判断是否是文件</h2><p><code>isfile()</code>判断是否是已经存在的文件</p>
 <h1 id="with"><a href="#with" class="headerlink" title="with"></a>with</h1><ol>
 <li>可以自动处理异常，关闭文件</li>
 </ol>
@@ -395,6 +416,34 @@
 <p>hex()</p>
 </li>
 </ol>
+<h1 id="当认为是空列表的时候结果是正确的"><a href="#当认为是空列表的时候结果是正确的" class="headerlink" title="当认为是空列表的时候结果是正确的"></a>当认为是空列表的时候结果是正确的</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="创建元组"><a href="#创建元组" class="headerlink" title="创建元组"></a>创建元组</h1><p>注意分清楚下面的几种情况</p>
+<ul>
+<li><p>创建一个”abcd“的元组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">tp =<span class="hljs-built_in">tuple</span>([<span class="hljs-string">&quot;abcd&quot;</span>])<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建(“abcd”,)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">tp =<span class="hljs-built_in">tuple</span>(<span class="hljs-string">&quot;abcd&quot;</span>)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个 (‘a’, ‘b’, ‘c’, ‘d’)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>tp =<span class="hljs-built_in">tuple</span>((<span class="hljs-string">&quot;abcd&quot;</span>))<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建非元组’abcd’</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">tp =(<span class="hljs-string">&quot;abcd&quot;</span>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="格式化输出-1"><a href="#格式化输出-1" class="headerlink" title="格式化输出"></a>格式化输出</h1><ol>
+<li><code>.</code>前面的是总的长度</li>
+<li>后面的是控制精度</li>
+</ol>
+<h1 id="Python动态添加成员"><a href="#Python动态添加成员" class="headerlink" title="Python动态添加成员"></a>Python动态添加成员</h1><p>可以动态的添加呈成员变量</p>
+<p>比如一下的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">T</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">pass</span><br><br>t=T()<br>t.ew=<span class="hljs-number">10</span><br><span class="hljs-built_in">print</span>(t.ew)<br></code></pre></td></tr></table></figure>
+
+<h1 id="python一切都是对象"><a href="#python一切都是对象" class="headerlink" title="python一切都是对象"></a>python一切都是对象</h1><p>在Python中，任何数值（包括整数、浮点数、复数等）、字符串、列表、元组、字典等都是对象。在Python中，一切皆对象，这意味着这些数据类型都是对象，它们都具有属性和方法。因此，整数2、字符串’hello’等都是对象。</p>
+<h1 id="readlines"><a href="#readlines" class="headerlink" title="readlines()"></a>readlines()</h1><p>返回的是list类型</p>
+<p>read()返回的是字符串</p>
+<h1 id="描述继承关系"><a href="#描述继承关系" class="headerlink" title="描述继承关系"></a>描述继承关系</h1><p>使用<code>is a</code></p>
+<h1 id="和"><a href="#和" class="headerlink" title="/和//"></a><code>/</code>和<code>//</code></h1><p>使用<code>/</code>的话，是浮点数除法，也就是说，无论使用什么类型结果都是浮点数</p>
+<p><code>//</code>使用这个话，当都是整数的时候会是整形，包括结果是整形的情况下。但是含有浮点数，就是浮点数</p>
 
                 
               </div>
