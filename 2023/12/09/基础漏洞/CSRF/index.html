@@ -16,18 +16,21 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="同源策略协议、域名、端口 相同  漏洞简介">
+    <meta name="description" content="同源策略协议、域名、端口这些是相同的 漏洞简介 这个就可以为攻击者使用受害者的已经认证了的页面去访问，也就是这样就可以做到登录受害者的账号 这个根源是使用相同的cookie也就是，用户的cookie，这个cookie用于保存用户信息的。在XSS那里提到过，有时候我们不能直接获得cookie的具体的值，那我们就得到他的值，我们直接只用这个访问 跨站：从一个网站到另一个网站 请求：HTTP请求 伪造：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSRF">
 <meta property="og:url" content="https://tsy244.github.io/2023/12/09/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/CSRF/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="同源策略协议、域名、端口 相同  漏洞简介">
+<meta property="og:description" content="同源策略协议、域名、端口这些是相同的 漏洞简介 这个就可以为攻击者使用受害者的已经认证了的页面去访问，也就是这样就可以做到登录受害者的账号 这个根源是使用相同的cookie也就是，用户的cookie，这个cookie用于保存用户信息的。在XSS那里提到过，有时候我们不能直接获得cookie的具体的值，那我们就得到他的值，我们直接只用这个访问 跨站：从一个网站到另一个网站 请求：HTTP请求 伪造：">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144012391.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144102490.png">
 <meta property="article:published_time" content="2023-12-09T09:13:08.000Z">
-<meta property="article:modified_time" content="2023-12-09T09:42:58.162Z">
+<meta property="article:modified_time" content="2023-12-10T06:52:57.758Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144012391.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -227,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          18 words
+          1.7k words
         
       </span>
     
@@ -238,7 +241,7 @@
         
         
         
-          1 mins
+          15 mins
         
       </span>
     
@@ -281,9 +284,43 @@
             
               <div class="markdown-body">
                 
-                <h1 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h1><p>协议、域名、端口</p>
-<p>相同 </p>
-<h1 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h1>
+                <h1 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h1><p>协议、域名、端口这些是相同的</p>
+<h1 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h1><p> 这个就可以为攻击者使用受害者的已经认证了的页面去访问，也就是这样就可以做到登录受害者的账号</p>
+<p>这个根源是使用相同的cookie也就是，用户的cookie，这个cookie用于保存用户信息的。在XSS那里提到过，有时候我们不能直接获得cookie的具体的值，那我们就得到他的值，我们直接只用这个访问</p>
+<p>跨站：从一个网站到另一个网站</p>
+<p>请求：HTTP请求</p>
+<p>伪造：伪造，伪装</p>
+<p>总结一下的说：攻击者盗用了你的身份，以你的名义发送恶意请求。</p>
+<h1 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h1><p>CSRF漏洞一般是由于没有检查Referer以及未在头部设置token造成的。</p>
+<p>通过这个我们也可以联想到漏洞的检查方式。当我们把referer修改了之后发现还能正常的访问就说明存在这些问题</p>
+<h1 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h1><p>CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全等等等等。可以说CSRF能够做什么，取决于你在网站里能做什么操作</p>
+<h1 id="与XSS的区别"><a href="#与XSS的区别" class="headerlink" title="与XSS的区别"></a>与XSS的区别</h1><p>前面也提到了，我们可以使用这个cookile而不是直接获取这个值</p>
+<p>下面是更加完整的说法</p>
+<blockquote>
+<p>CSRF与XSS不同，主要在于XSS是获取用户的凭证信息等，而CSRF是利用用户凭证信息，并不获取</p>
+</blockquote>
+<h1 id="漏洞类型"><a href="#漏洞类型" class="headerlink" title="漏洞类型"></a>漏洞类型</h1><h2 id="GET型"><a href="#GET型" class="headerlink" title="GET型"></a>GET型</h2><p>接下来示范一下</p>
+<p><strong>攻击者：</strong></p>
+<p>正常的修改密码</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144012391.png" srcset="/img/loading.gif" lazyload alt="image-20231210144012391"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144102490.png" srcset="/img/loading.gif" lazyload alt="image-20231210144102490"></p>
+<p>密码已经修改了，我们使用攻击者使用url看看</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://192.168.15.166/dvwa/vulnerabilities/csrf/?password_new=0804chgCHG&password_conf=0804chgCHG&Change=Change">http://192.168.15.166/dvwa/vulnerabilities/csrf/?password_new=0804chgCHG&amp;password_conf=0804chgCHG&amp;Change=Change#</a></p>
+</blockquote>
+<p>然后诱导受害者点击这个url那他的密码也会被修改</p>
+<p>如果这个联合存储型XSS的话，只要用户触发了这个XSS那么他的密码就会被无意的被修改了</p>
+<h2 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h2><p>这个的危险程度没有GET那么大，同常的形式是一个表单，访问该页面表单位自动提交</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">http://test.com/csrf.php</span> <span class="hljs-attr">method</span>=<span class="hljs-string">POST</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;hidden&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;xx&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;11&quot;</span> /&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-variable language_">document</span>.<span class="hljs-property">forms</span>[<span class="hljs-number">0</span>].<span class="hljs-title function_">submit</span>()</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>相当于模拟了用户提交表单的这个过程</p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p>主要是和XSS打组合拳，当网站设置了http-only的话，那我们就不能只用XSS获取cookie了，那么我们可以换一个思路不获取它，而是直接利用这个值</p>
+<p>例如，在存在xss漏洞的A网站上注入一条链接点击这里领取黑客秘籍&lt;a href&#x3D;”xxx.xxxx.xxx&#x2F;test.php?money&#x3D;1111”&#x2F;&gt;,当用户点击之后，进入攻击者提前写好的网站B，触发网站B中,例如&lt;img src&#x3D;”http:&#x2F;&#x2F;网站A&#x2F;test.php?Id&#x3D;1&amp;money&#x3D;100000”&#x2F;&gt;这样的恶意代码。这时候由于用户带有A网站的认证信息，B网站利用用户此时的请求，篡改GET或POST表单内的参数，在用户不知情的情况下请求A网站，完成转账，修改密码等恶意操作</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><ol>
+<li>Referer检查。攻击者虽然是利用用户的请求进行访问，但是Referer的内容显示的是B网站，也就是攻击者自己构造的网站。如果对Referer进行白名单检查，看是否来自合法的网站。如果不是，就极有可能是CSRF攻击</li>
+<li>添加Token验证。CSRF攻击成功的原因就是利用用户已经认证过的cookie信息。cookie中的身份信息在请求时会自动添加，所以我们要在cookie外再加入一种验证身份的信息。具体的做法是在HTTP请求中，以参数的形式加入一个随机产生的Token,并在服务器端建立一个拦截器来验证这个 Token，如果请求中没有 Token 或者 Token 内容不正确，则认为可能是 CSRF 攻击而拒绝该请求</li>
+</ol>
+
                 
               </div>
             
