@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83/image-20230912203818546.png">
 <meta property="article:published_time" content="2023-09-12T12:33:30.000Z">
-<meta property="article:modified_time" content="2023-10-05T02:15:48.448Z">
+<meta property="article:modified_time" content="2024-01-07T05:14:40.523Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          425 words
+          663 words
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          4 mins
+          6 mins
         
       </span>
     
@@ -305,8 +305,24 @@
 </ol>
 <h2 id="windows域环境"><a href="#windows域环境" class="headerlink" title="windows域环境"></a>windows域环境</h2><ol>
 <li><p>域环境简介</p>
-<p>  域是一个有安全边界的计算机集合（ 安全边界，意思是在两个域中，一个域中的用户无法访问另一个域中的资源）；域内资源由一台域控制 器（Domain Controller，DC）集中管理，用户名和密码是放在域控制器去验证的。  </p>
+<p>域是一个有安全边界的计算机集合（ 安全边界，意思是在两个域中，一个域中的用户无法访问另一个域中的资源）；域内资源由一台域控制 器（Domain Controller，DC）集中管理，用户名和密码是放在域控制器去验证的。  </p>
 <p><strong>渗透的目标就是拿到域控制器</strong></p>
+</li>
+<li><p>安全域划分</p>
+<p>DMZ（Demilitarized Zone，边界网络，隔离区，安全级别中等）：作为内网中安全系统和非安全系统之间的缓冲区，用于对外提供服务，一般可以放置一  些必须公开的服务器设施  </p>
+<p>拥有DMZ区的访问规则</p>
+<ul>
+<li>内网可以访问外网</li>
+<li>外网不能访问内网</li>
+<li>外网可以访问DMZ区</li>
+<li>内网可以访问DMZ</li>
+<li>DMZ不能访问内网</li>
+<li>DMZ不能访问外网</li>
+</ul>
+<p>上面只是通常的做法，具体的还是得看具体的规则怎么实现</p>
+<blockquote>
+<p>一般如果拿下了DMZ区，可以尝试访问其他地区</p>
+</blockquote>
 </li>
 <li><p>与渗透的思路</p>
 <ul>
@@ -315,6 +331,9 @@
 <li>利用域管理员可以登陆域中任何成员主机的特性，定位出域管理员登陆过的主机IP  </li>
 <li>设法从域成员主机内存中dump出域管理员密码</li>
 </ul>
+</li>
+<li><p>域渗透的目标</p>
+<p>就是拿到域控，因为域控沦陷了，内网就基本可以说掌握中了</p>
 </li>
 </ol>
 <h1 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h1><h2 id="域内信息收集"><a href="#域内信息收集" class="headerlink" title="域内信息收集"></a>域内信息收集</h2><h1 id="域密码凭证获取"><a href="#域密码凭证获取" class="headerlink" title="域密码凭证获取"></a>域密码凭证获取</h1>

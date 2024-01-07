@@ -16,34 +16,29 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[SWPUCTF 2021 新生赛]PseudoProtocols**0x00  **  file_get_contents() 这个函数就会将内容读取出来，然后转变为字符串 0x01 绕过 这个函数有两个方式绕过  php:&#x2F;&#x2F;input  然后在post里面添加内容  I want flag  还有一个方法是data  data:&#x2F;&#x2F;text&#x2F;">
+    <meta name="description" content="[BJDCTF 2020]easy_md5**0x00  ** 这道题对我来说收获很多  首先反应是万能密码，但是试过了没有用，就F12，抓包查找信息 我是用bp的时候发现有一个请求头  这里我是直接抄的wp  ffifdyop  然后就到了第二关 0x01  查看源码，直接使用数组绕过 0x02 到了第三关，我还是使用的是数组绕过  只是要注意这个是post 0x03 整体难度不大，但是第一个绕">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件包含">
-<meta property="og:url" content="https://tsy244.github.io/2024/01/05/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/index.html">
+<meta property="og:title" content="md5">
+<meta property="og:url" content="https://tsy244.github.io/2024/01/07/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/md5/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="[SWPUCTF 2021 新生赛]PseudoProtocols**0x00  **  file_get_contents() 这个函数就会将内容读取出来，然后转变为字符串 0x01 绕过 这个函数有两个方式绕过  php:&#x2F;&#x2F;input  然后在post里面添加内容  I want flag  还有一个方法是data  data:&#x2F;&#x2F;text&#x2F;">
+<meta property="og:description" content="[BJDCTF 2020]easy_md5**0x00  ** 这道题对我来说收获很多  首先反应是万能密码，但是试过了没有用，就F12，抓包查找信息 我是用bp的时候发现有一个请求头  这里我是直接抄的wp  ffifdyop  然后就到了第二关 0x01  查看源码，直接使用数组绕过 0x02 到了第三关，我还是使用的是数组绕过  只是要注意这个是post 0x03 整体难度不大，但是第一个绕">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240105221129539.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107095634950.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107095812819.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107095853088.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107095925922.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107101022664.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107101126165.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107101355638.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107101409393.png">
-<meta property="article:published_time" content="2024-01-05T14:09:29.000Z">
-<meta property="article:modified_time" content="2024-01-07T03:20:30.452Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/md5/image-20240107111226559.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/md5/image-20240107111356004.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/md5/image-20240107112239625.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/md5/image-20240107112440394.png">
+<meta property="article:published_time" content="2024-01-07T03:10:13.000Z">
+<meta property="article:modified_time" content="2024-01-07T03:26:26.771Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240105221129539.png">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/md5/image-20240107111226559.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>文件包含 - AU9U5T</title>
+  <title>md5 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -209,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="文件包含"></span>
+            <span id="subtitle" data-typed-text="md5"></span>
           
         </div>
 
@@ -225,8 +220,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-05 22:09" pubdate>
-          January 5, 2024 pm
+        <time datetime="2024-01-07 11:10" pubdate>
+          January 7, 2024 am
         </time>
       </span>
     
@@ -237,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          567 words
+          192 words
         
       </span>
     
@@ -248,7 +243,7 @@
         
         
         
-          5 mins
+          2 mins
         
       </span>
     
@@ -286,55 +281,32 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">文件包含</h1>
+            <h1 style="display: none">md5</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SWPUCTF-2021-新生赛-PseudoProtocols"><a href="#SWPUCTF-2021-新生赛-PseudoProtocols" class="headerlink" title="[SWPUCTF 2021 新生赛]PseudoProtocols"></a>[SWPUCTF 2021 新生赛]PseudoProtocols</h1><p>**0x00  **</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240105221129539.png" srcset="/img/loading.gif" lazyload alt="image-20240105221129539"></p>
-<p>file_get_contents()</p>
-<p>这个函数就会将内容读取出来，然后转变为字符串</p>
-<p><strong>0x01 绕过</strong></p>
-<p>这个函数有两个方式绕过</p>
+                <h1 id="BJDCTF-2020-easy-md5"><a href="#BJDCTF-2020-easy-md5" class="headerlink" title="[BJDCTF 2020]easy_md5"></a>[BJDCTF 2020]easy_md5</h1><p>**0x00  **</p>
+<p>这道题对我来说收获很多</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/md5/image-20240107111226559.png" srcset="/img/loading.gif" lazyload alt="image-20240107111226559"></p>
+<p>首先反应是万能密码，但是试过了没有用，就F12，抓包查找信息</p>
+<p>我是用bp的时候发现有一个请求头</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/md5/image-20240107111356004.png" srcset="/img/loading.gif" lazyload alt="image-20240107111356004"></p>
+<p>这里我是直接抄的wp</p>
 <blockquote>
-<p>php:&#x2F;&#x2F;input</p>
+<p>ffifdyop</p>
 </blockquote>
-<p>然后在post里面添加内容</p>
-<blockquote>
-<p>I want flag</p>
-</blockquote>
-<p>还有一个方法是data</p>
-<blockquote>
-<p>data:&#x2F;&#x2F;text&#x2F;plain,I want flag</p>
-</blockquote>
-<p>​	</p>
-<h1 id="ZJCTF-2019-NiZhuanSiWei"><a href="#ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="[ZJCTF 2019]NiZhuanSiWei"></a>[ZJCTF 2019]NiZhuanSiWei</h1><p>**0x00  **</p>
-<p>这道题用到的主要使用伪协议</p>
+<p>然后就到了第二关</p>
 <p><strong>0x01</strong></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107095634950.png" srcset="/img/loading.gif" lazyload alt="image-20240107095634950"></p>
-<p>我们需要先绕过这个，还是伪协议，和上面那一道题是一样的</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107095812819.png" srcset="/img/loading.gif" lazyload alt="image-20240107095812819"></p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">data:<span class="hljs-regexp">//</span>text/plain<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107095853088.png" srcset="/img/loading.gif" lazyload alt="image-20240107095853088"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/md5/image-20240107112239625.png" srcset="/img/loading.gif" lazyload alt="image-20240107112239625"></p>
+<p>查看源码，直接使用数组绕过</p>
 <p><strong>0x02</strong></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107095925922.png" srcset="/img/loading.gif" lazyload alt="image-20240107095925922"></p>
-<p>根据提示使用伪协议读取useless.php文件内容，由于这个对flag会有过滤，我们就使用base64加密一下</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107101022664.png" srcset="/img/loading.gif" lazyload alt="image-20240107101022664"></p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">text=data:<span class="hljs-regexp">//</span>text<span class="hljs-regexp">/plain,welcome to the zjctf&amp;file=php:/</span><span class="hljs-regexp">/filter/</span>read=convert.base64-encode/resource=useless.php<br></code></pre></td></tr></table></figure>
-
-<p>然后解密base64</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107101126165.png" srcset="/img/loading.gif" lazyload alt="image-20240107101126165"></p>
+<p>到了第三关，我还是使用的是数组绕过</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/md5/image-20240107112440394.png" srcset="/img/loading.gif" lazyload alt="image-20240107112440394"></p>
+<p>只是要注意这个是post</p>
 <p><strong>0x03</strong></p>
-<p>反序列化出flag</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">O</span>:<span class="hljs-number">4</span>:<span class="hljs-string">&quot;Flag&quot;</span>:<span class="hljs-number">1</span>:&#123;s:<span class="hljs-number">4</span>:<span class="hljs-string">&quot;file&quot;</span>;s:<span class="hljs-number">8</span>:<span class="hljs-string">&quot;flag.php&quot;</span>;&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107101355638.png" srcset="/img/loading.gif" lazyload alt="z"></p>
-<p>查看源码</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240107101409393.png" srcset="/img/loading.gif" lazyload alt="image-20240107101409393"></p>
+<p>整体难度不大，但是第一个绕过还是有点迷糊</p>
+<p>现在是记住就行</p>
 
                 
               </div>
@@ -359,8 +331,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>文件包含</div>
-      <div>https://tsy244.github.io/2024/01/05/CTF刷题记录/WEB/文件包含/</div>
+      <div>md5</div>
+      <div>https://tsy244.github.io/2024/01/07/CTF刷题记录/WEB/md5/</div>
     </div>
     <div class="license-meta">
       
@@ -372,7 +344,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 5, 2024</div>
+          <div>January 7, 2024</div>
         </div>
       
       
@@ -404,18 +376,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/07/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/md5/" title="md5">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">md5</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/04/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/%E5%85%B6%E4%BB%96/" title="其他">
-                        <span class="hidden-mobile">其他</span>
+                      <a href="/2024/01/05/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" title="文件包含">
+                        <span class="hidden-mobile">文件包含</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
