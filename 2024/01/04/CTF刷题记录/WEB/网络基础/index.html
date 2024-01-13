@@ -16,12 +16,12 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="http[SWPUCTF 2021 新生赛]Do_you_know_http0x00 基础知识，记录一下 可以通过名字发现这个是关于http的ctf 0x01 browser  这个是说，使用浏览器 闹我们直接修改字段  0x02  后面的步骤需要抓包  修改了User-Agent的结果 0x03 假装是回环地址访问   出现了新的东西 最后就直接访问">
+    <meta name="description" content="http[SWPUCTF 2021 新生赛]Do_you_know_http0x00 基础知识，记录一下 可以通过名字发现这个是关于http的ctf 0x01 browser  这个是说，使用浏览器 闹我们直接修改字段  0x02  后面的步骤需要抓包  修改了User-Agent的结果 0x03 假装是回环地址访问   出现了新的东西 最后就直接访问  [LitCTF 2023]Http pro">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络基础">
 <meta property="og:url" content="https://tsy244.github.io/2024/01/04/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="http[SWPUCTF 2021 新生赛]Do_you_know_http0x00 基础知识，记录一下 可以通过名字发现这个是关于http的ctf 0x01 browser  这个是说，使用浏览器 闹我们直接修改字段  0x02  后面的步骤需要抓包  修改了User-Agent的结果 0x03 假装是回环地址访问   出现了新的东西 最后就直接访问">
+<meta property="og:description" content="http[SWPUCTF 2021 新生赛]Do_you_know_http0x00 基础知识，记录一下 可以通过名字发现这个是关于http的ctf 0x01 browser  这个是说，使用浏览器 闹我们直接修改字段  0x02  后面的步骤需要抓包  修改了User-Agent的结果 0x03 假装是回环地址访问   出现了新的东西 最后就直接访问  [LitCTF 2023]Http pro">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240104212839903.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240104212913787.png">
@@ -29,8 +29,16 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240104213259258.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240104213334105.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240104213420519.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112222829652.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112222841082.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112222850599.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112222940322.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112223041025.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112223104527.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112223122500.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112223203119.png">
 <meta property="article:published_time" content="2024-01-04T12:44:22.000Z">
-<meta property="article:modified_time" content="2024-01-04T13:34:23.812Z">
+<meta property="article:modified_time" content="2024-01-12T14:32:05.722Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          156 words
+          298 words
         
       </span>
     
@@ -245,7 +253,7 @@
         
         
         
-          2 mins
+          3 mins
         
       </span>
     
@@ -304,6 +312,31 @@
 <p>出现了新的东西</p>
 <p>最后就直接访问</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240104213420519.png" srcset="/img/loading.gif" lazyload alt="image-20240104213420519"></p>
+<h2 id="LitCTF-2023-Http-pro-max-plus"><a href="#LitCTF-2023-Http-pro-max-plus" class="headerlink" title="[LitCTF 2023]Http pro max plus"></a>[LitCTF 2023]Http pro max plus</h2><p><strong>0x00</strong></p>
+<p> 探姬老师挺有趣的</p>
+<p>使用的知识点：</p>
+<blockquote>
+<ol>
+<li>http中本地访问不只有XFF(X-Forwarded-For)还可以使用client-ip</li>
+<li>代理使用via</li>
+<li></li>
+</ol>
+</blockquote>
+<p>整体来说，只要跟着走就行了</p>
+<p><strong>0x01</strong></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112222829652.png" srcset="/img/loading.gif" lazyload alt="image-20240112222829652"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112222841082.png" srcset="/img/loading.gif" lazyload alt="image-20240112222841082"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112222850599.png" srcset="/img/loading.gif" lazyload alt="image-20240112222850599"></p>
+<p>那就换一个</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112222940322.png" srcset="/img/loading.gif" lazyload alt="image-20240112222940322"></p>
+<p><strong>0x02</strong></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112223041025.png" srcset="/img/loading.gif" lazyload alt="image-20240112223041025"></p>
+<p><strong>0x03</strong></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112223104527.png" srcset="/img/loading.gif" lazyload alt="image-20240112223104527"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112223122500.png" srcset="/img/loading.gif" lazyload alt="image-20240112223122500"></p>
+<p><strong>0x03</strong></p>
+<p>使用前面提到的via</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240112223203119.png" srcset="/img/loading.gif" lazyload alt="image-20240112223203119"></p>
 
                 
               </div>

