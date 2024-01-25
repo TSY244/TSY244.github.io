@@ -16,24 +16,31 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] lambda高级使用捕获列表lambda 表达式还可以通过捕获列表捕获一定范围内的变量：  [] 不捕获任何变量。 [&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。 [&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。 [&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。 [bar">
+    <meta name="description" content="[GDOUCTF 2023]受不了一点0x00 这个就是代码审计 123456789101112131415161718192021222324252627282930313233343536373839404142434445&lt;?phperror_reporting(0);header(&quot;Content-type:text&#x2F;html;charset&#x3D;utf-8&quot;);if">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lambda高级使用">
-<meta property="og:url" content="https://tsy244.github.io/2023/03/26/c++/lambda%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="代码审计">
+<meta property="og:url" content="https://tsy244.github.io/2024/01/25/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="[TOC] lambda高级使用捕获列表lambda 表达式还可以通过捕获列表捕获一定范围内的变量：  [] 不捕获任何变量。 [&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。 [&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。 [&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。 [bar">
+<meta property="og:description" content="[GDOUCTF 2023]受不了一点0x00 这个就是代码审计 123456789101112131415161718192021222324252627282930313233343536373839404142434445&lt;?phperror_reporting(0);header(&quot;Content-type:text&#x2F;html;charset&#x3D;utf-8&quot;);if">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-26T12:39:43.000Z">
-<meta property="article:modified_time" content="2023-04-10T14:25:14.004Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184501023.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184614075.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184636644.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184707258.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184819978.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125185033074.png">
+<meta property="article:published_time" content="2024-01-25T10:43:12.000Z">
+<meta property="article:modified_time" content="2024-01-25T10:50:36.237Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c++基础">
+<meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184501023.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>lambda高级使用 - AU9U5T</title>
+  <title>代码审计 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +206,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="lambda高级使用"></span>
+            <span id="subtitle" data-typed-text="代码审计"></span>
           
         </div>
 
@@ -215,8 +222,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-26 20:39" pubdate>
-          March 26, 2023 pm
+        <time datetime="2024-01-25 18:43" pubdate>
+          January 25, 2024 pm
         </time>
       </span>
     
@@ -227,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          1.5k words
         
       </span>
     
@@ -238,7 +245,7 @@
         
         
         
-          11 mins
+          13 mins
         
       </span>
     
@@ -276,34 +283,29 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">lambda高级使用</h1>
+            <h1 style="display: none">代码审计</h1>
             
             
               <div class="markdown-body">
                 
-                <p>[TOC]</p>
-<h1 id="lambda高级使用"><a href="#lambda高级使用" class="headerlink" title="lambda高级使用"></a>lambda高级使用</h1><h2 id="捕获列表"><a href="#捕获列表" class="headerlink" title="捕获列表"></a>捕获列表</h2><p>lambda 表达式还可以通过捕获列表捕获一定范围内的变量：</p>
-<ul>
-<li>[] 不捕获任何变量。</li>
-<li>[&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。</li>
-<li>[&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。</li>
-<li>[&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。</li>
-<li>[bar] 按值捕获 bar 变量，同时不捕获其他变量。</li>
-<li>[this] 捕获当前类中的 this <a target="_blank" rel="noopener" href="http://c.biancheng.net/c/80/">指针</a>，让 lambda 表达式拥有和当前类成员函数同样的访问权限。如果已经使用了 &amp; 或者 &#x3D;，就默认添加此选项。捕获 this 的目的是可以在 lamda 中使用当前类的成员函数和成员变量。</li>
-</ul>
-<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><ol>
-<li>没有捕获的时候，我们将该lambda变量可以看成函数指针</li>
-<li>有捕获的时候，我们将该lambda表达式堪称仿函数</li>
-</ol>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ol>
-<li><p>使用<code>function</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iostream&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functional&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;vector&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a&#123;<span class="hljs-number">9</span>&#125;;<br>    <span class="hljs-type">int</span> b&#123;<span class="hljs-number">10</span>&#125;;<br>    [a,b](<span class="hljs-type">int</span> x)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;a+b&lt;&lt;std::endl&lt;&lt;x&lt;&lt;std::endl;<br>    &#125;(<span class="hljs-number">88</span>);<br>    std::function&lt;<span class="hljs-type">void</span>(<span class="hljs-type">int</span>,std::string)&gt; func&#123;[](<span class="hljs-type">int</span> num,std::string S)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;num= &quot;</span>&lt;&lt;num&lt;&lt;<span class="hljs-string">&quot; name= &quot;</span>&lt;&lt;S&lt;&lt;std::endl;<br>    &#125;&#125;;<br>    <span class="hljs-built_in">func</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;chg&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+                <h1 id="GDOUCTF-2023-受不了一点"><a href="#GDOUCTF-2023-受不了一点" class="headerlink" title="[GDOUCTF 2023]受不了一点"></a>[GDOUCTF 2023]受不了一点</h1><p>0x00</p>
+<p>这个就是代码审计</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&quot;Content-type:text/html;charset=utf-8&quot;</span>);<br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;gdou&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;ctf&#x27;</span>])) &#123;<br>    <span class="hljs-variable">$b</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;ctf&#x27;</span>];<br>    <span class="hljs-variable">$a</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;gdou&#x27;</span>];<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;gdou&#x27;</span>] != <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;ctf&#x27;</span>] &amp;&amp; <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$a</span>) === <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$b</span>)) &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_COOKIE</span>[<span class="hljs-string">&#x27;cookie&#x27;</span>])) &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-variable">$_COOKIE</span>[<span class="hljs-string">&#x27;cookie&#x27;</span>] == <span class="hljs-string">&#x27;j0k3r&#x27;</span>) &#123;<br>                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;aaa&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;bbb&#x27;</span>])) &#123;<br>                    <span class="hljs-variable">$aaa</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;aaa&#x27;</span>];<br>                    <span class="hljs-variable">$bbb</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;bbb&#x27;</span>];<br>                    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$aaa</span> == <span class="hljs-number">114514</span> &amp;&amp; <span class="hljs-variable">$bbb</span> == <span class="hljs-number">114514</span> &amp;&amp; <span class="hljs-variable">$aaa</span> != <span class="hljs-variable">$bbb</span>) &#123;<br>                        <span class="hljs-variable">$give</span> = <span class="hljs-string">&#x27;cancanwordflag&#x27;</span>;<br>                        <span class="hljs-variable">$get</span> = <span class="hljs-string">&#x27;hacker!&#x27;</span>;<br>                        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;flag&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;flag&#x27;</span>])) &#123;<br>                            <span class="hljs-keyword">die</span>(<span class="hljs-variable">$give</span>);<br>                        &#125;<br>                        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;flag&#x27;</span>] === <span class="hljs-string">&#x27;flag&#x27;</span> || <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;flag&#x27;</span>] === <span class="hljs-string">&#x27;flag&#x27;</span>) &#123;<br>                            <span class="hljs-keyword">die</span>(<span class="hljs-variable">$get</span>);<br>                        &#125;<br>                        <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$_POST</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>) &#123;<br>                            <span class="hljs-variable">$$key</span> = <span class="hljs-variable">$value</span>;<br>                        &#125;<br>                        <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$_GET</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>) &#123;<br>                            <span class="hljs-variable">$$key</span> = <span class="hljs-variable">$$value</span>;<br>                        &#125;<br>                        <span class="hljs-keyword">echo</span> <span class="hljs-variable">$flag</span>;<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;洗洗睡吧&quot;</span>;<br>                    &#125;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;行不行啊细狗&quot;</span>;<br>                &#125;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;菜菜&#x27;</span>;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;就这?&quot;</span>;<br>    &#125;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;别来沾边&quot;</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
 
-</li>
-<li><p>使用<code>bind</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a&#123;<span class="hljs-number">9</span>&#125;;	<br>    <span class="hljs-type">int</span> b&#123;<span class="hljs-number">10</span>&#125;;<br>    [a,b](<span class="hljs-type">int</span> x)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;a+b&lt;&lt;std::endl&lt;&lt;x&lt;&lt;std::endl;<br>    &#125;(<span class="hljs-number">88</span>);<br>    <span class="hljs-keyword">auto</span> f2= std::<span class="hljs-built_in">bind</span>([](<span class="hljs-type">int</span> num,std::string S)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;num= &quot;</span>&lt;&lt;num&lt;&lt;<span class="hljs-string">&quot; name= &quot;</span>&lt;&lt;S&lt;&lt;std::endl;<br>    &#125;,std::placeholders::_1,std::placeholders::_2);<br>    <span class="hljs-built_in">f2</span>(<span class="hljs-number">2</span>,<span class="hljs-string">&quot;zjy&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
-</ol>
+
+<p>0x01</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184501023.png" srcset="/img/loading.gif" lazyload alt="image-20240125184501023"></p>
+<p>这个地方只需要进行数组绕过就可以了</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184614075.png" srcset="/img/loading.gif" lazyload alt="image-20240125184614075"></p>
+<p>设置cookie</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184636644.png" srcset="/img/loading.gif" lazyload alt="image-20240125184636644"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184707258.png" srcset="/img/loading.gif" lazyload alt="image-20240125184707258"></p>
+<p>两个等号这个是弱比较</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_47804678/article/details/128814377">php比较绕过（强比较“&#x3D;&#x3D;&#x3D;”&#x2F;弱比较“&#x3D;&#x3D;“）-CSDN博客</a></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184819978.png" srcset="/img/loading.gif" lazyload alt="image-20240125184819978"></p>
+<p>这个地方只需要设置一个flag，而且这个部分并没有对其他的参数进行过滤，我们只需要将其他参数设置成flag然后Falg使用这个参数就可以了</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125185033074.png" srcset="/img/loading.gif" lazyload alt="image-20240125185033074"></p>
 
                 
               </div>
@@ -316,7 +318,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c-%E5%9F%BA%E7%A1%80/">#c++基础</a>
+        <a href="/tags/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">#CTF刷题记录</a>
       
     </div>
   
@@ -328,8 +330,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>lambda高级使用</div>
-      <div>https://tsy244.github.io/2023/03/26/c++/lambda高级使用/</div>
+      <div>代码审计</div>
+      <div>https://tsy244.github.io/2024/01/25/CTF刷题记录/WEB/代码审计/</div>
     </div>
     <div class="license-meta">
       
@@ -341,7 +343,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 26, 2023</div>
+          <div>January 25, 2024</div>
         </div>
       
       
@@ -373,18 +375,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BA%BF%E6%80%A7%E8%A1%A8/" title="线性表">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">线性表</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/26/c++/%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%8C%85%E8%A3%85%E5%99%A8/" title="可调用对象包装器">
-                        <span class="hidden-mobile">可调用对象包装器</span>
+                      <a href="/2024/01/25/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/" title="Socks代理">
+                        <span class="hidden-mobile">Socks代理</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
