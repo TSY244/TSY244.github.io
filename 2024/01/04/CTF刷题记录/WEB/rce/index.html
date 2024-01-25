@@ -29,8 +29,11 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140543624.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140656434.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140731254.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125175304677.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125175337730.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125175455096.png">
 <meta property="article:published_time" content="2024-01-04T13:22:59.000Z">
-<meta property="article:modified_time" content="2024-01-09T06:07:33.791Z">
+<meta property="article:modified_time" content="2024-01-25T09:55:18.375Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          1.9k words
         
       </span>
     
@@ -245,7 +248,7 @@
         
         
         
-          16 mins
+          17 mins
         
       </span>
     
@@ -366,6 +369,21 @@
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140656434.png" srcset="/img/loading.gif" lazyload alt="image-20240109140656434"></p>
 <p>因为过滤了la所以这这里使用转义</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240109140731254.png" srcset="/img/loading.gif" lazyload alt="image-20240109140731254"></p>
+<h1 id="羊城杯-2020-easycon"><a href="#羊城杯-2020-easycon" class="headerlink" title="[羊城杯 2020]easycon"></a>[羊城杯 2020]easycon</h1><p>0x00</p>
+<p>这道题挺好玩的</p>
+<p>使用的知识点：</p>
+<ol>
+<li>base64转图片</li>
+</ol>
+<p>0x01</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125175304677.png" srcset="/img/loading.gif" lazyload alt="image-20240125175304677"></p>
+<p>访问index，发现自带了rce环境，直接连接</p>
+<p>0x02</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125175337730.png" srcset="/img/loading.gif" lazyload alt="image-20240125175337730"></p>
+<p>发现一个可疑的文件</p>
+<p>有点像base64</p>
+<p>尝试base64转图片</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125175455096.png" srcset="/img/loading.gif" lazyload alt="image-20240125175455096"></p>
 
                 
               </div>

