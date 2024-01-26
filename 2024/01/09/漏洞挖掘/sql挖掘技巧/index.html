@@ -16,15 +16,15 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介漏洞挖掘不像是渗透，挖掘不需要打穿，点到为止就可以了，写这个的原因是，学习怎么挖掘sql漏洞 但是挖掘漏洞之前都必须要实现一下 网站的正常功能 信息收集不管是漏洞挖掘还是渗透测试，最重要的都是信息收集 主要的方法就是  网络空间搜索引擎（对edu有奇效） 谷歌搜索语法">
+    <meta name="description" content="简介漏洞挖掘不像是渗透，挖掘不需要打穿，点到为止就可以了，写这个的原因是，学习怎么挖掘sql漏洞 但是挖掘漏洞之前都必须要实现一下 网站的正常功能 信息收集不管是漏洞挖掘还是渗透测试，最重要的都是信息收集 主要的方法就是  网络空间搜索引擎（对edu有奇效）  谷歌搜索语法  about.php?cartID&#x3D;accinfo.php?cartld&#x3D;acclogin.php?ca">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql挖掘技巧">
 <meta property="og:url" content="https://tsy244.github.io/2024/01/09/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/sql%E6%8C%96%E6%8E%98%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="简介漏洞挖掘不像是渗透，挖掘不需要打穿，点到为止就可以了，写这个的原因是，学习怎么挖掘sql漏洞 但是挖掘漏洞之前都必须要实现一下 网站的正常功能 信息收集不管是漏洞挖掘还是渗透测试，最重要的都是信息收集 主要的方法就是  网络空间搜索引擎（对edu有奇效） 谷歌搜索语法">
+<meta property="og:description" content="简介漏洞挖掘不像是渗透，挖掘不需要打穿，点到为止就可以了，写这个的原因是，学习怎么挖掘sql漏洞 但是挖掘漏洞之前都必须要实现一下 网站的正常功能 信息收集不管是漏洞挖掘还是渗透测试，最重要的都是信息收集 主要的方法就是  网络空间搜索引擎（对edu有奇效）  谷歌搜索语法  about.php?cartID&#x3D;accinfo.php?cartld&#x3D;acclogin.php?ca">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-09T13:36:35.000Z">
-<meta property="article:modified_time" content="2024-01-09T14:37:40.449Z">
+<meta property="article:modified_time" content="2024-01-25T13:24:47.367Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="漏洞挖掘">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          129 words
+          732 words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          2 mins
+          7 mins
         
       </span>
     
@@ -286,9 +286,15 @@
 <h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>不管是漏洞挖掘还是渗透测试，最重要的都是信息收集</p>
 <p>主要的方法就是</p>
 <ol>
-<li>网络空间搜索引擎（对edu有奇效）</li>
-<li>谷歌搜索语法</li>
-<li></li>
+<li><p>网络空间搜索引擎（对edu有奇效）</p>
+</li>
+<li><p>谷歌搜索语法</p>
+<blockquote>
+<p>about.php?cartID&#x3D;<br>accinfo.php?cartld&#x3D;<br>acclogin.php?cartID&#x3D;<br>add.php?bookid&#x3D;<br>add_cart.php?num&#x3D;<br>addcart.php?addltem.php add-to-cart.php?ID&#x3D;<br>addToCart.php?idProduct&#x3D;<br>addtomylist.php?Prodld&#x3D;<br>adminEditProductFields.php?intProdID&#x3D;<br>advSearch_h.php?idCategory&#x3D;<br>affiliate.php?ID&#x3D;<br>affiliate-agreement.cfm?storeid&#x3D;<br>affiliates.php?id&#x3D;<br>ancillary.php?ID&#x3D;<br>archive.php?id&#x3D;<br>article.php?id&#x3D;<br>phpx?PagelD basket.php?id&#x3D;<br>Book.php?bookID&#x3D;<br>book_list.php?bookid&#x3D;<br>book_view.php?bookid&#x3D;<br>BookDetails.php?ID&#x3D;<br>browse.php?catid&#x3D;</p>
+</blockquote>
+</li>
+<li><p>添加单引号。确认是否存在SQL注入漏洞</p>
+</li>
 </ol>
 
                 
