@@ -1,0 +1,826 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介Linux系统拥有非常灵活和强大的日志功能，可以保存几乎所有的操作记录，并可以从中检索出我们需要的信息。 本文简介一下Linux系统日志及日志分析技  巧。   日志对于系统的安全来说非常重要，它记录了系统每天发生的各种各样的事情，用户可以通过它来检查错误发生的原因，或者寻找受到攻击时攻击者留下的痕迹。日志主要的功能是审计和监测。它还可以实时地监测系统状态，监测和追踪侵入者。   日志默认存放">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux痕迹清除">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/18/%E6%B8%97%E9%80%8F/Linux%E7%97%95%E8%BF%B9%E6%B8%85%E9%99%A4/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介Linux系统拥有非常灵活和强大的日志功能，可以保存几乎所有的操作记录，并可以从中检索出我们需要的信息。 本文简介一下Linux系统日志及日志分析技  巧。   日志对于系统的安全来说非常重要，它记录了系统每天发生的各种各样的事情，用户可以通过它来检查错误发生的原因，或者寻找受到攻击时攻击者留下的痕迹。日志主要的功能是审计和监测。它还可以实时地监测系统状态，监测和追踪侵入者。   日志默认存放">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218223343224.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218230456597.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218231852198.png">
+<meta property="article:published_time" content="2024-02-18T14:10:40.000Z">
+<meta property="article:modified_time" content="2024-02-18T15:22:44.232Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218223343224.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Linux痕迹清除 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux痕迹清除"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-18 22:10" pubdate>
+          February 18, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          51 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux痕迹清除</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Linux系统拥有非常灵活和强大的日志功能，可以保存几乎所有的操作记录，并可以从中检索出我们需要的信息。 本文简介一下Linux系统日志及日志分析技  巧。  </p>
+<p>日志对于系统的安全来说非常重要，它记录了系统每天发生的各种各样的事情，用户可以通过它来检查错误发生的原因，或者寻找受到攻击时攻击者留下的痕迹。日志主要的功能是审计和监测。它还可以实时地监测系统状态，监测和追踪侵入者。</p>
+<blockquote>
+<p> 日志默认存放位置：&#x2F;var&#x2F;log&#x2F;  </p>
+<p> 查看日志配置情况：more  &#x2F;etc&#x2F;rsyslog.conf  </p>
+</blockquote>
+<p>日志消息级别  </p>
+<blockquote>
+<p>0 EMERG（紧急）：会导致主机系统不可用的情况  </p>
+<p>1 ALERT（警告）：必须马上采取措施解决的问题  </p>
+<p>2 CRIT（严重）：比较严重的情况  </p>
+<p>3 ERR（错误）：运行出现错误  </p>
+<p>4 WARNING（提醒）：可能会影响系统功能的事件  </p>
+<p>5 NOTICE（注意）：不会影响系统但值得注意  </p>
+<p>6 INFO（信息）：一般信息  </p>
+<p>7 DEBUG（调试）：程序或系统调试信息等</p>
+</blockquote>
+<h1 id="日志文件"><a href="#日志文件" class="headerlink" title="日志文件"></a>日志文件</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218223343224.png" srcset="/img/loading.gif" lazyload alt="image-20240218223343224"></p>
+<blockquote>
+<p>登录失败记录：&#x2F;var&#x2F;log&#x2F;btmp  #lastb  </p>
+<p>最后一次登录：&#x2F;var&#x2F;log&#x2F;lastlog  <em>#lastlog</em>  </p>
+<p>登录成功记录: &#x2F;var&#x2F;log&#x2F;wtmp  登录日志记录：&#x2F;var&#x2F;log&#x2F;secure  #last  </p>
+<p>目前登录用户信息：&#x2F;var&#x2F;run&#x2F;utmp  #w、<em>who</em>、<em>users</em>  历史命令记录：history  </p>
+<p>仅清理当前用户：history -c</p>
+</blockquote>
+<h1 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h1><ul>
+<li><p>who</p>
+<p>who 命令显示关于当前在本地系统上的所有用户的信息。  </p>
+<p>可以显示现在登录得信息和之前登录得信息</p>
+</li>
+<li><p>w</p>
+<p>w 显示目前登入系统的用户信息。  </p>
+</li>
+<li><p>last  </p>
+<p>last命令列出目前与过去登入系统的用户相关信息。  </p>
+</li>
+<li><p>lastlog  </p>
+<p>lastlog 报告所有用户的最近登录情况，或者指定用户的最近登录情况</p>
+</li>
+</ul>
+<blockquote>
+<p>tty：终端设备的统称。  </p>
+<p>tty一词源于Teletypes，或者teletypewriters，原来指的是电传打字机，是通过串行线用打印机键盘通过阅读和发送信息的东西，后来这东西被键盘与显示器取  代，所以现在叫终端比较合适。终端是一种字符型设备，它有多种类型，通常使用tty来简称各种类型的终端设备。  </p>
+<p>tty1～6是文本型控制台，tty7是X Window图形显示管理器。在本地机器上可以通过Ctrl+Alt+F1（F1-F7键）切换到对应的登录控制台。</p>
+</blockquote>
+<blockquote>
+<p>pty（虚拟终端)：  </p>
+<p>但是假如我们远程telnet到主机或使用xterm时不也需要一个终端交互么？是的，这就是虚拟终端pty(pseudo-tty)  pts&#x2F;ptmx（pts&#x2F;ptmx结合使用，进而实现pty）：  </p>
+<p>pts(pseudo-terminal slave)是pty的实现方法，和ptmx(pseudo-terminal master)配合使用实现pty。  </p>
+</blockquote>
+<h1 id="日志分析技巧"><a href="#日志分析技巧" class="headerlink" title="日志分析技巧"></a>日志分析技巧</h1><h2 id="常用的shell命令"><a href="#常用的shell命令" class="headerlink" title="常用的shell命令"></a>常用的shell命令</h2><blockquote>
+<p>  ﬁnd、grep 、egrep、awk、sed  </p>
+</blockquote>
+<ul>
+<li>grep 显示前后几行信息</li>
+</ul>
+  <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nsis">grep -C <span class="hljs-number">5</span> <span class="hljs-literal">admin</span> <span class="hljs-keyword">file</span> <span class="hljs-comment">#显示file文件里匹配admin字串那行以及上下5行</span><br>grep -B <span class="hljs-number">5</span> <span class="hljs-literal">admin</span> <span class="hljs-keyword">file</span> <span class="hljs-comment">#显示admin及前5行</span><br>grep -A <span class="hljs-number">5</span> <span class="hljs-literal">admin</span> <span class="hljs-keyword">file</span> <span class="hljs-comment">#显示admin及后5行</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>grep 查找含有某字符串的所有文件</li>
+</ul>
+  <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs diff">grep -rn &quot;hello,world!&quot; *<br>*: 表示当前目录所有文件，也可以是某个文件名<br><span class="hljs-deletion">-r 是递归查找</span><br><span class="hljs-deletion">-n 是显示行号</span><br><span class="hljs-deletion">-R 查找所有文件包含子目录</span><br><span class="hljs-deletion">-i 忽略大小写</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>显示一个文件的某几行</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#从第1000行开始，显示2000行。即显示1000~2999行</span><br><span class="hljs-built_in">cat</span> input_file | <span class="hljs-built_in">tail</span> -n +1000 | <span class="hljs-built_in">head</span> -n 2000<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>ﬁnd 查找文件</li>
+</ul>
+  <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment">#在/etc目录中查找文件init</span><br><span class="hljs-built_in">find</span> /etc -name init<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>awk</li>
+</ul>
+  <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gradle">#只是显示<span class="hljs-regexp">/etc/</span>passwd的账户<br>cat <span class="hljs-regexp">/etc/</span>passwd |awk -F <span class="hljs-string">&#x27;:&#x27;</span> <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span><br>#awk -F指定域分隔符为<span class="hljs-string">&#x27;:&#x27;</span>，将记录按指定的域分隔符划分域，填充域，$<span class="hljs-number">0</span>则表示所有域, $<span class="hljs-number">1</span>表示第一个域, $n表示第n个域。<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>sed</li>
+</ul>
+  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment">#删除历史操作记录，只保留前153行</span><br><span class="hljs-attribute">sed</span> -i <span class="hljs-string">&#x27;153,<span class="hljs-variable">$d</span>&#x27;</span> .bash_history<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="secure日志"><a href="#secure日志" class="headerlink" title="secure日志"></a>secure日志</h2><blockquote>
+<p>centos   &#x2F;var&#x2F;log&#x2F;secure </p>
+<p>ubuntu &#x2F;var&#x2F;log&#x2F;auth.log</p>
+</blockquote>
+<blockquote>
+<p>记录验证和授权方面的信息，只要涉及账号和密码的程序都会记录，比如SSH登录，su切换用户，sudo授权，甚至添加用户和修改户密码都会记录在这个日  志文件中。  </p>
+</blockquote>
+<ol>
+<li><p>定位有哪些IP在爆破</p>
+<blockquote>
+<p>  <em>#</em> 模拟爆破  </p>
+<p>  hydra -l  root -P rockyou.txt 192.168.81.147 ssh  </p>
+</blockquote>
+<blockquote>
+<p>grep “Failed password” &#x2F;var&#x2F;log&#x2F;secure | awk ‘{print $11}’ | sort | uniq -c</p>
+<p>grep “Failed password” &#x2F;var&#x2F;log&#x2F;secure | grep -E -o “(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)” | uniq -c</p>
+<p>grep “Failed password” &#x2F;var&#x2F;log&#x2F;secure | egrep -o “(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)” | uniq -c</p>
+<p>grep -E：使用扩展正则表达式<br>grep -o：只输出文件中匹配到的部分</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218230456597.png" srcset="/img/loading.gif" lazyload alt="image-20240218230456597"></p>
+<p>还好vps 没有被爆破</p>
+</li>
+<li><p>定位哪些IP在爆破主机的root帐号</p>
+</li>
+</ol>
+   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep <span class="hljs-string">&quot;Failed password for root&quot;</span> /var/log/secure | awk <span class="hljs-string">&#x27;&#123;print $11&#125;&#x27;</span> | <span class="hljs-built_in">sort</span> | <span class="hljs-built_in">uniq</span> -c | <span class="hljs-built_in">sort</span> -nr<br>awk：文本和数据进行处理的编程语言。<br><span class="hljs-built_in">sort</span>：对文本文件中所有行进行排序。<br><span class="hljs-built_in">sort</span> -nr：依照数值的大小排序；以相反的顺序来排序<br><span class="hljs-built_in">uniq</span>：显示或忽略重复的行。<br><span class="hljs-built_in">uniq</span> -c：在每行开头增加重复次数<br><br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>定位哪些IP在使用不存在的用户爆破，爆破的用户名是</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;Failed password for invalid user&quot;</span> <span class="hljs-regexp">/var/</span>log/secure | awk <span class="hljs-string">&#x27;&#123;print $0&#125;&#x27;</span><br><span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;Failed password for invalid user&quot;</span> <span class="hljs-regexp">/var/</span>log/secure | awk <span class="hljs-string">&#x27;&#123;print $11,$13&#125;&#x27;</span> | uniq -c<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>获取爆破用户名字典</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;Failed password&quot;</span> <span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/secure | perl -e &#x27;while($_=&lt;&gt;)&#123; /</span><span class="hljs-keyword">for</span>(.*?) <span class="hljs-keyword">from</span>/; <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;$1\n&quot;</span>;&#125;<span class="hljs-string">&#x27; | uniq -c | sort -rn</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>登录成功的IP有哪些</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;Accepted &quot;</span> <span class="hljs-regexp">/var/</span>log/secure | awk <span class="hljs-string">&#x27;&#123;print $11&#125;&#x27;</span> | <span class="hljs-keyword">sort</span> | uniq -c | <span class="hljs-keyword">sort</span> -nr | more<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>登录成功的日期、用户名、IP</p>
+</li>
+</ol>
+   <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dart">grep <span class="hljs-string">&quot;Accepted &quot;</span> /<span class="hljs-keyword">var</span>/log/secure | awk <span class="hljs-string">&#x27;&#123;print <span class="hljs-subst">$1</span>,<span class="hljs-subst">$2</span>,<span class="hljs-subst">$3</span>,<span class="hljs-subst">$9</span>,<span class="hljs-subst">$11</span>&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>增加一个用户kali日志</li>
+</ol>
+   <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># 添加用户</span><br><span class="hljs-attribute">useradd</span> kali<br>passwd kali<br></code></pre></td></tr></table></figure>
+
+<p>   然后过滤创建得用户</p>
+   <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs inform7">grep <span class="hljs-string">&quot;Failed password&quot;</span> /var/log/secure | awk &#x27;&#123;print $11&#125;&#x27; | sort | uniq -c<br><br>grep <span class="hljs-string">&quot;Failed password&quot;</span> /var/log/secure | grep -E -o <span class="hljs-string">&quot;(25<span class="hljs-subst">[0-5]</span>|2<span class="hljs-subst">[0-4]</span><span class="hljs-subst">[0-9]</span>|<span class="hljs-subst">[01]</span>?<span class="hljs-subst">[0-9]</span><span class="hljs-subst">[0-9]</span>?)\.(25<span class="hljs-subst">[0-5]</span>|2<span class="hljs-subst">[0-4]</span><span class="hljs-subst">[0-9]</span>|<span class="hljs-subst">[01]</span>?<span class="hljs-subst">[0-9]</span><span class="hljs-subst">[0-9]</span>?)\.(25<span class="hljs-subst">[0-5]</span>|2<span class="hljs-subst">[0-4]</span><span class="hljs-subst">[0-9]</span>|<span class="hljs-subst">[01]</span>?<span class="hljs-subst">[0-9]</span><span class="hljs-subst">[0-9]</span>?)\.(25<span class="hljs-subst">[0-5]</span>|2<span class="hljs-subst">[0-4]</span><span class="hljs-subst">[0-9]</span>|<span class="hljs-subst">[01]</span>?<span class="hljs-subst">[0-9]</span><span class="hljs-subst">[0-9]</span>?)&quot;</span> | uniq -c<br><br>grep <span class="hljs-string">&quot;Failed password&quot;</span> /var/log/secure | egrep -o <span class="hljs-string">&quot;(25<span class="hljs-subst">[0-5]</span>|2<span class="hljs-subst">[0-4]</span><span class="hljs-subst">[0-9]</span>|<span class="hljs-subst">[01]</span>?<span class="hljs-subst">[0-9]</span><span class="hljs-subst">[0-9]</span>?)\.(25<span class="hljs-subst">[0-5]</span>|2<span class="hljs-subst">[0-4]</span><span class="hljs-subst">[0-9]</span>|<span class="hljs-subst">[01]</span>?<span class="hljs-subst">[0-9]</span><span class="hljs-subst">[0-9]</span>?)\.(25<span class="hljs-subst">[0-5]</span>|2<span class="hljs-subst">[0-4]</span><span class="hljs-subst">[0-9]</span>|<span class="hljs-subst">[01]</span>?<span class="hljs-subst">[0-9]</span><span class="hljs-subst">[0-9]</span>?)\.(25<span class="hljs-subst">[0-5]</span>|2<span class="hljs-subst">[0-4]</span><span class="hljs-subst">[0-9]</span>|<span class="hljs-subst">[01]</span>?<span class="hljs-subst">[0-9]</span><span class="hljs-subst">[0-9]</span>?)&quot;</span> | uniq -c<br><br>grep -E：使用扩展正则表达式<br>grep -o：只输出文件中匹配到的部分<br></code></pre></td></tr></table></figure>
+
+<ol start="8">
+<li><p>删除用户kali日志</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 删除用户</span><br><span class="hljs-attribute">userdel</span> kali<br><br><span class="hljs-comment"># grep &quot;userdel&quot; /var/log/secure</span><br><br><span class="hljs-attribute">Jul</span> <span class="hljs-number">10</span> <span class="hljs-number">00</span>:<span class="hljs-number">14</span>:<span class="hljs-number">17</span> localhost userdel[<span class="hljs-number">2393</span>]: delete user &#x27;kali&#x27;<br><span class="hljs-attribute">Jul</span> <span class="hljs-number">10</span> <span class="hljs-number">00</span>:<span class="hljs-number">14</span>:<span class="hljs-number">17</span> localhost userdel[<span class="hljs-number">2393</span>]: removed group &#x27;kali&#x27; owned by &#x27;kali&#x27;<br><span class="hljs-attribute">Jul</span> <span class="hljs-number">10</span> <span class="hljs-number">00</span>:<span class="hljs-number">14</span>:<span class="hljs-number">17</span> localhost userdel[<span class="hljs-number">2393</span>]: removed shadow group &#x27;kali&#x27; owned by &#x27;kali&#x27;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>su 切换用户</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stata"># <span class="hljs-keyword">su</span> <span class="hljs-keyword">test</span><br><br># grep <span class="hljs-string">&quot;su:session&quot;</span> /<span class="hljs-keyword">var</span>/<span class="hljs-keyword">log</span>/secure<br><br>Oct 13 08:00:29 localhost <span class="hljs-keyword">su</span>: pam_unix(<span class="hljs-keyword">su</span>:session): session opened <span class="hljs-keyword">for</span> user <span class="hljs-keyword">test</span> <span class="hljs-keyword">by</span> root(uid=0)<br>Oct 13 08:00:33 localhost <span class="hljs-keyword">su</span>: pam_unix(<span class="hljs-keyword">su</span>:session): session closed <span class="hljs-keyword">for</span> user <span class="hljs-keyword">test</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>sudo 授权</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># sudo -l</span><br><br><span class="hljs-comment"># grep &quot;sudo&quot; /var/log/secure</span><br><br>Oct 13 08:05:04 localhost sudo:    root : <span class="hljs-attribute">TTY</span>=pts/0 ; <span class="hljs-attribute">PWD</span>=/home ; <span class="hljs-attribute">USER</span>=root ; <span class="hljs-attribute">COMMAND</span>=list<br>Oct 13 08:06:07 localhost sudo:    root : <span class="hljs-attribute">TTY</span>=pts/0 ; <span class="hljs-attribute">PWD</span>=/home ; <span class="hljs-attribute">USER</span>=root ; <span class="hljs-attribute">COMMAND</span>=list<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="登录日志"><a href="#登录日志" class="headerlink" title="登录日志"></a>登录日志</h2><p>ssh 产生得日志</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">命令        日志文件                 描述<br>last        <span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/wtmp         所有成功登录/</span>登出的历史记录<br>lastb        <span class="hljs-regexp">/var/</span>log/btmp         登录失败尝试记录<br>lastlog        <span class="hljs-regexp">/var/</span>log/lastlog      最近登录记录<br>w,who       <span class="hljs-regexp">/var/</span>run/utmp         记录当前登录的每个用户的信息，它只保留当时连接的用户记录，不会为用户保留永久的记录<br></code></pre></td></tr></table></figure>
+
+<p>命令的输出包括：登录名，上次登录时间，IP地址，端口等。  </p>
+<p>登录日志清理：last等日志是二进制文件，无法直接修改。所以清除的最简单方式是清空日志文件本身。</p>
+<h2 id="WEB日志"><a href="#WEB日志" class="headerlink" title="WEB日志"></a>WEB日志</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/httpd/</span>access.log<br><span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/nginx/</span>access.log<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  通过HTTP协议访问连接程序的WEB容器时，会记录对应的访问日志，因此需要清理容器的日志。如tomcat日志，IIS日志。  </p>
+</blockquote>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/httpd/</span>access.log<br><span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/nginx/</span>access.log<br>cat <span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/nginx/</span>access.log | <span class="hljs-keyword">grep</span> -v shell.php &gt; <span class="hljs-regexp">/tmp/</span>a.log<br>cat <span class="hljs-regexp">/tmp/</span>a.log &gt; <span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/nginx/</span>access.log<br>sed -i -e <span class="hljs-string">&#x27;/shell.php/d&#x27;</span> <span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/httpd/</span>access.log<br>sed -i -e <span class="hljs-string">&#x27;/123\.123\.123\.123/d&#x27;</span> <span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/httpd/</span>access.log<br>第一条删除所有包含shell.php这个字符串的行<br>第二条删除包含<span class="hljs-number">123.123</span>.<span class="hljs-number">123.123</span>这个字符串(我们自己的IP)的行.<br><br></code></pre></td></tr></table></figure>
+
+<p>相关得还有apache 的日志</p>
+<h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><blockquote>
+<p>&#x2F;var&#x2F;log&#x2F;cron：记录了系统定时任务相关的日志</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218231852198.png" srcset="/img/loading.gif" lazyload alt="image-20240218231852198"></p>
+<h2 id="操作历史记录"><a href="#操作历史记录" class="headerlink" title="操作历史记录"></a>操作历史记录</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">history</span>：显示历史记录<br>~<span class="hljs-string">/.bash_history</span>：历史记录文件<br><br>删除全部历史记录：<span class="hljs-keyword">history</span> –w &amp;&amp; <span class="hljs-keyword">history</span> –c &amp;&amp; &gt; <span class="hljs-string">.bash_history</span><br>删除指定行的历史记录：<span class="hljs-keyword">history</span> -d 111<br>备份还原历史记录：cp <span class="hljs-string">.bash_history</span> his.txt<br>删除100行以后的历史记录：sed -i <span class="hljs-string">&quot;100,$d&quot;</span> <span class="hljs-string">.bash_history</span><br></code></pre></td></tr></table></figure>
+
+<p>如果是zsh 文件的名字则为 .zsh_history</p>
+<p>如果是其他 就是对应的名字后面添加histroy</p>
+<h1 id="隐藏历史记录"><a href="#隐藏历史记录" class="headerlink" title="隐藏历史记录"></a>隐藏历史记录</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">开启无痕模式，禁用命令历史记录功能。<br><span class="hljs-built_in">set</span> +o <span class="hljs-built_in">history</span><br>恢复<br><span class="hljs-built_in">set</span> -o <span class="hljs-built_in">history</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="SSH隐身登录"><a href="#SSH隐身登录" class="headerlink" title="SSH隐身登录"></a>SSH隐身登录</h1><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gradle">ssh -T user@host <span class="hljs-regexp">/bin/</span>bash -i<br>ssh -o UserKnownHostsFile=<span class="hljs-regexp">/dev/</span><span class="hljs-keyword">null</span> -T user@host <span class="hljs-regexp">/bin/</span>bash -<span class="hljs-keyword">if</span><br><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux痕迹清除</div>
+      <div>https://tsy244.github.io/2024/02/18/渗透/Linux痕迹清除/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 18, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/18/%E6%B8%97%E9%80%8F/windwos%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/" title="windwos痕迹清楚">
+                        <span class="hidden-mobile">windwos痕迹清楚</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

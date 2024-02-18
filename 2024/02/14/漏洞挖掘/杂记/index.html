@@ -16,18 +16,22 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="遇到的方法集合 能获取api 接口的情况之下，获取用户信息  文件上传漏洞，但是智能上传pdf      可以考虑上传svg,html,pdf 这个能执行js 脚本，可以实现储存型xss  在登陆界面，尝试修改密码，看看是否可以修改其他人的密码   获取验证码是否存在短信轰炸漏洞">
+    <meta name="description" content="遇到的方法集合 能获取api 接口的情况之下，获取用户信息  文件上传漏洞，但是智能上传pdf      可以考虑上传svg,html,pdf 这个能执行js 脚本，可以实现储存型xss  在登陆界面，尝试修改密码，看看是否可以修改其他人的密码   获取验证码是否存在短信轰炸漏洞   XSS都说xss 是捡漏，但是捡漏也是漏洞  发现会请求图片 构造xss 通过修改http_host部分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="杂记">
 <meta property="og:url" content="https://tsy244.github.io/2024/02/14/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/%E6%9D%82%E8%AE%B0/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="遇到的方法集合 能获取api 接口的情况之下，获取用户信息  文件上传漏洞，但是智能上传pdf      可以考虑上传svg,html,pdf 这个能执行js 脚本，可以实现储存型xss  在登陆界面，尝试修改密码，看看是否可以修改其他人的密码   获取验证码是否存在短信轰炸漏洞">
+<meta property="og:description" content="遇到的方法集合 能获取api 接口的情况之下，获取用户信息  文件上传漏洞，但是智能上传pdf      可以考虑上传svg,html,pdf 这个能执行js 脚本，可以实现储存型xss  在登陆界面，尝试修改密码，看看是否可以修改其他人的密码   获取验证码是否存在短信轰炸漏洞   XSS都说xss 是捡漏，但是捡漏也是漏洞  发现会请求图片 构造xss 通过修改http_host部分">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/1049983-20221205120119915-1550751559.jpg">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/1049983-20221205120120690-217287024.jpg">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/1049983-20221205120121286-2038736915.jpg">
 <meta property="article:published_time" content="2024-02-14T07:03:09.000Z">
-<meta property="article:modified_time" content="2024-02-14T07:11:22.801Z">
+<meta property="article:modified_time" content="2024-02-17T15:35:56.593Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="漏洞挖掘">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/1049983-20221205120119915-1550751559.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -227,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          123 words
+          170 words
         
       </span>
     
@@ -292,6 +296,13 @@
 <li><p>在登陆界面，尝试修改密码，看看是否可以修改其他人的密码 </p>
 </li>
 <li><p>获取验证码是否存在短信轰炸漏洞</p>
+</li>
+</ol>
+<h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><p>都说xss 是捡漏，但是捡漏也是漏洞</p>
+<ol>
+<li><p>发现会请求图片<br> 构造xss<br> 通过修改http_host部分</p>
+<p> <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/1049983-20221205120119915-1550751559.jpg" srcset="/img/loading.gif" lazyload alt="img"><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/1049983-20221205120120690-217287024.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p> <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/1049983-20221205120121286-2038736915.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 </li>
 </ol>
 

