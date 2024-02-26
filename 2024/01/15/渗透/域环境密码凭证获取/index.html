@@ -31,6 +31,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110141817.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110241407.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110335963.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240227010209839.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121115816244.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121115859064.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121120139033.png">
@@ -38,7 +39,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121123126491.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121124727833.png">
 <meta property="article:published_time" content="2024-01-15T07:37:43.000Z">
-<meta property="article:modified_time" content="2024-02-26T14:21:45.894Z">
+<meta property="article:modified_time" content="2024-02-26T17:02:35.795Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -242,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.3k words
+          10k words
         
       </span>
     
@@ -253,7 +254,7 @@
         
         
         
-          78 mins
+          87 mins
         
       </span>
     
@@ -392,6 +393,54 @@
 <p>  KDC接收到TGT与其他内容后，会首先使用KDC 的 NTLM  Hash解密TGT，只有KDC可以解密TGT，从  TGT中提取到 CLIENT&#x2F;TGS SESSIONKEY ，再使用 CLIENT&#x2F;TGS SESSIONKEY 解密Authenticator  1，获取到 {Client ID, Timestamp} 并与通过解密TGT获取到的{Client ID, 有效时间}进行对  比  </p>
 <p>  TGS为Client响应服务授权票据  </p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121110335963.png" srcset="/img/loading.gif" lazyload alt="image-20240121110335963"></p>
+<pre><code class=" mermaid">graph TB
+	
+subgraph KDC
+	AS === TGS
+	end
+	
+subgraph AS_result
+	AS_ret
+	if1
+	TGT
+	end
+	
+subgraph TGS_result
+	TGS_ret
+	if2
+	end
+
+subgraph server_result
+	ser_ret
+	end
+
+client ==用户name+password+请求时间+票据有效时间+时间戳by用户的NTML===&gt; AS
+
+AS ==接收到信息===AS_ret(使用用户名字查找NTDS是否存在这个用户)
+AS_ret ==不存在用户===&gt; 认证失败 
+AS_ret ==存在用户===&gt; if1(读出NTML_hash,使用这个hash解密得到时间戳,对比票据有效时间)
+if1 ==超过时间===&gt; 认证失败
+if1 ==未超过时间===&gt; TGT(生成TGT,TGT包括*login_session_key,用户名,认证时间,过期时间*,使用用户的NTMLhash加密login_session_key)
+AS ==TGT_by_bertgt_NTML+加密的login_session_key+others===&gt;client
+
+client==接收到as===使用自己的NTML解密得到login_session_key
+client==请求时间+票据有效时间+时间戳by用户的NTML+TGT===&gt;TGS
+
+TGS=====TGS_ret(使用kertgt_hash解密得到存活时间和login_session_key,利用login_session_key解密得到时间戳)
+TGS_ret==时间超时,或者不能解出时间戳===&gt;认证失败
+TGS_ret==login_session_key能解出时间戳+不超过时间===&gt;if2(生成tiket包含*server_session_key,过期时间,生成时间*,使用server_session_key加密时间戳)
+TGS==tiket_bt_server_NTML+server_session_key_by_login_session_key+others==&gt;client
+
+client==接收到TGS==&gt;使用login_session_key得到server_session_key,通过server_session_key加密时间戳
+client==tiket+时间戳by_server_session_key==&gt;server
+
+server==同理能获取时间,并且准确==&gt;ser_ret(认证成功,访问服务)
+server==不能解出时间,或者时间不正确===&gt;认证失败
+
+
+</code></pre>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240227010209839.png" srcset="/img/loading.gif" lazyload alt="image-20240227010209839"></p>
 <h1 id="活动目录数据库"><a href="#活动目录数据库" class="headerlink" title="活动目录数据库"></a>活动目录数据库</h1><p>  Active Directory 域服务AD DS 数据存储：  </p>
 <ul>
 <li>由 NTDS.DIT 文件构成，是Active Directory的核心  </li>
