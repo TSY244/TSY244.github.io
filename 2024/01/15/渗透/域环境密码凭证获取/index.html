@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121123126491.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240121124727833.png">
 <meta property="article:published_time" content="2024-01-15T07:37:43.000Z">
-<meta property="article:modified_time" content="2024-01-21T04:55:13.753Z">
+<meta property="article:modified_time" content="2024-02-26T14:21:45.894Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -242,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.1k words
+          9.3k words
         
       </span>
     
@@ -253,7 +253,7 @@
         
         
         
-          77 mins
+          78 mins
         
       </span>
     
@@ -529,6 +529,8 @@
 
 <h1 id="解密得到hash"><a href="#解密得到hash" class="headerlink" title="解密得到hash"></a>解密得到hash</h1><h2 id="在线破解"><a href="#在线破解" class="headerlink" title="在线破解"></a>在线破解</h2><p>  在线破解，不用将域控上的ntds.dit文件下载下来，直接在已有的shell上破解。  </p>
 <p>  有一个Cobaltstrike弹回的beacon，就可以在beacon中直接利用mimikatz来破解，前提是要有管理员权限</p>
+<p>  有一个 Meterpreter  Shell ，可以在Session会话中加载kiwi模块，直接在目标主机进行密码凭证获取</p>
+<p>  Mimikatz有一个功能dcsync，它可以利用目录复制服务（Directory Replication Service,  DRS）从NTDS.DIT文件中提取密码哈希值。  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mimikatz lsadump::dcsync /domain:mingy.com /all /csv<br></code></pre></td></tr></table></figure>
 
 <p>  查看单个用户的详细信息  </p>
