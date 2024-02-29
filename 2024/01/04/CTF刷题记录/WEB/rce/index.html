@@ -36,8 +36,14 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240131210733362.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240201135453053.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240201135742653.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228212643127.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228212946497.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228212952176.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228215815368.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228220105156.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228220704922.png">
 <meta property="article:published_time" content="2024-01-04T13:22:59.000Z">
-<meta property="article:modified_time" content="2024-02-01T06:04:26.514Z">
+<meta property="article:modified_time" content="2024-02-28T14:07:08.145Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,7 +247,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k words
+          3.5k words
         
       </span>
     
@@ -252,7 +258,7 @@
         
         
         
-          29 mins
+          30 mins
         
       </span>
     
@@ -295,7 +301,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="SWPUCTF-2021-新生赛-easyrce"><a href="#SWPUCTF-2021-新生赛-easyrce" class="headerlink" title="[SWPUCTF 2021 新生赛]easyrce"></a>[SWPUCTF 2021 新生赛]easyrce</h1><p><strong>0X00 被坑了</strong></p>
+                <h1 id="SWPUCTF-2021-新生赛-easyrce"><a href="#SWPUCTF-2021-新生赛-easyrce" class="headerlink" title="[SWPUCTF 2021 新生赛]easyrce"></a>[SWPUCTF 2021 新生赛]easyrce</h1><p><strong>0X00 被坑了</strong></p>
 <p>这道题看见了eval()函数，这个函数可以把字符串当做php代码执行，但是….</p>
 <p><a target="_blank" rel="noopener" href="https://www.runoob.com/php/func-misc-eval.html">PHP eval() 函数 | 菜鸟教程 (runoob.com)</a></p>
 <p><strong>0x01  system &amp;&amp; shell_eval</strong></p>
@@ -329,9 +335,6 @@
 <li>&#x2F;**&#x2F;注释也是可以绕过的</li>
 </ol>
 </blockquote>
-<h1 id="GXYCTF-2019-Ping-Ping-Ping"><a href="#GXYCTF-2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF 2019]Ping Ping Ping"></a>[GXYCTF 2019]Ping Ping Ping</h1><p><strong>0x00</strong></p>
-<p>这道题总体来说还是比较简单，用到的知识点是空格绕过和变量绕过</p>
-<p><strong>0x01</strong> </p>
 <h1 id="SWPUCTF-2021-新生赛-hardrce"><a href="#SWPUCTF-2021-新生赛-hardrce" class="headerlink" title="[SWPUCTF 2021 新生赛]hardrce"></a>[SWPUCTF 2021 新生赛]hardrce</h1><p>0x00</p>
 <p>这道题比较惊奇，学到了取反绕过</p>
 <p>0x01</p>
@@ -429,6 +432,31 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">mess</span>=<span class="hljs-variable">$_</span>=<span class="hljs-string">&quot;0302181&quot;</span>^<span class="hljs-string">&quot;@[@[_^^&quot;</span><span class="hljs-comment">;$_();</span><br></code></pre></td></tr></table></figure>
 
 <p>根据提示，flag就在phpinfo()里面</p>
+<h1 id="MoeCTF-2021-babyRCE"><a href="#MoeCTF-2021-babyRCE" class="headerlink" title="[MoeCTF 2021]babyRCE"></a>[MoeCTF 2021]babyRCE</h1><p>0x00 </p>
+<p>运用的知识点</p>
+<p>转移绕过执行</p>
+<p>0x01</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228212643127.png" srcset="/img/loading.gif" lazyload alt="image-20240228212643127"></p>
+<p>发现并没有过滤 <code>\</code></p>
+<p>所以可以尝试使用转义</p>
+<p>0x02</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs excel">=c\a<span class="hljs-built_in">t</span>%<span class="hljs-number">09</span>f\lag.php<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228212946497.png" srcset="/img/loading.gif" lazyload alt="image-20240228212946497"></p>
+<p>查看源码</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228212952176.png" srcset="/img/loading.gif" lazyload alt="image-20240228212952176"></p>
+<h1 id="NSSRound-8-Basic-MyDoor"><a href="#NSSRound-8-Basic-MyDoor" class="headerlink" title="[NSSRound#8 Basic]MyDoor"></a>[NSSRound#8 Basic]MyDoor</h1><p>0x00</p>
+<p>知识点</p>
+<ol>
+<li>php 伪协议读取文件</li>
+</ol>
+<p>0x01</p>
+<p>使用伪协议读取网站源代码</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228215815368.png" srcset="/img/loading.gif" lazyload alt="image-20240228215815368"><br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228220105156.png" srcset="/img/loading.gif" lazyload alt="image-20240228220105156"></p>
+<p>发现eval 代码执行</p>
+<p>0x02</p>
+<p>接下来就构造参数</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228220704922.png" srcset="/img/loading.gif" lazyload alt="image-20240228220704922"></p>
 
                 
               </div>
