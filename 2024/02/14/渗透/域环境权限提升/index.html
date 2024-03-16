@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214135723990.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20240214145341876.png">
 <meta property="article:published_time" content="2024-02-14T01:49:35.000Z">
-<meta property="article:modified_time" content="2024-03-16T12:55:10.122Z">
+<meta property="article:modified_time" content="2024-03-16T15:41:01.190Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -378,6 +378,7 @@
 <h1 id="CVE-2020-1472-–-Netlogon域提权"><a href="#CVE-2020-1472-–-Netlogon域提权" class="headerlink" title="CVE-2020-1472  – Netlogon域提权"></a>CVE-2020-1472  – Netlogon域提权</h1><h2 id="漏洞简介-1"><a href="#漏洞简介-1" class="headerlink" title="漏洞简介"></a>漏洞简介</h2><blockquote>
 <p>2020年08月12日， 微软官方发布了 NetLogon 特权提升漏洞的风险通告。攻击者通过NetLogon（MS-NRPC），建立与域控间易受攻击的安全通道时，可利用此漏洞获取域管访问权限。成  功利用此漏洞的攻击者可以在该网络中的设备上运行经特殊设计的应用程序。  </p>
 </blockquote>
+<p>该漏洞可以置空域控的密码</p>
 <h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><h3 id="手动利用"><a href="#手动利用" class="headerlink" title="手动利用"></a>手动利用</h3><ol>
 <li><p>获取域控主机的名称</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">net <span class="hljs-keyword">group</span> <span class="hljs-title">&quot;domain</span> controllers<span class="hljs-string">&quot; /domain</span><br></code></pre></td></tr></table></figure>
