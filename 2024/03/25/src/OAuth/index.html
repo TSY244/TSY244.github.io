@@ -16,27 +16,24 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="部分思路 查找测试商品或者是隐藏商品  测试商品 主要是  隐藏商品 主要是一切打折扣的东西，但是由于现在没有折扣了，但是能正常的访问，并且购买 衍生出来就是一些赠品    获取了商品测试修改大商品赠送 比如修改包的时候，修改赠送商品的id，就可以  尝试优惠卷复用  还有就是抓支付的包   方法 根据网络查找接口         根据怀疑的接口进行重放">
+    <meta name="description" content="思路 准备两个账号，两个浏览器 首先抓账号A的认证包，然后将这个包，在登录B的浏览器上，访问这个url 如果发现被绑定，那么就存在该漏洞">
 <meta property="og:type" content="article">
-<meta property="og:title" content="商城类">
-<meta property="og:url" content="https://tsy244.github.io/2024/03/24/src/%E5%95%86%E5%9F%8E%E7%B1%BB/index.html">
+<meta property="og:title" content="OAuth">
+<meta property="og:url" content="https://tsy244.github.io/2024/03/25/src/OAuth/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="部分思路 查找测试商品或者是隐藏商品  测试商品 主要是  隐藏商品 主要是一切打折扣的东西，但是由于现在没有折扣了，但是能正常的访问，并且购买 衍生出来就是一些赠品    获取了商品测试修改大商品赠送 比如修改包的时候，修改赠送商品的id，就可以  尝试优惠卷复用  还有就是抓支付的包   方法 根据网络查找接口         根据怀疑的接口进行重放">
+<meta property="og:description" content="思路 准备两个账号，两个浏览器 首先抓账号A的认证包，然后将这个包，在登录B的浏览器上，访问这个url 如果发现被绑定，那么就存在该漏洞">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/src/%E5%95%86%E5%9F%8E%E7%B1%BB/image-20240324230838792.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/src/%E5%95%86%E5%9F%8E%E7%B1%BB/image-20240324231003973.png">
-<meta property="article:published_time" content="2024-03-24T14:56:09.000Z">
-<meta property="article:modified_time" content="2024-03-24T15:24:44.380Z">
+<meta property="article:published_time" content="2024-03-25T01:04:39.000Z">
+<meta property="article:modified_time" content="2024-03-25T01:07:44.622Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="src">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/src/%E5%95%86%E5%9F%8E%E7%B1%BB/image-20240324230838792.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>商城类 - AU9U5T</title>
+  <title>OAuth - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="商城类"></span>
+            <span id="subtitle" data-typed-text="OAuth"></span>
           
         </div>
 
@@ -218,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-24 22:56" pubdate>
-          March 24, 2024 pm
+        <time datetime="2024-03-25 09:04" pubdate>
+          March 25, 2024 am
         </time>
       </span>
     
@@ -230,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          148 words
+          65 words
         
       </span>
     
@@ -241,7 +238,7 @@
         
         
         
-          2 mins
+          1 mins
         
       </span>
     
@@ -279,37 +276,16 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">商城类</h1>
+            <h1 style="display: none">OAuth</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="部分思路"><a href="#部分思路" class="headerlink" title="部分思路"></a>部分思路</h1><ol>
-<li><p>查找测试商品或者是隐藏商品</p>
-<ul>
-<li><p>测试商品</p>
-<p>主要是</p>
-</li>
-<li><p>隐藏商品</p>
-<p>主要是一切打折扣的东西，但是由于现在没有折扣了，但是能正常的访问，并且购买</p>
-<p>衍生出来就是一些赠品</p>
-</li>
-</ul>
-</li>
-<li><p>获取了商品测试修改大商品赠送</p>
-<p>比如修改包的时候，修改赠送商品的id，就可以</p>
-</li>
-<li><p>尝试优惠卷复用</p>
-</li>
-<li><p>还有就是抓支付的包</p>
+                <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ol>
+<li><p>准备两个账号，两个浏览器</p>
+<p>首先抓账号A的认证包，然后将这个包，在登录B的浏览器上，访问这个url 如果发现被绑定，那么就存在该漏洞</p>
 </li>
 </ol>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><ol>
-<li>根据网络查找接口</li>
-</ol>
-<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/src/%E5%95%86%E5%9F%8E%E7%B1%BB/image-20240324230838792.png" srcset="/img/loading.gif" lazyload alt="image-20240324230838792"></p>
-<p>   根据怀疑的接口进行重放</p>
-<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/src/%E5%95%86%E5%9F%8E%E7%B1%BB/image-20240324231003973.png" srcset="/img/loading.gif" lazyload alt="image-20240324231003973"></p>
 
                 
               </div>
@@ -334,8 +310,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>商城类</div>
-      <div>https://tsy244.github.io/2024/03/24/src/商城类/</div>
+      <div>OAuth</div>
+      <div>https://tsy244.github.io/2024/03/25/src/OAuth/</div>
     </div>
     <div class="license-meta">
       
@@ -347,7 +323,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 24, 2024</div>
+          <div>March 25, 2024</div>
         </div>
       
       
@@ -379,18 +355,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/25/src/OAuth/" title="OAuth">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">OAuth</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/03/20/src/src/" title="src">
-                        <span class="hidden-mobile">src</span>
+                      <a href="/2024/03/24/src/%E5%95%86%E5%9F%8E%E7%B1%BB/" title="商城类">
+                        <span class="hidden-mobile">商城类</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

