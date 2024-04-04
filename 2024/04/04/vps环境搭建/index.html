@@ -16,24 +16,24 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] 右值和左值右值左值的区分 能取地址的是左值，不能取地址的是右值  实例 1234567891011int main()&amp;#123;    &#x2F;&#x2F;左值    int lvalue&#x3D;244;    &#x2F;&#x2F;左值引用    int &amp;lvalueCite&#x3D;lvalue;    &#x2F;&#x2F;右值    &#x2F;&#x2F;右值引用    int &amp;&amp;rvalueCite&#x3D;6;&amp;#125;  使用右值">
+    <meta name="description" content="docker 搭建 安装必要的系统工具 12sudo apt updatesudo apt -y install apt-transport-https ca-certificates curl software-properties-common  添加docker PGP key 1curl -fsSL https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;debian&#x2F;gpg">
 <meta property="og:type" content="article">
-<meta property="og:title" content="右值和左值">
-<meta property="og:url" content="https://tsy244.github.io/2023/03/26/c++/%E5%8F%B3%E5%80%BC%E5%92%8C%E5%B7%A6%E5%80%BC/index.html">
+<meta property="og:title" content="vps环境搭建">
+<meta property="og:url" content="https://tsy244.github.io/2024/04/04/vps%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="[TOC] 右值和左值右值左值的区分 能取地址的是左值，不能取地址的是右值  实例 1234567891011int main()&amp;#123;    &#x2F;&#x2F;左值    int lvalue&#x3D;244;    &#x2F;&#x2F;左值引用    int &amp;lvalueCite&#x3D;lvalue;    &#x2F;&#x2F;右值    &#x2F;&#x2F;右值引用    int &amp;&amp;rvalueCite&#x3D;6;&amp;#125;  使用右值">
+<meta property="og:description" content="docker 搭建 安装必要的系统工具 12sudo apt updatesudo apt -y install apt-transport-https ca-certificates curl software-properties-common  添加docker PGP key 1curl -fsSL https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;debian&#x2F;gpg">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-26T12:39:43.000Z">
-<meta property="article:modified_time" content="2023-04-10T14:33:38.576Z">
+<meta property="article:published_time" content="2024-04-04T03:25:31.000Z">
+<meta property="article:modified_time" content="2024-04-04T04:11:05.759Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c++基础">
+<meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>右值和左值 - AU9U5T</title>
+  <title>vps环境搭建 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="右值和左值"></span>
+            <span id="subtitle" data-typed-text="vps环境搭建"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-26 20:39" pubdate>
-          March 26, 2023 pm
+        <time datetime="2024-04-04 11:25" pubdate>
+          April 4, 2024 am
         </time>
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          10 mins
+          11 mins
         
       </span>
     
@@ -276,29 +276,55 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">右值和左值</h1>
+            <h1 style="display: none">vps环境搭建</h1>
             
             
               <div class="markdown-body">
                 
-                <p>[TOC]</p>
-<h1 id="右值和左值"><a href="#右值和左值" class="headerlink" title="右值和左值"></a>右值和左值</h1><h2 id="右值左值的区分"><a href="#右值左值的区分" class="headerlink" title="右值左值的区分"></a>右值左值的区分</h2><ol>
-<li><p>能取地址的是左值，不能取地址的是右值</p>
+                <h1 id="docker-搭建"><a href="#docker-搭建" class="headerlink" title="docker 搭建"></a>docker 搭建</h1><ol>
+<li><p>安装必要的系统工具</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">sudo</span> apt update<br><span class="hljs-title">sudo</span> apt -y install apt-trans<span class="hljs-keyword">port</span>-https ca-certificates curl software-properties-common<br></code></pre></td></tr></table></figure>
 </li>
-<li><p>实例</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//左值</span><br>    <span class="hljs-type">int</span> lvalue=<span class="hljs-number">244</span>;<br>    <span class="hljs-comment">//左值引用</span><br>    <span class="hljs-type">int</span> &amp;lvalueCite=lvalue;<br>    <span class="hljs-comment">//右值</span><br>    <span class="hljs-comment">//右值引用</span><br>    <span class="hljs-type">int</span> &amp;&amp;rvalueCite=<span class="hljs-number">6</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<li><p>添加docker PGP key</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -fsSL https:<span class="hljs-regexp">//</span>download.docker.com<span class="hljs-regexp">/linux/</span>debian<span class="hljs-regexp">/gpg | sudo gpg --dearmor -o /</span>etc<span class="hljs-regexp">/apt/</span>trusted.gpg.d/docker-ce-archive-keyring.gpg<br></code></pre></td></tr></table></figure>
 </li>
-<li><p>使用右值引用延长生命周期</p>
+<li><p>写入软件源信息</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">printf <span class="hljs-string">&#x27;%s\n&#x27;</span> <span class="hljs-string">&quot;deb https://download.docker.com/linux/debian bullseye stable&quot;</span> | sudo tee <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>docker-ce.list<br></code></pre></td></tr></table></figure>
 </li>
+<li><p>更新apt </p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo apt update</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>删除之前安装的旧docker </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">sudo apt <span class="hljs-built_in">remove</span> docker docker-engine docker.<span class="hljs-built_in">io</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>安装docker </p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">apt install docker-<span class="hljs-keyword">ce</span> docker-<span class="hljs-keyword">ce</span>-cli containerd.io<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看docker </p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">systemctl status docker</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>设置开机自启动</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">systemctl <span class="hljs-built_in">enable</span> docker<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>下载docker-compose</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -L <span class="hljs-string">&quot;https://mirror.ghproxy.com/https://github.com/docker/compose/releases/download/v2.22.0/docker-compose-$(uname -s)-$(uname -m)&quot;</span> -o <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>docker-compose<br><br>chmod +x <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>docker-compose<br></code></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="移动构造函数"><a href="#移动构造函数" class="headerlink" title="移动构造函数"></a>移动构造函数</h2><ol>
-<li><p>作用： 复用其他对象的资源（堆内存）</p>
-</li>
-<li><p>实现浅拷贝 </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iostream&quot;</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">name1</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">//无参构造</span><br>    <span class="hljs-built_in">name1</span>()&#123;<br>        mPtr=<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>;<br>    &#125;<br>    <span class="hljs-comment">//拷贝构造</span><br>    <span class="hljs-built_in">name1</span>(<span class="hljs-type">const</span> name1 &amp;tem)&#123;<br>        <span class="hljs-keyword">this</span>-&gt;mPtr=tem.mPtr;<br>    &#125;<br>    <span class="hljs-comment">//移动构造</span><br>    <span class="hljs-built_in">name1</span>(name1&amp;&amp; tem):<span class="hljs-built_in">mPtr</span>(tem.mPtr)<br>    &#123;<br>        tem.mPtr=<span class="hljs-literal">nullptr</span>;<br><br>    &#125;<br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> * mPtr;<br>&#125;;<br><br><span class="hljs-function">name1 <span class="hljs-title">getObj</span><span class="hljs-params">()</span></span>&#123;<br>    name1 name11;<br>    *name11.mPtr=<span class="hljs-number">2</span>;<br>    std::cout&lt;&lt;name11.mPtr&lt;&lt;std::endl;<br>    <span class="hljs-keyword">return</span> name11;<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//要求右侧是个临时对象，才会调用移动拷贝构造函数</span><br>    <span class="hljs-comment">//如果没有移动拷贝构造函数，就会调用拷贝构造函数</span><br>    name1 obj=<span class="hljs-built_in">getObj</span>();<br>    std::cout&lt;&lt;obj.mPtr&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;*obj.mPtr&lt;&lt;std::endl;<br>    name1&amp;&amp; obj2=<span class="hljs-built_in">getObj</span>();<br>    std::cout&lt;&lt;obj2.mPtr&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;*obj2.mPtr&lt;&lt;std::endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="move"><a href="#move" class="headerlink" title="move"></a>move</h3><p>使用std::move方法可以将左值转换为右值。使用这个函数并不能移动任何东西，而是和移动构造函数一样都具有移动语义，将对象的状态或者所有权从一个对象转移到另一个对象，只是转移，没有内存拷贝。</p>
-<h3 id="forward"><a href="#forward" class="headerlink" title="forward"></a>forward</h3><p>右值引用类型是独立于值的，一个右值引用作为函数参数的形参时，在函数内部转发该参数给内部其他函数时，它就变成一个左值，并不是原来的类型了。如果需要按照参数原来的类型转发到另一个函数，可以使用 C++11 提供的 std::forward () 函数，该函数实现的功能称之为完美转发。</p>
+<h1 id="安装java1-8"><a href="#安装java1-8" class="headerlink" title="安装java1.8"></a>安装java1.8</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">apt</span>-cache search java | grep jdk<br><br><span class="hljs-attribute">apt</span> install openjdk-<span class="hljs-number">8</span>-jre-headless<br><span class="hljs-attribute">apt</span> install openjdk-<span class="hljs-number">8</span>-jdk-headless<br><br><span class="hljs-attribute">apt</span> install openjdk-<span class="hljs-number">11</span>-jdk<br></code></pre></td></tr></table></figure>
+
+
+
+<p>通过update-alternatives 进行管理</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">update</span><span class="hljs-operator">-</span>alternatives <span class="hljs-comment">--config java</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="安装msf"><a href="#安装msf" class="headerlink" title="安装msf"></a>安装msf</h1><p>安装</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/rapid7/m</span>etasploit-omnibus<span class="hljs-regexp">/master/</span>config<span class="hljs-regexp">/templates/m</span>etasploit-framework-wrappers<span class="hljs-regexp">/msfupdate.erb &gt; msfinstall &amp;&amp; \chmod 755 msfinstall &amp;&amp; \./m</span>sfinstall<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
 
                 
               </div>
@@ -311,7 +337,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c-%E5%9F%BA%E7%A1%80/">#c++基础</a>
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
       
     </div>
   
@@ -323,8 +349,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>右值和左值</div>
-      <div>https://tsy244.github.io/2023/03/26/c++/右值和左值/</div>
+      <div>vps环境搭建</div>
+      <div>https://tsy244.github.io/2024/04/04/vps环境搭建/</div>
     </div>
     <div class="license-meta">
       
@@ -336,7 +362,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 26, 2023</div>
+          <div>April 4, 2024</div>
         </div>
       
       
@@ -368,15 +394,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/26/c++/lambda%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8/" title="lambda高级使用">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">lambda高级使用</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2024/04/04/%E6%B8%97%E9%80%8F/%E5%B0%86%E6%99%AE%E9%80%9A%E7%A8%8B%E5%BA%8F%E6%B3%A8%E5%86%8C%E6%88%90%E6%9C%8D%E5%8A%A1/" title="将普通程序注册成服务">
+                        <span class="hidden-mobile">将普通程序注册成服务</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
