@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231118224251531.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231118224412973.png">
 <meta property="article:published_time" content="2023-10-14T07:51:33.000Z">
-<meta property="article:modified_time" content="2024-03-27T10:53:04.789Z">
+<meta property="article:modified_time" content="2024-04-04T13:35:07.274Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞">
 <meta name="twitter:card" content="summary_large_image">
@@ -245,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.8k words
+          8.3k words
         
       </span>
     
@@ -256,7 +256,7 @@
         
         
         
-          65 mins
+          69 mins
         
       </span>
     
@@ -724,6 +724,73 @@
 </ol>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这两种getshell的方式都是通过将日志文作为我们的payload，通过此来连接getshell</p>
 <h2 id="思路总结"><a href="#思路总结" class="headerlink" title="思路总结"></a>思路总结</h2><p>首先需要打开对应的日志系统，然后将日志文件设定成我们的payload载体，在使用select 添加一句话木马（这里都可以），因为日志是记录使用的命令</p>
+<h1 id="面试常问"><a href="#面试常问" class="headerlink" title="面试常问"></a>面试常问</h1><ol>
+<li><p>sql 注入的种类</p>
+<blockquote>
+<ol>
+<li><p>根据注入位置分</p>
+<p>get, post, head(user-agent, cookie, host, xff, referer)</p>
+</li>
+<li><p>根据类型分</p>
+<p>数字型，字符型</p>
+</li>
+<li><p>根据利用方式分</p>
+<p>union, 报错, 盲注（时间,bool）, 堆叠，二次，宽字节</p>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>sql 注入能做什么？</p>
+<blockquote>
+<ol>
+<li>写webshell</li>
+<li>UDF 提权（mysql）&#x2F;MsSql 提权xp_cmdshell</li>
+<li>获取管理的密码</li>
+<li>破坏数据库导致服务出错</li>
+<li>万能密码登录</li>
+</ol>
+</blockquote>
+</li>
+<li><p>端口识别</p>
+<blockquote>
+<p>mysql : 3306</p>
+<p>mssql : 1433</p>
+<p>orecle : 1521</p>
+<p>postgreSql : 5432</p>
+<p>db2 : 50000</p>
+</blockquote>
+</li>
+<li><p>堆叠注入和二次注入的区别</p>
+<blockquote>
+<p>堆叠注入是同时执行多条语句，使用<code>;</code>进行分割，然后每一个<code>;</code>执行逐步执行</p>
+<p>二次注入是将执行存储起来，然后某一个程序调用这个方法</p>
+</blockquote>
+</li>
+<li><p>宽字节注入的原理</p>
+<blockquote>
+<p>使用gbk 编码，一个字符使用两个字节，后端使用gbk存储和 addslashes()函数，我们可以使用%df 来闭合引号</p>
+</blockquote>
+</li>
+<li><p>时间盲注主要函数</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">if</span><span class="hljs-params">()</span></span><br><span class="hljs-function"><span class="hljs-title">sleep</span><span class="hljs-params">()</span></span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>bool 盲注</p>
+<blockquote>
+<p>ascii()</p>
+<p>lenth()</p>
+<p>substr()</p>
+<p>left()</p>
+</blockquote>
+</li>
+<li><p>报错注入相关函数</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">updatexml</span><span class="hljs-params">()</span></span><br><span class="hljs-function"><span class="hljs-title">extractvalue</span><span class="hljs-params">()</span></span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>轻绕过waf</p>
+<p>将其url+base64 编码</p>
+</li>
+<li><p>字符串无法预编译</p>
+</li>
+</ol>
 <section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>xml用于网络存储和数据交换的标签语言，类似于html但是没有预设的标签，都是用户自定义
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
