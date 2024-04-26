@@ -16,24 +16,29 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="联合体专解共用体的定义1234union 名字&amp;#123;    &#x2F;&#x2F;数据&amp;#125;    理解 所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存  在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量 12345678910111213141516union Date&amp;#123;	int num;	char name[20];&amp;#125;;int main()">
+    <meta name="description" content="引言首先有一个问题，什么是waf waf 的全称是：Web Application Firewall 可以这个是web 应用的防火墙，但是和传统的防火墙有什么区别呢？  放置位置   IDS:  入侵检测系统 IPS:  入侵防御系统 WAF:  Web应用程序防火墙   osi 模型中的位置  传统防火墙工作在传输层和网络层（3，4）层 waf 工作于应用层，同时能够向下兼容网络防火墙   工作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="联合体专解">
-<meta property="og:url" content="https://tsy244.github.io/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/index.html">
+<meta property="og:title" content="waf绕过思路总结">
+<meta property="og:url" content="https://tsy244.github.io/2024/04/26/%E6%B8%97%E9%80%8F/waf%E7%BB%95%E8%BF%87%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="联合体专解共用体的定义1234union 名字&amp;#123;    &#x2F;&#x2F;数据&amp;#125;    理解 所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存  在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量 12345678910111213141516union Date&amp;#123;	int num;	char name[20];&amp;#125;;int main()">
+<meta property="og:description" content="引言首先有一个问题，什么是waf waf 的全称是：Web Application Firewall 可以这个是web 应用的防火墙，但是和传统的防火墙有什么区别呢？  放置位置   IDS:  入侵检测系统 IPS:  入侵防御系统 WAF:  Web应用程序防火墙   osi 模型中的位置  传统防火墙工作在传输层和网络层（3，4）层 waf 工作于应用层，同时能够向下兼容网络防火墙   工作">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-20T01:01:17.000Z">
-<meta property="article:modified_time" content="2023-04-20T05:09:20.831Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/20200818131333555.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/v2-02d045513b0eafe5650be588ecff8c51_1440w.webp">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/v2-6389c54711ca4625f2e69c37750934e9_r.jpg">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/v2-a5e44b0957a57699748c31ee19df5a42_1440w.webp">
+<meta property="article:published_time" content="2024-04-26T07:54:37.000Z">
+<meta property="article:modified_time" content="2024-04-26T08:42:34.422Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c基础">
+<meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/20200818131333555.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>联合体专解 - AU9U5T</title>
+  <title>waf绕过思路总结 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="联合体专解"></span>
+            <span id="subtitle" data-typed-text="waf绕过思路总结"></span>
           
         </div>
 
@@ -215,8 +220,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-20 09:01" pubdate>
-          April 20, 2023 am
+        <time datetime="2024-04-26 15:54" pubdate>
+          April 26, 2024 pm
         </time>
       </span>
     
@@ -227,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          353 words
+          726 words
         
       </span>
     
@@ -238,7 +243,7 @@
         
         
         
-          3 mins
+          7 mins
         
       </span>
     
@@ -276,21 +281,83 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">联合体专解</h1>
+            <h1 style="display: none">waf绕过思路总结</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="联合体专解"><a href="#联合体专解" class="headerlink" title="联合体专解"></a>联合体专解</h1><h2 id="共用体的定义"><a href="#共用体的定义" class="headerlink" title="共用体的定义"></a>共用体的定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">union</span> 名字</span><br><span class="hljs-class">&#123;</span><br>    <span class="hljs-comment">//数据</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><ol>
-<li><p>所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存</p>
+                <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>首先有一个问题，什么是waf</p>
+<p>waf 的全称是：Web Application Firewall</p>
+<p>可以这个是web 应用的防火墙，但是和传统的防火墙有什么区别呢？</p>
+<ol>
+<li><p>放置位置</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/20200818131333555.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<blockquote>
+<p>IDS:  入侵检测系统</p>
+<p>IPS:  入侵防御系统</p>
+<p>WAF:  Web应用程序防火墙</p>
+</blockquote>
 </li>
-<li><p>在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">union</span> <span class="hljs-title">Date</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-type">int</span> num;<br>	<span class="hljs-type">char</span> name[<span class="hljs-number">20</span>];<br>&#125;;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">union</span> <span class="hljs-title">Date</span> <span class="hljs-title">date</span>;</span><br>	date.num=<span class="hljs-number">65</span>;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,date.num);<br>    <span class="hljs-comment">//结果为65</span><br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>,date.name);<br>    <span class="hljs-comment">//结果为A，虽然没有定义date.name,但是由于共用一个内存，是可以访问的，因为65是A的码值</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>osi 模型中的位置</p>
+<ul>
+<li>传统防火墙工作在传输层和网络层（3，4）层</li>
+<li>waf 工作于应用层，同时能够向下兼容网络防火墙</li>
+</ul>
+</li>
+<li><p>工作方式</p>
+<ul>
+<li>waf 能够比较有效的过滤特定web 应用程序的内容</li>
+<li>常规的防火墙的工作是充当于服务器的安全门</li>
+</ul>
+</li>
 </ol>
+<h1 id="waf-的部署模式"><a href="#waf-的部署模式" class="headerlink" title="waf 的部署模式"></a>waf 的部署模式</h1><ol>
+<li><p>作为服务器的模块</p>
+<blockquote>
+<p>好处是：对而已请求的拦截效率比较高</p>
+<p>缺点是：过于分散，不好管理</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/v2-02d045513b0eafe5650be588ecff8c51_1440w.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+</li>
+<li><p>作为反向代理服务器</p>
+<blockquote>
+<p>优点是：部署简单，集中管理</p>
+<p>缺点是：对恶意请求误判率比较高</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/v2-6389c54711ca4625f2e69c37750934e9_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+</li>
+<li><p>作为路由器</p>
+<blockquote>
+<p>优点是：集中管理，部署简单</p>
+<p>缺点是：单点问题，需要双机，同时由于作为一个路由器，需要在用户态上实现协议栈（TCP&#x2F;IP），维护路由信息，不占用域名，对性能要求更高；且对https支持难度高。因此整体实现难度很高。	</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/v2-a5e44b0957a57699748c31ee19df5a42_1440w.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+</li>
+<li><p>作为交换机</p>
+<blockquote>
+<p>优点是：部署方便简单，集中管理，不占域名，也不占用IP，也就是说，对攻击者来说，它完全是透明的</p>
+<p>缺点是：单点问题，需要双机，作为一个交换机，也需要在用户态实现协议栈（链路，TCP&#x2F;IP），维护转发表，也由于同时防护多个站点，对性能要求高；且对https支持难度高。</p>
+</blockquote>
+<blockquote>
+<p>交换机和路由器的主要区别是：交换机工作与数据链路层，路由器工作于网络层传输层</p>
+</blockquote>
+</li>
+</ol>
+<p>第二种方式是主流waf 的工作方式</p>
+<h1 id="waf-功能"><a href="#waf-功能" class="headerlink" title="waf 功能"></a>waf 功能</h1><ul>
+<li>禁止HTTP协议的非安全方法</li>
+<li>伪装Web服务的特征</li>
+<li>防止API和命令注入</li>
+<li>防止路径遍历和文件包含注入，对敏感的系统路径进行保护</li>
+<li>防止sql注入</li>
+<li>防止XSS攻击</li>
+<li>防止网页挂马</li>
+<li>防护CC攻击</li>
+<li>文件上传的防护</li>
+<li>动态IP黑名单</li>
+<li>白名单</li>
+<li>与实时计算平台对接</li>
+</ul>
 
                 
               </div>
@@ -303,7 +370,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
       
     </div>
   
@@ -315,8 +382,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>联合体专解</div>
-      <div>https://tsy244.github.io/2023/04/20/C/联合体专解/</div>
+      <div>waf绕过思路总结</div>
+      <div>https://tsy244.github.io/2024/04/26/渗透/waf绕过思路总结/</div>
     </div>
     <div class="license-meta">
       
@@ -328,7 +395,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 20, 2023</div>
+          <div>April 26, 2024</div>
         </div>
       
       
@@ -360,18 +427,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/20/C/%E5%88%9D%E5%A7%8B%E6%8C%87%E9%92%88/" title="初始指针">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">初始指针</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" title="枚举">
-                        <span class="hidden-mobile">枚举</span>
+                      <a href="/2024/04/07/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/php%E6%AF%94%E8%BE%83/" title="php比较">
+                        <span class="hidden-mobile">php比较</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

