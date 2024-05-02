@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/v2-6389c54711ca4625f2e69c37750934e9_r.jpg">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/others/v2-a5e44b0957a57699748c31ee19df5a42_1440w.webp">
 <meta property="article:published_time" content="2024-04-26T07:54:37.000Z">
-<meta property="article:modified_time" content="2024-04-26T08:42:34.422Z">
+<meta property="article:modified_time" content="2024-05-02T08:17:25.998Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          726 words
+          3.4k words
         
       </span>
     
@@ -243,7 +243,7 @@
         
         
         
-          7 mins
+          29 mins
         
       </span>
     
@@ -311,6 +311,23 @@
 </ul>
 </li>
 </ol>
+<h1 id="waf-分类"><a href="#waf-分类" class="headerlink" title="waf 分类"></a>waf 分类</h1><ol>
+<li><p>软waf</p>
+<p>软件WAF安装过程比较简单，需要安装到需要安全防护的web服务器上，以纯软件的方式实现。</p>
+<p>代表产品：安全狗，云锁，D盾等</p>
+</li>
+<li><p>硬waf</p>
+<p>硬件WAF的价格一般比较昂贵，支持多种方式部署到Web服务器前端，识别外部的异常流量，并进行阻断拦截，为Web应用提供安全防护。</p>
+<p>代表产品有：Imperva、天清WAG等</p>
+</li>
+<li><p>云waf</p>
+<p>云WAF的维护成本低，不需要部署任何硬件设备，云WAF的拦截规则会实时更新。对于部署了云WAF的网站，我们发出的数据请求首先会经过云WAF节点进行规则检测，如果请求匹配到WAF拦截规则，则会被WAF进行拦截处理，对于正常、安全的请求则转发到真实Web服务器中进行响应处理。</p>
+<p>代表产品有：阿里云云盾，腾讯云WAF等</p>
+</li>
+<li><p>自定义waf</p>
+<p>我们在平时的渗透测试中，更多情况下会遇到的是网站开发人员自己写的防护规则。网站开发人员为了网站的安全，会在可能遭受攻击的地方增加一些安全防护代码，比如过滤敏感字符，对潜在的威胁的字符进行编码、转义等。</p>
+</li>
+</ol>
 <h1 id="waf-的部署模式"><a href="#waf-的部署模式" class="headerlink" title="waf 的部署模式"></a>waf 的部署模式</h1><ol>
 <li><p>作为服务器的模块</p>
 <blockquote>
@@ -358,6 +375,112 @@
 <li>白名单</li>
 <li>与实时计算平台对接</li>
 </ul>
+<h1 id="waf-工作原理"><a href="#waf-工作原理" class="headerlink" title="waf 工作原理"></a>waf 工作原理</h1><p>大致的处理流程是</p>
+<blockquote>
+<p>预处理 -&gt; 规则检测 -&gt; 处理模块 -&gt; 日志记录</p>
+</blockquote>
+<h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><p>预处理阶段首先在接收到数据请求流量时会先判断是否为HTTP&#x2F;HTTPS请求，之后会查看此URL请求是否在白名单之内，如果该URL请求在白名单列表里，直接交给后端Web服务器进行响应处理，对于不在白名单之内的对数据包解析后进入到规则检测部分。</p>
+<h2 id="规则检测"><a href="#规则检测" class="headerlink" title="规则检测"></a>规则检测</h2><p>每一种WAF产品都有自己独特的检测规则体系，解析后的数据包会进入到检测体系中进行规则匹配，检查该数据请求是否符合规则，识别出恶意攻击行为。</p>
+<h2 id="处理模块"><a href="#处理模块" class="headerlink" title="处理模块"></a>处理模块</h2><p>针对不同的检测结果，处理模块会做出不同的安全防御动作，如果符合规则则交给后端Web服务器进行响应处理，对于不符合规则的请求会执行相关的阻断、记录、告警处理。</p>
+<h2 id="日志处理"><a href="#日志处理" class="headerlink" title="日志处理"></a>日志处理</h2><p>WAF在处理的过程中也会将拦截处理的日志记录下来，方便用户在后续中可以进行日志查看分析。</p>
+<h1 id="waf-绕过"><a href="#waf-绕过" class="headerlink" title="waf 绕过"></a>waf 绕过</h1><ol>
+<li><p>通过编码绕过</p>
+<ul>
+<li>url 编码</li>
+<li>二次url 编码</li>
+<li>其他编码</li>
+</ul>
+</li>
+<li><p>大小写绕过</p>
+</li>
+<li><p>空格绕过</p>
+<ul>
+<li><p>使用空白符号进行绕过</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据库类型</th>
+<th align="center">允许的空白符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SQLite3</td>
+<td align="center">0A，0D，0C，09，20</td>
+</tr>
+<tr>
+<td align="center">MySQL5</td>
+<td align="center">09，0A，0B，0C，0D，A0，20</td>
+</tr>
+<tr>
+<td align="center">PosgresSQL</td>
+<td align="center">0A，0D，0C，09，20</td>
+</tr>
+<tr>
+<td align="center">Oracle 11g</td>
+<td align="center">00，0A，0D，0C，09，20</td>
+</tr>
+<tr>
+<td align="center">MSSQL</td>
+<td align="center">01，02，03，04，05，06，07，08，09，0A，0B，0C，0D，0E，0F，10，11，12，13，14，15，16，17，18，19，1A，1B，1C，1D，1E，1F，20</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>使用<code>+</code> 进行绕过</p>
+</li>
+<li><p>使用注释符</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/**/</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>双关键字绕过</p>
+</li>
+<li><p>内联sql 绕过</p>
+</li>
+<li><p>请求方式差异绕过</p>
+<p>当白名单中有某一个请求的白名单的时候可以使用这个方式进行绕过</p>
+</li>
+<li><p>使用异常的方法绕过过滤规则</p>
+</li>
+<li><p>超大数据包绕过</p>
+</li>
+<li><p>复参数绕过</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">?id<span class="hljs-operator">=</span><span class="hljs-number">1</span><span class="hljs-operator">&amp;</span>id<span class="hljs-operator">=</span><span class="hljs-number">2</span><span class="hljs-operator">+</span><span class="hljs-keyword">and</span><span class="hljs-operator">+</span>sleep(<span class="hljs-number">3</span>) <br></code></pre></td></tr></table></figure>
+
+<p>将攻击语句赋予最后一个id参数，可绕过WAF检测直接进入后端服务器。</p>
+</li>
+<li><p>添加%绕过过滤</p>
+<p>将WAF中过滤的敏感字符通过添加%绕过过滤。</p>
+<p>例如：WAF过滤了select ，可通过se%lect绕过过滤,在进入后端执行中对参数串进行url解码时，会直接过滤掉%字符，从而注入语句被执行。IIS下的asp.dll文件在对asp文件后参数串进行url解码时，会直接过滤%字符。</p>
+</li>
+<li><p>协议未覆盖绕过</p>
+<p>下面是四种常见的content-type</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-title class_">Content</span>-<span class="hljs-title class_">Type</span><span class="hljs-symbol">:multipart/form-data</span>;<br><span class="hljs-title class_">Content</span>-<span class="hljs-title class_">Type</span><span class="hljs-symbol">:application/x-www-form-urlencoded</span><br><span class="hljs-title class_">Content</span>-<span class="hljs-title class_">Type</span>: text/xml<br><span class="hljs-title class_">Content</span>-<span class="hljs-title class_">Type</span>: application/json<br></code></pre></td></tr></table></figure>
+
+<p>部分WAF可能只对一种content-type类型增加了检测规则，可以尝试互相替换尝试去绕过WAF过滤机制。</p>
+<p>例如使用multipart&#x2F;form-data进行绕过。</p>
+</li>
+<li><p>宽字节绕过</p>
+</li>
+<li><p>%00截断</p>
+</li>
+<li><p>Cookie&#x2F;X-Forwarded-For注入绕过</p>
+<p>部分WAF可能只对GET，POST提交的参数进行过滤，未对Cookie或者X-Forwarded-For进行检测，可通过cookie或者X-Forwarded-For提交注入参数语句进行绕过。</p>
+<p>Cookie:TOKEN&#x3D;F6F57AD6473E851F5F8A0E7A64D01E28; id&#x3D;1+and+1&#x3D;1;</p>
+<p>X-Forwarded-For:127.0.0.1’;WAITFOR DELAY’0:0:5’–</p>
+</li>
+<li><p>pipline</p>
+<p>当请求中的Connection字段值为keep-alive，则代表本次发起的请求所建立的tcp连接不断开，直到所发送内容结束Connection为close为止。部分WAF可能只对第一次传输过来的请求进行过滤处理。</p>
+</li>
+<li><p>利用分块编码传输绕过</p>
+<p>分块传输编码是HTTP的一种数据传输机制，允许将消息体分成若干块进行发送。当数据请求包中header信息存在Transfer-Encoding: chunked，就代表这个消息体采用了分块编码传输。</p>
+</li>
+<li><p>冷门函数</p>
+</li>
+<li><p>添加换行符</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">Content-Disposition: <span class="hljs-string">&quot;form-data&quot;</span>; <span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;file_x&quot;</span>; filename=[0x09]<span class="hljs-string">&quot;xx.php&quot;</span><br>Content-Disposition: <span class="hljs-string">&quot;form-data&quot;</span>; <span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;file_x&quot;</span>; filename=[0x09]<span class="hljs-string">&quot;xx.php</span><br><span class="hljs-string">Content-Disposition: &quot;</span>form-data<span class="hljs-string">&quot;; name=&quot;</span>file_x<span class="hljs-string">&quot;; filename=[0x09]&quot;</span>xx.php<span class="hljs-string">&quot;[0x09]</span><br><span class="hljs-string">Content-Disposition: &quot;</span>form-data<span class="hljs-string">&quot;; name=&quot;</span>file_x<span class="hljs-string">&quot;; filename=[0x09]xx.php</span><br><span class="hljs-string">Content-Disposition: &quot;</span>form-data<span class="hljs-string">&quot;; name=&quot;</span>file_x<span class="hljs-string">&quot;; filename=[0x09]xx.php[0x09];</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>多个等号</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-attribute">Content-Disposition</span><span class="hljs-punctuation">: </span>form-data; name==&quot;file_x&quot;; filename====&quot;test.php&quot;<br></code></pre></td></tr></table></figure></li>
+</ol>
 
                 
               </div>
