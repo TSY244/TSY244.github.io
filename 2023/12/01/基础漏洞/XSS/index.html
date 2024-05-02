@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204136766.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204249856.png">
 <meta property="article:published_time" content="2023-12-01T12:22:37.000Z">
-<meta property="article:modified_time" content="2024-05-01T13:15:19.633Z">
+<meta property="article:modified_time" content="2024-05-02T04:49:19.918Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞">
 <meta name="twitter:card" content="summary_large_image">
@@ -243,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9k words
+          9.7k words
         
       </span>
     
@@ -254,7 +254,7 @@
         
         
         
-          75 mins
+          82 mins
         
       </span>
     
@@ -382,7 +382,7 @@
 <h2 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h2><p>又称为持久性XSS，攻击脚本基本储存在咪表的服务器当中，更具有隐蔽性。</p>
 <p>这种多用于博客，论坛，留言板当中，在发帖的过程中嵌入XSS攻击代码，帖子被目标服务器存储在数据库当中，当用户进行正常的额访问时，触发XSS代码</p>
 <h2 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h2><p>可以理解为不经过后端只在前端执行的代码</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="盗用cookie"><a href="#盗用cookie" class="headerlink" title="盗用cookie"></a>盗用cookie</h1><h2 id="cookile简绍"><a href="#cookile简绍" class="headerlink" title="cookile简绍"></a>cookile简绍</h2><p>Cookie是HTTP协议下，服务器可以维护客户工作站上信息的一种方式。cookie是由web服务器保存在用户的客户端上的小文本文件，它可以包含多种信息</p>
+<h1 id="盗用cookie"><a href="#盗用cookie" class="headerlink" title="盗用cookie"></a>盗用cookie</h1><h2 id="cookile简绍"><a href="#cookile简绍" class="headerlink" title="cookile简绍"></a>cookile简绍</h2><p>Cookie是HTTP协议下，服务器可以维护客户工作站上信息的一种方式。cookie是由web服务器保存在用户的客户端上的小文本文件，它可以包含多种信息</p>
 <h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ol>
 <li><p>没有httponly</p>
 </li>
@@ -553,6 +553,12 @@
 
 <h2 id="不区分大小写，过滤之间的所有内容"><a href="#不区分大小写，过滤之间的所有内容" class="headerlink" title="不区分大小写，过滤之间的所有内容"></a>不区分大小写，过滤之间的所有内容</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">1</span> <span class="hljs-attr">οnerrοr</span>=<span class="hljs-string">alert(</span>&#x27;<span class="hljs-attr">hack</span>&#x27;)&gt;</span><br></code></pre></td></tr></table></figure>
 
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">src</span>=<span class="hljs-string">javascript:alert()</span>&gt;</span>123<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
 <h1 id="XSS防御"><a href="#XSS防御" class="headerlink" title="XSS防御"></a>XSS防御</h1><p>总体的思路是</p>
 <p>对输入进行url过滤，对输出进行html编码[^html编码]</p>
 <p>这样即使用户输入了脚本，但是并不能运行 </p>
@@ -579,6 +585,88 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>这个需要在F12，开启调试之后才能发现，可以理解为调试的结果，日志输出</p>
+<h1 id="面试相关"><a href="#面试相关" class="headerlink" title="面试相关"></a>面试相关</h1><ol>
+<li><p>XSS 漏洞原理</p>
+<p>本质是js 代码执行，原理就是用户在可控参数输入恶意的js 代码，然后该代码被执行</p>
+</li>
+<li><p>如何验证xss</p>
+<ol>
+<li>寻找用户可控的利用点</li>
+<li>测试特殊符号是否被过滤</li>
+<li>根据第二步及，添加js 事件</li>
+</ol>
+</li>
+<li><p>xss 种类</p>
+<ol>
+<li><p>dom 型</p>
+<p>攻击者将所有的恶意的js 代码，放置于前端，不经过后端</p>
+</li>
+<li><p>反射型</p>
+<p>攻击者将带有恶意的js 传递给网站，经过服务器返回到客户端，然后由客户端的浏览器执行</p>
+</li>
+<li><p>存储型</p>
+<p>将带有恶意的js 代码存放到网站的数据库，然后客户端每一次访问都从数据库读取恶意的js 代码然后执行</p>
+</li>
+<li><p>uxss</p>
+<p>通用型xss</p>
+</li>
+<li><p>mxss</p>
+<p>突变型xss</p>
+</li>
+</ol>
+</li>
+<li><p>xss 有哪些危害？</p>
+<ol>
+<li><p>盗用cookie </p>
+<p>使用http only</p>
+</li>
+<li><p>插入广告</p>
+</li>
+<li><p>盗用身份</p>
+</li>
+<li><p>引流</p>
+</li>
+<li><p>蠕虫攻击</p>
+</li>
+</ol>
+<p>…..</p>
+</li>
+<li><p>怎么防御xss?</p>
+<ol>
+<li>对用户的数据进行限制</li>
+<li>使用黑白名单，进行过滤</li>
+<li>设置http only</li>
+</ol>
+</li>
+<li><p>xss 案例</p>
+<ol>
+<li>2007年12月，百度空间遭受蠕虫攻击，用户之间开始转发垃圾短消息</li>
+<li>2011年新浪微博曾遭受xss攻击（点击链接会自动发送一个连接出去，攻击逐渐扩大，属于蠕虫攻击）</li>
+<li>QQ邮箱发现反射性xss漏洞</li>
+</ol>
+</li>
+<li><p>DOM 型的测试方法</p>
+<p>寻找类似doucument.write、innerHTML赋值、outterHTML赋值、window.location操作、写入javascript：后内容、eval、setTime、setInterval等直接执行之类的函数点<br>思路<br>寻找变量，回溯变量来源是否可控，是否经过安全过滤。</p>
+</li>
+<li><p>修复建议</p>
+<ol>
+<li>对用户的输入进行过滤</li>
+<li>对用户的数据进行html 编码</li>
+<li>对输出的内容进行编码转义</li>
+<li>设置httl only</li>
+</ol>
+</li>
+<li><p>如何绕过xss 的安全限制方法</p>
+<ol>
+<li><p>大小写绕过</p>
+</li>
+<li><p>更换不同的事件</p>
+</li>
+<li><p>超链接</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">src</span>=<span class="hljs-string">javascript:alert()</span>&gt;</span>123<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50854790/article/details/124297046">XSS攻击绕过过滤方法大全（转）_xss绕过-CSDN博客</a></p>
 </blockquote>
