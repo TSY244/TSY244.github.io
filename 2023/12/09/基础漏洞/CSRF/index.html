@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144012391.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144102490.png">
 <meta property="article:published_time" content="2023-12-09T09:13:08.000Z">
-<meta property="article:modified_time" content="2024-05-07T07:33:30.601Z">
+<meta property="article:modified_time" content="2024-05-09T01:52:38.862Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k words
+          2.3k words
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          16 mins
+          20 mins
         
       </span>
     
@@ -294,7 +294,7 @@
 <h1 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h1><p>CSRF漏洞一般是由于没有检查Referer以及未在头部设置token造成的。</p>
 <p>通过这个我们也可以联想到漏洞的检查方式。当我们把referer修改了之后发现还能正常的访问就说明存在这些问题</p>
 <p>执行操作的时候没有只检查了cookie 并没有具体验证身份；请求的参数可以猜测到，也就是说请求参数是确定的</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h1><p>CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全等等等等。可以说CSRF能够做什么，取决于你在网站里能做什么操作</p>
+<h1 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h1><p>CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全等等等等。可以说CSRF能够做什么，取决于你在网站里能做什么操作</p>
 <h1 id="与XSS的区别"><a href="#与XSS的区别" class="headerlink" title="与XSS的区别"></a>与XSS的区别</h1><p>前面也提到了，我们可以使用这个cookile而不是直接获取这个值</p>
 <p>下面是更加完整的说法</p>
 <blockquote>
@@ -329,9 +329,48 @@
 <li>如果发现网站寻找上传地方，上传的数据包文件，取到当前同域名可以访问的地址</li>
 </ol>
 <h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><ol>
-<li><p>Referer检查。攻击者虽然是利用用户的请求进行访问，但是Referer的内容显示的是B网站，也就是攻击者自己构造的网站。如果对Referer进行白名单检查，看是否来自合法的网站。如果不是，就极有可能是CSRF攻击</p>
+<li>Referer检查。攻击者虽然是利用用户的请求进行访问，但是Referer的内容显示的是B网站，也就是攻击者自己构造的网站。如果对Referer进行白名单检查，看是否来自合法的网站。如果不是，就极有可能是CSRF攻击</li>
+<li>添加Token验证。CSRF攻击成功的原因就是利用用户已经认证过的cookie信息。cookie中的身份信息在请求时会自动添加，所以我们要在cookie外再加入一种验证身份的信息。具体的做法是在HTTP请求中，以参数的形式加入一个随机产生的Token,并在服务器端建立一个拦截器来验证这个 Token，如果请求中没有 Token 或者 Token 内容不正确，则认为可能是 CSRF 攻击而拒绝该请求</li>
+</ol>
+<h1 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h1><ol>
+<li><p>CSRF跨站请求伪造原理</p>
+<blockquote>
+<ol>
+<li>攻击者利用服务器对用户的信任，从而欺骗服务器（伪造的恶意url）</li>
+<li>服务端没有对请求中的referer 做检查，没有添加对应的token ，在进行关键操作的时候没有再次验证</li>
+</ol>
+</blockquote>
 </li>
-<li><p>添加Token验证。CSRF攻击成功的原因就是利用用户已经认证过的cookie信息。cookie中的身份信息在请求时会自动添加，所以我们要在cookie外再加入一种验证身份的信息。具体的做法是在HTTP请求中，以参数的形式加入一个随机产生的Token,并在服务器端建立一个拦截器来验证这个 Token，如果请求中没有 Token 或者 Token 内容不正确，则认为可能是 CSRF 攻击而拒绝该请求</p>
+<li><p>和xss 区别</p>
+<blockquote>
+<p>xss： 利用的是用户对服务端的信任；具体的利用是脚本在用户浏览器上执行，并不会对服务器造成什么影响</p>
+<p>csrf：利用的是服务器对用户的信任；具体的利用是已经认证的用户（登录的用户）身份信息，对服务器请求，服务器会认为是用户的正常请求</p>
+</blockquote>
+</li>
+<li><p>攻击要点</p>
+<blockquote>
+<ol>
+<li>用户处于登录状态</li>
+<li>服务端没有对请求进一步验证，referer，token等</li>
+<li>攻击者能有一个可以利用的请求也很重要</li>
+</ol>
+</blockquote>
+</li>
+<li><p>如何防御CSRF</p>
+<blockquote>
+<ol>
+<li>避免url 中的参数被直接获取，或者是猜测到</li>
+<li>使用同步令牌及其有效性</li>
+<li>检测Referer Header</li>
+<li>不在客户端存放敏感信息（身份认证信息）</li>
+<li>会话最长的时间，如果之间没有请求就断开</li>
+<li>有关重要操作需要进行进一步操作（比如修改密码）</li>
+<li>敏感信息的修改使用post而不是get</li>
+<li>避免交叉漏洞， 如XSS等</li>
+<li>禁止跨域访问</li>
+<li>在响应中设置CSP（Content-Security-Policy）内容安全策略</li>
+</ol>
+</blockquote>
 </li>
 </ol>
 
