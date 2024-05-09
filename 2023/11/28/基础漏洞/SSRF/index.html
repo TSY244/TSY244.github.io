@@ -25,8 +25,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130140802475.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130141033863.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/image-20240509173630164.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/image-20240509191455708.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/image-20240509191615554.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/image-20240509191715142.png">
 <meta property="article:published_time" content="2023-11-28T06:52:10.000Z">
-<meta property="article:modified_time" content="2024-03-21T11:41:21.663Z">
+<meta property="article:modified_time" content="2024-05-09T11:17:44.827Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="基础漏洞">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.6k words
+          5.7k words
         
       </span>
     
@@ -241,7 +245,7 @@
         
         
         
-          47 mins
+          48 mins
         
       </span>
     
@@ -315,7 +319,10 @@
 </li>
 <li><p>curl_exec</p>
 <p>关于curl</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">// 检查是否设置了POST请求中的&#x27;url&#x27;参数</span><br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>])) &#123;<br>    <span class="hljs-variable">$link</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>]; <span class="hljs-comment">// 获取POST请求中的&#x27;url&#x27;参数值</span><br><br>    <span class="hljs-variable">$curlobj</span> = <span class="hljs-title function_ invoke__">curl_init</span>(); <span class="hljs-comment">// 初始化一个cURL会话</span><br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$curlobj</span>, CURLOPT_POST, <span class="hljs-number">0</span>); <span class="hljs-comment">// 设置cURL请求为GET请求</span><br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$curlobj</span>, CURLOPT_URL, <span class="hljs-variable">$link</span>); <span class="hljs-comment">// 设置要访问的URL</span><br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$curlobj</span>, CURLOPT_RETURNTRANSFER, <span class="hljs-number">1</span>); <span class="hljs-comment">// 设置cURL执行后不直接输出结果，而是返回到变量中</span><br>    <span class="hljs-variable">$result</span> = <span class="hljs-title function_ invoke__">curl_exec</span>(<span class="hljs-variable">$curlobj</span>); <span class="hljs-comment">// 执行cURL请求并将结果保存到$result变量</span><br>    <span class="hljs-title function_ invoke__">curl_close</span>(<span class="hljs-variable">$curlobj</span>); <span class="hljs-comment">// 关闭cURL会话</span><br><br>    <span class="hljs-variable">$filename</span> = <span class="hljs-string">&#x27;./curled/&#x27;</span> . <span class="hljs-title function_ invoke__">rand</span>() . <span class="hljs-string">&#x27;.txt&#x27;</span>; <span class="hljs-comment">// 生成一个随机文件名</span><br>    <span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-variable">$filename</span>, <span class="hljs-variable">$result</span>); <span class="hljs-comment">// 将cURL获取的结果保存到文件中</span><br>    <span class="hljs-keyword">echo</span> <span class="hljs-variable">$result</span>; <span class="hljs-comment">// 输出cURL获取的结果</span><br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">// 检查是否设置了POST请求中的&#x27;url&#x27;参数</span><br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>])) &#123;<br>    <span class="hljs-variable">$link</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>]; <span class="hljs-comment">// 获取POST请求中的&#x27;url&#x27;参数值</span><br><br>    <span class="hljs-variable">$curlobj</span> = <span class="hljs-title function_ invoke__">curl_init</span>(); <span class="hljs-comment">// 初始化一个cURL会话</span><br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$curlobj</span>, CURLOPT_POST, <span class="hljs-number">0</span>); <span class="hljs-comment">// 设置cURL请求为GET请求</span><br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$curlobj</span>, CURLOPT_URL, <span class="hljs-variable">$link</span>); <span class="hljs-comment">// 设置要访问的URL</span><br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$curlobj</span>, CURLOPT_RETURNTRANSFER, <span class="hljs-number">1</span>); <span class="hljs-comment">// 设置cURL执行后不直接输出结果，而是返回到变量中</span><br>    <span class="hljs-variable">$result</span> = <span class="hljs-title function_ invoke__">curl_exec</span>(<span class="hljs-variable">$curlobj</span>); <span class="hljs-comment">// 执行cURL请求并将结果保存到$result变量</span><br>    <span class="hljs-title function_ invoke__">curl_close</span>(<span class="hljs-variable">$curlobj</span>); <span class="hljs-comment">// 关闭cURL会话</span><br><br>    <span class="hljs-variable">$filename</span> = <span class="hljs-string">&#x27;./curled/&#x27;</span> . <span class="hljs-title function_ invoke__">rand</span>() . <span class="hljs-string">&#x27;.txt&#x27;</span>; <span class="hljs-comment">// 生成一个随机文件名</span><br>    <span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-variable">$filename</span>, <span class="hljs-variable">$result</span>); <span class="hljs-comment">// 将cURL获取的结果保存到文件中</span><br>    <span class="hljs-keyword">echo</span> <span class="hljs-variable">$result</span>; <span class="hljs-comment">// 输出cURL获取的结果</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>fsockopen</p>
+</li>
 </ol>
 <h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3><blockquote>
 <p>仅支持 HTTP&#x2F;HTTPS 协议的类：HttpClient 类、HttpURLConnection 类、 OkHttp 类、 Request</p>
@@ -403,9 +410,6 @@
 </li>
 </ul>
 <h1 id="SSRF利用"><a href="#SSRF利用" class="headerlink" title="SSRF利用"></a>SSRF利用</h1><h2 id="内网访问"><a href="#内网访问" class="headerlink" title="内网访问"></a>内网访问</h2><p>ctfhub  技能树</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://127.0.0.1/flag.php</a></p>
-</blockquote>
 <h2 id="伪协议读取文件"><a href="#伪协议读取文件" class="headerlink" title="伪协议读取文件"></a>伪协议读取文件</h2><p><strong>伪协议:</strong></p>
 <blockquote>
 <p>类型<br>file:&#x2F;&#x2F;&#x2F;<br>dict:&#x2F;&#x2F;<br>sftp:&#x2F;&#x2F;<br>ldap:&#x2F;&#x2F;<br>tftp:&#x2F;&#x2F;<br>gopher:&#x2F;&#x2F;</p>
@@ -455,6 +459,18 @@
 <blockquote>
 <p>?url&#x3D;localhost&#x2F;flag.php</p>
 </blockquote>
+<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><p>使用ctfhub 进行演示</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/image-20240509173630164.png" srcset="/img/loading.gif" lazyload alt="image-20240509173630164"></p>
+<p>可以发现存在ssrf </p>
+<p>然后尝试使用redis 对内网进行攻击</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/image-20240509191455708.png" srcset="/img/loading.gif" lazyload alt="image-20240509191455708"></p>
+<p>制作出webshell</p>
+<p>然后尝试使用访问，会发现不行，得再次url 加密一下</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/image-20240509191615554.png" srcset="/img/loading.gif" lazyload alt="image-20240509191615554"></p>
+<p>然后访问</p>
+<p>出现了504 但是不要紧</p>
+<p>这个是时候shell.php 是已经写好的</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/image-20240509191715142.png" srcset="/img/loading.gif" lazyload alt="image-20240509191715142"></p>
 
                 
               </div>
