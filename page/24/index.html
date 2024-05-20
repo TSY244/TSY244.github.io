@@ -226,15 +226,55 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/20/C/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%90%88%E9%9B%86/" target="_self">
-          函数指针合集
+        <a href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" target="_self">
+          枚举
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%90%88%E9%9B%86/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" target="_self">
         <div>
-          学习目标：  认识函数指针 typedef和函数指针 万能指针充当函数指针  [TOC] 函数指针合集概念 什么是函数指针  对应函数在内存当中的首地址   定义函数指针   使用(*标识符（可以当作指针变量的名字）)替换函数名，剩下的照抄  使用示例 123456int func(int a,int b)&#123;    ;&#125;int (*p_func)(int a,int b)//函
+          枚举常量符号化 用符号而不是具体的数字来表示程序中的数字 123const int red=0;//然后直接使用类型的名字//等等  枚举是一种用户定义的数据类型，他用关键字enum来声明 1enum 枚举类型的名字&#123;名字0······名字n&#125;;  枚举类型的名字通常不直接使用，而是使用大括号里面的名字 12345enum colors&#123;red,yellow,gree
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-20 09:01" pubdate>
+              2023-04-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/" target="_self">
+          联合体专解
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/" target="_self">
+        <div>
+          联合体专解共用体的定义1234union 名字&#123;    //数据&#125;    理解 所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存  在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量 12345678910111213141516union Date&#123;	int num;	char name[20];&#125;;int main()
         </div>
       </a>
 
@@ -573,46 +613,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/c-%E5%9F%BA%E7%A1%80/">#c++基础</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/13/%E7%AE%97%E6%B3%95/newcoder/%E6%A0%88%E7%9A%84%E5%8E%8B%E5%85%A5%E5%92%8C%E5%BC%B9%E5%87%BA%E5%BA%8F%E5%88%97/" target="_self">
-          栈的压入和弹出序列
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/13/%E7%AE%97%E6%B3%95/newcoder/%E6%A0%88%E7%9A%84%E5%8E%8B%E5%85%A5%E5%92%8C%E5%BC%B9%E5%87%BA%E5%BA%8F%E5%88%97/" target="_self">
-        <div>
-          [题](栈的压入、弹出序列_牛客题霸_牛客网 (nowcoder.com))   代码 方法一 123456789101112131415161718class Solution &#123;  public:    bool IsPopOrder(vector&lt;int&gt; pushV, vector&lt;int&gt; popV) &#123;        stack&lt;int
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-13 23:41" pubdate>
-              2023-04-13
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%82%A3%E4%BA%9B%E5%B9%B4%E5%88%B7%E8%BF%87%E7%9A%84%E7%AE%97%E6%B3%95%E9%A2%98/">#那些年刷过的算法题</a>
             
           </div>
         
