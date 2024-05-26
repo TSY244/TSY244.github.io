@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204136766.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204249856.png">
 <meta property="article:published_time" content="2023-12-01T12:22:37.000Z">
-<meta property="article:modified_time" content="2024-05-26T02:20:30.915Z">
+<meta property="article:modified_time" content="2024-05-26T03:46:54.656Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
@@ -243,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.7k words
+          10k words
         
       </span>
     
@@ -254,7 +254,7 @@
         
         
         
-          82 mins
+          88 mins
         
       </span>
     
@@ -575,6 +575,38 @@
 </blockquote>
 </li>
 <li><p>服务端设置Cookie的http only属性，这样一来js脚本就不能直接获取Cookie信息了</p>
+</li>
+<li><p>前端进行输入过滤</p>
+</li>
+<li><p>纯前端渲染</p>
+</li>
+</ul>
+<h1 id="绕过http-only"><a href="#绕过http-only" class="headerlink" title="绕过http-only"></a>绕过http-only</h1><ul>
+<li><p>CVE-2012-0053</p>
+<p>apache 在2.2.0-2.2.21 版本 中的漏洞，攻击者在请求中注入一个非常大的cookie 超过了apache 最大请求长度4192 字节，apache 就会返回400 错误，状态码中就包含了http-only 的保护的cookie  </p>
+</li>
+<li><p>phpinfo页面进行获取</p>
+<p>可以使用XMLHttpRequest 请求该页面获取cookie信息</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest">XMLHttpRequest - Web API | MDN (mozilla.org)</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://hackcommander.github.io/posts/2022/11/12/bypass-httponly-via-php-info-page/">https://hackcommander.github.io/posts/2022/11/12/bypass-httponly-via-php-info-page/#</a></p>
+<p>不得不感叹，国内的文章真的是….我通过谷歌随便找的一篇文章都比国内的清晰</p>
+</blockquote>
+<p>简单的理解是，如果服务器存在phpinfo() 函数或者是页面，我们可以将这个页面的信息发送到我们服务器中，然后由于phpinfo 页面本身就可以看到http-only 的cookie 所以我们久获取了对应了cookie </p>
+<p>但是这个方法本身有一个巨大的问题，没有phpinfo 这个页面的话，就会很难搞</p>
+</li>
+<li><p>既然获取cookie 是为了得到登录权限，那么还有一种简单的方式可以用于登录，那就是直接输入账号和密码</p>
+<p>那我们在登录页面发现的xss 就可以在登录的时候直接发送账号和密码到我们的服务器</p>
+</li>
+<li><p>使用frame 框架进行钓鱼，或者是钓鱼网站进行钓鱼</p>
+<blockquote>
+<p>iframe框架钓鱼（通过标签嵌入一个远程域，完全撑开后，以覆盖原有的页<br>面）。跳转钓鱼（通过购买相似名，构建相同的钓鱼页面，使受害者跳转至钓鱼<br>站）。</p>
+</blockquote>
+</li>
+<li><p>历史密码</p>
+<p>通过js 伪造登录表单，欺骗浏览器自动填入，由此获得浏览器记住的历史密码</p>
 </li>
 </ul>
 <h1 id="使用JS反向shell"><a href="#使用JS反向shell" class="headerlink" title="使用JS反向shell"></a>使用JS反向shell</h1><blockquote>
