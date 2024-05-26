@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/src/image-20240511005705421.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/src/image-20240519141645770.png">
 <meta property="article:published_time" content="2024-05-10T16:54:26.000Z">
-<meta property="article:modified_time" content="2024-05-19T06:34:23.534Z">
+<meta property="article:modified_time" content="2024-05-24T05:20:37.683Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="src">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          415 words
+          728 words
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          4 mins
+          7 mins
         
       </span>
     
@@ -344,7 +344,41 @@
 <li><p>findsomething</p>
 <p>查看是否又sk ak 之类的东西</p>
 </li>
+<li><p>二维码类</p>
+<ul>
+<li><p>接口遍历</p>
+<p>当扫描二维码活的时候会获取一个url 这个url 中可能存在关键的参数，如果发现是ak,sk,key,password等字样，可以尝试利用</p>
+</li>
+<li><p>xss</p>
+<p>看扫描二维码是否是会返回信息输出到前端，如果发下有返回到前端的信息可以尝试利用xss</p>
+</li>
+<li><p>图片dos</p>
+<p>就是可以修改图片的大小然后进行输出</p>
+</li>
+<li><p>伪造二维码进行钓鱼</p>
+<p>如果发现是登录只需要关注二维码，不在进行二次验证的情况下可以尝试钓鱼伪造</p>
+</li>
+</ul>
+</li>
+<li><p>登录框</p>
+</li>
 </ol>
+<ul>
+<li><p>未授权api </p>
+<p>将findsomething 中的path 导入bp</p>
+<ol>
+<li><p>405</p>
+<p>如果发现get 方式是405 可以尝试访问其他方式</p>
+<p>特别的是options 可以请求服务器获取可能用于访问的方法</p>
+</li>
+<li><p>参数缺失</p>
+<p>可能根据访问前端页面中，寻找对对应的参数和拼接请求</p>
+</li>
+<li><p>403 bypass</p>
+</li>
+</ol>
+</li>
+</ul>
 
                 
               </div>
