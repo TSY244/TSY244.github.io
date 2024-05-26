@@ -226,15 +226,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/11/c++/c++%E9%9A%8F%E8%AE%B0/" target="_self">
-          c++随记
+        <a href="/2023/03/26/c++/%E5%87%BD%E6%95%B0/" target="_self">
+          函数
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/11/c++/c++%E9%9A%8F%E8%AE%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/26/c++/%E5%87%BD%E6%95%B0/" target="_self">
         <div>
-          平常笔记 初始化数组需要定义大小才能被cin  cin和scanf一样，都跳过空格  public和private:用于类的封装  new 和 malloc的主要区别:new调用构造函数，malloc不会  int *p1 &#x3D; new int[10]，int *p2 &#x3D; new int[10]()区别：p1申请的空间里的值是随机值，p2申请的空间里的值已经初始化  引用: 12
+          [TOC] 函数构造函数 通过类里函数可以给私有成员赋值，同时也可以通过函数return 出值  特殊的成员函数，主要用于创建对象时初始化对象-&gt;给对象成员赋予初值  构造函数的特点  构造函数的函数名与类名相同 构造函数没有返回值类型，也没有返回值 构造函数可以重载   没有写构造函数，自己会生成，由于内联函数，牺牲时间换效率  系统给的构造函数 1Myclass()&#123;&#125
         </div>
       </a>
 
@@ -242,8 +242,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-11 12:46" pubdate>
-              2023-04-11
+            <time datetime="2023-03-26 20:39" pubdate>
+              2023-03-26
             </time>
           </div>
         
@@ -266,15 +266,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/11/c++/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" target="_self">
-          智能指针
+        <a href="/2023/03/26/c++/%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%8C%85%E8%A3%85%E5%99%A8/" target="_self">
+          可调用对象包装器
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/11/c++/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/26/c++/%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%8C%85%E8%A3%85%E5%99%A8/" target="_self">
         <div>
-          智能指针shared_ptr操作方法 操作实例123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293
+          [TOC] 可调用对象包装器可调用对象可以按照函数的方法进行调用 分类 函数指针  使用using进行定义函数指针  1using callBack = void(*)(int, double);    仿函数  可以转换为函数的类对象  类成员的函数指针  实例 1234567891011121314151617181920212223242526272829303132333435363738
         </div>
       </a>
 
@@ -282,8 +282,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-11 12:46" pubdate>
-              2023-04-11
+            <time datetime="2023-03-26 20:39" pubdate>
+              2023-03-26
             </time>
           </div>
         
@@ -306,15 +306,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8F%8D%E8%BD%AC%E6%95%B4%E4%B8%AA%E9%93%BE%E8%A1%A8/" target="_self">
-          反转整个链表
+        <a href="/2023/03/26/c++/%E5%8F%B3%E5%80%BC%E5%92%8C%E5%B7%A6%E5%80%BC/" target="_self">
+          右值和左值
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8F%8D%E8%BD%AC%E6%95%B4%E4%B8%AA%E9%93%BE%E8%A1%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/26/c++/%E5%8F%B3%E5%80%BC%E5%92%8C%E5%B7%A6%E5%80%BC/" target="_self">
         <div>
-          题   代码 123456789101112131415struct ListNode* ReverseList(struct ListNode* pHead ) &#123;    // write code here    if(pHead==NULL)&#123;        return NULL;    &#125;    struct ListNode* pre=NULL;    s
+          [TOC] 右值和左值右值左值的区分 能取地址的是左值，不能取地址的是右值  实例 1234567891011int main()&#123;    //左值    int lvalue=244;    //左值引用    int &amp;lvalueCite=lvalue;    //右值    //右值引用    int &amp;&amp;rvalueCite=6;&#125;  使用右值
         </div>
       </a>
 
@@ -322,8 +322,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-10 22:39" pubdate>
-              2023-04-10
+            <time datetime="2023-03-26 20:39" pubdate>
+              2023-03-26
             </time>
           </div>
         
@@ -332,287 +332,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/newcoder/">#newcoder</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/10/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8F%8D%E8%BD%AC%E6%95%B4%E4%B8%AA%E9%93%BE%E8%A1%A8/" target="_self">
-          反转整个链表
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/10/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8F%8D%E8%BD%AC%E6%95%B4%E4%B8%AA%E9%93%BE%E8%A1%A8/" target="_self">
-        <div>
-          题   代码 123456789101112131415struct ListNode* ReverseList(struct ListNode* pHead ) &#123;    // write code here    if(pHead==NULL)&#123;        return NULL;    &#125;    struct ListNode* pre=NULL;    s
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-10 22:39" pubdate>
-              2023-04-10
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/newcoder/">#newcoder</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/10/%E7%AE%97%E6%B3%95/newcoder/%E9%93%BE%E8%A1%A8%E5%86%85%E6%8C%87%E5%AE%9A%E5%8C%BA%E5%9F%9F%E5%8F%8D%E8%BD%AC/" target="_self">
-          链表内指定区域反转
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/10/%E7%AE%97%E6%B3%95/newcoder/%E9%93%BE%E8%A1%A8%E5%86%85%E6%8C%87%E5%AE%9A%E5%8C%BA%E5%9F%9F%E5%8F%8D%E8%BD%AC/" target="_self">
-        <div>
-          [题](链表内指定区间反转_牛客题霸_牛客网 (nowcoder.com))   代码 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455/** * struct ListNode &#123; *  int val; *  struct List
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-10 21:59" pubdate>
-              2023-04-10
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%82%A3%E4%BA%9B%E5%B9%B4%E5%88%B7%E8%BF%87%E7%9A%84%E7%AE%97%E6%B3%95%E9%A2%98/">#那些年刷过的算法题</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_self">
-          树和二叉树
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_self">
-        <div>
-          [TOC] 树和二叉树树的基本  一个根和若干的子树  基本术语   树的类别  有序树 子树有位置要求  无序树 子树无要求 意思是：1，2，3，这三颗子树，无论如何排列都是一个树    森林   树和线性结构的比较  树是一对多 线性结构是一对一    二叉树 每个节点最多有两个度  二叉树是个有序树（但是不是树的特殊情况）  二叉树可以是一 个空集   二叉树必须要分左子树还是右子树，即使只
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-05 21:02" pubdate>
-              2023-04-05
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">#数据结构和算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/05/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_self">
-          树和二叉树
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/05/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_self">
-        <div>
-          [TOC] 树和二叉树树的基本  一个根和若干的子树  基本术语   树的类别  有序树 子树有位置要求  无序树 子树无要求 意思是：1，2，3，这三颗子树，无论如何排列都是一个树    森林   树和线性结构的比较  树是一对多 线性结构是一对一    二叉树 每个节点最多有两个度  二叉树是个有序树（但是不是树的特殊情况）  二叉树可以是一 个空集   二叉树必须要分左子树还是右子树，即使只
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-05 21:02" pubdate>
-              2023-04-05
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">#数据结构和算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/" target="_self">
-          串、数组和广义表
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/" target="_self">
-        <div>
-          [TOC] 串、数组和广义表串（字符串string） 是一个内容受限的线性表（只能存放字符）  子串 例如abcd的的子串 “ ”  “a”  “ab”  ……..  子串在主串当中的位置   所有的空串都是相等的   一般选用顺序的   串的顺序实现1234typedef struct SString&#123;    char ch[MAXSIZE];    int Length;&#125;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-04 10:38" pubdate>
-              2023-04-04
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">#数据结构和算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/04/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/" target="_self">
-          串、数组和广义表
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/04/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/" target="_self">
-        <div>
-          [TOC] 串、数组和广义表串（字符串string） 是一个内容受限的线性表（只能存放字符）  子串 例如abcd的的子串 “ ”  “a”  “ab”  ……..  子串在主串当中的位置   所有的空串都是相等的   一般选用顺序的   串的顺序实现1234typedef struct SString&#123;    char ch[MAXSIZE];    int Length;&#125;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-04 10:38" pubdate>
-              2023-04-04
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">#数据结构和算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/03/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" target="_self">
-          栈和队列
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" target="_self">
-        <div>
-          [TOC] 栈和队列栈定义和特点  栈：先进后出 队列：先进先出（排队的问题）  顺序栈的表示和操作实现 约定an端为栈顶，a1端为栈底  操作 初始化   制造一个空栈 InitStack(&amp;S)  销毁栈    DestroyStack(&amp;S)  判断是否为空 StackEmpty(S)  求栈的长度 StackLength(S)  取栈顶的元素 GetTop(S,&amp;e
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-03-29 20:39" pubdate>
-              2023-03-29
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">#数据结构和算法</a>
+              <a href="/tags/c-%E5%9F%BA%E7%A1%80/">#c++基础</a>
             
           </div>
         
@@ -624,7 +344,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/26/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/#board">25</a><a class="page-number" href="/page/26/#board">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/#board">28</a><a class="extend next" rel="next" href="/page/28/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/26/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/#board">25</a><a class="page-number" href="/page/26/#board">26</a><span class="page-number current">27</span>
     </span>
   </nav>
 

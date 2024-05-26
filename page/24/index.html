@@ -226,15 +226,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/07/C/C%E8%AF%AD%E8%A8%80%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0/" target="_self">
-          C语言平常笔记
+        <a href="/2023/04/20/C/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" target="_self">
+          文件操作
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/07/C/C%E8%AF%AD%E8%A8%80%E5%B9%B3%E5%B8%B8%E7%AC%94%E8%AE%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" target="_self">
         <div>
-          C语言平常笔记 在在自定义函数中使用sqrt函数，必须将开方数，重定义如（double） 123456789101112131415161718192021void n_prime(int a)&#123;	int x=0;	for(x=2;x&lt;sqrt((double)x);x++)	&#123;		if(0==a%x)		&#123;			printf(&quot;this is not
+          文件操作什么是文件  数据文件 存放程序运行时需要读取的数据   文件名 文件名包含：文件路径+文件主干+文件后缀     文件的打开和关闭 文件指针：指向文件地址 文件信息区：在内存中开辟的名为FILE的结构体变量(由系统声明) 通过使用FILE*指针来维护FILE结构体 fopen()函数和:     filename:文件名 mode:打开方式 fopen:打开文件 fclose :关闭文件
         </div>
       </a>
 
@@ -242,8 +242,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-07 13:56" pubdate>
-              2023-05-07
+            <time datetime="2023-04-20 09:01" pubdate>
+              2023-04-20
             </time>
           </div>
         
@@ -266,15 +266,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/07/go/%E5%88%9D%E5%A7%8Bgo/" target="_self">
-          初始go
+        <a href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" target="_self">
+          枚举
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/07/go/%E5%88%9D%E5%A7%8Bgo/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" target="_self">
         <div>
-          [TOC] 初始GO基础语法hello world 一个项目只有一个包main 而且在main里面有一个func main   注释1234//单行注释/*多行注释 */  简单的程序 小程序 123456789101112	package mainimport &quot;fmt&quot;func main() &#123;	var name string = &quot;awd&quot;
+          枚举常量符号化 用符号而不是具体的数字来表示程序中的数字 123const int red=0;//然后直接使用类型的名字//等等  枚举是一种用户定义的数据类型，他用关键字enum来声明 1enum 枚举类型的名字&#123;名字0······名字n&#125;;  枚举类型的名字通常不直接使用，而是使用大括号里面的名字 12345enum colors&#123;red,yellow,gree
         </div>
       </a>
 
@@ -282,8 +282,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-07 13:56" pubdate>
-              2023-05-07
+            <time datetime="2023-04-20 09:01" pubdate>
+              2023-04-20
             </time>
           </div>
         
@@ -292,7 +292,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/go/">#go</a>
+              <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
             
           </div>
         
@@ -306,15 +306,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/06/linux/shell/" target="_self">
-          shell
+        <a href="/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/" target="_self">
+          联合体专解
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/06/linux/shell/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/" target="_self">
         <div>
-          [TOC] shell运行方法12345#方法一  直接运行解释器sh hello.sh#方法二  使用可执行文件chmod +x hello.sh./hello.sh  变量定义 系统变量 系统变量有$HOME、$PWD、$USER等  自定义变量  创建变量 变量名&#x3D;变量值，等号两侧不能有空格，变量名一般习惯用大写。  删除变量 unset 变量名  声明静态变量 readonly
+          联合体专解共用体的定义1234union 名字&#123;    //数据&#125;    理解 所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存  在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量 12345678910111213141516union Date&#123;	int num;	char name[20];&#125;;int main()
         </div>
       </a>
 
@@ -322,8 +322,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-06 14:26" pubdate>
-              2023-05-06
+            <time datetime="2023-04-20 09:01" pubdate>
+              2023-04-20
             </time>
           </div>
         
@@ -332,7 +332,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Linux/">#Linux</a>
+              <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
             
           </div>
         
@@ -346,15 +346,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/01/%E7%AE%97%E6%B3%95/newcoder/%E6%9F%A5%E7%9C%8B%E9%93%BE%E8%A1%A8%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF/" target="_self">
-          查看链表是否有环
+        <a href="/2023/04/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/" target="_self">
+          图
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/01/%E7%AE%97%E6%B3%95/newcoder/%E6%9F%A5%E7%9C%8B%E9%93%BE%E8%A1%A8%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/" target="_self">
         <div>
-          [题](判断链表中是否有环_牛客题霸_牛客网 (nowcoder.com))   代码 1234567891011121314151617181920212223/** * Definition for singly-linked list. * struct ListNode &#123; *     int val; *     ListNode *next; *     ListNode(i
+          [TOC] 图图的定义和基本术语  完全图  有n个点每个点都与n-1个点有边，但是注意如果是无向的边则应该是n*(n-1)/2。如果是有向的边，则应该是n*(n-1)  稀疏图(e&lt;nlogn) 带箭头的边称为狐 有很少的边或狐的图  稠密图 有较多的边或狐的图  网 边&#x2F;狐带权（有意义，如：20km等）的图  邻接 有边&#x2F;狐相连的两个顶点之间的关系 根据离散的知识(V
         </div>
       </a>
 
@@ -362,8 +362,88 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-01 23:24" pubdate>
-              2023-05-01
+            <time datetime="2023-04-20 09:01" pubdate>
+              2023-04-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">#数据结构和算法</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/04/20/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/" target="_self">
+          图
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/" target="_self">
+        <div>
+          [TOC] 图图的定义和基本术语  完全图  有n个点每个点都与n-1个点有边，但是注意如果是无向的边则应该是n*(n-1)/2。如果是有向的边，则应该是n*(n-1)  稀疏图(e&lt;nlogn) 带箭头的边称为狐 有很少的边或狐的图  稠密图 有较多的边或狐的图  网 边&#x2F;狐带权（有意义，如：20km等）的图  邻接 有边&#x2F;狐相连的两个顶点之间的关系 根据离散的知识(V
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-20 09:01" pubdate>
+              2023-04-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">#数据结构和算法</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/04/19/%E7%AE%97%E6%B3%95/newcoder/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" target="_self">
+          逆波兰表达式求值
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/19/%E7%AE%97%E6%B3%95/newcoder/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" target="_self">
+        <div>
+          [题](逆波兰表达式求值_牛客题霸_牛客网 (nowcoder.com))   代码 自己的版本 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556class Solution &#123;public:    /**     * 代码中的类名
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-19 22:30" pubdate>
+              2023-04-19
             </time>
           </div>
         
@@ -386,15 +466,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/30/linux/%E4%BD%BF%E7%94%A8linux/" target="_self">
-          使用linux
+        <a href="/2023/04/19/linux/linux%E9%9A%8F%E8%AE%B0/" target="_self">
+          linux随记
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/30/linux/%E4%BD%BF%E7%94%A8linux/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/19/linux/linux%E9%9A%8F%E8%AE%B0/" target="_self">
         <div>
-          [TOC] 使用Linux各类小技巧 强制停止  Ctrl+c 退出程序  Ctrl+c 退出登出或退出     不能用于退出vi&#x2F;vim  历史命令查找  history  1history | grep ch  过滤使用的指令里带有ch的命令  Ctrl+r 输入内容匹配 如果搜索到的命令是可执行的，则直接回车 键盘的左右键，可以得到此命令  ! 匹配最近的 比如： 1!p  匹配最
+          linux随记 sudo  在Linux系统中，sudo是一种特殊权限（superuser do）命令，允许普通用户以超级管理员的身份执行特定任务或命令。管理员可以使用sudo命令来授权其他用户执行某些特定操作，而无需共享root账户密码  Ctrl+l 清屏   -R 表示递归的参数，用于文件夹相关的参数  su - root 切换到root用户  exit 用于退出root  |管道符 把管道
         </div>
       </a>
 
@@ -402,8 +482,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-30 16:41" pubdate>
-              2023-04-30
+            <time datetime="2023-04-19 15:18" pubdate>
+              2023-04-19
             </time>
           </div>
         
@@ -426,15 +506,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/26/%E7%AE%97%E6%B3%95/newcoder/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%E6%AF%8Fk%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC/" target="_self">
-          链表中的节点每k个一组翻转
+        <a href="/2023/04/17/linux/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" target="_self">
+          常用指令
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/26/%E7%AE%97%E6%B3%95/newcoder/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%E6%AF%8Fk%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/17/linux/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" target="_self">
         <div>
-          [题](链表中的节点每k个一组翻转_牛客题霸_牛客网 (nowcoder.com))   代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445/** * struct ListNode &#123; *  int val; *  struct ListNode *next; * &#
+          [TOC] 常用指令目录结构 LInux的根目录是树形结构 Linux没有盘符（C盘等）的概念，只有一个根目录/   文件路径的描述方式 使用/ windows使用\  注意文件路径的开始必须是/,第一个是根目录，后面的是层级关系    LInux命令入门 通用格式 command [-options] [parameter]  command 命令本身 -options 可选的选项(非必填) p
         </div>
       </a>
 
@@ -442,48 +522,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-26 22:01" pubdate>
-              2023-04-26
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%82%A3%E4%BA%9B%E5%B9%B4%E5%88%B7%E8%BF%87%E7%9A%84%E7%AE%97%E6%B3%95%E9%A2%98/">#那些年刷过的算法题</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/26/linux/%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90/" target="_self">
-          用户和权限
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/26/linux/%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90/" target="_self">
-        <div>
-          [TOC] 用户和权限root su 切换用户  su - -root 注意中间的- 前后都有空格    exit 退出返回上一个用户  sudo 普通用户获得普通的权限，但不是所有的用户都有sudo认证，需要认证   用户用户组 一个用户可以在多个用户组  用户组的管理 用户组的创建 1groupadd` 用户组名  删除用户组 1groupdel 用户组名  用户管理  getent pass
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-26 13:56" pubdate>
-              2023-04-26
+            <time datetime="2023-04-17 15:01" pubdate>
+              2023-04-17
             </time>
           </div>
         
@@ -506,15 +546,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BB%8E%E4%B8%AD%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_self">
-          从中序与后序遍历序列构造二叉树
+        <a href="/2023/04/17/linux/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" target="_self">
+          操作系统概述
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BB%8E%E4%B8%AD%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/17/linux/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" target="_self">
         <div>
-          [题](从中序与后序遍历序列构造二叉树_牛客题霸_牛客网 (nowcoder.com))   代码 1234567891011121314151617181920212223242526272829303132333435363738394041/** * struct TreeNode &#123; *  int val; *  struct TreeNode *left; *  struct
+          计算机由哪两个部分组成 软件和硬件  操作系统是什么？ 操作系统是软件的一种 主要作用是协助用户调度硬件工作充当用户和计算机硬件之间的桥梁  不同文件的用途
         </div>
       </a>
 
@@ -522,8 +562,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-24 10:17" pubdate>
-              2023-04-24
+            <time datetime="2023-04-17 14:15" pubdate>
+              2023-04-17
             </time>
           </div>
         
@@ -532,7 +572,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/newcoder/">#newcoder</a>
+              <a href="/tags/Linux/">#Linux</a>
             
           </div>
         
@@ -546,15 +586,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/24/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BB%8E%E4%B8%AD%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_self">
-          从中序与后序遍历序列构造二叉树
+        <a href="/2023/04/17/%E7%AE%97%E6%B3%95/newcoder/%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7%E5%BA%8F%E5%88%97/" target="_self">
+          有效括号序列
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/24/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BB%8E%E4%B8%AD%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/17/%E7%AE%97%E6%B3%95/newcoder/%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7%E5%BA%8F%E5%88%97/" target="_self">
         <div>
-          [题](从中序与后序遍历序列构造二叉树_牛客题霸_牛客网 (nowcoder.com))   代码 1234567891011121314151617181920212223242526272829303132333435363738394041/** * struct TreeNode &#123; *  int val; *  struct TreeNode *left; *  struct
+          [题](有效括号序列_牛客题霸_牛客网 (nowcoder.com))   代码 12345678910111213141516171819202122232425262728293031323334353637383940414243class Solution &#123;public:    /**     *      * @param s string字符串      * @return
         </div>
       </a>
 
@@ -562,48 +602,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-24 10:17" pubdate>
-              2023-04-24
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/newcoder/">#newcoder</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/21/%E7%AE%97%E6%B3%95/newcoder/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" target="_self">
-          表达式求值
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/21/%E7%AE%97%E6%B3%95/newcoder/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" target="_self">
-        <div>
-          [题](表达式求值_牛客题霸_牛客网 (nowcoder.com))   代码 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970class Solution &#123;  public
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-21 13:55" pubdate>
-              2023-04-21
+            <time datetime="2023-04-17 11:01" pubdate>
+              2023-04-17
             </time>
           </div>
         
@@ -624,7 +624,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/23/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/#board">22</a><a class="page-number" href="/page/23/#board">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/#board">25</a><a class="page-number" href="/page/26/#board">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/#board">28</a><a class="extend next" rel="next" href="/page/25/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/23/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/#board">22</a><a class="page-number" href="/page/23/#board">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/#board">25</a><a class="page-number" href="/page/26/#board">26</a><a class="page-number" href="/page/27/#board">27</a><a class="extend next" rel="next" href="/page/25/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
