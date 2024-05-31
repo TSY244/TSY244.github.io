@@ -234,7 +234,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/05/26/web/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87waf/" target="_self">
         <div>
-          http 上传文件数据包的解析文件上传的本质就是客户端的post 请求，前端需要指定enctype 为 multipart&#x2F;from-data 才能正常上传 可以先尝试分析一下一个文件上传的包，使用uploadlabs进行尝试 参考文章 干货 | 最全的文件上传漏洞之WAF拦截绕过总结-腾讯云开发者社区-腾讯云 (tencent.com)   【WAF Bypass】文件上传绕过waf姿
+          php 上传文件的步骤实现思路 传文件 取文件 移动文件  必备知识 $_FILES  $_FILES 是一个超全局变量二位数组 第一个参数是表单上传文件 input 的name属性值，第二个下标可以是 “name”, “type”, “size”, “tmp_name” 或 “error”  $_FILES数组内容如下:$_FILES[s’myFile’][‘name’] 客户端文件的原名称。$
         </div>
       </a>
 
@@ -427,7 +427,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/05/11/src/%E7%AE%80%E5%8D%95%E7%9A%84%E6%8D%A1%E6%BC%8F%E6%BC%8F%E6%B4%9E/" target="_self">
         <div>
-          dig  测试邮箱  测试dns 域传送 首先 1dig ns 根域名  然后根据  中  部分做测试 1dig axfr @dns 根域名   go 语言内存泄露 使用web 目录扫描工具进行扫描的过程中如果出现了 c 路径，可以尝试访问  url 跳转 出现在返回某一个url 时 当退出的时候触发了某一个这个漏洞，如果改了域名之后是302 说明是存在该漏洞  并发 使用bp 插件进行爆破
+          dig  测试邮箱  swaks –body “钓鱼邮件测试” –header “Subject:钓鱼测试” -t @163.com -f  “&#x74;&#x65;&#115;&#x74;&#x40;&#x62;&#97;&#x69;&#x64;&#117;&#x2e;&#99;&#111;&#109;“   测试dns 域传送 首先 1dig ns 根域名  然后根据  中  部分做测试
         </div>
       </a>
 

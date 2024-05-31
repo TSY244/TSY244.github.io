@@ -16,18 +16,18 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="dig  测试邮箱  测试dns 域传送 首先 1dig ns 根域名  然后根据  中  部分做测试 1dig axfr @dns 根域名   go 语言内存泄露 使用web 目录扫描工具进行扫描的过程中如果出现了 c 路径，可以尝试访问  url 跳转 出现在返回某一个url 时 当退出的时候触发了某一个这个漏洞，如果改了域名之后是302 说明是存在该漏洞  并发 使用bp 插件进行爆破">
+    <meta name="description" content="dig  测试邮箱  swaks –body “钓鱼邮件测试” –header “Subject:钓鱼测试” -t @163.com -f  “&amp;#x74;&amp;#x65;&amp;#115;&amp;#x74;&amp;#x40;&amp;#x62;&amp;#97;&amp;#x69;&amp;#x64;&amp;#117;&amp;#x2e;&amp;#99;&amp;#111;&amp;#109;“   测试dns 域传送 首先 1dig ns 根域名  然后根据  中  部分做测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单的捡漏漏洞">
 <meta property="og:url" content="https://tsy244.github.io/2024/05/11/src/%E7%AE%80%E5%8D%95%E7%9A%84%E6%8D%A1%E6%BC%8F%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="dig  测试邮箱  测试dns 域传送 首先 1dig ns 根域名  然后根据  中  部分做测试 1dig axfr @dns 根域名   go 语言内存泄露 使用web 目录扫描工具进行扫描的过程中如果出现了 c 路径，可以尝试访问  url 跳转 出现在返回某一个url 时 当退出的时候触发了某一个这个漏洞，如果改了域名之后是302 说明是存在该漏洞  并发 使用bp 插件进行爆破">
+<meta property="og:description" content="dig  测试邮箱  swaks –body “钓鱼邮件测试” –header “Subject:钓鱼测试” -t @163.com -f  “&amp;#x74;&amp;#x65;&amp;#115;&amp;#x74;&amp;#x40;&amp;#x62;&amp;#97;&amp;#x69;&amp;#x64;&amp;#117;&amp;#x2e;&amp;#99;&amp;#111;&amp;#109;“   测试dns 域传送 首先 1dig ns 根域名  然后根据  中  部分做测试">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/src/image-20240511005640488.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/src/image-20240511005705421.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/src/image-20240519141645770.png">
 <meta property="article:published_time" content="2024-05-10T16:54:26.000Z">
-<meta property="article:modified_time" content="2024-05-24T05:20:37.683Z">
+<meta property="article:modified_time" content="2024-05-27T12:39:14.349Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="src">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          728 words
+          2.1k words
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          7 mins
+          18 mins
         
       </span>
     
@@ -289,6 +289,9 @@
 <li><p>dig</p>
 <ul>
 <li><p>测试邮箱</p>
+<blockquote>
+<p>swaks –body “钓鱼邮件测试” –header “Subject:钓鱼测试” -t @163.com -f  “<a href="mailto:&#x74;&#x65;&#115;&#x74;&#x40;&#x62;&#97;&#x69;&#x64;&#117;&#x2e;&#99;&#111;&#109;">&#x74;&#x65;&#115;&#x74;&#x40;&#x62;&#97;&#x69;&#x64;&#117;&#x2e;&#99;&#111;&#109;</a>“</p>
+</blockquote>
 </li>
 <li><p>测试dns 域传送</p>
 <p>首先</p>
@@ -310,6 +313,24 @@
 <li><p>url 跳转</p>
 <p>出现在返回某一个url 时</p>
 <p>当退出的时候触发了某一个这个漏洞，如果改了域名之后是302 说明是存在该漏洞</p>
+<p>绕过技巧</p>
+<p>原本是：?logout&#x3D;<a target="_blank" rel="noopener" href="http://www.source.com/">http://www.source.com</a></p>
+<blockquote>
+<p>?logout&#x3D;<a target="_blank" rel="noopener" href="http://www.test.com/">http://www.test.com</a></p>
+<p>?logout&#x3D;<a target="_blank" rel="noopener" href="http://www.test.com/">www.test.com</a></p>
+<p>?logout&#x3D;&#x2F;<a target="_blank" rel="noopener" href="http://www.test.com/">www.test.com</a></p>
+<p>?logout&#x3D;&#x2F;&#x2F;<a target="_blank" rel="noopener" href="http://www.test.com/">www.test.com</a></p>
+<p>?logout&#x3D;&#x2F;&#x2F;&#x2F;<a target="_blank" rel="noopener" href="http://www.test.com/">www.test.com</a></p>
+<p>?logout&#x3D;.test.com</p>
+<p>?logout&#x3D;.test</p>
+<p>?logout&#x3D;<a target="_blank" rel="noopener" href="http://www.source.com@http//www.test.com">http://www.source.com@http://www.test.com</a></p>
+<p>?logout&#x3D;<a target="_blank" rel="noopener" href="http://www.source.com/http://www.test.com">http://www.source.com\http://www.test.com</a></p>
+<p>?logout&#x3D;<a target="_blank" rel="noopener" href="http://www.source.com///http://www.test.com">http://www.source.com\\\http://www.test.com</a></p>
+<p>?logout&#x3D;<a target="_blank" rel="noopener" href="http://www.source.com/?http://www.test.com">http://www.source.com?http://www.test.com</a></p>
+<p>?logout&#x3D;<a target="_blank" rel="noopener" href="http://www.source.com/#http://www.test.com">http://www.source.com#http://www.test.com</a></p>
+<p>?logout&#x3D;<a target="_blank" rel="noopener" href="http://www.source.com/%0a/test.com">http://www.source.com/%0a/test.com</a></p>
+<p>?logout&#x3D;<a target="_blank" rel="noopener" href="http://www.source.com/%5c%5ctest.com/%252e%252e%252f">http://www.source.com/%5c%5ctest.com/%252e%252e%252f</a></p>
+</blockquote>
 </li>
 <li><p>并发</p>
 <p>使用bp 插件进行爆破 </p>
@@ -379,6 +400,16 @@
 </ol>
 </li>
 </ul>
+<ol start="11">
+<li><p>地图api </p>
+<blockquote>
+<p>(web.body&#x3D;”webapi.amap.com”||web.body&#x3D;”api.map.baidu.com”||web.body&#x3D;”apis.map.qq.com”||web.body&#x3D;”map.qq.com&#x2F;api&#x2F;js?v&#x3D;”)&amp;&amp;domain.suffix&#x3D;”<strong>根域名替换</strong>“</p>
+<p>fofa：(body&#x3D;”webapi.amap.com”||body&#x3D;”api.map.baidu.com”||body&#x3D;”apis.map.qq.com”||body&#x3D;”map.qq.com&#x2F;api&#x2F;js?v&#x3D;”)&amp;&amp;domain&#x3D;”<strong>根域名替换</strong>“</p>
+<p>钟馗之眼：(Banner:”webapi.amap.com” Banner:”api.map.baidu.com” Banner:”map.qq.com&#x2F;api”)+site:”<strong>根域名替换</strong>“</p>
+<p>360QUAKE:domain:”<strong>根域名替换</strong>“ AND (response: “webapi.amap.com” OR response: “api.map.baidu.com” OR response: “map.qq.com”)</p>
+</blockquote>
+</li>
+</ol>
 
                 
               </div>
