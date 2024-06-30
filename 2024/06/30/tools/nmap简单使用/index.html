@@ -16,30 +16,24 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="信息收集 ip 查询   端口查询    web 渗透21 端口 尝试一下弱口令 尝试一下anonymous 登录  80访问80   尝试爆破目录 没有啥价值  发现可能存在webdav 提权漏洞">
+    <meta name="description" content="主机发现 示例  12nmap -sn ip段nmap -sn  ip&#x2F;24    说明 该操作用于探测网络中活动的主机，对于初次进入到内网中，或者是想要了解当前的网络情况有用   端口扫描 基本扫描 1nmap ip  syn 扫描 又称为半开放扫描 1nmap -sS  tcp 扫描 又称为全开放 1nmap -sT  udp 扫描 1nmap -sU   说明      上述命令展示了不同类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目7">
-<meta property="og:url" content="https://tsy244.github.io/2024/06/27/%E9%A1%B9%E7%9B%AE7/index.html">
+<meta property="og:title" content="nmap简单使用">
+<meta property="og:url" content="https://tsy244.github.io/2024/06/30/tools/nmap%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="信息收集 ip 查询   端口查询    web 渗透21 端口 尝试一下弱口令 尝试一下anonymous 登录  80访问80   尝试爆破目录 没有啥价值  发现可能存在webdav 提权漏洞">
+<meta property="og:description" content="主机发现 示例  12nmap -sn ip段nmap -sn  ip&#x2F;24    说明 该操作用于探测网络中活动的主机，对于初次进入到内网中，或者是想要了解当前的网络情况有用   端口扫描 基本扫描 1nmap ip  syn 扫描 又称为半开放扫描 1nmap -sS  tcp 扫描 又称为全开放 1nmap -sT  udp 扫描 1nmap -sU   说明      上述命令展示了不同类">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628000654301.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001041355.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001144293.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001601684.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001953849.png">
-<meta property="article:published_time" content="2024-06-27T15:51:22.000Z">
-<meta property="article:modified_time" content="2024-06-27T16:30:47.459Z">
+<meta property="article:published_time" content="2024-06-30T13:56:43.000Z">
+<meta property="article:modified_time" content="2024-06-30T14:06:07.553Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="靶场记录">
+<meta property="article:tag" content="tools">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628000654301.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>项目7 - AU9U5T</title>
+  <title>nmap简单使用 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="项目7"></span>
+            <span id="subtitle" data-typed-text="nmap简单使用"></span>
           
         </div>
 
@@ -221,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-27 23:51" pubdate>
-          June 27, 2024 pm
+        <time datetime="2024-06-30 21:56" pubdate>
+          June 30, 2024 pm
         </time>
       </span>
     
@@ -233,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          76 words
+          343 words
         
       </span>
     
@@ -244,7 +238,7 @@
         
         
         
-          1 mins
+          3 mins
         
       </span>
     
@@ -282,32 +276,59 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">项目7</h1>
+            <h1 style="display: none">nmap简单使用</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><ol>
-<li><p>ip 查询</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628000654301.png" srcset="/img/loading.gif" lazyload alt="image-20240628000654301"></p>
+                <h1 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h1><ol>
+<li><p>示例 </p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">nmap</span> -<span class="hljs-meta">sn</span> <span class="hljs-built_in">ip</span>段<br><span class="hljs-symbol">nmap</span> -<span class="hljs-meta">sn</span>  <span class="hljs-built_in">ip</span>/<span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
+
+
 </li>
-<li><p>端口查询</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001041355.png" srcset="/img/loading.gif" lazyload alt="image-20240628001041355"></p>
+<li><p>说明</p>
+<p>该操作用于探测网络中活动的主机，对于初次进入到内网中，或者是想要了解当前的网络情况有用</p>
 </li>
 </ol>
-<h1 id="web-渗透"><a href="#web-渗透" class="headerlink" title="web 渗透"></a>web 渗透</h1><h2 id="21-端口"><a href="#21-端口" class="headerlink" title="21 端口"></a>21 端口</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001144293.png" srcset="/img/loading.gif" lazyload alt="image-20240628001144293"></p>
-<p>尝试一下弱口令</p>
-<p>尝试一下anonymous 登录</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001601684.png" srcset="/img/loading.gif" lazyload alt="image-20240628001601684"></p>
-<h2 id="80"><a href="#80" class="headerlink" title="80"></a>80</h2><p>访问80</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001953849.png" srcset="/img/loading.gif" lazyload alt="image-20240628001953849"></p>
-<ol>
-<li><p>尝试爆破目录</p>
-<p>没有啥价值</p>
+<h1 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h1><ol>
+<li><p>基本扫描</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">nmap</span> <span class="hljs-built_in">ip</span><br></code></pre></td></tr></table></figure>
 </li>
-<li><p>发现可能存在webdav 提权漏洞</p>
+<li><p>syn 扫描</p>
+<p>又称为半开放扫描</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">nmap -sS</span><br></code></pre></td></tr></table></figure>
 </li>
-<li></li>
+<li><p>tcp 扫描</p>
+<p>又称为全开放</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">nmap -<span class="hljs-keyword">sT</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>udp 扫描</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">nmap -sU</span> <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>说明</p>
+</li>
+</ol>
+<p>   上述命令展示了不同类型的端口扫描，其中syn 扫描时最快的，并且很隐蔽</p>
+<h1 id="服务和版本探测"><a href="#服务和版本探测" class="headerlink" title="服务和版本探测"></a>服务和版本探测</h1><ol>
+<li><p>命令示例</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">nmap</span> -sV <span class="hljs-built_in">ip</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="操作系统探测"><a href="#操作系统探测" class="headerlink" title="操作系统探测"></a>操作系统探测</h1><ol>
+<li><p>命令示例</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">nmap</span> -O <span class="hljs-built_in">ip</span> <br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="脚本扫描"><a href="#脚本扫描" class="headerlink" title="脚本扫描"></a>脚本扫描</h1><ol>
+<li><p>命令示例</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">nmap <span class="hljs-comment">--script vuln ip</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="高级扫描"><a href="#高级扫描" class="headerlink" title="高级扫描"></a>高级扫描</h1><ol>
+<li><p>命令示例</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> -p <span class="hljs-number">22</span>,<span class="hljs-number">80</span>,<span class="hljs-number">443</span> -A <span class="hljs-number">192.168.1.1</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>说明</p>
+<p>上述命令限制了扫描范围至端口22、80、443，并使用<code>-A</code>选项进行更加积极的扫描，包括OS检测、版本检测和脚本扫描。</p>
+</li>
 </ol>
 
                 
@@ -321,7 +342,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/">#靶场记录</a>
+        <a href="/tags/tools/">#tools</a>
       
     </div>
   
@@ -333,8 +354,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>项目7</div>
-      <div>https://tsy244.github.io/2024/06/27/项目7/</div>
+      <div>nmap简单使用</div>
+      <div>https://tsy244.github.io/2024/06/30/tools/nmap简单使用/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +367,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 27, 2024</div>
+          <div>June 30, 2024</div>
         </div>
       
       
@@ -382,8 +403,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/27/%E6%B8%97%E9%80%8F/tomcat/" title="tomcat">
-                        <span class="hidden-mobile">tomcat</span>
+                      <a href="/2024/06/30/web/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/" title="floor报错注入">
+                        <span class="hidden-mobile">floor报错注入</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
