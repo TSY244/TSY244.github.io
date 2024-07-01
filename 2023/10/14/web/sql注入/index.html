@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231118224251531.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/sql/image-20231118224412973.png">
 <meta property="article:published_time" content="2023-10-14T07:51:33.000Z">
-<meta property="article:modified_time" content="2024-05-26T02:20:19.564Z">
+<meta property="article:modified_time" content="2024-06-30T16:46:03.208Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
@@ -245,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.3k words
+          8.8k words
         
       </span>
     
@@ -256,7 +256,7 @@
         
         
         
-          69 mins
+          74 mins
         
       </span>
     
@@ -394,6 +394,7 @@
 <h1 id="sql注入的分类"><a href="#sql注入的分类" class="headerlink" title="sql注入的分类"></a>sql注入的分类</h1><h2 id="根据变量分"><a href="#根据变量分" class="headerlink" title="根据变量分"></a>根据变量分</h2><ol>
 <li>字符型</li>
 <li>数字型</li>
+<li>搜索型注入</li>
 </ol>
 <h2 id="根据位置分"><a href="#根据位置分" class="headerlink" title="根据位置分"></a>根据位置分</h2><ol>
 <li>get</li>
@@ -556,7 +557,25 @@
 <li><p>求字段名</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> users <span class="hljs-keyword">WHERE</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> ASCII(SUBSTR((<span class="hljs-keyword">select</span> username <span class="hljs-keyword">from</span> users  limit <span class="hljs-number">0</span>,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>,<span class="hljs-number">1</span>))  <span class="hljs-operator">=</span> <span class="hljs-number">68</span><br><br></code></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="时间注入"><a href="#时间注入" class="headerlink" title="时间注入"></a>时间注入</h2><h2 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h2><h1 id="sql绕过"><a href="#sql绕过" class="headerlink" title="sql绕过"></a>sql绕过</h1><p>由于部分程序会对sql的语法进行检测，所以我们的sql语句不能再后端执行，我们需要绕过才行</p>
+<h2 id="时间注入"><a href="#时间注入" class="headerlink" title="时间注入"></a>时间注入</h2><h2 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h2><h2 id="搜索型注入"><a href="#搜索型注入" class="headerlink" title="搜索型注入"></a>搜索型注入</h2><p>搜索型的注入也可以被叫做时文本框注入</p>
+<p>本质上就是模糊查询，使用like 等方式</p>
+<h3 id="mysql-的模糊查询"><a href="#mysql-的模糊查询" class="headerlink" title="mysql  的模糊查询"></a>mysql  的模糊查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">&#x27;%a&#x27;     //以a结尾的数据<br>&#x27;a%&#x27;     //以a开头的数据<br>&#x27;%a%&#x27;    //含有a的数据<br>&#x27;_a_&#x27;    //三位且中间字母是a的<br>&#x27;_a&#x27;     //两位且结尾字母是a的<br>&#x27;a_&#x27;     //两位且开头字母是a的<br></code></pre></td></tr></table></figure>
+
+<h4 id="判断方式"><a href="#判断方式" class="headerlink" title="判断方式"></a>判断方式</h4><ol>
+<li><p>搜索 <code>keywords&#39;</code> ，如果出错的话，有90%的可能性存在注入；</p>
+<p>可以观察报错信息中是否含有% 等字符</p>
+</li>
+<li><p>搜索 <code>keywords%&#39; and 1=1 and &#39;%&#39;=&#39;</code> （这个语句的功能就相当于普通SQL注入的 <code>and 1=1</code> ）看返回情况；</p>
+</li>
+<li><p>搜索 <code>keywords%&#39; and 1=2 and &#39;%&#39;=&#39;</code> （这个语句的功能就相当于普通SQL注入的 <code>and 1=2</code> ）看返回情况；</p>
+</li>
+<li><p>根据2和3的返回情况来判断是不是搜索型文本框注入了。</p>
+</li>
+</ol>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><span class="hljs-string">&#x27;and 1=1 and &#x27;</span><span class="hljs-meta">%</span><span class="hljs-string">&#x27;=&#x27;</span><br><span class="hljs-meta">%</span><span class="hljs-string">&#x27; and 1=1 --+&#x27;</span><br><span class="hljs-meta">%</span><span class="hljs-string">&#x27; and 1=1 and &#x27;</span><span class="hljs-meta">%</span><span class="hljs-string">&#x27;=&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>剩下的就是闭合，然后利用union 进行注入就可以了</p>
+<h1 id="sql绕过"><a href="#sql绕过" class="headerlink" title="sql绕过"></a>sql绕过</h1><p>由于部分程序会对sql的语法进行检测，所以我们的sql语句不能再后端执行，我们需要绕过才行</p>
 <h2 id="嵌套双写绕过"><a href="#嵌套双写绕过" class="headerlink" title="嵌套双写绕过"></a>嵌套双写绕过</h2><p>ununionion</p>
 <h2 id="大小写混淆"><a href="#大小写混淆" class="headerlink" title="大小写混淆"></a>大小写混淆</h2><p>union Union</p>
 <h2 id="通过内联注释"><a href="#通过内联注释" class="headerlink" title="通过内联注释"></a>通过内联注释</h2><h2 id="通过空格绕过"><a href="#通过空格绕过" class="headerlink" title="通过空格绕过"></a>通过空格绕过</h2><p>两个空格等于一个tab，所以我们使用  %a0&#x3D;空格的方式</p>
