@@ -16,20 +16,23 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="信息收集 ip 查询   端口查询    web 渗透21 端口 尝试一下弱口令 尝试一下anonymous 登录  80访问80   尝试爆破目录 没有啥价值  发现可能存在webdav 提权漏洞">
+    <meta name="description" content="信息收集 ip 查询   端口查询    web 渗透可以尝试使用ip 反查查域名，可以得到域名是 www.moonlab.com 修改host 文件  21 端口 尝试一下弱口令 尝试一下anonymous 登录  80访问80   尝试爆破目录 没有啥价值  发现可能存在webdav 提权漏洞  发现存在waf   可能存在安全狗，然后因为扫描目录的速率过大，导致被封锁了  可以降低线程数量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="项目7">
 <meta property="og:url" content="https://tsy244.github.io/2024/06/27/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE7/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="信息收集 ip 查询   端口查询    web 渗透21 端口 尝试一下弱口令 尝试一下anonymous 登录  80访问80   尝试爆破目录 没有啥价值  发现可能存在webdav 提权漏洞">
+<meta property="og:description" content="信息收集 ip 查询   端口查询    web 渗透可以尝试使用ip 反查查域名，可以得到域名是 www.moonlab.com 修改host 文件  21 端口 尝试一下弱口令 尝试一下anonymous 登录  80访问80   尝试爆破目录 没有啥价值  发现可能存在webdav 提权漏洞  发现存在waf   可能存在安全狗，然后因为扫描目录的速率过大，导致被封锁了  可以降低线程数量">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628000654301.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001041355.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE7/image-20240721095726441.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE7/image-20240721095805895.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001144293.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001601684.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001953849.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE7/image-20240721094804641.png">
 <meta property="article:published_time" content="2024-06-27T15:51:22.000Z">
-<meta property="article:modified_time" content="2024-06-27T16:30:47.459Z">
+<meta property="article:modified_time" content="2024-07-21T02:04:26.279Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="靶场记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          76 words
+          172 words
         
       </span>
     
@@ -244,7 +247,7 @@
         
         
         
-          1 mins
+          2 mins
         
       </span>
     
@@ -295,7 +298,10 @@
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001041355.png" srcset="/img/loading.gif" lazyload alt="image-20240628001041355"></p>
 </li>
 </ol>
-<h1 id="web-渗透"><a href="#web-渗透" class="headerlink" title="web 渗透"></a>web 渗透</h1><h2 id="21-端口"><a href="#21-端口" class="headerlink" title="21 端口"></a>21 端口</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001144293.png" srcset="/img/loading.gif" lazyload alt="image-20240628001144293"></p>
+<h1 id="web-渗透"><a href="#web-渗透" class="headerlink" title="web 渗透"></a>web 渗透</h1><p>可以尝试使用ip 反查查域名，可以得到域名是 <a target="_blank" rel="noopener" href="http://www.moonlab.com/">www.moonlab.com</a></p>
+<p>修改host 文件</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE7/image-20240721095726441.png" srcset="/img/loading.gif" lazyload alt="image-20240721095726441"><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE7/image-20240721095805895.png" srcset="/img/loading.gif" lazyload alt="image-20240721095805895"></p>
+<h2 id="21-端口"><a href="#21-端口" class="headerlink" title="21 端口"></a>21 端口</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001144293.png" srcset="/img/loading.gif" lazyload alt="image-20240628001144293"></p>
 <p>尝试一下弱口令</p>
 <p>尝试一下anonymous 登录</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001601684.png" srcset="/img/loading.gif" lazyload alt="image-20240628001601684"></p>
@@ -307,7 +313,13 @@
 </li>
 <li><p>发现可能存在webdav 提权漏洞</p>
 </li>
-<li></li>
+<li><p>发现存在waf </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE7/image-20240721094804641.png" srcset="/img/loading.gif" lazyload alt="image-20240721094804641"></p>
+<p>可能存在安全狗，然后因为扫描目录的速率过大，导致被封锁了</p>
+</li>
+<li><p>可以降低线程数量</p>
+<p>添加sleep 时间</p>
+</li>
 </ol>
 
                 
