@@ -1,0 +1,744 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在开发高效且可维护的 Go 应用程序时，处理超时、取消操作和传递请求范围的数据变得至关重要。 这时，Go 标准库中的 context 包就显得尤其重要了，它提供了在不同 API 层级之间传递取消信号、超时时间、截止日期，以及其他特定请求的值的能力。 简介contextcontext 包允许你传递可取消的信号、超时时间、截止日期，以及跨 API 边界的请求范围的数据。在并发编程中，它非常有用，尤其是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="context简单入门">
+<meta property="og:url" content="https://tsy244.github.io/2024/08/13/go/context%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="在开发高效且可维护的 Go 应用程序时，处理超时、取消操作和传递请求范围的数据变得至关重要。 这时，Go 标准库中的 context 包就显得尤其重要了，它提供了在不同 API 层级之间传递取消信号、超时时间、截止日期，以及其他特定请求的值的能力。 简介contextcontext 包允许你传递可取消的信号、超时时间、截止日期，以及跨 API 边界的请求范围的数据。在并发编程中，它非常有用，尤其是">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/go/1460000040917754">
+<meta property="article:published_time" content="2024-08-13T01:10:24.000Z">
+<meta property="article:modified_time" content="2024-08-13T04:32:56.881Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="go">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/go/1460000040917754">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>context简单入门 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="context简单入门"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-13 09:10" pubdate>
+          August 13, 2024 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          97 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">context简单入门</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>在开发高效且可维护的 Go 应用程序时，处理超时、取消操作和传递请求范围的数据变得至关重要。</p>
+<p>这时，Go 标准库中的 <code>context</code> 包就显得尤其重要了，它提供了在不同 API 层级之间传递取消信号、超时时间、截止日期，以及其他特定请求的值的能力。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="context"><a href="#context" class="headerlink" title="context"></a>context</h2><p><code>context</code> 包允许你传递可取消的信号、超时时间、截止日期，以及跨 API 边界的请求范围的数据。在并发编程中，它非常有用，尤其是处理那些可能需要提前停止的长时间运行操作。</p>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><p>Go 语言的 <code>context</code> 包提供了一系列方法，用于创建上下文（Context），这些上下文可以帮助我们管理请求的生命周期、取消信号、超时、截止日期和传递请求范围的数据。</p>
+<p>官方建议将context 作为第一个参数，并且不断的透传下去，这样的效果就是整个项目中到处都是context。但是仅仅使用透传将context 传递下去并不能做到，取消信号，超时等功能，context 本身的机制采用的是通知机制，简单的透传并不能起作用。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>  &#123;<br>    ctx,cancel := context.WithTimeout(context.Background(),<span class="hljs-number">10</span> * time.Second)<br>    <span class="hljs-keyword">defer</span> cancel()<br>    <span class="hljs-keyword">go</span> Monitor(ctx)<br><br>    time.Sleep(<span class="hljs-number">20</span> * time.Second)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Monitor</span><span class="hljs-params">(ctx context.Context)</span></span>  &#123;<br>    <span class="hljs-keyword">for</span> &#123;<br>        fmt.Print(<span class="hljs-string">&quot;monitor&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在上面的例子中，虽然context 进行了透传，但是没有正确的使用就不会起作用</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="父context"><a href="#父context" class="headerlink" title="父context"></a>父context</h2><p>context 本身就是一个interface{}</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Context <span class="hljs-keyword">interface</span> &#123;<br>	<span class="hljs-comment">// Deadline returns the time when work done on behalf of this context</span><br>	<span class="hljs-comment">// should be canceled. Deadline returns ok==false when no deadline is</span><br>	<span class="hljs-comment">// set. Successive calls to Deadline return the same results.</span><br>	Deadline() (deadline time.Time, ok <span class="hljs-type">bool</span>)<br><br>	<span class="hljs-comment">// Done returns a channel that&#x27;s closed when work done on behalf of this</span><br>	<span class="hljs-comment">// context should be canceled. Done may return nil if this context can</span><br>	<span class="hljs-comment">// never be canceled. Successive calls to Done return the same value.</span><br>	<span class="hljs-comment">// The close of the Done channel may happen asynchronously,</span><br>	<span class="hljs-comment">// after the cancel function returns.</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// WithCancel arranges for Done to be closed when cancel is called;</span><br>	<span class="hljs-comment">// WithDeadline arranges for Done to be closed when the deadline</span><br>	<span class="hljs-comment">// expires; WithTimeout arranges for Done to be closed when the timeout</span><br>	<span class="hljs-comment">// elapses.</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// Done is provided for use in select statements:</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">//  // Stream generates values with DoSomething and sends them to out</span><br>	<span class="hljs-comment">//  // until DoSomething returns an error or ctx.Done is closed.</span><br>	<span class="hljs-comment">//  func Stream(ctx context.Context, out chan&lt;- Value) error &#123;</span><br>	<span class="hljs-comment">//  	for &#123;</span><br>	<span class="hljs-comment">//  		v, err := DoSomething(ctx)</span><br>	<span class="hljs-comment">//  		if err != nil &#123;</span><br>	<span class="hljs-comment">//  			return err</span><br>	<span class="hljs-comment">//  		&#125;</span><br>	<span class="hljs-comment">//  		select &#123;</span><br>	<span class="hljs-comment">//  		case &lt;-ctx.Done():</span><br>	<span class="hljs-comment">//  			return ctx.Err()</span><br>	<span class="hljs-comment">//  		case out &lt;- v:</span><br>	<span class="hljs-comment">//  		&#125;</span><br>	<span class="hljs-comment">//  	&#125;</span><br>	<span class="hljs-comment">//  &#125;</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// See https://blog.golang.org/pipelines for more examples of how to use</span><br>	<span class="hljs-comment">// a Done channel for cancellation.</span><br>	Done() &lt;-<span class="hljs-keyword">chan</span> <span class="hljs-keyword">struct</span>&#123;&#125;<br><br>	<span class="hljs-comment">// If Done is not yet closed, Err returns nil.</span><br>	<span class="hljs-comment">// If Done is closed, Err returns a non-nil error explaining why:</span><br>	<span class="hljs-comment">// Canceled if the context was canceled</span><br>	<span class="hljs-comment">// or DeadlineExceeded if the context&#x27;s deadline passed.</span><br>	<span class="hljs-comment">// After Err returns a non-nil error, successive calls to Err return the same error.</span><br>	Err() <span class="hljs-type">error</span><br><br>	<span class="hljs-comment">// Value returns the value associated with this context for key, or nil</span><br>	<span class="hljs-comment">// if no value is associated with key. Successive calls to Value with</span><br>	<span class="hljs-comment">// the same key returns the same result.</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// Use context values only for request-scoped data that transits</span><br>	<span class="hljs-comment">// processes and API boundaries, not for passing optional parameters to</span><br>	<span class="hljs-comment">// functions.</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// A key identifies a specific value in a Context. Functions that wish</span><br>	<span class="hljs-comment">// to store values in Context typically allocate a key in a global</span><br>	<span class="hljs-comment">// variable then use that key as the argument to context.WithValue and</span><br>	<span class="hljs-comment">// Context.Value. A key can be any type that supports equality;</span><br>	<span class="hljs-comment">// packages should define keys as an unexported type to avoid</span><br>	<span class="hljs-comment">// collisions.</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// Packages that define a Context key should provide type-safe accessors</span><br>	<span class="hljs-comment">// for the values stored using that key:</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 	// Package user defines a User type that&#x27;s stored in Contexts.</span><br>	<span class="hljs-comment">// 	package user</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 	import &quot;context&quot;</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 	// User is the type of value stored in the Contexts.</span><br>	<span class="hljs-comment">// 	type User struct &#123;...&#125;</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 	// key is an unexported type for keys defined in this package.</span><br>	<span class="hljs-comment">// 	// This prevents collisions with keys defined in other packages.</span><br>	<span class="hljs-comment">// 	type key int</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 	// userKey is the key for user.User values in Contexts. It is</span><br>	<span class="hljs-comment">// 	// unexported; clients use user.NewContext and user.FromContext</span><br>	<span class="hljs-comment">// 	// instead of using this key directly.</span><br>	<span class="hljs-comment">// 	var userKey key</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 	// NewContext returns a new Context that carries value u.</span><br>	<span class="hljs-comment">// 	func NewContext(ctx context.Context, u *User) context.Context &#123;</span><br>	<span class="hljs-comment">// 		return context.WithValue(ctx, userKey, u)</span><br>	<span class="hljs-comment">// 	&#125;</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 	// FromContext returns the User value stored in ctx, if any.</span><br>	<span class="hljs-comment">// 	func FromContext(ctx context.Context) (*User, bool) &#123;</span><br>	<span class="hljs-comment">// 		u, ok := ctx.Value(userKey).(*User)</span><br>	<span class="hljs-comment">// 		return u, ok</span><br>	<span class="hljs-comment">// 	&#125;</span><br>	Value(key any) any<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>Deadline</strong></p>
+<p>简单理解为，过期时间是什么时候，通过这个方法，就可以获取停止的时间</p>
+<p><strong>Done</strong></p>
+<p>done 本身是一个阻塞的channel </p>
+<p>当已经完成了context 阻塞就会消失</p>
+<p><strong>Err</strong></p>
+<p>如果Done尚未关闭，Err返回nil。<br>如果Done关闭，Err将返回一个非零错误，解释原因：<br>如果上下文被取消，则取消<br>如果上下文的截止日期已过，则为DeadlineExceeded。<br>在Err返回非零错误之后，对Err的连续调用将返回相同的错误。</p>
+<p><strong>Value</strong></p>
+<p>可以用于取值，可以 简单的理解</p>
+<p>这个Value 可以用于取最下层的context 的值，如果被设置好了</p>
+<p>创建context 的方式有两个函数</p>
+<p><code>context.TODO</code> 和<code>context.Backgroud</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// Background returns a non-nil, empty Context. It is never canceled, has no</span><br><span class="hljs-comment">// values, and has no deadline. It is typically used by the main function,</span><br><span class="hljs-comment">// initialization, and tests, and as the top-level Context for incoming</span><br><span class="hljs-comment">// requests.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Background</span><span class="hljs-params">()</span></span> Context &#123;<br>	<span class="hljs-keyword">return</span> background<br>&#125;<br><br><span class="hljs-comment">// 下方代码从源码删减得到，只为更加直观展示对应的变量</span><br><span class="hljs-keyword">var</span> (<br>	background = <span class="hljs-built_in">new</span>(emptyCtx)<br>)<br><br><span class="hljs-keyword">type</span> emptyCtx <span class="hljs-type">int</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(*emptyCtx)</span></span> Deadline() (deadline time.Time, ok <span class="hljs-type">bool</span>) &#123;<br>	<span class="hljs-keyword">return</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(*emptyCtx)</span></span> Done() &lt;-<span class="hljs-keyword">chan</span> <span class="hljs-keyword">struct</span>&#123;&#125; &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(*emptyCtx)</span></span> Err() <span class="hljs-type">error</span> &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(*emptyCtx)</span></span> Value(key any) any &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(e *emptyCtx)</span></span> String() <span class="hljs-type">string</span> &#123;<br>	<span class="hljs-keyword">switch</span> e &#123;<br>	<span class="hljs-keyword">case</span> background:<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;context.Background&quot;</span><br>	<span class="hljs-keyword">case</span> todo:<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;context.TODO&quot;</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;unknown empty Context&quot;</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>可以发现使用Backgroud 创建的channel 是最顶层的channel ，不会被取消，没有值，也不会deadline。通过观察源码发现，所谓的channel 其实就是一个空context</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// TODO returns a non-nil, empty Context. Code should use context.TODO when</span><br><span class="hljs-comment">// it&#x27;s unclear which Context to use or it is not yet available (because the</span><br><span class="hljs-comment">// surrounding function has not yet been extended to accept a Context</span><br><span class="hljs-comment">// parameter).</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TODO</span><span class="hljs-params">()</span></span> Context &#123;<br>	<span class="hljs-keyword">return</span> todo<br>&#125;<br><br><span class="hljs-comment">// 下方代码从源码删减得到，只为更加直观展示对应的变量</span><br><span class="hljs-keyword">var</span> (<br>	todo = <span class="hljs-built_in">new</span>(emptyCtx)<br>)<br><br><span class="hljs-keyword">type</span> emptyCtx <span class="hljs-type">int</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(*emptyCtx)</span></span> Deadline() (deadline time.Time, ok <span class="hljs-type">bool</span>) &#123;<br>	<span class="hljs-keyword">return</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(*emptyCtx)</span></span> Done() &lt;-<span class="hljs-keyword">chan</span> <span class="hljs-keyword">struct</span>&#123;&#125; &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(*emptyCtx)</span></span> Err() <span class="hljs-type">error</span> &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(*emptyCtx)</span></span> Value(key any) any &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(e *emptyCtx)</span></span> String() <span class="hljs-type">string</span> &#123;<br>	<span class="hljs-keyword">switch</span> e &#123;<br>	<span class="hljs-keyword">case</span> background:<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;context.Background&quot;</span><br>	<span class="hljs-keyword">case</span> todo:<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;context.TODO&quot;</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;unknown empty Context&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以发现，todo 和backgroud 创建的context 都是空context</p>
+<p>上面的两种方式是创建根<code>context</code>，不具备任何功能，所以在此称之为父context</p>
+<h2 id="子context"><a href="#子context" class="headerlink" title="子context"></a>子context</h2><p>可以使用下面的方法创建具有对应功能的context</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">WithCancel</span><span class="hljs-params">(parent Context)</span></span> (ctx Context, cancel CancelFunc)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">WithDeadline</span><span class="hljs-params">(parent Context, deadline time.Time)</span></span> (Context, CancelFunc)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">WithTimeout</span><span class="hljs-params">(parent Context, timeout time.Duration)</span></span> (Context, CancelFunc)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">WithValue</span><span class="hljs-params">(parent Context, key, val <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> Context<br></code></pre></td></tr></table></figure>
+
+<p>这些就具有对应的功能</p>
+<p>并且使用这些方法，创建的context 可以认为是父context 的一个衍生，当创建的数量够多了，就形成了一个context 树</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/go/1460000040917754" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>$图片取自<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040917752">【Go语言】小白也能看懂的context包详解：从入门到精通 - 个人文章 - SegmentFault 思否</a>$</p>
+<p>并且，我们可以依赖于我们创建的子节点创建新的context</p>
+<h2 id="WithValue携带数据"><a href="#WithValue携带数据" class="headerlink" title="WithValue携带数据"></a><code>WithValue</code>携带数据</h2><p>我们日常在业务开发中都希望能有一个<code>trace_id</code>能串联所有的日志，这就需要我们打印日志时能够获取到这个<code>trace_id</code>，在<code>python</code>中我们可以用<code>gevent.local</code>来传递，在<code>java</code>中我们可以用<code>ThreadLocal</code>来传递，在<code>Go</code>语言中我们就可以使用<code>Context</code>来传递，通过使用<code>WithValue</code>来创建一个携带<code>trace_id</code>的<code>context</code>，然后不断透传下去，打印日志时输出即可</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// WithValue returns a copy of parent in which the value associated with key is</span><br><span class="hljs-comment">// val.</span><br><span class="hljs-comment">//</span><br><span class="hljs-comment">// Use context Values only for request-scoped data that transits processes and</span><br><span class="hljs-comment">// APIs, not for passing optional parameters to functions.</span><br><span class="hljs-comment">//</span><br><span class="hljs-comment">// The provided key must be comparable and should not be of type</span><br><span class="hljs-comment">// string or any other built-in type to avoid collisions between</span><br><span class="hljs-comment">// packages using context. Users of WithValue should define their own</span><br><span class="hljs-comment">// types for keys. To avoid allocating when assigning to an</span><br><span class="hljs-comment">// interface&#123;&#125;, context keys often have concrete type</span><br><span class="hljs-comment">// struct&#123;&#125;. Alternatively, exported context key variables&#x27; static</span><br><span class="hljs-comment">// type should be a pointer or interface.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">WithValue</span><span class="hljs-params">(parent Context, key, val any)</span></span> Context &#123;<br>	<span class="hljs-keyword">if</span> parent == <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;cannot create context from nil parent&quot;</span>)<br>	&#125;<br>	<span class="hljs-keyword">if</span> key == <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;nil key&quot;</span>)<br>	&#125;<br>	<span class="hljs-keyword">if</span> !reflectlite.TypeOf(key).Comparable() &#123;<br>		<span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;key is not comparable&quot;</span>)<br>	&#125;<br>	<span class="hljs-keyword">return</span> &amp;valueCtx&#123;parent, key, val&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以查看下面的这个例子</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">const</span> (<br>	KEY = <span class="hljs-string">&quot;trace_id&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewRequestID</span><span class="hljs-params">()</span></span> <span class="hljs-type">string</span> &#123;<br>	<span class="hljs-keyword">return</span> strings.Replace(uuid.New().String(), <span class="hljs-string">&quot;-&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">-1</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewContextWithTraceID</span><span class="hljs-params">()</span></span> context.Context &#123;<br>	ctx := context.WithValue(context.Background(), KEY, NewRequestID())<br>	<span class="hljs-keyword">return</span> ctx<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">PrintLog</span><span class="hljs-params">(ctx context.Context, message <span class="hljs-type">string</span>)</span></span> &#123;<br>	fmt.Printf(<span class="hljs-string">&quot;%s|info|trace_id=%s|%s&quot;</span>, time.Now().Format(<span class="hljs-string">&quot;2006-01-02 15:04:05&quot;</span>), GetContextValue(ctx, KEY), message)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">GetContextValue</span><span class="hljs-params">(ctx context.Context, k <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">string</span> &#123;<br>	v, ok := ctx.Value(k).(<span class="hljs-type">string</span>)<br>	<span class="hljs-keyword">if</span> !ok &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> v<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ProcessEnter</span><span class="hljs-params">(ctx context.Context)</span></span> &#123;<br>	PrintLog(ctx, <span class="hljs-string">&quot;Golang梦工厂&quot;</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	ProcessEnter(NewContextWithTraceID())<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们基于<code>context.Background</code>创建一个携带<code>trace_id</code>的<code>ctx</code>，然后通过<code>context</code>树一起传递，从中派生的任何<code>context</code>都会获取此值，我们最后打印日志的时候就可以从<code>ctx</code>中取值输出到日志中。目前一些<code>RPC</code>框架都是支持了<code>Context</code>，所以<code>trace_id</code>的向下传递就更方便了。</p>
+<p>使用<code>WithValue</code> 的注意事项</p>
+<ul>
+<li>不建议使用<code>context</code>值传递关键参数，关键参数应该显示的声明出来，不应该隐式处理，<code>context</code>中最好是携带签名、<code>trace_id</code>这类值。</li>
+<li>因为携带<code>value</code>也是<code>key</code>、<code>value</code>的形式，为了避免<code>context</code>因多个包同时使用<code>context</code>而带来冲突，<code>key</code>建议采用内置类型。</li>
+<li>上面的例子我们获取<code>trace_id</code>是直接从当前<code>ctx</code>获取的，实际我们也可以获取父<code>context</code>中的<code>value</code>，在获取键值对是，我们先从当前<code>context</code>中查找，没有找到会在从父<code>context</code>中查找该键对应的值直到在某个父<code>context</code>中返回 <code>nil</code> 或者查找到对应的值。</li>
+<li><code>context</code>传递的数据中<code>key</code>、<code>value</code>都是<code>interface</code>类型，这种类型编译期无法确定类型，所以不是很安全，所以在类型断言时别忘了保证程序的健壮性。</li>
+</ul>
+<h2 id="超时控制"><a href="#超时控制" class="headerlink" title="超时控制"></a>超时控制</h2><p>通常健壮的程序都是要设置超时时间的，避免因为服务端长时间响应消耗资源，所以一些<code>web</code>框架或<code>rpc</code>框架都会采用<code>withTimeout</code>或者<code>withDeadline</code>来做超时控制，当一次请求到达我们设置的超时时间，就会及时取消，不在往下执行。<code>withTimeout</code>和<code>withDeadline</code>作用是一样的，就是传递的时间参数不同而已，他们都会通过传入的时间来自动取消<code>Context</code>，这里要注意的是他们都会返回一个<code>cancelFunc</code>方法，通过调用这个方法可以达到提前进行取消，不过在使用的过程还是建议在自动取消后也调用<code>cancelFunc</code>去停止定时减少不必要的资源浪费。</p>
+<p><code>withTimeout</code>、<code>WithDeadline</code>不同在于<code>WithTimeout</code>将持续时间作为参数输入而不是时间对象，这两个方法使用哪个都是一样的，看业务场景和个人习惯了，因为本质<code>withTimout</code>内部也是调用的<code>WithDeadline</code>。</p>
+<p>现在我们就举个例子来试用一下超时控制</p>
+<ol>
+<li><p>当超过时间就终止下面的执行</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs scss">func <span class="hljs-built_in">newContextWithTimeOutForOver</span>() (context.Context, context.CancelFunc) &#123;<br>	return context<span class="hljs-selector-class">.WithTimeout</span>(context.Background(), <span class="hljs-number">4</span>*<span class="hljs-selector-tag">time</span><span class="hljs-selector-class">.Second</span>)<br>&#125;<br><br>func <span class="hljs-built_in">dealForOver</span>(ctx context.Context) &#123;<br>	for <span class="hljs-selector-tag">i</span> := <span class="hljs-number">0</span>; <span class="hljs-selector-tag">i</span> &lt; <span class="hljs-number">10</span>; <span class="hljs-selector-tag">i</span>++ &#123;<br>		<span class="hljs-selector-tag">time</span><span class="hljs-selector-class">.Sleep</span>(<span class="hljs-number">1</span> * time.Second)<br>		select &#123;<br>		case &lt;-ctx<span class="hljs-selector-class">.Done</span>():<br>			fmt.<span class="hljs-built_in">Println</span>(ctx.<span class="hljs-built_in">Err</span>())<br>			return<br>		default:<br>			fmt.<span class="hljs-built_in">Println</span>(<span class="hljs-string">&quot;deal time is:&quot;</span>, i)<br>		&#125;<br>	&#125;<br>&#125;<br><br>func <span class="hljs-built_in">handlerForOver</span>() &#123;<br>	ctx, cancelFunc := <span class="hljs-built_in">newContextWithTimeOutForOver</span>()<br>	defer <span class="hljs-built_in">cancelFunc</span>()<br>	<span class="hljs-built_in">dealForOver</span>(ctx)<br>&#125;<br><br>func <span class="hljs-built_in">TestForOver</span>() &#123;<br>	<span class="hljs-built_in">handlerForOver</span>()<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>没有超过时间，但是手动终止</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs scss">func <span class="hljs-built_in">newContextWithTimeOutForNoOver</span>() (context.Context, context.CancelFunc) &#123;<br>	return context<span class="hljs-selector-class">.WithTimeout</span>(context.Background(), <span class="hljs-number">4</span>*<span class="hljs-selector-tag">time</span><span class="hljs-selector-class">.Second</span>)<br>&#125;<br><br>func <span class="hljs-built_in">dealForNoOver</span>(ctx context.Context, cancelFunc context.CancelFunc) &#123;<br>	for <span class="hljs-selector-tag">i</span> := <span class="hljs-number">0</span>; <span class="hljs-selector-tag">i</span> &lt; <span class="hljs-number">10</span>; <span class="hljs-selector-tag">i</span>++ &#123;<br>		<span class="hljs-selector-tag">time</span><span class="hljs-selector-class">.Sleep</span>(<span class="hljs-number">1</span> * time.Second)<br>		select &#123;<br>		case &lt;-ctx<span class="hljs-selector-class">.Done</span>():<br>			fmt.<span class="hljs-built_in">Println</span>(ctx.<span class="hljs-built_in">Err</span>())<br>			return<br>		default:<br>			fmt.<span class="hljs-built_in">Println</span>(<span class="hljs-string">&quot;deal time is:&quot;</span>, i+<span class="hljs-number">1</span>)<br>			<span class="hljs-built_in">cancelFunc</span>()<br>		&#125;<br>	&#125;<br>&#125;<br><br>func <span class="hljs-built_in">handlerForNoOver</span>() &#123;<br>	ctx, cancelFunc := <span class="hljs-built_in">newContextWithTimeOutForNoOver</span>()<br>	defer <span class="hljs-built_in">cancelFunc</span>()<br>	<span class="hljs-built_in">dealForNoOver</span>(ctx, cancelFunc)<br>&#125;<br><br>func <span class="hljs-built_in">TestForNoOver</span>() &#123;<br>	<span class="hljs-built_in">handlerForNoOver</span>()<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>注意</p>
+<p>总结</p>
+<blockquote>
+<p><code>context</code>包主要提供了两种方式创建<code>context</code>:</p>
+<ul>
+<li><code>context.Backgroud()</code></li>
+<li><code>context.TODO()</code></li>
+</ul>
+<p>这两个函数其实只是互为别名，没有差别，官方给的定义是：</p>
+<ul>
+<li><code>context.Background</code> 是上下文的默认值，所有其他的上下文都应该从它衍生（Derived）出来。</li>
+<li><code>context.TODO</code> 应该只在不确定应该使用哪种上下文时使用；</li>
+</ul>
+<p>所以在大多数情况下，我们都使用<code>context.Background</code>作为起始的上下文向下传递。</p>
+<p>上面的两种方式是创建根<code>context</code>，不具备任何功能</p>
+</blockquote>
+<p>使用起来还是比较容易的，既可以超时自动取消，又可以手动控制取消。这里大家要记的一个坑，就是我们往从请求入口透传的调用链路中的<code>context</code>是携带超时时间的，如果我们想在其中单独开一个goroutine去处理其他的事情并且不会随着请求结束后而被取消的话，那么传递的<code>context</code>要基于<code>context.Background</code>或者<code>context.TODO</code>重新衍生一个传递，否决就会和预期不符合了，可以参考<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzkzNjYxNTU3MQ==&mid=2247487212&idx=1&sn=d9d58404a54bc80f141c826ab20eeee2&source=41#wechat_redirect">context使用不当引发的一个bug (qq.com)</a></p>
+<h2 id="WithCancel取消控制"><a href="#WithCancel取消控制" class="headerlink" title="WithCancel取消控制"></a>WithCancel取消控制</h2><p>手动关闭</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">speak</span><span class="hljs-params">(ctx context.Context)</span></span> &#123;<br>	<span class="hljs-keyword">for</span> <span class="hljs-keyword">range</span> time.Tick(time.Second) &#123;<br>		<span class="hljs-keyword">select</span> &#123;<br>		<span class="hljs-keyword">case</span> &lt;-ctx.Done():<br>			fmt.Println(<span class="hljs-string">&quot;停止输出&quot;</span>)<br>			<span class="hljs-keyword">return</span><br>		<span class="hljs-keyword">default</span>:<br>			fmt.Println(<span class="hljs-string">&quot;balabalabala&quot;</span>)<br>		&#125;<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Test</span><span class="hljs-params">()</span></span> &#123;<br>	ctx, cancel := context.WithCancel(context.Background())<br>	<span class="hljs-keyword">go</span> speak(ctx)<br>	time.Sleep(<span class="hljs-number">3</span> * time.Second)<br>	cancel()<br>	time.Sleep(<span class="hljs-number">1</span> * time.Second)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="自定义context"><a href="#自定义context" class="headerlink" title="自定义context"></a>自定义context</h2><p>因为<code>Context</code>本质是一个接口，所以我们可以通过实现<code>Context</code>达到自定义<code>Context</code>的目的，一般在实现<code>Web</code>框架或<code>RPC</code>框架往往采用这种形式，比如<code>gin</code>框架的<code>Context</code>就是自己有封装了一层</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040917752">【Go语言】小白也能看懂的context包详解：从入门到精通 - 个人文章 - SegmentFault 思否</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2413048">Golang深入浅出之-Go语言上下文（context）包：处理取消与超时-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000045143185">一文弄懂Go语言的Context包，值得收藏！ - 左诗右码 - SegmentFault 思否</a></p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/go/">#go</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>context简单入门</div>
+      <div>https://tsy244.github.io/2024/08/13/go/context简单入门/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 13, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/12/go/go-zero/" title="go-zero">
+                        <span class="hidden-mobile">go-zero</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
