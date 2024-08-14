@@ -24,7 +24,7 @@
 <meta property="og:description" content="简介log包是Go语言标准库的一部分，提供了基本的日志记录功能。它支持日志消息的格式化、日志输出位置的设置以及日志级别的管理。通过log包，我们可以方便地记录程序运行中的各种信息，如调试信息、错误消息和普通运行日志。 使用基础方法主要就是几个方法 123456789log.Print()log.Printf()log.Println()log.Fatal()log.Fatalf()log.Fata">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-08-13T09:43:43.000Z">
-<meta property="article:modified_time" content="2024-08-13T09:57:25.181Z">
+<meta property="article:modified_time" content="2024-08-14T02:31:45.421Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="go">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          600 words
+          1.4k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          6 mins
+          12 mins
         
       </span>
     
@@ -289,6 +289,10 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestLogIntoFile</span><span class="hljs-params">()</span></span> &#123;<br>	file, err := os.OpenFile(<span class="hljs-string">&quot;log.txt&quot;</span>, os.O_CREATE|os.O_WRONLY|os.O_APPEND, <span class="hljs-number">0666</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatalln(<span class="hljs-string">&quot;Failed to open log file:&quot;</span>, err)<br>	&#125;<br>	log.SetOutput(file)<br>	log.Println(<span class="hljs-string">&quot;This is a log message&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h2 id="自定义Logger"><a href="#自定义Logger" class="headerlink" title="自定义Logger"></a>自定义Logger</h2><p>我们可以通过<code>log.New()</code>函数创建自定义的Logger，指定输出位置、前缀和日志格式。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><br><span class="hljs-keyword">go</span><br><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;log&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	file, err := os.OpenFile(<span class="hljs-string">&quot;custom.log&quot;</span>, os.O_CREATE|os.O_WRONLY|os.O_APPEND, <span class="hljs-number">0666</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br>	<span class="hljs-keyword">defer</span> file.Close()<br><br>	customLogger := log.New(file, <span class="hljs-string">&quot;CUSTOM: &quot;</span>, log.Ldate|log.Ltime|log.Lshortfile)<br>	customLogger.Println(<span class="hljs-string">&quot;This is a message from the custom logger&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="日志层级管理"><a href="#日志层级管理" class="headerlink" title="日志层级管理"></a>日志层级管理</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><br><span class="hljs-keyword">go</span><br><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;log&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	file, err := os.OpenFile(<span class="hljs-string">&quot;custom.log&quot;</span>, os.O_CREATE|os.O_WRONLY|os.O_APPEND, <span class="hljs-number">0666</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br>	<span class="hljs-keyword">defer</span> file.Close()<br><br>	customLogger := log.New(file, <span class="hljs-string">&quot;CUSTOM: &quot;</span>, log.Ldate|log.Ltime|log.Lshortfile)<br>	customLogger.Println(<span class="hljs-string">&quot;This is a message from the custom logger&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
