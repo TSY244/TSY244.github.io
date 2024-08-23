@@ -16,13 +16,15 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="参考文章 Quick start | Go | gRPC   Quick start | Go | gRPC  环境搭建安装protoc 转换工具，该工具无论是server 或者是clinet 都是可以准备一个 https:&#x2F;&#x2F;github.com&#x2F;protocolbuffers&#x2F;protobuf&#x2F;releases 然后创建一个新的项目 拉一下 123go get github.com&#x2F;golan">
+<meta property="og:type" content="article">
 <meta property="og:title" content="grpc">
 <meta property="og:url" content="https://tsy244.github.io/2024/08/14/go/grpc/index.html">
 <meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="参考文章 Quick start | Go | gRPC   Quick start | Go | gRPC  环境搭建安装protoc 转换工具，该工具无论是server 或者是clinet 都是可以准备一个 https:&#x2F;&#x2F;github.com&#x2F;protocolbuffers&#x2F;protobuf&#x2F;releases 然后创建一个新的项目 拉一下 123go get github.com&#x2F;golan">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-08-14T14:23:47.000Z">
-<meta property="article:modified_time" content="2024-08-14T15:15:43.707Z">
+<meta property="article:modified_time" content="2024-08-20T09:05:35.464Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="go">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          3k words
         
       </span>
     
@@ -236,7 +238,7 @@
         
         
         
-          1 mins
+          26 mins
         
       </span>
     
@@ -279,7 +281,68 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://grpc.io/docs/languages/go/quickstart/">Quick start | Go | gRPC</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://grpc.io/docs/languages/go/quickstart/">Quick start | Go | gRPC</a></p>
+</blockquote>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>安装protoc 转换工具，该工具无论是server 或者是clinet 都是可以准备一个</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf/releases">https://github.com/protocolbuffers/protobuf/releases</a></p>
+<p>然后创建一个新的项目</p>
+<p>拉一下</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> get github.com/golang/protobuf/proto<br><span class="hljs-keyword">go</span> get google.golang.org/grpc<br><span class="hljs-keyword">go</span> install github.com/golang/protobuf/protoc-gen-<span class="hljs-keyword">go</span><br></code></pre></td></tr></table></figure>
+
+<p>然后需要配置环境，这里介绍一个 linux 配置环境变量的方法</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /etc/environment<br></code></pre></td></tr></table></figure>
+
+<p>然后添加对应的路径在后面</p>
+<p>如</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-symbol">:/root/go/bin</span><br></code></pre></td></tr></table></figure>
+
+<p>因为我云服务器我懒得配置成所有用户的了</p>
+<p>然后使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">source /etc/environment<br></code></pre></td></tr></table></figure>
+
+<p>测试环境是否搭建成功</p>
+<p>首先编写一个protobuf 文件</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs protobuf">syntax = <span class="hljs-string">&quot;proto3&quot;</span>; <span class="hljs-comment">// 指定proto版本</span><br><span class="hljs-keyword">package</span> hello_grpc;     <span class="hljs-comment">// 指定默认包名</span><br><br><span class="hljs-comment">// 指定golang包名</span><br><span class="hljs-keyword">option</span> go_package = <span class="hljs-string">&quot;/hello_grpc&quot;</span>;<br><br><span class="hljs-comment">//定义rpc服务</span><br><span class="hljs-keyword">service </span><span class="hljs-title class_">HelloService</span> &#123;<br>  <span class="hljs-comment">// 定义函数</span><br>  <span class="hljs-function"><span class="hljs-keyword">rpc</span> SayHello (HelloRequest) <span class="hljs-keyword">returns</span> (HelloResponse) </span>&#123;&#125;<br>&#125;<br><br><span class="hljs-comment">// HelloRequest 请求内容</span><br><span class="hljs-keyword">message </span><span class="hljs-title class_">HelloRequest</span> &#123;<br>  <span class="hljs-type">string</span> name = <span class="hljs-number">1</span>;<br>  <span class="hljs-type">string</span> message = <span class="hljs-number">2</span>;<br>&#125;<br><br><span class="hljs-comment">// HelloResponse 响应内容</span><br><span class="hljs-keyword">message </span><span class="hljs-title class_">HelloResponse</span>&#123;<br>  <span class="hljs-type">string</span> name = <span class="hljs-number">1</span>;<br>  <span class="hljs-type">string</span> message = <span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我的目录树</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs tree">D:.<br>│  go.mod<br>│  go.sum<br>│<br>├─.idea<br>│      .gitignore<br>│      deployment.xml<br>│      GRPCStudyServer.iml<br>│      modules.xml<br>│      webServers.xml<br>│      workspace.xml<br>│<br>├─cmd<br>│      main.go<br>│      server.exe<br>│<br>├─grpcProto<br>│  │  hello.proto<br>│  │<br>│  └─hello_grpc<br>│          hello.pb.go<br>│<br>├─grpcServer<br>│      helloGrpc.go<br>│<br>└─script<br>        set.bat<br>        set.sh<br></code></pre></td></tr></table></figure>
+
+<p>然后再set.bat 或者set.sh 里面填写</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">protoc <span class="hljs-literal">-I</span> ../grpc_proto <span class="hljs-literal">--go_out</span>=plugins=grpc:../grpcProto ../grpcProto/hello.proto<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">protoc -I ../grpcProto --go_out=plugins=grpc:../grpcProto ../grpcProto/hello.proto<br></code></pre></td></tr></table></figure>
+
+<p>然后执行就行了</p>
+<p>命令里的重点</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-function"><span class="hljs-title">protoc</span></span> -I ../grpcProto --go_out=plugins=grpc:文件生成的目录  proto文件路径<br></code></pre></td></tr></table></figure>
+
+<p>然后就生成了hello_grpc 文件夹   </p>
+<p>能生成说明环境配置成功</p>
+<h1 id="server-搭建"><a href="#server-搭建" class="headerlink" title="server 搭建"></a>server 搭建</h1><p>当文件创建之后，就必须实现他的方法</p>
+<p>helloGrpc.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> grpcServer<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;GRPCStudyServer/grpcProto/hello_grpc&quot;</span><br>	<span class="hljs-string">&quot;context&quot;</span><br>	<span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-keyword">type</span> HelloGrpcServer <span class="hljs-keyword">struct</span> &#123;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *HelloGrpcServer)</span></span> SayHello(ctx context.Context, request *hello_grpc.HelloRequest) (response *hello_grpc.HelloResponse, err <span class="hljs-type">error</span>) &#123;<br>	fmt.Println(<span class="hljs-string">&quot;request:&quot;</span>, request)<br>	response = &amp;hello_grpc.HelloResponse&#123;<br>		Message: <span class="hljs-string">&quot;AU9U5T&quot;</span>,<br>	&#125;<br>	<span class="hljs-keyword">return</span> response, <span class="hljs-literal">nil</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>这样就相当于实现了他的方法，然后我们再注册一个服务就行了</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	listen, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;:8080&quot;</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>	&#125;<br>	<span class="hljs-keyword">defer</span> listen.Close()<br>	s := grpc.NewServer()<br><br>	server := grpcServer.HelloGrpcServer&#123;&#125;<br><br>	hello_grpc.RegisterHelloServiceServer(s, &amp;server)<br>	fmt.Println(<span class="hljs-string">&quot;grpc server start&quot;</span>)<br>	err = s.Serve(listen)<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="client-搭建"><a href="#client-搭建" class="headerlink" title="client 搭建"></a>client 搭建</h1><p>建议这个观看</p>
+<p><a target="_blank" rel="noopener" href="https://grpc.io/docs/languages/go/quickstart/">快速入门 |前往 |gRPC的</a></p>
+<p>还是一样的，首先拷贝同样的文件，到项目目录</p>
+<p>然后生成对应的go 文件</p>
+<p>然后再进行连接</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;GRPCStudy/grpc_proto/hello_grpc&quot;</span><br>	<span class="hljs-string">&quot;context&quot;</span><br>	<span class="hljs-string">&quot;google.golang.org/grpc&quot;</span><br>	<span class="hljs-string">&quot;google.golang.org/grpc/credentials/insecure&quot;</span><br>	<span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	addr := <span class="hljs-string">&quot;139.159.140.145:8080&quot;</span><br>	conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>	&#125;<br>	<span class="hljs-keyword">defer</span> conn.Close()<br><br>	client := hello_grpc.NewHelloServiceClient(conn)<br><br>	ctx, cancel := context.WithTimeout(context.Background(), time.Second)<br>	<span class="hljs-keyword">defer</span> cancel()<br>	req, err := client.SayHello(ctx, &amp;hello_grpc.HelloRequest&#123;<br>		Name: <span class="hljs-string">&quot;gRPC&quot;</span>,<br>	&#125;)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>	&#125;<br>	<span class="hljs-built_in">println</span>(req.Message)<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+
                 
               </div>
             
