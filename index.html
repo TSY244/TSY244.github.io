@@ -226,6 +226,166 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/10/03/%E5%85%8D%E6%9D%80/apc-load/" target="_self">
+          apc_load
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/03/%E5%85%8D%E6%9D%80/apc-load/" target="_self">
+        <div>
+          预备知识 线程是不能被“杀掉”、“挂起”、“恢复”的，线程在执行的时候自己占据着CPU，别人不能控制它 举个极端的例子：如果不调用API，屏蔽中断，并保证代码不出现异常，线程将永久占用CPU 所以说线程如果想“死”，一定是自己执行代码把自己杀死，不存在“他杀”的情况  那么将会产生一个问题  如果想改变一个线程的行为该怎么做呢？   既然只能让他自己杀死自己，那我们就递出那一把刀。 让他主动调用一
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-10-03 21:34" pubdate>
+              2024-10-03
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%85%8D%E6%9D%80/">#免杀</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/09/29/c++/dll%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" target="_self">
+          dll动态加载
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/29/c++/dll%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" target="_self">
+        <div>
+          
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-09-29 18:24" pubdate>
+              2024-09-29
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/c/">#c++</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/09/26/k8s/%E8%B5%84%E6%BA%90%E7%9A%84%E5%88%86%E7%B1%BB/" target="_self">
+          资源的分类
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/26/k8s/%E8%B5%84%E6%BA%90%E7%9A%84%E5%88%86%E7%B1%BB/" target="_self">
+        <div>
+          集群级别的资源作用于集群之上，集群下的所有资源都可以共享 namespace一个集群中的概念，可以简单理解为使用命名空间(namespace)，在集群内划分出了很多不同的小的集群 在同一个命名空间中的资源是可以相互访问的，但是不同的命名空间中的是拒绝访问
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-09-26 23:20" pubdate>
+              2024-09-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/k8s/">#k8s</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/09/26/k8s/%E5%AF%B9%E8%B1%A1%E8%A7%84%E7%BA%A6%E5%92%8C%E7%8A%B6%E6%80%81/" target="_self">
+          对象规约和状态
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/26/k8s/%E5%AF%B9%E8%B1%A1%E8%A7%84%E7%BA%A6%E5%92%8C%E7%8A%B6%E6%80%81/" target="_self">
+        <div>
+          对象和资源Kubernetes中的所有内容都被抽象为”资源”，如Pod、Service、Node等都是资源。“对象“就是”资源”的实何，是持久化的实体。如某个具体的Pod、某个具体的Node。Kubernetes使用这些实体去表示整个集群的状态。对象的创建、除、修改都是通过”Kubernetes API”,也就是”Api Server”组件提供的API接口，这些是RESTful风格的Api，与k8
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-09-26 23:07" pubdate>
+              2024-09-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/k8s/">#k8s</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2024/09/25/k8s/k8s%E7%AE%80%E4%BB%8B/" target="_self">
           k8s简介
         </a>
@@ -444,166 +604,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2024-08-14 22:23" pubdate>
               2024-08-14
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/go/">#go</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/08/14/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/DedeCMSV5-7-114%E5%90%8E%E5%8F%B0sys-verizes-php-rce/" target="_self">
-          DedeCMSV5.7.114后台sys_verizes.php-rce
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/14/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/DedeCMSV5-7-114%E5%90%8E%E5%8F%B0sys-verizes-php-rce/" target="_self">
-        <div>
-          0x01 产品简介织梦内容管理系统(DedeCMS)，是一个集内容发布、编辑、管理检索等于一体的网站管理系统(Web CMS)，他拥有国外CMS众多特点之外，还结合中国用户的需要，对内容管理系统概念进行明确分析和定位。 0x02 漏洞描述DedeCMS V5.7.114存在远程代码执行漏洞。产生该漏洞的原因是，虽然sys_verizes.php对编辑的文件进行了一定的限制，但攻击者仍然可以绕过这些
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-14 13:03" pubdate>
-              2024-08-14
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">#漏洞复现</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/08/14/go/%E5%8F%8D%E5%B0%84reflect/" target="_self">
-          反射reflect
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/14/go/%E5%8F%8D%E5%B0%84reflect/" target="_self">
-        <div>
-          简介反射reflect 变量的内在机制变量包包含了类型信息，和值信息 类型信息是静态的元信息是预先定义好的 值信息，是程序运行过程中动态改变的 反射的使用reflect 包封装了反射相关的方法 reflect.TypeOf 是静态的 reflect.ValueOf 是动态的 空接口与反射
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-14 10:05" pubdate>
-              2024-08-14
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/go/">#go</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/08/14/go/RPC/" target="_self">
-          RPC
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/14/go/RPC/" target="_self">
-        <div>
-          简介rpc 远程过程调用（Remote Procedure Call，RPC）是一个计算机通信协议 该协议允许运行于一台计算机的程序调用另一台计算机的子程序，而程序员无需额外地为这个交互作用编程 如果涉及的软件采用面向对象编程，那么远程过程调用亦可称作远程调用或远程方法调用  golang 中实现rpc golang中实现RPC非常简单，官方提供了封装好的库，还有一些第三方的库 golang官方的
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-14 09:03" pubdate>
-              2024-08-14
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/go/">#go</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/08/13/go/go-log%E5%BA%93/" target="_self">
-          go-log库
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/13/go/go-log%E5%BA%93/" target="_self">
-        <div>
-          简介log包是Go语言标准库的一部分，提供了基本的日志记录功能。它支持日志消息的格式化、日志输出位置的设置以及日志级别的管理。通过log包，我们可以方便地记录程序运行中的各种信息，如调试信息、错误消息和普通运行日志。 使用基础方法主要就是几个方法 123456789log.Print()log.Printf()log.Println()log.Fatal()log.Fatalf()log.Fata
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-13 17:43" pubdate>
-              2024-08-13
             </time>
           </div>
         
