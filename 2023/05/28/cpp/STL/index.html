@@ -16,24 +16,26 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在string里面使用find函数查找子串 123456789101112131415   int main() &amp;#123;    std::string a&#x3D;&quot;this&quot;;    std::string b&#x3D;&quot;this is b&quot;;    const auto tem&#x3D; a&lt;&#x3D;&gt;b;    auto i&#x3D;b.find(a);    if(i">
+    <meta name="description" content="[TOC] STL之数据结构初始STLSTL六大件 容器，算法，迭代器，仿函数，适配器（配接器），空间配置器    vector for_each()函数，官方提供的用于遍历的函数  string 本质是char*  构造  使用无参构造 C语言的字符串 拷贝构造 string ( int n,char c) 使用n个c构造   赋值方法  使用&#x3D;  chat* string char   ass">
 <meta property="og:type" content="article">
-<meta property="og:title" content="c++新特性">
-<meta property="og:url" content="https://tsy244.github.io/2023/06/26/c++/cpp%E6%96%B0%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:title" content="STL">
+<meta property="og:url" content="https://tsy244.github.io/2023/05/28/cpp/STL/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="在string里面使用find函数查找子串 123456789101112131415   int main() &amp;#123;    std::string a&#x3D;&quot;this&quot;;    std::string b&#x3D;&quot;this is b&quot;;    const auto tem&#x3D; a&lt;&#x3D;&gt;b;    auto i&#x3D;b.find(a);    if(i">
+<meta property="og:description" content="[TOC] STL之数据结构初始STLSTL六大件 容器，算法，迭代器，仿函数，适配器（配接器），空间配置器    vector for_each()函数，官方提供的用于遍历的函数  string 本质是char*  构造  使用无参构造 C语言的字符串 拷贝构造 string ( int n,char c) 使用n个c构造   赋值方法  使用&#x3D;  chat* string char   ass">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-06-26T05:25:26.000Z">
-<meta property="article:modified_time" content="2024-09-29T10:26:08.709Z">
+<meta property="og:image" content="https://cpp-1317182407.cos.ap-nanjing.myqcloud.com/STL/%E5%88%9D%E5%A7%8BSTL/stl%E5%85%AD%E5%A4%A7%E4%BB%B6.jpg">
+<meta property="article:published_time" content="2023-05-28T14:47:16.000Z">
+<meta property="article:modified_time" content="2024-10-22T02:45:17.312Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="c++">
+<meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cpp-1317182407.cos.ap-nanjing.myqcloud.com/STL/%E5%88%9D%E5%A7%8BSTL/stl%E5%85%AD%E5%A4%A7%E4%BB%B6.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>c++新特性 - AU9U5T</title>
+  <title>STL - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="c++新特性"></span>
+            <span id="subtitle" data-typed-text="STL"></span>
           
         </div>
 
@@ -215,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-26 13:25" pubdate>
-          June 26, 2023 pm
+        <time datetime="2023-05-28 22:47" pubdate>
+          May 28, 2023 pm
         </time>
       </span>
     
@@ -227,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          333 words
+          397 words
         
       </span>
     
@@ -238,7 +240,7 @@
         
         
         
-          3 mins
+          4 mins
         
       </span>
     
@@ -276,14 +278,76 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">c++新特性</h1>
+            <h1 style="display: none">STL</h1>
             
             
               <div class="markdown-body">
                 
-                <ol>
-<li><p>在<code>string</code>里面使用<code>find</code>函数查找子串</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++">   <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    std::string a=<span class="hljs-string">&quot;this&quot;</span>;<br>    std::string b=<span class="hljs-string">&quot;this is b&quot;</span>;<br>    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> tem= a&lt;=&gt;b;<br>    <span class="hljs-keyword">auto</span> i=b.<span class="hljs-built_in">find</span>(a);<br>    <span class="hljs-keyword">if</span>(i!=std::string::npos)&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = i; j &lt; i+a.<span class="hljs-built_in">size</span>(); ++j) &#123;<br>            std::cout&lt;&lt;b[j];<br>        &#125;<br>        std::cout&lt;&lt;std::endl&lt;&lt;<span class="hljs-string">&quot;^&quot;</span>&lt;&lt;i;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br>   <br></code></pre></td></tr></table></figure></li>
+                <p>[TOC]</p>
+<h1 id="STL之数据结构"><a href="#STL之数据结构" class="headerlink" title="STL之数据结构"></a>STL之数据结构</h1><h2 id="初始STL"><a href="#初始STL" class="headerlink" title="初始STL"></a>初始STL</h2><h3 id="STL六大件"><a href="#STL六大件" class="headerlink" title="STL六大件"></a>STL六大件</h3><ol>
+<li><p>容器，算法，迭代器，仿函数，适配器（配接器），空间配置器</p>
+<p><img src="https://cpp-1317182407.cos.ap-nanjing.myqcloud.com/STL/%E5%88%9D%E5%A7%8BSTL/stl%E5%85%AD%E5%A4%A7%E4%BB%B6.jpg" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><ol>
+<li><code>for_each()</code>函数，官方提供的用于遍历的函数</li>
+</ol>
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><ol>
+<li><p>本质是<code>char*</code></p>
+</li>
+<li><p>构造</p>
+<ul>
+<li>使用无参构造</li>
+<li>C语言的字符串</li>
+<li>拷贝构造</li>
+<li>string ( int n,char c) 使用n个c构造</li>
+</ul>
+</li>
+<li><p>赋值方法</p>
+<ul>
+<li><p>使用<code>=</code></p>
+<ul>
+<li><code>chat*</code></li>
+<li><code>string</code></li>
+<li><code>char</code></li>
+</ul>
+</li>
+<li><p>assign</p>
+<ul>
+<li><p>(chat*,int n)</p>
+<p>将前面个赋值给<code>string</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="STL之算法"><a href="#STL之算法" class="headerlink" title="STL之算法"></a>STL之算法</h1><h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><ol>
+<li><code>for_each()</code></li>
+<li><code>transform()</code> 搬运函数，接口默认为原值搬运。接口可以指导搬运法制</li>
+</ol>
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><ol>
+<li><p><code>find()</code>  返回迭代器</p>
+</li>
+<li><p><code>find_if</code>  可以添加接口</p>
+</li>
+<li><p><code>binary_search()</code>  二分查找，容器需要有序。</p>
+<p>注意返回值是<code>bool</code></p>
+</li>
+</ol>
+<h3 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h3><ol>
+<li><code>count()</code>  统计某个书的个数</li>
+<li><code>count_if()</code>  满足<code>if</code>的个数</li>
+</ol>
+<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><ol>
+<li><code>merge()</code></li>
+</ol>
+<h3 id="反转"><a href="#反转" class="headerlink" title="反转"></a>反转</h3><ol>
+<li><code>reverse()</code></li>
+</ol>
+<h3 id="替代"><a href="#替代" class="headerlink" title="替代"></a>替代</h3><ol>
+<li><code>replace()</code>  替代</li>
+<li><code>replace_if()</code>  安条件替换</li>
 </ol>
 
                 
@@ -297,7 +361,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c/">#c++</a>
+        <a href="/tags/cpp/">#cpp</a>
       
     </div>
   
@@ -309,8 +373,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>c++新特性</div>
-      <div>https://tsy244.github.io/2023/06/26/c++/cpp新特性/</div>
+      <div>STL</div>
+      <div>https://tsy244.github.io/2023/05/28/cpp/STL/</div>
     </div>
     <div class="license-meta">
       
@@ -322,7 +386,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 26, 2023</div>
+          <div>May 28, 2023</div>
         </div>
       
       
@@ -354,9 +418,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/26/QT/QT/" title="QT">
+                      <a href="/2023/05/29/effective/effective/" title="改程序和设计程序的55个具体做法">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">QT</span>
+                        <span class="hidden-mobile">改程序和设计程序的55个具体做法</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -364,8 +428,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/24/linux/dgb%E8%B0%83%E8%AF%95/" title="dgb调试">
-                        <span class="hidden-mobile">dgb调试</span>
+                      <a href="/2023/05/23/others/git%E7%9A%84%E4%BD%BF%E7%94%A8/" title="git的使用">
+                        <span class="hidden-mobile">git的使用</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
