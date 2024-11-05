@@ -16,23 +16,34 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Archives">
-<meta property="og:url" content="https://tsy244.github.io/archives/page/7/index.html">
+    <meta name="description" content="静态免杀核心观点 主要是看导入表不同的杀软检测逻辑可能不同，但是通过导入表可以直接获取使用了windows kernel32 的哪些函数，如果是使用多个危险函数，可能就会被报毒如果想要防止被察觉到，就有两种方法，第一种方法就是使用加壳，第二个方法就是进行动态加载  封装windows api 免杀（r3 层函数重写）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态加载">
+<meta property="og:url" content="https://tsy244.github.io/2024/11/03/%E5%85%8D%E6%9D%80/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/index.html">
 <meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="静态免杀核心观点 主要是看导入表不同的杀软检测逻辑可能不同，但是通过导入表可以直接获取使用了windows kernel32 的哪些函数，如果是使用多个危险函数，可能就会被报毒如果想要防止被察觉到，就有两种方法，第一种方法就是使用加壳，第二个方法就是进行动态加载  封装windows api 免杀（r3 层函数重写）">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-11-03T04:05:36.000Z">
+<meta property="article:modified_time" content="2024-11-04T16:28:10.246Z">
 <meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="免杀">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Archives - AU9U5T</title>
+  <title>动态加载 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -82,7 +93,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -188,9 +199,54 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Archives"></span>
+            <span id="subtitle" data-typed-text="动态加载"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-03 12:05" pubdate>
+          November 3, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          151 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          2 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -206,100 +262,172 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">298 posts in total</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2024</p>
-    
-    <a href="/2024/04/26/%E6%B8%97%E9%80%8F/waf%E7%BB%95%E8%BF%87%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
-      <time>04-26</time>
-      <div class="list-group-item-title">waf绕过思路总结</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">动态加载</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="静态免杀核心观点"><a href="#静态免杀核心观点" class="headerlink" title="静态免杀核心观点"></a>静态免杀核心观点</h1><ol>
+<li>主要是看导入表<br>不同的杀软检测逻辑可能不同，但是通过导入表可以直接获取使用了windows kernel32 的哪些函数，如果是使用多个危险函数，可能就会被报毒<br>如果想要防止被察觉到，就有两种方法，第一种方法就是使用加壳，第二个方法就是进行动态加载</li>
+</ol>
+<h1 id="封装windows-api-免杀（r3-层函数重写）"><a href="#封装windows-api-免杀（r3-层函数重写）" class="headerlink" title="封装windows api 免杀（r3 层函数重写）"></a>封装windows api 免杀（r3 层函数重写）</h1>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-    
-    <a href="/2024/04/07/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/php%E6%AF%94%E8%BE%83/" class="list-group-item list-group-item-action">
-      <time>04-07</time>
-      <div class="list-group-item-title">php比较</div>
-    </a>
   
-    
-    <a href="/2024/04/05/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E9%A1%B9%E7%9B%AE8/" class="list-group-item list-group-item-action">
-      <time>04-05</time>
-      <div class="list-group-item-title">项目8</div>
-    </a>
-  
-    
-    <a href="/2024/04/04/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/WEB/bugku%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%80/" class="list-group-item list-group-item-action">
-      <time>04-04</time>
-      <div class="list-group-item-title">bugku渗透测试一</div>
-    </a>
-  
-    
-    <a href="/2024/04/04/%E6%B8%97%E9%80%8F/vps%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="list-group-item list-group-item-action">
-      <time>04-04</time>
-      <div class="list-group-item-title">vps环境搭建</div>
-    </a>
-  
-    
-    <a href="/2024/04/04/%E6%B8%97%E9%80%8F/%E5%B0%86%E6%99%AE%E9%80%9A%E7%A8%8B%E5%BA%8F%E6%B3%A8%E5%86%8C%E6%88%90%E6%9C%8D%E5%8A%A1/" class="list-group-item list-group-item-action">
-      <time>04-04</time>
-      <div class="list-group-item-title">将普通程序注册成服务</div>
-    </a>
-  
-    
-    <a href="/2024/03/19/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E5%A4%96%E7%BD%91%E9%9D%B6%E5%9C%BA2/" class="list-group-item list-group-item-action">
-      <time>03-19</time>
-      <div class="list-group-item-title">外网靶场2</div>
-    </a>
-  
-    
-    <a href="/2024/03/19/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/%E5%A4%96%E7%BD%91%E9%9D%B6%E5%9C%BA1/" class="list-group-item list-group-item-action">
-      <time>03-19</time>
-      <div class="list-group-item-title">外网靶场1</div>
-    </a>
-  
-    
-    <a href="/2024/03/16/%E6%95%B4%E7%90%86/%E6%8F%90%E6%9D%83/" class="list-group-item list-group-item-action">
-      <time>03-16</time>
-      <div class="list-group-item-title">提权</div>
-    </a>
-  
-    
-    <a href="/2024/03/11/%E6%95%B4%E7%90%86/%E4%BB%A3%E7%90%86/" class="list-group-item list-group-item-action">
-      <time>03-11</time>
-      <div class="list-group-item-title">代理</div>
-    </a>
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%85%8D%E6%9D%80/">#免杀</a>
+      
+    </div>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/#board">5</a><a class="page-number" href="/archives/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/archives/page/8/#board">8</a><a class="page-number" href="/archives/page/9/#board">9</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/30/#board">30</a><a class="extend next" rel="next" href="/archives/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
+              
+  
 
-
-
-
-              </div>
-            </div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>动态加载</div>
+      <div>https://tsy244.github.io/2024/11/03/免杀/动态加载/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 3, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
           </div>
         </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/11/03/%E5%85%8D%E6%9D%80/av-der%E6%A3%80%E6%B5%8B%E6%9C%BA%E5%88%B6/" title="av_der检测机制">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">av_der检测机制</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/11/02/%E6%B8%97%E9%80%8F/%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E6%94%BB%E9%98%B2/" title="终端复用和攻防">
+                        <span class="hidden-mobile">终端复用和攻防</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -417,6 +545,99 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
