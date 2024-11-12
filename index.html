@@ -226,6 +226,46 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/11/07/win32/win32%E5%9F%BA%E7%A1%80/" target="_self">
+          win32基础
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/11/07/win32/win32%E5%9F%BA%E7%A1%80/" target="_self">
+        <div>
+          win32 编程本质就是直接使用win 的API 进程编程 所使用的dll 全部在 该目录下C:\Windows
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-11-07 22:14" pubdate>
+              2024-11-07
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/win32/">#win32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2024/11/03/%E5%85%8D%E6%9D%80/av-der%E6%A3%80%E6%B5%8B%E6%9C%BA%E5%88%B6/" target="_self">
           av_der检测机制
         </a>
@@ -274,7 +314,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/11/03/%E5%85%8D%E6%9D%80/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" target="_self">
         <div>
-          静态免杀核心观点 主要是看导入表不同的杀软检测逻辑可能不同，但是通过导入表可以直接获取使用了windows kernel32 的哪些函数，如果是使用多个危险函数，可能就会被报毒如果想要防止被察觉到，就有两种方法，第一种方法就是使用加壳，第二个方法就是进行动态加载  封装windows api 免杀（r3 层函数重写）
+          静态免杀核心观点 主要是看导入表不同的杀软检测逻辑可能不同，但是通过导入表可以直接获取使用了windows kernel32 的哪些函数，如果是使用多个危险函数，可能就会被报毒如果想要防止被察觉到，就有两种方法，第一种方法就是使用加壳，第二个方法就是进行动态加载  封装windows api 免杀（r3 层函数重写）所谓的r3 层本质就是用户层r0 层就是内核层 -&gt; 驱动 通过封装达到免杀
         </div>
       </a>
 
@@ -564,46 +604,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2024-10-17 22:38" pubdate>
               2024-10-17
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%85%8D%E6%9D%80/">#免杀</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/10/03/%E5%85%8D%E6%9D%80/apc-load/" target="_self">
-          apc_load
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/03/%E5%85%8D%E6%9D%80/apc-load/" target="_self">
-        <div>
-          预备知识 线程是不能被“杀掉”、“挂起”、“恢复”的，线程在执行的时候自己占据着CPU，别人不能控制它 举个极端的例子：如果不调用API，屏蔽中断，并保证代码不出现异常，线程将永久占用CPU 所以说线程如果想“死”，一定是自己执行代码把自己杀死，不存在“他杀”的情况  那么将会产生一个问题  如果想改变一个线程的行为该怎么做呢？   既然只能让他自己杀死自己，那我们就递出那一把刀。 让他主动调用一
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-10-03 21:34" pubdate>
-              2024-10-03
             </time>
           </div>
         
