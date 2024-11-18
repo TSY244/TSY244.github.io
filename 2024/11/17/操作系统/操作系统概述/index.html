@@ -16,24 +16,28 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[TOC] lambda高级使用捕获列表lambda 表达式还可以通过捕获列表捕获一定范围内的变量：  [] 不捕获任何变量。 [&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。 [&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。 [&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。 [bar">
+    <meta name="description" content="操作系统简介 操作系统是做什么的？ 操作系统（英语：operating system，缩写作 OS）是管理计算机硬件与软件资源的计算机程序，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。    本质上来说这句话没什么用，可以简称为操作系统很重要的学计算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lambda高级使用">
-<meta property="og:url" content="https://tsy244.github.io/2023/03/26/cpp/lambda%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="操作系统概述">
+<meta property="og:url" content="https://tsy244.github.io/2024/11/17/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="[TOC] lambda高级使用捕获列表lambda 表达式还可以通过捕获列表捕获一定范围内的变量：  [] 不捕获任何变量。 [&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。 [&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。 [&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。 [bar">
+<meta property="og:description" content="操作系统简介 操作系统是做什么的？ 操作系统（英语：operating system，缩写作 OS）是管理计算机硬件与软件资源的计算机程序，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。    本质上来说这句话没什么用，可以简称为操作系统很重要的学计算">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-26T12:39:43.000Z">
-<meta property="article:modified_time" content="2024-10-22T02:45:08.655Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/win32/image-20241117211051523.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/win32/image-20241117213141709.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241117222511581.png">
+<meta property="article:published_time" content="2024-11-17T12:03:04.000Z">
+<meta property="article:modified_time" content="2024-11-17T15:36:10.968Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/win32/image-20241117211051523.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>lambda高级使用 - AU9U5T</title>
+  <title>操作系统概述 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="lambda高级使用"></span>
+            <span id="subtitle" data-typed-text="操作系统概述"></span>
           
         </div>
 
@@ -215,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-26 20:39" pubdate>
-          March 26, 2023 pm
+        <time datetime="2024-11-17 20:03" pubdate>
+          November 17, 2024 pm
         </time>
       </span>
     
@@ -227,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          709 words
         
       </span>
     
@@ -238,7 +242,7 @@
         
         
         
-          11 mins
+          6 mins
         
       </span>
     
@@ -276,34 +280,59 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">lambda高级使用</h1>
+            <h1 style="display: none">操作系统概述</h1>
             
             
               <div class="markdown-body">
                 
-                <p>[TOC]</p>
-<h1 id="lambda高级使用"><a href="#lambda高级使用" class="headerlink" title="lambda高级使用"></a>lambda高级使用</h1><h2 id="捕获列表"><a href="#捕获列表" class="headerlink" title="捕获列表"></a>捕获列表</h2><p>lambda 表达式还可以通过捕获列表捕获一定范围内的变量：</p>
-<ul>
-<li>[] 不捕获任何变量。</li>
-<li>[&amp;] 捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。</li>
-<li>[&#x3D;] 捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。</li>
-<li>[&#x3D;，&amp;foo] 按值捕获外部作用域中所有变量，并按引用捕获 foo 变量。</li>
-<li>[bar] 按值捕获 bar 变量，同时不捕获其他变量。</li>
-<li>[this] 捕获当前类中的 this <a target="_blank" rel="noopener" href="http://c.biancheng.net/c/80/">指针</a>，让 lambda 表达式拥有和当前类成员函数同样的访问权限。如果已经使用了 &amp; 或者 &#x3D;，就默认添加此选项。捕获 this 的目的是可以在 lamda 中使用当前类的成员函数和成员变量。</li>
-</ul>
-<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><ol>
-<li>没有捕获的时候，我们将该lambda变量可以看成函数指针</li>
-<li>有捕获的时候，我们将该lambda表达式堪称仿函数</li>
-</ol>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ol>
-<li><p>使用<code>function</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iostream&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functional&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;vector&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a&#123;<span class="hljs-number">9</span>&#125;;<br>    <span class="hljs-type">int</span> b&#123;<span class="hljs-number">10</span>&#125;;<br>    [a,b](<span class="hljs-type">int</span> x)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;a+b&lt;&lt;std::endl&lt;&lt;x&lt;&lt;std::endl;<br>    &#125;(<span class="hljs-number">88</span>);<br>    std::function&lt;<span class="hljs-type">void</span>(<span class="hljs-type">int</span>,std::string)&gt; func&#123;[](<span class="hljs-type">int</span> num,std::string S)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;num= &quot;</span>&lt;&lt;num&lt;&lt;<span class="hljs-string">&quot; name= &quot;</span>&lt;&lt;S&lt;&lt;std::endl;<br>    &#125;&#125;;<br>    <span class="hljs-built_in">func</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;chg&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-
+                <h1 id="操作系统简介"><a href="#操作系统简介" class="headerlink" title="操作系统简介"></a>操作系统简介</h1><ol>
+<li>操作系统是做什么的？<blockquote>
+<p>操作系统（英语：operating system，缩写作 OS）是管理计算机硬件与软件资源的计算机程序，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。</p>
+</blockquote>
 </li>
-<li><p>使用<code>bind</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a&#123;<span class="hljs-number">9</span>&#125;;	<br>    <span class="hljs-type">int</span> b&#123;<span class="hljs-number">10</span>&#125;;<br>    [a,b](<span class="hljs-type">int</span> x)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;a+b&lt;&lt;std::endl&lt;&lt;x&lt;&lt;std::endl;<br>    &#125;(<span class="hljs-number">88</span>);<br>    <span class="hljs-keyword">auto</span> f2= std::<span class="hljs-built_in">bind</span>([](<span class="hljs-type">int</span> num,std::string S)-&gt;<span class="hljs-type">void</span>&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;num= &quot;</span>&lt;&lt;num&lt;&lt;<span class="hljs-string">&quot; name= &quot;</span>&lt;&lt;S&lt;&lt;std::endl;<br>    &#125;,std::placeholders::_1,std::placeholders::_2);<br>    <span class="hljs-built_in">f2</span>(<span class="hljs-number">2</span>,<span class="hljs-string">&quot;zjy&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
 </ol>
+<p>本质上来说这句话没什么用，可以简称为操作系统很重要的学计算机软件软件</p>
+<h1 id="os-的作用"><a href="#os-的作用" class="headerlink" title="os 的作用"></a>os 的作用</h1><ol>
+<li><p>Os 是用户与计算机硬件之间的接口</p>
+<p>Os 处于应用用户和计算机硬件之间</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/win32/image-20241117211051523.png" srcset="/img/loading.gif" lazyload alt="image-20241117211051523"></p>
+</li>
+<li><p>os 是系统资源的管理者</p>
+<p>为了方便用户对系统资源的使用，OS将计算机资源抽象为一组数据结构及操作命令（对象），然后再设<br>计出对这些抽象资源的管理软件，然后再将这些管理软件逐层覆盖在计算机硬件之上，于是便形成了一层<br>层的虚机器。这些虚机器是逐层系统软件覆盖在裸机上而成的逻辑计算机。</p>
+</li>
+<li><p>os 是计算机资源的抽象 </p>
+<blockquote>
+<p>用于对计算机的操作多用于io处理上</p>
+<p>第一层抽象i&#x2F;o设备的管理</p>
+<p> 第二层抽象对文件的管理</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/win32/image-20241117213141709.png" srcset="/img/loading.gif" lazyload alt="image-20241117213141709"></p>
+<blockquote>
+<p>第三层抽象对图形界面的管理</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="os-启动过程"><a href="#os-启动过程" class="headerlink" title="os 启动过程"></a>os 启动过程</h1><p>此段在x86 pc 实模式下进行加载</p>
+<ol>
+<li><p>开启电源的时候，cpu 处于实模式</p>
+<blockquote>
+<p>实模式与保护模式对应</p>
+<p>实模式的寻址方式实cs:ip (cs 左移4位 + ip)</p>
+</blockquote>
+</li>
+<li><p>开机时ip 又计算机硬件设计者设计<br>开机时cs&#x3D;0xffff ip&#x3D;0x0000</p>
+</li>
+<li><p>寻址0xfff0<br>该地址通过(cs 左移4位 + ip)，实模式下寻址而来</p>
+</li>
+<li><p>检查ram，键盘。。。。</p>
+</li>
+<li><p>将磁盘0磁道0扇区中读出一个扇区也就是512 byte，放入0x7c00<br>这个512 就是系统的引导区</p>
+</li>
+<li><p>设置cs&#x3D;0x7c00 ip&#x3D;0x0000</p>
+</li>
+</ol>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241117222511581.png" srcset="/img/loading.gif" lazyload alt="image-20241117222511581"></p>
+<p>总的来说boot的工作就是读setup 和system</p>
 
                 
               </div>
@@ -316,7 +345,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/cpp/">#cpp</a>
+        <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">#操作系统</a>
       
     </div>
   
@@ -328,8 +357,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>lambda高级使用</div>
-      <div>https://tsy244.github.io/2023/03/26/cpp/lambda高级使用/</div>
+      <div>操作系统概述</div>
+      <div>https://tsy244.github.io/2024/11/17/操作系统/操作系统概述/</div>
     </div>
     <div class="license-meta">
       
@@ -341,7 +370,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 26, 2023</div>
+          <div>November 17, 2024</div>
         </div>
       
       
@@ -373,18 +402,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/26/cpp/%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%8C%85%E8%A3%85%E5%99%A8/" title="可调用对象包装器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">可调用对象包装器</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/26/cpp/%E5%8F%B3%E5%80%BC%E5%92%8C%E5%B7%A6%E5%80%BC/" title="右值和左值">
-                        <span class="hidden-mobile">右值和左值</span>
+                      <a href="/2024/11/07/win32/win32%E5%9F%BA%E7%A1%80/" title="win32基础">
+                        <span class="hidden-mobile">win32基础</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
