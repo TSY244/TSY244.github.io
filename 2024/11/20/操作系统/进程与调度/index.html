@@ -16,12 +16,12 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="总结第一章进程的状态转换和进程的管理 第二章线程 处理机的调度  调度算法  进程互斥和进程同步 进程互斥的软件实现 cpu 管理的直观想法 io 指令消耗的时间远远大于普通的计算 如何避免io 消耗？就只有通过并发的执行的方式  多进程如何组织？ 进程的状态 新建态直接就是就绪态 终止态只能由运行态转换  在新建态的时候，系统会为其创建pcb 和相关的资源，只有所有的都初始化结束了，新建态 转变">
+    <meta name="description" content="总结第一章进程的状态转换和进程的管理 第二章线程 处理机的调度  调度算法  第三章进程互斥和进程同步 进程互斥的软件实现 进程互斥的硬件实现 信号量  cpu 管理的直观想法 io 指令消耗的时间远远大于普通的计算 如何避免io 消耗？就只有通过并发的执行的方式  多进程如何组织？ 进程的状态 新建态直接就是就绪态 终止态只能由运行态转换  在新建态的时候，系统会为其创建pcb 和相关的资源，只">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程与调度">
 <meta property="og:url" content="https://tsy244.github.io/2024/11/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E8%B0%83%E5%BA%A6/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="总结第一章进程的状态转换和进程的管理 第二章线程 处理机的调度  调度算法  进程互斥和进程同步 进程互斥的软件实现 cpu 管理的直观想法 io 指令消耗的时间远远大于普通的计算 如何避免io 消耗？就只有通过并发的执行的方式  多进程如何组织？ 进程的状态 新建态直接就是就绪态 终止态只能由运行态转换  在新建态的时候，系统会为其创建pcb 和相关的资源，只有所有的都初始化结束了，新建态 转变">
+<meta property="og:description" content="总结第一章进程的状态转换和进程的管理 第二章线程 处理机的调度  调度算法  第三章进程互斥和进程同步 进程互斥的软件实现 进程互斥的硬件实现 信号量  cpu 管理的直观想法 io 指令消耗的时间远远大于普通的计算 如何避免io 消耗？就只有通过并发的执行的方式  多进程如何组织？ 进程的状态 新建态直接就是就绪态 终止态只能由运行态转换  在新建态的时候，系统会为其创建pcb 和相关的资源，只">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241120233254926.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241124105625599.png">
@@ -31,6 +31,9 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241125230956332.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127104408090.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127111719617.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127214811270.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127223833853.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241128004844351.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241120212525226.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241120212734199.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241120232740974.png">
@@ -80,8 +83,32 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127105820163.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127111134008.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127111344733.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127214542922.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127214729387.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127215110882.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127215039333.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127220900667.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127221802336.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127222807347.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127223638920.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241128004754560.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241128004724395.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241128003506013.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241128003924926.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241201154358273.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241201154556090.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241201154156347.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241201162645100.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241201162407373.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202225052546.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202225312625.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202231544952.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202231924967.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202233700128.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202234320759.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202234653342.png">
 <meta property="article:published_time" content="2024-11-20T02:32:08.000Z">
-<meta property="article:modified_time" content="2024-11-27T03:17:25.141Z">
+<meta property="article:modified_time" content="2024-12-02T16:15:16.731Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary_large_image">
@@ -285,7 +312,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k words
+          5k words
         
       </span>
     
@@ -296,7 +323,7 @@
         
         
         
-          34 mins
+          42 mins
         
       </span>
     
@@ -345,8 +372,11 @@
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241125215249682.png" srcset="/img/loading.gif" lazyload alt="image-20241125215249682"></p>
 <h3 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241125223652578.png" srcset="/img/loading.gif" lazyload alt="image-20241125223652578"></p>
 <p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241125230956332.png" srcset="/img/loading.gif" lazyload alt="image-20241125230956332"></p>
-<h3 id="进程互斥和进程同步"><a href="#进程互斥和进程同步" class="headerlink" title="进程互斥和进程同步"></a>进程互斥和进程同步</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127104408090.png" srcset="/img/loading.gif" lazyload alt="image-20241127104408090"></p>
+<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><h3 id="进程互斥和进程同步"><a href="#进程互斥和进程同步" class="headerlink" title="进程互斥和进程同步"></a>进程互斥和进程同步</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127104408090.png" srcset="/img/loading.gif" lazyload alt="image-20241127104408090"></p>
 <h3 id="进程互斥的软件实现"><a href="#进程互斥的软件实现" class="headerlink" title="进程互斥的软件实现"></a>进程互斥的软件实现</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127111719617.png" srcset="/img/loading.gif" lazyload alt="image-20241127111719617"></p>
+<h3 id="进程互斥的硬件实现"><a href="#进程互斥的硬件实现" class="headerlink" title="进程互斥的硬件实现"></a>进程互斥的硬件实现</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127214811270.png" srcset="/img/loading.gif" lazyload alt="image-20241127214811270"></p>
+<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127223833853.png" srcset="/img/loading.gif" lazyload alt="image-20241127223833853"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241128004844351.png" srcset="/img/loading.gif" lazyload alt="image-20241128004844351"></p>
 <h1 id="cpu-管理的直观想法"><a href="#cpu-管理的直观想法" class="headerlink" title="cpu 管理的直观想法"></a>cpu 管理的直观想法</h1><ol>
 <li>io 指令消耗的时间远远大于普通的计算</li>
 <li>如何避免io 消耗？<br>就只有通过并发的执行的方式</li>
@@ -540,7 +570,7 @@
 <li>让权等待。当进程不能进入临界区时，应立即释放处理机，防止进程忙等待。</li>
 </ol>
 </blockquote>
-<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><h3 id="单标识法"><a href="#单标识法" class="headerlink" title="单标识法"></a>单标识法</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127104756429.png" srcset="/img/loading.gif" lazyload alt="image-20241127104756429"></p>
+<h2 id="软件实现方法"><a href="#软件实现方法" class="headerlink" title="软件实现方法"></a>软件实现方法</h2><h3 id="单标识法"><a href="#单标识法" class="headerlink" title="单标识法"></a>单标识法</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127104756429.png" srcset="/img/loading.gif" lazyload alt="image-20241127104756429"></p>
 <p>远离上，就是将自己的临界区的控制权进行谦让</p>
 <h3 id="双标志先法"><a href="#双标志先法" class="headerlink" title="双标志先法"></a>双标志先法</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127105118841.png" srcset="/img/loading.gif" lazyload alt="image-20241127105118841"></p>
 <p>问题：</p>
@@ -565,6 +595,48 @@
 <p>Peterson算法用软件方法解决了进程互斥问题，遵循了空闲让进、忙则等待、有限等待三个原则，但是依然未遵循让权等待的原则。</p>
 <p>不满足让权等待的原因是：因为无法使用临界区应该被剥夺处理剂，但是这个算法是while 一直等待</p>
 </blockquote>
+<h2 id="硬件实现方法"><a href="#硬件实现方法" class="headerlink" title="硬件实现方法"></a>硬件实现方法</h2><h3 id="中断屏蔽"><a href="#中断屏蔽" class="headerlink" title="中断屏蔽"></a>中断屏蔽</h3><p>![image-20241127214155698](&#x2F;Users&#x2F;august&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20241127214155698.png)</p>
+<h3 id="TestAndSet"><a href="#TestAndSet" class="headerlink" title="TestAndSet"></a>TestAndSet</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127214542922.png" srcset="/img/loading.gif" lazyload alt="image-20241127214542922"></p>
+<h3 id="swap"><a href="#swap" class="headerlink" title="swap"></a>swap</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127214729387.png" srcset="/img/loading.gif" lazyload alt="image-20241127214729387"></p>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127215110882.png" srcset="/img/loading.gif" lazyload alt="image-20241127215110882"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127215039333.png" srcset="/img/loading.gif" lazyload alt="image-20241127215039333"></p>
+<h1 id="信号量机制"><a href="#信号量机制" class="headerlink" title="信号量机制"></a>信号量机制</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127220900667.png" srcset="/img/loading.gif" lazyload alt="image-20241127220900667"></p>
+<h2 id="整形信号量"><a href="#整形信号量" class="headerlink" title="整形信号量"></a>整形信号量</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127221802336.png" srcset="/img/loading.gif" lazyload alt="image-20241127221802336"></p>
+<h2 id="记录型信号量"><a href="#记录型信号量" class="headerlink" title="记录型信号量"></a>记录型信号量</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127222807347.png" srcset="/img/loading.gif" lazyload alt="image-20241127222807347"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241127223638920.png" srcset="/img/loading.gif" lazyload alt="image-20241127223638920"></p>
+<h1 id="信号量的运用"><a href="#信号量的运用" class="headerlink" title="信号量的运用"></a>信号量的运用</h1><h2 id="信号量实现进程互斥"><a href="#信号量实现进程互斥" class="headerlink" title="信号量实现进程互斥"></a>信号量实现进程互斥</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241128004754560.png" srcset="/img/loading.gif" lazyload alt="image-20241128004754560"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241128004724395.png" srcset="/img/loading.gif" lazyload alt="image-20241128004724395"></p>
+<h2 id="信号量实现进程同步"><a href="#信号量实现进程同步" class="headerlink" title="信号量实现进程同步"></a>信号量实现进程同步</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241128003506013.png" srcset="/img/loading.gif" lazyload alt="image-20241128003506013"></p>
+<p>可以理解为一个资源</p>
+<p>代码4 在代码2 之后运行，那么代码2 之后将资源的数量++ 之后代码4的p 操作就不会被阻塞</p>
+<h2 id="信号量实现前驱关系"><a href="#信号量实现前驱关系" class="headerlink" title="信号量实现前驱关系"></a>信号量实现前驱关系</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241128003924926.png" srcset="/img/loading.gif" lazyload alt="image-20241128003924926"></p>
+<p>可以总结为前v 后p </p>
+<h1 id="典型问题"><a href="#典型问题" class="headerlink" title="典型问题"></a>典型问题</h1><h2 id="生产者和消费者"><a href="#生产者和消费者" class="headerlink" title="生产者和消费者"></a>生产者和消费者</h2><p>系统中有一组生产者进程和一组消费者进程，生产者进程每次生产一个产品放入缓冲区，消费者<br>进程每次从缓冲区中取出一个产品并使用。（注：这里的“产品”理解为某种数据）<br>生产者、消费者共享一个初始为空、大小为的缓冲区。<br>只有缓冲区没满时，生产者才能把产品放入缓冲区，否则必须等待。<br>只有缓冲区不空时，消费者才能从中取出产品，否则必须等待。<br>缓冲区是临界资源，各进程必须互斥地访问。</p>
+<p>一般的代码实现应该是如下的样子</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241201154358273.png" srcset="/img/loading.gif" lazyload alt="image-20241201154358273"></p>
+<p>注意的是，实现互斥的应该是在同一个进程中，实现同步的应该在两个进程中</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241201154556090.png" srcset="/img/loading.gif" lazyload alt="image-20241201154556090"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241201154156347.png" srcset="/img/loading.gif" lazyload alt="image-20241201154156347"></p>
+<p>p 操作会让资源–</p>
+<p>v 操作会让资源++</p>
+<p>而且需要注意，实现的互斥的p 操作一定要在实现同步的p 操作之后</p>
+<h2 id="多生产者和多消费者"><a href="#多生产者和多消费者" class="headerlink" title="多生产者和多消费者"></a>多生产者和多消费者</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241201162645100.png" srcset="/img/loading.gif" lazyload alt="image-20241201162645100"></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241201162407373.png" srcset="/img/loading.gif" lazyload alt="image-20241201162407373"></p>
+<p>所以在这个条件下，我们可以发现，只要盘子（临界资源）的数量是1，我们就可以不用加锁的访问，具体问题，具体的解决</p>
+<h1 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h1><h2 id="产生的原因"><a href="#产生的原因" class="headerlink" title="产生的原因"></a>产生的原因</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202225052546.png" srcset="/img/loading.gif" lazyload alt="image-20241202225052546"></p>
+<h2 id="管程的定义"><a href="#管程的定义" class="headerlink" title="管程的定义"></a>管程的定义</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202225312625.png" srcset="/img/loading.gif" lazyload alt="image-20241202225312625"></p>
+<p>管程的设计方式很像是类的设计</p>
+<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><h2 id="死锁，饥饿，死循环的概念"><a href="#死锁，饥饿，死循环的概念" class="headerlink" title="死锁，饥饿，死循环的概念"></a>死锁，饥饿，死循环的概念</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202231544952.png" srcset="/img/loading.gif" lazyload alt="image-20241202231544952"></p>
+<h2 id="死锁产生的条件"><a href="#死锁产生的条件" class="headerlink" title="死锁产生的条件"></a>死锁产生的条件</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202231924967.png" srcset="/img/loading.gif" lazyload alt="image-20241202231924967"></p>
+<h2 id="预防死锁"><a href="#预防死锁" class="headerlink" title="预防死锁"></a>预防死锁</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202233700128.png" srcset="/img/loading.gif" lazyload alt="image-20241202233700128"></p>
+<h2 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h2><h3 id="安全序列、不安全状态、死锁的联系"><a href="#安全序列、不安全状态、死锁的联系" class="headerlink" title="安全序列、不安全状态、死锁的联系"></a>安全序列、不安全状态、死锁的联系</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202234320759.png" srcset="/img/loading.gif" lazyload alt="image-20241202234320759"></p>
+<h3 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h3><h4 id="第一种计算方式"><a href="#第一种计算方式" class="headerlink" title="第一种计算方式"></a>第一种计算方式</h4><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20241202234653342.png" srcset="/img/loading.gif" lazyload alt="image-20241202234653342"></p>
+<p>逐个比较计算</p>
+<p>比如剩余的有（3，3，2）</p>
+<p>我们可以从头开始逐个比较，然后计算出结果</p>
+<h4 id="第二种计算方式"><a href="#第二种计算方式" class="headerlink" title="第二种计算方式"></a>第二种计算方式</h4><p>从剩余的出发，可以发现还有（3，3，2）</p>
+<p>这个时候可以发现，p1,p3 都是满足的，那么将这两个都添加到安全序列之后变成的（7，4，3）这个数字是通过已分配归还的</p>
+<h2 id="检测和解除死锁"><a href="#检测和解除死锁" class="headerlink" title="检测和解除死锁"></a>检测和解除死锁</h2><p>![image-20241203001513933](&#x2F;Users&#x2F;august&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20241203001513933.png)</p>
 
                 
               </div>
