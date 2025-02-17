@@ -226,6 +226,206 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/11/07/win32/win32%E5%9F%BA%E7%A1%80/" target="_self">
+          win32基础
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/11/07/win32/win32%E5%9F%BA%E7%A1%80/" target="_self">
+        <div>
+          win32 编程本质就是直接使用win 的API 进程编程 所使用的dll 全部在 该目录下C:\Windows
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-11-07 22:14" pubdate>
+              2024-11-07
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/win32/">#win32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/11/03/%E5%85%8D%E6%9D%80/av-der%E6%A3%80%E6%B5%8B%E6%9C%BA%E5%88%B6/" target="_self">
+          av_der检测机制
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/11/03/%E5%85%8D%E6%9D%80/av-der%E6%A3%80%E6%B5%8B%E6%9C%BA%E5%88%B6/" target="_self">
+        <div>
+          静态特征检测签名是恶意软件中唯⼀标识签名的字节数或字符串数。还可以指定其他条件，例如变量名称和导⼊的函 数。安全解决⽅案扫描程序后，会尝试将其与已知规则列表进⾏匹配。这些规则必须预先构建并推送到 安全解决⽅案中。 YARA特征查杀 YARA 是安全供应商⽤来构建检测规则的⼀种⼯具。例如，如果 shellcode 包含以 开头 FC 48 83 E4  F0 E8 C0 00 00 00 41 51
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-11-03 22:48" pubdate>
+              2024-11-03
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%85%8D%E6%9D%80/">#免杀</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/11/03/%E5%85%8D%E6%9D%80/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" target="_self">
+          动态加载
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/11/03/%E5%85%8D%E6%9D%80/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" target="_self">
+        <div>
+          静态免杀核心观点 主要是看导入表不同的杀软检测逻辑可能不同，但是通过导入表可以直接获取使用了windows kernel32 的哪些函数，如果是使用多个危险函数，可能就会被报毒如果想要防止被察觉到，就有两种方法，第一种方法就是使用加壳，第二个方法就是进行动态加载  封装windows api 免杀（r3 层函数重写）所谓的r3 层本质就是用户层r0 层就是内核层 -&gt; 驱动 通过封装达到免杀
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-11-03 12:05" pubdate>
+              2024-11-03
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%85%8D%E6%9D%80/">#免杀</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/11/02/%E6%B8%97%E9%80%8F/%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E6%94%BB%E9%98%B2/" target="_self">
+          终端复用和攻防
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/11/02/%E6%B8%97%E9%80%8F/%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E6%94%BB%E9%98%B2/" target="_self">
+        <div>
+          简介在做渗透测试中，尽量使用终端代替图形化  图形化可能是商业工具，不确定是否是有后门 有很多终端指令可以完全代替图形化的功能  常用命令 base64 tcpdump可以代替wireshark  终端复用tmux
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-11-02 10:32" pubdate>
+              2024-11-02
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B8%97%E9%80%8F/">#渗透</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/10/28/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/W1R3S-1-0-1%E6%89%93%E9%9D%B6%E8%AE%B0%E5%BD%95/" target="_self">
+          W1R3S:1.0.1打靶记录
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/28/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/W1R3S-1-0-1%E6%89%93%E9%9D%B6%E8%AE%B0%E5%BD%95/" target="_self">
+        <div>
+          靶场搭建直接讲将目标下载到本地，然后倒入到vm 里面就可以了  https://download.vulnhub.com/w1r3s/w1r3s.v1.0.1.zip  思路可以看看红队笔记师傅的视频  【「红队笔记」靶机精讲：W1R3S 1.0.1 - 渗透测试思路为王，细节多到即使对于纯萌新也能无感入圈。】 https://www.bilibili.com/video/BV1mB4y1j7K6
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-10-28 23:42" pubdate>
+              2024-10-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/">#靶场记录</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2024/10/26/%E5%85%8D%E6%9D%80/powershell%E5%8A%A0%E8%BD%BDshellcode/" target="_self">
           powershell加载shellcode
         </a>
@@ -413,206 +613,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E5%85%8D%E6%9D%80/">#免杀</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/10/03/%E5%85%8D%E6%9D%80/apc-load/" target="_self">
-          apc_load
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/03/%E5%85%8D%E6%9D%80/apc-load/" target="_self">
-        <div>
-          预备知识 线程是不能被“杀掉”、“挂起”、“恢复”的，线程在执行的时候自己占据着CPU，别人不能控制它 举个极端的例子：如果不调用API，屏蔽中断，并保证代码不出现异常，线程将永久占用CPU 所以说线程如果想“死”，一定是自己执行代码把自己杀死，不存在“他杀”的情况  那么将会产生一个问题  如果想改变一个线程的行为该怎么做呢？   既然只能让他自己杀死自己，那我们就递出那一把刀。 让他主动调用一
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-10-03 21:34" pubdate>
-              2024-10-03
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%85%8D%E6%9D%80/">#免杀</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/09/29/cpp/dll%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" target="_self">
-          dll动态加载
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/29/cpp/dll%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" target="_self">
-        <div>
-          简介cpp 加载dll 可以分为在编译的时候进行加载或者是在执行代码的时候进行动态加载 编译加载dll 的制作制作一个class static 的函数的dll，然后在编译的时候链接，但是这样如果dll 数量过多，只要有一个dll 不存在，整个程序都会报错 12345678910111213141516171819cmake_minimum_required(VERSION 3.29)  proje
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-09-29 18:24" pubdate>
-              2024-09-29
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/cpp/">#cpp</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/09/26/k8s/%E8%B5%84%E6%BA%90%E7%9A%84%E5%88%86%E7%B1%BB/" target="_self">
-          资源的分类
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/26/k8s/%E8%B5%84%E6%BA%90%E7%9A%84%E5%88%86%E7%B1%BB/" target="_self">
-        <div>
-          集群级别的资源作用于集群之上，集群下的所有资源都可以共享 namespace一个集群中的概念，可以简单理解为使用命名空间(namespace)，在集群内划分出了很多不同的小的集群 在同一个命名空间中的资源是可以相互访问的，但是不同的命名空间中的是拒绝访问
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-09-26 23:20" pubdate>
-              2024-09-26
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/k8s/">#k8s</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/09/26/k8s/%E5%AF%B9%E8%B1%A1%E8%A7%84%E7%BA%A6%E5%92%8C%E7%8A%B6%E6%80%81/" target="_self">
-          对象规约和状态
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/26/k8s/%E5%AF%B9%E8%B1%A1%E8%A7%84%E7%BA%A6%E5%92%8C%E7%8A%B6%E6%80%81/" target="_self">
-        <div>
-          对象和资源Kubernetes中的所有内容都被抽象为”资源”，如Pod、Service、Node等都是资源。“对象“就是”资源”的实何，是持久化的实体。如某个具体的Pod、某个具体的Node。Kubernetes使用这些实体去表示整个集群的状态。对象的创建、除、修改都是通过”Kubernetes API”,也就是”Api Server”组件提供的API接口，这些是RESTful风格的Api，与k8
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-09-26 23:07" pubdate>
-              2024-09-26
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/k8s/">#k8s</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/09/25/k8s/k8s%E7%AE%80%E4%BB%8B/" target="_self">
-          k8s简介
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/25/k8s/k8s%E7%AE%80%E4%BB%8B/" target="_self">
-        <div>
-          masterapi-server一个基于rest 风格的接口，用于操作k8s controller-manager控制器管理器  管理各个类型的控制器 针对k8s 中的各种资源进行管理 cloud-controller-manager云控制器管理器 用于第三方云平台的api 对接的管理器 kube-scheduler调度器 负责将pod 基于一定算法，将其调度到合适的节点（服务器）上 etcdk8
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-09-25 14:32" pubdate>
-              2024-09-25
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/k8s/">#k8s</a>
             
           </div>
         
