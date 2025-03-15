@@ -226,6 +226,86 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/04/20/C/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%90%88%E9%9B%86/" target="_self">
+          函数指针合集
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%90%88%E9%9B%86/" target="_self">
+        <div>
+          学习目标：  认识函数指针 typedef和函数指针 万能指针充当函数指针  [TOC] 函数指针合集概念 什么是函数指针  对应函数在内存当中的首地址   定义函数指针   使用(*标识符（可以当作指针变量的名字）)替换函数名，剩下的照抄  使用示例 123456int func(int a,int b)&#123;    ;&#125;int (*p_func)(int a,int b)//函
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-20 09:01" pubdate>
+              2023-04-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/04/20/C/%E5%88%9D%E5%A7%8B%E6%8C%87%E9%92%88/" target="_self">
+          初始指针
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E5%88%9D%E5%A7%8B%E6%8C%87%E9%92%88/" target="_self">
+        <div>
+          初始指针what is 指针 指针描述了数据在内存中的位置 指针也就是内存地址 一个内存单元为一个字节 指针在32位平台是4个字节，在64位平台是8个字节  指针的意义 指针的类型决定了，指针解引用的权限有多大 123//例如char*//可以指1个字节int*//可以指4个字节  取地址运算 &amp;：取地址后的，需要用%p输出，如果用%x（16进制），则会警告  只有明确的变量才能取他的地址
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-20 09:01" pubdate>
+              2023-04-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/c%E5%9F%BA%E7%A1%80/">#c基础</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/04/20/C/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" target="_self">
           文件操作
         </a>
@@ -306,15 +386,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" target="_self">
-          枚举
+        <a href="/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/" target="_self">
+          联合体专解
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/" target="_self">
         <div>
-          枚举常量符号化 用符号而不是具体的数字来表示程序中的数字 123const int red=0;//然后直接使用类型的名字//等等  枚举是一种用户定义的数据类型，他用关键字enum来声明 1enum 枚举类型的名字&#123;名字0······名字n&#125;;  枚举类型的名字通常不直接使用，而是使用大括号里面的名字 12345enum colors&#123;red,yellow,gree
+          联合体专解共用体的定义1234union 名字&#123;    //数据&#125;    理解 所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存  在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量 12345678910111213141516union Date&#123;	int num;	char name[20];&#125;;int main()
         </div>
       </a>
 
@@ -346,15 +426,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/" target="_self">
-          联合体专解
+        <a href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" target="_self">
+          枚举
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E8%81%94%E5%90%88%E4%BD%93%E4%B8%93%E8%A7%A3/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/C/%E6%9E%9A%E4%B8%BE/" target="_self">
         <div>
-          联合体专解共用体的定义1234union 名字&#123;    //数据&#125;    理解 所有变量使用同一个内存，一般为联合体中数据成员占用内存最多的变量的内存  在使用时，只有一个变量有效，在初始化时，不能同时初始化，多个变量 12345678910111213141516union Date&#123;	int num;	char name[20];&#125;;int main()
+          枚举常量符号化 用符号而不是具体的数字来表示程序中的数字 123const int red=0;//然后直接使用类型的名字//等等  枚举是一种用户定义的数据类型，他用关键字enum来声明 1enum 枚举类型的名字&#123;名字0······名字n&#125;;  枚举类型的名字通常不直接使用，而是使用大括号里面的名字 12345enum colors&#123;red,yellow,gree
         </div>
       </a>
 
@@ -524,86 +604,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2023-04-19 15:18" pubdate>
               2023-04-19
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">#Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/17/linux/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" target="_self">
-          常用指令
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/17/linux/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" target="_self">
-        <div>
-          [TOC] 常用指令目录结构 LInux的根目录是树形结构 Linux没有盘符（C盘等）的概念，只有一个根目录/   文件路径的描述方式 使用/ windows使用\  注意文件路径的开始必须是/,第一个是根目录，后面的是层级关系    LInux命令入门 通用格式 command [-options] [parameter]  command 命令本身 -options 可选的选项(非必填) p
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-17 15:01" pubdate>
-              2023-04-17
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">#Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/17/linux/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" target="_self">
-          操作系统概述
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/17/linux/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" target="_self">
-        <div>
-          计算机由哪两个部分组成 软件和硬件  操作系统是什么？ 操作系统是软件的一种 主要作用是协助用户调度硬件工作充当用户和计算机硬件之间的桥梁  不同文件的用途
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-17 14:15" pubdate>
-              2023-04-17
             </time>
           </div>
         
