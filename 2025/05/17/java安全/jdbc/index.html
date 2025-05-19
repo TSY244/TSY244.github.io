@@ -16,27 +16,26 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Unsafe首先unsafe 是不可以被实例化的，是内部的api 不允许外部直接调用 可能在以后的版本会被删除 如何创建一个unsafe类通过反射进行创建一个类 12345678910try &amp;#123;    Constructor constructor &#x3D; Unsafe.class.getDeclaredConstructor();    constructor.setAccessible(">
+    <meta name="description" content="连接数据库12345678910public static Connection Connect() throws SQLException, ClassNotFoundException &amp;#123;    String CLASS_NAME&#x3D;&quot;com.mysql.cj.jdbc.Driver&quot;;    Class.forName(CLASS_NAME);    String">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unsafe">
-<meta property="og:url" content="https://tsy244.github.io/2025/05/08/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Unsafe/index.html">
+<meta property="og:title" content="jdbc">
+<meta property="og:url" content="https://tsy244.github.io/2025/05/17/java%E5%AE%89%E5%85%A8/jdbc/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="Unsafe首先unsafe 是不可以被实例化的，是内部的api 不允许外部直接调用 可能在以后的版本会被删除 如何创建一个unsafe类通过反射进行创建一个类 12345678910try &amp;#123;    Constructor constructor &#x3D; Unsafe.class.getDeclaredConstructor();    constructor.setAccessible(">
+<meta property="og:description" content="连接数据库12345678910public static Connection Connect() throws SQLException, ClassNotFoundException &amp;#123;    String CLASS_NAME&#x3D;&quot;com.mysql.cj.jdbc.Driver&quot;;    Class.forName(CLASS_NAME);    String">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250508195643316.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250508195958440.png">
-<meta property="article:published_time" content="2025-05-08T11:44:17.000Z">
-<meta property="article:modified_time" content="2025-05-15T13:35:43.762Z">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250517173259976.png">
+<meta property="article:published_time" content="2025-05-17T08:37:26.000Z">
+<meta property="article:modified_time" content="2025-05-18T07:36:22.612Z">
 <meta property="article:author" content="August Rosenberg">
-<meta property="article:tag" content="java代码审计">
+<meta property="article:tag" content="java安全">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250508195643316.png">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250517173259976.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Unsafe - AU9U5T</title>
+  <title>jdbc - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Unsafe"></span>
+            <span id="subtitle" data-typed-text="jdbc"></span>
           
         </div>
 
@@ -218,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-05-08 19:44" pubdate>
-          May 8, 2025 pm
+        <time datetime="2025-05-17 16:37" pubdate>
+          May 17, 2025 pm
         </time>
       </span>
     
@@ -230,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          2.3k words
         
       </span>
     
@@ -241,7 +240,7 @@
         
         
         
-          14 mins
+          20 mins
         
       </span>
     
@@ -279,25 +278,68 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Unsafe</h1>
+            <h1 style="display: none">jdbc</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Unsafe"><a href="#Unsafe" class="headerlink" title="Unsafe"></a>Unsafe</h1><p>首先unsafe 是不可以被实例化的，是内部的api 不允许外部直接调用</p>
-<p>可能在以后的版本会被删除</p>
-<h1 id="如何创建一个unsafe类"><a href="#如何创建一个unsafe类" class="headerlink" title="如何创建一个unsafe类"></a>如何创建一个unsafe类</h1><p>通过反射进行创建一个类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-type">Constructor</span> <span class="hljs-variable">constructor</span> <span class="hljs-operator">=</span> Unsafe.class.getDeclaredConstructor();<br>    constructor.setAccessible(<span class="hljs-literal">true</span>);<br>    <span class="hljs-type">Unsafe</span> <span class="hljs-variable">unsafe</span> <span class="hljs-operator">=</span> (Unsafe) constructor.newInstance();<br>    myUnsafe.unsafe = unsafe;<br>&#125;  <span class="hljs-keyword">catch</span> (NoSuchMethodException e) &#123;<br>    e.printStackTrace();<br>&#125; <span class="hljs-keyword">catch</span> (InvocationTargetException | InstantiationException | IllegalAccessException e) &#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Connection <span class="hljs-title function_">Connect</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SQLException, ClassNotFoundException &#123;<br>    String CLASS_NAME=<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>;<br>    Class.forName(CLASS_NAME);<br><br><br>    String URL=<span class="hljs-string">&quot;jdbc:mysql://localhost:3306/jfinal_cms&quot;</span>;<br>    String USER=<span class="hljs-string">&quot;root&quot;</span>;<br>    <span class="hljs-keyword">return</span>  DriverManager.getConnection(URL,USER,<span class="hljs-string">&quot;&quot;</span>);<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250508195643316.png" srcset="/img/loading.gif" lazyload alt="image-20250508195643316"></p>
-<h1 id="无视构造函数构造类"><a href="#无视构造函数构造类" class="headerlink" title="无视构造函数构造类"></a>无视构造函数构造类</h1><p>使用unsafe.allocateInstance</p>
-<p>假设一下的类不能被创建了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> fun.au9u5t;<br><br><span class="hljs-keyword">import</span> java.io.FileOutputStream;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.ObjectOutputStream;<br><span class="hljs-keyword">import</span> java.io.Serializable;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span>  <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span><br>&#123;<br>    <span class="hljs-keyword">public</span> String name;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> age;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">User</span><span class="hljs-params">(String name, <span class="hljs-type">int</span> age)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>        <span class="hljs-built_in">this</span>.age = age;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">User</span><span class="hljs-params">(<span class="hljs-type">int</span> age)</span>&#123;<br>        <span class="hljs-built_in">this</span>.age = age;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">Say</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-built_in">this</span>.name+<span class="hljs-string">&quot;: My name is &quot;</span> + name + <span class="hljs-string">&quot; and I am &quot;</span> + age + <span class="hljs-string">&quot; years old.&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">Say</span><span class="hljs-params">(String message )</span>&#123;<br>        System.out.println(<span class="hljs-built_in">this</span>.name+<span class="hljs-string">&quot;: &quot;</span>+message);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span>&#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">ToString</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.name+<span class="hljs-string">&quot;: My name is &quot;</span> + name + <span class="hljs-string">&quot; and I am &quot;</span> + age + <span class="hljs-string">&quot; years old.&quot;</span>;<br>    &#125;<br><br><span class="hljs-comment">//    public static void main(String[] args) &#123;</span><br><span class="hljs-comment">//        User user = new User(&quot;august&quot;,99);</span><br><span class="hljs-comment">//        // 序列化成文件</span><br><span class="hljs-comment">//        String fileName= &quot;user.ser&quot;;</span><br><span class="hljs-comment">//        try (ObjectOutputStream oos=  new ObjectOutputStream(new FileOutputStream(fileName)))&#123;</span><br><span class="hljs-comment">//            oos.writeObject(user);</span><br><span class="hljs-comment">//        &#125;catch (IOException e)&#123;</span><br><span class="hljs-comment">//            e.printStackTrace();</span><br><span class="hljs-comment">//        &#125;</span><br><span class="hljs-comment">//    &#125;</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>这个就是完整的连接数据库的逻辑</p>
+<p>现在就有一个问题了</p>
+<p><strong>为什么需要Class.forName 提前注册？</strong></p>
+<p>需要了解Class.forName 的作用：动态加载类到 JVM 中并执行类的初始化</p>
+<p>那为什么需要呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//</span><br><span class="hljs-comment">// Source code recreated from a .class file by IntelliJ IDEA</span><br><span class="hljs-comment">// (powered by FernFlower decompiler)</span><br><span class="hljs-comment">//</span><br><br><span class="hljs-keyword">package</span> com.mysql.cj.jdbc;<br><br><span class="hljs-keyword">import</span> java.sql.DriverManager;<br><span class="hljs-keyword">import</span> java.sql.SQLException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Driver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">NonRegisteringDriver</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">java</span>.sql.Driver &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Driver</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>    &#125;<br><br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            DriverManager.registerDriver(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Driver</span>());<br>        &#125; <span class="hljs-keyword">catch</span> (SQLException var1) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Can&#x27;t register driver!&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
-<p>尝试直接创建对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">User user=(User) unsafe.allocateInstance(User.class);<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250508195958440.png" srcset="/img/loading.gif" lazyload alt="image-20250508195958440"></p>
+<p>可以通过这个类发现，需要通过反射，registerDriver</p>
+<p>但是为什么在删除这个之后有时候发现也能正常的执行数据库连接？</p>
+<p>那就又要掏出另一个概念了-SPI</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/84337883">深入理解 Java 中 SPI 机制 - 知乎 (zhihu.com)</a></p>
+<blockquote>
+<p>简单的说就是会主动的找classpath 对应的目录下的META-INF&#x2F;services 并将这个包中的内容加载到jvm 中</p>
+<p>这一步就是完全自动化的</p>
+</blockquote>
+<p>在jdbc 中</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250517173259976.png" srcset="/img/loading.gif" lazyload alt="image-20250517173259976"></p>
+<p>这个类就会自动的加载</p>
+<h1 id="问题思考"><a href="#问题思考" class="headerlink" title="问题思考"></a>问题思考</h1><ol>
+<li><p><code>SPI机制</code>是否有安全性问题？</p>
+<blockquote>
+<ol>
+<li>SPI通过扫描<code>META-INF/services</code>目录下的配置文件动态加载实现类，攻击者可能篡改配置文件或植入恶意JAR包，导致加载未经验证的类并执行恶意代码。例如，若服务提供者的实现类中包含反射调用危险方法（如Runtime.exec()），可能直接触发远程代码执行（RCE）</li>
+<li>Java默认的类加载机制未严格限制SPI实现类的来源。若未配合安全管理器（<code>SecurityManager</code>）或沙箱类加载器，攻击者可利用SPI加载来自不可信路径的类，突破权限隔离</li>
+<li>SPI的配置文件以明文形式存储于JAR包中，攻击者可通过修改<code>META-INF/services</code>下的接口文件内容，指定恶意实现类路径，从而劫持服务加载过程</li>
+</ol>
+</blockquote>
+</li>
+<li><p><code>Java反射</code>有那些安全问题？</p>
+<blockquote>
+<ol>
+<li>默认加载的时候可能存在恶意的static 代码，以至于不需要实例化对象，就在默认调用的时候完成了攻击</li>
+<li>反射允许直接访问和修改类的私有字段、方法或构造器，例如通过setAccessible(true)绕过private修饰符的限制。这可能导致敏感数据泄露（如密码字段）或破坏对象封装性。</li>
+<li>反射常与反序列化结合使用，若反序列化数据不可信，可能触发恶意代码执行（如通过ObjectInputStream加载恶意对象）</li>
+</ol>
+</blockquote>
+</li>
+<li><p><code>Java类加载机制</code>是什么？</p>
+<blockquote>
+<p>就是将class 文件加载到jvm 中的机制。这个机制中最出名的模型是双亲委派模型。就是子加载在加载的时候不会先加载，而是向上抛给上一层加载器。一直到顶层的加载器无法加载，才会逐步向下尝试加载。</p>
+<p><strong>一些风险：</strong></p>
+<ol>
+<li>如果攻击者能够控制应用程序使用的类加载器，或者能够注入一个恶意的自定义类加载器，他们就可以加载任意的恶意代码。</li>
+<li>虽然自定义类加载器通常建议重写<code>findClass()</code>以遵循双亲委派，但如果错误地重写了<code>loadClass()</code>并破坏了委派链，可能会导致命名空间混淆或加载非预期的类版本。</li>
+<li><code>java.lang.ClassLoader</code>的<code>protected final byte[] defineClass(String name, byte[] b, int off, int len)</code>方法可以将一个字节数组转换为<code>Class</code>对象。如果攻击者能够控制传递给此方法的字节数组内容，他们就可以在JVM中定义任意类。</li>
+<li><code>java.net.URLClassLoader</code>可以从指定的URL加载类和资源。如果URL来源不受信任或可被攻击者控制，那么JVM就会加载并可能执行恶意代码。</li>
+<li>类加载器不仅加载类，还加载资源（如配置文件、图片等）通过<code>getResource()</code>或<code>getResourceAsStream()</code>。如果自定义类加载器在构造资源路径时未对输入进行充分验证，可能导致路径操纵，读取到非预期的本地文件或发起非预期的网络请求（类似SSRF，如果从URL加载资源）。</li>
+</ol>
+</blockquote>
+</li>
+<li><p>数据库连接时密码安全问题？</p>
+</li>
+<li><p>使用JDBC如何写一个通用的<code>数据库密码爆破</code>模块？</p>
+</li>
+</ol>
 
                 
               </div>
@@ -310,7 +352,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">#java代码审计</a>
+        <a href="/tags/java%E5%AE%89%E5%85%A8/">#java安全</a>
       
     </div>
   
@@ -322,8 +364,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Unsafe</div>
-      <div>https://tsy244.github.io/2025/05/08/java代码审计/Unsafe/</div>
+      <div>jdbc</div>
+      <div>https://tsy244.github.io/2025/05/17/java安全/jdbc/</div>
     </div>
     <div class="license-meta">
       
@@ -335,7 +377,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 8, 2025</div>
+          <div>May 17, 2025</div>
         </div>
       
       
@@ -367,18 +409,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/10/javaee/%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BB%84%E4%BB%B6/" title="使用第三方组件">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">使用第三方组件</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/02/javaee/listener/" title="listener">
-                        <span class="hidden-mobile">listener</span>
+                      <a href="/2025/05/17/java%E5%AE%89%E5%85%A8/java%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4/" title="java执行命令">
+                        <span class="hidden-mobile">java执行命令</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

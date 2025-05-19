@@ -1,0 +1,698 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="参考[本地命令执行 · 攻击Java Web应用-Java Web安全] (javasec.org) runtime 直接加载1234567891011121314151617public static void DirectLoad(String...cmds) throws IOException &amp;#123;        Runtime.getRuntime().exec(cmds);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java执行命令">
+<meta property="og:url" content="https://tsy244.github.io/2025/05/17/java%E5%AE%89%E5%85%A8/java%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="参考[本地命令执行 · 攻击Java Web应用-Java Web安全] (javasec.org) runtime 直接加载1234567891011121314151617public static void DirectLoad(String...cmds) throws IOException &amp;#123;        Runtime.getRuntime().exec(cmds);">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-17T07:20:08.000Z">
+<meta property="article:modified_time" content="2025-05-17T08:36:08.999Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="java安全">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>java执行命令 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="java执行命令"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-17 15:20" pubdate>
+          May 17, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          74 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">java执行命令</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[本地命令执行 · 攻击Java Web应用-<a target="_blank" rel="noopener" href="https://www.javasec.org/javase/CommandExecution/">Java Web安全] (javasec.org)</a></p>
+<h1 id="runtime-直接加载"><a href="#runtime-直接加载" class="headerlink" title="runtime 直接加载"></a>runtime 直接加载</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">DirectLoad</span><span class="hljs-params">(String...cmds)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        Runtime.getRuntime().exec(cmds);<br>        <span class="hljs-keyword">try</span> &#123;<br>            Process process=  Runtime.getRuntime().exec(cmds);<br>            <span class="hljs-type">InputStream</span> <span class="hljs-variable">inputStream</span> <span class="hljs-operator">=</span> process.getInputStream();<br>            <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">outputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>            <span class="hljs-type">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>            <span class="hljs-type">int</span> bytesRead;<br>            <span class="hljs-keyword">while</span> ((bytesRead = inputStream.read(buffer)) != -<span class="hljs-number">1</span>) &#123;<br>                outputStream.write(buffer, <span class="hljs-number">0</span>, bytesRead);<br>            &#125;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">output</span> <span class="hljs-operator">=</span> outputStream.toString();<br>            System.out.println(output);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="通过反射加载getruntime"><a href="#通过反射加载getruntime" class="headerlink" title="通过反射加载getruntime"></a>通过反射加载getruntime</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ReflectLoad</span><span class="hljs-params">(String cmds)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-comment">// 获取java.lang.Runtime</span><br>        String rt=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[]&#123;<span class="hljs-number">106</span>, <span class="hljs-number">97</span>, <span class="hljs-number">118</span>, <span class="hljs-number">97</span>, <span class="hljs-number">46</span>, <span class="hljs-number">108</span>, <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">46</span>, <span class="hljs-number">82</span>, <span class="hljs-number">117</span>, <span class="hljs-number">110</span>, <span class="hljs-number">116</span>, <span class="hljs-number">105</span>, <span class="hljs-number">109</span>, <span class="hljs-number">101</span>&#125;);<br>        <span class="hljs-keyword">try</span> &#123;<br>            Class&lt;?&gt; clazz=Class.forName(rt);<br>            <span class="hljs-comment">// 获取getRuntime方法</span><br>            Method m1=clazz.getMethod(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[]&#123;<span class="hljs-number">103</span>, <span class="hljs-number">101</span>, <span class="hljs-number">116</span>, <span class="hljs-number">82</span>, <span class="hljs-number">117</span>, <span class="hljs-number">110</span>, <span class="hljs-number">116</span>, <span class="hljs-number">105</span>, <span class="hljs-number">109</span>, <span class="hljs-number">101</span>&#125;));<br>            <span class="hljs-comment">// 获取Exec方法</span><br>            Method m2=clazz.getMethod(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[]&#123;<span class="hljs-number">101</span>, <span class="hljs-number">120</span>, <span class="hljs-number">101</span>, <span class="hljs-number">99</span>&#125;),String.class);<br>            <span class="hljs-comment">// 反射调用exec方法</span><br>            Object ovj2=m2.invoke(m1.invoke(<span class="hljs-literal">null</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;&#125;),<span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;cmds&#125;);<br>            <span class="hljs-comment">// 获取getInputStream方法</span><br>            <span class="hljs-type">Method</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> ovj2.getClass().getMethod(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[]&#123;<span class="hljs-number">103</span>, <span class="hljs-number">101</span>, <span class="hljs-number">116</span>, <span class="hljs-number">73</span>, <span class="hljs-number">110</span>, <span class="hljs-number">112</span>, <span class="hljs-number">117</span>, <span class="hljs-number">116</span>, <span class="hljs-number">83</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">101</span>, <span class="hljs-number">97</span>, <span class="hljs-number">109</span>&#125;));<br>            m.setAccessible(<span class="hljs-literal">true</span>);<br>            <span class="hljs-comment">// 获取命令行结果</span><br>            <span class="hljs-type">Scanner</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>((InputStream)m.invoke(ovj2,<span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;&#125;)).useDelimiter(<span class="hljs-string">&quot;\\A&quot;</span>);<br>            <span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> s.hasNext() ? s.next() : <span class="hljs-string">&quot;&quot;</span>;<br>            System.out.println(result);<br>        &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="调用UseProcessBuilder"><a href="#调用UseProcessBuilder" class="headerlink" title="调用UseProcessBuilder"></a>调用UseProcessBuilder</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">UseProcessBuilder</span><span class="hljs-params">(String... cmds)</span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">ProcessBuilder</span> <span class="hljs-variable">processBuilder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ProcessBuilder</span>(cmds);<br>            <span class="hljs-type">Process</span> <span class="hljs-variable">process</span> <span class="hljs-operator">=</span> processBuilder.start();<br>            <span class="hljs-type">InputStream</span> <span class="hljs-variable">inputStream</span> <span class="hljs-operator">=</span> process.getInputStream();<br>            <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">outputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>            <span class="hljs-type">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>            <span class="hljs-type">int</span> bytesRead;<br>            <span class="hljs-keyword">while</span> ((bytesRead = inputStream.read(buffer)) != -<span class="hljs-number">1</span>) &#123;<br>                outputStream.write(buffer, <span class="hljs-number">0</span>, bytesRead);<br>            &#125;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">output</span> <span class="hljs-operator">=</span> outputStream.toString();<br>            System.out.println(output);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="反射UNIXProcess-x2F-ProcessImpl执行本地命令"><a href="#反射UNIXProcess-x2F-ProcessImpl执行本地命令" class="headerlink" title="反射UNIXProcess&#x2F;ProcessImpl执行本地命令"></a>反射UNIXProcess&#x2F;ProcessImpl执行本地命令</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">byte</span>[] toCString(String s) &#123;<br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br><br>        <span class="hljs-type">byte</span>[] bytes  = s.getBytes();<br>        <span class="hljs-type">byte</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[bytes.length + <span class="hljs-number">1</span>];<br>        System.arraycopy(bytes, <span class="hljs-number">0</span>, result, <span class="hljs-number">0</span>, bytes.length);<br>        result[result.length - <span class="hljs-number">1</span>] = (<span class="hljs-type">byte</span>) <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> InputStream <span class="hljs-title function_">start</span><span class="hljs-params">(String[] strs)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// java.lang.UNIXProcess</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">unixClass</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[]&#123;<span class="hljs-number">106</span>, <span class="hljs-number">97</span>, <span class="hljs-number">118</span>, <span class="hljs-number">97</span>, <span class="hljs-number">46</span>, <span class="hljs-number">108</span>, <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">46</span>, <span class="hljs-number">85</span>, <span class="hljs-number">78</span>, <span class="hljs-number">73</span>, <span class="hljs-number">88</span>, <span class="hljs-number">80</span>, <span class="hljs-number">114</span>, <span class="hljs-number">111</span>, <span class="hljs-number">99</span>, <span class="hljs-number">101</span>, <span class="hljs-number">115</span>, <span class="hljs-number">115</span>&#125;);<br><br>        <span class="hljs-comment">// java.lang.ProcessImpl</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">processClass</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[]&#123;<span class="hljs-number">106</span>, <span class="hljs-number">97</span>, <span class="hljs-number">118</span>, <span class="hljs-number">97</span>, <span class="hljs-number">46</span>, <span class="hljs-number">108</span>, <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">46</span>, <span class="hljs-number">80</span>, <span class="hljs-number">114</span>, <span class="hljs-number">111</span>, <span class="hljs-number">99</span>, <span class="hljs-number">101</span>, <span class="hljs-number">115</span>, <span class="hljs-number">115</span>, <span class="hljs-number">73</span>, <span class="hljs-number">109</span>, <span class="hljs-number">112</span>, <span class="hljs-number">108</span>&#125;);<br><br>        <span class="hljs-type">Class</span> <span class="hljs-variable">clazz</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><br>        <span class="hljs-comment">// 反射创建UNIXProcess或者ProcessImpl</span><br>        <span class="hljs-keyword">try</span> &#123;<br>            clazz = Class.forName(unixClass);<br>        &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException e) &#123;<br>            clazz = Class.forName(processClass);<br>        &#125;<br><br>        <span class="hljs-comment">// 获取UNIXProcess或者ProcessImpl的构造方法</span><br>        Constructor&lt;?&gt; constructor = clazz.getDeclaredConstructors()[<span class="hljs-number">0</span>];<br>        constructor.setAccessible(<span class="hljs-literal">true</span>);<br><br>        <span class="hljs-keyword">assert</span> strs != <span class="hljs-literal">null</span> &amp;&amp; strs.length &gt; <span class="hljs-number">0</span>;<br><br>        <span class="hljs-comment">// Convert arguments to a contiguous block; it&#x27;s easier to do</span><br>        <span class="hljs-comment">// memory management in Java than in C.</span><br>        <span class="hljs-type">byte</span>[][] args = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[strs.length - <span class="hljs-number">1</span>][];<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> args.length; <span class="hljs-comment">// For added NUL bytes</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; args.length; i++) &#123;<br>            args[i] = strs[i + <span class="hljs-number">1</span>].getBytes();<br>            size += args[i].length;<br>        &#125;<br><br>        <span class="hljs-type">byte</span>[] argBlock = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[size];<br>        <span class="hljs-type">int</span>    <span class="hljs-variable">i</span>        <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">byte</span>[] arg : args) &#123;<br>            System.arraycopy(arg, <span class="hljs-number">0</span>, argBlock, i, arg.length);<br>            i += arg.length + <span class="hljs-number">1</span>;<br>            <span class="hljs-comment">// No need to write NUL bytes explicitly</span><br>        &#125;<br><br>        <span class="hljs-type">int</span>[] envc    = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">1</span>];<br>        <span class="hljs-type">int</span>[] std_fds = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>&#125;;<br><br>        <span class="hljs-type">FileInputStream</span> <span class="hljs-variable">f0</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">FileOutputStream</span> <span class="hljs-variable">f1</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">FileOutputStream</span> <span class="hljs-variable">f2</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><br>        <span class="hljs-comment">// In theory, close() can throw IOException</span><br>        <span class="hljs-comment">// (although it is rather unlikely to happen here)</span><br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">if</span> (f0 != <span class="hljs-literal">null</span>) f0.close();<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-keyword">if</span> (f1 != <span class="hljs-literal">null</span>) f1.close();<br>            &#125; <span class="hljs-keyword">finally</span> &#123;<br>                <span class="hljs-keyword">if</span> (f2 != <span class="hljs-literal">null</span>) f2.close();<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 创建UNIXProcess或者ProcessImpl实例</span><br>        <span class="hljs-type">Object</span> <span class="hljs-variable">object</span> <span class="hljs-operator">=</span> constructor.newInstance(<br>                toCString(strs[<span class="hljs-number">0</span>]), argBlock, args.length,<br>                <span class="hljs-literal">null</span>, envc[<span class="hljs-number">0</span>], <span class="hljs-literal">null</span>, std_fds, <span class="hljs-literal">false</span><br>        );<br><br>        <span class="hljs-comment">// 获取命令执行的InputStream</span><br>        <span class="hljs-type">Method</span> <span class="hljs-variable">inMethod</span> <span class="hljs-operator">=</span> object.getClass().getDeclaredMethod(<span class="hljs-string">&quot;getInputStream&quot;</span>);<br>        inMethod.setAccessible(<span class="hljs-literal">true</span>);<br><br>        <span class="hljs-keyword">return</span> (InputStream) inMethod.invoke(object);<br>    &#125;<br><br>     <span class="hljs-keyword">static</span> String <span class="hljs-title function_">inputStreamToString</span><span class="hljs-params">(InputStream in, String charset)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">if</span> (charset == <span class="hljs-literal">null</span>) &#123;<br>                charset = <span class="hljs-string">&quot;UTF-8&quot;</span>;<br>            &#125;<br><br>            <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">out</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>            <span class="hljs-type">int</span>                   <span class="hljs-variable">a</span>   <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-type">byte</span>[]                b   = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br><br>            <span class="hljs-keyword">while</span> ((a = in.read(b)) != -<span class="hljs-number">1</span>) &#123;<br>                out.write(b, <span class="hljs-number">0</span>, a);<br>            &#125;<br><br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(out.toByteArray());<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            <span class="hljs-keyword">throw</span> e;<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-keyword">if</span> (in != <span class="hljs-literal">null</span>)<br>                in.close();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 反射UNIXProcess/ProcessImpl执行本地命令</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ReflectUNIXProcess</span><span class="hljs-params">(String... cmds)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        InputStream in= start(cmds);<br>        String ret=inputStreamToString(in,<span class="hljs-string">&quot;UTF-8&quot;</span>);<br>        System.out.println(ret);<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>    String[] cmds= &#123;<span class="hljs-string">&quot;/bin/bash&quot;</span>,<span class="hljs-string">&quot;-c&quot;</span>, <span class="hljs-string">&quot;cd /Users/august/code/java/JavaSecLearn&amp;&amp;ls -al&quot;</span>&#125;;<br>    <span class="hljs-comment">// 反射UNIXProcess/ProcessImpl执行本地命令</span><br>    ReflectUNIXProcess(cmds);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="forkAndExec命令执行-Unsafe-反射-Native方法调用"><a href="#forkAndExec命令执行-Unsafe-反射-Native方法调用" class="headerlink" title="forkAndExec命令执行-Unsafe+反射+Native方法调用"></a>forkAndExec命令执行-Unsafe+反射+Native方法调用</h1><p>如果<code>RASP</code>把<code>UNIXProcess/ProcessImpl</code>类的构造方法给拦截了我们是不是就无法执行本地命令了？其实我们可以利用Java的几个特性就可以绕过RASP执行本地命令了，具体步骤如下:</p>
+<ol>
+<li>使用<code>sun.misc.Unsafe.allocateInstance(Class)</code>特性可以无需<code>new</code>或者<code>newInstance</code>创建<code>UNIXProcess/ProcessImpl</code>类对象。</li>
+<li>反射<code>UNIXProcess/ProcessImpl</code>类的<code>forkAndExec</code>方法。</li>
+<li>构造<code>forkAndExec</code>需要的参数并调用。</li>
+<li>反射<code>UNIXProcess/ProcessImpl</code>类的<code>initStreams</code>方法初始化输入输出结果流对象。</li>
+<li>反射<code>UNIXProcess/ProcessImpl</code>类的<code>getInputStream</code>方法获取本地命令执行结果(如果要输出流、异常流反射对应方法即可)。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">UnsafeLoad</span><span class="hljs-params">(String[] strs)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>       <span class="hljs-keyword">if</span> (strs != <span class="hljs-literal">null</span>) &#123;<br>           <span class="hljs-type">Field</span> <span class="hljs-variable">theUnsafeField</span> <span class="hljs-operator">=</span> Unsafe.class.getDeclaredField(<span class="hljs-string">&quot;theUnsafe&quot;</span>);<br>           theUnsafeField.setAccessible(<span class="hljs-literal">true</span>);<br>           <span class="hljs-type">Unsafe</span> <span class="hljs-variable">unsafe</span> <span class="hljs-operator">=</span> (Unsafe) theUnsafeField.get(<span class="hljs-literal">null</span>);<br><br>           <span class="hljs-type">Class</span> <span class="hljs-variable">processClass</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><br>           <span class="hljs-keyword">try</span> &#123;<br>               processClass = Class.forName(<span class="hljs-string">&quot;java.lang.UNIXProcess&quot;</span>);<br>           &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException e) &#123;<br>               processClass = Class.forName(<span class="hljs-string">&quot;java.lang.ProcessImpl&quot;</span>);<br>           &#125;<br><br>           <span class="hljs-type">Object</span> <span class="hljs-variable">processObject</span> <span class="hljs-operator">=</span> unsafe.allocateInstance(processClass);<br><br>           <span class="hljs-comment">// Convert arguments to a contiguous block; it&#x27;s easier to do</span><br>           <span class="hljs-comment">// memory management in Java than in C.</span><br>           <span class="hljs-type">byte</span>[][] args = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[strs.length - <span class="hljs-number">1</span>][];<br>           <span class="hljs-type">int</span>      <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> args.length; <span class="hljs-comment">// For added NUL bytes</span><br><br>           <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; args.length; i++) &#123;<br>               args[i] = strs[i + <span class="hljs-number">1</span>].getBytes();<br>               size += args[i].length;<br>           &#125;<br><br>           <span class="hljs-type">byte</span>[] argBlock = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[size];<br>           <span class="hljs-type">int</span>    <span class="hljs-variable">i</span>        <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>           <span class="hljs-keyword">for</span> (<span class="hljs-type">byte</span>[] arg : args) &#123;<br>               System.arraycopy(arg, <span class="hljs-number">0</span>, argBlock, i, arg.length);<br>               i += arg.length + <span class="hljs-number">1</span>;<br>               <span class="hljs-comment">// No need to write NUL bytes explicitly</span><br>           &#125;<br><br>           <span class="hljs-type">int</span>[] envc                 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">1</span>];<br>           <span class="hljs-type">int</span>[] std_fds              = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>&#125;;<br>           <span class="hljs-type">Field</span> <span class="hljs-variable">launchMechanismField</span> <span class="hljs-operator">=</span> processClass.getDeclaredField(<span class="hljs-string">&quot;launchMechanism&quot;</span>);<br>           <span class="hljs-type">Field</span> <span class="hljs-variable">helperpathField</span>      <span class="hljs-operator">=</span> processClass.getDeclaredField(<span class="hljs-string">&quot;helperpath&quot;</span>);<br>           launchMechanismField.setAccessible(<span class="hljs-literal">true</span>);<br>           helperpathField.setAccessible(<span class="hljs-literal">true</span>);<br>           <span class="hljs-type">Object</span> <span class="hljs-variable">launchMechanismObject</span> <span class="hljs-operator">=</span> launchMechanismField.get(processObject);<br>           <span class="hljs-type">byte</span>[] helperpathObject      = (<span class="hljs-type">byte</span>[]) helperpathField.get(processObject);<br><br>           <span class="hljs-type">int</span> <span class="hljs-variable">ordinal</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) launchMechanismObject.getClass().getMethod(<span class="hljs-string">&quot;ordinal&quot;</span>).invoke(launchMechanismObject);<br><br>           <span class="hljs-type">Method</span> <span class="hljs-variable">forkMethod</span> <span class="hljs-operator">=</span> processClass.getDeclaredMethod(<span class="hljs-string">&quot;forkAndExec&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;<br>                   <span class="hljs-type">int</span>.class, <span class="hljs-type">byte</span>[].class, <span class="hljs-type">byte</span>[].class, <span class="hljs-type">byte</span>[].class, <span class="hljs-type">int</span>.class,<br>                   <span class="hljs-type">byte</span>[].class, <span class="hljs-type">int</span>.class, <span class="hljs-type">byte</span>[].class, <span class="hljs-type">int</span>[].class, <span class="hljs-type">boolean</span>.class<br>           &#125;);<br><br>           forkMethod.setAccessible(<span class="hljs-literal">true</span>);<span class="hljs-comment">// 设置访问权限</span><br><br>           <span class="hljs-type">int</span> <span class="hljs-variable">pid</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) forkMethod.invoke(processObject, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<br>                   ordinal + <span class="hljs-number">1</span>, helperpathObject, toCString(strs[<span class="hljs-number">0</span>]), argBlock, args.length,<br>                   <span class="hljs-literal">null</span>, envc[<span class="hljs-number">0</span>], <span class="hljs-literal">null</span>, std_fds, <span class="hljs-literal">false</span><br>           &#125;);<br><br>           <span class="hljs-comment">// 初始化命令执行结果，将本地命令执行的输出流转换为程序执行结果的输出流</span><br>           <span class="hljs-type">Method</span> <span class="hljs-variable">initStreamsMethod</span> <span class="hljs-operator">=</span> processClass.getDeclaredMethod(<span class="hljs-string">&quot;initStreams&quot;</span>, <span class="hljs-type">int</span>[].class);<br>           initStreamsMethod.setAccessible(<span class="hljs-literal">true</span>);<br>           initStreamsMethod.invoke(processObject, std_fds);<br><br>           <span class="hljs-comment">// 获取本地执行结果的输入流</span><br>           <span class="hljs-type">Method</span> <span class="hljs-variable">getInputStreamMethod</span> <span class="hljs-operator">=</span> processClass.getMethod(<span class="hljs-string">&quot;getInputStream&quot;</span>);<br>           getInputStreamMethod.setAccessible(<span class="hljs-literal">true</span>);<br>           <span class="hljs-type">InputStream</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> (InputStream) getInputStreamMethod.invoke(processObject);<br><br>           <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">baos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>           <span class="hljs-type">int</span>                   <span class="hljs-variable">a</span>    <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>           <span class="hljs-type">byte</span>[]                b    = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br><br>           <span class="hljs-keyword">while</span> ((a = in.read(b)) != -<span class="hljs-number">1</span>) &#123;<br>               baos.write(b, <span class="hljs-number">0</span>, a);<br>           &#125;<br>           System.out.println(baos.toString());<br>       &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="JNI命令执行"><a href="#JNI命令执行" class="headerlink" title="JNI命令执行"></a>JNI命令执行</h1><p>java 通过JNI 调用动态链接库，只需要在动态链接库中写一个本地命令就OK 了</p>
+<p>但是这个方法对攻击服务器的作用并不是很大</p>
+<p>首先你不像前面的Java 原生代码 ，可以直接使用工具编写成一个字节</p>
+<p>在这个场景下需要，提前给系统添加一个动态链接库才行。</p>
+<p>如果将动态链接库编写成base64 编码之后的字符串的话，对http 数据包的大小有更强的依赖。</p>
+<h1 id="java本地命令-执行"><a href="#java本地命令-执行" class="headerlink" title="java本地命令 执行"></a>java本地命令 执行</h1><p>Java本地命令执行是一个非常高危的漏洞，一旦被攻击者利用后果不堪设想。这个漏洞原理一样是非常简单且容易被发现。开发阶段我们应该尽可能的避免调用本地命令接口，如果不得不调用那么请仔细检查命令执行参数，严格检查(防止命令注入)或严禁用户直接传入命令！代码审计阶段我们应该多搜索下<code>Runtime.exec/ProcessBuilder/ProcessImpl</code>等关键词，这样可以快速找出命令执行点。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/java%E5%AE%89%E5%85%A8/">#java安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>java执行命令</div>
+      <div>https://tsy244.github.io/2025/05/17/java安全/java执行命令/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 17, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/17/java%E5%AE%89%E5%85%A8/jdbc/" title="jdbc">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">jdbc</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/15/java%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="sql注入代码审计">
+                        <span class="hidden-mobile">sql注入代码审计</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
