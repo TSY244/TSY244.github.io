@@ -1,0 +1,749 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介Java语言是基于C语言实现的，Java底层的很多API都是通过JNI(Java Native Interface)来实现的。通过JNI接口C&#x2F;C++和Java可以互相调用(存在跨平台问题)。Java可以通过JNI调用来弥补语言自身的不足(代码安全性、内存操作等)。这个看似非常炫酷的特性其实自JDK1.1开始就有了，但是我们不得不去考虑JNI调用带来的一系列的安全问题！ jni-定义nativ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jni">
+<meta property="og:url" content="https://tsy244.github.io/2025/05/24/java%E5%AE%89%E5%85%A8/jni/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介Java语言是基于C语言实现的，Java底层的很多API都是通过JNI(Java Native Interface)来实现的。通过JNI接口C&#x2F;C++和Java可以互相调用(存在跨平台问题)。Java可以通过JNI调用来弥补语言自身的不足(代码安全性、内存操作等)。这个看似非常炫酷的特性其实自JDK1.1开始就有了，但是我们不得不去考虑JNI调用带来的一系列的安全问题！ jni-定义nativ">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524194301362.png">
+<meta property="article:published_time" content="2025-05-24T11:30:23.000Z">
+<meta property="article:modified_time" content="2025-05-24T12:21:19.177Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="java安全">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524194301362.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>jni - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="jni"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-24 19:30" pubdate>
+          May 24, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          49 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">jni</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Java语言是基于C语言实现的，Java底层的很多API都是通过<code>JNI(Java Native Interface)</code>来实现的。通过<code>JNI</code>接口<code>C/C++</code>和<code>Java</code>可以互相调用(存在跨平台问题)。Java可以通过JNI调用来弥补语言自身的不足(代码安全性、内存操作等)。这个看似非常炫酷的特性其实自<code>JDK1.1</code>开始就有了，但是我们不得不去考虑JNI调用带来的一系列的安全问题！</p>
+<h1 id="jni-定义native-方法"><a href="#jni-定义native-方法" class="headerlink" title="jni-定义native 方法"></a>jni-定义native 方法</h1><p>只需要添加一个native 关键字</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.example;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JNILearn</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">native</span> String <span class="hljs-title function_">Exec</span><span class="hljs-params">(String cmd)</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="jni-生成类头文件"><a href="#jni-生成类头文件" class="headerlink" title="jni-生成类头文件"></a>jni-生成类头文件</h1><p>已经编写好了java 文件，现在尝试将这个Java 文件编译成c 语言的头文件</p>
+<blockquote>
+<p>javac -cp . org&#x2F;example&#x2F;JNILearn.java     </p>
+<p>javac -cp  .  org&#x2F;example&#x2F;JNILearn.java -h  org&#x2F;example </p>
+</blockquote>
+<p>此时头文件就在 org&#x2F;example </p>
+<p>生成的文件特点</p>
+<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524194301362.png" srcset="/img/loading.gif" lazyload alt="image-20250524194301362"></p>
+<p>头文件的命名强制性</p>
+<blockquote>
+<p>javah生成的头文件中的函数命名方式是有非常强制性的约束的，如<code>Java_com_anbai_sec_cmd_CommandExecution_exec</code>中<code>Java_</code>是固定的前缀，而<code>com_anbai_sec_cmd_CommandExecution</code>也就代表着Java的完整包名称:<code>com.anbai.sec.cmd.CommandExecution</code>，<code>_exec</code>自然是表示的方法名称了。<code>(JNIEnv *, jclass, jstring)</code>表示分别是<code>JNI环境变量对象</code>、<code>java调用的类对象</code>、<code>参数入参类型</code>。</p>
+</blockquote>
+<h1 id="Jni-基础数据类型"><a href="#Jni-基础数据类型" class="headerlink" title="Jni-基础数据类型"></a>Jni-基础数据类型</h1><p>需要特别注意的是Java和JNI定义的类型是需要转换的，不能直接使用Java里的类型，也不能直接将JNI、C&#x2F;C++的类型直接返回给Java。</p>
+<p>参考如下类型对照表:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Java类型</th>
+<th align="left">JNI类型</th>
+<th align="left">C&#x2F;C++类型</th>
+<th align="left">大小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Boolean</td>
+<td align="left">Jblloean</td>
+<td align="left">unsigned char</td>
+<td align="left">无符号8位</td>
+</tr>
+<tr>
+<td align="left">Byte</td>
+<td align="left">Jbyte</td>
+<td align="left">char</td>
+<td align="left">有符号8位</td>
+</tr>
+<tr>
+<td align="left">Char</td>
+<td align="left">Jchar</td>
+<td align="left">unsigned short</td>
+<td align="left">无符号16位</td>
+</tr>
+<tr>
+<td align="left">Short</td>
+<td align="left">Jshort</td>
+<td align="left">short</td>
+<td align="left">有符号16位</td>
+</tr>
+<tr>
+<td align="left">Int</td>
+<td align="left">Jint</td>
+<td align="left">int</td>
+<td align="left">有符号32位</td>
+</tr>
+<tr>
+<td align="left">Long</td>
+<td align="left">Jlong</td>
+<td align="left">long long</td>
+<td align="left">有符号64位</td>
+</tr>
+<tr>
+<td align="left">Float</td>
+<td align="left">Jfloat</td>
+<td align="left">float</td>
+<td align="left">32位</td>
+</tr>
+<tr>
+<td align="left">Double</td>
+<td align="left">Jdouble</td>
+<td align="left">double</td>
+<td align="left">64位</td>
+</tr>
+</tbody></table>
+<p>jstring转char*：<code>env-&gt;GetStringUTFChars(str, &amp;jsCopy)</code></p>
+<p>char*转jstring: <code>env-&gt;NewStringUTF(&quot;Hello...&quot;)</code></p>
+<p>字符串资源释放: <code>env-&gt;ReleaseStringUTFChars(javaString, p);</code></p>
+<p>其他知识点参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25722767/article/details/52557235">jni中java与原生代码通信规则</a></p>
+<h1 id="编写逻辑"><a href="#编写逻辑" class="headerlink" title="编写逻辑"></a>编写逻辑</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs java"><br>#include &lt;iostream&gt;<br>#include &lt;stdlib.h&gt;<br>#include &lt;cstring&gt;<br>#include &lt;string&gt;<br>#include <span class="hljs-string">&quot;org_example_JNILearn.h&quot;</span><br><br>using namespace std;<br><br>JNIEXPORT jstring<br><br>    JNICALL<br>    <span class="hljs-title function_">Java_com_anbai_sec_cmd_CommandExecution_exec</span><span class="hljs-params">(JNIEnv *env, jclass jclass, jstring str)</span><br>&#123;<br><br>  <span class="hljs-keyword">if</span> (str != NULL)<br>  &#123;<br>    jboolean jsCopy;<br>    <span class="hljs-comment">// 将jstring参数转成char指针</span><br>    const <span class="hljs-type">char</span> *cmd = env-&gt;GetStringUTFChars(str, &amp;jsCopy);<br><br>    <span class="hljs-comment">// 使用popen函数执行系统命令</span><br>    FILE *fd = popen(cmd, <span class="hljs-string">&quot;r&quot;</span>);<br><br>    <span class="hljs-keyword">if</span> (fd != NULL)<br>    &#123;<br>      <span class="hljs-comment">// 返回结果字符串</span><br>      string result;<br><br>      <span class="hljs-comment">// 定义字符串数组</span><br>      <span class="hljs-type">char</span> buf[<span class="hljs-number">128</span>];<br><br>      <span class="hljs-comment">// 读取popen函数的执行结果</span><br>      <span class="hljs-keyword">while</span> (fgets(buf, sizeof(buf), fd) != NULL)<br>      &#123;<br>        <span class="hljs-comment">// 拼接读取到的结果到result</span><br>        result += buf;<br>      &#125;<br><br>      <span class="hljs-comment">// 关闭popen</span><br>      pclose(fd);<br><br>      <span class="hljs-comment">// 返回命令执行结果给Java</span><br>      <span class="hljs-keyword">return</span> env-&gt;NewStringUTF(result.c_str());<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> NULL;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">g++ -fPIC -I<span class="hljs-string">&quot;$JAVA_8U181_HOME/include&quot;</span> -I<span class="hljs-string">&quot;$JAVA_8U181_HOME/include/darwin&quot;</span> -<span class="hljs-keyword">shared </span>-o libcmd.<span class="hljs-keyword">jnilib </span><span class="hljs-keyword">org_example_JNILearn.cpp </span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.example;<br><br><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">import</span> java.lang.reflect.Method;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Creator: yz</span><br><span class="hljs-comment"> * Date: 2019/12/8</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JniExec</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">COMMAND_CLASS_NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;org.example.JNILearn&quot;</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * JDK1.5编译的com.anbai.sec.cmd.CommandExecution类字节码,</span><br><span class="hljs-comment">     * 只有一个public static native String exec(String cmd);的方法</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">byte</span>[] COMMAND_CLASS_BYTES = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[]&#123;<br>            -<span class="hljs-number">54</span>,  -<span class="hljs-number">2</span>, -<span class="hljs-number">70</span>, -<span class="hljs-number">66</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">61</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">15</span>,<br>            <span class="hljs-number">10</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">2</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">3</span>,   <span class="hljs-number">7</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">4</span>,  <span class="hljs-number">12</span>,   <span class="hljs-number">0</span>,<br>            <span class="hljs-number">5</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">6</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">16</span>, <span class="hljs-number">106</span>,  <span class="hljs-number">97</span>, <span class="hljs-number">118</span>,  <span class="hljs-number">97</span>,<br>            <span class="hljs-number">47</span>, <span class="hljs-number">108</span>,  <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>,  <span class="hljs-number">47</span>,  <span class="hljs-number">79</span>,  <span class="hljs-number">98</span>, <span class="hljs-number">106</span>, <span class="hljs-number">101</span>,<br>            <span class="hljs-number">99</span>, <span class="hljs-number">116</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">6</span>,  <span class="hljs-number">60</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">105</span>, <span class="hljs-number">116</span>,<br>            <span class="hljs-number">62</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">3</span>,  <span class="hljs-number">40</span>,  <span class="hljs-number">41</span>,  <span class="hljs-number">86</span>,   <span class="hljs-number">7</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">8</span>,<br>            <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">20</span>, <span class="hljs-number">111</span>, <span class="hljs-number">114</span>, <span class="hljs-number">103</span>,  <span class="hljs-number">47</span>, <span class="hljs-number">101</span>, <span class="hljs-number">120</span>,  <span class="hljs-number">97</span>,<br>            <span class="hljs-number">109</span>, <span class="hljs-number">112</span>, <span class="hljs-number">108</span>, <span class="hljs-number">101</span>,  <span class="hljs-number">47</span>,  <span class="hljs-number">74</span>,  <span class="hljs-number">78</span>,  <span class="hljs-number">73</span>,  <span class="hljs-number">76</span>, <span class="hljs-number">101</span>,<br>            <span class="hljs-number">97</span>, <span class="hljs-number">114</span>, <span class="hljs-number">110</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">4</span>,  <span class="hljs-number">67</span>, <span class="hljs-number">111</span>, <span class="hljs-number">100</span>, <span class="hljs-number">101</span>,<br>            <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">15</span>,  <span class="hljs-number">76</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">101</span>,  <span class="hljs-number">78</span>, <span class="hljs-number">117</span>, <span class="hljs-number">109</span>,<br>            <span class="hljs-number">98</span>, <span class="hljs-number">101</span>, <span class="hljs-number">114</span>,  <span class="hljs-number">84</span>,  <span class="hljs-number">97</span>,  <span class="hljs-number">98</span>, <span class="hljs-number">108</span>, <span class="hljs-number">101</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,<br>            <span class="hljs-number">4</span>,  <span class="hljs-number">69</span>, <span class="hljs-number">120</span>, <span class="hljs-number">101</span>,  <span class="hljs-number">99</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">38</span>,  <span class="hljs-number">40</span>,  <span class="hljs-number">76</span>,<br>            <span class="hljs-number">106</span>,  <span class="hljs-number">97</span>, <span class="hljs-number">118</span>,  <span class="hljs-number">97</span>,  <span class="hljs-number">47</span>, <span class="hljs-number">108</span>,  <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>,  <span class="hljs-number">47</span>,<br>            <span class="hljs-number">83</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>,  <span class="hljs-number">59</span>,  <span class="hljs-number">41</span>,  <span class="hljs-number">76</span>, <span class="hljs-number">106</span>,<br>            <span class="hljs-number">97</span>, <span class="hljs-number">118</span>,  <span class="hljs-number">97</span>,  <span class="hljs-number">47</span>, <span class="hljs-number">108</span>,  <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>,  <span class="hljs-number">47</span>,  <span class="hljs-number">83</span>,<br>            <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>,  <span class="hljs-number">59</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">10</span>,  <span class="hljs-number">83</span>,<br>            <span class="hljs-number">111</span>, <span class="hljs-number">117</span>, <span class="hljs-number">114</span>,  <span class="hljs-number">99</span>, <span class="hljs-number">101</span>,  <span class="hljs-number">70</span>, <span class="hljs-number">105</span>, <span class="hljs-number">108</span>, <span class="hljs-number">101</span>,   <span class="hljs-number">1</span>,<br>            <span class="hljs-number">0</span>,  <span class="hljs-number">13</span>,  <span class="hljs-number">74</span>,  <span class="hljs-number">78</span>,  <span class="hljs-number">73</span>,  <span class="hljs-number">76</span>, <span class="hljs-number">101</span>,  <span class="hljs-number">97</span>, <span class="hljs-number">114</span>, <span class="hljs-number">110</span>,<br>            <span class="hljs-number">46</span>, <span class="hljs-number">106</span>,  <span class="hljs-number">97</span>, <span class="hljs-number">118</span>,  <span class="hljs-number">97</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">33</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">7</span>,   <span class="hljs-number">0</span>,<br>            <span class="hljs-number">2</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">2</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,<br>            <span class="hljs-number">5</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">6</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">9</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,<br>            <span class="hljs-number">29</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">5</span>,  <span class="hljs-number">42</span>,<br>            -<span class="hljs-number">73</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">1</span>, -<span class="hljs-number">79</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">10</span>,<br>            <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">6</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">1</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">3</span>,<br>            <span class="hljs-number">1</span>,   <span class="hljs-number">9</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">11</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">12</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">1</span>,<br>            <span class="hljs-number">0</span>,  <span class="hljs-number">13</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">2</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">14</span>,<br>    &#125;;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">cmd</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;ifconfig&quot;</span>;<span class="hljs-comment">// 定于需要执行的cmd</span><br><br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">ClassLoader</span> <span class="hljs-variable">loader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ClassLoader</span>(JNILearn.class.getClassLoader()) &#123;<br>                <span class="hljs-meta">@Override</span><br>                <span class="hljs-keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="hljs-keyword">throws</span> ClassNotFoundException &#123;<br>                    <span class="hljs-keyword">try</span> &#123;<br>                        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>.findClass(name);<br>                    &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException e) &#123;<br>                        <span class="hljs-keyword">return</span> defineClass(COMMAND_CLASS_NAME, COMMAND_CLASS_BYTES, <span class="hljs-number">0</span>, COMMAND_CLASS_BYTES.length);<br>                    &#125;<br>                &#125;<br>            &#125;;<br><br>            <span class="hljs-comment">// 测试时候换成自己编译好的lib路径</span><br>            <span class="hljs-type">File</span> <span class="hljs-variable">libPath</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;.............libcmd.jnilib&quot;</span>); <span class="hljs-comment">// 绝对路径</span><br><br>            <span class="hljs-comment">// load命令执行类</span><br>            <span class="hljs-type">Class</span> <span class="hljs-variable">commandClass</span> <span class="hljs-operator">=</span> loader.loadClass(<span class="hljs-string">&quot;org.example.JNILearn&quot;</span>);<br><br>            <span class="hljs-comment">// 可以用System.load也加载lib也可以用反射ClassLoader加载,如果loadLibrary0</span><br>            <span class="hljs-comment">// 也被拦截了可以换java.lang.ClassLoader$NativeLibrary类的load方法。</span><br><span class="hljs-comment">//            System.load(&quot;/Users/yz/IdeaProjects/javaweb-sec/javaweb-sec-source/javase/src/main/java/com/anbai/sec/cmd/libcmd.jnilib/libcmd.jnilib&quot;);</span><br>            <span class="hljs-type">Method</span> <span class="hljs-variable">loadLibrary0Method</span> <span class="hljs-operator">=</span> ClassLoader.class.getDeclaredMethod(<span class="hljs-string">&quot;loadLibrary0&quot;</span>, Class.class, File.class);<br>            loadLibrary0Method.setAccessible(<span class="hljs-literal">true</span>);<br>            loadLibrary0Method.invoke(loader, commandClass, libPath);<br><br>            <span class="hljs-type">String</span> <span class="hljs-variable">content</span> <span class="hljs-operator">=</span> (String) commandClass.getMethod(<span class="hljs-string">&quot;Exec&quot;</span>, String.class).invoke(<span class="hljs-literal">null</span>, cmd);<br>            System.out.println(content);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>COMMAND_CLASS_NAME 是最开始写的.java 的名字</p>
+<p>COMMAND_CLASS_BYTES 是COMMAND_CLASS_NAME 对应的class 文件</p>
+<p>一下的方法可以获取这个bytes</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> cn.au9u5t;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.nio.file.Files;<br><span class="hljs-keyword">import</span> java.nio.file.Paths;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">// 填入你的.class文件路径</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">filePath</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;/Users/august/code/java/JavaSecLearn/src/main/java/org/example/JNILearn.class&quot;</span>;<br><br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">byte</span>[] classBytes = readClassFile(filePath);<br>            printByteArray(classBytes);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            System.err.println(<span class="hljs-string">&quot;读取类文件时出错: &quot;</span> + e.getMessage());<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 从指定路径读取.class文件并返回字节数组</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">byte</span>[] readClassFile(String filePath) <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-keyword">return</span> Files.readAllBytes(Paths.get(filePath));<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 将字节数组打印成与你提供的格式相似的形式</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printByteArray</span><span class="hljs-params">(<span class="hljs-type">byte</span>[] bytes)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;private static final byte[] COMMAND_CLASS_BYTES = new byte[]&#123;&quot;</span>);<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">lineLength</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; bytes.length; i++) &#123;<br>            System.out.printf(<span class="hljs-string">&quot;%4d,&quot;</span>, bytes[i]);<br>            lineLength++;<br><br>            <span class="hljs-keyword">if</span> (lineLength &gt;= <span class="hljs-number">10</span>) &#123;<br>                System.out.println();<br>                lineLength = <span class="hljs-number">0</span>;<br>            &#125;<br>        &#125;<br><br>        System.out.println(<span class="hljs-string">&quot;\n&#125;;&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/java%E5%AE%89%E5%85%A8/">#java安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>jni</div>
+      <div>https://tsy244.github.io/2025/05/24/java安全/jni/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 24, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/24/java%E5%AE%89%E5%85%A8/UrlConnection/" title="UrlConnection">
+                        <span class="hidden-mobile">UrlConnection</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
