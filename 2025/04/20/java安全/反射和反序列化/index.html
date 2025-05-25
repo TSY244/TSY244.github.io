@@ -18,13 +18,13 @@
   
     <meta name="description" content="前提代码123456789101112131415161718192021public class Person &amp;#123;    public String name;    private int age;    public Person(String name, int age) &amp;#123;        this.name &#x3D; name;        this.age &#x3D; age;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基础">
+<meta property="og:title" content="反射和反序列化">
 <meta property="og:url" content="https://tsy244.github.io/2025/04/20/java%E5%AE%89%E5%85%A8/%E5%8F%8D%E5%B0%84%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="前提代码123456789101112131415161718192021public class Person &amp;#123;    public String name;    private int age;    public Person(String name, int age) &amp;#123;        this.name &#x3D; name;        this.age &#x3D; age;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-20T08:42:32.000Z">
-<meta property="article:modified_time" content="2025-05-17T07:21:12.503Z">
+<meta property="article:modified_time" content="2025-05-25T08:00:32.751Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="java安全">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>基础 - AU9U5T</title>
+  <title>反射和反序列化 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="基础"></span>
+            <span id="subtitle" data-typed-text="反射和反序列化"></span>
           
         </div>
 
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.5k words
+          5.6k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          38 mins
+          47 mins
         
       </span>
     
@@ -276,7 +276,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">基础</h1>
+            <h1 style="display: none">反射和反序列化</h1>
             
             
               <div class="markdown-body">
@@ -296,14 +296,12 @@
 
 
 
-<h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><p>为什么需要序列化</p>
-<blockquote>
+<h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><h2 id="为什么需要序列化"><a href="#为什么需要序列化" class="headerlink" title="为什么需要序列化"></a>为什么需要序列化</h2><blockquote>
 <p>由于代码都是运行在内存，当发生了特殊情况的时候，内存中的数据就没有了<br>如果内存中存放的是用户的session 类的话</p>
 <p>当发生了意外那么所有的session 信息都没有<br>这个时候就可以存储一些数据到数据库或者是文件中</p>
 <p>总的来说，序列化的作用就是为了存放对象的数据，或者是用于传输</p>
 </blockquote>
-<p>一个简单的序列化demo</p>
-<p>将一个对象保存成文件</p>
+<h2 id="一个简单的序列化demo"><a href="#一个简单的序列化demo" class="headerlink" title="一个简单的序列化demo"></a>一个简单的序列化demo</h2><p>将一个对象保存成文件</p>
 <p>Main.java</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        SerializationClass serializationClass=<span class="hljs-keyword">new</span> <span class="hljs-title class_">SerializationClass</span>(<span class="hljs-string">&quot;张三&quot;</span>,<span class="hljs-number">20</span>);<br>        Serialization.SerializationToFile(<span class="hljs-string">&quot;test.bin&quot;</span>,serializationClass);<br>        Object o=Serialization.UnserializationFromFile(<span class="hljs-string">&quot;test.bin&quot;</span>);<br>        SerializationClass s=(SerializationClass) o;<br>        s.name=<span class="hljs-string">&quot;李四&quot;</span>;<br>        s.Say();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
@@ -312,10 +310,27 @@
 <p>SerializationClass.java</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.Serializable;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SerializationClass</span>  <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span><br>&#123;<br>    <span class="hljs-keyword">public</span> String name;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> age;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">SerializationClass</span><span class="hljs-params">(String name, <span class="hljs-type">int</span> age)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>        <span class="hljs-built_in">this</span>.age = age;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">SerializationClass</span><span class="hljs-params">(<span class="hljs-type">int</span> age)</span>&#123;<br>        <span class="hljs-built_in">this</span>.age = age;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">Say</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-built_in">this</span>.name+<span class="hljs-string">&quot;: My name is &quot;</span> + name + <span class="hljs-string">&quot; and I am &quot;</span> + age + <span class="hljs-string">&quot; years old.&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">Say</span><span class="hljs-params">(String message )</span>&#123;<br>        System.out.println(<span class="hljs-built_in">this</span>.name+<span class="hljs-string">&quot;: &quot;</span>+message);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span>&#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
-
-
-
-
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在Java中实现对象反序列化非常简单，实现<code>java.io.Serializable(内部序列化)</code>或<code>java.io.Externalizable(外部序列化)</code>接口即可被序列化，其中<code>java.io.Externalizable</code>接口只是实现了<code>java.io.Serializable</code>接口。</p>
+<p>反序列化类对象时有如下限制：</p>
+<ol>
+<li><p>被反序列化的类必须存在。</p>
+</li>
+<li><p><code>serialVersionUID</code>值必须一致。</p>
+<blockquote>
+<p>在Java编程中，<em>serialVersionUID</em>是一个用于序列化的类的<strong>版本号</strong>。它作为<em>Serializable</em>接口的一部分，确保了序列化和反序列化过程中类的版本一致性。当一个类对象需要通过网络发送或在文件系统中存储时，Java序列化机制通过比较<em>serialVersionUID</em>来确认发送和接收的是同一版本的类对象。</p>
+</blockquote>
+</li>
+</ol>
+<p>并且反序列化不会直接调用构造函数，反序列化创建对象的时候使用的是<code>sun.reflect.ReflectionFactory.newConstructorForSerialization</code> 创建了一个反序列化专用的<code>Constructor(反射构造方法对象)</code> 使用这个特殊的<code>Constructor</code>可以绕过构造方法创建类实例(前面章节讲<code>sun.misc.Unsafe</code> 的时候我们提到了使用<code>allocateInstance</code>方法也可以实现绕过构造方法创建类实例)。</p>
+<h1 id="自定义序列化和反序列化"><a href="#自定义序列化和反序列化" class="headerlink" title="自定义序列化和反序列化"></a>自定义序列化和反序列化</h1><p>实现了<code>java.io.Serializable</code>接口的类，还可以定义如下方法(<code>反序列化魔术方法</code>)，这些方法将会在类序列化或反序列化过程中调用：</p>
+<ol>
+<li><strong><code>private void writeObject(ObjectOutputStream oos)</code>,自定义序列化。</strong></li>
+<li><strong><code>private void readObject(ObjectInputStream ois)</code>，自定义反序列化。</strong></li>
+<li><code>private void readObjectNoData()</code>。</li>
+<li><code>protected Object writeReplace()</code>，写入时替换对象。</li>
+<li><code>protected Object readResolve()</code>。</li>
+</ol>
+<p>当我们对<code>DeserializationTest</code>类进行序列化操作时，会自动调用(反射调用)该类的<code>writeObject(ObjectOutputStream oos)</code>方法,对其进行反序列化操作时也会自动调用该类的<code>readObject(ObjectInputStream)</code>方法，也就是说我们可以通过在待<strong>序列化或反序列化的类中定义<code>readObject</code>和<code>writeObject</code>方法，来实现自定义的序列化和反序列化操作</strong>，当然前提是，被序列化的类必须有此方法，并且方法的修饰符必须是<code>private</code>。</p>
 <h1 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.example;<br><br><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.lang.reflect.Constructor;<br><span class="hljs-keyword">import</span> java.lang.reflect.InvocationTargetException;<br><span class="hljs-keyword">import</span> java.lang.reflect.Method;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">classPath</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;/Users/august/code/java/JavaSecLearn/src/main/java/fun/au9u5t/User.class&quot;</span>;<br>        <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(classPath);<br>        <span class="hljs-type">byte</span>[] classData = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[(<span class="hljs-type">int</span>) file.length()];<br>        <span class="hljs-keyword">try</span> &#123;<br>            java.io.<span class="hljs-type">FileInputStream</span> <span class="hljs-variable">fileInputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">java</span>.io.FileInputStream(file);<br>            fileInputStream.read(classData);<br>            fileInputStream.close();<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>        <span class="hljs-type">MyClassLoader</span> <span class="hljs-variable">myClassLoader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyClassLoader</span>();<br>        myClassLoader.setClassData(classData);<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">Class</span> <span class="hljs-variable">userClass</span> <span class="hljs-operator">=</span> myClassLoader.loadClass(<span class="hljs-string">&quot;fun.au9u5t.User&quot;</span>);<br>            <span class="hljs-comment">// 使用 Constructor.newInstance() 方法</span><br>            Constructor&lt;?&gt; constructor = userClass.getConstructor(String.class, <span class="hljs-type">int</span>.class);<br>            <span class="hljs-type">Object</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> constructor.newInstance(<span class="hljs-string">&quot;hhhhh&quot;</span>, <span class="hljs-number">20</span>);<br>            System.out.println(user);<br>            <span class="hljs-type">Method</span> <span class="hljs-variable">method</span> <span class="hljs-operator">=</span> userClass.getMethod(<span class="hljs-string">&quot;Say&quot;</span>);<br>            method.invoke(user);<br><br>        &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;fun.au9u5t.User 加载成功&quot;</span>);<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
@@ -342,7 +357,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>基础</div>
+      <div>反射和反序列化</div>
       <div>https://tsy244.github.io/2025/04/20/java安全/反射和反序列化/</div>
     </div>
     <div class="license-meta">
