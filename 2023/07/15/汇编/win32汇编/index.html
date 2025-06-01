@@ -23,161 +23,161 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="[TOC] win32汇编模式定义 定义了程序使用的指令集、互作模式和格式  win32环境中.386是必不可少的    后面带p则是伪指令  内存模式  但是主要使用的是flat  因win32程序只有一种内存模式，flat模式，没有64kb的限制   语言模式 除了在.model语句中指定内存模式意以外，还应该指定语言模式   stdcall的参数压栈方式是：从右往左   option语句">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173340028.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173449273.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173747893.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715174527757.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715175305850.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715180311206.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715194544213.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195000045.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195240031.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195356997.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201548889.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201811427.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201856489.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715202519213.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715173340028.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715173449273.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715173747893.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715174527757.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715175305850.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715180311206.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715194544213.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715195000045.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715195240031.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715195356997.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715201548889.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715201811427.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715201856489.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715202519213.png">
 <meta property="og:image" content="c:\Users\12414\Desktop\image-20230715203657995.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715203928273.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715204231533.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715204632946.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715215236758.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715215645107.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/undefinedimage-20230716084312490.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716085208255.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716085421317.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716090026683.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716090405835.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716090423891.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716090725511.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716091713070.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716093250606.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716094212170.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716095945277.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716100100399.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716101511844.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716102702916.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716104922959.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716105002004.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716105222790.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716105929452.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716110042079.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716110153358.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716111534344.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716111607802.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716112122258.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716112706165.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716122834546.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716123018164.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716125149179.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716125613059.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716131816020.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716131856832.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716133337992.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716144300168.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716144512642.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716144924625.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716145044120.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716145822421.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716151134078.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716153229377.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716221210923.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716222442970.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716222503487.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716223151317.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716224038899.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716224248893.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716224430994.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717082341757.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717082647963.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717083225200.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717083339200.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717083437467.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717083618134.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717093314962.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717094332560.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717094412098.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717094815772.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717094842573.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717095031636.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717095105968.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717095138524.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717095741377.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717095916043.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717101238518.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717101314519.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717101430013.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717102012261.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717102555823.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717103506340.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717103942765.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717104354934.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717105407878.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717143337820.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717143452332.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717143731304.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717144409193.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717144914095.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717145123909.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717151631460.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717151827583.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717151940270.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717152252202.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717153331916.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717160403774.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717160636378.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717160711329.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717160919253.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717161052164.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717173039779.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717173321243.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174026872.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174205538.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174234587.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715203928273.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715204231533.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715204632946.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715215236758.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715215645107.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/undefinedimage-20230716084312490.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716085208255.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716085421317.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716090026683.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716090405835.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716090423891.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716090725511.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716091713070.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716093250606.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716094212170.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716095945277.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716100100399.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716101511844.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716102702916.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716104922959.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716105002004.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716105222790.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716105929452.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716110042079.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716110153358.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716111534344.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716111607802.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716112122258.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716112706165.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716122834546.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716123018164.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716125149179.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716125613059.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716131816020.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716131856832.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716133337992.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716144300168.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716144512642.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716144924625.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716145044120.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716145822421.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716151134078.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716153229377.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716221210923.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716222442970.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716222503487.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716223151317.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716224038899.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716224248893.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716224430994.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717082341757.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717082647963.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717083225200.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717083339200.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717083437467.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717083618134.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717093314962.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717094332560.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717094412098.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717094815772.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717094842573.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717095031636.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717095105968.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717095138524.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717095741377.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717095916043.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717101238518.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717101314519.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717101430013.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717102012261.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717102555823.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717103506340.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717103942765.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717104354934.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717105407878.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717143337820.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717143452332.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717143731304.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717144409193.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717144914095.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717145123909.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717151631460.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717151827583.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717151940270.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717152252202.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717153331916.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717160403774.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717160636378.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717160711329.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717160919253.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717161052164.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717173039779.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717173321243.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174026872.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174205538.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174234587.png">
 <meta property="og:image" content="c:\Users\12414\Desktop\hexo\source_posts\%E6%B1%87%E7%BC%96\win32%E6%B1%87%E7%BC%96.assets\image-20230717174312970.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174402830.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174850382.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174937533.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717175138449.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717175240029.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717175615607.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718083711673.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718083931575.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718084236722.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718084346721.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718084711472.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718084955790.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718085112936.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718085332659.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718085306650.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718085919241.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718090141825.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718090259854.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718091807097.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718092232261.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718092717495.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718092900612.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718093002726.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718093104742.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718093413292.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718093437707.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718093446473.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718103357430.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718104005759.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718104141640.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718104314711.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718104605311.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718105309632.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718111110387.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718112856487.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718112937397.png">
-<meta property="og:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718113658053.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174402830.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174850382.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174937533.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717175138449.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717175240029.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717175615607.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718083711673.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718083931575.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718084236722.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718084346721.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718084711472.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718084955790.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718085112936.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718085332659.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718085306650.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718085919241.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718090141825.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718090259854.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718091807097.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718092232261.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718092717495.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718092900612.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718093002726.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718093104742.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718093413292.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718093437707.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718093446473.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718103357430.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718104005759.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718104141640.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718104314711.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718104605311.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718105309632.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718111110387.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718112856487.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718112937397.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718113658053.png">
 <meta property="article:published_time" content="2023-07-15T01:29:24.000Z">
-<meta property="article:modified_time" content="2023-07-21T10:36:33.269Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.509Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="汇编">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173340028.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715173340028.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -436,13 +436,13 @@
 <li><p>定义了程序使用的指令集、互作模式和格式</p>
 </li>
 <li><p>win32环境中<code>.386</code>是必不可少的</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173340028.png" srcset="/img/loading.gif" lazyload alt="image-20230715173340028"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173449273.png" srcset="/img/loading.gif" lazyload alt="image-20230715173449273"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715173340028.png" srcset="/img/loading.gif" lazyload alt="image-20230715173340028"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715173449273.png" srcset="/img/loading.gif" lazyload alt="image-20230715173449273"></p>
 </li>
 <li><p>后面带<code>p</code>则是伪指令</p>
 </li>
 <li><p>内存模式</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715173747893.png" srcset="/img/loading.gif" lazyload alt="image-20230715173747893"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715173747893.png" srcset="/img/loading.gif" lazyload alt="image-20230715173747893"></p>
 <p>但是主要使用的是<code>flat</code></p>
 <blockquote>
 <p>因win32程序只有一种内存模式，flat模式，没有64kb的限制</p>
@@ -450,27 +450,27 @@
 </li>
 <li><p>语言模式</p>
 <p>除了在<code>.model</code>语句中指定内存模式意以外，还应该指定语言模式</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715174527757.png" srcset="/img/loading.gif" lazyload alt="image-20230715174527757"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715174527757.png" srcset="/img/loading.gif" lazyload alt="image-20230715174527757"></p>
 <ul>
 <li>stdcall的参数压栈方式是：从右往左</li>
 </ul>
 </li>
 <li><p><code>option</code>语句</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715175305850.png" srcset="/img/loading.gif" lazyload alt="image-20230715175305850"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715175305850.png" srcset="/img/loading.gif" lazyload alt="image-20230715175305850"></p>
 </li>
 </ol>
-<h2 id="短的定义"><a href="#短的定义" class="headerlink" title="短的定义"></a>短的定义</h2><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715180311206.png" srcset="/img/loading.gif" lazyload alt="image-20230715180311206"></p>
-<h3 id="数据段"><a href="#数据段" class="headerlink" title="数据段"></a>数据段</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715194544213.png" srcset="/img/loading.gif" lazyload alt="image-20230715194544213"></p>
+<h2 id="短的定义"><a href="#短的定义" class="headerlink" title="短的定义"></a>短的定义</h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715180311206.png" srcset="/img/loading.gif" lazyload alt="image-20230715180311206"></p>
+<h3 id="数据段"><a href="#数据段" class="headerlink" title="数据段"></a>数据段</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715194544213.png" srcset="/img/loading.gif" lazyload alt="image-20230715194544213"></p>
 <ol>
 <li><p>可读可写的已定义的变量</p>
 <p>这些数据在<code>.data</code>的段中，是已初始化的数据段。<code>.data</code>的段存放在可执行文件的_DATA字节区内</p>
 </li>
 <li><p>可读可写的未定义的变量</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195000045.png" srcset="/img/loading.gif" lazyload alt="image-20230715195000045"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195240031.png" srcset="/img/loading.gif" lazyload alt="image-20230715195240031"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715195000045.png" srcset="/img/loading.gif" lazyload alt="image-20230715195000045"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715195240031.png" srcset="/img/loading.gif" lazyload alt="image-20230715195240031"></p>
 </li>
 <li><p>常量</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715195356997.png" srcset="/img/loading.gif" lazyload alt="image-20230715195356997"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715195356997.png" srcset="/img/loading.gif" lazyload alt="image-20230715195356997"></p>
 </li>
 </ol>
 <h3 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a>代码段</h3><ol>
@@ -479,17 +479,17 @@
 </ol>
 <h2 id="简单知识点"><a href="#简单知识点" class="headerlink" title="简单知识点"></a>简单知识点</h2><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><ol>
 <li><p>在代码前面写”;”，代表注释处理 </p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201548889.png" srcset="/img/loading.gif" lazyload alt="image-20230715201548889"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715201548889.png" srcset="/img/loading.gif" lazyload alt="image-20230715201548889"></p>
 </li>
 </ol>
 <h3 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h3><ol>
 <li>由于程序的某一行过长，不利于阅读时可以使用<code>\</code>做换行符</li>
 </ol>
-<h3 id="调用API函数"><a href="#调用API函数" class="headerlink" title="调用API函数"></a>调用API函数</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201811427.png" srcset="/img/loading.gif" lazyload alt="image-20230715201811427"></p>
-<p> <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715201856489.png" srcset="/img/loading.gif" lazyload alt="image-20230715201856489"></p>
-<h3 id="动态链接库（dll）"><a href="#动态链接库（dll）" class="headerlink" title="动态链接库（dll）"></a>动态链接库（dll）</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715202519213.png" srcset="/img/loading.gif" lazyload alt="image-20230715202519213"></p>
+<h3 id="调用API函数"><a href="#调用API函数" class="headerlink" title="调用API函数"></a>调用API函数</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715201811427.png" srcset="/img/loading.gif" lazyload alt="image-20230715201811427"></p>
+<p> <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715201856489.png" srcset="/img/loading.gif" lazyload alt="image-20230715201856489"></p>
+<h3 id="动态链接库（dll）"><a href="#动态链接库（dll）" class="headerlink" title="动态链接库（dll）"></a>动态链接库（dll）</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715202519213.png" srcset="/img/loading.gif" lazyload alt="image-20230715202519213"></p>
 <h3 id="使用invoke语句"><a href="#使用invoke语句" class="headerlink" title="使用invoke语句"></a>使用invoke语句</h3><p><img src="C:\Users\12414\Desktop\image-20230715203657995.png" srcset="/img/loading.gif" lazyload alt="image-20230715203657995"></p>
-<h3 id="API函数的返回值"><a href="#API函数的返回值" class="headerlink" title="API函数的返回值"></a>API函数的返回值</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715203928273.png" srcset="/img/loading.gif" lazyload alt="image-20230715203928273"></p>
+<h3 id="API函数的返回值"><a href="#API函数的返回值" class="headerlink" title="API函数的返回值"></a>API函数的返回值</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715203928273.png" srcset="/img/loading.gif" lazyload alt="image-20230715203928273"></p>
 <ol>
 <li><p>返回值保存在<code>eax</code>寄存器当中‘</p>
 </li>
@@ -497,7 +497,7 @@
 <p>如果超出4个字节的字符串，这个时候返回的就是指针（32位下的指针是4个字节）</p>
 </li>
 </ol>
-<h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715204231533.png" srcset="/img/loading.gif" lazyload alt="image-20230715204231533"><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715204632946.png" srcset="/img/loading.gif" lazyload alt="image-20230715204632946"></p>
+<h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715204231533.png" srcset="/img/loading.gif" lazyload alt="image-20230715204231533"><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715204632946.png" srcset="/img/loading.gif" lazyload alt="image-20230715204632946"></p>
 <ol>
 <li><p>使用<code>proto</code></p>
 </li>
@@ -517,108 +517,108 @@
 <li><p>包含的两个方式】</p>
 <p><code>include &lt;头文件的名字&gt;</code></p>
 <p><code>include 头文件的名字 </code></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715215236758.png" srcset="/img/loading.gif" lazyload alt="image-20230715215236758"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715215236758.png" srcset="/img/loading.gif" lazyload alt="image-20230715215236758"></p>
 </li>
 </ol>
 <h3 id="includelib"><a href="#includelib" class="headerlink" title="includelib"></a>includelib</h3><ol>
 <li><p>导入库文件</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230715215645107.png" srcset="/img/loading.gif" lazyload alt="image-20230715215645107"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230715215645107.png" srcset="/img/loading.gif" lazyload alt="image-20230715215645107"></p>
 </li>
 <li><p>一般库文件和动态链接库的名字相同，后缀不同</p>
 </li>
 <li><p>使用lib更像是一个借用，但是使用include是将文件拷贝到程序当中</p>
 </li>
 </ol>
-<h3 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h3><p> <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/undefinedimage-20230716084312490.png" srcset="/img/loading.gif" lazyload alt="image-20230716084312490"></p>
+<h3 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h3><p> <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/undefinedimage-20230716084312490.png" srcset="/img/loading.gif" lazyload alt="image-20230716084312490"></p>
 <ol>
 <li><p>MB_OK是一个按钮，表示确定</p>
 <p>具体的信息可以查vs的字典  </p>
 </li>
 <li><p>在win32汇编里面不需要使用je,jmp等</p>
 <p>可以使用if,elseif,else </p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716085208255.png" srcset="/img/loading.gif" lazyload alt="image-20230716085208255"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716085421317.png" srcset="/img/loading.gif" lazyload alt="image-20230716085421317"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716085208255.png" srcset="/img/loading.gif" lazyload alt="image-20230716085208255"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716085421317.png" srcset="/img/loading.gif" lazyload alt="image-20230716085421317"></p>
 </li>
 </ol>
 <h3 id="标号"><a href="#标号" class="headerlink" title="标号"></a>标号</h3><ol>
 <li><p>可以理解为c语言的<code>goto</code></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716090026683.png" srcset="/img/loading.gif" lazyload alt="image-20230716090026683"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716090026683.png" srcset="/img/loading.gif" lazyload alt="image-20230716090026683"></p>
 </li>
 <li><p>为了解决标号名称的浪费可以使用</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716090405835.png" srcset="/img/loading.gif" lazyload alt="image-20230716090405835"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716090423891.png" srcset="/img/loading.gif" lazyload alt="image-20230716090423891"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716090405835.png" srcset="/img/loading.gif" lazyload alt="image-20230716090405835"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716090423891.png" srcset="/img/loading.gif" lazyload alt="image-20230716090423891"></p>
 </li>
 </ol>
 <h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><h4 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h4><ol>
 <li><p>类型</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716090725511.png" srcset="/img/loading.gif" lazyload alt="image-20230716090725511"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716090725511.png" srcset="/img/loading.gif" lazyload alt="image-20230716090725511"></p>
 </li>
 </ol>
 <h4 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h4><ol>
 <li><p>通过修改堆栈的指针<code>esp</code>来预留需要的空间</p>
 <p>其实这个和C语言的调用是一样的</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716091713070.png" srcset="/img/loading.gif" lazyload alt="image-20230716091713070"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716091713070.png" srcset="/img/loading.gif" lazyload alt="image-20230716091713070"></p>
 </li>
 <li><p>使用<code>local</code>定义局部变量</p>
 </li>
 <li><p>而且数据必须在代码之前 </p>
 </li>
 <li><p>局部变量的使用</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716093250606.png" srcset="/img/loading.gif" lazyload alt="image-20230716093250606"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716093250606.png" srcset="/img/loading.gif" lazyload alt="image-20230716093250606"></p>
 </li>
 <li><p>对局部变量的初始化</p>
 <p><code>RtlZeroMemory</code>这个API函数经行初始化</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716094212170.png" srcset="/img/loading.gif" lazyload alt="image-20230716094212170"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716094212170.png" srcset="/img/loading.gif" lazyload alt="image-20230716094212170"></p>
 </li>
 </ol>
 <h4 id="变量的使用"><a href="#变量的使用" class="headerlink" title="变量的使用"></a>变量的使用</h4><ol>
 <li><p>强制类型转换</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716095945277.png" srcset="/img/loading.gif" lazyload alt="image-20230716095945277"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716095945277.png" srcset="/img/loading.gif" lazyload alt="image-20230716095945277"></p>
 </li>
 </ol>
 <h4 id="变量的尺寸"><a href="#变量的尺寸" class="headerlink" title="变量的尺寸"></a>变量的尺寸</h4><ol>
 <li><p>数据的长度计算</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716100100399.png" srcset="/img/loading.gif" lazyload alt="image-20230716100100399"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716101511844.png" srcset="/img/loading.gif" lazyload alt="image-20230716101511844"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716100100399.png" srcset="/img/loading.gif" lazyload alt="image-20230716100100399"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716101511844.png" srcset="/img/loading.gif" lazyload alt="image-20230716101511844"></p>
 </li>
 </ol>
 <h4 id="获取变量的地址"><a href="#获取变量的地址" class="headerlink" title="获取变量的地址"></a>获取变量的地址</h4><ol>
 <li><p>使用<code>lea</code></p>
-<p>   <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716102702916.png" srcset="/img/loading.gif" lazyload alt="image-20230716102702916"></p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716102702916.png" srcset="/img/loading.gif" lazyload alt="image-20230716102702916"></p>
 </li>
 <li><p>解析addr</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716104922959.png" srcset="/img/loading.gif" lazyload alt="image-20230716104922959"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716105002004.png" srcset="/img/loading.gif" lazyload alt="image-20230716105002004"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716104922959.png" srcset="/img/loading.gif" lazyload alt="image-20230716104922959"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716105002004.png" srcset="/img/loading.gif" lazyload alt="image-20230716105002004"></p>
 <p>在有addr的程序中，不用eax</p>
 </li>
 </ol>
-<h3 id="使用子程序"><a href="#使用子程序" class="headerlink" title="使用子程序"></a>使用子程序</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716105222790.png" srcset="/img/loading.gif" lazyload alt="image-20230716105222790"></p>
+<h3 id="使用子程序"><a href="#使用子程序" class="headerlink" title="使用子程序"></a>使用子程序</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716105222790.png" srcset="/img/loading.gif" lazyload alt="image-20230716105222790"></p>
 <ol>
 <li><p>相当于函数  </p>
 </li>
 <li><p>参数的传递和堆栈的平衡</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716105929452.png" srcset="/img/loading.gif" lazyload alt="image-20230716105929452"></p>
-<p> <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716110042079.png" srcset="/img/loading.gif" lazyload alt="image-20230716110042079"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716110153358.png" srcset="/img/loading.gif" lazyload alt="image-20230716110153358"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716105929452.png" srcset="/img/loading.gif" lazyload alt="image-20230716105929452"></p>
+<p> <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716110042079.png" srcset="/img/loading.gif" lazyload alt="image-20230716110042079"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716110153358.png" srcset="/img/loading.gif" lazyload alt="image-20230716110153358"></p>
 </li>
 </ol>
 <h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><ol>
 <li>实现的语法</li>
 </ol>
-<p>   <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716111534344.png" srcset="/img/loading.gif" lazyload alt="image-20230716111534344"></p>
-<p>   <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716111607802.png" srcset="/img/loading.gif" lazyload alt="image-20230716111607802"> </p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716111534344.png" srcset="/img/loading.gif" lazyload alt="image-20230716111534344"></p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716111607802.png" srcset="/img/loading.gif" lazyload alt="image-20230716111607802"> </p>
 <p>   例子：</p>
-<p>   <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716112122258.png" srcset="/img/loading.gif" lazyload alt="image-20230716112122258"></p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716112122258.png" srcset="/img/loading.gif" lazyload alt="image-20230716112122258"></p>
 <ol start="2">
 <li><p>实现引用</p>
 <ul>
 <li><p>使用点操作符</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716112706165.png" srcset="/img/loading.gif" lazyload alt="image-20230716112706165"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716112706165.png" srcset="/img/loading.gif" lazyload alt="image-20230716112706165"></p>
 </li>
-<li><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716122834546.png" srcset="/img/loading.gif" lazyload alt="image-20230716122834546"></p>
+<li><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716122834546.png" srcset="/img/loading.gif" lazyload alt="image-20230716122834546"></p>
 </li>
 <li><p>使用<code>assume</code>伪指令把寄存器预先定义为结构指针</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716123018164.png" srcset="/img/loading.gif" lazyload alt="image-20230716123018164"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716123018164.png" srcset="/img/loading.gif" lazyload alt="image-20230716123018164"></p>
 </li>
 </ul>
 </li>
@@ -626,21 +626,21 @@
 <h2 id="win汇编的高级语法"><a href="#win汇编的高级语法" class="headerlink" title="win汇编的高级语法"></a>win汇编的高级语法</h2><ol>
 <li>补充了：条件测试，分支和循环等高级语法</li>
 </ol>
-<h3 id="条件测试"><a href="#条件测试" class="headerlink" title="条件测试"></a>条件测试</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716125149179.png" srcset="/img/loading.gif" lazyload alt="image-20230716125149179"></p>
+<h3 id="条件测试"><a href="#条件测试" class="headerlink" title="条件测试"></a>条件测试</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716125149179.png" srcset="/img/loading.gif" lazyload alt="image-20230716125149179"></p>
 <p> 但是注意条件判断的左边只能是变量，不能为常数；而且两边不能同时为变量，但可以是寄存器</p>
 <h3 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h3><ol>
 <li><p>下面是格式</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716125613059.png" srcset="/img/loading.gif" lazyload alt="image-20230716125613059"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716125613059.png" srcset="/img/loading.gif" lazyload alt="image-20230716125613059"></p>
 </li>
 </ol>
 <h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><ol>
 <li><p>while语法</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716131816020.png" srcset="/img/loading.gif" lazyload alt="image-20230716131816020"></p>
-<p>​			<img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716131856832.png" srcset="/img/loading.gif" lazyload alt="image-20230716131856832"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716131816020.png" srcset="/img/loading.gif" lazyload alt="image-20230716131816020"></p>
+<p>​			<img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716131856832.png" srcset="/img/loading.gif" lazyload alt="image-20230716131856832"></p>
 <p>使用break 的时候我们记得指出退出的条件</p>
 </li>
 <li><p>do_while()语法</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716133337992.png" srcset="/img/loading.gif" lazyload alt="image-20230716133337992"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716133337992.png" srcset="/img/loading.gif" lazyload alt="image-20230716133337992"></p>
 </li>
 </ol>
 <h2 id="代码风格"><a href="#代码风格" class="headerlink" title="代码风格"></a>代码风格</h2><h3 id="匈牙利命名法"><a href="#匈牙利命名法" class="headerlink" title="匈牙利命名法"></a>匈牙利命名法</h3><ol>
@@ -648,17 +648,17 @@
 </ol>
 <ul>
 <li><p>类型使用小写字母表示</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716144300168.png" srcset="/img/loading.gif" lazyload alt="image-20230716144300168"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716144300168.png" srcset="/img/loading.gif" lazyload alt="image-20230716144300168"></p>
 <p><code>sz</code>表示以0结尾的字符串，<code>dw</code>表示<code>double word </code>，<code>h</code>表示句柄</p>
 <p>常用的前缀</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716144512642.png" srcset="/img/loading.gif" lazyload alt="image-20230716144512642"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716144512642.png" srcset="/img/loading.gif" lazyload alt="image-20230716144512642"></p>
 </li>
 <li><p>变量名采用的双峰命名法</p>
 </li>
 </ul>
 <ol start="2">
 <li><p>全局变量和局部变量</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716144924625.png" srcset="/img/loading.gif" lazyload alt="image-20230716144924625"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716144924625.png" srcset="/img/loading.gif" lazyload alt="image-20230716144924625"></p>
 </li>
 </ol>
 <h3 id="代码的书写风格"><a href="#代码的书写风格" class="headerlink" title="代码的书写风格"></a>代码的书写风格</h3><ol>
@@ -667,23 +667,23 @@
 <p>但是指令和寄存器等要使用小写字母</p>
 <p>而用<code>equ</code>等位操作符定义的变量则使用大写的字母</p>
 <p>变量和标号使用匈牙利表示法</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716145044120.png" srcset="/img/loading.gif" lazyload alt="image-20230716145044120"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716145044120.png" srcset="/img/loading.gif" lazyload alt="image-20230716145044120"></p>
 </li>
 <li><p>注释和空行</p>
 <p>总结的开说我们需要写合适的注释就好了，不要太多但是也不来能没有</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716145822421.png" srcset="/img/loading.gif" lazyload alt="image-20230716145822421"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716145822421.png" srcset="/img/loading.gif" lazyload alt="image-20230716145822421"></p>
 </li>
 <li><p>代码的组织模式</p>
 </li>
 </ol>
-<h2 id="窗口程序执行过程"><a href="#窗口程序执行过程" class="headerlink" title="窗口程序执行过程"></a>窗口程序执行过程</h2><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716151134078.png" srcset="/img/loading.gif" lazyload alt="image-20230716151134078"></p>
-<p> <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716153229377.png" srcset="/img/loading.gif" lazyload alt="image-20230716153229377"></p>
+<h2 id="窗口程序执行过程"><a href="#窗口程序执行过程" class="headerlink" title="窗口程序执行过程"></a>窗口程序执行过程</h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716151134078.png" srcset="/img/loading.gif" lazyload alt="image-20230716151134078"></p>
+<p> <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716153229377.png" srcset="/img/loading.gif" lazyload alt="image-20230716153229377"></p>
 <ol>
 <li><p>使用satrt开始，endsatrt结束，但是需要添加<code>invoke	ExitProcess,NULL</code>，不然会报错</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">	.code	; 写在代码段<br>start:<br>	invoke	ExitProcess,NULL   ;退出程序<br>	end start   ;结束<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>详细的过程</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716221210923.png" srcset="/img/loading.gif" lazyload alt="image-20230716221210923"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716221210923.png" srcset="/img/loading.gif" lazyload alt="image-20230716221210923"></p>
 </li>
 <li><p><code>PostMassage</code>和<code>SendMessage</code>主要是用于消息的转发机制</p>
 </li>
@@ -692,260 +692,260 @@
 </ol>
 <ul>
 <li><p>为什么windows调用窗口，直接处理信息不是更简单吗？</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716222442970.png" srcset="/img/loading.gif" lazyload alt="image-20230716222442970"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716222503487.png" srcset="/img/loading.gif" lazyload alt="image-20230716222503487"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716222442970.png" srcset="/img/loading.gif" lazyload alt="image-20230716222442970"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716222503487.png" srcset="/img/loading.gif" lazyload alt="image-20230716222503487"></p>
 </li>
 </ul>
 <h2 id="窗口程序的解剖"><a href="#窗口程序的解剖" class="headerlink" title="窗口程序的解剖"></a>窗口程序的解剖</h2><h3 id="句柄"><a href="#句柄" class="headerlink" title="句柄"></a>句柄</h3><ol>
 <li><p>可以理解为窗口的序号</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716223151317.png" srcset="/img/loading.gif" lazyload alt="image-20230716223151317"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716223151317.png" srcset="/img/loading.gif" lazyload alt="image-20230716223151317"></p>
 </li>
 <li><p>模块和句柄</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716224038899.png" srcset="/img/loading.gif" lazyload alt="image-20230716224038899"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716224038899.png" srcset="/img/loading.gif" lazyload alt="image-20230716224038899"></p>
 <ul>
 <li><p>得到句柄使用<code>GetModuleHandle</code></p>
 </li>
 <li><p>例子</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716224248893.png" srcset="/img/loading.gif" lazyload alt="image-20230716224248893"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230716224430994.png" srcset="/img/loading.gif" lazyload alt="image-20230716224430994"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716224248893.png" srcset="/img/loading.gif" lazyload alt="image-20230716224248893"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230716224430994.png" srcset="/img/loading.gif" lazyload alt="image-20230716224430994"></p>
 <p>如果使用的参数是<code>NULL</code>那么我们就是调用的是调用者的句柄</p>
 </li>
 </ul>
 </li>
 </ol>
-<h3 id="创建窗口"><a href="#创建窗口" class="headerlink" title="创建窗口"></a>创建窗口</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717082341757.png" srcset="/img/loading.gif" lazyload alt="image-20230717082341757"></p>
+<h3 id="创建窗口"><a href="#创建窗口" class="headerlink" title="创建窗口"></a>创建窗口</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717082341757.png" srcset="/img/loading.gif" lazyload alt="image-20230717082341757"></p>
 <ol>
 <li><p>注册窗口类</p>
 <p><code>RegisterClassEx</code></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717082647963.png" srcset="/img/loading.gif" lazyload alt="image-20230717082647963"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717082647963.png" srcset="/img/loading.gif" lazyload alt="image-20230717082647963"></p>
 </li>
 <li><p>创建窗口类</p>
 <p><code>WNDCLASSEX</code>的结构各字段的含义 </p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717083225200.png" srcset="/img/loading.gif" lazyload alt="image-20230717083225200"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717083339200.png" srcset="/img/loading.gif" lazyload alt="image-20230717083339200"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717083437467.png" srcset="/img/loading.gif" lazyload alt="image-20230717083437467"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717083618134.png" srcset="/img/loading.gif" lazyload alt="image-20230717083618134"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717093314962.png" srcset="/img/loading.gif" lazyload alt="image-20230717093314962"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717083225200.png" srcset="/img/loading.gif" lazyload alt="image-20230717083225200"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717083339200.png" srcset="/img/loading.gif" lazyload alt="image-20230717083339200"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717083437467.png" srcset="/img/loading.gif" lazyload alt="image-20230717083437467"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717083618134.png" srcset="/img/loading.gif" lazyload alt="image-20230717083618134"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717093314962.png" srcset="/img/loading.gif" lazyload alt="image-20230717093314962"></p>
 </li>
 <li><p>建立窗口 </p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717094332560.png" srcset="/img/loading.gif" lazyload alt="image-20230717094332560"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717094332560.png" srcset="/img/loading.gif" lazyload alt="image-20230717094332560"></p>
 <p>建立窗口的函数CreatWindowEx&#96;</p>
 <p>下面是使用方法：</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717094412098.png" srcset="/img/loading.gif" lazyload alt="image-20230717094412098"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717094412098.png" srcset="/img/loading.gif" lazyload alt="image-20230717094412098"></p>
 <p>第二个参数<code>IpClassName</code>就是表明使用的窗口的类型，这里使用自己自定义的窗口</p>
 <p>第三个参数是<code>IpWindowName</code>这个是窗口的名称</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717094815772.png" srcset="/img/loading.gif" lazyload alt="image-20230717094815772"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717094815772.png" srcset="/img/loading.gif" lazyload alt="image-20230717094815772"></p>
 <p>第十个参数是菜单的句柄</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717094842573.png" srcset="/img/loading.gif" lazyload alt="image-20230717094842573"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717094842573.png" srcset="/img/loading.gif" lazyload alt="image-20230717094842573"></p>
 <p>第十一个参数<code>HInstance</code>指定窗口所属的层序模块</p>
 <p>第九个参数<code>hWndParent</code>设置父窗口</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717095031636.png" srcset="/img/loading.gif" lazyload alt="image-20230717095031636"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717095105968.png" srcset="/img/loading.gif" lazyload alt="image-20230717095105968"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717095031636.png" srcset="/img/loading.gif" lazyload alt="image-20230717095031636"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717095105968.png" srcset="/img/loading.gif" lazyload alt="image-20230717095105968"></p>
 <p>第四个参数<code>dwstyle</code> 指出需要的风格（预定的值可以查看）</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717095138524.png" srcset="/img/loading.gif" lazyload alt="image-20230717095138524"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717095138524.png" srcset="/img/loading.gif" lazyload alt="image-20230717095138524"></p>
 </li>
 </ol>
 <h3 id="ShowWindow"><a href="#ShowWindow" class="headerlink" title="ShowWindow"></a><code>ShowWindow</code></h3><p>主要是显示窗口和控制窗口的显示状态</p>
-<p> <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717095741377.png" srcset="/img/loading.gif" lazyload alt="image-20230717095741377"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717095916043.png" srcset="/img/loading.gif" lazyload alt="image-20230717095916043"></p>
-<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717101238518.png" srcset="/img/loading.gif" lazyload alt="image-20230717101238518"></p>
+<p> <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717095741377.png" srcset="/img/loading.gif" lazyload alt="image-20230717095741377"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717095916043.png" srcset="/img/loading.gif" lazyload alt="image-20230717095916043"></p>
+<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717101238518.png" srcset="/img/loading.gif" lazyload alt="image-20230717101238518"></p>
 <p>一般形式：</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717101314519.png" srcset="/img/loading.gif" lazyload alt="image-20230717101314519"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717101430013.png" srcset="/img/loading.gif" lazyload alt="image-20230717101430013"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717101314519.png" srcset="/img/loading.gif" lazyload alt="image-20230717101314519"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717101430013.png" srcset="/img/loading.gif" lazyload alt="image-20230717101430013"></p>
 <p>当指定没有信息的不在获取cpu时间片</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717102012261.png" srcset="/img/loading.gif" lazyload alt="image-20230717102012261"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717102012261.png" srcset="/img/loading.gif" lazyload alt="image-20230717102012261"></p>
 <p>我们使用的是<code>PeekMessage</code>加上条件判断来控制cpu的时间片的</p>
-<h3 id="窗口过程"><a href="#窗口过程" class="headerlink" title="窗口过程"></a>窗口过程</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717102555823.png" srcset="/img/loading.gif" lazyload alt="image-20230717102555823"></p>
-<p> <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717103506340.png" srcset="/img/loading.gif" lazyload alt="image-20230717103506340"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717103942765.png" srcset="/img/loading.gif" lazyload alt="image-20230717103942765"></p>
+<h3 id="窗口过程"><a href="#窗口过程" class="headerlink" title="窗口过程"></a>窗口过程</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717102555823.png" srcset="/img/loading.gif" lazyload alt="image-20230717102555823"></p>
+<p> <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717103506340.png" srcset="/img/loading.gif" lazyload alt="image-20230717103506340"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717103942765.png" srcset="/img/loading.gif" lazyload alt="image-20230717103942765"></p>
 <p>下面这张图的意思就是说我们不能直接使用DestroyWindow来摧毁窗口。而是我们使用<code>PodtQuiTMessage</code>来摧毁信息回环机制</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717104354934.png" srcset="/img/loading.gif" lazyload alt="image-20230717104354934"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717104354934.png" srcset="/img/loading.gif" lazyload alt="image-20230717104354934"></p>
 <h2 id="关于程序接受信息的顺序"><a href="#关于程序接受信息的顺序" class="headerlink" title="关于程序接受信息的顺序"></a>关于程序接受信息的顺序</h2><ol>
 <li><p>在使用<code>CreatWindowEx</code>时发送窗口接收到的信息</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717105407878.png" srcset="/img/loading.gif" lazyload alt="image-20230717105407878"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717105407878.png" srcset="/img/loading.gif" lazyload alt="image-20230717105407878"></p>
 </li>
 <li><p>使用DestroyWindow摧毁窗口的时候发送的信息</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717143337820.png" srcset="/img/loading.gif" lazyload alt="image-20230717143337820"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717143337820.png" srcset="/img/loading.gif" lazyload alt="image-20230717143337820"></p>
 <p>大部分的信息都不需要程序自己关心，windows只是尽义务的通知窗口过程而已</p>
 <p>下面是程序需要自己关心的</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717143452332.png" srcset="/img/loading.gif" lazyload alt="image-20230717143452332"></p>
-<p>  <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717143731304.png" srcset="/img/loading.gif" lazyload alt="image-20230717143731304"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717143452332.png" srcset="/img/loading.gif" lazyload alt="image-20230717143452332"></p>
+<p>  <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717143731304.png" srcset="/img/loading.gif" lazyload alt="image-20230717143731304"></p>
 </li>
 <li><p><code>Defwindowproc</code>信息的默认处理机制</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717144409193.png" srcset="/img/loading.gif" lazyload alt="image-20230717144409193"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717144409193.png" srcset="/img/loading.gif" lazyload alt="image-20230717144409193"></p>
 </li>
 </ol>
 <h2 id="窗口间的消息互发"><a href="#窗口间的消息互发" class="headerlink" title="窗口间的消息互发"></a>窗口间的消息互发</h2><ol>
 <li><p>主要是使用<code>PostMessage</code>和<code>SendMessage</code></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717144914095.png" srcset="/img/loading.gif" lazyload alt="image-20230717144914095"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717144914095.png" srcset="/img/loading.gif" lazyload alt="image-20230717144914095"></p>
 </li>
 <li><p>类似于<code>printf</code>的函数<code>wsprintf</code></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717145123909.png" srcset="/img/loading.gif" lazyload alt="image-20230717145123909"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717145123909.png" srcset="/img/loading.gif" lazyload alt="image-20230717145123909"></p>
 </li>
 <li><p>为什么字符串的地址不一样</p>
 <blockquote>
 <p>因为windows对字符串进行了拷贝</p>
 </blockquote>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717151631460.png" srcset="/img/loading.gif" lazyload alt="image-20230717151631460"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717151631460.png" srcset="/img/loading.gif" lazyload alt="image-20230717151631460"></p>
 </li>
 </ol>
 <h2 id="在窗口见传递数据"><a href="#在窗口见传递数据" class="headerlink" title="在窗口见传递数据"></a>在窗口见传递数据</h2><ol>
 <li><p>使用<code>WM_COPYDATA</code>信息</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717151827583.png" srcset="/img/loading.gif" lazyload alt="image-20230717151827583"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717151940270.png" srcset="/img/loading.gif" lazyload alt="image-20230717151940270"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717151827583.png" srcset="/img/loading.gif" lazyload alt="image-20230717151827583"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717151940270.png" srcset="/img/loading.gif" lazyload alt="image-20230717151940270"></p>
 <p>类似于C语言的传址的传参</p>
 <p>因为使用的是共享的内存</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717152252202.png" srcset="/img/loading.gif" lazyload alt="image-20230717152252202"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717152252202.png" srcset="/img/loading.gif" lazyload alt="image-20230717152252202"></p>
 </li>
 <li><p><code>SendMessage</code>和<code>PostMessage</code>的区别</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717153331916.png" srcset="/img/loading.gif" lazyload alt="image-20230717153331916"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717153331916.png" srcset="/img/loading.gif" lazyload alt="image-20230717153331916"></p>
 </li>
 </ol>
 <h2 id="实践性"><a href="#实践性" class="headerlink" title="实践性"></a>实践性</h2><h3 id="使用资源"><a href="#使用资源" class="headerlink" title="使用资源"></a>使用资源</h3><ol>
 <li>程序运行&#x3D;代码的创建+资源的运行</li>
 <li>源文件是以<code>rc</code>为扩展名的脚本文件</li>
 </ol>
-<h3 id="菜单的定义框架"><a href="#菜单的定义框架" class="headerlink" title="菜单的定义框架"></a>菜单的定义框架</h3><p> <img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717160403774.png" srcset="/img/loading.gif" lazyload alt="image-20230717160403774"></p>
+<h3 id="菜单的定义框架"><a href="#菜单的定义框架" class="headerlink" title="菜单的定义框架"></a>菜单的定义框架</h3><p> <img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717160403774.png" srcset="/img/loading.gif" lazyload alt="image-20230717160403774"></p>
 <ul>
 <li><p>方法</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717160636378.png" srcset="/img/loading.gif" lazyload alt="image-20230717160636378"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717160636378.png" srcset="/img/loading.gif" lazyload alt="image-20230717160636378"></p>
 </li>
 <li><p>方法一：</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717160711329.png" srcset="/img/loading.gif" lazyload alt="image-20230717160711329"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717160711329.png" srcset="/img/loading.gif" lazyload alt="image-20230717160711329"></p>
 </li>
 <li><p>方法二：定义的是菜单项之间的分割线</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717160919253.png" srcset="/img/loading.gif" lazyload alt="image-20230717160919253"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717160919253.png" srcset="/img/loading.gif" lazyload alt="image-20230717160919253"></p>
 </li>
 <li><p>方法三</p>
 <p>定义的是子菜单</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717161052164.png" srcset="/img/loading.gif" lazyload alt="image-20230717161052164"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717161052164.png" srcset="/img/loading.gif" lazyload alt="image-20230717161052164"></p>
 </li>
 </ul>
-<h3 id="加载菜单和加速键"><a href="#加载菜单和加速键" class="headerlink" title="加载菜单和加速键"></a>加载菜单和加速键</h3><p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717173039779.png" srcset="/img/loading.gif" lazyload alt="image-20230717173039779"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717173321243.png" srcset="/img/loading.gif" lazyload alt="image-20230717173321243"></p>
+<h3 id="加载菜单和加速键"><a href="#加载菜单和加速键" class="headerlink" title="加载菜单和加速键"></a>加载菜单和加速键</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717173039779.png" srcset="/img/loading.gif" lazyload alt="image-20230717173039779"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717173321243.png" srcset="/img/loading.gif" lazyload alt="image-20230717173321243"></p>
 <h3 id="菜单项的修改"><a href="#菜单项的修改" class="headerlink" title="菜单项的修改"></a>菜单项的修改</h3><ol>
 <li><p>插入菜单项</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174026872.png" srcset="/img/loading.gif" lazyload alt="image-20230717174026872"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174205538.png" srcset="/img/loading.gif" lazyload alt="image-20230717174205538"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174026872.png" srcset="/img/loading.gif" lazyload alt="image-20230717174026872"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174205538.png" srcset="/img/loading.gif" lazyload alt="image-20230717174205538"></p>
 </li>
 <li><p>修改菜单项</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174234587.png" srcset="/img/loading.gif" lazyload alt="image-20230717174234587"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174234587.png" srcset="/img/loading.gif" lazyload alt="image-20230717174234587"></p>
 </li>
 <li><p>删除菜单项</p>
 <p><img src="C:\Users\12414\Desktop\hexo\source_posts\汇编\win32汇编.assets\image-20230717174312970.png" srcset="/img/loading.gif" lazyload alt="image-20230717174312970"></p>
 <p>区别：</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174402830.png" srcset="/img/loading.gif" lazyload alt="image-20230717174402830"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174402830.png" srcset="/img/loading.gif" lazyload alt="image-20230717174402830"></p>
 </li>
 <li><p>添加系统菜单</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174850382.png" srcset="/img/loading.gif" lazyload alt="image-20230717174850382"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174850382.png" srcset="/img/loading.gif" lazyload alt="image-20230717174850382"></p>
 </li>
 <li><p>右键弹出菜单</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717174937533.png" srcset="/img/loading.gif" lazyload alt="image-20230717174937533"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717174937533.png" srcset="/img/loading.gif" lazyload alt="image-20230717174937533"></p>
 </li>
 <li><p>二级菜单</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717175138449.png" srcset="/img/loading.gif" lazyload alt="image-20230717175138449"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717175138449.png" srcset="/img/loading.gif" lazyload alt="image-20230717175138449"></p>
 </li>
 <li><p>获取鼠标的位置</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717175240029.png" srcset="/img/loading.gif" lazyload alt="image-20230717175240029"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717175240029.png" srcset="/img/loading.gif" lazyload alt="image-20230717175240029"></p>
 </li>
 <li><p>菜单窗台的检测</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230717175615607.png" srcset="/img/loading.gif" lazyload alt="image-20230717175615607"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230717175615607.png" srcset="/img/loading.gif" lazyload alt="image-20230717175615607"></p>
 </li>
 </ol>
 <h2 id="图标和光标"><a href="#图标和光标" class="headerlink" title="图标和光标"></a>图标和光标</h2><ol>
 <li><p>定义</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718083711673.png" srcset="/img/loading.gif" lazyload alt="image-20230718083711673"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718083711673.png" srcset="/img/loading.gif" lazyload alt="image-20230718083711673"></p>
 </li>
 <li><p>装载图标和光标</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718083931575.png" srcset="/img/loading.gif" lazyload alt="image-20230718083931575"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718083931575.png" srcset="/img/loading.gif" lazyload alt="image-20230718083931575"></p>
 <p>通过发送信息</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718084236722.png" srcset="/img/loading.gif" lazyload alt="image-20230718084236722"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718084236722.png" srcset="/img/loading.gif" lazyload alt="image-20230718084236722"></p>
 </li>
 <li><p>改变窗口的属性然后改变光标的设定</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718084346721.png" srcset="/img/loading.gif" lazyload alt="image-20230718084346721"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718084346721.png" srcset="/img/loading.gif" lazyload alt="image-20230718084346721"></p>
 </li>
 </ol>
 <h2 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h2><ol>
 <li><p>是一种存储方式</p>
 <p>linux也是这种</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718084711472.png" srcset="/img/loading.gif" lazyload alt="image-20230718084711472"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718084711472.png" srcset="/img/loading.gif" lazyload alt="image-20230718084711472"></p>
 </li>
 <li><p>矢量和位图的关系</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718084955790.png" srcset="/img/loading.gif" lazyload alt="image-20230718084955790"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718084955790.png" srcset="/img/loading.gif" lazyload alt="image-20230718084955790"></p>
 </li>
 <li><p>区分位图，设备无关位图，位图文件</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718085112936.png" srcset="/img/loading.gif" lazyload alt="image-20230718085112936"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718085332659.png" srcset="/img/loading.gif" lazyload alt="image-20230718085332659"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718085306650.png" srcset="/img/loading.gif" lazyload alt="image-20230718085306650"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718085112936.png" srcset="/img/loading.gif" lazyload alt="image-20230718085112936"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718085332659.png" srcset="/img/loading.gif" lazyload alt="image-20230718085332659"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718085306650.png" srcset="/img/loading.gif" lazyload alt="image-20230718085306650"></p>
 </li>
 <li><p>在资源中定义位图</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718085919241.png" srcset="/img/loading.gif" lazyload alt="image-20230718085919241"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718085919241.png" srcset="/img/loading.gif" lazyload alt="image-20230718085919241"></p>
 </li>
 </ol>
 <h2 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h2><ol>
 <li><p>模态对话框和非模块对话框</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718090141825.png" srcset="/img/loading.gif" lazyload alt="image-20230718090141825">相当于特殊的窗口</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718090259854.png" srcset="/img/loading.gif" lazyload alt="image-20230718090259854"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718090141825.png" srcset="/img/loading.gif" lazyload alt="image-20230718090141825">相当于特殊的窗口</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718090259854.png" srcset="/img/loading.gif" lazyload alt="image-20230718090259854"></p>
 </li>
 <li><p>对话框的创建</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718091807097.png" srcset="/img/loading.gif" lazyload alt="image-20230718091807097"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718091807097.png" srcset="/img/loading.gif" lazyload alt="image-20230718091807097"></p>
 </li>
 <li><p>tab停留位</p>
 <p>就是使用tab经行焦点的转变</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718092232261.png" srcset="/img/loading.gif" lazyload alt="image-20230718092232261"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718092232261.png" srcset="/img/loading.gif" lazyload alt="image-20230718092232261"></p>
 </li>
 <li><p>使用对话框</p>
 <ul>
 <li><p>创建部分和对话框过程（回调函数）的部分</p>
 </li>
 <li><p>创建模态对话框</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718092717495.png" srcset="/img/loading.gif" lazyload alt="image-20230718092717495"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718092900612.png" srcset="/img/loading.gif" lazyload alt="image-20230718092900612"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718092717495.png" srcset="/img/loading.gif" lazyload alt="image-20230718092717495"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718092900612.png" srcset="/img/loading.gif" lazyload alt="image-20230718092900612"></p>
 </li>
 <li><p>结束模态对话框</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718093002726.png" srcset="/img/loading.gif" lazyload alt="image-20230718093002726"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718093002726.png" srcset="/img/loading.gif" lazyload alt="image-20230718093002726"></p>
 </li>
 <li><p>创建非模块对话框</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718093104742.png" srcset="/img/loading.gif" lazyload alt="image-20230718093104742"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718093104742.png" srcset="/img/loading.gif" lazyload alt="image-20230718093104742"></p>
 </li>
 <li><p>两个创建函数的不同</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718093413292.png" srcset="/img/loading.gif" lazyload alt="image-20230718093413292"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718093437707.png" srcset="/img/loading.gif" lazyload alt="image-20230718093437707"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718093446473.png" srcset="/img/loading.gif" lazyload alt="image-20230718093446473"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718093413292.png" srcset="/img/loading.gif" lazyload alt="image-20230718093413292"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718093437707.png" srcset="/img/loading.gif" lazyload alt="image-20230718093437707"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718093446473.png" srcset="/img/loading.gif" lazyload alt="image-20230718093446473"></p>
 </li>
 </ul>
 </li>
 </ol>
 <h2 id="使用子窗口控件"><a href="#使用子窗口控件" class="headerlink" title="使用子窗口控件"></a>使用子窗口控件</h2><h2 id="子窗口的控件"><a href="#子窗口的控件" class="headerlink" title="子窗口的控件"></a>子窗口的控件</h2><ol>
 <li><p>定义</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718103357430.png" srcset="/img/loading.gif" lazyload alt="image-20230718103357430"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718103357430.png" srcset="/img/loading.gif" lazyload alt="image-20230718103357430"></p>
 </li>
 <li><p>通用的使用方法</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718104005759.png" srcset="/img/loading.gif" lazyload alt="image-20230718104005759"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718104005759.png" srcset="/img/loading.gif" lazyload alt="image-20230718104005759"></p>
 <ul>
 <li><p>通过id获取句柄</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718104141640.png" srcset="/img/loading.gif" lazyload alt="image-20230718104141640"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718104141640.png" srcset="/img/loading.gif" lazyload alt="image-20230718104141640"></p>
 </li>
 <li><p>向控件发送信息</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718104314711.png" srcset="/img/loading.gif" lazyload alt="image-20230718104314711"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718104314711.png" srcset="/img/loading.gif" lazyload alt="image-20230718104314711"></p>
 <p>其中的换行符出现了错误</p>
 </li>
 <li><p>使用单选钮和复选框</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718104605311.png" srcset="/img/loading.gif" lazyload alt="image-20230718104605311"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718104605311.png" srcset="/img/loading.gif" lazyload alt="image-20230718104605311"></p>
 </li>
 <li><p>使用静态控件</p>
 <p>不向对话框发送信息</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718105309632.png" srcset="/img/loading.gif" lazyload alt="image-20230718105309632"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718105309632.png" srcset="/img/loading.gif" lazyload alt="image-20230718105309632"></p>
 <p>可以用来构造简单的线条图形</p>
 </li>
 <li><p>使用文本编辑控件</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718111110387.png" srcset="/img/loading.gif" lazyload alt="image-20230718111110387"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718111110387.png" srcset="/img/loading.gif" lazyload alt="image-20230718111110387"></p>
 </li>
 <li><p>使用滚动条、</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718112856487.png" srcset="/img/loading.gif" lazyload alt="image-20230718112856487"></p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718112937397.png" srcset="/img/loading.gif" lazyload alt="image-20230718112937397"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718112856487.png" srcset="/img/loading.gif" lazyload alt="image-20230718112856487"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718112937397.png" srcset="/img/loading.gif" lazyload alt="image-20230718112937397"></p>
 <p>发送信息获取返回</p>
-<p><img src="https://compilation-1317182407.cos.ap-nanjing.myqcloud.com/win32%E6%B1%87%E7%BC%96/image-20230718113658053.png" srcset="/img/loading.gif" lazyload alt="image-20230718113658053"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/compilation/win32%E6%B1%87%E7%BC%96/image-20230718113658053.png" srcset="/img/loading.gif" lazyload alt="image-20230718113658053"></p>
 </li>
 </ul>
 </li>

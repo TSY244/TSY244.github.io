@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="同源策略协议、域名、端口这些是相同的 漏洞简介 这个就可以为攻击者使用受害者的已经认证了的页面去访问，也就是这样就可以做到登录受害者的账号 这个根源是使用相同的cookie也就是，用户的cookie，这个cookie用于保存用户信息的。在XSS那里提到过，有时候我们不能直接获得cookie的具体的值，那我们就可以不得到他的值，我们直接只用这个访问 跨站：从一个网站到另一个网站 请求：HTTP请求">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144012391.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144102490.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144012391.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144102490.png">
 <meta property="article:published_time" content="2023-12-09T09:13:08.000Z">
-<meta property="article:modified_time" content="2024-06-27T10:51:45.753Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.318Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144012391.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144012391.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -304,8 +304,8 @@
 <h1 id="漏洞类型"><a href="#漏洞类型" class="headerlink" title="漏洞类型"></a>漏洞类型</h1><h2 id="GET型"><a href="#GET型" class="headerlink" title="GET型"></a>GET型</h2><p>接下来示范一下</p>
 <p><strong>攻击者：</strong></p>
 <p>正常的修改密码</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144012391.png" srcset="/img/loading.gif" lazyload alt="image-20231210144012391"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144102490.png" srcset="/img/loading.gif" lazyload alt="image-20231210144102490"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144012391.png" srcset="/img/loading.gif" lazyload alt="image-20231210144012391"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/CSRF/image-20231210144102490.png" srcset="/img/loading.gif" lazyload alt="image-20231210144102490"></p>
 <p>密码已经修改了，我们使用攻击者使用url看看</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="http://192.168.15.166/dvwa/vulnerabilities/csrf/?password_new=ASASd&password_conf=afsdf&Change=Change#">http://192.168.15.166/dvwa/vulnerabilities/csrf/?password_new=ASASd&amp;password_conf=afsdf&amp;Change=Change#</a></p>

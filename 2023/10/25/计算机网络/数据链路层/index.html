@@ -23,60 +23,60 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="概述数据链路层的地位  链路 从一个结点到另一个相邻结点，中间没有其他的交换结点  数据链路 在链路上添加了协议和软件，就跟构成了数据链路  数据链路层通过帧来传递数据   数据链路层的三个重要问题封装成帧需要在来自网络层的数据添加，帧头和帧尾，这个过程就是封装成帧的过程  差错检测 每一个帧具有帧检验字段 通过算法查看是否有出错  可靠传输如果传输的过程中出现了错误，就会被丢弃 如果发送方提供的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103310175.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103913366.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104213045.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104521813.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105011257.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105610036.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110036815.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110406127.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110519536.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110611230.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025115733560.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030141158181.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030143347874.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103310175.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103913366.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104213045.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104521813.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105011257.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105610036.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110036815.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110406127.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110519536.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110611230.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025115733560.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030141158181.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030143347874.png">
 <meta property="og:image" content="d:\hexo\source_posts\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C\%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82.assets\image-20231030144135604.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030150735902.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030150932832.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151024198.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151024198.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151944904.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152207282.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152337706.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152509687.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152628597.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101104026847.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030150735902.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030150932832.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151024198.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151024198.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151944904.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152207282.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152337706.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152509687.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152628597.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101104026847.png">
 <meta property="og:image" content="https://tsy244.github.io/">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103050893.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103222579.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103239455.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103520069.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101110820915.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101112241231.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113002463.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113121633.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113410095.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113837171.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113959921.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106141538494.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142039698.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142310810.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143323621.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143642085.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144543701.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144739764.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106145924298.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150151949.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150459459.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150955022.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106151426644.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103050893.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103222579.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103239455.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103520069.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101110820915.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101112241231.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113002463.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113121633.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113410095.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113837171.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113959921.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106141538494.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142039698.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142310810.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143323621.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143642085.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144543701.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144739764.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106145924298.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150151949.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150459459.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150955022.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106151426644.png">
 <meta property="article:published_time" content="2023-10-25T02:29:57.000Z">
-<meta property="article:modified_time" content="2023-11-13T06:03:57.347Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.493Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103310175.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103310175.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -330,7 +330,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="数据链路层的地位"><a href="#数据链路层的地位" class="headerlink" title="数据链路层的地位"></a>数据链路层的地位</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103310175.png" srcset="/img/loading.gif" lazyload alt="image-20231025103310175"></p>
+                <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="数据链路层的地位"><a href="#数据链路层的地位" class="headerlink" title="数据链路层的地位"></a>数据链路层的地位</h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103310175.png" srcset="/img/loading.gif" lazyload alt="image-20231025103310175"></p>
 <ol>
 <li><p>链路</p>
 <p>从一个结点到另一个相邻结点，中间没有其他的交换结点</p>
@@ -342,16 +342,16 @@
 </li>
 </ol>
 <h2 id="数据链路层的三个重要问题"><a href="#数据链路层的三个重要问题" class="headerlink" title="数据链路层的三个重要问题"></a>数据链路层的三个重要问题</h2><h3 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h3><p>需要在来自网络层的数据添加，帧头和帧尾，这个过程就是封装成帧的过程</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103913366.png" srcset="/img/loading.gif" lazyload alt="image-20231025103913366"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025103913366.png" srcset="/img/loading.gif" lazyload alt="image-20231025103913366"></p>
 <h3 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h3><p> 每一个帧具有帧检验字段</p>
 <p>通过算法查看是否有出错</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104213045.png" srcset="/img/loading.gif" lazyload alt="image-20231025104213045"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104213045.png" srcset="/img/loading.gif" lazyload alt="image-20231025104213045"></p>
 <h3 id="可靠传输"><a href="#可靠传输" class="headerlink" title="可靠传输"></a>可靠传输</h3><p>如果传输的过程中出现了错误，就会被丢弃</p>
 <p>如果发送方提供的是不可靠服务，丢弃就丢弃了。如果是可靠服务，就需要保证上层能过接收到真正确的副本</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104521813.png" srcset="/img/loading.gif" lazyload alt="image-20231025104521813"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025104521813.png" srcset="/img/loading.gif" lazyload alt="image-20231025104521813"></p>
 <h1 id="封装成帧-1"><a href="#封装成帧-1" class="headerlink" title="封装成帧"></a>封装成帧</h1><p>添加帧头和帧尾的过程</p>
 <p>帧头和帧尾的作用之一是帧定界</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105011257.png" srcset="/img/loading.gif" lazyload alt="image-20231025105011257"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105011257.png" srcset="/img/loading.gif" lazyload alt="image-20231025105011257"></p>
 <p>通过帧的标志位来划分</p>
 <p>但是不是所有的帧都包含标志位</p>
 <p>比如像mac帧，就存在标志位，那是怎么定位的呢？</p>
@@ -365,23 +365,23 @@
 </li>
 </ol>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105610036.png" srcset="/img/loading.gif" lazyload alt="image-20231025105610036"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025105610036.png" srcset="/img/loading.gif" lazyload alt="image-20231025105610036"></p>
 <h2 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h2><ol>
 <li><p>数据链路层对上层传输的数据没有任何限制</p>
 <p>问题：如果上层传输的数据中存在flag的值，那就不能正常传输</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110036815.png" srcset="/img/loading.gif" lazyload alt="image-20231025110036815"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110036815.png" srcset="/img/loading.gif" lazyload alt="image-20231025110036815"></p>
 <blockquote>
 <p>因此存在各种数据链路层协议，为解决这个问题</p>
 <p>可以这样，当上层数据传入数据链路层的时候，数据链路层会扫描发送的数据，如果存在数据定位符，我们就对非flag转义</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110406127.png" srcset="/img/loading.gif" lazyload alt="image-20231025110406127"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110406127.png" srcset="/img/loading.gif" lazyload alt="image-20231025110406127"></p>
 <p>但是现在有一个新的问题：</p>
 <p>如果存在转移字符，怎么解决？</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110519536.png" srcset="/img/loading.gif" lazyload alt="image-20231025110519536"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110519536.png" srcset="/img/loading.gif" lazyload alt="image-20231025110519536"></p>
 <blockquote>
 <p>将改转义字符也转义变成普通的字符</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110611230.png" srcset="/img/loading.gif" lazyload alt="image-20231025110611230"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025110611230.png" srcset="/img/loading.gif" lazyload alt="image-20231025110611230"></p>
 </li>
 <li><p>数据部分的长度</p>
 <p>考虑到差错控制等多种因素，每一种数据链路层的协议都规定了<strong>最大传送单元MTU</strong></p>
@@ -403,81 +403,81 @@
 <p>基本实现：</p>
 <p>发送方发发送数据然后接收方检测，如果没有误码就给发送方发送ACK，发送方就可以继续发送数据。如果存在误码就会发送NAK，然后发送方就会重新发送数据</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025115733560.png" srcset="/img/loading.gif" lazyload alt="image-20231025115733560"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231025115733560.png" srcset="/img/loading.gif" lazyload alt="image-20231025115733560"></p>
 <p><strong>超时重传</strong></p>
 <p>还有一种情况，假设现在传数据，但是丢失了，也就是说接收方完全没有接收到，这种情况下，就需要<strong>超时重传</strong>了</p>
 <p>发送方设定了一个超时时间，从发送方发送开始计时，如果超过了这个时间接收方还没有发来ACK或者NAK就需要重发数据</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030141158181.png" srcset="/img/loading.gif" lazyload alt="image-20231030141158181"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030141158181.png" srcset="/img/loading.gif" lazyload alt="image-20231030141158181"></p>
 <p><strong>确认丢失</strong></p>
 <p>当ack丢失的时候，我们采取对数据编号的方法，这这种情况下我们只需要一比特（0，1）的方法做标记。当ack丢失的时候，发送方会再次发送这个包。接收方会通过序号检查发现是重复的包，就只会发一个确认，并将此包丢弃</p>
 <p><strong>确认迟到</strong></p>
 <p>当ack迟到的时候，接收方会误认为此包丢失了，所以这个是发送方有重新发送此包。但是发送完毕之后，接收到了ack，发送方又会发送一下包，这个时候接收方收到了发送方发来的第一个包，所以会发送ack。当ack传入到接收方的时候会误认为是第二个包的。这样就会出现冲突，所以我们需要对ack也进行编号</p>
 <p>虽然此协议可以有效的防止数据丢失，但是信道利用率会非常的低</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030143347874.png" srcset="/img/loading.gif" lazyload alt="image-20231030143347874"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030143347874.png" srcset="/img/loading.gif" lazyload alt="image-20231030143347874"></p>
 <h2 id="回退N帧协议的GBN（滑动窗口协议）"><a href="#回退N帧协议的GBN（滑动窗口协议）" class="headerlink" title="回退N帧协议的GBN（滑动窗口协议）"></a>回退N帧协议的GBN（滑动窗口协议）</h2><p> <img src="D:\hexo\source_posts\计算机网络\数据链路层.assets\image-20231030144135604.png" srcset="/img/loading.gif" lazyload alt="image-20231030144135604"></p>
 <p><strong>重点：</strong></p>
 <ol>
 <li>取帧的大小要根据约定</li>
 <li>如果网络信号不好，信道利用率也很低</li>
 </ol>
-<h2 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h2><h1 id="点对点协议（ppp协议）"><a href="#点对点协议（ppp协议）" class="headerlink" title="点对点协议（ppp协议）"></a>点对点协议（ppp协议）</h1><p>​     <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030150735902.png" srcset="/img/loading.gif" lazyload alt="image-20231030150735902"></p>
+<h2 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h2><h1 id="点对点协议（ppp协议）"><a href="#点对点协议（ppp协议）" class="headerlink" title="点对点协议（ppp协议）"></a>点对点协议（ppp协议）</h1><p>​     <img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030150735902.png" srcset="/img/loading.gif" lazyload alt="image-20231030150735902"></p>
 <h2 id="透明传输-1"><a href="#透明传输-1" class="headerlink" title="透明传输"></a>透明传输</h2><ol>
 <li><p>当在帧的数据部分遇到了标识符的时候有两种做法</p>
 <ul>
 <li>面向字节的异步链路</li>
 <li>面向比特的同步链路</li>
 </ul>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030150932832.png" srcset="/img/loading.gif" lazyload alt="image-20231030150932832"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151024198.png" srcset="/img/loading.gif" lazyload alt="image-20231030151024198"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030150932832.png" srcset="/img/loading.gif" lazyload alt="image-20231030150932832"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151024198.png" srcset="/img/loading.gif" lazyload alt="image-20231030151024198"></p>
 </li>
 </ol>
-<h2 id="工作状态"><a href="#工作状态" class="headerlink" title="工作状态"></a>工作状态</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151024198.png" srcset="/img/loading.gif" lazyload alt="image-20231030151024198"></p>
+<h2 id="工作状态"><a href="#工作状态" class="headerlink" title="工作状态"></a>工作状态</h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151024198.png" srcset="/img/loading.gif" lazyload alt="image-20231030151024198"></p>
 <h1 id="媒体接入控制的基本概念"><a href="#媒体接入控制的基本概念" class="headerlink" title="媒体接入控制的基本概念"></a>媒体接入控制的基本概念</h1><h2 id="共享信道"><a href="#共享信道" class="headerlink" title="共享信道"></a>共享信道</h2><ol>
 <li>当使用总线传输的时候，需要协调多个发送和接受使用同一个共享媒体的占用，即媒体控制mac</li>
 </ol>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151944904.png" srcset="/img/loading.gif" lazyload alt="image-20231030151944904"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030151944904.png" srcset="/img/loading.gif" lazyload alt="image-20231030151944904"></p>
 <h2 id="信道复用"><a href="#信道复用" class="headerlink" title="信道复用"></a>信道复用</h2><h3 id="频分复用"><a href="#频分复用" class="headerlink" title="频分复用"></a>频分复用</h3><p>所有的用户占用不同的频段资源并行通信</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152207282.png" srcset="/img/loading.gif" lazyload alt="image-20231030152207282"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152207282.png" srcset="/img/loading.gif" lazyload alt="image-20231030152207282"></p>
 <h3 id="时分复用"><a href="#时分复用" class="headerlink" title="时分复用"></a>时分复用</h3><p>所有的用户通过时间间隙复用</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152337706.png" srcset="/img/loading.gif" lazyload alt="image-20231030152337706"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152337706.png" srcset="/img/loading.gif" lazyload alt="image-20231030152337706"></p>
 <h3 id="波分复用"><a href="#波分复用" class="headerlink" title="波分复用"></a>波分复用</h3><p>可以理解为光的频分复用</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152509687.png" srcset="/img/loading.gif" lazyload alt="image-20231030152509687"></p>
-<h3 id="码分复用"><a href="#码分复用" class="headerlink" title="码分复用"></a>码分复用</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152628597.png" srcset="/img/loading.gif" lazyload alt="image-20231030152628597"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152509687.png" srcset="/img/loading.gif" lazyload alt="image-20231030152509687"></p>
+<h3 id="码分复用"><a href="#码分复用" class="headerlink" title="码分复用"></a>码分复用</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231030152628597.png" srcset="/img/loading.gif" lazyload alt="image-20231030152628597"></p>
 <h2 id="动态接入-随机接入（CSMA-x2F-CD协议）"><a href="#动态接入-随机接入（CSMA-x2F-CD协议）" class="headerlink" title="动态接入-随机接入（CSMA&#x2F;CD协议）"></a>动态接入-随机接入（CSMA&#x2F;CD协议）</h2><p>发送流程图</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101104026847.png" srcset="/img/loading.gif" lazyload alt="image-20231101104026847"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101104026847.png" srcset="/img/loading.gif" lazyload alt="image-20231101104026847"></p>
 <p>接受流程图</p>
 <h3 id="多址接入"><a href="#多址接入" class="headerlink" title="多址接入"></a><img src="/" srcset="/img/loading.gif" lazyload alt="image-20231101104115688">多址接入</h3><p> 多个站点接入到一个总线上</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103050893.png" srcset="/img/loading.gif" lazyload alt="image-20231101103050893"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103050893.png" srcset="/img/loading.gif" lazyload alt="image-20231101103050893"></p>
 <h3 id="载波监听"><a href="#载波监听" class="headerlink" title="载波监听"></a>载波监听</h3><p>每一个站点在发送帧之前先检查一下总线上是否存在空闲的96比特的时间，如果是忙的话就继续监听</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103222579.png" srcset="/img/loading.gif" lazyload alt="image-20231101103222579"></p>
-<h3 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103239455.png" srcset="/img/loading.gif" lazyload alt="image-20231101103239455"></p>
-<h3 id="争用期"><a href="#争用期" class="headerlink" title="争用期"></a>争用期</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103520069.png" srcset="/img/loading.gif" lazyload alt="image-20231101103520069"></p>
-<h1 id="CSMA-x2F-CA协议"><a href="#CSMA-x2F-CA协议" class="headerlink" title="CSMA&#x2F;CA协议"></a>CSMA&#x2F;CA协议</h1><h2 id="信道预约"><a href="#信道预约" class="headerlink" title="信道预约"></a>信道预约</h2><h2 id="虚拟载波监听"><a href="#虚拟载波监听" class="headerlink" title="虚拟载波监听"></a>虚拟载波监听</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101110820915.png" srcset="/img/loading.gif" lazyload alt="image-20231101110820915"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103222579.png" srcset="/img/loading.gif" lazyload alt="image-20231101103222579"></p>
+<h3 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103239455.png" srcset="/img/loading.gif" lazyload alt="image-20231101103239455"></p>
+<h3 id="争用期"><a href="#争用期" class="headerlink" title="争用期"></a>争用期</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101103520069.png" srcset="/img/loading.gif" lazyload alt="image-20231101103520069"></p>
+<h1 id="CSMA-x2F-CA协议"><a href="#CSMA-x2F-CA协议" class="headerlink" title="CSMA&#x2F;CA协议"></a>CSMA&#x2F;CA协议</h1><h2 id="信道预约"><a href="#信道预约" class="headerlink" title="信道预约"></a>信道预约</h2><h2 id="虚拟载波监听"><a href="#虚拟载波监听" class="headerlink" title="虚拟载波监听"></a>虚拟载波监听</h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101110820915.png" srcset="/img/loading.gif" lazyload alt="image-20231101110820915"></p>
 <h1 id="MAC地址，IP地址，ARP协议"><a href="#MAC地址，IP地址，ARP协议" class="headerlink" title="MAC地址，IP地址，ARP协议"></a>MAC地址，IP地址，ARP协议</h1><blockquote>
 <p>MAC地址是数据链路层的协议</p>
 <p>IP地址，ARP地址是网际层的协议</p>
 </blockquote>
 <h2 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h2><ol>
 <li><p>存储在eeprom中，所以也称MAC地址为硬件地址</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101112241231.png" srcset="/img/loading.gif" lazyload alt="image-20231101112241231"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101112241231.png" srcset="/img/loading.gif" lazyload alt="image-20231101112241231"></p>
 <p>但是MAC地址不是物理层的地址，而是数据链路层 </p>
 </li>
 <li><p>分类</p>
 <p>根据第一位字节的b1位和第一字节的b0位，一共有4种MAC地址</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113002463.png" srcset="/img/loading.gif" lazyload alt="image-20231101113002463"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113002463.png" srcset="/img/loading.gif" lazyload alt="image-20231101113002463"></p>
 </li>
 <li><p>发送顺序</p>
 <p>字节的发送是顺序</p>
 <p>字节内的发送时逆序</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113121633.png" srcset="/img/loading.gif" lazyload alt="image-20231101113121633"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113121633.png" srcset="/img/loading.gif" lazyload alt="image-20231101113121633"></p>
 </li>
 <li><p>多播MAC地址</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113410095.png" srcset="/img/loading.gif" lazyload alt="image-20231101113410095"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113410095.png" srcset="/img/loading.gif" lazyload alt="image-20231101113410095"></p>
 <p>判断是否是多播地址，根据第一个字节的十六进制是否能整除2，不能则为多播。能就是单播地址</p>
 </li>
 </ol>
-<h2 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h2><p> <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113837171.png" srcset="/img/loading.gif" lazyload alt="image-20231101113837171"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113959921.png" srcset="/img/loading.gif" lazyload alt="image-20231101113959921"></p>
+<h2 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h2><p> <img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113837171.png" srcset="/img/loading.gif" lazyload alt="image-20231101113837171"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231101113959921.png" srcset="/img/loading.gif" lazyload alt="image-20231101113959921"></p>
 <p>在网络层首部中右源IP地址和目标IP地址</p>
 <p>在数据链路层的首部中有源MAC地址和目标IP地址 </p>
 <h2 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h2><p>就是用于使用Ip地址发现mac地址</p>
@@ -485,11 +485,11 @@
 <p>通过广播查询，然后ip匹配的地址就会记录到arp高速缓存表</p>
 <p><strong>arp只能在一个链路和一个网络之间只用，不能跨网络使用</strong></p>
 <p>存在arp欺骗的问题</p>
-<h1 id="集线器和交换机"><a href="#集线器和交换机" class="headerlink" title="集线器和交换机"></a>集线器和交换机</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106141538494.png" srcset="/img/loading.gif" lazyload alt="image-20231106141538494"></p>
+<h1 id="集线器和交换机"><a href="#集线器和交换机" class="headerlink" title="集线器和交换机"></a>集线器和交换机</h1><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106141538494.png" srcset="/img/loading.gif" lazyload alt="image-20231106141538494"></p>
 <h2 id="交换机和集线器的区别"><a href="#交换机和集线器的区别" class="headerlink" title="交换机和集线器的区别"></a>交换机和集线器的区别</h2><p>交换机可以指定一个主机交流</p>
 <p>集线器会使用一种类似广播的形式也就是说每一个用户都会接受到信息</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142039698.png" srcset="/img/loading.gif" lazyload alt="image-20231106142039698"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142310810.png" srcset="/img/loading.gif" lazyload alt="image-20231106142310810"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142039698.png" srcset="/img/loading.gif" lazyload alt="image-20231106142039698"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106142310810.png" srcset="/img/loading.gif" lazyload alt="image-20231106142310810"></p>
 <p>交换机会扩大广播域但是不会扩展碰撞域</p>
 <p>集线器会扩展广播域同时也会扩展碰撞域</p>
 <p><strong>交换机工作在主要数据链路层，集线器工作在物理层</strong></p>
@@ -497,10 +497,10 @@
 <li><p>交换机插上网线就能使用，最开始的时候帧转发表是空的，但是要能连上网，就会自己存储转发表</p>
 </li>
 <li><p>帧交换表不会永久存放，到一定的时间之后就会消除</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143323621.png" srcset="/img/loading.gif" lazyload alt="image-20231106143323621"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143323621.png" srcset="/img/loading.gif" lazyload alt="image-20231106143323621"></p>
 <p>因为mac地址也交换机接口的对应关系不是永久性的</p>
 </li>
-<li><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143642085.png" srcset="/img/loading.gif" lazyload alt="image-20231106143642085"></p>
+<li><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106143642085.png" srcset="/img/loading.gif" lazyload alt="image-20231106143642085"></p>
 <p>mac地址就是物理地址工作在数据链路层</p>
 </li>
 </ol>
@@ -509,31 +509,31 @@
 </ol>
 <h1 id="虚拟局域网-VLAN"><a href="#虚拟局域网-VLAN" class="headerlink" title="虚拟局域网(VLAN)"></a>虚拟局域网(VLAN)</h1><ol>
 <li><p>随着交换机的增多，广播域也变大，就会造成很多问题</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144543701.png" srcset="/img/loading.gif" lazyload alt="image-20231106144543701"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144543701.png" srcset="/img/loading.gif" lazyload alt="image-20231106144543701"></p>
 <ul>
 <li>当某一个主机获取mac地址，使用arp协议的时候就会广播所有的域</li>
 </ul>
 </li>
 <li><p>网络上大量使用广播</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144739764.png" srcset="/img/loading.gif" lazyload alt="image-20231106144739764"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106144739764.png" srcset="/img/loading.gif" lazyload alt="image-20231106144739764"></p>
 </li>
 <li><p>同一个VLAN可以广播通信，不同的VLAN不能广播通信</p>
 </li>
 </ol>
-<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106145924298.png" srcset="/img/loading.gif" lazyload alt="image-20231106145924298"></p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106145924298.png" srcset="/img/loading.gif" lazyload alt="image-20231106145924298"></p>
 <ol start="4">
-<li><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150151949.png" srcset="/img/loading.gif" lazyload alt="image-20231106150151949"></p>
+<li><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150151949.png" srcset="/img/loading.gif" lazyload alt="image-20231106150151949"></p>
 </li>
-<li><p>ACCESS端口<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150459459.png" srcset="/img/loading.gif" lazyload alt="image-20231106150459459"></p>
+<li><p>ACCESS端口<br><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150459459.png" srcset="/img/loading.gif" lazyload alt="image-20231106150459459"></p>
 <p>access端口将会对没打标签的打标签，打标签的去标签，如果与自己的PVID相等的话就转发该帧</p>
 <p>连接主机的端口应该设置为ACCESS</p>
 </li>
 <li><p>TRUNK端口</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150955022.png" srcset="/img/loading.gif" lazyload alt="image-20231106150955022"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106150955022.png" srcset="/img/loading.gif" lazyload alt="image-20231106150955022"></p>
 <p>对于这个转发机制，适用于不同VLAN之间的转发</p>
 </li>
 <li><p>Hybrid端口</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106151426644.png" srcset="/img/loading.gif" lazyload alt="image-20231106151426644"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/ComputerNetwork/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/image-20231106151426644.png" srcset="/img/loading.gif" lazyload alt="image-20231106151426644"></p>
 </li>
 </ol>
 

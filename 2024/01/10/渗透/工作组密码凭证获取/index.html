@@ -23,36 +23,36 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="windows密码凭证获windwos hash hash 简介 这个加密函数对一个任意长度的字符串数据进行一次数学加密函数运算，然后返回一个固定长度的字符串。   简单地说，就是将一个任意长度的消息压缩到某个固定的长度的信息摘要的函数  windows hash  简单地说就是windwos用户的密码经过hash加密之后，就被称为windwos hash  对于windows系统来说，现在有两种">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194412201.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194504355.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110205719351.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110210245240.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%B7%A5%E4%BD%9C%E7%BB%84%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240224003041427.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213933133.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213957620.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214308301.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214838397.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135357843.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135605815.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135914371.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112140327159.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115162931213.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163016831.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163108233.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163155828.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163317507.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115154822166.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115155014440.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172020746.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172204334.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172347238.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172859541.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194412201.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194504355.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110205719351.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110210245240.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%B7%A5%E4%BD%9C%E7%BB%84%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240224003041427.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213933133.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213957620.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214308301.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214838397.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135357843.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135605815.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135914371.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112140327159.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115162931213.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163016831.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163108233.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163155828.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163317507.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115154822166.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115155014440.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172020746.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172204334.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172347238.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172859541.png">
 <meta property="article:published_time" content="2024-01-10T08:20:20.000Z">
-<meta property="article:modified_time" content="2025-01-07T16:59:10.325Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.486Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194412201.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194412201.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -385,8 +385,8 @@
 <p>   从windows vista &#x2F; windows server 2008开始默认情况下就已经禁用了该算法</p>
 <p>   LM算法基础是 DES</p>
 <p>   生成原理</p>
-<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194412201.png" srcset="/img/loading.gif" lazyload alt="image-20240110194412201"></p>
-<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194504355.png" srcset="/img/loading.gif" lazyload alt="image-20240110194504355"></p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194412201.png" srcset="/img/loading.gif" lazyload alt="image-20240110194412201"></p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20240110194504355.png" srcset="/img/loading.gif" lazyload alt="image-20240110194504355"></p>
 <p>   缺点：</p>
 <ol>
 <li><p>密码长度最大只能为14位</p>
@@ -421,7 +421,7 @@
 </ul>
 </li>
 <li><p>本地认证</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110205719351.png" srcset="/img/loading.gif" lazyload alt="image-20240110205719351"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110205719351.png" srcset="/img/loading.gif" lazyload alt="image-20240110205719351"></p>
 <p>通过这个图，我们可以知道，我们可以直接从lsass.exe中获取到明文密码</p>
 <p>具体的过程是：</p>
 <ul>
@@ -444,7 +444,7 @@
 </li>
 <li><p>网络认证</p>
 <p>网络认证即在工作组环境下远程登陆另一台电脑所采用的认证机制  </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110210245240.png" srcset="/img/loading.gif" lazyload alt="image-20240110210245240"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110210245240.png" srcset="/img/loading.gif" lazyload alt="image-20240110210245240"></p>
 <p>NTML协议的认证过程分为3步，也叫挑战相应机制</p>
 <pre><code class=" mermaid">graph TB
 	client(客户端发送用户名)--&gt;server(服务端查询用户是否存在)
@@ -486,7 +486,7 @@
 <li><p>用户权限判断</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">whoami</span> /all <br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/%E5%B7%A5%E4%BD%9C%E7%BB%84%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240224003041427.png" srcset="/img/loading.gif" lazyload alt="image-20240224003041427"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/%E5%B7%A5%E4%BD%9C%E7%BB%84%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240224003041427.png" srcset="/img/loading.gif" lazyload alt="image-20240224003041427"></p>
 <p>如果发现这个组并且存在大量的权限的话，那就是完全的管理员权限</p>
 </li>
 <li><p>明文密码的提取方式</p>
@@ -508,11 +508,11 @@
 <ol>
 <li><p>获取命令</p>
 <p>随便输入一个字符</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213933133.png" srcset="/img/loading.gif" lazyload alt="image-20240110213933133"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213933133.png" srcset="/img/loading.gif" lazyload alt="image-20240110213933133"></p>
 </li>
 <li><p>获取模块</p>
 <p>可以输入两个<code>::</code></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213957620.png" srcset="/img/loading.gif" lazyload alt="image-20240110213957620"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110213957620.png" srcset="/img/loading.gif" lazyload alt="image-20240110213957620"></p>
 </li>
 </ol>
 <p>下面以两种模式简绍</p>
@@ -524,7 +524,7 @@
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">privilege::debug<br></code></pre></td></tr></table></figure>
 
 <p>提权到可调式权限</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214308301.png" srcset="/img/loading.gif" lazyload alt="image-20240110214308301"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214308301.png" srcset="/img/loading.gif" lazyload alt="image-20240110214308301"></p>
 </li>
 <li><p>记录日志</p>
 <p>会记录我们所操作的命令和结果</p>
@@ -533,7 +533,7 @@
 <p>记录到1.txt</p>
 </li>
 <li><p>获取密码</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214838397.png" srcset="/img/loading.gif" lazyload alt="image-20240110214838397"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windwos%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240110214838397.png" srcset="/img/loading.gif" lazyload alt="image-20240110214838397"></p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">sekurlsa::logonpasswords<br></code></pre></td></tr></table></figure>
 
 <p>非交互的</p>
@@ -596,18 +596,18 @@
 <li><p>获取hash值</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hashdump</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135357843.png" srcset="/img/loading.gif" lazyload alt="image-20240112135357843"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135357843.png" srcset="/img/loading.gif" lazyload alt="image-20240112135357843"></p>
 <p>可以反映出相关的hash</p>
 </li>
 <li><p>提权到system</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">getsystem</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135605815.png" srcset="/img/loading.gif" lazyload alt="image-20240112135605815"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135605815.png" srcset="/img/loading.gif" lazyload alt="image-20240112135605815"></p>
 </li>
 <li><p>加载猕猴桃模块</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">load kiwi</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135914371.png" srcset="/img/loading.gif" lazyload alt="image-20240112135914371"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112135914371.png" srcset="/img/loading.gif" lazyload alt="image-20240112135914371"></p>
 </li>
 <li><p>获取明文密码</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">creds_all<br>kiwi_cmd sekurlsa::logonpasswords <br></code></pre></td></tr></table></figure>
@@ -616,7 +616,7 @@
 <figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smali">rev2self<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>获取sam数据库</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112140327159.png" srcset="/img/loading.gif" lazyload alt="image-20240112140327159"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/%E9%97%AE%E9%A2%98%E8%AE%B0%E8%BD%BD/image-20240112140327159.png" srcset="/img/loading.gif" lazyload alt="image-20240112140327159"></p>
 </li>
 <li><p>更加高级的hashdump 模块，用于提高获取hash 的可能性</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">run post<span class="hljs-regexp">/windows/g</span>ather/smart_hashdump<br></code></pre></td></tr></table></figure>
@@ -629,21 +629,21 @@
 <li><p>获取hash</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hashdump</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115162931213.png" srcset="/img/loading.gif" lazyload alt="image-20240115162931213"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115162931213.png" srcset="/img/loading.gif" lazyload alt="image-20240115162931213"></p>
 </li>
 <li><p>获取密码</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">logonpasswords<br>mimikatz sekurlsa::logonpasswords<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163016831.png" srcset="/img/loading.gif" lazyload alt="image-20240115163016831"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163108233.png" srcset="/img/loading.gif" lazyload alt="image-20240115163108233"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163016831.png" srcset="/img/loading.gif" lazyload alt="image-20240115163016831"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163108233.png" srcset="/img/loading.gif" lazyload alt="image-20240115163108233"></p>
 </li>
 <li><p>获取sam</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mimikatz lsadump::sam<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163155828.png" srcset="/img/loading.gif" lazyload alt="image-20240115163155828"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163155828.png" srcset="/img/loading.gif" lazyload alt="image-20240115163155828"></p>
 </li>
 <li><p>cs会自动收录密码凭证</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163317507.png" srcset="/img/loading.gif" lazyload alt="image-20240115163317507"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115163317507.png" srcset="/img/loading.gif" lazyload alt="image-20240115163317507"></p>
 </li>
 </ol>
 <h3 id="hash解密"><a href="#hash解密" class="headerlink" title="hash解密"></a>hash解密</h3><h4 id="在线解密"><a href="#在线解密" class="headerlink" title="在线解密"></a>在线解密</h4><p><a target="_blank" rel="noopener" href="https://www.cmd5.com/">https://www.cmd5.com/</a></p>
@@ -668,12 +668,12 @@
 <li><p>查看本地机器本地连接过的目标主机</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">reg</span> <span class="hljs-keyword">query</span> <span class="hljs-string">&quot;HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Servers&quot;</span> /s<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115154822166.png" srcset="/img/loading.gif" lazyload alt="image-20240115154822166"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115154822166.png" srcset="/img/loading.gif" lazyload alt="image-20240115154822166"></p>
 </li>
 <li><p>查看本地用用户此目录下是否存在RDP密码文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">dir</span> /a %userprofile%\AppData\Local\Microsoft\Credentials\*<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115155014440.png" srcset="/img/loading.gif" lazyload alt="image-20240115155014440"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115155014440.png" srcset="/img/loading.gif" lazyload alt="image-20240115155014440"></p>
 </li>
 <li><p>查看保存在本地的远程主机信息</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cmdkey /list<br></code></pre></td></tr></table></figure>
@@ -709,10 +709,10 @@
 </blockquote>
 <p>一般是单独存在一个文件夹中与用户有关的一共有三个文件即user.frm、user.MYD和user.MYI，MySQL数据库用户密码都保存  在user.MYD文件中，包括root用户和其他用户的密码。  </p>
 <h3 id="MySQL加密方式"><a href="#MySQL加密方式" class="headerlink" title="MySQL加密方式"></a>MySQL加密方式</h3><p>MYSQL数据库的认证密码有两种方式MYSQL 4.1版本之前是MYSQL323加密，MYSQL 4.1和之后的版本都是MYSQLSHA1加密MYSQL数据库中自带 Old_Password(str) 和 Password(str)函数,它们均可以在MYSQL数据库里  进行查询，前者是MYSQL323加密，后者是MYSQLSHA1方式加密。  </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172020746.png" srcset="/img/loading.gif" lazyload alt="image-20240115172020746"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172020746.png" srcset="/img/loading.gif" lazyload alt="image-20240115172020746"></p>
 <p>MYSQL323加密中生成的是16位字符串，而在MYSQLSHA1中生成的是41位字符串，其中*是不加入实  际的密码运算中，MYSQLSHA1加密的密码的实际位数是40位  </p>
 <h3 id="获取mysql数据库的hash值"><a href="#获取mysql数据库的hash值" class="headerlink" title="获取mysql数据库的hash值"></a>获取mysql数据库的hash值</h3><p>只需要将user.MYD文件放进二进制编辑器就可以</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172204334.png" srcset="/img/loading.gif" lazyload alt="image-20240115172204334"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172204334.png" srcset="/img/loading.gif" lazyload alt="image-20240115172204334"></p>
 <p>然后可以尝试对其解密</p>
 <h3 id="hash解密-1"><a href="#hash解密-1" class="headerlink" title="hash解密"></a>hash解密</h3><ol>
 <li><p>hash网站</p>
@@ -720,14 +720,14 @@
 <p>  <a target="_blank" rel="noopener" href="http://www.cmd5.com/">www.cmd5.com</a>  </p>
 <p> <a target="_blank" rel="noopener" href="http://www.somd5.com/">www.somd5.com</a>  </p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172347238.png" srcset="/img/loading.gif" lazyload alt="image-20240115172347238"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172347238.png" srcset="/img/loading.gif" lazyload alt="image-20240115172347238"></p>
 </li>
 <li><p>hashcat</p>
 </li>
 <li><p>john the ripper 破解</p>
 </li>
 </ol>
-<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172859541.png" srcset="/img/loading.gif" lazyload alt="image-20240115172859541"></p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/image-20240115172859541.png" srcset="/img/loading.gif" lazyload alt="image-20240115172859541"></p>
 <p>   感觉这个会快很多</p>
 <h2 id="应用程序密码解密"><a href="#应用程序密码解密" class="headerlink" title="应用程序密码解密"></a>应用程序密码解密</h2><p>  对密码已保存在 Windwos 系统上的部分程序进行解析，包括：  Navicat,TeamViewer,FileZilla,WinSCP,Xmangager系列产品（Xshell,Xftp)。  </p>
 <p>  ackBrowserData 是一个浏览器数据（密码|历史记录|Cookie|书签|信用卡|下载记录|localStorage|浏览器插件）的导出工具，支持全平台主流浏览器。  </p>

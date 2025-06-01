@@ -23,18 +23,18 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="函数简绍这个函数用于php 替换文本  函数的原型是 1preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit &#x3D; -1 [, int &amp;$count ]] ) : mixed   意思就是将$subject 中的$pattern 替换成$replacement  但是特别的是在 $">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240509235432890.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240509235849188.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510000028183.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510002651637.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510002940190.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510004845612.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240509235432890.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240509235849188.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240510000028183.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240510002651637.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240510002940190.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240510004845612.png">
 <meta property="article:published_time" content="2024-05-09T15:41:36.000Z">
-<meta property="article:modified_time" content="2024-05-10T01:21:24.948Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.326Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240509235432890.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240509235432890.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -289,7 +289,7 @@
               <div class="markdown-body">
                 
                 <h1 id="函数简绍"><a href="#函数简绍" class="headerlink" title="函数简绍"></a>函数简绍</h1><p>这个函数用于php 替换文本</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240509235432890.png" srcset="/img/loading.gif" lazyload alt="image-20240509235432890"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240509235432890.png" srcset="/img/loading.gif" lazyload alt="image-20240509235432890"></p>
 <p>函数的原型是</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-title function_ invoke__">preg_replace</span> ( <span class="hljs-keyword">mixed</span> <span class="hljs-variable">$pattern</span> , <span class="hljs-keyword">mixed</span> <span class="hljs-variable">$replacement</span> , <span class="hljs-keyword">mixed</span> <span class="hljs-variable">$subject</span> [, <span class="hljs-keyword">int</span> <span class="hljs-variable">$limit</span> = -<span class="hljs-number">1</span> [, <span class="hljs-keyword">int</span> &amp;<span class="hljs-variable">$count</span> ]] ) : <span class="hljs-keyword">mixed</span><br></code></pre></td></tr></table></figure>
 
@@ -297,7 +297,7 @@
 <p>意思就是将$subject 中的$pattern 替换成$replacement</p>
 </blockquote>
 <p>但是特别的是在 $pattern中有一个匹配模式php 将其称之为模式修饰符</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240509235849188.png" srcset="/img/loading.gif" lazyload alt="image-20240509235849188"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240509235849188.png" srcset="/img/loading.gif" lazyload alt="image-20240509235849188"></p>
 <p>原文如下</p>
 <blockquote>
 <h1 id="模式修饰符"><a href="#模式修饰符" class="headerlink" title="模式修饰符:"></a>模式修饰符:</h1><p>下面列出了当前可用的 PCRE 修饰符。括号中提到的名字是 PCRE 内部这些修饰符的名称。 模式修饰符中的空格，换行符会被忽略，其他字符会导致错误。</p>
@@ -343,7 +343,7 @@
 </blockquote>
 </blockquote>
 <p>重点关注&#x2F;e模式</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510000028183.png" srcset="/img/loading.gif" lazyload alt="image-20240510000028183"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240510000028183.png" srcset="/img/loading.gif" lazyload alt="image-20240510000028183"></p>
 <p>当服务器使用这个函数，并且模式选择的是<code>/e</code> 的时候，会出现将第二个参数作为php 代码进行执行</p>
 <h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>源代码</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$id</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;id&#x27;</span>];<br><span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;id&#x27;</span>] = <span class="hljs-variable">$id</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">complex</span>(<span class="hljs-params"><span class="hljs-variable">$re</span>, <span class="hljs-variable">$str</span></span>)</span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">preg_replace</span>(<br>        <span class="hljs-string">&#x27;/(&#x27;</span> . <span class="hljs-variable">$re</span> . <span class="hljs-string">&#x27;)/ei&#x27;</span>,<br>        <span class="hljs-string">&#x27;strtolower(&quot;\\1&quot;)&#x27;</span>,<br>        <span class="hljs-variable">$str</span><br>    );<br>&#125;<br><br><br><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$_GET</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$re</span> =&gt; <span class="hljs-variable">$str</span>) &#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">complex</span>(<span class="hljs-variable">$re</span>, <span class="hljs-variable">$str</span>) . <span class="hljs-string">&quot;\n&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -362,7 +362,7 @@
 <p><strong>&#x2F;?.*&#x3D;{${phpinfo()}}</strong></p>
 <p>这个payload 经过url 被服务端获取到结果是</p>
 <p>参数名为<code>.*</code>  参数的值为<code>&#123;$&#123;phpinfo()&#125;&#125;</code> 但是这里发现是执行不了这个代码的</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510002651637.png" srcset="/img/loading.gif" lazyload alt="image-20240510002651637"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240510002651637.png" srcset="/img/loading.gif" lazyload alt="image-20240510002651637"></p>
 <p>这个是因为使用<code>.*</code>进行get传参的时候，使得<code>.*</code>  &#x3D;&#x3D;&gt;  变成了  <code>_*</code></p>
 <p>因为在php 中得<code>.*</code>是非法字符</p>
 <p>这里可以使用其他方式进行绕过</p>
@@ -370,7 +370,7 @@
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">?\S*=&#123;$&#123;phpinfo()&#125;&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这个形式就可以成功得执行了</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510002940190.png" srcset="/img/loading.gif" lazyload alt="image-20240510002940190"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240510002940190.png" srcset="/img/loading.gif" lazyload alt="image-20240510002940190"></p>
 <p>成功得执行</p>
 <h2 id="注意点3"><a href="#注意点3" class="headerlink" title="注意点3"></a>注意点3</h2><p>为什么这里一定要使用<code>&#123;$&#123;phpinfo()&#125;&#125;</code>得形式呢？为什么不能直接给一个phpinfo() 这种形式？</p>
 <p>这个是因为PHP 可变变量得原因</p>
@@ -382,7 +382,7 @@
 
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-string">?\S</span>*=&#123;<span class="hljs-variable">$&#123;</span>phpinfo()&#125;&#125;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/image-20240510004845612.png" srcset="/img/loading.gif" lazyload alt="image-20240510004845612"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/image-20240510004845612.png" srcset="/img/loading.gif" lazyload alt="image-20240510004845612"></p>
 
                 
               </div>

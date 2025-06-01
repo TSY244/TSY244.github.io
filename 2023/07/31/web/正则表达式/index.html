@@ -23,37 +23,37 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="正则表达式基础 使用[]进行匹配  可以使用区间的方式    使用转义字符进行转义   使用取反操作     快捷键的匹配 匹配字母和数字 匹配字母：-w 匹配数字：-d  匹配空白 \s   匹配单词的边界    快捷键取反操作 就是改小写为大写   匹配字符串的结尾和开头   匹配任何单个字符   匹配一次或0次   重复   重复区间   区间范围       进阶笔记 分组 分组就是字面的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8C%BA%E9%97%B4%E8%A7%84%E5%88%991">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8C%BA%E9%97%B4%E6%B5%8B%E8%AF%95">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8F%96%E5%8F%8D">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8F%96%E5%8F%8D%E6%93%8D%E4%BD%9C">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8C%BA%E9%97%B4%E8%A7%84%E5%88%991">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8C%BA%E9%97%B4%E6%B5%8B%E8%AF%95">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8F%96%E5%8F%8D">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8F%96%E5%8F%8D%E6%93%8D%E4%BD%9C">
 <meta property="og:image" content="c:\Users\12414\Desktop\hexo\source_posts\web\%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.assets\image-20230801085446374.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8C%B9%E9%85%8D%E5%8D%95%E8%AF%8D%E8%BE%B9%E7%95%8C%E7%A4%BA%E4%BE%8B">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8C%B9%E9%85%8D%E5%8D%95%E8%AF%8D%E7%BB%83%E4%B9%A0">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801090459948.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801123354332.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801123539593.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801123809867.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801124258603.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801124425850.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801124728907.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801141051642.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801141404234.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801141605087.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801141734353.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801142113479.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801142434498.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801142638894.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801142928705.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801143053853.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801143358287.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8C%B9%E9%85%8D%E5%8D%95%E8%AF%8D%E8%BE%B9%E7%95%8C%E7%A4%BA%E4%BE%8B">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8C%B9%E9%85%8D%E5%8D%95%E8%AF%8D%E7%BB%83%E4%B9%A0">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801090459948.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801123354332.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801123539593.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801123809867.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801124258603.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801124425850.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801124728907.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801141051642.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801141404234.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801141605087.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801141734353.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801142113479.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801142434498.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801142638894.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801142928705.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801143053853.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801143358287.png">
 <meta property="article:published_time" content="2023-07-31T14:10:23.000Z">
-<meta property="article:modified_time" content="2023-08-01T06:43:20.639Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.316Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="web安全">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8C%BA%E9%97%B4%E8%A7%84%E5%88%991">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8C%BA%E9%97%B4%E8%A7%84%E5%88%991">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -311,15 +311,15 @@
 <li><p>使用[]进行匹配</p>
 </li>
 <li><p>可以使用区间的方式</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8C%BA%E9%97%B4%E8%A7%84%E5%88%991" srcset="/img/loading.gif" lazyload alt="image-20230801084705729"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8C%BA%E9%97%B4%E6%B5%8B%E8%AF%95" srcset="/img/loading.gif" lazyload alt="image-20230801084751543"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8C%BA%E9%97%B4%E8%A7%84%E5%88%991" srcset="/img/loading.gif" lazyload alt="image-20230801084705729"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8C%BA%E9%97%B4%E6%B5%8B%E8%AF%95" srcset="/img/loading.gif" lazyload alt="image-20230801084751543"></p>
 </li>
 <li><p>使用转义字符进行转义</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6" srcset="/img/loading.gif" lazyload alt="image-20230801084903442"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6" srcset="/img/loading.gif" lazyload alt="image-20230801084903442"></p>
 </li>
 <li><p>使用取反操作</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8F%96%E5%8F%8D" srcset="/img/loading.gif" lazyload alt="image-20230801085043193"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8F%96%E5%8F%8D%E6%93%8D%E4%BD%9C" srcset="/img/loading.gif" lazyload alt="image-20230801085129023"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8F%96%E5%8F%8D" srcset="/img/loading.gif" lazyload alt="image-20230801085043193"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8F%96%E5%8F%8D%E6%93%8D%E4%BD%9C" srcset="/img/loading.gif" lazyload alt="image-20230801085129023"></p>
 </li>
 </ol>
 <h2 id="快捷键的匹配"><a href="#快捷键的匹配" class="headerlink" title="快捷键的匹配"></a>快捷键的匹配</h2><ol>
@@ -332,64 +332,64 @@
 <p><img src="C:\Users\12414\Desktop\hexo\source_posts\web\正则表达式.assets\image-20230801085446374.png" srcset="/img/loading.gif" lazyload alt="image-20230801085446374"></p>
 </li>
 <li><p>匹配单词的边界</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8C%B9%E9%85%8D%E5%8D%95%E8%AF%8D%E8%BE%B9%E7%95%8C%E7%A4%BA%E4%BE%8B" srcset="/img/loading.gif" lazyload alt="image-20230801085844782"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/%E5%8C%B9%E9%85%8D%E5%8D%95%E8%AF%8D%E7%BB%83%E4%B9%A0" srcset="/img/loading.gif" lazyload alt="image-20230801085915050"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8C%B9%E9%85%8D%E5%8D%95%E8%AF%8D%E8%BE%B9%E7%95%8C%E7%A4%BA%E4%BE%8B" srcset="/img/loading.gif" lazyload alt="image-20230801085844782"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/%E5%8C%B9%E9%85%8D%E5%8D%95%E8%AF%8D%E7%BB%83%E4%B9%A0" srcset="/img/loading.gif" lazyload alt="image-20230801085915050"></p>
 </li>
 <li><p>快捷键取反操作</p>
 <p>就是改小写为大写</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801090459948.png" srcset="/img/loading.gif" lazyload alt="image-20230801090459948"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801090459948.png" srcset="/img/loading.gif" lazyload alt="image-20230801090459948"></p>
 </li>
 <li><p>匹配字符串的结尾和开头</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801123354332.png" srcset="/img/loading.gif" lazyload alt="image-20230801123354332"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801123354332.png" srcset="/img/loading.gif" lazyload alt="image-20230801123354332"></p>
 </li>
 <li><p>匹配任何单个字符</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801123539593.png" srcset="/img/loading.gif" lazyload alt="image-20230801123539593"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801123539593.png" srcset="/img/loading.gif" lazyload alt="image-20230801123539593"></p>
 </li>
 <li><p>匹配一次或0次</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801123809867.png" srcset="/img/loading.gif" lazyload alt="image-20230801123809867"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801123809867.png" srcset="/img/loading.gif" lazyload alt="image-20230801123809867"></p>
 </li>
 <li><p>重复</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801124258603.png" srcset="/img/loading.gif" lazyload alt="image-20230801124258603"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801124258603.png" srcset="/img/loading.gif" lazyload alt="image-20230801124258603"></p>
 </li>
 <li><p>重复区间</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801124425850.png" srcset="/img/loading.gif" lazyload alt="image-20230801124425850"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801124425850.png" srcset="/img/loading.gif" lazyload alt="image-20230801124425850"></p>
 </li>
 <li><p>区间范围</p>
 </li>
 </ol>
-<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801124728907.png" srcset="/img/loading.gif" lazyload alt="image-20230801124728907"></p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801124728907.png" srcset="/img/loading.gif" lazyload alt="image-20230801124728907"></p>
 <h2 id="进阶笔记"><a href="#进阶笔记" class="headerlink" title="进阶笔记"></a>进阶笔记</h2><ol>
 <li><p>分组</p>
 <p>分组就是字面的意思，我们可以提取这一组的数据</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801141051642.png" srcset="/img/loading.gif" lazyload alt="image-20230801141051642"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801141404234.png" srcset="/img/loading.gif" lazyload alt="image-20230801141404234"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801141051642.png" srcset="/img/loading.gif" lazyload alt="image-20230801141051642"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801141404234.png" srcset="/img/loading.gif" lazyload alt="image-20230801141404234"></p>
 </li>
 <li><p>使用<code>or</code>或者<code>|</code>我们可以匹配多个</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801141605087.png" srcset="/img/loading.gif" lazyload alt="image-20230801141605087"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801141605087.png" srcset="/img/loading.gif" lazyload alt="image-20230801141605087"></p>
 </li>
 <li><p>使用<code>(?:)</code>实现非捕获分组，也就是说我们可以匹配但是我们捕获获取</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801141734353.png" srcset="/img/loading.gif" lazyload alt="image-20230801141734353"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801141734353.png" srcset="/img/loading.gif" lazyload alt="image-20230801141734353"></p>
 </li>
 <li><p>分组回溯的使用</p>
 <p>简单的就是引用前面的分组</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801142113479.png" srcset="/img/loading.gif" lazyload alt="image-20230801142113479"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801142113479.png" srcset="/img/loading.gif" lazyload alt="image-20230801142113479"></p>
 <p>下面是一个列题</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801142434498.png" srcset="/img/loading.gif" lazyload alt="image-20230801142434498"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801142434498.png" srcset="/img/loading.gif" lazyload alt="image-20230801142434498"></p>
 </li>
 <li><p>正向先行断言</p>
 <p>先行都是判断词在后面，正向就是说符合匹配</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801142638894.png" srcset="/img/loading.gif" lazyload alt="image-20230801142638894"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801142638894.png" srcset="/img/loading.gif" lazyload alt="image-20230801142638894"></p>
 </li>
 <li><p>反向先行断言</p>
 <p>先行都是判断词在后面，反向就是说不符合匹配</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801142928705.png" srcset="/img/loading.gif" lazyload alt="image-20230801142928705"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801142928705.png" srcset="/img/loading.gif" lazyload alt="image-20230801142928705"></p>
 </li>
 <li><p>正向后行断言</p>
 <p>后行都是判断词在前面，正向就是说符合匹配</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801143053853.png" srcset="/img/loading.gif" lazyload alt="image-20230801143053853"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801143053853.png" srcset="/img/loading.gif" lazyload alt="image-20230801143053853"></p>
 </li>
 <li><p>反向后行断言</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/%E6%AD%A3%E5%88%99/image-20230801143358287.png" srcset="/img/loading.gif" lazyload alt="image-20230801143358287"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/%E6%AD%A3%E5%88%99/image-20230801143358287.png" srcset="/img/loading.gif" lazyload alt="image-20230801143358287"></p>
 </li>
 </ol>
 <h2 id="小知识点补充"><a href="#小知识点补充" class="headerlink" title="小知识点补充"></a>小知识点补充</h2><ol>

@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="简介Java语言是基于C语言实现的，Java底层的很多API都是通过JNI(Java Native Interface)来实现的。通过JNI接口C&#x2F;C++和Java可以互相调用(存在跨平台问题)。Java可以通过JNI调用来弥补语言自身的不足(代码安全性、内存操作等)。这个看似非常炫酷的特性其实自JDK1.1开始就有了，但是我们不得不去考虑JNI调用带来的一系列的安全问题！ jni-定义nativ">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524194301362.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250524194301362.png">
 <meta property="article:published_time" content="2025-05-24T11:30:23.000Z">
-<meta property="article:modified_time" content="2025-05-24T12:21:19.177Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.269Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="java安全">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524194301362.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250524194301362.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -296,7 +296,7 @@
 </blockquote>
 <p>此时头文件就在 org&#x2F;example </p>
 <p>生成的文件特点</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524194301362.png" srcset="/img/loading.gif" lazyload alt="image-20250524194301362"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250524194301362.png" srcset="/img/loading.gif" lazyload alt="image-20250524194301362"></p>
 <p>头文件的命名强制性</p>
 <blockquote>
 <p>javah生成的头文件中的函数命名方式是有非常强制性的约束的，如<code>Java_com_anbai_sec_cmd_CommandExecution_exec</code>中<code>Java_</code>是固定的前缀，而<code>com_anbai_sec_cmd_CommandExecution</code>也就代表着Java的完整包名称:<code>com.anbai.sec.cmd.CommandExecution</code>，<code>_exec</code>自然是表示的方法名称了。<code>(JNIEnv *, jclass, jstring)</code>表示分别是<code>JNI环境变量对象</code>、<code>java调用的类对象</code>、<code>参数入参类型</code>。</p>

@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="域前置本质上就是一种利用cdn 达成流量隐藏的一个方法 其核心思想是利用不同网络层的信息差异，使审查者难以识别实际访问的目标  整个流程可以这么理解 首先我们访问一个url  如果这个url 对应的服务配置了cdn 那么那就先去走一个cdn 的域名解析 这个域名解析的结果是cdn 对应的ip  然后拿这个ip 去访问cdn 的时候，cdn 会将http 头 中的 “host:addr” 中的add">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/image-20250221213645101.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/image-20250221222158801.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/image-20250221213645101.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/image-20250221222158801.png">
 <meta property="article:published_time" content="2025-02-21T13:11:44.000Z">
-<meta property="article:modified_time" content="2025-02-21T15:06:27.154Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.461Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/image-20250221213645101.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/image-20250221213645101.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -286,7 +286,7 @@
                 
                 <h1 id="域前置"><a href="#域前置" class="headerlink" title="域前置"></a>域前置</h1><p>本质上就是一种利用cdn 达成流量隐藏的一个方法</p>
 <p>其核心思想是利用不同网络层的信息差异，使审查者难以识别实际访问的目标</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/image-20250221213645101.png" srcset="/img/loading.gif" lazyload alt="image-20250221213645101"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/image-20250221213645101.png" srcset="/img/loading.gif" lazyload alt="image-20250221213645101"></p>
 <p>整个流程可以这么理解</p>
 <p>首先我们访问一个url </p>
 <p>如果这个url 对应的服务配置了cdn 那么那就先去走一个cdn 的域名解析</p>
@@ -295,7 +295,7 @@
 <p>但是对于外部来说，如果没有tls 加密（http）的一个请求包的话，也是可以很方便发现Host 是否是恶意的</p>
 <p>但是只要通过tls 加密之后，整个包就是加密的了，并且ip(cdn) 通过host 查询ip  的过程也是在cdn 后台完成的也就完成了流量隐藏</p>
 <h1 id="云函数"><a href="#云函数" class="headerlink" title="云函数"></a>云函数</h1><p>核心思想其实很简单，就是由第三方提供的服务接收C2客户端流量，转发给C2服务端，避免直接暴露服务端</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/image-20250221222158801.png" srcset="/img/loading.gif" lazyload alt="image-20250221222158801"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/image-20250221222158801.png" srcset="/img/loading.gif" lazyload alt="image-20250221222158801"></p>
 <p>域前置？转发器换成 CDN；</p>
 <p>云函数？转发器换成云函数转发；</p>
 <p>代理隐藏？转发器换成代理机；</p>

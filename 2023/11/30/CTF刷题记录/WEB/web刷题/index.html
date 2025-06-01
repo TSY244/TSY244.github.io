@@ -23,28 +23,28 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="SSRF[NISACTF 2022]easyssrf0x01 这道题的思路比较简单 就是使用ssrf访问文件  给了一个接口，那么就直接访问  跟着他走  file:&#x2F;&#x2F;&#x2F;&#x2F;fl4g		   访问它指定的路径 出现了  file_get_contents   0x02 通过这个函数，我们可以直接访问文件 他又说了文件在flag，所以就直接访问flag 建议直">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093925060.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094012524.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094113614.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094245225.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095243554.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095633444.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160232238.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160609970.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160640457.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130165650011.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151743522.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151831483.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152127655.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152622012.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201153024703.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093925060.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094012524.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094113614.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094245225.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095243554.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095633444.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160232238.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160609970.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160640457.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130165650011.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151743522.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151831483.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152127655.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152622012.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201153024703.png">
 <meta property="article:published_time" content="2023-11-30T01:35:09.000Z">
-<meta property="article:modified_time" content="2024-01-04T12:42:08.265Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.281Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="CTF刷题记录">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -301,20 +301,20 @@
                 <h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h1><h2 id="NISACTF-2022-easyssrf"><a href="#NISACTF-2022-easyssrf" class="headerlink" title="[NISACTF 2022]easyssrf"></a>[NISACTF 2022]easyssrf</h2><p><strong>0x01</strong></p>
 <p>这道题的思路比较简单</p>
 <p>就是使用ssrf访问文件</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png" srcset="/img/loading.gif" lazyload alt="image-20231130093853864"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093853864.png" srcset="/img/loading.gif" lazyload alt="image-20231130093853864"></p>
 <p>给了一个接口，那么就直接访问</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093925060.png" srcset="/img/loading.gif" lazyload alt="image-20231130093925060"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130093925060.png" srcset="/img/loading.gif" lazyload alt="image-20231130093925060"></p>
 <p>跟着他走</p>
 <blockquote>
 <p>file:&#x2F;&#x2F;&#x2F;&#x2F;fl4g		</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094012524.png" srcset="/img/loading.gif" lazyload alt="image-20231130094012524"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094012524.png" srcset="/img/loading.gif" lazyload alt="image-20231130094012524"></p>
 <p>访问它指定的路径</p>
 <p>出现了</p>
 <blockquote>
 <p>file_get_contents</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094113614.png" srcset="/img/loading.gif" lazyload alt="image-20231130094113614"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094113614.png" srcset="/img/loading.gif" lazyload alt="image-20231130094113614"></p>
 <p><strong>0x02</strong></p>
 <p>通过这个函数，我们可以直接访问文件</p>
 <p>他又说了文件在<code>flag</code>，所以就直接访问flag</p>
@@ -322,11 +322,11 @@
 <blockquote>
 <p>?file&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;flag</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094245225.png" srcset="/img/loading.gif" lazyload alt="image-20231130094245225"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130094245225.png" srcset="/img/loading.gif" lazyload alt="image-20231130094245225"></p>
 <h2 id="HNCTF-2022-WEEK2-ez-ssrf已解决"><a href="#HNCTF-2022-WEEK2-ez-ssrf已解决" class="headerlink" title="[HNCTF 2022 WEEK2]ez_ssrf已解决"></a>[HNCTF 2022 WEEK2]ez_ssrf已解决</h2><p>[<a target="_blank" rel="noopener" href="https://www.nssctf.cn/problem/2949">HNCTF 2022 WEEK2]ez_ssrf | NSSCTF</a></p>
 <p><strong>0x00</strong></p>
 <p>访问他给的地址，然后发现这个</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095243554.png" srcset="/img/loading.gif" lazyload alt="image-20231130095243554"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095243554.png" srcset="/img/loading.gif" lazyload alt="image-20231130095243554"></p>
 <p>出现了</p>
 <blockquote>
 <p> fsockopen()</p>
@@ -342,7 +342,7 @@
 </blockquote>
 <p>得到flag</p>
 <p>这里就相当于是伪造了一个请求，请求了服务端，但是这个host和port不是很理解</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095633444.png" srcset="/img/loading.gif" lazyload alt="image-20231130095633444"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130095633444.png" srcset="/img/loading.gif" lazyload alt="image-20231130095633444"></p>
 <h2 id="HITCON-2017-SSRFme"><a href="#HITCON-2017-SSRFme" class="headerlink" title="[HITCON 2017]SSRFme"></a>[HITCON 2017]SSRFme</h2><p>这道题需要代码审计</p>
 <p>访问，出现了源代码</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>])) &#123;<br>       <span class="hljs-variable">$http_x_headers</span> = <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&#x27;,&#x27;</span>, <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>]);<br>       <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REMOTE_ADDR&#x27;</span>] = <span class="hljs-variable">$http_x_headers</span>[<span class="hljs-number">0</span>];<br>   &#125;<br><br>   <span class="hljs-keyword">echo</span> <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&quot;REMOTE_ADDR&quot;</span>];<span class="hljs-comment">// 以上的只是为了告诉我们ip地址，也就是下面加密需要用到的东西</span><br><br>   <span class="hljs-variable">$sandbox</span> = <span class="hljs-string">&quot;sandbox/&quot;</span> . <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-string">&quot;orange&quot;</span> . <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&quot;REMOTE_ADDR&quot;</span>]);<span class="hljs-comment">//这个是加密路径，相当于url文件访问路径，有了上面的ip就可以计算出这个值</span><br>   @<span class="hljs-title function_ invoke__">mkdir</span>(<span class="hljs-variable">$sandbox</span>);<span class="hljs-comment">//创建目录</span><br>   @<span class="hljs-title function_ invoke__">chdir</span>(<span class="hljs-variable">$sandbox</span>);<span class="hljs-comment">//将当前php的目录改为这个</span><br><br>   <span class="hljs-variable">$data</span> = <span class="hljs-title function_ invoke__">shell_exec</span>(<span class="hljs-string">&quot;GET &quot;</span> . <span class="hljs-title function_ invoke__">escapeshellarg</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&quot;url&quot;</span>]));<br>   <span class="hljs-variable">$info</span> = <span class="hljs-title function_ invoke__">pathinfo</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&quot;filename&quot;</span>]);<br>   <span class="hljs-variable">$dir</span>  = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&quot;.&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-title function_ invoke__">basename</span>(<span class="hljs-variable">$info</span>[<span class="hljs-string">&quot;dirname&quot;</span>]));<br>   @<span class="hljs-title function_ invoke__">mkdir</span>(<span class="hljs-variable">$dir</span>);<br>   @<span class="hljs-title function_ invoke__">chdir</span>(<span class="hljs-variable">$dir</span>);<br>   @<span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-title function_ invoke__">basename</span>(<span class="hljs-variable">$info</span>[<span class="hljs-string">&quot;basename&quot;</span>]), <span class="hljs-variable">$data</span>);<br>   <span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br></code></pre></td></tr></table></figure>
@@ -352,7 +352,7 @@
 <blockquote>
 <p>786c0b7e11c1e9322763fcc8090ef181</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160232238.png" srcset="/img/loading.gif" lazyload alt="image-20231130160232238"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160232238.png" srcset="/img/loading.gif" lazyload alt="image-20231130160232238"></p>
 <p><strong>0x01</strong></p>
 <p>创建一个目录</p>
 <blockquote>
@@ -362,9 +362,9 @@
 <blockquote>
 <p><a target="_blank" rel="noopener" href="http://d9768014-7cfd-42d6-841e-07f9b9e5dc90.node4.buuoj.cn/sandbox/786c0b7e11c1e9322763fcc8090ef181/temp">http://d9768014-7cfd-42d6-841e-07f9b9e5dc90.node4.buuoj.cn/sandbox/786c0b7e11c1e9322763fcc8090ef181/temp</a></p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160609970.png" srcset="/img/loading.gif" lazyload alt="image-20231130160609970"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160609970.png" srcset="/img/loading.gif" lazyload alt="image-20231130160609970"></p>
 <p>出现了一些路径</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160640457.png" srcset="/img/loading.gif" lazyload alt="image-20231130160640457"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130160640457.png" srcset="/img/loading.gif" lazyload alt="image-20231130160640457"></p>
 <p>有一个readfalg，这个是一个程序，所以我们想办法运行，并且将将运行的数据存放到我们的文件里面</p>
 <p>使用bash -c &#x2F;readflag是使用bash运行程序</p>
 <blockquote>
@@ -375,7 +375,7 @@
 <blockquote>
 <p><a target="_blank" rel="noopener" href="http://1e99b289-a06d-43fe-aa18-d5367c10e0d9.node4.buuoj.cn/sandbox/786c0b7e11c1e9322763fcc8090ef181/123">http://1e99b289-a06d-43fe-aa18-d5367c10e0d9.node4.buuoj.cn/sandbox/786c0b7e11c1e9322763fcc8090ef181/123</a></p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130165650011.png" srcset="/img/loading.gif" lazyload alt="image-20231130165650011"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/image-20231130165650011.png" srcset="/img/loading.gif" lazyload alt="image-20231130165650011"></p>
 <h1 id="upload-file"><a href="#upload-file" class="headerlink" title="upload file"></a>upload file</h1><h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2><p><strong>0x00 考点</strong></p>
 <ol>
 <li>后缀绕过</li>
@@ -384,17 +384,17 @@
 </ol>
 <p><strong>0x01</strong></p>
 <p>我先尝试直接上传php文件之后</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151743522.png" srcset="/img/loading.gif" lazyload alt="image-20231201151743522"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151743522.png" srcset="/img/loading.gif" lazyload alt="image-20231201151743522"></p>
 <p><strong>0x02</strong></p>
 <p>修改Content-Type</p>
 <p>0x03</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151831483.png" srcset="/img/loading.gif" lazyload alt="image-20231201151831483"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201151831483.png" srcset="/img/loading.gif" lazyload alt="image-20231201151831483"></p>
 <p>说明已经通过了一个测试点了</p>
 <p>但是这里他说我们上传的是php，说明他检测到了我们的后缀</p>
 <p><strong>0x04</strong></p>
 <p>尝试修改文件名，修改了很多都不行</p>
 <p>我看了其他师傅的wp发现这个地方需要上传<code>phtml</code></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152127655.png" srcset="/img/loading.gif" lazyload alt="image-20231201152127655"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152127655.png" srcset="/img/loading.gif" lazyload alt="image-20231201152127655"></p>
 <p>他这里开始了内容检查，我们上传不带<code>&lt;?</code></p>
 <p>也就是使用php+html形式</p>
 <p><strong>0x05</strong></p>
@@ -403,10 +403,10 @@
 
 
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152622012.png" srcset="/img/loading.gif" lazyload alt="image-20231201152622012"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201152622012.png" srcset="/img/loading.gif" lazyload alt="image-20231201152622012"></p>
 <p><strong>0x06</strong></p>
 <p>然后就是连接</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201153024703.png" srcset="/img/loading.gif" lazyload alt="image-20231201153024703"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/CTF/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/web/upload_file/image-20231201153024703.png" srcset="/img/loading.gif" lazyload alt="image-20231201153024703"></p>
 <p>测试出路径为&#x2F;upload</p>
 <h2 id="攻防世界-easyupload"><a href="#攻防世界-easyupload" class="headerlink" title="[攻防世界]easyupload"></a>[攻防世界]easyupload</h2><p><strong>0x00</strong>  前菜</p>
 <p>这道题挺有趣的，首先</p>

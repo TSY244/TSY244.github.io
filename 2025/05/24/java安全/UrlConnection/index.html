@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="URLConnect这个是一个可以向外发送请求的类，通过这个类可以造成ssrf 漏洞 支持的协议有 1file ftp mailto http https jar netdoc gopher        简单使用1234567891011121314151617181920212223242526272829303132333435363738394041424344package org.ex">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524185844553.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524190410344.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524190559348.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250524185844553.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250524190410344.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250524190559348.png">
 <meta property="article:published_time" content="2025-05-24T09:58:24.000Z">
-<meta property="article:modified_time" content="2025-05-24T11:20:44.314Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.271Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="java安全">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524185844553.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250524185844553.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -301,16 +301,16 @@
 
 <h1 id="ssrf"><a href="#ssrf" class="headerlink" title="ssrf"></a>ssrf</h1><p>SSRF漏洞形成的原因大部分是因为服务端提供了可以从其他服务器获取资源的功能，然而并没有对用户的输入以及发起请求的url进行过滤&amp;限制，从而导致了ssrf的漏洞。</p>
 <p>如果上面代码中这个时候url 是可控的那么，就将出现ssrf</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524185844553.png" srcset="/img/loading.gif" lazyload alt="image-20250524185844553"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250524185844553.png" srcset="/img/loading.gif" lazyload alt="image-20250524185844553"></p>
 <p>如果将<code>url.openConnection();</code> 切换成 HttpURLConnection 那么就只支持http 协议了</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arduino">HttpURLConnection<br><span class="hljs-built_in">HttpClient</span><br>Request<br>okhttp<br></code></pre></td></tr></table></figure>
 
 <p>如果传入了携带端口的，如果端口存在就会将网页的信息输出出来</p>
 <p>如果是非web端口的服务，则会爆出<code>Invalid Http response</code>,<code>Connection reset</code>,<code>Read timed out</code>异常。</p>
 <p>如果能将此异常抛出来，那么就可以对内网所有服务端口进行探测。</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524190410344.png" srcset="/img/loading.gif" lazyload alt="image-20250524190410344"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250524190410344.png" srcset="/img/loading.gif" lazyload alt="image-20250524190410344"></p>
 <p>如果是不存在的服务的</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/java%E5%AE%89%E5%85%A8/image-20250524190559348.png" srcset="/img/loading.gif" lazyload alt="image-20250524190559348"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250524190559348.png" srcset="/img/loading.gif" lazyload alt="image-20250524190559348"></p>
 <p>总之会报错，或者是其他区别</p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>java 中默认对http&#x2F;https 做的事情</p>
 <ol>

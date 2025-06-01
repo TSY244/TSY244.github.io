@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="初始mysql 登录数据库  1mysql -uroot  -proot  查看当前数据库的字段 1SELECT * FROM chg_girlfriends  查看当前有哪些数据库 1show databases;  创建数据库 1creat database 数据库名字  选中数据库操作 1use 数据库的名称  查看数据库的表 1SHOW TABLES;  创建一个gril_friend的表">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231101093311153.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231101093619444.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231101094236099.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231104211144308.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/image-20230922091346627.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/mysql/fristLearn/image-20231101093311153.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/mysql/fristLearn/image-20231101093619444.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/mysql/fristLearn/image-20231101094236099.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/mysql/fristLearn/image-20231104211144308.png">
 <meta property="article:published_time" content="2023-09-22T00:26:25.000Z">
-<meta property="article:modified_time" content="2023-11-16T13:20:14.194Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.500Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="MYSQL">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/others/image-20230922091346627.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -314,7 +314,7 @@
 
 
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/others/image-20230922091346627.png" srcset="/img/loading.gif" lazyload alt="image-20230922091346627"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/others/image-20230922091346627.png" srcset="/img/loading.gif" lazyload alt="image-20230922091346627"></p>
 </li>
 <li><p>查看表中数据</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECt * FROM student;<br></code></pre></td></tr></table></figure>
@@ -509,7 +509,7 @@
 
 <h2 id="year"><a href="#year" class="headerlink" title="year()"></a>year()</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 查询student 的年龄 和姓名<br><br># 注意年龄需要  现在的日期-出生日期<br><br>select sname,YEAR(NOW())-YEAR(sbirthday) from student;<br><br></code></pre></td></tr></table></figure>
 
-<h2 id="sql连接查询"><a href="#sql连接查询" class="headerlink" title="sql连接查询"></a>sql连接查询</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231101093311153.png" srcset="/img/loading.gif" lazyload alt="image-20231101093311153"></p>
+<h2 id="sql连接查询"><a href="#sql连接查询" class="headerlink" title="sql连接查询"></a>sql连接查询</h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/mysql/fristLearn/image-20231101093311153.png" srcset="/img/loading.gif" lazyload alt="image-20231101093311153"></p>
 <p><strong>数据准备</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE table person( id INT, name VARCHAR(20),cardId int);<br><br>CREATE TABLE card( id INT, name VARCHAR(20) );<br><br>SHOW TABLES;<br><br>INSERT INTO card(id, name)<br>VALUES (1, &#x27;饭卡&#x27;), (2, &#x27;建行卡&#x27;), (3, &#x27;农行卡&#x27;), (4, &#x27;工商卡&#x27;), (5, &#x27;邮政卡&#x27;);<br><br>SELECT * FROM card;<br><br>INSERT INTO<br>    person(id, name, `cardId`)<br>VALUES (1, &#x27;张三&#x27;, 1), (2, &#x27;李四&#x27;, 3), (3, &#x27;王五&#x27;, 6);<br><br>SELECT * FROM person;<br><br>-- 这里没有创建外键<br>-- 而且person里面的有一个card并不存在于caard表中<br></code></pre></td></tr></table></figure>
 
@@ -547,7 +547,7 @@
 <li>full outer join</li>
 </ol>
 <p>但是mysql不支持full 连接的方式，但是额可以使用union 左右连接发现</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231101093619444.png" srcset="/img/loading.gif" lazyload alt="image-20231101093619444"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/mysql/fristLearn/image-20231101093619444.png" srcset="/img/loading.gif" lazyload alt="image-20231101093619444"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT *<br>FROM person<br>    RIGHT JOIN card ON person.`cardId` = card.id<br>UNION<br>SELECT *<br>FROM person<br>    LEFT JOIN card ON person.`cardId` = card.id;<br></code></pre></td></tr></table></figure>
 
 
@@ -562,7 +562,7 @@
 <li><p>事务是否开启</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select @@autocommot;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231101094236099.png" srcset="/img/loading.gif" lazyload alt="image-20231101094236099"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/mysql/fristLearn/image-20231101094236099.png" srcset="/img/loading.gif" lazyload alt="image-20231101094236099"></p>
 <p>1 则为开启（默认)</p>
 </li>
 <li><p>事务开启的作用</p>
@@ -594,7 +594,7 @@
 <li><p>将槽变为数据页</p>
 </li>
 <li><p>多级目录</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/mysql/fristLearn/image-20231104211144308.png" srcset="/img/loading.gif" lazyload alt="image-20231104211144308"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/mysql/fristLearn/image-20231104211144308.png" srcset="/img/loading.gif" lazyload alt="image-20231104211144308"></p>
 </li>
 </ol>
 <h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><ol>

@@ -23,50 +23,50 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="[TOC] 渗透基础由于现在的网站有WAF，并且有一些是基于框架的，所以现在这些漏洞都不是很常见 如果有的话，也有可能得到的数据都是强加密过的数据，得到了也没有什么用 web安全-基础环境搭建web安全-sql注入sql简介 什么是sql   SQL是一种数据库查询和程序设计语言。用于存取数据以及查询、更新和管理关系数据库系统。     常见的SQL数据库有MySQL，SQL server，Ora">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152001672.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152402216.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152421200.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152602583.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823153825533.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165930344.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165956400.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823171333802.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823171534833.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211411271.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211441010.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211947605.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823212149811.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823212646244.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823213844804.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823215104388.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823215745818.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823220144076.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823220918700.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823221124017.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824172423642.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824173033394.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174352849.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174429113.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174532010.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174606203.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174709369.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174904343.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175119627.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175154589.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175215369.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175418574.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175548147.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175602580.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175700733.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175744058.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230825001713621.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230825002853984.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152001672.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152402216.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152421200.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152602583.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823153825533.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165930344.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165956400.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823171333802.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823171534833.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211411271.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211441010.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211947605.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823212149811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823212646244.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823213844804.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823215104388.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823215745818.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823220144076.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823220918700.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823221124017.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824172423642.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824173033394.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174352849.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174429113.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174532010.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174606203.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174709369.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174904343.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175119627.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175154589.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175215369.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175418574.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175548147.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175602580.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175700733.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175744058.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230825001713621.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230825002853984.png">
 <meta property="article:published_time" content="2023-08-19T06:01:59.000Z">
-<meta property="article:modified_time" content="2025-02-17T15:31:24.920Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.393Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152001672.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152001672.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -357,7 +357,7 @@
 <p>按照降序对记录排序，使用DESC关键字；  </p>
 <p>order by 排序列数大于当前查询的列数时就会报错； </p>
 <p> sql注入利用这个特性来判断列数以及显示位。  </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152001672.png" srcset="/img/loading.gif" lazyload alt="image-20230823152001672"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152001672.png" srcset="/img/loading.gif" lazyload alt="image-20230823152001672"></p>
 </li>
 <li><p>where</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 有条件地从表中选取数据<br># 语法：<br>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值<br><br></code></pre></td></tr></table></figure>
@@ -366,13 +366,13 @@
 <p>AND 和 OR  可在 WHERE 子语句中把两个或多个条件结合起来。  </p>
 <p>如果第一个条件和第二个条件都成立，则 AND 运算符显示一条记录。  </p>
 <p>如果第一个条件和第二个条件中只要有一个成立，则 OR 运算符显示一条记录</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152402216.png" srcset="/img/loading.gif" lazyload alt="image-20230823152402216"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152421200.png" srcset="/img/loading.gif" lazyload alt="image-20230823152421200"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152402216.png" srcset="/img/loading.gif" lazyload alt="image-20230823152402216"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152421200.png" srcset="/img/loading.gif" lazyload alt="image-20230823152421200"></p>
 </li>
 <li><p>注释符</p>
 <ul>
 <li><p>注释符可以替代空格</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152602583.png" srcset="/img/loading.gif" lazyload alt="image-20230823152602583"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823152602583.png" srcset="/img/loading.gif" lazyload alt="image-20230823152602583"></p>
 <p>有些时候可能对方不接受空格，所以使用注释符的形式</p>
 </li>
 <li><p>内联注入</p>
@@ -430,7 +430,7 @@
 <li><p>COLUMNS 表：提供了表中的列信息。详细表述了某张表的所有列以及每个列的信息。  <strong>show</strong> columns from <strong>schemaname.tablename;</strong> (<strong>schemaname</strong>为指定数据库名**,** tablename为指定数据 库下的数据表名)的结果取之此表。</p>
 </li>
 </ul>
-<p>  <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823153825533.png" srcset="/img/loading.gif" lazyload alt="image-20230823153825533"></p>
+<p>  <img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823153825533.png" srcset="/img/loading.gif" lazyload alt="image-20230823153825533"></p>
 </li>
 </ol>
 <h3 id="mysql注入的原理"><a href="#mysql注入的原理" class="headerlink" title="mysql注入的原理"></a>mysql注入的原理</h3><ol>
@@ -439,10 +439,10 @@
 <p>攻击者把SQL命令语句作为输入被服务器SQL解释器正确解析执行，数据库把查询到的结果返回给服  务器，然后呈现给攻击者，<strong>攻击者由此获得数据库内的数据信息</strong>。</p>
 </li>
 <li><p>一次正常的HTTP请求分析</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165930344.png" srcset="/img/loading.gif" lazyload alt="image-20230823165930344"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165930344.png" srcset="/img/loading.gif" lazyload alt="image-20230823165930344"></p>
 </li>
 <li><p>一次正常的sql注入分析</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165956400.png" srcset="/img/loading.gif" lazyload alt="image-20230823165956400"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823165956400.png" srcset="/img/loading.gif" lazyload alt="image-20230823165956400"></p>
 </li>
 </ol>
 <h3 id="sql注入判断"><a href="#sql注入判断" class="headerlink" title="sql注入判断"></a>sql注入判断</h3><p>  根据客户端返回的结果来判断提交的测试语句是否成功被数据库引擎执行，如果测试语句被执行了，  说明存在注入漏洞。  </p>
@@ -502,12 +502,12 @@
 <blockquote>
 <p>?id&#x3D;1’ and 1&#x3D;2 –+</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823171333802.png" srcset="/img/loading.gif" lazyload alt="image-20230823171333802"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823171333802.png" srcset="/img/loading.gif" lazyload alt="image-20230823171333802"></p>
 <p>当我输入</p>
 <blockquote>
 <p>?id&#x3D;1’ and 1&#x3D;1 –+</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823171534833.png" srcset="/img/loading.gif" lazyload alt="image-20230823171534833"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823171534833.png" srcset="/img/loading.gif" lazyload alt="image-20230823171534833"></p>
 <p>会发现，网站执行了我们输入的 and ……这种附加的mysql语句，所以存在漏洞，当然不同的类型检查原理都一样，只是输入的参数不一样，我们这里输入的是<code>&#39;</code>,由此可见这是字符型</p>
 </li>
 <li><p>字符型</p>
@@ -588,9 +588,9 @@
 <p>?id&#x3D;1’</p>
 </blockquote>
 <p>使用<code>&#39;</code>发现存在是字符型，接下来检查是否存在漏洞，使用and 1&#x3D;1</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211411271.png" srcset="/img/loading.gif" lazyload alt="image-20230823211411271"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211411271.png" srcset="/img/loading.gif" lazyload alt="image-20230823211411271"></p>
 <p>上面是使用 and 1&#x3D;1 的结果，避免字符型的，只读前面造成的正确却访问接下来来看and 1&#x3D;2</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211441010.png" srcset="/img/loading.gif" lazyload alt="image-20230823211441010"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211441010.png" srcset="/img/loading.gif" lazyload alt="image-20230823211441010"></p>
 <p>已经出现了错误，说明执行了我们插入了语句，存在漏洞</p>
 </li>
 <li><p>获取字段数</p>
@@ -607,40 +607,40 @@
 <p>? id&#x3D;-1’ union select 1,2,3 –+</p>
 </blockquote>
 <p><code>--+</code>用于注释多出来的<code>&#39;</code></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211947605.png" srcset="/img/loading.gif" lazyload alt="image-20230823211947605"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823211947605.png" srcset="/img/loading.gif" lazyload alt="image-20230823211947605"></p>
 <p>可以发现2,3经行输出了，所以我们，针对2，3显示，显示我们想要查到的数据</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823212149811.png" srcset="/img/loading.gif" lazyload alt="image-20230823212149811"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823212149811.png" srcset="/img/loading.gif" lazyload alt="image-20230823212149811"></p>
 <p>得到了数据库的拥有者，和当前的数据库版本</p>
 </li>
 <li><p>获取当前的数据库</p>
 <blockquote>
 <p>?id&#x3D;-1’ union select 1,database(),3–+</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823212646244.png" srcset="/img/loading.gif" lazyload alt="image-20230823212646244"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823212646244.png" srcset="/img/loading.gif" lazyload alt="image-20230823212646244"></p>
 </li>
 <li><p>查看所有的数据库</p>
 <blockquote>
 <p>?id&#x3D;-1’ union select 1,group_concat(schema_name),3 from information_schema.schemata–+</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823213844804.png" srcset="/img/loading.gif" lazyload alt="image-20230823213844804"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823213844804.png" srcset="/img/loading.gif" lazyload alt="image-20230823213844804"></p>
 </li>
 <li><p>查找某一个表的信息</p>
 <blockquote>
 <p>?id&#x3D;-1’ union select 1,group_concat(table_name),3 from information_schema.tables where table_schema&#x3D;database() –+</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823215104388.png" srcset="/img/loading.gif" lazyload alt="image-20230823215104388"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823215104388.png" srcset="/img/loading.gif" lazyload alt="image-20230823215104388"></p>
 </li>
 <li><p>获取表中的所有字段</p>
 <blockquote>
 <p>?id&#x3D;-1’ union select 1,group_concat(column_name),3 from information_schema.columns where table_schema&#x3D;database() and table_name&#x3D;”users” –+</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823215745818.png" srcset="/img/loading.gif" lazyload alt="image-20230823215745818"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823215745818.png" srcset="/img/loading.gif" lazyload alt="image-20230823215745818"></p>
 </li>
 <li><p>获取数据</p>
 <blockquote>
 <p>?id&#x3D;-1’ union select 1,group_concat(username),group_concat(password)  from users–+</p>
 </blockquote>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823220144076.png" srcset="/img/loading.gif" lazyload alt="image-20230823220144076"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823220144076.png" srcset="/img/loading.gif" lazyload alt="image-20230823220144076"></p>
 <p>得到用户和密码，完成漏洞的挖掘</p>
 </li>
 </ul>
@@ -651,7 +651,7 @@
 <li><p>作用：将多个字符串连接在一起</p>
 </li>
 <li><p>语法：concat(str1,str2,…)</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823220918700.png" srcset="/img/loading.gif" lazyload alt="image-20230823220918700"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823220918700.png" srcset="/img/loading.gif" lazyload alt="image-20230823220918700"></p>
 </li>
 </ul>
 </li>
@@ -660,7 +660,7 @@
 <li><p>作用：  和concat()一样，将多个字符串连接成一个字符串，但是可以一次性指定分隔符（concat_ws就  是concat with separator）  </p>
 </li>
 <li><p>语法：concat_ws(separator, str1, str2, …)</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823221124017.png" srcset="/img/loading.gif" lazyload alt="image-20230823221124017"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/sql%E6%B3%A8%E5%85%A5/image-20230823221124017.png" srcset="/img/loading.gif" lazyload alt="image-20230823221124017"></p>
 </li>
 </ul>
 </li>
@@ -672,11 +672,11 @@
 </li>
 </ol>
 <h2 id="web安全-文件上传"><a href="#web安全-文件上传" class="headerlink" title="web安全-文件上传"></a>web安全-文件上传</h2><h3 id="什么是文件上传"><a href="#什么是文件上传" class="headerlink" title="什么是文件上传"></a>什么是文件上传</h3><p>  将客户端数据以文件形式封装，通过网络协议发送到服务器端。在服务器端解析数据，最终在服务端  硬盘上作为真实的文件保存。  </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824172423642.png" srcset="/img/loading.gif" lazyload alt="image-20230824172423642"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824172423642.png" srcset="/img/loading.gif" lazyload alt="image-20230824172423642"></p>
 <p>  通常一个文件以HTTP协议进行上传时，将以<em><strong>POST</strong></em>请求发送至Web服务器，Web服务器收到请求并同  意后，用户与Web服务器将建立连接，并传输数据。  </p>
 <h3 id="什么是文件上传漏洞"><a href="#什么是文件上传漏洞" class="headerlink" title="什么是文件上传漏洞"></a>什么是文件上传漏洞</h3><p>  <strong>文件上传漏洞是指用户上传了一个可执行的脚本文件，并通过此脚本文件获得了执行服务器端命令的  能力</strong>。这种攻击方式是最为直接和有效的，”文件上传”本身没有问题，有问题的是文件上传后，服务  器怎么处理、解释文件。如果服务器端脚本语言未对上传的文件进行严格的验证和过滤，就容易造成  上传任意文件的情况。  </p>
 <p>  通常 Web 站点会有用户注册功能，<strong>而当用户登录之后大多数情况下会存在类似头像上传、附件上传之  类的功能</strong>，这些功能点往往存在上传验证方式不严格的安全缺陷，导致攻击者通过各种手段绕过验  证，上传非法文件，这是在web渗透中非常关键的突破口。  </p>
-<h3 id="文件上传检测方式"><a href="#文件上传检测方式" class="headerlink" title="文件上传检测方式"></a>文件上传检测方式</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824173033394.png" srcset="/img/loading.gif" lazyload alt="image-20230824173033394"></p>
+<h3 id="文件上传检测方式"><a href="#文件上传检测方式" class="headerlink" title="文件上传检测方式"></a>文件上传检测方式</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824173033394.png" srcset="/img/loading.gif" lazyload alt="image-20230824173033394"></p>
 <h3 id="什么是webshell"><a href="#什么是webshell" class="headerlink" title="什么是webshell"></a>什么是webshell</h3><p>  WebShell就是以ASP、PHP、JSP或者CGI等网页文件形式存在的一种命令执行环境，也可以将其称之  为一种网页后门。攻击者在入侵了一个网站后，通常会将这些asp或php后门文件与网站服务器web目  录下正常的网页文件混在一起，然后使用浏览器来访问这些后门，得到一个命令执行环境，以达到控  </p>
 <p>制网站服务器的目的（可以上传下载或者修改文件，操作数据库，执行任意命令等）</p>
 <h4 id="常用的一句话webshell"><a href="#常用的一句话webshell" class="headerlink" title="常用的一句话webshell"></a>常用的一句话webshell</h4><blockquote>
@@ -700,10 +700,10 @@
 <h4 id="绕过服务端检测"><a href="#绕过服务端检测" class="headerlink" title="绕过服务端检测"></a>绕过服务端检测</h4><ol>
 <li><p>服务端检测</p>
 <p>  服务端的代码通常检测三个点：MIME类型、文件内容、文件后缀  </p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174352849.png" srcset="/img/loading.gif" lazyload alt="image-20230824174352849"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174352849.png" srcset="/img/loading.gif" lazyload alt="image-20230824174352849"></p>
 </li>
 <li><p>绕过MIME类型检测</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174429113.png" srcset="/img/loading.gif" lazyload alt="image-20230824174429113"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174429113.png" srcset="/img/loading.gif" lazyload alt="image-20230824174429113"></p>
 <p>  原理：检测图片类型文件上传过程中http包的Content-Type字段的值，来判断上传文件是否合法。  方法：用burpsuite截取并修改数据包中文件的content-type类型进行绕过。  </p>
 </li>
 <li><p>绕过文件后缀检测-黑名单  </p>
@@ -711,22 +711,22 @@
 </li>
 </ol>
 <p>   文件扩展名在黑名单中为不合法，一般有个专门的黑名单列表，里面会包含常见的危险脚本文件。</p>
-<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174532010.png" srcset="/img/loading.gif" lazyload alt="image-20230824174532010"></p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174532010.png" srcset="/img/loading.gif" lazyload alt="image-20230824174532010"></p>
 <ul>
 <li><p>后缀大小写绕过</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174606203.png" srcset="/img/loading.gif" lazyload alt="image-20230824174606203"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174606203.png" srcset="/img/loading.gif" lazyload alt="image-20230824174606203"></p>
 </li>
 </ul>
-<p>   <img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174709369.png" srcset="/img/loading.gif" lazyload alt="image-20230824174709369"></p>
-<h4 id="绕过文件后缀检测"><a href="#绕过文件后缀检测" class="headerlink" title="绕过文件后缀检测"></a>绕过文件后缀检测</h4><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174904343.png" srcset="/img/loading.gif" lazyload alt="image-20230824174904343"></p>
-<h4 id="绕过文件内容检测"><a href="#绕过文件内容检测" class="headerlink" title="绕过文件内容检测"></a>绕过文件内容检测</h4><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175119627.png" srcset="/img/loading.gif" lazyload alt="image-20230824175119627"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175154589.png" srcset="/img/loading.gif" lazyload alt="image-20230824175154589"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175215369.png" srcset="/img/loading.gif" lazyload alt="image-20230824175215369"></p>
-<h3 id="文件解析漏洞"><a href="#文件解析漏洞" class="headerlink" title="文件解析漏洞"></a>文件解析漏洞</h3><h4 id="apache解析漏洞"><a href="#apache解析漏洞" class="headerlink" title="apache解析漏洞"></a>apache解析漏洞</h4><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175418574.png" srcset="/img/loading.gif" lazyload alt="image-20230824175418574"></p>
-<h4 id="Nginx解析漏洞"><a href="#Nginx解析漏洞" class="headerlink" title="Nginx解析漏洞"></a>Nginx解析漏洞</h4><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175548147.png" srcset="/img/loading.gif" lazyload alt="image-20230824175548147"></p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175602580.png" srcset="/img/loading.gif" lazyload alt="image-20230824175602580"></p>
-<h4 id="IIS6-0解析漏洞"><a href="#IIS6-0解析漏洞" class="headerlink" title="IIS6.0解析漏洞"></a>IIS6.0解析漏洞</h4><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175700733.png" srcset="/img/loading.gif" lazyload alt="image-20230824175700733"></p>
-<h4 id="IIS-7-0-x2F-7-5解析漏洞"><a href="#IIS-7-0-x2F-7-5解析漏洞" class="headerlink" title="IIS 7.0&#x2F;7.5解析漏洞"></a>IIS 7.0&#x2F;7.5解析漏洞</h4><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175744058.png" srcset="/img/loading.gif" lazyload alt="image-20230824175744058"></p>
+<p>   <img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174709369.png" srcset="/img/loading.gif" lazyload alt="image-20230824174709369"></p>
+<h4 id="绕过文件后缀检测"><a href="#绕过文件后缀检测" class="headerlink" title="绕过文件后缀检测"></a>绕过文件后缀检测</h4><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824174904343.png" srcset="/img/loading.gif" lazyload alt="image-20230824174904343"></p>
+<h4 id="绕过文件内容检测"><a href="#绕过文件内容检测" class="headerlink" title="绕过文件内容检测"></a>绕过文件内容检测</h4><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175119627.png" srcset="/img/loading.gif" lazyload alt="image-20230824175119627"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175154589.png" srcset="/img/loading.gif" lazyload alt="image-20230824175154589"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175215369.png" srcset="/img/loading.gif" lazyload alt="image-20230824175215369"></p>
+<h3 id="文件解析漏洞"><a href="#文件解析漏洞" class="headerlink" title="文件解析漏洞"></a>文件解析漏洞</h3><h4 id="apache解析漏洞"><a href="#apache解析漏洞" class="headerlink" title="apache解析漏洞"></a>apache解析漏洞</h4><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175418574.png" srcset="/img/loading.gif" lazyload alt="image-20230824175418574"></p>
+<h4 id="Nginx解析漏洞"><a href="#Nginx解析漏洞" class="headerlink" title="Nginx解析漏洞"></a>Nginx解析漏洞</h4><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175548147.png" srcset="/img/loading.gif" lazyload alt="image-20230824175548147"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175602580.png" srcset="/img/loading.gif" lazyload alt="image-20230824175602580"></p>
+<h4 id="IIS6-0解析漏洞"><a href="#IIS6-0解析漏洞" class="headerlink" title="IIS6.0解析漏洞"></a>IIS6.0解析漏洞</h4><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175700733.png" srcset="/img/loading.gif" lazyload alt="image-20230824175700733"></p>
+<h4 id="IIS-7-0-x2F-7-5解析漏洞"><a href="#IIS-7-0-x2F-7-5解析漏洞" class="headerlink" title="IIS 7.0&#x2F;7.5解析漏洞"></a>IIS 7.0&#x2F;7.5解析漏洞</h4><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230824175744058.png" srcset="/img/loading.gif" lazyload alt="image-20230824175744058"></p>
 <h2 id="web安全-命令执行"><a href="#web安全-命令执行" class="headerlink" title="web安全-命令执行"></a>web安全-命令执行</h2><h3 id="命令执行的漏洞简介"><a href="#命令执行的漏洞简介" class="headerlink" title="命令执行的漏洞简介"></a>命令执行的漏洞简介</h3><ol>
 <li><p>原因</p>
 <p>因为没有对用户输入没有严格的过滤，导致用户的输入当作命令</p>
@@ -787,7 +787,7 @@
 <p>   调用回调函数，并把一个数组参数作为回调函数的参数</p>
 <h3 id="系统命令执行"><a href="#系统命令执行" class="headerlink" title="系统命令执行"></a>系统命令执行</h3><p>  一般出现这种漏洞，是因为应用系统从设计上需要给用户提供指定的远程命令操作的接口，比如我们  常见的路由器、防火墙、入侵检测等设备的web管理界面上，一般会给用户提供一个ping操作的web界  面，用户从web界面输入目标IP，提交后后台会对该IP地址进行一次ping测试，并返回测试结果。  而，如果，设计者在完成该功能时，没有做严格的安全控制，则可能会导致攻击者通过该接口提交恶  意命令，让后台进行执行，从而获得后台服务器权限。  </p>
 <p>  利用PHP 的系统命令执行函数来调用系统命令并执行，这类函数有 system()、exec()、shell_exec()、  passthru()、penti_exec()、popen()、proc_pen()等，此外还有反引号命令执行，这种方式实际上是调  用 shell_exec()函数来执行。  </p>
-<h3 id="php系统命令执行函数"><a href="#php系统命令执行函数" class="headerlink" title="php系统命令执行函数"></a>php系统命令执行函数</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230825001713621.png" srcset="/img/loading.gif" lazyload alt="image-20230825001713621"></p>
+<h3 id="php系统命令执行函数"><a href="#php系统命令执行函数" class="headerlink" title="php系统命令执行函数"></a>php系统命令执行函数</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230825001713621.png" srcset="/img/loading.gif" lazyload alt="image-20230825001713621"></p>
 <p>php提供的专门执行外部命令的函数</p>
 <blockquote>
 <p>exec()</p>
@@ -815,7 +815,7 @@
 <p>成功则返回true，否则返回false。第二个参数与exec第三个参数含义一样。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;pre&gt;&#x27;</span>;<br><span class="hljs-comment">// 输出 shell 命令 &quot;ls&quot; 的返回结果</span><br><span class="hljs-comment">// 并且将输出的最后一样内容返回到 $last_line。</span><br><span class="hljs-comment">// 将命令的返回值保存到 $retval。</span><br><span class="hljs-variable">$last_line</span> = <span class="hljs-title function_ invoke__">system</span>(<span class="hljs-string">&#x27;ls&#x27;</span>, <span class="hljs-variable">$retval</span>);<br><span class="hljs-comment">// 打印更多信息</span><br><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;</span><br><span class="hljs-string">&lt;/pre&gt;</span><br><span class="hljs-string">&lt;hr /&gt;Last line of the output: &#x27;</span> . <span class="hljs-variable">$last_line</span> . <span class="hljs-string">&#x27;</span><br><span class="hljs-string">&lt;hr /&gt;Return value: &#x27;</span> . <span class="hljs-variable">$retval</span>;<br><span class="hljs-meta">?&gt;</span><br>   <br></code></pre></td></tr></table></figure></li>
 </ol>
-<h3 id="命令常用的特殊字符"><a href="#命令常用的特殊字符" class="headerlink" title="命令常用的特殊字符"></a>命令常用的特殊字符</h3><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230825002853984.png" srcset="/img/loading.gif" lazyload alt="image-20230825002853984"></p>
+<h3 id="命令常用的特殊字符"><a href="#命令常用的特殊字符" class="headerlink" title="命令常用的特殊字符"></a>命令常用的特殊字符</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/%E6%B8%97%E9%80%8F/web%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/image-20230825002853984.png" srcset="/img/loading.gif" lazyload alt="image-20230825002853984"></p>
 <h2 id="web安全-漏洞扫描器"><a href="#web安全-漏洞扫描器" class="headerlink" title="web安全-漏洞扫描器"></a>web安全-漏洞扫描器</h2><h3 id="XRAY"><a href="#XRAY" class="headerlink" title="XRAY"></a>XRAY</h3><p>  xray 是一款功能强大的安全评估工具，由多名经验丰富的一线安全从业者呕心打造而成，主要特性有:  </p>
 <blockquote>
 <p>检测速度快：发包速度快; 漏洞检测算法高效。  </p>

@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="简介Filter被称为过滤器，过滤器实际上就是对Web资源进行拦截，做一些处理后再交给下一个过滤器或Servlet.处理，通常都是用来拦截reg转est进行处理的，也可以对返回的 response进行拦截处理。开发人员利用filter技术，可以实现对所有Web资源的管理，例如实现权限访问控制、过滤敏感词汇、压缩响应信息等一些高级功能。 过滤器也是可以实现内存马的 web 请求逻辑 创建过滤器的流程">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502160140758.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502162159452.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502165133807.png">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502165156420.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502160140758.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502162159452.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502165133807.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502165156420.png">
 <meta property="article:published_time" content="2025-05-02T07:58:51.000Z">
-<meta property="article:modified_time" content="2025-05-02T08:52:02.778Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.313Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="javaee">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502160140758.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502160140758.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -288,9 +288,9 @@
                 
                 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Filter被称为过滤器，过滤器实际上就是对Web资源进行拦截，做一些处理后再交给下一个过滤器或Servlet.处理，通常都是用来拦截reg转est进行处理的，也可以对返回的 response进行拦截处理。开发人员利用filter技术，可以实现对所有Web资源的管理，例如实现权限访问控制、过滤敏感词汇、压缩响应信息等一些高级功能。</p>
 <p>过滤器也是可以实现内存马的</p>
-<h1 id="web-请求逻辑"><a href="#web-请求逻辑" class="headerlink" title="web 请求逻辑"></a>web 请求逻辑</h1><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502160140758.png" srcset="/img/loading.gif" lazyload alt="  "></p>
+<h1 id="web-请求逻辑"><a href="#web-请求逻辑" class="headerlink" title="web 请求逻辑"></a>web 请求逻辑</h1><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502160140758.png" srcset="/img/loading.gif" lazyload alt="  "></p>
 <h1 id="创建过滤器的流程"><a href="#创建过滤器的流程" class="headerlink" title="创建过滤器的流程"></a>创建过滤器的流程</h1><ol>
-<li><p>便于项目结构的拆分，将servlet 和filter 分开<br><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502162159452.png" srcset="/img/loading.gif" lazyload alt="image-20250502162159452"></p>
+<li><p>便于项目结构的拆分，将servlet 和filter 分开<br><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502162159452.png" srcset="/img/loading.gif" lazyload alt="image-20250502162159452"></p>
 </li>
 <li><p>在filter 目录中添加XssFilter 类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.xssfilter.filter;<br><span class="hljs-keyword">import</span> javax.servlet.*;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebFilter;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><br><br><span class="hljs-meta">@WebFilter(filterName = &quot;XssFilter&quot;,value = &quot;/helloName&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">XssFilter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Filter</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doFilter</span><span class="hljs-params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="hljs-keyword">throws</span> IOException, ServletException &#123;<br>        System.out.println(<span class="hljs-string">&quot;XssFilter doFilter&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">param</span> <span class="hljs-operator">=</span> servletRequest.getParameter(<span class="hljs-string">&quot;name&quot;</span>);<br>        PrintWriter out=servletResponse.getWriter();<br>        <span class="hljs-keyword">if</span>(param!=<span class="hljs-literal">null</span>)&#123;<br>            param = param.replace(<span class="hljs-string">&quot;&lt;&quot;</span>,<span class="hljs-string">&quot;&amp;lt;&quot;</span>);<br>            param = param.replace(<span class="hljs-string">&quot;&gt;&quot;</span>,<span class="hljs-string">&quot;&amp;gt;&quot;</span>);<br>            servletRequest.setAttribute(<span class="hljs-string">&quot;name&quot;</span>,param);<br>        &#125;<br>        <span class="hljs-comment">// 检查是否存在script</span><br>        <span class="hljs-keyword">if</span>(param!=<span class="hljs-literal">null</span> &amp;&amp; param.contains(<span class="hljs-string">&quot;script&quot;</span>))&#123;<br>            out.write(<span class="hljs-string">&quot;this is xss&quot;</span>);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        filterChain.doFilter(servletRequest,servletResponse);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;XssFilter destroy&quot;</span>);<br>        Filter.<span class="hljs-built_in">super</span>.destroy();<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">(FilterConfig filterConfig)</span> <span class="hljs-keyword">throws</span> ServletException &#123;<br>        System.out.println(<span class="hljs-string">&quot;XssFilter init&quot;</span>);<br>        Filter.<span class="hljs-built_in">super</span>.init(filterConfig);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
@@ -304,9 +304,9 @@
 
 <p>注意如果是 value&#x3D;”&#x2F;*” 代表，这个是所有路径都要使用的</p>
 <p>尝试访问</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502165133807.png" srcset="/img/loading.gif" lazyload alt="image-20250502165133807"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502165133807.png" srcset="/img/loading.gif" lazyload alt="image-20250502165133807"></p>
 <p>输入script 的时候会输出xss</p>
-<p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502165156420.png" srcset="/img/loading.gif" lazyload alt="image-20250502165156420"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502165156420.png" srcset="/img/loading.gif" lazyload alt="image-20250502165156420"></p>
 <p>正常的请求</p>
 </li>
 </ol>

@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="简介 监听ServletContext、HttpSession、ServletRequest等域对象创建和销毁事件 监听域对象的属性发生修改的事件 监听在事件发生前、发生后做一些必要的处理   创建监听器 监听器内置方法 监听器触发流程  创建一个监控session 的监听器创建servlet这个servlet 的作用是创建session 和销毁session 123456789101112131">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502173217901.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502173217901.png">
 <meta property="article:published_time" content="2025-05-02T09:16:09.000Z">
-<meta property="article:modified_time" content="2025-05-02T09:32:22.416Z">
+<meta property="article:modified_time" content="2025-06-01T09:42:24.311Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="javaee">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502173217901.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502173217901.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -302,7 +302,7 @@
 
 <h2 id="创建listener"><a href="#创建listener" class="headerlink" title="创建listener"></a>创建listener</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.listenerdemo.listener;<br><br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebListener;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpSessionEvent;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpSessionListener;<br><br><span class="hljs-meta">@WebListener</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SessionListener</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">HttpSessionListener</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sessionCreated</span><span class="hljs-params">(javax.servlet.http.HttpSessionEvent httpSessionEvent)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;listener: Session Created&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sessionDestroyed</span><span class="hljs-params">(HttpSessionEvent se)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;listener: Session Destroyed&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://allinit-1317182407.cos.ap-nanjing.myqcloud.com/javaee/image-20250502173217901.png" srcset="/img/loading.gif" lazyload alt="image-20250502173217901"></p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/image-20250502173217901.png" srcset="/img/loading.gif" lazyload alt="image-20250502173217901"></p>
 
                 
               </div>
