@@ -18,8 +18,8 @@
   
     <meta name="description" content="cos 防盗刷简介防止cos 被盗刷通过scf+ monitor 的方式设置cos 桶的权限 对象存储 防盗刷指引_腾讯云 使用腾讯云SCF实现COS费用封顶的最佳实践-腾讯云开发者社区-腾讯云 部署基本是跟着使用腾讯云SCF实现COS费用封顶的最佳实践-腾讯云开发者社区-腾讯云 这个过程来就行 但是其中需要修改一下cos sdk。并且还需要设置下子用户的权限 创建一个用户 登录 - 腾讯云 需要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AU9U5T">
-<meta property="og:url" content="https://tsy244.github.io/2025/06/04/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/cos%E9%98%B2%E7%9B%97%E5%88%B7/index.html">
+<meta property="og:title" content="cos防盗刷">
+<meta property="og:url" content="https://tsy244.github.io/2025/05/31/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/cos%E9%98%B2%E7%9B%97%E5%88%B7/index.html">
 <meta property="og:site_name" content="AU9U5T">
 <meta property="og:description" content="cos 防盗刷简介防止cos 被盗刷通过scf+ monitor 的方式设置cos 桶的权限 对象存储 防盗刷指引_腾讯云 使用腾讯云SCF实现COS费用封顶的最佳实践-腾讯云开发者社区-腾讯云 部署基本是跟着使用腾讯云SCF实现COS费用封顶的最佳实践-腾讯云开发者社区-腾讯云 这个过程来就行 但是其中需要修改一下cos sdk。并且还需要设置下子用户的权限 创建一个用户 登录 - 腾讯云 需要">
 <meta property="og:locale" content="en_US">
@@ -27,9 +27,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604005034192.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604005051523.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604005111653.png">
-<meta property="article:published_time" content="2025-06-03T16:47:51.813Z">
-<meta property="article:modified_time" content="2025-06-03T16:51:41.656Z">
+<meta property="article:published_time" content="2025-05-30T16:15:35.000Z">
+<meta property="article:modified_time" content="2025-06-03T16:55:47.448Z">
 <meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="技术随笔">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604004951720.png">
   
@@ -37,7 +38,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>AU9U5T</title>
+  <title>cos防盗刷 - AU9U5T</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="cos防盗刷"></span>
           
         </div>
 
@@ -219,8 +220,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-06-04 00:47" pubdate>
-          June 4, 2025 am
+        <time datetime="2025-05-31 00:15" pubdate>
+          May 31, 2025 am
         </time>
       </span>
     
@@ -280,7 +281,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">cos防盗刷</h1>
             
             
               <div class="markdown-body">
@@ -330,6 +331,13 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">#技术随笔</a>
+      
+    </div>
+  
 </div>
 
 
@@ -338,8 +346,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>https://tsy244.github.io/2025/06/04/技术随笔/cos防盗刷/</div>
+      <div>cos防盗刷</div>
+      <div>https://tsy244.github.io/2025/05/31/技术随笔/cos防盗刷/</div>
     </div>
     <div class="license-meta">
       
@@ -351,7 +359,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 4, 2025</div>
+          <div>May 31, 2025</div>
         </div>
       
       
@@ -383,12 +391,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2025/06/03/js%E9%80%86%E5%90%91/js%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95/" title="js简单语法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">js简单语法</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/03/js%E9%80%86%E5%90%91/js%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95/" title="js简单语法">
-                        <span class="hidden-mobile">js简单语法</span>
+                      <a href="/2025/05/25/js%E9%80%86%E5%90%91/js%E5%BC%95%E5%85%A5/" title="js引入">
+                        <span class="hidden-mobile">js引入</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
