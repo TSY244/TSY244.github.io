@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="cos 防盗刷简介防止cos 被盗刷通过scf+ monitor 的方式设置cos 桶的权限 对象存储 防盗刷指引_腾讯云 使用腾讯云SCF实现COS费用封顶的最佳实践-腾讯云开发者社区-腾讯云 部署基本是跟着使用腾讯云SCF实现COS费用封顶的最佳实践-腾讯云开发者社区-腾讯云 这个过程来就行 但是其中需要修改一下cos sdk。并且还需要设置下子用户的权限 创建一个用户 登录 - 腾讯云 需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AU9U5T">
+<meta property="og:url" content="https://tsy244.github.io/2025/06/04/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/cos%E9%98%B2%E7%9B%97%E5%88%B7/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="cos 防盗刷简介防止cos 被盗刷通过scf+ monitor 的方式设置cos 桶的权限 对象存储 防盗刷指引_腾讯云 使用腾讯云SCF实现COS费用封顶的最佳实践-腾讯云开发者社区-腾讯云 部署基本是跟着使用腾讯云SCF实现COS费用封顶的最佳实践-腾讯云开发者社区-腾讯云 这个过程来就行 但是其中需要修改一下cos sdk。并且还需要设置下子用户的权限 创建一个用户 登录 - 腾讯云 需要">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604004951720.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604005034192.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604005051523.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604005111653.png">
+<meta property="article:published_time" content="2025-06-03T16:47:51.813Z">
+<meta property="article:modified_time" content="2025-06-03T16:51:41.656Z">
+<meta property="article:author" content="August Rosenberg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604004951720.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-06-04 00:47" pubdate>
+          June 4, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          40 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="cos-防盗刷"><a href="#cos-防盗刷" class="headerlink" title="cos 防盗刷"></a><strong>cos 防盗刷</strong></h1><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong>简介</strong></h1><p>防止cos 被盗刷通过scf+ monitor 的方式设置cos 桶的权限</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/436/97973">对象存储 防盗刷指引_腾讯云</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2258668">使用腾讯云SCF实现COS费用封顶的最佳实践-腾讯云开发者社区-腾讯云</a></p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a><strong>部署</strong></h1><p>基本是跟着<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2258668">使用腾讯云SCF实现COS费用封顶的最佳实践-腾讯云开发者社区-腾讯云</a> 这个过程来就行</p>
+<p>但是其中需要修改一下cos sdk。并且还需要设置下子用户的权限</p>
+<h2 id="创建一个用户"><a href="#创建一个用户" class="headerlink" title="创建一个用户"></a><strong>创建一个用户</strong></h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604004951720.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cam">登录 - 腾讯云</a></p>
+<p>需要注意添加两个权限，一个是和cos 相关的，一个是和monitor 相关的</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604005034192.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>不过这个权限给的很高了，可以测试下其他权限是否可以</p>
+<p>不过这个权限给的很高了，可以测试下其他权限是否可以</p>
+<h2 id="选一个云函数环境"><a href="#选一个云函数环境" class="headerlink" title="选一个云函数环境"></a><strong>选一个云函数环境</strong></h2><p><a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/scf/list-create?rid=1&ns=default">登录 - 腾讯云</a></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604005051523.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>然后下一步</p>
+<p>其他步骤都是随便选择，只不过重点是控制执行的周期时间</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/png-20250604005111653.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>之后完成</p>
+<h2 id="修改代码"><a href="#修改代码" class="headerlink" title="修改代码"></a><strong>修改代码</strong></h2><p><a target="_blank" rel="noopener" href="https://github.com/colasun/serverless-demo/tree/master/Python3.6-COSLimitSpendingDemo/src">serverless-demo&#x2F;Python3.6-COSLimitSpendingDemo&#x2F;src at master · colasun&#x2F;serverless-demo · GitHub</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf8 -*-</span><br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> logging<br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> smtplib<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> math<br><br><span class="hljs-comment">#import tencentcloud-sdk-python</span><br><span class="hljs-keyword">from</span> qcloud_cos <span class="hljs-keyword">import</span> CosConfig<br><span class="hljs-keyword">from</span> qcloud_cos <span class="hljs-keyword">import</span> CosS3Client<br><br><span class="hljs-keyword">from</span> tencentcloud.common.profile.client_profile <span class="hljs-keyword">import</span> ClientProfile<br><span class="hljs-keyword">from</span> tencentcloud.common.profile.http_profile <span class="hljs-keyword">import</span> HttpProfile<br><span class="hljs-keyword">from</span> tencentcloud.common <span class="hljs-keyword">import</span> credential<br><span class="hljs-keyword">from</span> tencentcloud.common.exception.tencent_cloud_sdk_exception <span class="hljs-keyword">import</span> TencentCloudSDKException<br><span class="hljs-keyword">from</span> tencentcloud.monitor.v20180724 <span class="hljs-keyword">import</span> monitor_client, models<br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> timedelta<br><br>logger = logging.getLogger()<br>logger.setLevel(logging.DEBUG)<br><br><br>data=&#123; <br>    <span class="hljs-string">&quot;secret_id&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<br>    <span class="hljs-string">&quot;secret_key&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<br>    <span class="hljs-string">&quot;region&quot;</span>:<span class="hljs-string">&quot;ap-guangzhou&quot;</span><br>&#125;<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">checkQuota</span>():<br>    secret_id = data[<span class="hljs-string">&#x27;secret_id&#x27;</span>]     <span class="hljs-comment"># 用户的 SecretId，建议使用子账号密钥，授权遵循最小权限指引，降低使用风险。子账号密钥获取可参见 https://cloud.tencent.com/document/product/598/37140</span><br>    secret_key = data[<span class="hljs-string">&#x27;secret_key&#x27;</span>]   <span class="hljs-comment"># 用户的 SecretKey，建议使用子账号密钥，授权遵循最小权限指引，降低使用风险。子账号密钥获取可参见 https://cloud.tencent.com/document/product/598/37140</span><br>    region = data[<span class="hljs-string">&#x27;region&#x27;</span>]      <span class="hljs-comment"># 替换为用户的 region，已创建桶归属的 region 可以在控制台查看，https://console.cloud.tencent.com/cos5/bucket</span><br>                            <span class="hljs-comment"># COS 支持的所有 region 列表参见 https://cloud.tencent.com/document/product/436/6224</span><br>    token = <span class="hljs-literal">None</span>               <span class="hljs-comment"># 如果使用永久密钥不需要填入 token，如果使用临时密钥需要填入，临时密钥生成和使用指引参见 https://cloud.tencent.com/document/product/436/14048</span><br>    scheme = <span class="hljs-string">&#x27;https&#x27;</span>           <span class="hljs-comment"># 指定使用 http/https 协议来访问 COS，默认为 https，可不填</span><br>    bucket = <span class="hljs-string">&#x27;cos-1317182407-sadf-1317182407&#x27;</span><br><br>    localOffset = datetime.timedelta(hours = <span class="hljs-number">8</span>) <span class="hljs-comment">#本地时差，当前以北京为例，UTC+8</span><br>    S_delay = datetime.timedelta(minutes=<span class="hljs-number">15</span>) <span class="hljs-comment">#开始时间差值，因云监控上报有时延，这里时间前置调整，时延单位为分钟</span><br>    E_delay = datetime.timedelta(minutes=<span class="hljs-number">10</span>) <span class="hljs-comment">#结束时间差值，因云监控上报有时延，这里时间前置调整，时延单位为分钟</span><br><br>    time_start = datetime.datetime.now() + localOffset - S_delay    <span class="hljs-comment">#查询云监控的开始时间，为当前时间前置15分钟。</span><br>    time_end = datetime.datetime.now() + localOffset - E_delay      <span class="hljs-comment">#查询云监控的结束时间，为当前时间前置10分钟。</span><br>    <br>    cred = credential.Credential(secret_id, secret_key)<br>    <span class="hljs-comment"># 实例化一个http选项，可选的，没有特殊需求可以跳过</span><br>    httpProfile = HttpProfile()<br>    httpProfile.endpoint = <span class="hljs-string">&quot;monitor.tencentcloudapi.com&quot;</span><br><br>    <span class="hljs-comment"># 实例化一个client选项，可选的，没有特殊需求可以跳过</span><br>    clientProfile = ClientProfile()<br>    clientProfile.httpProfile = httpProfile<br>    <span class="hljs-comment"># 实例化要请求产品的client对象,clientProfile是可选的</span><br>    client = monitor_client.MonitorClient(cred, region, clientProfile)<br><br>    <span class="hljs-comment"># 这里是获取云监控的分钟级数据</span><br>    <span class="hljs-comment"># MetricName 参数 InternetTraffic 指的是外网下行流量，CdnOriginTraffic指的是CDN回源流量，其他相关监控指标详见https://cloud.tencent.com/document/product/248/45140</span><br>     <br>    req = models.GetMonitorDataRequest()<br>    params = &#123;<br>        <span class="hljs-string">&quot;Namespace&quot;</span>: <span class="hljs-string">&quot;QCE/COS&quot;</span>,<br>        <span class="hljs-string">&quot;MetricName&quot;</span>: <span class="hljs-string">&quot;InternetTraffic&quot;</span>,<br>        <span class="hljs-string">&quot;Period&quot;</span>: <span class="hljs-number">60</span>,<br>        <span class="hljs-string">&quot;StartTime&quot;</span>: time_start.strftime(<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>),<br>        <span class="hljs-string">&quot;EndTime&quot;</span>: time_end.strftime(<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>),<br>        <span class="hljs-string">&quot;Instances&quot;</span>: [<br>            &#123;<br>                <span class="hljs-string">&quot;Dimensions&quot;</span>: [<br>                    &#123;<br>                        <span class="hljs-string">&quot;Name&quot;</span>: <span class="hljs-string">&quot;bucket&quot;</span>,<br>                        <span class="hljs-string">&quot;Value&quot;</span>: bucket<br>                    &#125;<br>                ]<br>            &#125;<br>        ]<br>    &#125;<br>    req.from_json_string(json.dumps(params))<br><br>    <span class="hljs-comment"># 返回的resp是一个GetMonitorDataResponse的实例，与请求对象对应</span><br>    resp = client.GetMonitorData(req)<br>    <span class="hljs-comment"># 输出json格式的字符串回包</span><br>    _<span class="hljs-built_in">str</span> = resp.to_json_string()<br>    <span class="hljs-built_in">print</span>(_<span class="hljs-built_in">str</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;------------------------------------------------------&quot;</span>)<br>    jsObj = json.loads(_<span class="hljs-built_in">str</span>)<br>    <br>    <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> jsObj.items():<br>        <span class="hljs-keyword">if</span> k == <span class="hljs-string">&quot;DataPoints&quot;</span>:<br>            <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> v[<span class="hljs-number">0</span>].items():<br>                <span class="hljs-keyword">if</span> k == <span class="hljs-string">&quot;Values&quot;</span>:<br>                    _flow = <span class="hljs-built_in">sum</span>(v)                   <br>                    <br>    <span class="hljs-keyword">if</span> _flow &gt; <span class="hljs-number">5000</span>*<span class="hljs-number">1024</span>*<span class="hljs-number">1024</span>:   <span class="hljs-comment">#超过5GB流量阈值        </span><br>        config = CosConfig(Region=region, SecretId=secret_id, SecretKey=secret_key, Token=token, Scheme=scheme)<br>        cosclient = CosS3Client(config)<br>        cosclient.put_bucket_acl(<br>        Bucket=bucket,<br>        ACL=<span class="hljs-string">&#x27;private&#x27;</span><br>        )<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;判断阈值&quot;</span>,_flow)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;达到阈值，已改为私有读写权限&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-string">&#x27;&#x27;&#x27; 如果需要在盗刷后自动恢复公共读权限，则去掉这段注释。</span><br><span class="hljs-string">        config = CosConfig(Region=region, SecretId=secret_id, SecretKey=secret_key, Token=token, Scheme=scheme)</span><br><span class="hljs-string">        cosclient = CosS3Client(config)</span><br><span class="hljs-string">        cosclient.put_bucket_acl(</span><br><span class="hljs-string">        Bucket=bucket,</span><br><span class="hljs-string">        ACL=&#x27;public-read&#x27;</span><br><span class="hljs-string">        )  </span><br><span class="hljs-string">        &#x27;&#x27;&#x27;</span>      <br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;判断阈值&quot;</span>,_flow)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;未达到阈值，不做权限修改操作&quot;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main_handler</span>(<span class="hljs-params">event, context</span>):<br>    checkQuota()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main_handler(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>需要填写ak&#x2F;sk</p>
+<h3 id="本地测试"><a href="#本地测试" class="headerlink" title="本地测试"></a><strong>本地测试</strong></h3><p>需要安装几个包</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/sdk/Python">SDK 中心 Python_腾讯云</a></p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mel">pip install --upgrade tencentcloud-sdk-<span class="hljs-keyword">python</span>-common<br>pip install --upgrade tencentcloud-sdk-<span class="hljs-keyword">python</span><br>pip install -U <span class="hljs-keyword">cos</span>-<span class="hljs-keyword">python</span>-sdk-v5<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>如果出现了报错</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44415561/article/details/113058184">python安装腾讯云对象存储sdk总是失败解决办法_qcloudcosxml pod 安装失败-CSDN博客</a></p>
+<h3 id="云函数"><a href="#云函数" class="headerlink" title="云函数"></a><strong>云函数</strong></h3><p>直接部署测试就行</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>https://tsy244.github.io/2025/06/04/技术随笔/cos防盗刷/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 4, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/06/03/js%E9%80%86%E5%90%91/js%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95/" title="js简单语法">
+                        <span class="hidden-mobile">js简单语法</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
