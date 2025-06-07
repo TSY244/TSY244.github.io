@@ -1,0 +1,809 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="bind&#x2F;apply&#x2F;call总结一句话就是，这三个函数都是用于重新定义this 的 12345678910const obj&#x3D;&amp;#123;    name:&quot;august&quot;,    work: &quot;developer&quot;,    do: function()&amp;#123;        console.log(this.name+&quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js对象">
+<meta property="og:url" content="https://tsy244.github.io/2025/06/07/js%E9%80%86%E5%90%91/js%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="bind&#x2F;apply&#x2F;call总结一句话就是，这三个函数都是用于重新定义this 的 12345678910const obj&#x3D;&amp;#123;    name:&quot;august&quot;,    work: &quot;developer&quot;,    do: function()&amp;#123;        console.log(this.name+&quot;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607171352301.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607171620030.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607184753902.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607184746673.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607185254694.png">
+<meta property="article:published_time" content="2025-06-07T08:50:55.000Z">
+<meta property="article:modified_time" content="2025-06-07T11:12:44.465Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="js逆向">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607171352301.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>js对象 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="js对象"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-06-07 16:50" pubdate>
+          June 7, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">js对象</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="bind-x2F-apply-x2F-call"><a href="#bind-x2F-apply-x2F-call" class="headerlink" title="bind&#x2F;apply&#x2F;call"></a>bind&#x2F;apply&#x2F;call</h1><p>总结一句话就是，这三个函数都是用于重新定义this 的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj=&#123;<br>    <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;august&quot;</span>,<br>    <span class="hljs-attr">work</span>: <span class="hljs-string">&quot;developer&quot;</span>,<br>    <span class="hljs-attr">do</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>+<span class="hljs-string">&quot; is doing...&quot;</span>+<span class="hljs-variable language_">this</span>.<span class="hljs-property">work</span>)<br>    &#125;<br>&#125;<br><br>obj.<span class="hljs-title function_">do</span>()<br><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607171352301.png" srcset="/img/loading.gif" lazyload alt="image-20250607171352301"></p>
+<p>这个this 是获取的<code>&#123;&#125;</code> 这个对象里的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj=&#123;<br>    <span class="hljs-attr">do</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>+<span class="hljs-string">&quot; is doing...&quot;</span>+<span class="hljs-variable language_">this</span>.<span class="hljs-property">work</span>)<br>    &#125;<br>&#125;<br><br><br><span class="hljs-keyword">const</span> name=<span class="hljs-string">&quot;august&quot;</span><br><span class="hljs-keyword">const</span> work=<span class="hljs-string">&quot;design&quot;</span><br><br><br><span class="hljs-comment">// obj.do.bind(info)()</span><br><br><br>obj.<span class="hljs-title function_">do</span>()<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607171620030.png" srcset="/img/loading.gif" lazyload alt="image-20250607171620030"></p>
+<p>按道理来说这个this 会访问到外部的windows 从而获取name 但是为什么这个地方是undefine 呢？</p>
+<p>引入一下几个问题</p>
+<h2 id="this是什么？"><a href="#this是什么？" class="headerlink" title="this是什么？"></a><strong>this是什么？</strong></h2><p>this 取决于函数的调用者，在ojb 方式中，调用者是obj ，所以this  也是obj。</p>
+<h2 id="为什么不会穿透到外部windows的原型？"><a href="#为什么不会穿透到外部windows的原型？" class="headerlink" title="为什么不会穿透到外部windows的原型？"></a><strong>为什么不会穿透到外部windows的原型？</strong></h2><p>这涉及到两个问题，**<code>this</code> 的动态绑定** 和 <strong>原型链的属性查找</strong>。<br><code>this</code> 的设计目标是决定“谁是这次调用的主角（上下文）”；而原型链的设计目标是解决“如果主角身上没有某个技能&#x2F;属性，去哪里找”。<code>this</code> 的确定是“一锤子买卖”，在函数被调用的那一刻就定死了，它不会、也不需要通过原型链去“寻找”一个<code>this</code>。</p>
+<h3 id="this-的世界：确定“执行上下文”"><a href="#this-的世界：确定“执行上下文”" class="headerlink" title="this 的世界：确定“执行上下文”"></a><code>this</code> 的世界：确定“执行上下文”</h3><p>想象一下，<code>this</code> 就是一个舞台上的<strong>“主角”</strong>。一个函数（剧本）可以被不同的主角来表演。</p>
+<ul>
+<li><p><strong><code>this</code> 的使命</strong>：在函数（剧本）执行的瞬间，指明当前是哪个对象（主角）在调用这个函数。它的核心是<strong>执行上下文（Execution Context）</strong>。</p>
+</li>
+<li><p>确定时机</p>
+<p>：</p>
+<p>只在函数被调用的那一刻决定</p>
+<p>。JS 引擎会看函数是怎么被叫来演出的。</p>
+<ul>
+<li><code>student.sayHello()</code>：哦，是 <code>student</code> 叫 <code>sayHello</code> 来演出的，那这次演出的主角 <code>this</code> 就是 <code>student</code>。</li>
+<li><code>sayHello()</code>：哦，没有主语，是直接在全局环境下叫的，那这次的主角 <code>this</code> 就是 <code>window</code>（非严格模式）。</li>
+<li><code>sayHello.call(teacher)</code>：哦，导演用 <code>.call</code> 强制指定了，那这次的主角 <code>this</code> 就是 <code>teacher</code>。</li>
+</ul>
+</li>
+</ul>
+<p><code>this</code> 的绑定过程非常霸道和直接，它只看“调用时”的场景，一旦确定，在本次函数执行期间就不可更改。它是一个<strong>动态绑定</strong>的机制，不是一个“查找”机制。</p>
+<h3 id="原型链的世界：进行“属性查找”"><a href="#原型链的世界：进行“属性查找”" class="headerlink" title="原型链的世界：进行“属性查找”"></a>原型链的世界：进行“属性查找”</h3><p>现在，主角 (<code>this</code>) 已经确定了。主角要开始表演了，比如要念一句台词 <code>this.name</code> 或者施放一个技能 <code>this.sayHello()</code>。</p>
+<ul>
+<li><p><strong>原型链的使命</strong>：如果发现主角（<code>this</code> 对象）自己身上没有这个属性或方法（比如 <code>name</code> 或 <code>sayHello</code>），那该去哪里找？原型链就是这个<strong>“寻找技能书&#x2F;道具的路径”</strong>。</p>
+</li>
+<li><p>查找过程</p>
+<p>：</p>
+<ol>
+<li>先看 <code>this</code> 对象本身有没有这个属性。</li>
+<li>如果没有，就通过 <code>this</code> 对象的内部链接 <code>[[Prototype]]</code>（即 <code>__proto__</code>）找到它的原型对象。</li>
+<li>在原型对象上查找该属性。</li>
+<li>如果还没找到，就继续沿着原型对象的原型对象向上查找，直到链的尽头 <code>Object.prototype</code>。</li>
+<li>如果最终还是没找到，就返回 <code>undefined</code>。</li>
+</ol>
+</li>
+</ul>
+<p>这是一个纯粹的<strong>属性查找</strong>机制。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><strong><code>this</code> 的确定</strong> 和 <strong>原型链</strong> 是两码事。<code>this</code> 在调用时就定了，它不会通过原型链去“找”一个新的<code>this</code>。</li>
+<li><strong><code>window</code> 不是所有对象的原型</strong>。<code>window</code> 是全局执行上下文的<strong>宿主对象</strong>。绝大多数普通对象的原型链最终指向的是 <code>Object.prototype</code>，而不是 <code>window</code>。<code>window</code> 本身也是一个对象，它的原型链也指向 <code>Object.prototype</code>。</li>
+</ol>
+<ul>
+<li>函数调用发生时<ol>
+<li><strong><code>this</code> 绑定系统（看调用方式）</strong> -&gt; 瞬间确定**主角 <code>this</code>**。</li>
+<li>执行函数代码<ul>
+<li>当代码中遇到 <code>this.xxx</code> 时…</li>
+<li><strong>原型链系统（看 <code>[[Prototype]]</code> 链）</strong> -&gt; 以<strong>已经确定的 <code>this</code></strong> 为起点，开始<strong>查找 <code>xxx</code> 属性&#x2F;方法</strong>。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="var-x2F-let-x2F-const区别是什么？"><a href="#var-x2F-let-x2F-const区别是什么？" class="headerlink" title="var&#x2F;let&#x2F;const区别是什么？"></a>var&#x2F;let&#x2F;const区别是什么？</h2><p>var 会造成全局对象污染，所以在下面代码中能获取到name</p>
+<p>Window 也是一个对象</p>
+<blockquote>
+<p>在全局作用域中，<code>var</code> 声明的变量会成为<strong>全局对象 (<code>window</code>)</strong> 的属性。我们称这个行为是 <strong>“污染全局对象”</strong> 或 <strong>“污染全局命名空间”</strong>。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> name=<span class="hljs-string">&quot;august&quot;</span>;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">show</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>&#125;<br><br><span class="hljs-title function_">show</span>()<br></code></pre></td></tr></table></figure>
+
+
+
+<p>因此来分析下面这段代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> fav=<span class="hljs-string">&#x27;盲僧&#x27;</span>; <span class="hljs-comment">// or let fav=&#x27;盲僧&#x27;;</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">shows</span>(<span class="hljs-params"></span>)&#123;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">fav</span>);<br>&#125;<br><br><span class="hljs-title function_">shows</span>();<br><br><span class="hljs-keyword">var</span> name=<span class="hljs-string">&quot;august&quot;</span>;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">show</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>&#125;<br><br><span class="hljs-title function_">show</span>()<br></code></pre></td></tr></table></figure>
+
+<p>第一个shows 输出undefine</p>
+<p>第一个show 输出august</p>
+<ol>
+<li>shows 和show 都的this 都是window 对象</li>
+<li>var 会污染window 对象，会挂载到window上，但是let 和 const 不会</li>
+</ol>
+<p>因此可以得出结论</p>
+<p>show 能输出，shows 不能</p>
+<h2 id="函数和原型对象的关系是什么？"><a href="#函数和原型对象的关系是什么？" class="headerlink" title="函数和原型对象的关系是什么？"></a>函数和原型对象的关系是什么？</h2><p>函数是 <code>实例</code> 的工厂，原型对象是 <code>实例</code> 的模板。</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607184753902.png" srcset="/img/loading.gif" lazyload alt="image-20250607184753902"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607184746673.png" srcset="/img/loading.gif" lazyload alt="image-20250607184746673"></p>
+<h2 id="揭秘call-x2F-apply-x2F-bind"><a href="#揭秘call-x2F-apply-x2F-bind" class="headerlink" title="揭秘call&#x2F;apply&#x2F;bind"></a>揭秘call&#x2F;apply&#x2F;bind</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 将p 和eat 绑定，现在函数的this指向p</span><br>eat.<span class="hljs-title function_">call</span>(p,data)<br>eat.<span class="hljs-title function_">apply</span>(p,data)<br>eat.<span class="hljs-title function_">bind</span>(p,data)() <span class="hljs-comment">//bind 返回一个函数需要二次调用</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/image-20250607185254694.png" srcset="/img/loading.gif" lazyload alt="image-20250607185254694"></p>
+<p>call 、bind 、 apply 这三个函数的第一个参数都是 this 的指向对象，第二个参数差别就来了：</p>
+<p>call 的参数是直接放进去的，第二第三第 n 个参数全都用逗号分隔，直接放到后面 **obj.myFun.call(db,’成都’, … ,’string’ )**。</p>
+<p>apply 的所有参数都必须放在一个数组里面传进去 **obj.myFun.apply(db,[‘成都’, …, ‘string’ ])**。</p>
+<p>bind 除了返回是函数以外，它 的参数和 call 一样。</p>
+<h1 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js">arr=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]<br>ret=arr.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>)=&gt;</span>&#123;<span class="hljs-keyword">return</span> item*item&#125;)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ret)<br><br>ret=arr.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> i*i)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ret)<br><br><br>ret=arr.<span class="hljs-title function_">map</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">item</span>) &#123;<br>    <span class="hljs-keyword">return</span> item*item<br>&#125;)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ret)<br><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs js"><br><span class="hljs-comment">// 1. 设置一个 interval 定时器</span><br><span class="hljs-keyword">const</span> intervalID = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;来自 setInterval: hello yuan&quot;</span>);<br>&#125;, <span class="hljs-number">1000</span>);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;setInterval 的 ID 是:&quot;</span>, intervalID);<br><br><span class="hljs-comment">// 2. 设置一个 timeout 定时器</span><br><span class="hljs-keyword">const</span> timeoutID = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 这个回调函数永远不会执行</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;来自 setTimeout: hello yuan&quot;</span>);<br>&#125;, <span class="hljs-number">3000</span>);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;setTimeout 的 ID 是:&quot;</span>, timeoutID);<br><br><span class="hljs-comment">// 3. 立即清除 timeout 定时器</span><br><span class="hljs-built_in">clearTimeout</span>(timeoutID);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`ID 为 <span class="hljs-subst">$&#123;timeoutID&#125;</span> 的 setTimeout 已被清除。`</span>);<br><br><span class="hljs-comment">// 4. 在需要的时候清除 interval 定时器（例如，5秒后）</span><br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-built_in">clearInterval</span>(intervalID); <span class="hljs-comment">// 注意：清除 interval 用 clearInterval</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`ID 为 <span class="hljs-subst">$&#123;intervalID&#125;</span> 的 setInterval 已在 5 秒后被清除。`</span>);<br>&#125;, <span class="hljs-number">5000</span>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>setTimeout</code><strong>：在</strong>指定延迟后执行一次</strong>任务，然后就停了。像一个“定时闹钟”。</li>
+<li><strong><code>setInterval</code><strong>：在</strong>指定延迟后开始执行</strong>任务，并<strong>每隔一个周期重复执行</strong>该任务。像一个“节拍器”。</li>
+</ul>
+<h1 id="Document-获取dom-的几个方式"><a href="#Document-获取dom-的几个方式" class="headerlink" title="Document 获取dom 的几个方式"></a>Document 获取dom 的几个方式</h1><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>返回值</th>
+<th>集合类型</th>
+<th>性能</th>
+<th>核心优势与建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getElementById()</td>
+<td>单个元素</td>
+<td>N&#x2F;A</td>
+<td>最高</td>
+<td>首选：当你知道 id 时，用它就对了。</td>
+</tr>
+<tr>
+<td>getElementsByTagName()</td>
+<td>HTMLCollection</td>
+<td>动态</td>
+<td>很高</td>
+<td>适用于获取特定标签类型的元素，但要注意动态集合的特性。</td>
+</tr>
+<tr>
+<td>getElementsByClassName()</td>
+<td>HTMLCollection</td>
+<td>动态</td>
+<td>较高</td>
+<td>适用于获取特定类的元素，同样要注意动态集合。</td>
+</tr>
+<tr>
+<td>querySelector()</td>
+<td>单个元素</td>
+<td>N&#x2F;A</td>
+<td>较好</td>
+<td>主力：非常灵活，使用 CSS 选择器定位单个元素的首选。</td>
+</tr>
+<tr>
+<td>querySelectorAll()</td>
+<td>NodeList</td>
+<td>静态</td>
+<td>较好</td>
+<td>主力：批量获取元素的现代标准，返回静态集合更安全、可预测。</td>
+</tr>
+</tbody></table>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/js%E9%80%86%E5%90%91/">#js逆向</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>js对象</div>
+      <div>https://tsy244.github.io/2025/06/07/js逆向/js对象/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 7, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/06/07/java%E5%AE%89%E5%85%A8/rmi-jndi/" title="rmi_jndi">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">rmi_jndi</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/06/04/js%E9%80%86%E5%90%91/js%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3/" title="js函数相关">
+                        <span class="hidden-mobile">js函数相关</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
