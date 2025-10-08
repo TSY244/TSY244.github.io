@@ -16,15 +16,15 @@
   <meta name="author" content="August Rosenberg">
   <meta name="keywords" content="">
   
-    <meta name="description" content="参考[本地命令执行 · 攻击Java Web应用-Java Web安全] (javasec.org) runtime 直接加载1234567891011121314151617public static void DirectLoad(String...cmds) throws IOException &amp;#123;        Runtime.getRuntime().exec(cmds);">
+    <meta name="description" content="参考[本地命令执行 · 攻击Java Web应用-Java Web安全] (javasec.org) java 执行命令的函数调用链通过观察整个调用链我们可以清楚的看到exec方法并不是命令执行的最终点，执行逻辑大致是：  Runtime.exec(xxx) java.lang.ProcessBuilder.start() new java.lang.UNIXProcess(xxx) UNIXPr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java执行命令">
 <meta property="og:url" content="https://tsy244.github.io/2025/05/17/java%E5%AE%89%E5%85%A8/java%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="AU9U5T">
-<meta property="og:description" content="参考[本地命令执行 · 攻击Java Web应用-Java Web安全] (javasec.org) runtime 直接加载1234567891011121314151617public static void DirectLoad(String...cmds) throws IOException &amp;#123;        Runtime.getRuntime().exec(cmds);">
+<meta property="og:description" content="参考[本地命令执行 · 攻击Java Web应用-Java Web安全] (javasec.org) java 执行命令的函数调用链通过观察整个调用链我们可以清楚的看到exec方法并不是命令执行的最终点，执行逻辑大致是：  Runtime.exec(xxx) java.lang.ProcessBuilder.start() new java.lang.UNIXProcess(xxx) UNIXPr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-17T07:20:08.000Z">
-<meta property="article:modified_time" content="2025-05-17T08:36:08.999Z">
+<meta property="article:modified_time" content="2025-10-03T01:20:06.063Z">
 <meta property="article:author" content="August Rosenberg">
 <meta property="article:tag" content="java安全">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.8k words
+          9.1k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          74 mins
+          77 mins
         
       </span>
     
@@ -282,6 +282,15 @@
               <div class="markdown-body">
                 
                 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[本地命令执行 · 攻击Java Web应用-<a target="_blank" rel="noopener" href="https://www.javasec.org/javase/CommandExecution/">Java Web安全] (javasec.org)</a></p>
+<h1 id="java-执行命令的函数调用链"><a href="#java-执行命令的函数调用链" class="headerlink" title="java 执行命令的函数调用链"></a>java 执行命令的函数调用链</h1><p>通过观察整个调用链我们可以清楚的看到<code>exec</code>方法并不是命令执行的最终点，执行逻辑大致是：</p>
+<ol>
+<li><code>Runtime.exec(xxx)</code></li>
+<li><code>java.lang.ProcessBuilder.start()</code></li>
+<li><code>new java.lang.UNIXProcess(xxx)</code></li>
+<li><code>UNIXProcess</code>构造方法中调用了<code>forkAndExec(xxx)</code> native方法。</li>
+<li><code>forkAndExec</code>调用操作系统级别<code>fork</code>-&gt;<code>exec</code>(*nix)&#x2F;<code>CreateProcess</code>(Windows)执行命令并返回<code>fork</code>&#x2F;<code>CreateProcess</code>的<code>PID</code>。</li>
+</ol>
+<p>有了以上的调用链分析我们就可以深刻的理解到Java本地命令执行的深入逻辑了，切记<code>Runtime</code>和<code>ProcessBuilder</code>并不是程序的最终执行点!</p>
 <h1 id="runtime-直接加载"><a href="#runtime-直接加载" class="headerlink" title="runtime 直接加载"></a>runtime 直接加载</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">DirectLoad</span><span class="hljs-params">(String...cmds)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        Runtime.getRuntime().exec(cmds);<br>        <span class="hljs-keyword">try</span> &#123;<br>            Process process=  Runtime.getRuntime().exec(cmds);<br>            <span class="hljs-type">InputStream</span> <span class="hljs-variable">inputStream</span> <span class="hljs-operator">=</span> process.getInputStream();<br>            <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">outputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>            <span class="hljs-type">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>            <span class="hljs-type">int</span> bytesRead;<br>            <span class="hljs-keyword">while</span> ((bytesRead = inputStream.read(buffer)) != -<span class="hljs-number">1</span>) &#123;<br>                outputStream.write(buffer, <span class="hljs-number">0</span>, bytesRead);<br>            &#125;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">output</span> <span class="hljs-operator">=</span> outputStream.toString();<br>            System.out.println(output);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
 
 
