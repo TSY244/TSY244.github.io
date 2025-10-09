@@ -234,7 +234,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/10/09/java%E5%AE%89%E5%85%A8/Apache-Commons-Collections7%E5%88%86%E6%9E%90/" target="_self">
         <div>
-          简介还是使用的是 LazyMap.get() 进行反序列化的 分析
+          简介还是使用的是 LazyMap.get() 进行反序列化的 分析全局分析先通过LazyMap.get() 去分析  然后就看哪里调用了equals  然后在Hashtable.reconstitutionPut() 调用了 equals()  然后在HashTable中调用了该函数 那么就很清晰了 调用流程为如下 12345java.util.Hashtable.readObjectjava.u
         </div>
       </a>
 
