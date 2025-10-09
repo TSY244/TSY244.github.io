@@ -226,6 +226,46 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2025/10/09/java%E5%AE%89%E5%85%A8/Apache-Commons-Collections7%E5%88%86%E6%9E%90/" target="_self">
+          Apache_Commons_Collections7分析
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/09/java%E5%AE%89%E5%85%A8/Apache-Commons-Collections7%E5%88%86%E6%9E%90/" target="_self">
+        <div>
+          简介还是使用的是 LazyMap.get() 进行反序列化的 分析
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-09 17:34" pubdate>
+              2025-10-09
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/java%E5%AE%89%E5%85%A8/">#java安全</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2025/10/09/java%E5%AE%89%E5%85%A8/Apache-Commons-Collections5%E5%88%86%E6%9E%90/" target="_self">
           Apache_Commons_Collections5分析
         </a>
@@ -234,7 +274,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/10/09/java%E5%AE%89%E5%85%A8/Apache-Commons-Collections5%E5%88%86%E6%9E%90/" target="_self">
         <div>
-          
+          简介 也就是换了一个入口(source)函数 分析我们从LazyMap.get() 出发 发现 TiedMapEntry 的getValue() 也调用了get()  getValue() 又在toString() 中调用  然后就找一个可以被反序列化的类完成调用，重点关注readObject()  看看valObj是否可控   这个可以通过反射进行修改，那么链子就很清晰了 12345BadAtt
         </div>
       </a>
 
@@ -248,6 +288,13 @@
           </div>
         
         
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/java%E5%AE%89%E5%85%A8/">#java安全</a>
+            
+          </div>
         
       </div>
     </article>
@@ -566,46 +613,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2025/06/13/others/mac-fish%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" target="_self">
-          mac_fish添加环境变量
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/06/13/others/mac-fish%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" target="_self">
-        <div>
-          mac fish 添加环境变量由于fish 会继承开启shell 的path 那么就在开启shell 的环境变量中修改这个值  vim ~&#x2F;.bash_profile 12345export GOROOT=$(brew --prefix golang)export GOPATH=$HOME/goexport PATH=$PATH:$GOROOT/bin:$GOPATH/binexport
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-06-13 00:25" pubdate>
-              2025-06-13
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/others/">#others</a>
             
           </div>
         
